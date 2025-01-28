@@ -1,6 +1,6 @@
 // import { SlidersHorizontal } from "lucide-react";
 import Button from "./ui/Button";
-import { navbarIcons } from "../data/categoryBar";
+import { navbarIcons, responsive } from "../data/categoryBar";
 import Carsoul from "./ui/Carsoul";
 import useScrollShadow from "../hooks/useScrollShadow";
 import { useAppSelector } from "../store/hooks";
@@ -19,6 +19,7 @@ function CategoryBar() {
         slidesToShow={10}
         borderColor="2px solid gainsboro"
         padding="1px"
+        responsive={responsive}
       >
         {navbarIcons.map((item, index) => (
           <Button key={index} className="">

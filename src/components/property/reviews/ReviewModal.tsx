@@ -31,13 +31,9 @@ function ReviewModal({ isReviewed, close }: IProps) {
             </div>
             <div className="space-y-1">
               {widths.map((item, index) => (
-                <div className="flex items-center gap-2">
+                <div key={index} className="flex items-center gap-2">
                   <span className="font-medium">{item.num}</span>
-                  <PrograssBar
-                    key={index}
-                    width={item.width}
-                    backgroundColor="black"
-                  />
+                  <PrograssBar width={item.width} backgroundColor="black" />
                 </div>
               ))}
             </div>

@@ -13,6 +13,7 @@ import Carsoul from "./ui/Carsoul";
 import { useMediaQuery } from "react-responsive";
 import Image from "./ui/Image";
 import { Link } from "react-router-dom";
+import { responsive } from "../data/categoryBar";
 function Footer() {
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
   return (
@@ -34,6 +35,7 @@ function Footer() {
             slidesToShow={8}
             borderColor="2px solid gainsboro"
             padding="1px"
+            responsive={responsive}
           >
             {categories.map((category, index) => (
               <Button

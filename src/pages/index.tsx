@@ -1,11 +1,9 @@
 import Cart from "../components/Cart";
 import NavbarOfUtils from "../components/CategoryBar";
-import { useTranslation } from "react-i18next";
+import DatePicker from "../components/ui/DatePicker";
 
 export default function Home() {
   const cartItems = Array.from({ length: 20 });
-  const { t } = useTranslation();
-  console.log(t("welcome_message"));
 
   return (
     <div className="">
@@ -15,6 +13,7 @@ export default function Home() {
           <Cart key={index} />
         ))}
       </div>
+      <DatePicker />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import CustomNextArrow from "./CustomNextArrow";
 import CustomPrevArrow from "./CustomPrevArrow";
 import { useState } from "react";
 import CustomDots from "./CustomDots";
-import { responsive } from "../../data/categoryBar";
+import { ResponsiveSetting } from "../../interfaces";
 
 interface IProps {
   children: React.ReactNode;
@@ -15,6 +15,7 @@ interface IProps {
   right?: string;
   top?: string;
   padding?: string;
+  responsive?: ResponsiveSetting[];
 }
 
 function Carsoul({
@@ -27,6 +28,7 @@ function Carsoul({
   right,
   top,
   padding,
+  responsive,
 }: IProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 

@@ -6,12 +6,13 @@ import { HashLink } from "react-router-hash-link";
 import Carsoul from "../../components/ui/Carsoul";
 import { useMediaQuery } from "react-responsive";
 import SpecificGallery from "../../components/property/gallery/SpecificGallery";
+import { responsive } from "../../data/categoryBar";
 
 function Gallery() {
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
   return (
     <div className="px-5 xl:px-20 py-5">
-      <div className="fixed top-8">
+      <div className="fixed top-8 left-0 xl:left-20">
         <Link to="/properties/1">
           <ChevronLeft />
         </Link>
@@ -37,7 +38,7 @@ function Gallery() {
             })}
           </div>
         ) : (
-          <Carsoul showArrow={false}>
+          <Carsoul showArrow={false} responsive={responsive}>
             {gallery.map((item, index) => {
               const { image, title } = item;
               return (
