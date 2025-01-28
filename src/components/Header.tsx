@@ -14,7 +14,7 @@ export default function Header() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isDropdownOpen } = useAppSelector((state) => state.categoryBar);
-  const [isLangSwitcherOpen, setisLangSwitcherOpen] = useState(true);
+  const [isLangSwitcherOpen, setisLangSwitcherOpen] = useState(false);
   const toggleLangSwitcher = () => {
     setisLangSwitcherOpen(!isLangSwitcherOpen);
     dispatch(setIsDropdownOpen(false));
