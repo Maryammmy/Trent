@@ -9,6 +9,7 @@ import Image from "./ui/Image";
 import { useState } from "react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const { t } = useTranslation();
@@ -28,13 +29,13 @@ export default function Header() {
     <>
       <header className="border-b fixed top-0 left-0 right-0 w-full bg-white z-30">
         <div className="px-5 xl:px-20 m-auto  flex flex-col gap-2 md:flex-row md:justify-between items-center py-2 md:py-5">
-          <div className="w-[28%] md:w-[8%]">
+          <Link to="/" className="w-[28%] md:w-[8%]">
             <Image
               imageUrl={logo}
               alt="logo"
               className="w-full h-full object-cover"
             />
-          </div>
+          </Link>
           <HomeSearch />
           <div className="hidden md:flex items-center gap-2">
             <div className="hidden xl:block font-semibold py-2 px-4 rounded-full hover:bg-[#F7F7F7]">

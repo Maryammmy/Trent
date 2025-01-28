@@ -6,7 +6,7 @@ html {
 }
 .bg-contact-us {
   background-image: url("./assets/iamges/contact.avif"),
-    linear-gradient(rgb(128, 0, 41), rgba(128, 0, 36, 0.092));
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
   background-blend-mode: overlay;
 }
 .bg-about-us {
