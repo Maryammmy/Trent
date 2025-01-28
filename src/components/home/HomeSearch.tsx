@@ -9,7 +9,7 @@ function HomeSearch() {
 
   return (
     <>
-      <div className="flex lg:hidden items-center justify-center gap-2 w-full md:w-[400px] rounded-full py-3 px-5 border shadow hover:shadow-lg">
+      <div className="flex lg:hidden items-center justify-center gap-2 w-full md:w-[400px] rounded-full py-2 px-5 border shadow hover:shadow-lg">
         <Search />
         <Input
           type="search"
