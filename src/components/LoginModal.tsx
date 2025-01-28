@@ -6,11 +6,11 @@ import { buttons, countryOptions } from "../data";
 import Image from "./ui/Image";
 import Input from "./ui/Input";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setIsLoggedIn } from "../store/features/categoryBar/categoryBarSlice";
+import { setIsLoggedIn } from "../store/features/homeSearch/homeSearchSlice";
 
 function LoginModal() {
   const dispatch = useAppDispatch();
-  const isLoggedIn = useAppSelector((state) => state.categoryBar.isLoggedIn);
+  const { isLoggedIn } = useAppSelector((state) => state.homeSearch);
   return (
     <Modal
       maxWidth="600px"

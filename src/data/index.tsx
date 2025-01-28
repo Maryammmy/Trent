@@ -5,7 +5,12 @@ import image4 from "../assets/iamges/home4.avif";
 import googleIcon from "../assets/iamges/google.png";
 import appleIcon from "../assets/iamges/apple.png";
 import faceIcon from "../assets/iamges/facebook.png";
-import { IButton, IHomeSearch, ISelectOption } from "../interfaces";
+import {
+  IButton,
+  IDestinations,
+  IHomeSearch,
+  ISelectOption,
+} from "../interfaces";
 import { Mail } from "lucide-react";
 
 export const images: string[] = [image1, image2, image3, image4];
@@ -37,4 +42,20 @@ export const homeSearch: IHomeSearch[] = [
   { title: "check_in", text: "add_dates" },
   { title: "check_out", text: "add_dates" },
   { title: "who", text: "add_guests" },
+];
+export const destinations: IDestinations[] = [
+  {
+    city: "Sofia, Bulgaria",
+    reason: "For sights like Alexander Nevsky Cathedral",
+  },
+  { city: "Tallinn, Estonia", reason: "For its bustling nightlife" },
+  { city: "Warsaw, Poland", reason: "For its stunning architecture" },
+  { city: "Helsinki, Finland", reason: "For sights like Suomenlinna" },
+  { city: "Stockholm, Sweden", reason: "For its top-notch dining" },
+  { city: "Riga, Latvia", reason: "For its bustling nightlife" },
+  { city: "Tallinn, Estonia", reason: "For its bustling nightlife" },
+  { city: "Warsaw, Poland", reason: "For its stunning architecture" },
+  { city: "Helsinki, Finland", reason: "For sights like Suomenlinna" },
+  { city: "Stockholm, Sweden", reason: "For its top-notch dining" },
+  { city: "Riga, Latvia", reason: "For its bustling nightlife" },
 ];

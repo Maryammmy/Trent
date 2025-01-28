@@ -11,7 +11,7 @@ function CategoryBar() {
 
   return (
     <div
-      className={`fixed top-[81px] lg:top-[113px] z-20 w-full  bg-white px-5 xl:px-20 py-5 transition-shadow ${
+      className={`fixed top-[81px] xl:top-[105px] z-20 w-full  bg-white px-5 xl:px-20 py-5 transition-shadow ${
         shadow ? "shadow-lg" : ""
       }`}
     >

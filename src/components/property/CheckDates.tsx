@@ -1,4 +1,6 @@
+import Counter from "../home/Counter";
 import Button from "../ui/Button";
+import DatePicker from "../ui/DatePicker";
 
 function CheckDates() {
   return (
@@ -9,18 +11,20 @@ function CheckDates() {
         </h2>
         <div className="border border-stone-300 rounded-lg flex flex-col">
           <div className="flex gap-10 xl:gap-20 border-b border-stone-300 text-sm">
-            <div className="ps-3 py-1">
+            <Button className="ps-3 py-1 flex flex-col items-start">
               <h3 className="text-black font-bold">CHECK-IN</h3>
-              <p className="text-secondary font-medium">Add date</p>
-            </div>
-            <div className="border-l ps-3  py-1">
+              <DatePicker />
+            </Button>
+            <Button className="border-l ps-3  py-1 flex flex-col items-start">
               <h3 className="text-black font-bold">CHECKOUT</h3>
-              <p className="text-secondary font-medium">Add date</p>
-            </div>
+              <DatePicker />
+            </Button>
           </div>
           <div className="ps-3 py-1 text-sm">
             <h2 className="text-black font-bold">GUESTS</h2>
-            <p className="text-black font-medium">1 guest</p>
+            <div className="font-medium">
+              <Counter />
+            </div>
           </div>
         </div>
         <Button className="bg-primary text-lg text-white font-semibold w-full py-2 rounded-md mt-4">

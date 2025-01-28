@@ -27,3 +27,7 @@ export interface IHomeSearch {
   title: string;
   text: string;
 }
+export interface IDestinations {
+  city: string;
+  reason: string;
+}

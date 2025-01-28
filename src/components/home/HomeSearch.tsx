@@ -5,9 +5,23 @@ import Counter from "./Counter";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 import DatePicker from "../ui/DatePicker";
+import DestinationCard from "../DestinationCard";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import {
+  setIsDestinationOpen,
+  setIsDropdownOpen,
+  setIsLangSwitcherOpen,
+} from "../../store/features/homeSearch/homeSearchSlice";
 
 function HomeSearch() {
   const { t } = useTranslation();
+  const { isDestinationOpen } = useAppSelector((state) => state.homeSearch);
+  const dispatch = useAppDispatch();
+  const handleDestinationToggle = () => {
+    dispatch(setIsDestinationOpen(!isDestinationOpen));
+    dispatch(setIsDropdownOpen(false));
+    dispatch(setIsLangSwitcherOpen(false));
+  };
   return (
     <>
       <div className="flex xl:hidden items-center justify-center gap-2 w-full md:w-[500px] rounded-full py-2 px-5 border shadow hover:shadow-lg">
@@ -18,40 +32,42 @@ function HomeSearch() {
           placeholder={t("placeholder_search")}
         />
       </div>
-      <div className="hidden xl:flex items-center justify-around w-[900px] rounded-full py-3 px-5 border shadow hover:shadow-lg">
-        {homeSearch.map((item, index) => {
-          const title = t(item.title);
-          const text = t(item.text);
-          const borderBottom =
-            index === homeSearch.length - 1
-              ? ""
-              : "border-r  rtl:border-l rtl:border-r-0";
-          return (
-            <Button
-              key={index}
-              className={`px-2 font-medium ${borderBottom} flex flex-col`}
-              onClick={() => {
-                console.log("hhb");
-              }}
-            >
-              <h2>{title}</h2>
-              <div>
-                {text === t("add_guests") ? (
-                  <div className="flex items-center gap-4">
-                    <p className="text-secondary">{text}</p>
+      <div className="hidden xl:block">
+        <div className="flex text-sm items-center justify-around w-[900px] rounded-full py-3 px-5 border shadow hover:shadow-lg">
+          {homeSearch.map((item, index) => {
+            const title = t(item.title);
+            const text = t(item.text);
+            const borderBottom =
+              index === homeSearch.length - 1
+                ? ""
+                : "border-r  rtl:border-l rtl:border-r-0";
+            return (
+              <Button
+                onClick={() =>
+                  t("where") === title && handleDestinationToggle()
+                }
+                key={index}
+                className={`px-2 font-medium ${borderBottom} flex flex-col`}
+              >
+                <h2>{title}</h2>
+                <div>
+                  {text === t("add_guests") ? (
                     <Counter />
-                  </div>
-                ) : title === t("check_in") || title === t("check_out") ? (
-                  <DatePicker />
-                ) : (
-                  <p className="text-secondary">{text}</p>
-                )}
-              </div>
-            </Button>
-          );
-        })}
-        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary">
-          <Search strokeWidth={2.75} size={15} className="text-white" />
+                  ) : title === t("check_in") || title === t("check_out") ? (
+                    <DatePicker showShortcuts={true} useRange={true} />
+                  ) : (
+                    <p className="text-secondary">{text}</p>
+                  )}
+                </div>
+              </Button>
+            );
+          })}
+          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary">
+            <Search strokeWidth={2.75} size={15} className="text-white" />
+          </div>
+        </div>
+        <div className="relative">
+          {isDestinationOpen && <DestinationCard />}
         </div>
       </div>
     </>
