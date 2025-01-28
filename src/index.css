@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html {
+  scroll-behavior: smooth;
+}
+.bg-contact-us {
+  background-image: url("./assets/iamges/contact.avif"),
+    linear-gradient(rgb(128, 0, 41), rgba(128, 0, 36, 0.092));
+  background-blend-mode: overlay;
+}
+.bg-about-us {
+  background-image: url("./assets/iamges/property.jpg"),
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  background-blend-mode: overlay;
+}
+p {
+  overflow-wrap: anywhere;
+}

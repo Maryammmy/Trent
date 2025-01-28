@@ -1,0 +1,21 @@
+{
+  "name": "فيلا بيرد",
+  "kilometers_away": "{{distance}} كيلومترًا بعيدًا",
+  "date_range": "{{start_date}} - {{end_date}}",
+  "price_per_night": "{{price}} جنيه في الليلة",
+  "rating": "{{rating}}",
+  "where": "المكان",
+  "search_destinations": "البحث عن الجهات",
+  "check_in": "تسجيل الدخول",
+  "check_out": "تسجيل المغادره",
+  "add_dates": "إضافه التواريخ",
+  "who": "من",
+  "add_guests": "إضافه الضيوف",
+  "placeholder_search": "ابدأ البحث",
+  "trent_your_home": "اعرض منزلك على Trent",
+  "sign_up": "إنشاء حساب",
+  "log_in": "تسجيل الدخول",
+  "gift_cards": "بطاقات الهدايا",
+  "host_an_experience": "استضف تجربة",
+  "help_Center": "مركز المساعدة"
+}

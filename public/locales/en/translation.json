@@ -1,0 +1,21 @@
+{
+  "name": "Villa Bird",
+  "kilometers_away": "{{distance}} kilometers away",
+  "date_range": "{{start_date}} - {{end_date}}",
+  "price_per_night": "{{price}} EGP night",
+  "rating": "{{rating}}",
+  "where": "where",
+  "search_destinations": "Search destinations",
+  "check_in": "Check in",
+  "check_out": "Check out",
+  "add_dates": "Add dates",
+  "who": "Who",
+  "add_guests": "Add guests",
+  "placeholder_search": "Start your search",
+  "trent_your_home": "Trent your home",
+  "sign_up": "Sign up",
+  "log_in": "Log in",
+  "gift_cards": "Gift cards",
+  "host_an_experience": "Host an experience",
+  "help_Center": "Help Center"
+}
