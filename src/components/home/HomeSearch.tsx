@@ -12,16 +12,25 @@ import {
   setIsDropdownOpen,
   setIsLangSwitcherOpen,
 } from "../../store/features/homeSearch/homeSearchSlice";
+import useClickOutside from "../../hooks/useClickOutside";
+import { useRef } from "react";
 
 function HomeSearch() {
   const { t } = useTranslation();
   const { isDestinationOpen } = useAppSelector((state) => state.homeSearch);
   const dispatch = useAppDispatch();
+  const destinationButtonRef = useRef<HTMLButtonElement>(null);
+  const destinationCardRef = useRef<HTMLDivElement>(null);
   const handleDestinationToggle = () => {
     dispatch(setIsDestinationOpen(!isDestinationOpen));
     dispatch(setIsDropdownOpen(false));
     dispatch(setIsLangSwitcherOpen(false));
   };
+  useClickOutside(
+    destinationCardRef,
+    () => dispatch(setIsDestinationOpen(false)),
+    destinationButtonRef
+  );
   return (
     <>
       <div className="flex xl:hidden items-center justify-center gap-2 w-full md:w-[500px] rounded-full py-2 px-5 border shadow hover:shadow-lg">
@@ -37,14 +46,17 @@ function HomeSearch() {
           {homeSearch.map((item, index) => {
             const title = t(item.title);
             const text = t(item.text);
+            console.log(title);
+            console.log(text);
             const borderBottom =
               index === homeSearch.length - 1
                 ? ""
                 : "border-r  rtl:border-l rtl:border-r-0";
             return (
               <Button
+                ref={title === t("where") ? destinationButtonRef : null}
                 onClick={() =>
-                  t("where") === title && handleDestinationToggle()
+                  title === t("where") && handleDestinationToggle()
                 }
                 key={index}
                 className={`px-2 font-medium ${borderBottom} flex flex-col`}
@@ -66,7 +78,7 @@ function HomeSearch() {
             <Search strokeWidth={2.75} size={15} className="text-white" />
           </div>
         </div>
-        <div className="relative">
+        <div className="relative bg-black" ref={destinationCardRef}>
           {isDestinationOpen && <DestinationCard />}
         </div>
       </div>

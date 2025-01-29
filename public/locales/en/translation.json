@@ -4,7 +4,7 @@
   "date_range": "{{start_date}} - {{end_date}}",
   "price_per_night": "{{price}} EGP night",
   "rating": "{{rating}}",
-  "where": "where",
+  "where": "Where",
   "search_destinations": "Search destinations",
   "check_in": "Check in",
   "check_out": "Check out",

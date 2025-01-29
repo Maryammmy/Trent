@@ -14,13 +14,22 @@ import {
   setIsLangSwitcherOpen,
 } from "../store/features/homeSearch/homeSearchSlice";
 import LoginModal from "./LoginModal";
+import { useRef } from "react";
+import useClickOutside from "../hooks/useClickOutside";
 
 export default function Header() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const languageSwitcherRef = useRef<HTMLDivElement>(null);
   const { isDropdownOpen, isLangSwitcherOpen } = useAppSelector(
     (state) => state.homeSearch
   );
+  useClickOutside(dropdownRef, () => dispatch(setIsDropdownOpen(false)));
+  useClickOutside(languageSwitcherRef, () =>
+    dispatch(setIsLangSwitcherOpen(false))
+  );
+
   const toggleLangSwitcher = () => {
     dispatch(setIsLangSwitcherOpen(!isLangSwitcherOpen));
     dispatch(setIsDropdownOpen(false));
@@ -31,7 +40,6 @@ export default function Header() {
     dispatch(setIsLangSwitcherOpen(false));
     dispatch(setIsDestinationOpen(false));
   };
-
   return (
     <>
       <header className="border-b fixed top-0 left-0 right-0 w-full bg-white z-30">
@@ -48,7 +56,7 @@ export default function Header() {
             <div className="hidden 2xl:block font-semibold py-2 px-4 rounded-full hover:bg-[#F7F7F7]">
               <h3>{t("trent_your_home")}</h3>
             </div>
-            <div className="relative">
+            <div className="relative" ref={languageSwitcherRef}>
               <Button
                 onClick={toggleLangSwitcher}
                 className="hidden xl:block py-2 px-4 rounded-full hover:bg-[#F7F7F7]"
@@ -57,7 +65,7 @@ export default function Header() {
               </Button>
               {isLangSwitcherOpen && <LanguageSwitcher />}
             </div>
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
               <Button
                 onClick={toggleMenu}
                 className="flex items-center border py-2 px-3 rounded-full gap-1 hover:shadow-lg"

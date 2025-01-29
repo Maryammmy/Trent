@@ -6,14 +6,10 @@ import {
   setIsLoggedIn,
 } from "../../store/features/homeSearch/homeSearchSlice";
 import Button from "./Button";
-import { useRef } from "react";
-import useClickOutside from "../../hooks/useClickOutside";
 
 function DropdownMenu() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  useClickOutside(dropdownRef, () => dispatch(setIsDropdownOpen(false)));
   const openLoginModal = () => {
     dispatch(setIsLoggedIn(true));
     dispatch(setIsDropdownOpen(false));
@@ -22,7 +18,6 @@ function DropdownMenu() {
   return (
     <>
       <div
-        ref={dropdownRef}
         className={`z-50 hidden md:block absolute top-10 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg ${
           document.documentElement.dir === "rtl" ? "left-0" : "right-0"
         }`}
