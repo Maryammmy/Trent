@@ -16,16 +16,18 @@ function Cart() {
   const rating = 5.0; // Example rating
 
   return (
-    <div className="block  w-full md:w-[354px] lg:w-[314px] xl:w-[305px] 2xl:w-[365px]">
-      <div className="w-full h-[300px]  rounded-md overflow-hidden">
+    <div>
+      <div>
         <Carsoul showDot={true} left="8px" right="8px" padding="2px">
           {images?.map((item: string, index: number) => (
             <Link key={index} to={"/properties/1"}>
-              <Image
-                imageUrl={item}
-                alt={`Slide ${index}`}
-                className="w-full h-[300px] object-cover"
-              />
+              <div className="rounded-md overflow-hidden h-[300px]">
+                <Image
+                  imageUrl={item}
+                  alt={`Slide ${index}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </Link>
           ))}
         </Carsoul>

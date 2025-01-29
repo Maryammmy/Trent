@@ -13,6 +13,7 @@ import {
   setIsDropdownOpen,
   setIsLangSwitcherOpen,
 } from "../store/features/homeSearch/homeSearchSlice";
+import LoginModal from "./LoginModal";
 
 export default function Header() {
   const { t } = useTranslation();
@@ -73,6 +74,7 @@ export default function Header() {
           </div>
         </div>
       </header>
+      <LoginModal />
     </>
   );
 }

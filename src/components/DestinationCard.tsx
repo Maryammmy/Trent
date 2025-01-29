@@ -1,9 +1,19 @@
 import { School } from "lucide-react";
 import { destinations } from "../data";
+import { setIsDestinationOpen } from "../store/features/homeSearch/homeSearchSlice";
+import useClickOutside from "../hooks/useClickOutside";
+import { useRef } from "react";
+import { useAppDispatch } from "../store/hooks";
 
 function DestinationCard() {
+  const dispatch = useAppDispatch();
+  const destinationCardRef = useRef<HTMLDivElement>(null);
+  useClickOutside(destinationCardRef, () =>
+    dispatch(setIsDestinationOpen(false))
+  );
   return (
     <div
+      ref={destinationCardRef}
       className={`hidden xl:block absolute top-0 max-w-md mt-2 shadow-lg ps-4 pe-1 py-4 bg-white rounded-3xl ${
         document.documentElement.dir === "rtl" ? "right-0" : "left-0"
       }`}

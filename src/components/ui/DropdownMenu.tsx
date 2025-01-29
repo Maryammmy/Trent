@@ -1,27 +1,28 @@
 import { menuItems } from "../../data";
-import LoginModal from "../LoginModal";
 import { useAppDispatch } from "../../store/hooks";
 import { useTranslation } from "react-i18next";
 import {
-  setIsDestinationOpen,
   setIsDropdownOpen,
-  setIsLangSwitcherOpen,
   setIsLoggedIn,
 } from "../../store/features/homeSearch/homeSearchSlice";
+import Button from "./Button";
+import { useRef } from "react";
+import useClickOutside from "../../hooks/useClickOutside";
 
 function DropdownMenu() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  useClickOutside(dropdownRef, () => dispatch(setIsDropdownOpen(false)));
   const openLoginModal = () => {
     dispatch(setIsLoggedIn(true));
     dispatch(setIsDropdownOpen(false));
-    dispatch(setIsLangSwitcherOpen(false));
-    dispatch(setIsDestinationOpen(false));
   };
+
   return (
     <>
       <div
+        ref={dropdownRef}
         className={`z-50 hidden md:block absolute top-10 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg ${
           document.documentElement.dir === "rtl" ? "left-0" : "right-0"
         }`}
@@ -33,16 +34,17 @@ function DropdownMenu() {
               className={`${
                 item === "log_in" ? "border-b pb-5" : ""
               } px-4 py-2 hover:bg-gray-100 cursor-pointer`}
-              onClick={() =>
-                (item === "log_in" || item === "sign_up") && openLoginModal()
-              }
             >
-              {t(item)}
+              <Button
+                className="w-full text-start"
+                onClick={() => item === "log_in" && openLoginModal()}
+              >
+                {t(item)}
+              </Button>
             </li>
           ))}
         </ul>
       </div>
-      <LoginModal />
     </>
   );
 }

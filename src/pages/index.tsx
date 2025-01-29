@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="">
       <CategoryBar />
-      <div className="py-5 md:py-10 px-5 xl:px-20 mt-32 lg:mt-44 flex flex-col md:flex-row flex-wrap  gap-5 justify-center md:justify-start  items-center">
+      <div className="py-5 md:py-10 px-5 xl:px-20 mt-32 lg:mt-44 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {cartItems.map((_, index) => (
           <Cart key={index} />
         ))}
