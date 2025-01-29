@@ -18,20 +18,18 @@ export const languageOptions: ISelectOption[] = [
   { label: "English", value: "en" },
   { label: "العربية", value: "ar" },
 ];
-export const countryOptions: ISelectOption[] = [
-  { value: "eg", label: "Egypt (+20)" },
-  { value: "us", label: "USA (+1)" },
-  { value: "uk", label: "UK (+44)" },
-];
 export const buttons: IButton[] = [
   { id: 1, label: "Continue with Google", icon: googleIcon },
   { id: 2, label: "Continue with Apple", icon: appleIcon },
-  { id: 3, label: "Continue with Email", icon: <Mail size={30} /> },
+  {
+    id: 3,
+    label: "Continue with Email",
+    icon: <Mail size={30} />,
+  },
   { id: 4, label: "Continue with Facebook", icon: faceIcon },
 ];
+export const authItems: string[] = ["log_in", "sign_up"];
 export const menuItems: string[] = [
-  "sign_up",
-  "log_in",
   "gift_cards",
   "trent_your_home",
   "host_an_experience",

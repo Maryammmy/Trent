@@ -16,12 +16,14 @@ import {
 import LoginModal from "./LoginModal";
 import { useRef } from "react";
 import useClickOutside from "../hooks/useClickOutside";
+import SignupModal from "./SignupModal";
 
 export default function Header() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const languageSwitcherRef = useRef<HTMLDivElement>(null);
+
   const { isDropdownOpen, isLangSwitcherOpen } = useAppSelector(
     (state) => state.homeSearch
   );
@@ -83,6 +85,7 @@ export default function Header() {
         </div>
       </header>
       <LoginModal />
+      <SignupModal />
     </>
   );
 }

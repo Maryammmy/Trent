@@ -4,14 +4,12 @@ interface homeSearchState {
   isDestinationOpen: boolean;
   isLangSwitcherOpen: boolean;
   isDropdownOpen: boolean;
-  isLoggedIn: boolean;
 }
 
 const initialState: homeSearchState = {
   isDestinationOpen: false,
   isLangSwitcherOpen: false,
   isDropdownOpen: false,
-  isLoggedIn: false,
 };
 
 const homeSearchSlice = createSlice({
@@ -27,9 +25,6 @@ const homeSearchSlice = createSlice({
     setIsDropdownOpen(state, action: PayloadAction<boolean>) {
       state.isDropdownOpen = action.payload;
     },
-    setIsLoggedIn(state, action: PayloadAction<boolean>) {
-      state.isLoggedIn = action.payload;
-    },
   },
 });
 
@@ -37,7 +32,6 @@ export const {
   setIsDestinationOpen,
   setIsLangSwitcherOpen,
   setIsDropdownOpen,
-  setIsLoggedIn,
 } = homeSearchSlice.actions;
 
 export default homeSearchSlice.reducer;

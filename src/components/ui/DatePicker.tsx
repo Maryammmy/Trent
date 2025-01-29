@@ -14,11 +14,10 @@ const DatePicker = ({ showShortcuts = false, useRange = false }: IProps) => {
   });
   const handleValueChange = (newValue: DateValueType) => {
     setDateValue(newValue);
-    console.log("Selected Date Range: ", newValue);
   };
 
   return (
-    <div className="relative">
+    <div className="remove-icon">
       <Datepicker
         popoverDirection="down"
         showShortcuts={showShortcuts}
@@ -32,13 +31,13 @@ const DatePicker = ({ showShortcuts = false, useRange = false }: IProps) => {
       />
       <style>
         {`
-        .relative div button svg{
+        .remove-icon div button svg{
           display: none !important;
         }
-       .relative div .flex.justify-center.space-x-3 {
+       .remove-icon div .flex.justify-center.space-x-3 {
       gap: 8px !important; 
     }
-    .relative div .flex.justify-center.space-x-3 > * {
+    .remove-icon div .flex.justify-center.space-x-3 > * {
       margin-left: 0 !important;
       margin-right: 0 !important;
     }
