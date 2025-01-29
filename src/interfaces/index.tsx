@@ -15,10 +15,6 @@ export interface ResponsiveSetting {
     slidesToShow: number;
   };
 }
-export interface SpecificCategory {
-  title: string;
-  item: string;
-}
 export interface IFooterLinks {
   title: string;
   to: string;
