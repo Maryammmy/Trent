@@ -3,7 +3,7 @@ import router from "./router";
 import { RouterProvider } from "react-router-dom";
 import i18n from "./i18n";
 import { useEffect } from "react";
-import SidebarContextProvider from "./context/SidebarContext";
+import { PhotoProvider } from "react-photo-view";
 
 function App() {
   useEffect(() => {
@@ -20,10 +20,10 @@ function App() {
 
   return (
     <>
-      <SidebarContextProvider>
+      <PhotoProvider>
         <RouterProvider router={router} />
         <Toaster />
-      </SidebarContextProvider>
+      </PhotoProvider>
     </>
   );
 }
