@@ -28,7 +28,7 @@ function HomeSearch() {
         <Search />
         <Input
           type="search"
-          className="w-full outline-none"
+          className="w-full outline-none bg-transparent"
           placeholder={t("placeholder_search")}
         />
       </div>
