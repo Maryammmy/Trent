@@ -5,15 +5,14 @@ import { images } from "../data";
 import { FaStar } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
 
-function Cart() {
+function Card() {
   const { t } = useTranslation();
 
-  // Example data
-  const distance = 18; // Example distance in kilometers
-  const startDate = "May 11"; // Example start date
-  const endDate = "May 15"; // Example end date
-  const price = 500; // Example price per night
-  const rating = 5.0; // Example rating
+  const distance = 18;
+  const startDate = "May 11";
+  const endDate = "May 15";
+  const price = 500;
+  const rating = 5.0;
 
   return (
     <div>
@@ -52,4 +51,4 @@ function Cart() {
   );
 }
 
-export default Cart;
+export default Card;
