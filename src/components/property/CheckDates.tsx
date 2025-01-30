@@ -86,7 +86,7 @@ function CheckDates() {
           </div>
         </div>
         <Button className="bg-primary text-lg text-white font-semibold w-full py-2 rounded-md mt-4">
-          <span>{t("check_availability")}</span>
+          <span>Check availability</span>
         </Button>
       </div>
     </div>

@@ -15,7 +15,7 @@ function LoginModal() {
     <Modal
       maxWidth="600px"
       className="text-lg text-center p-4 border-b font-semibold"
-      title="Login"
+      title="Log in"
       close={() => dispatch(setIsloggedin(false))}
       isOpen={isLoggedin}
     >
@@ -46,7 +46,7 @@ function LoginModal() {
           );
         })}
         <Button className="w-full bg-primary text-white py-2 rounded-lg font-bold">
-          <span>Login</span>
+          <span>Log in</span>
         </Button>
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-500">or</p>

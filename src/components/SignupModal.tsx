@@ -15,7 +15,7 @@ function SignupModal() {
     <Modal
       maxWidth="600px"
       className="text-lg text-center p-4 border-b font-semibold"
-      title="Signup"
+      title="Sign up"
       close={() => dispatch(setIsSignup(false))}
       isOpen={isSignup}
     >
@@ -46,7 +46,7 @@ function SignupModal() {
           );
         })}
         <Button className="w-full bg-primary text-white py-2 rounded-lg font-bold">
-          <span> Signup</span>
+          <span> Sign up</span>
         </Button>
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-500">or</p>
