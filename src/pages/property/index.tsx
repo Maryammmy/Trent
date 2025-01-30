@@ -64,7 +64,7 @@ function Property() {
           onClick={() => setIsReviewed(true)}
           className="font-semibold text-2xl"
         >
-          Review
+          <span> Review</span>
         </Button>
       </div>
       <ReviewModal isReviewed={isReviewed} close={() => setIsReviewed(false)} />

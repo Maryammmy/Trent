@@ -7,7 +7,6 @@ function useClickOutside(
 ) {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // Check if the click is outside the ref AND the exception ref (button)
       if (
         ref.current &&
         !ref.current.contains(event.target as Node) &&

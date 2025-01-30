@@ -24,7 +24,7 @@ function CategoryBar() {
         {navbarIcons.map((item, index) => (
           <Button key={index} className="">
             <div>{item.icon}</div>
-            <div className="text-sm font-medium ">{item.title}</div>{" "}
+            <div className="text-sm font-medium ">{item.title}</div>
           </Button>
         ))}
       </Carsoul>

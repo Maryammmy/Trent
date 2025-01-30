@@ -39,7 +39,7 @@ function DropdownMenu() {
                   item === "log_in" ? openLoginModal() : openSignupModal()
                 }
               >
-                {t(item)}
+                <span>{t(item)}</span>
               </Button>
             </li>
           ))}
@@ -50,7 +50,9 @@ function DropdownMenu() {
               key={index}
               className={`px-4 py-2 hover:bg-gray-100 cursor-pointer`}
             >
-              <Button className="w-full text-start">{t(item)}</Button>
+              <Button className="w-full text-start">
+                <span>{t(item)}</span>
+              </Button>
             </li>
           ))}
         </ul>

@@ -19,5 +19,6 @@
   "log_in": "Log in",
   "gift_cards": "Gift cards",
   "host_an_experience": "Host an experience",
-  "help_Center": "Help Center"
+  "help_Center": "Help Center",
+  "error_Check_in": "check in must be before check out"
 }

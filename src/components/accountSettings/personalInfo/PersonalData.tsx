@@ -13,7 +13,9 @@ function PersonalData() {
               <p className=" text-secondary">{text}</p>
             </div>
             <div>
-              <Button className=" underline font-medium">{button}</Button>
+              <Button className=" underline font-medium">
+                <span>{button}</span>
+              </Button>
             </div>
           </div>
         );

@@ -63,7 +63,9 @@ export default function Header() {
                 onClick={toggleLangSwitcher}
                 className="hidden xl:block py-2 px-4 rounded-full hover:bg-[#F7F7F7]"
               >
-                <Globe size={18} />
+                <span>
+                  <Globe size={18} />
+                </span>
               </Button>
               {isLangSwitcherOpen && <LanguageSwitcher />}
             </div>

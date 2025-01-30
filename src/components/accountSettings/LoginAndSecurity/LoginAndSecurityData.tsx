@@ -14,7 +14,9 @@ function LoginAndSecurityData() {
           <p className=" text-secondary text-lg">Last updated a day ago</p>
         </div>
         <div>
-          <Button className="text-primary text-xl font-medium">Update</Button>
+          <Button className="text-primary text-xl font-medium">
+            <span>Update</span>
+          </Button>
         </div>
       </div>
     </div>

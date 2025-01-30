@@ -22,14 +22,18 @@ function Counter() {
           counter === 0 ? "opacity-50" : ""
         }`}
       >
-        <Minus size={15} />
+        <span>
+          <Minus size={15} />
+        </span>
       </Button>
       <span className="font-medium">{counter}</span>
       <Button
         onClick={() => setCounter(counter + 1)}
         className="w-6 h-6 rounded-full bg-white text-secondary border-2 flex justify-center items-center"
       >
-        <Plus size={15} />
+        <span>
+          <Plus size={15} />
+        </span>
       </Button>
     </div>
   );

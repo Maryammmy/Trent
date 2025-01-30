@@ -35,7 +35,7 @@ function ContactForm() {
           );
         })}
         <Button className="my-4 py-3 rounded-md w-full bg-primary text-white font-medium">
-          Sumit your request
+          <span>Sumit your request</span>
         </Button>
       </form>
     </div>

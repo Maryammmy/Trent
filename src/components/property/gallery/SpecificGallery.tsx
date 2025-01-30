@@ -26,9 +26,8 @@ function SpecificGallery() {
                 const isEven = images.length % 2 === 0;
                 const firstIndex = index === 0;
                 return (
-                  <PhotoViewer src={image}>
+                  <PhotoViewer key={index} src={image}>
                     <div
-                      key={index}
                       className={`${
                         !isEven && firstIndex
                           ? "w-full h-[200px] xl:w-[800px] md:h-[500px]"

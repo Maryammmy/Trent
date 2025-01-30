@@ -23,7 +23,9 @@ function LoginModal() {
         onClick={() => dispatch(setIsloggedin(false))}
         className="absolute top-5 right-4 text-gray-500 hover:text-black"
       >
-        <X className="text-black" size={20} />
+        <span>
+          <X className="text-black" size={20} />
+        </span>
       </Button>
       <div className="p-6">
         <div className="pb-4">
@@ -44,7 +46,7 @@ function LoginModal() {
           );
         })}
         <Button className="w-full bg-primary text-white py-2 rounded-lg font-bold">
-          Login
+          <span>Login</span>
         </Button>
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-500">or</p>

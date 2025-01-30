@@ -21,7 +21,9 @@ function ReviewModal({ isReviewed, close }: IProps) {
     <Modal isOpen={isReviewed} close={close} maxWidth="1024px">
       <div className="p-5">
         <Button onClick={close}>
-          <X />
+          <span>
+            <X />
+          </span>
         </Button>
         <div className="flex flex-col lg:flex-row justify-between gap-10 p-6 ">
           <div className="flex-1">

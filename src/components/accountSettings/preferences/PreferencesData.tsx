@@ -14,7 +14,7 @@ function PreferencesData() {
             </div>
             <div>
               <Button className="text-primary text-xl font-medium">
-                {button}
+                <span>{button}</span>
               </Button>
             </div>
           </div>

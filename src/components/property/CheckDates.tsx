@@ -1,8 +1,35 @@
+import toast from "react-hot-toast";
 import Counter from "../home/Counter";
 import Button from "../ui/Button";
 import DatePicker from "../ui/DatePicker";
+import { DateValueType } from "react-tailwindcss-datepicker";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function CheckDates() {
+  const { t } = useTranslation();
+  const [startDateValue, setStartDateValue] = useState<DateValueType>({
+    startDate: null,
+    endDate: null,
+  });
+  const [endDateValue, setEndDateValue] = useState<DateValueType>({
+    startDate: null,
+    endDate: null,
+  });
+  const handleStartValueChange = (newValue: DateValueType) => {
+    const { startDate } = newValue || {};
+    if (
+      startDate &&
+      endDateValue?.startDate &&
+      new Date(startDate) > new Date(endDateValue.startDate)
+    ) {
+      return toast.error(t("error_Check_in"));
+    }
+    setStartDateValue(newValue);
+  };
+  const handleEndValueChange = (newValue: DateValueType) => {
+    setEndDateValue(newValue);
+  };
   return (
     <div className="flex-1">
       <div className="border shadow-lg rounded-lg p-6 max-w-[400px] ">
@@ -13,11 +40,17 @@ function CheckDates() {
           <div className="flex gap-10 xl:gap-20 border-b border-stone-300 text-sm">
             <Button className="ps-3 py-1 flex flex-col items-start">
               <h3 className="text-black font-bold">CHECK-IN</h3>
-              <DatePicker />
+              <DatePicker
+                dateValue={startDateValue}
+                handleValueChange={handleStartValueChange}
+              />
             </Button>
             <Button className="border-l ps-3  py-1 flex flex-col items-start">
               <h3 className="text-black font-bold">CHECKOUT</h3>
-              <DatePicker />
+              <DatePicker
+                dateValue={endDateValue}
+                handleValueChange={handleEndValueChange}
+              />
             </Button>
           </div>
           <div className="ps-3 py-1 text-sm">
@@ -28,7 +61,7 @@ function CheckDates() {
           </div>
         </div>
         <Button className="bg-primary text-lg text-white font-semibold w-full py-2 rounded-md mt-4">
-          Check availability
+          <span>Check availability</span>
         </Button>
       </div>
     </div>

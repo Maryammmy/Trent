@@ -13,11 +13,34 @@ import {
   setIsLangSwitcherOpen,
 } from "../../store/features/homeSearch/homeSearchSlice";
 import useClickOutside from "../../hooks/useClickOutside";
-import { useRef } from "react";
-
+import { useRef, useState } from "react";
+import { DateValueType } from "react-tailwindcss-datepicker";
+import toast from "react-hot-toast";
 function HomeSearch() {
   const { t } = useTranslation();
   const { isDestinationOpen } = useAppSelector((state) => state.homeSearch);
+  const [startDateValue, setStartDateValue] = useState<DateValueType>({
+    startDate: null,
+    endDate: null,
+  });
+  const [endDateValue, setEndDateValue] = useState<DateValueType>({
+    startDate: null,
+    endDate: null,
+  });
+  const handleStartValueChange = (newValue: DateValueType) => {
+    const { startDate } = newValue || {};
+    if (
+      startDate &&
+      endDateValue?.startDate &&
+      new Date(startDate) > new Date(endDateValue.startDate)
+    ) {
+      return toast.error(t("error_Check_in"), { position: "top-right" });
+    }
+    setStartDateValue(newValue);
+  };
+  const handleEndValueChange = (newValue: DateValueType) => {
+    setEndDateValue(newValue);
+  };
   const dispatch = useAppDispatch();
   const destinationButtonRef = useRef<HTMLButtonElement>(null);
   const destinationCardRef = useRef<HTMLDivElement>(null);
@@ -31,6 +54,7 @@ function HomeSearch() {
     () => dispatch(setIsDestinationOpen(false)),
     destinationButtonRef
   );
+
   return (
     <>
       <div className="flex xl:hidden items-center justify-center gap-2 w-full md:w-[500px] rounded-full py-2 px-5 border shadow hover:shadow-lg">
@@ -46,12 +70,11 @@ function HomeSearch() {
           {homeSearch.map((item, index) => {
             const title = t(item.title);
             const text = t(item.text);
-            console.log(title);
-            console.log(text);
             const borderBottom =
               index === homeSearch.length - 1
                 ? ""
-                : "border-r  rtl:border-l rtl:border-r-0";
+                : "border-r rtl:border-l rtl:border-r-0";
+
             return (
               <Button
                 ref={title === t("where") ? destinationButtonRef : null}
@@ -65,8 +88,20 @@ function HomeSearch() {
                 <div>
                   {text === t("add_guests") ? (
                     <Counter />
-                  ) : title === t("check_in") || title === t("check_out") ? (
-                    <DatePicker showShortcuts={true} useRange={true} />
+                  ) : title === t("check_in") ? (
+                    <DatePicker
+                      showShortcuts={true}
+                      useRange={true}
+                      dateValue={startDateValue}
+                      handleValueChange={handleStartValueChange}
+                    />
+                  ) : title === t("check_out") ? (
+                    <DatePicker
+                      showShortcuts={true}
+                      useRange={true}
+                      dateValue={endDateValue}
+                      handleValueChange={handleEndValueChange}
+                    />
                   ) : (
                     <p className="text-secondary">{text}</p>
                   )}

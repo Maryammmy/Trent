@@ -20,7 +20,7 @@ export const ExpandableText = ({ text, maxLength }: ExpandableTextProps) => {
           onClick={toggleTruncation}
           className="text-secondary underline hover:text-stone-600 font-bold ml-1"
         >
-          {isTruncated ? "Show more" : "Show less"}
+          <span> {isTruncated ? "Show more" : "Show less"}</span>
         </Button>
       )}
     </span>
