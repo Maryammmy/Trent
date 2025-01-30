@@ -4,6 +4,19 @@
 html {
   scroll-behavior: smooth;
 }
+.PhotoView__PhotoBox {
+  width: 70% !important;
+  height: 80vh !important;
+  transform: none !important;
+  margin: auto !important;
+}
+.PhotoView__PhotoBox img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transform: none !important;
+}
+
 .destination-scroller::-webkit-scrollbar {
   width: 6px;
 }
