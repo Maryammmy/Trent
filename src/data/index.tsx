@@ -33,7 +33,7 @@ export const menuItems: string[] = [
   "gift_cards",
   "trent_your_home",
   "host_an_experience",
-  "help_Center",
+  "help_center",
 ];
 export const homeSearch: IHomeSearch[] = [
   { title: "where", text: "search_destinations" },

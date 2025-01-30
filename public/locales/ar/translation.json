@@ -6,7 +6,7 @@
   "rating": "{{rating}}",
   "where": "المكان",
   "search_destinations": "البحث عن الجهات",
-  "check_in": "تسجيل الدخول",
+  "check_in": "تسجيل الوصول",
   "check_out": "تسجيل المغادره",
   "add_dates": "إضافه التواريخ",
   "who": "من",
@@ -19,8 +19,11 @@
   "log_in": "تسجيل الدخول",
   "gift_cards": "بطاقات الهدايا",
   "host_an_experience": "استضف تجربة",
-  "help_Center": "مركز المساعدة",
-  "error_Check_in": "تاريخ تسجيل الوصول يجب أن يكون قبل تاريخ تسجيل المغادرة",
+  "help_center": "مركز المساعدة",
+  "error_check_in": "تاريخ الوصول يجب أن يكون قبل تاريخ المغادرة",
+  "error_check_out": "تاريخ المغادرة يجب ان يكون بعد تاريخ الوصول",
+  "error_Check_in_after_today": "تاريخ الوصول لا يمكن أن يكون قبل اليوم",
+  "error_Check_out_after_today": "تاريخ المغادرة لا يمكن ان يكون قبل اليوم",
   "display_total_before_taxes": "عرض الإجمالي قبل الضرائب",
   "total_before_taxes": "الأجمالي قبل الضرائب"
 }

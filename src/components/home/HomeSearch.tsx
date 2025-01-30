@@ -16,6 +16,7 @@ import useClickOutside from "../../hooks/useClickOutside";
 import { useRef, useState } from "react";
 import { DateValueType } from "react-tailwindcss-datepicker";
 import toast from "react-hot-toast";
+
 function HomeSearch() {
   const { t } = useTranslation();
   const { isDestinationOpen } = useAppSelector((state) => state.homeSearch);
@@ -29,16 +30,42 @@ function HomeSearch() {
   });
   const handleStartValueChange = (newValue: DateValueType) => {
     const { startDate } = newValue || {};
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (startDate && new Date(startDate) < today) {
+      toast.error(t("error_Check_in_after_today"));
+      return;
+    }
     if (
       startDate &&
       endDateValue?.startDate &&
       new Date(startDate) > new Date(endDateValue.startDate)
     ) {
-      return toast.error(t("error_Check_in"), { position: "top-right" });
+      toast.error(t("error_check_in"));
+      return;
     }
+
     setStartDateValue(newValue);
   };
+
   const handleEndValueChange = (newValue: DateValueType) => {
+    const { startDate } = newValue || {};
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (startDate && new Date(startDate) < today) {
+      toast.error(t("error_Check_out_after_today"));
+      return;
+    }
+    if (
+      startDate &&
+      startDateValue?.startDate &&
+      new Date(startDate) < new Date(startDateValue.startDate)
+    ) {
+      toast.error(t("error_check_out"));
+      setEndDateValue({ startDate: null, endDate: null });
+      return;
+    }
+
     setEndDateValue(newValue);
   };
   const dispatch = useAppDispatch();

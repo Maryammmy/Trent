@@ -19,8 +19,11 @@
   "log_in": "Log in",
   "gift_cards": "Gift cards",
   "host_an_experience": "Host an experience",
-  "help_Center": "Help Center",
-  "error_Check_in": "check in must be before check out",
+  "help_center": "Help Center",
+  "error_check_in": "check in must be before check out",
+  "error_check_out": "check out must be after check in",
+  "error_Check_in_after_today": "Check in date cannot be before today",
+  "error_Check_out_after_today": "Check out date cannot be before today",
   "display_total_before_taxes": "Display total before taxes",
   "total_before_taxes": "Total before taxes"
 }
