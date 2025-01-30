@@ -15,7 +15,7 @@ export default function Home() {
       <div>
         <CategoryBar />
         <div className="px-5 xl:px-20 flex justify-end">
-          <Button className=" mt-20 flex items-center gap-2 border p-2 rounded-md bg-white">
+          <Button className="mt-14 xl:mt-20 flex items-center gap-2 border p-2 rounded-md bg-white">
             <span className="text-sm"> {t("display_total_before_taxes")}</span>
             <div>
               <Switcher />
