@@ -3,12 +3,9 @@ import CheckDates from "../../components/property/CheckDates";
 import HostedBy from "../../components/property/HostedBy";
 import Image from "../../components/ui/Image";
 import { images } from "../../data";
-import { useState } from "react";
-import ReviewModal from "../../components/property/reviews/ReviewModal";
-import { Button } from "@headlessui/react";
+import ReviewComponent from "../../components/property/reviews/ReviewComponent";
 
 function Property() {
-  const [isReviewed, setIsReviewed] = useState<boolean>(false);
   return (
     <>
       <div className="px-5 xl:px-20 py-2 lg:py-6">
@@ -60,14 +57,8 @@ function Property() {
           </div>
           <CheckDates />
         </div>
-        <Button
-          onClick={() => setIsReviewed(true)}
-          className="font-semibold text-2xl"
-        >
-          <span> Review</span>
-        </Button>
+        <ReviewComponent />
       </div>
-      <ReviewModal isReviewed={isReviewed} close={() => setIsReviewed(false)} />
     </>
   );
 }

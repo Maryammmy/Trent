@@ -78,9 +78,11 @@ function ReviewModal({ isReviewed, close }: IProps) {
                 className="outline-none w-full"
               />
             </div>
-            {reviewCards.map((_, index) => (
-              <ReviewCard key={index} />
-            ))}
+            <div className=" flex flex-col gap-4">
+              {reviewCards.map((_, index) => (
+                <ReviewCard key={index} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

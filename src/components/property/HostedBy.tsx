@@ -4,7 +4,7 @@ import { Fence, KeyRound, MapPin } from "lucide-react";
 
 function HostedBy() {
   return (
-    <div className="border-t border-b py-4">
+    <div className="border-t py-4">
       <div className="flex items-center gap-5">
         <div className="w-12 h-12 rounded-full overflow-hidden">
           <Image
