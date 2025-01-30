@@ -17,10 +17,10 @@ function Card() {
   return (
     <div>
       <div>
-        <Carsoul showDot={true} left="8px" right="8px" padding="2px">
+        <Carsoul showDot={true} left="8px" right="8px" padding="1px">
           {images?.map((item: string, index: number) => (
             <Link key={index} to={"/properties/1"}>
-              <div className="rounded-md overflow-hidden h-[300px]">
+              <div className="rounded-md overflow-hidden h-[280px]">
                 <Image
                   imageUrl={item}
                   alt={`Slide ${index}`}

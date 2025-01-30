@@ -10,7 +10,7 @@ export default function Home() {
     <div className="">
       {/* <CategoryBarSkeleton cards={8} /> */}
       <CategoryBar />
-      <div className="py-5 md:py-10 px-5 xl:px-20 mt-32 lg:mt-44 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <div className="py-5 md:py-10 px-5 xl:px-20 mt-32 lg:mt-44 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
         {cartItems.map((_, index) => (
           <Cart key={index} />
         ))}

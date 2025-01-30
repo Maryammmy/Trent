@@ -6,6 +6,7 @@ import { images } from "../../data";
 import ReviewComponent from "../../components/property/reviews/ReviewComponent";
 import Iframe from "../../components/ui/Iframe";
 import Amenities from "../../components/property/Amenities";
+import { Grip } from "lucide-react";
 
 function Property() {
   return (
@@ -16,7 +17,7 @@ function Property() {
             Tiny house close to Rotterdam
           </h2>
         </div>
-        <div className="flex gap-5 flex-col xl:flex-row flex-wrap">
+        <div className="relative flex gap-5 flex-col xl:flex-row flex-wrap">
           <div className="xl:flex-[0_0_49%] h-[240px] xl:h-[500px]">
             <Link to={`/properties/1/gallery`}>
               <Image
@@ -44,6 +45,15 @@ function Property() {
               </div>
             ))}
           </div>
+          <Link
+            to={`/properties/1/gallery`}
+            className="absolute bottom-2 right-8 flex items-center gap-1 bg-white py-1 px-2 border border-black rounded-md"
+          >
+            <span>
+              <Grip size={15} />
+            </span>
+            <span className="font-medium text-sm ">Show all photos</span>
+          </Link>
         </div>
         <div className="py-8 flex flex-col lg:flex-row gap-10 xl:gap-20 md:justify-between">
           <div className="flex-[2]">
