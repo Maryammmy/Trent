@@ -4,11 +4,18 @@
 html {
   scroll-behavior: smooth;
 }
+/* Default styles for larger screens */
 .PhotoView__PhotoBox {
   width: 70% !important;
   height: 80vh !important;
   transform: none !important;
   margin: auto !important;
+}
+@media (max-width: 768px) {
+  .PhotoView__PhotoBox {
+    width: 100% !important;
+    height: 50vh !important;
+  }
 }
 .PhotoView__PhotoBox img {
   width: 100% !important;

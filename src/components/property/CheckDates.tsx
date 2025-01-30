@@ -20,14 +20,10 @@ function CheckDates() {
     const { startDate } = newValue || {};
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-
-    // Validate if the selected "check-in" date is before today
     if (startDate && new Date(startDate) < today) {
       toast.error(t("error_Check_in_after_today"));
       return;
     }
-
-    // Check if the start date is after the end date
     if (
       startDate &&
       endDateValue?.startDate &&
@@ -36,14 +32,16 @@ function CheckDates() {
       toast.error(t("error_check_in"));
       return;
     }
-
     setStartDateValue(newValue);
   };
-
   const handleEndValueChange = (newValue: DateValueType) => {
     const { startDate } = newValue || {};
-
-    // Check if the end date is before the start date
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (startDate && new Date(startDate) < today) {
+      toast.error(t("error_Check_out_after_today"));
+      return;
+    }
     if (
       startDate &&
       startDateValue?.startDate &&

@@ -44,10 +44,8 @@ function HomeSearch() {
       toast.error(t("error_check_in"));
       return;
     }
-
     setStartDateValue(newValue);
   };
-
   const handleEndValueChange = (newValue: DateValueType) => {
     const { startDate } = newValue || {};
     const today = new Date();
