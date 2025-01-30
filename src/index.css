@@ -4,7 +4,7 @@
 html {
   scroll-behavior: smooth;
 }
-/* Default styles for larger screens */
+
 .PhotoView__PhotoBox {
   width: 70% !important;
   height: 80vh !important;
