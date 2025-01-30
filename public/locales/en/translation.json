@@ -22,5 +22,5 @@
   "help_Center": "Help Center",
   "error_Check_in": "check in must be before check out",
   "display_total_before_taxes": "Display total before taxes",
-  "includes_taxes": "Includes taxes"
+  "total_before_taxes": "Total before taxes"
 }

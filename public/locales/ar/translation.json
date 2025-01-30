@@ -22,5 +22,5 @@
   "help_Center": "مركز المساعدة",
   "error_Check_in": "تاريخ تسجيل الوصول يجب أن يكون قبل تاريخ تسجيل المغادرة",
   "display_total_before_taxes": "عرض الإجمالي قبل الضرائب",
-  "includes_taxes": "شامل الضرائب"
+  "total_before_taxes": "الأجمالي قبل الضرائب"
 }

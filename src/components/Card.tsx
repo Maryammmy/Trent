@@ -54,8 +54,8 @@ function Card() {
             ? t("price_per_night", { price: priceBeforeTaxes.toFixed(2) })
             : t("price_per_night", { price: priceWithTaxes.toFixed(2) })}
         </p>
-        {!enableTaxes && (
-          <p className="text-sm text-gray-500">{t("includes_taxes")}</p>
+        {enableTaxes && (
+          <p className="text-sm text-gray-500">{t("total_before_taxes")}</p>
         )}
       </div>
     </div>
