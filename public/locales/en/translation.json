@@ -20,5 +20,7 @@
   "gift_cards": "Gift cards",
   "host_an_experience": "Host an experience",
   "help_Center": "Help Center",
-  "error_Check_in": "check in must be before check out"
+  "error_Check_in": "check in must be before check out",
+  "display_total_before_taxes": "Display total before taxes",
+  "includes_taxes": "Includes taxes"
 }

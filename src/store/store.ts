@@ -3,6 +3,7 @@ import darkModeSlice from "./features/darkMode/darkModeSlice";
 import categoryBarSlice from "./features/categoryBar/categoryBarSlice";
 import homeSearchSlice from "./features/homeSearch/homeSearchSlice";
 import authSlice from "./features/auth/authSlice";
+import taxesSlice from "./features/taxes/taxesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     categoryBar: categoryBarSlice,
     homeSearch: homeSearchSlice,
     auth: authSlice,
+    taxes: taxesSlice,
   },
 });
 

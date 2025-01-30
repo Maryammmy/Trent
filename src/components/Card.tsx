@@ -4,15 +4,19 @@ import Image from "./ui/Image";
 import { images } from "../data";
 import { FaStar } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../store/hooks";
 
 function Card() {
   const { t } = useTranslation();
-
+  const { enableTaxes } = useAppSelector((state) => state.taxes);
   const distance = 18;
   const startDate = "May 11";
   const endDate = "May 15";
-  const price = 500;
-  const rating = 5.0;
+  const basePrice = 500;
+  const taxRate = 14 / 100;
+
+  const priceBeforeTaxes = basePrice;
+  const priceWithTaxes = basePrice * (1 + taxRate);
 
   return (
     <div>
@@ -36,7 +40,7 @@ function Card() {
           <h3 className="font-bold">{t("name")}</h3>
           <p className="flex gap-1 items-center font-medium">
             <FaStar size={15} />
-            <span>{t("rating", { rating })}</span>
+            <span>{t("rating", { rating: 5.0 })}</span>
           </p>
         </div>
         <p className="text-stone-500 font-medium">
@@ -45,7 +49,14 @@ function Card() {
         <p className="text-stone-500 font-medium">
           {t("date_range", { start_date: startDate, end_date: endDate })}
         </p>
-        <p className="font-medium">{t("price_per_night", { price })}</p>
+        <p className="font-medium">
+          {enableTaxes
+            ? t("price_per_night", { price: priceBeforeTaxes.toFixed(2) })
+            : t("price_per_night", { price: priceWithTaxes.toFixed(2) })}
+        </p>
+        {!enableTaxes && (
+          <p className="text-sm text-gray-500">{t("includes_taxes")}</p>
+        )}
       </div>
     </div>
   );
