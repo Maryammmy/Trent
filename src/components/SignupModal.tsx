@@ -1,10 +1,10 @@
 import { X } from "lucide-react";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
-// import Image from "./ui/Image";
+import Image from "./ui/Image";
 import Input from "./ui/Input";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-// import { buttons } from "../data";
+import { buttons } from "../data";
 import { signupData } from "../data/authData";
 import { setIsSignup } from "../store/features/auth/authSlice";
 
@@ -27,7 +27,7 @@ function SignupModal() {
           <X className="text-black" size={20} />
         </span>
       </Button>
-      <div className="p-6">
+      <div className="p-6 max-h-[80vh] overflow-y-auto">
         <div className="pb-4">
           <h2 className="text-lg font-semibold">Welcome to Trent</h2>
         </div>
@@ -48,7 +48,7 @@ function SignupModal() {
         <Button className="w-full bg-primary text-white py-2 rounded-lg font-bold">
           <span> Signup</span>
         </Button>
-        {/* <div className="mt-4 text-center">
+        <div className="mt-4 text-center">
           <p className="text-sm text-gray-500">or</p>
           <div className="flex flex-col gap-2 mt-2">
             {buttons.map((button) => (
@@ -71,7 +71,7 @@ function SignupModal() {
               </Button>
             ))}
           </div>
-        </div> */}
+        </div>
       </div>
     </Modal>
   );
