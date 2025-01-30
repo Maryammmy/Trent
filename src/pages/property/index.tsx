@@ -4,6 +4,8 @@ import HostedBy from "../../components/property/HostedBy";
 import Image from "../../components/ui/Image";
 import { images } from "../../data";
 import ReviewComponent from "../../components/property/reviews/ReviewComponent";
+import Iframe from "../../components/ui/Iframe";
+import Amenities from "../../components/property/Amenities";
 
 function Property() {
   return (
@@ -54,10 +56,14 @@ function Property() {
               </p>
             </div>
             <HostedBy />
+            <Amenities />
           </div>
           <CheckDates />
         </div>
         <ReviewComponent />
+        <div className="max-w-7xl mx-auto py-5">
+          <Iframe width="100%" />
+        </div>
       </div>
     </>
   );

@@ -23,8 +23,12 @@ export interface IWidth {
 export interface IReview {
   image: string;
   name: string;
-  rating:number;
+  rating: number;
   duration: string;
   when: string;
   text: string;
+}
+export interface IAmenity {
+  text: string;
+  icon: ReactNode;
 }
