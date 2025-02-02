@@ -1,7 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { preferencesData } from "../../../data/accountSettingsData/preferencesData";
 import Button from "../../ui/Button";
 
 function PreferencesData() {
+  const { t } = useTranslation();
   return (
     <div className="flex-[2]">
       {preferencesData.map((item, index) => {
@@ -9,12 +11,12 @@ function PreferencesData() {
         return (
           <div key={index} className="border-b pb-8 pt-4 flex justify-between">
             <div>
-              <h2 className="font-bold">{label}</h2>
-              <p className=" text-secondary text-lg">{text}</p>
+              <h2 className="font-bold">{t(label)}</h2>
+              <p className=" text-secondary text-lg">{t(text)}</p>
             </div>
             <div>
               <Button className="text-primary text-xl font-medium">
-                <span>{button}</span>
+                <span>{t(button)}</span>
               </Button>
             </div>
           </div>

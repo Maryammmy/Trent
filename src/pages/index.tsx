@@ -39,7 +39,7 @@ export default function Home() {
               onClick={() => setIsFilterOpen(!isFilterOpen)}
             >
               <SlidersHorizontal size={15} strokeWidth={2.5} />
-              <span className="font-medium text-sm">Filters</span>
+              <span className="font-medium text-sm">{t("filters")}</span>
             </Button>
           </div>
         </div>
@@ -55,7 +55,7 @@ export default function Home() {
               onClick={handleShowMore}
               className="bg-black text-white font-medium py-2 px-4 rounded-lg text-center"
             >
-              Show More
+              <span>{t("show_more")}</span>
             </Button>
           </div>
         )}

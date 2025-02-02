@@ -1,8 +1,10 @@
 import Image from "../ui/Image";
 import user from "../../assets/iamges/home1.avif";
 import { Fence, KeyRound, MapPin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function HostedBy() {
+  const { t } = useTranslation();
   return (
     <div className="border-t border-b py-4">
       <div className="flex items-center gap-5">
@@ -14,7 +16,7 @@ function HostedBy() {
           />
         </div>
         <div>
-          <h2 className="text-black font-bold">Hosted by Alys</h2>
+          <h2 className="text-black font-bold">{t("hosted_by")} Alys</h2>
           <p className="text-secondary">Superhost.6 years hosting</p>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import { SlidersVertical } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-function preferencesCard() {
+function PreferencesCard() {
+  const { t } = useTranslation();
   return (
     <div className="flex-1">
       <div className=" border p-6 max-w-[400px]">
@@ -8,10 +10,9 @@ function preferencesCard() {
           <div>
             <SlidersVertical size={40} />
           </div>
-          <h2 className="font-bold text-xl">Your global preferences</h2>
+          <h2 className="font-bold text-xl">{t("your_global_preferences")}</h2>
           <p className="text-secondary font-medium">
-            Changing your currency updates how you see prices. You can change
-            how you get payments in your payments & payouts preferences.
+            {t("global_preferences_card_desc")}
           </p>
         </div>
       </div>
@@ -19,4 +20,4 @@ function preferencesCard() {
   );
 }
 
-export default preferencesCard;
+export default PreferencesCard;

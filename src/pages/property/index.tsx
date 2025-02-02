@@ -7,8 +7,10 @@ import ReviewComponent from "../../components/property/reviews/ReviewComponent";
 import Iframe from "../../components/ui/Iframe";
 import Amenities from "../../components/property/Amenities";
 import { Grip } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function Property() {
+  const { t } = useTranslation();
   return (
     <>
       <div className="px-5 xl:px-20 py-2 lg:py-6">
@@ -52,7 +54,7 @@ function Property() {
             <span>
               <Grip size={15} />
             </span>
-            <span className="font-medium text-sm ">Show all photos</span>
+            <span className="font-medium text-sm ">{t("show_all_photos")}</span>
           </Link>
         </div>
         <div className="py-8 flex flex-col lg:flex-row gap-10 xl:gap-20 md:justify-between">

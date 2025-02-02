@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import AccountSettingsCard from "../../components/accountSettings/AccountSettingsCard";
 import { accountSettingsData } from "../../data/accountSettingsData";
+import { useTranslation } from "react-i18next";
 
 function AccountSettings() {
+  const { t } = useTranslation();
   return (
     <div className="max-w-6xl  mx-auto py-5 md:py-10 px-5 xl:px-0">
       <div>
@@ -13,7 +15,7 @@ function AccountSettings() {
             <p className="text-xl">omar@gmail.com</p>
           </div>
           <Link to={`/`} className=" underline font-medium text-xl">
-            Go to profile
+            {t("go_to_profile")}
           </Link>
         </div>
       </div>

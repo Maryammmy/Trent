@@ -1,6 +1,8 @@
 import { ShieldQuestion } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function LoginAndSecurityCard() {
+  const { t } = useTranslation();
   return (
     <div className="flex-1">
       <div className=" border p-6 max-w-[400px]">
@@ -8,16 +10,20 @@ function LoginAndSecurityCard() {
           <div>
             <ShieldQuestion size={40} />
           </div>
-          <h2 className="font-bold text-xl">Keeping your account secure</h2>
+          <h2 className="font-bold text-xl">
+            {t("login_and_security_card_title")}
+          </h2>
           <p className="text-secondary font-medium">
-            We regularly review accounts to make sure they’re secure as
-            possible. We’ll also let you know if there’s more we can do to
-            increase the security of your account.
+            {t("login_and_security_card_text")}
           </p>
           <p className="text-secondary font-medium">
-            Learn about safety tips for{" "}
-            <span className="text-primary font-semibold">guests</span> and
-            <span className="text-primary font-semibold"> hosts</span>
+            {t("login_and_security_card_text2")}
+            <span className="text-primary font-semibold">
+              {" "}
+              {t("the_guests")}
+            </span>
+            <span> {t("and")}</span>
+            <span className="text-primary font-semibold"> {t("hosts")}</span>.
           </p>
         </div>
       </div>

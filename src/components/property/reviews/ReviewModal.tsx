@@ -11,11 +11,13 @@ import Input from "../../ui/Input";
 import ReviewCard from "./ReviewCard";
 import Button from "../../ui/Button";
 import Select from "../../ui/Select";
+import { useTranslation } from "react-i18next";
 interface IProps {
   isReviewed: boolean;
   close: () => void;
 }
 function ReviewModal({ isReviewed, close }: IProps) {
+  const { t } = useTranslation();
   const reviewCards = Array.from({ length: 20 });
   return (
     <Modal isOpen={isReviewed} close={close} maxWidth="1024px">
@@ -42,6 +44,7 @@ function ReviewModal({ isReviewed, close }: IProps) {
             {reviewInstruction.map((item, index) => {
               const lastIndex = reviewInstruction.length - 1;
               const { icon, title, rate } = item;
+              const translatedTitle = t(title);
               return (
                 <div
                   key={index}
@@ -51,7 +54,7 @@ function ReviewModal({ isReviewed, close }: IProps) {
                 >
                   <div className="flex items-center gap-2">
                     <span>{icon}</span>
-                    <h2 className="font-medium text-lg">{title}</h2>
+                    <h2 className="font-medium text-lg">{translatedTitle}</h2>
                   </div>
                   <div className="text-sm font-medium">{rate}</div>
                 </div>
@@ -61,13 +64,18 @@ function ReviewModal({ isReviewed, close }: IProps) {
           <div className="flex-[2] pe-4 lg:max-h-[80vh]  lg:overflow-y-auto">
             <div className="flex flex-col lg:flex-row gap-3 lg:gap-0 lg:items-center lg:justify-between">
               <div>
-                <h2 className="font-medium text-2xl">57 reviews</h2>
+                <h2 className="font-medium text-2xl">57 {t("reviews")}</h2>
                 <p className="text-secondary font-medium">
                   Learn how reviews work
                 </p>
               </div>
               <div>
-                <Select options={reviewOptions} />
+                <Select
+                  options={reviewOptions.map((option) => ({
+                    ...option,
+                    label: t(option.label),
+                  }))}
+                />
               </div>
             </div>
             <div className="my-4 flex items-center gap-2 w-full outline-none border-2 border-secondary rounded-full focus-within:border-black py-2 px-4">

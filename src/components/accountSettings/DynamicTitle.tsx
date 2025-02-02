@@ -1,10 +1,12 @@
 import { ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 interface IProps {
   title: string;
 }
 function DynamicTitle({ title }: IProps) {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-4">
@@ -12,7 +14,7 @@ function DynamicTitle({ title }: IProps) {
           to="/account-settings"
           className="text-stone-700 font-semibold text-lg"
         >
-          Account
+          {t("account")}
         </Link>
         <ChevronRight className="text-secondary" size={20} />
         <h2 className="text-stone-700 font-semibold text-lg">{title}</h2>

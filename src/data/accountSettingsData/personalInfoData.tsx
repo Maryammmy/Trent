@@ -1,4 +1,4 @@
-import { Eye, LockKeyhole, Shield } from "lucide-react";
+import { LockKeyhole, Shield } from "lucide-react";
 import {
   ISpecificAccountSettings,
   IPersonalCard,
@@ -6,41 +6,36 @@ import {
 
 export const personalInfoData: ISpecificAccountSettings[] = [
   {
-    label: "Legal name",
+    label: "legal_name",
     text: "John Doe",
-    button: "Edit",
+    button: "edit",
   },
   {
-    label: "Email",
+    label: "email",
     text: "John Doe@gmail.com",
-    button: "Edit",
+    button: "edit",
   },
   {
-    label: "Phone Number",
+    label: "phone_number",
     text: "+20****4467",
-    button: "Edit",
+    button: "edit",
   },
   {
-    label: "Government ID",
+    label: "government_ID",
     text: "Not provided",
-    button: "Add",
+    button: "add",
   },
 ];
 
 export const personalInfoCard: IPersonalCard[] = [
   {
-    title: "Why isn’t my info shown here?",
-    text: "We’re hiding some account details to protect your identity.",
+    title: "personal_info_card_title_1",
+    text: "personal_info_card_text_1",
     icon: <Shield className="text-primary" size={40} />,
   },
   {
-    title: "Which details can be edited?",
-    text: "Contact info and personal details can be edited. If this info was used to verify your identity.",
+    title: "personal_info_card_title_2",
+    text: "personal_info_card_text_2",
     icon: <LockKeyhole className="text-primary" size={40} />,
-  },
-  {
-    title: "Why isn’t my info shown here?",
-    text: "We’re hiding some account details to protect your identity.",
-    icon: <Eye className="text-primary" size={40} />,
   },
 ];

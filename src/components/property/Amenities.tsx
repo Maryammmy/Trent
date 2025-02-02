@@ -1,9 +1,13 @@
+import { useTranslation } from "react-i18next";
 import { amenities } from "../../data/property/amenities";
 
 function Amenities() {
+  const { t } = useTranslation();
   return (
     <div>
-      <h2 className="text-2xl font-semibold py-6">What this place offers</h2>
+      <h2 className="text-2xl font-semibold py-6">
+        {t("what_this_place_offers")}
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 max-w-lg">
         {amenities.map((item, index) => {
           const { text, icon } = item;
