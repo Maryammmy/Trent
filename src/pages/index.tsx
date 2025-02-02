@@ -13,8 +13,8 @@ export default function Home() {
   const [visibleCount, setVisibleCount] = useState(10);
   const [loading, setLoading] = useState(false);
   const cartItems = Array.from({ length: 60 });
-  const { t } = useTranslation();
   const ITEMS_TO_LOAD = 20;
+  const { t } = useTranslation();
 
   const handleShowMore = () => {
     setLoading(true);

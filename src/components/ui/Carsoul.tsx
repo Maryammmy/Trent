@@ -1,8 +1,6 @@
 import Slider from "react-slick";
 import CustomNextArrow from "./CustomNextArrow";
 import CustomPrevArrow from "./CustomPrevArrow";
-import { useState } from "react";
-import CustomDots from "./CustomDots";
 import { ResponsiveSetting } from "../../interfaces";
 
 interface IProps {
@@ -30,12 +28,6 @@ function Carsoul({
   padding,
   responsive,
 }: IProps) {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const handleBeforeChange = (newIndex: number) => {
-    setCurrentSlide(newIndex);
-  };
-
   const settings = {
     infinite: false,
     slidesToShow: slidesToShow,
@@ -43,6 +35,7 @@ function Carsoul({
     speed: 500,
     arrows: showArrow,
     dots: showDot,
+    dotsClass: "custom-dots",
     nextArrow: (
       <CustomNextArrow
         borderColor={borderColor}
@@ -60,13 +53,13 @@ function Carsoul({
       />
     ),
     responsive: responsive,
-    customPaging: (i: number) => (
-      <CustomDots key={i} active={i === currentSlide} onClick={() => {}} />
-    ),
-    beforeChange: handleBeforeChange,
   };
 
-  return <Slider {...settings}>{children}</Slider>;
+  return (
+    <div className="relative">
+      <Slider {...settings}>{children}</Slider>
+    </div>
+  );
 }
 
 export default Carsoul;

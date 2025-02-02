@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 function CheckDates() {
+  const [counter, setCounter] = useState(0);
   const { t } = useTranslation();
   const [startDateValue, setStartDateValue] = useState<DateValueType>({
     startDate: null,
@@ -16,6 +17,12 @@ function CheckDates() {
     startDate: null,
     endDate: null,
   });
+  const increaseCounter = () => {
+    setCounter(counter + 1);
+  };
+  const decreaseCounter = () => {
+    setCounter(counter - 1);
+  };
   const handleStartValueChange = (newValue: DateValueType) => {
     const { startDate } = newValue || {};
     const today = new Date();
@@ -80,8 +87,19 @@ function CheckDates() {
           </div>
           <div className="ps-3 py-1 text-sm">
             <h2 className="text-black font-bold">{t("guests")}</h2>
-            <div className="font-medium">
-              <Counter />
+            <div className="flex items-center gap-2 text-sm">
+              <p className="text-secondary w-[90px] text-start">
+                {counter === 0
+                  ? t("add_guests")
+                  : counter === 1
+                  ? `${counter} ${t("guest")}`
+                  : `${counter} ${t("guests")}`}
+              </p>
+              <Counter
+                counter={counter}
+                increaseCounter={increaseCounter}
+                decreaseCounter={decreaseCounter}
+              />
             </div>
           </div>
         </div>
