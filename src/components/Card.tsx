@@ -20,15 +20,15 @@ function Card() {
 
   return (
     <div>
-      <div>
-        <Carsoul showDot={true} left="8px" right="8px" padding="1px">
+      <div className="overflow-hidden rounded-md">
+        <Carsoul showDot={true} left="5px" right="5px" padding="1px">
           {images?.map((item: string, index: number) => (
             <Link key={index} to={"/properties/1"}>
               <div className="rounded-md overflow-hidden h-[280px]">
                 <Image
                   imageUrl={item}
                   alt={`Slide ${index}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full rounded-md object-cover"
                 />
               </div>
             </Link>
