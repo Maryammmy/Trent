@@ -6,49 +6,63 @@ import Switcher from "../components/ui/Switcher";
 import { useState } from "react";
 import FilterModal from "../components/home/filter/FilterModal";
 import { SlidersHorizontal } from "lucide-react";
-// import CategoryBarSkeleton from "../components/skeleton/CategoryBarSkeleton";
-// import PropertyCardSkeleton from "../components/skeleton/PropertyCardSkeleton";
+import PropertyCardSkeleton from "../components/skeleton/PropertyCardSkeleton";
 
 export default function Home() {
-  const [isFlterOpen, setIsFilterOpen] = useState(false);
-  const cartItems = Array.from({ length: 20 });
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(10);
+  const [loading, setLoading] = useState(false);
+  const cartItems = Array.from({ length: 60 });
   const { t } = useTranslation();
+  const ITEMS_TO_LOAD = 20;
+
+  const handleShowMore = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setVisibleCount((prev) => prev + ITEMS_TO_LOAD);
+      setLoading(false);
+    }, 1000);
+  };
+
   return (
     <>
       <div>
-        {/* <CategoryBarSkeleton cards={8} /> */}
         <div>
           <CategoryBar />
-          <div className=" px-5 xl:px-20 flex gap-3 justify-end">
+          <div className="px-5 xl:px-20 flex gap-3 justify-end">
             <Button className="mt-[85px] flex items-center gap-2 border p-2 rounded-md bg-white">
-              <span className="text-sm">
-                {" "}
-                {t("display_total_before_taxes")}
-              </span>
-              <div>
-                <Switcher />
-              </div>
+              <span className="text-sm">{t("display_total_before_taxes")}</span>
+              <Switcher />
             </Button>
             <Button
               className="mt-[85px] flex gap-2 items-center border rounded-md px-3"
-              onClick={() => setIsFilterOpen(!isFlterOpen)}
+              onClick={() => setIsFilterOpen(!isFilterOpen)}
             >
-              <span>
-                <SlidersHorizontal size={15} strokeWidth={2.5} />
-              </span>
+              <SlidersHorizontal size={15} strokeWidth={2.5} />
               <span className="font-medium text-sm">Filters</span>
             </Button>
           </div>
         </div>
-        <div className="py-5 px-5 xl:px-20  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
-          {cartItems.map((_, index) => (
+        <div className="py-5 px-5 xl:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
+          {cartItems.slice(0, visibleCount).map((_, index) => (
             <Cart key={index} />
           ))}
-          {/* <PropertyCardSkeleton cards={20} /> */}
+          {loading && <PropertyCardSkeleton cards={ITEMS_TO_LOAD} />}
         </div>
+        {visibleCount < cartItems.length && !loading && (
+          <div className="flex justify-center my-5">
+            <Button
+              onClick={handleShowMore}
+              className="bg-black text-white font-medium py-2 px-4 rounded-lg text-center"
+            >
+              Show More
+            </Button>
+          </div>
+        )}
       </div>
+
       <FilterModal
-        isFilterOpen={isFlterOpen}
+        isFilterOpen={isFilterOpen}
         close={() => setIsFilterOpen(false)}
       />
     </>
