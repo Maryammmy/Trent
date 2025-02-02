@@ -4,6 +4,10 @@
 html {
   scroll-behavior: smooth;
 }
+p {
+  overflow-wrap: anywhere;
+}
+/* gallery page */
 .PhotoView__PhotoBox {
   width: 70% !important;
   height: 80vh !important;
@@ -22,6 +26,7 @@ html {
   object-fit: cover !important;
   transform: none !important;
 }
+/* destetation dropdown */
 .destination-scroller::-webkit-scrollbar {
   width: 6px;
 }
@@ -29,19 +34,19 @@ html {
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 10px;
 }
+/* contact us page */
 .bg-contact-us {
   background-image: url("./assets/iamges/contact.avif"),
     linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
   background-blend-mode: overlay;
 }
+/* about us page */
 .bg-about-us {
   background-image: url("./assets/iamges/property.jpg"),
     linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
   background-blend-mode: overlay;
 }
-p {
-  overflow-wrap: anywhere;
-}
+/* carsoul  */
 .custom-dots {
   position: absolute;
   bottom: 10px;
