@@ -30,14 +30,11 @@ function ReviewComponent() {
             ))}
           </div>
           {reviewInstruction.map((item, index) => {
-            const lastIndex = reviewInstruction.length - 1;
             const { icon, title, rate } = item;
             return (
               <div
                 key={index}
-                className={` flex flex-col justify-between xl:ps-6 ${
-                  lastIndex ? "xl:border-l" : ""
-                }`}
+                className={` flex flex-col justify-between xl:ps-6 xl:border-l`}
               >
                 <div>
                   <h2 className="font-medium">{title}</h2>

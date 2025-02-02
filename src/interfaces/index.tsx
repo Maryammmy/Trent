@@ -27,3 +27,7 @@ export interface IDestinations {
   city: string;
   reason: string;
 }
+export interface IFilterPropertyType {
+  name: string;
+  icon: ReactNode;
+}

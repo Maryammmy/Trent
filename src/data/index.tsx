@@ -8,10 +8,11 @@ import faceIcon from "../assets/iamges/facebook.png";
 import {
   IButton,
   IDestinations,
+  IFilterPropertyType,
   IHomeSearch,
   ISelectOption,
 } from "../interfaces";
-import { Mail } from "lucide-react";
+import { Hotel, House, HousePlus, Mail, School } from "lucide-react";
 
 export const images: string[] = [image1, image2, image3, image4];
 export const languageOptions: ISelectOption[] = [
@@ -56,4 +57,12 @@ export const destinations: IDestinations[] = [
   { city: "Helsinki, Finland", reason: "For sights like Suomenlinna" },
   { city: "Stockholm, Sweden", reason: "For its top-notch dining" },
   { city: "Riga, Latvia", reason: "For its bustling nightlife" },
+];
+export const filterTypes: string[] = ["Any type", "Room", "Entire home"];
+export const filterRoomsAndBeds: string[] = ["Bedrooms", "Beds", "Bathrooms"];
+export const filterPropertyType: IFilterPropertyType[] = [
+  { name: "House", icon: <House /> },
+  { name: "Apartment", icon: <School /> },
+  { name: "Guesthouse", icon: <HousePlus /> },
+  { name: "Hotel", icon: <Hotel /> },
 ];

@@ -19,6 +19,7 @@ import toast from "react-hot-toast";
 
 function HomeSearch() {
   const { t } = useTranslation();
+  const [counter, setCounter] = useState(0);
   const { isDestinationOpen } = useAppSelector((state) => state.homeSearch);
   const [startDateValue, setStartDateValue] = useState<DateValueType>({
     startDate: null,
@@ -79,7 +80,12 @@ function HomeSearch() {
     () => dispatch(setIsDestinationOpen(false)),
     destinationButtonRef
   );
-
+  const increaseCounter = () => {
+    setCounter(counter + 1);
+  };
+  const decreaseCounter = () => {
+    setCounter(counter - 1);
+  };
   return (
     <>
       <div className="flex xl:hidden items-center justify-center gap-2 w-full md:w-[500px] rounded-full py-2 px-5 border shadow hover:shadow-lg">
@@ -112,7 +118,20 @@ function HomeSearch() {
                 <h2>{title}</h2>
                 <div>
                   {text === t("add_guests") ? (
-                    <Counter />
+                    <div className="flex items-center gap-2 text-sm">
+                      <p className="text-secondary w-[90px] text-start">
+                        {counter === 0
+                          ? t("add_guests")
+                          : counter === 1
+                          ? `${counter} ${t("guest")}`
+                          : `${counter} ${t("guests")}`}
+                      </p>
+                      <Counter
+                        counter={counter}
+                        increaseCounter={increaseCounter}
+                        decreaseCounter={decreaseCounter}
+                      />
+                    </div>
                   ) : title === t("check_in") ? (
                     <DatePicker
                       showShortcuts={true}
