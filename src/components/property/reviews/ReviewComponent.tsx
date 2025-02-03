@@ -26,7 +26,11 @@ function ReviewComponent() {
             {widths.map((item, index) => (
               <div key={index} className="max-w-32 flex items-center gap-2">
                 <span className="font-medium text-xs">{item.num}</span>
-                <PrograssBar width={item.width} backgroundColor="black" />
+                <PrograssBar
+                  height="4px"
+                  width={item.width}
+                  backgroundColor="black"
+                />
               </div>
             ))}
           </div>

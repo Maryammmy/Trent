@@ -1,9 +1,13 @@
 interface IProps {
   width: string;
-  backgroundColor: string;
+  backgroundColor?: string;
   height?: string;
 }
-function PrograssBar({ width, backgroundColor, height = "4px" }: IProps) {
+function PrograssBar({
+  width,
+  backgroundColor = "#223f7f",
+  height = "6px",
+}: IProps) {
   return (
     <div
       className="w-full bg-gray-200 rounded-full h-1"

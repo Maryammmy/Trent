@@ -17,8 +17,10 @@ import {
   Store,
   University,
   TowerControl,
+  DoorClosed,
+  UsersRound,
 } from "lucide-react";
-import { IPropertyHosting } from "../interfaces/hostingInterface";
+import { IPropertyHosting, ITypeOfPlace } from "../interfaces/hostingInterface";
 
 export const PropertyHosting: IPropertyHosting[] = [
   { label: "House", icon: <Home size={35} /> },
@@ -39,4 +41,21 @@ export const PropertyHosting: IPropertyHosting[] = [
   { label: "Guesthouse", icon: <BedDouble size={35} /> },
   { label: "Hotel", icon: <Hotel size={35} /> },
   { label: "Tower", icon: <TowerControl size={35} /> },
+];
+export const typeOfPlace: ITypeOfPlace[] = [
+  {
+    title: "An entire place",
+    desc: "Guests have the whole place to themselves.",
+    icon: <Home size={35} />,
+  },
+  {
+    title: "A room",
+    desc: "Guests have their own room in a home, plus access to shared spaces.",
+    icon: <DoorClosed size={35} />,
+  },
+  {
+    title: "A shared room in a hotel",
+    desc: "Guests sleep in a shared room in a professionally managed hostel with staff onsite 24/7.",
+    icon: <UsersRound size={35} />,
+  },
 ];

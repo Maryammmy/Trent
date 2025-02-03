@@ -6,7 +6,6 @@ import BackAndNext from "../../components/hosting/BackAndNext";
 
 function ChoosePlace() {
   const [selectedIndex, setSelectedIndex] = useState<null | number>(null);
-
   const handleSelect = (index: number) => {
     setSelectedIndex(index);
   };
@@ -37,8 +36,8 @@ function ChoosePlace() {
           })}
         </div>
       </div>
-      <PrograssBar width="10%" backgroundColor="#223f7f" height="6px" />
-      <BackAndNext back="/hosting" next="/hosting/choose-location" />
+      <PrograssBar width="10%"/>
+      <BackAndNext back="/hosting" next="/hosting/type-of-place" />
     </div>
   );
 }

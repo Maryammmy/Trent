@@ -31,7 +31,6 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   const increaseCounter = (key: string) => {
     setCounters((prev) => ({ ...prev, [key]: prev[key] + 1 }));
   };
-
   const decreaseCounter = (key: string) => {
     setCounters((prev) => ({ ...prev, [key]: Math.max(0, prev[key] - 1) }));
   };
@@ -81,6 +80,8 @@ function FilterModal({ isFilterOpen, close }: IProps) {
             <div key={index} className="flex mb-2 justify-between items-center">
               <span className="font-medium">{item}</span>
               <Counter
+                width="30px"
+                height="30px"
                 counter={counters[item]}
                 increaseCounter={() => increaseCounter(item)}
                 decreaseCounter={() => decreaseCounter(item)}

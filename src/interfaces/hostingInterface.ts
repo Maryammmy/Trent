@@ -4,3 +4,8 @@ export interface IPropertyHosting {
   label: string;
   icon: ReactNode;
 }
+export interface ITypeOfPlace {
+  title: string;
+  desc: string;
+  icon: ReactNode;
+}
