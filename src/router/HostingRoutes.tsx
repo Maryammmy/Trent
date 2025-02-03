@@ -5,6 +5,7 @@ import ChoosePlace from "../pages/hosting/ChoosePlace";
 import TypeOfPlace from "../pages/hosting/TypeOfPlace";
 import LocationOfPlace from "../pages/hosting/LocationOfPlace";
 import FloorPlan from "../pages/hosting/FloorPlan";
+import GetStartedToHost from "../pages/hosting";
 
 export const HostingRoutes = (
   <Route
@@ -12,7 +13,7 @@ export const HostingRoutes = (
     element={<HostingLayout />}
     errorElement={<ErrorHandler />}
   >
-    <Route index element={<ChoosePlace />} />
+    <Route index element={<GetStartedToHost />} />
     <Route path="choose-place" element={<ChoosePlace />} />
     <Route path="type-of-place" element={<TypeOfPlace />} />
     <Route path="location" element={<LocationOfPlace />} />

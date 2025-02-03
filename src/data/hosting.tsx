@@ -20,8 +20,26 @@ import {
   DoorClosed,
   UsersRound,
 } from "lucide-react";
-import { IPropertyHosting, ITypeOfPlace } from "../interfaces/hostingInterface";
+import {
+  IGetStartedToHost,
+  IPropertyHosting,
+  ITypeOfPlace,
+} from "../interfaces/hostingInterface";
 
+export const getStartedToHost: IGetStartedToHost[] = [
+  {
+    title: "Tell us about your place",
+    desc: "Share some basic info, like where it is and how many guests can stay.",
+  },
+  {
+    title: "Make it stand out",
+    desc: "Add 5 or more photos plus a title and description—we’ll help you out.",
+  },
+  {
+    title: "Finish up and publish",
+    desc: "Choose a starting price, verify a few details, then publish your listing.",
+  },
+];
 export const PropertyHosting: IPropertyHosting[] = [
   { label: "House", icon: <Home size={35} /> },
   { label: "Apartment", icon: <Building size={35} /> },

@@ -9,3 +9,7 @@ export interface ITypeOfPlace {
   desc: string;
   icon: ReactNode;
 }
+export interface IGetStartedToHost {
+  title: string;
+  desc: string;
+}
