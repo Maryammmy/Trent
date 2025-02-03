@@ -7,6 +7,7 @@ import {
   setIsloggedin,
   setIsSignup,
 } from "../../store/features/auth/authSlice";
+import { Link } from "react-router-dom";
 
 function DropdownMenu() {
   const { t } = useTranslation();
@@ -50,9 +51,13 @@ function DropdownMenu() {
               key={index}
               className={`px-4 py-2 hover:bg-gray-100 cursor-pointer`}
             >
-              <Button className="w-full text-start">
+              <Link
+                onClick={() => dispatch(setIsDropdownOpen(false))}
+                to={item === "host_an_experience" ? "/hosting" : ""}
+                className="w-full text-start"
+              >
                 <span>{t(item)}</span>
-              </Button>
+              </Link>
             </li>
           ))}
         </ul>
