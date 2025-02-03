@@ -30,12 +30,12 @@ export default function Home() {
         <div>
           <CategoryBar />
           <div className="px-5 xl:px-20 flex gap-3 justify-end">
-            <Button className="mt-[85px] flex items-center gap-2 border p-2 rounded-md bg-white">
+            <Button className="mt-14 xl:mt-20 flex items-center gap-2 border p-2 rounded-md bg-white">
               <span className="text-sm">{t("display_total_before_taxes")}</span>
               <Switcher />
             </Button>
             <Button
-              className="mt-[85px] flex gap-2 items-center border rounded-md px-3"
+              className="mt-14 xl:mt-20 flex gap-2 items-center border rounded-md px-3"
               onClick={() => setIsFilterOpen(!isFilterOpen)}
             >
               <SlidersHorizontal size={15} strokeWidth={2.5} />
