@@ -1,4 +1,3 @@
-// DashboardRoutes.jsx
 import { Route } from "react-router-dom";
 import DashboardLayout from "../layouts/DashboardLayout";
 import ErrorHandler from "../components/errors/ErrorHandler";

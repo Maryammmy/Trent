@@ -14,7 +14,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-rtl"), // إضافة الـ RTL plugin هنا
-  ],
+  plugins: [require("tailwindcss-rtl")],
 };
