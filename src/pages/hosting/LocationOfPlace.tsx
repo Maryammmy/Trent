@@ -4,6 +4,8 @@ import PrograssBar from "../../components/ui/PrograssBar";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 import toast from "react-hot-toast";
+import "leaflet/dist/leaflet.css";
+
 function LocationOfPlace() {
   const [position, setPosition] = useState<[number, number]>([
     26.8206, 30.8025,
@@ -20,6 +22,7 @@ function LocationOfPlace() {
         },
         (error) => {
           console.error("Error getting location:", error);
+          toast.error("Failed to access location. Please enable GPS.");
         }
       );
     }
@@ -34,22 +37,23 @@ function LocationOfPlace() {
           Your address is only shared with guests after they’ve made a
           reservation.
         </p>
-        <MapContainer
-          center={position as LatLngExpression}
-          zoom={zoomLevel}
-          scrollWheelZoom={false}
-          style={{ height: "100%", width: "100%", borderRadius: "5px" }}
-        >
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          <Marker position={position}>
-            <Popup>Your Current Location</Popup>
-          </Marker>
-        </MapContainer>
+        <div className="h-96 w-full rounded-md">
+          <MapContainer
+            center={position as LatLngExpression}
+            zoom={zoomLevel}
+            scrollWheelZoom={false}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <Marker position={position}>
+              <Popup>Your Current Location</Popup>
+            </Marker>
+          </MapContainer>
+        </div>
       </div>
       <PrograssBar width="30%" />
       <BackAndNext back="/hosting/type-of-place" next="/hosting/floor-plan" />
     </div>
   );
 }
-
 export default LocationOfPlace;
