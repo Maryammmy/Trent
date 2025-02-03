@@ -7,8 +7,9 @@ html {
 p {
   overflow-wrap: anywhere;
 }
+/* hosting page */
 .hosting-layout {
-  height: calc(100vh - 234px);
+  min-height: calc(100vh - 234px);
 }
 /* gallery page */
 .PhotoView__PhotoBox {

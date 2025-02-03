@@ -12,7 +12,7 @@ function ChoosePlace() {
 
   return (
     <div className="py-10">
-      <div className="max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
+      <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
         <h3 className="text-2xl md:text-3xl font-semibold text-center pb-5 md:pb-10">
           Which of these best describes your place?
         </h3>
@@ -36,7 +36,7 @@ function ChoosePlace() {
           })}
         </div>
       </div>
-      <PrograssBar width="10%"/>
+      <PrograssBar width="10%" />
       <BackAndNext back="/hosting" next="/hosting/type-of-place" />
     </div>
   );
