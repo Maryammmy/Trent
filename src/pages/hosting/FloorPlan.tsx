@@ -3,8 +3,10 @@ import Counter from "../../components/home/Counter";
 import { filterRoomsAndBeds } from "../../data";
 import PrograssBar from "../../components/ui/PrograssBar";
 import BackAndNext from "../../components/hosting/BackAndNext";
+import { useTranslation } from "react-i18next";
 
 function FloorPlan() {
+  const { t } = useTranslation();
   const [counters, setCounters] = useState<{ [key: string]: number }>({
     Bedrooms: 0,
     Beds: 0,
@@ -21,12 +23,13 @@ function FloorPlan() {
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
         <h3 className="text-2xl md:text-3xl font-semibold pb-2">
-          Share some basics about your place
+          {t("floor_plan")}
         </h3>
         <p className="max-w-2xl text-secondary font-medium pb-10">
-          You'll add more details later, like bed types.
+          {t("floor_plan_desc")}
         </p>
         {filterRoomsAndBeds.map((item, index) => {
+          const translatedItem = t(item);
           const lastIndex = index === filterRoomsAndBeds.length - 1;
           return (
             <div
@@ -35,7 +38,7 @@ function FloorPlan() {
                 lastIndex && "border-none"
               }`}
             >
-              <span className="font-medium">{item}</span>
+              <span className="font-medium">{translatedItem}</span>
               <Counter
                 width="30px"
                 height="30px"

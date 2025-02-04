@@ -152,5 +152,10 @@
   "location_of_place_desc": "Your address is only shared with guests after they’ve made a reservation.",
   "your_current_location": "Your current location",
   "location_accessed": "Location accessed successfully!",
-  "Failed_to_access_location": "Failed to access location. Please enable GPS."
+  "Failed_to_access_location": "Failed to access location. Please enable GPS.",
+  "floor_plan": "Share some basics about your place",
+  "floor_plan_desc": "You'll add more details later, like bed types.",
+  "bedrooms": "Bedrooms",
+  "beds": "Beds",
+  "bathrooms": "Bathrooms"
 }
