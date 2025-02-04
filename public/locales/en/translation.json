@@ -110,5 +110,15 @@
   "terms": "· Terms ·",
   "sitemap": " Sitemap ·",
   "privacy": " Privacy ·",
-  "your_privacy_choices": " Your Privacy Choices"
+  "your_privacy_choices": " Your Privacy Choices",
+  "get_started_to_host": "It’s easy to get started on Trent",
+  "tell_us_about_your_place": "Tell us about your place",
+  "make_it_stand_out": "Make it stand out",
+  "finish_up_and_publish": "Finish up and publish",
+  "tell_us_about_your_place_desc": "Share some basic info, like where it is and how many guests can stay.",
+  "make_it_stand_out_desc": "Add 5 or more photos plus a title and description—we’ll help you out.",
+  "finish_up_and_publish_desc": "Choose a starting price, verify a few details, then publish your listing.",
+  "get_started": "Get started",
+  "exit": "Exit",
+  "save_and_exit": "Save & exit"
 }

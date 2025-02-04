@@ -28,16 +28,16 @@ import {
 
 export const getStartedToHost: IGetStartedToHost[] = [
   {
-    title: "Tell us about your place",
-    desc: "Share some basic info, like where it is and how many guests can stay.",
+    title: "tell_us_about_your_place",
+    desc: "tell_us_about_your_place_desc",
   },
   {
-    title: "Make it stand out",
-    desc: "Add 5 or more photos plus a title and description—we’ll help you out.",
+    title: "make_it_stand_out",
+    desc: "make_it_stand_out_desc",
   },
   {
-    title: "Finish up and publish",
-    desc: "Choose a starting price, verify a few details, then publish your listing.",
+    title: "finish_up_and_publish",
+    desc: "finish_up_and_publish_desc",
   },
 ];
 export const PropertyHosting: IPropertyHosting[] = [

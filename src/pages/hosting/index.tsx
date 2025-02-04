@@ -1,28 +1,32 @@
 import { Link } from "react-router-dom";
 import PrograssBar from "../../components/ui/PrograssBar";
 import { getStartedToHost } from "../../data/hosting";
+import { useTranslation } from "react-i18next";
 
 function GetStartedToHost() {
+  const { t } = useTranslation();
   return (
     <div className="py-10">
       <div className="flex items-center justify-between hosting-layout max-w-screen-xl mx-auto px-5 md:px-0 pb-10">
         <div>
           <h2 className="text-[70px] font-bold max-w-2xl">
-            It’s easy to get started on Trent
+            {t("get_started_to_host")}
           </h2>
         </div>
         <div>
           {getStartedToHost.map((item, index) => {
             const { title, desc } = item;
+            const translatedTitle = t(title);
+            const translatedDesc = t(desc);
             return (
               <div key={index} className="flex gap-3 mb-4">
                 <div>
                   <span className="text-2xl font-semibold">{index + 1}</span>
                 </div>
                 <div>
-                  <h2 className="text-2xl font-semibold">{title}</h2>
+                  <h2 className="text-2xl font-semibold">{translatedTitle}</h2>
                   <p className="text-secondary font-medium text-lg max-w-lg">
-                    {desc}
+                    {translatedDesc}
                   </p>
                 </div>
               </div>
@@ -36,7 +40,7 @@ function GetStartedToHost() {
           to="/hosting/choose-place"
           className="py-2 px-5 font-medium bg-primary text-white text-lg rounded-md mt-4 me-4"
         >
-          <span>Get started</span>
+          <span>{t("get_started")}</span>
         </Link>
       </div>
     </div>
