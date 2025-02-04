@@ -147,5 +147,10 @@
   "room": "A room",
   "room_desc": "Guests have their own room in a home, plus access to shared spaces.",
   "shared_room": "A shared room in a hotel",
-  "shared_room_desc": "Guests sleep in a shared room in a professionally managed hostel with staff onsite 24/7."
+  "shared_room_desc": "Guests sleep in a shared room in a professionally managed hostel with staff onsite 24/7.",
+  "location_of_place": "Where's your place located?",
+  "location_of_place_desc": "Your address is only shared with guests after they’ve made a reservation.",
+  "your_current_location": "Your current location",
+  "location_accessed": "Location accessed successfully!",
+  "Failed_to_access_location": "Failed to access location. Please enable GPS."
 }

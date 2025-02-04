@@ -5,8 +5,10 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 import toast from "react-hot-toast";
 import "leaflet/dist/leaflet.css";
+import { useTranslation } from "react-i18next";
 
 function LocationOfPlace() {
+  const { t } = useTranslation();
   const [position, setPosition] = useState<[number, number]>([
     26.8206, 30.8025,
   ]);
@@ -18,24 +20,22 @@ function LocationOfPlace() {
         (location) => {
           const { latitude, longitude } = location.coords;
           setPosition([latitude, longitude]);
-          toast.success("Location accessed successfully!");
+          toast.success(t("location_accessed"));
         },
-        (error) => {
-          console.error("Error getting location:", error);
-          toast.error("Failed to access location. Please enable GPS.");
+        () => {
+          toast.error(t("Failed_to_access_location"));
         }
       );
     }
-  }, []);
+  }, [t]);
   return (
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
         <h3 className="text-2xl md:text-3xl font-semibold pb-2">
-          Where's your place located?
+          {t("location_of_place")}
         </h3>
         <p className="max-w-2xl text-secondary font-medium pb-10">
-          Your address is only shared with guests after they’ve made a
-          reservation.
+          {t("location_of_place_desc")}
         </p>
         <div className="h-96 w-full rounded-md">
           <MapContainer
@@ -46,7 +46,7 @@ function LocationOfPlace() {
           >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={position}>
-              <Popup>Your Current Location</Popup>
+              <Popup>{t("your_current_location")}</Popup>
             </Marker>
           </MapContainer>
         </div>
