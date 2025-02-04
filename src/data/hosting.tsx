@@ -62,18 +62,18 @@ export const PropertyHosting: IPropertyHosting[] = [
 ];
 export const typeOfPlace: ITypeOfPlace[] = [
   {
-    title: "An entire place",
-    desc: "Guests have the whole place to themselves.",
+    title: "entire_place",
+    desc: "entire_place_desc",
     icon: <Home size={35} />,
   },
   {
-    title: "A room",
-    desc: "Guests have their own room in a home, plus access to shared spaces.",
+    title: "room",
+    desc: "room_desc",
     icon: <DoorClosed size={35} />,
   },
   {
-    title: "A shared room in a hotel",
-    desc: "Guests sleep in a shared room in a professionally managed hostel with staff onsite 24/7.",
+    title: "shared_room",
+    desc: "shared_room_desc",
     icon: <UsersRound size={35} />,
   },
 ];
