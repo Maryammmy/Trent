@@ -15,24 +15,22 @@ interface IProps {
   isFilterOpen: boolean;
   close: () => void;
 }
-
+// Initialize counters outside to avoid reinitialization on re-renders
+const initialCounters = Object.fromEntries(
+  filterRoomsAndBeds.map((key) => [key, 0])
+);
 function FilterModal({ isFilterOpen, close }: IProps) {
   const [isPropertyTypeOpen, setIsPropertyTypeOpen] = useState(false);
-  const [counters, setCounters] = useState<{ [key: string]: number }>({
-    Bedrooms: 0,
-    Beds: 0,
-    Bathrooms: 0,
-  });
+  const [counters, setCounters] = useState<{ [key: string]: number }>(
+    initialCounters
+  );
 
   const [values, setValues] = useState([500, 50000]);
   const handleRangeChange = (newValues: number[]) => {
     setValues(newValues);
   };
-  const increaseCounter = (key: string) => {
-    setCounters((prev) => ({ ...prev, [key]: prev[key] + 1 }));
-  };
-  const decreaseCounter = (key: string) => {
-    setCounters((prev) => ({ ...prev, [key]: Math.max(0, prev[key] - 1) }));
+  const updateCounter = (key: string, value: number) => {
+    setCounters((prev) => ({ ...prev, [key]: Math.max(0, prev[key] + value) }));
   };
 
   return (
@@ -82,9 +80,9 @@ function FilterModal({ isFilterOpen, close }: IProps) {
               <Counter
                 width="30px"
                 height="30px"
-                counter={counters[item]}
-                increaseCounter={() => increaseCounter(item)}
-                decreaseCounter={() => decreaseCounter(item)}
+                counter={counters[item] ?? 0}
+                increaseCounter={() => updateCounter(item, 1)}
+                decreaseCounter={() => updateCounter(item, -1)}
               />
             </div>
           ))}

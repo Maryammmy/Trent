@@ -80,12 +80,10 @@ function HomeSearch() {
     () => dispatch(setIsDestinationOpen(false)),
     destinationButtonRef
   );
-  const increaseCounter = () => {
-    setCounter(counter + 1);
+  const updateCounter = (value: number) => {
+    setCounter((prevCounter) => prevCounter + value);
   };
-  const decreaseCounter = () => {
-    setCounter(counter - 1);
-  };
+
   return (
     <>
       <div className="flex xl:hidden items-center justify-center gap-2 w-full md:w-[500px] rounded-full py-2 px-5 border shadow hover:shadow-lg">
@@ -128,8 +126,8 @@ function HomeSearch() {
                       </p>
                       <Counter
                         counter={counter}
-                        increaseCounter={increaseCounter}
-                        decreaseCounter={decreaseCounter}
+                        increaseCounter={() => updateCounter(1)}
+                        decreaseCounter={() => updateCounter(-1)}
                       />
                     </div>
                   ) : title === t("check_in") ? (

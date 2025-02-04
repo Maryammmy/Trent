@@ -17,11 +17,8 @@ function CheckDates() {
     startDate: null,
     endDate: null,
   });
-  const increaseCounter = () => {
-    setCounter(counter + 1);
-  };
-  const decreaseCounter = () => {
-    setCounter(counter - 1);
+  const updateCounter = (value: number) => {
+    setCounter((prevCounter) => prevCounter + value);
   };
   const handleStartValueChange = (newValue: DateValueType) => {
     const { startDate } = newValue || {};
@@ -97,8 +94,8 @@ function CheckDates() {
               </p>
               <Counter
                 counter={counter}
-                increaseCounter={increaseCounter}
-                decreaseCounter={decreaseCounter}
+                increaseCounter={() => updateCounter(1)}
+                decreaseCounter={() => updateCounter(-1)}
               />
             </div>
           </div>

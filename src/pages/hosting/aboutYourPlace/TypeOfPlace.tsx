@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Button from "../../components/ui/Button";
-import { typeOfPlace } from "../../data/hosting";
-import PrograssBar from "../../components/ui/PrograssBar";
-import BackAndNext from "../../components/hosting/BackAndNext";
+import Button from "../../../components/ui/Button";
+import { typeOfPlace } from "../../../data/hosting";
+import BackAndNext from "../../../components/hosting/BackAndNext";
 import { useTranslation } from "react-i18next";
+import ProgressBarsWrapper from "../../../components/hosting/ProgressBarsWrapper";
 
 function TypeOfPlace() {
   const { t } = useTranslation();
@@ -14,7 +14,7 @@ function TypeOfPlace() {
   return (
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
-        <h3 className="text-2xl md:text-3xl font-semibold text-center pb-5 md:pb-10">
+        <h3 className="text-2xl md:text-3xl font-semibold pb-5 md:pb-10">
           {t("type_of_place")}
         </h3>
         <div className="grid grid-cols-1 gap-4">
@@ -28,8 +28,8 @@ function TypeOfPlace() {
               <Button
                 key={index}
                 onClick={() => handleSelect(index)}
-                className={`flex gap-4 justify-between items-center p-5 border rounded-lg bg-white ${
-                  isSelected && "bg-gray-200 border-2 border-black"
+                className={`flex gap-4 justify-between items-center min-h-28 p-4 border rounded-lg bg-white ${
+                  isSelected && "bg-zinc-50 border-2 border-black"
                 }`}
               >
                 <div className="flex flex-col gap-2 justify-start items-start">
@@ -46,8 +46,12 @@ function TypeOfPlace() {
           })}
         </div>
       </div>
-      <PrograssBar width="20%" />
-      <BackAndNext back="/hosting/choose-place" next="/hosting/location" />
+      <ProgressBarsWrapper progressBarsData={["40%", "0px", "0px"]} />
+      <BackAndNext
+        back="/hosting/choose-place"
+        next="/hosting/location"
+        isNextDisabled={!selectedIndex}
+      />
     </div>
   );
 }

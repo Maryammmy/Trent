@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import BackAndNext from "../../components/hosting/BackAndNext";
-import PrograssBar from "../../components/ui/PrograssBar";
+import BackAndNext from "../../../components/hosting/BackAndNext";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 import toast from "react-hot-toast";
 import "leaflet/dist/leaflet.css";
 import { useTranslation } from "react-i18next";
+import ProgressBarsWrapper from "../../../components/hosting/ProgressBarsWrapper";
 
 function LocationOfPlace() {
   const { t } = useTranslation();
@@ -31,7 +31,7 @@ function LocationOfPlace() {
   return (
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
-        <h3 className="text-2xl md:text-3xl font-semibold pb-2">
+        <h3 className="text-2xl md:text-3xl font-semibold pb-3">
           {t("location_of_place")}
         </h3>
         <p className="max-w-2xl text-secondary font-medium pb-10">
@@ -51,8 +51,12 @@ function LocationOfPlace() {
           </MapContainer>
         </div>
       </div>
-      <PrograssBar width="30%" />
-      <BackAndNext back="/hosting/type-of-place" next="/hosting/floor-plan" />
+      <ProgressBarsWrapper progressBarsData={["50%", "0px", "0px"]} />
+      <BackAndNext
+        back="/hosting/type-of-place"
+        next="/hosting/floor-plan"
+        isNextDisabled={!position}
+      />
     </div>
   );
 }

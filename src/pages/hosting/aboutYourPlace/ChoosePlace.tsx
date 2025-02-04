@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Button from "../../components/ui/Button";
-import { PropertyHosting } from "../../data/hosting";
-import PrograssBar from "../../components/ui/PrograssBar";
-import BackAndNext from "../../components/hosting/BackAndNext";
+import Button from "../../../components/ui/Button";
+import { PropertyHosting } from "../../../data/hosting";
+import BackAndNext from "../../../components/hosting/BackAndNext";
 import { useTranslation } from "react-i18next";
+import ProgressBarsWrapper from "../../../components/hosting/ProgressBarsWrapper";
 
 function ChoosePlace() {
   const { t } = useTranslation();
@@ -28,8 +28,8 @@ function ChoosePlace() {
               <Button
                 key={index}
                 onClick={() => handleSelect(index)}
-                className={`flex flex-col gap-1 ps-4 border rounded-lg py-5 bg-white ${
-                  isSelected && "bg-gray-200 border-2 border-black"
+                className={`flex flex-col justify-center gap-1 p-4 border rounded-lg min-h-28 bg-white ${
+                  isSelected && "bg-zinc-50 border-2 border-black"
                 }`}
               >
                 <span>{icon}</span>
@@ -41,8 +41,12 @@ function ChoosePlace() {
           })}
         </div>
       </div>
-      <PrograssBar width="10%" />
-      <BackAndNext back="/hosting" next="/hosting/type-of-place" />
+      <ProgressBarsWrapper progressBarsData={["20%", "0px", "0px"]} />
+      <BackAndNext
+        back="/hosting"
+        next="/hosting/type-of-place"
+        isNextDisabled={!selectedIndex}
+      />
     </div>
   );
 }
