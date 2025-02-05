@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Button from "../../../components/ui/Button";
-import BackAndNext from "../../../components/hosting/BackAndNext";
 import { useTranslation } from "react-i18next";
-import ProgressBarsWrapper from "../../../components/hosting/ProgressBarsWrapper";
 import { amenities } from "../../../data/property/amenities";
+import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
+import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 
 function AmenitiesForProperty() {
   const { t } = useTranslation();
@@ -23,12 +23,13 @@ function AmenitiesForProperty() {
         </h3>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {amenities.map((item, index) => {
+            const idx = index + 1;
             const { text, icon } = item;
-            const isSelected = selectedIndexes.includes(index);
+            const isSelected = selectedIndexes.includes(idx);
             return (
               <Button
-                key={index}
-                onClick={() => handleSelect(index)}
+                key={idx}
+                onClick={() => handleSelect(idx)}
                 className={`flex flex-col justify-center gap-1 p-4 border rounded-lg min-h-28 bg-white ${
                   isSelected ? "bg-zinc-50 border-2 border-black" : ""
                 }`}
@@ -42,8 +43,8 @@ function AmenitiesForProperty() {
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "20%", "0px"]} />
       <BackAndNext
-        back="/hosting/stand-out"
-        next="/hosting/photos"
+        back="/become-a-host/stand-out"
+        next="/become-a-host/photos"
         isNextDisabled={!selectedIndexes.length}
       />
     </div>

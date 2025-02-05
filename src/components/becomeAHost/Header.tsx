@@ -12,7 +12,9 @@ function Header() {
         to={"/"}
         className="py-2 px-4 rounded-full border-2 flex justify-center items-center border-white font-medium text-white"
       >
-        <span>{pathname === "/hosting" ? t("exit") : t("save_and_exit")}</span>
+        <span>
+          {pathname === "/become-a-host" ? t("exit") : t("save_and_exit")}
+        </span>
       </Link>
     </div>
   );

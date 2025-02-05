@@ -4,6 +4,7 @@ import categoryBarSlice from "./features/categoryBar/categoryBarSlice";
 import homeSearchSlice from "./features/homeSearch/homeSearchSlice";
 import authSlice from "./features/auth/authSlice";
 import taxesSlice from "./features/taxes/taxesSlice";
+import becomeAHostSlice from "./features/becomeAHost/becomeAHostSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     homeSearch: homeSearchSlice,
     auth: authSlice,
     taxes: taxesSlice,
+    becomeAHost: becomeAHostSlice,
   },
 });
 

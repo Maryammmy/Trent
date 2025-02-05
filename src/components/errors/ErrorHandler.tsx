@@ -41,7 +41,7 @@ const ErrorHandler = ({ statusCode = 500, title = "Server Error" }: IProps) => {
           Oops something went wrong. Try to refresh this page or <br /> feel
           free to contact us if the problem presists.
         </p>
-        <div className="flex items-center justify-center space-x-4 my-10">
+        <div className="flex items-center justify-center gap-5 my-10">
           <Link
             to={"/"}
             className="inline-block bg-blue-600 p-2 text-white hover:!text-white rounded-md"

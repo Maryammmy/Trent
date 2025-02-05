@@ -19,12 +19,16 @@ import {
   TowerControl,
   DoorClosed,
   UsersRound,
+  Zap,
+  CalendarCheck,
 } from "lucide-react";
 import {
   IGetStartedToHost,
-  IPropertyHosting,
+  IInstantBook,
+  IPriceBreakdown,
+  IPropertyhosting,
   ITypeOfPlace,
-} from "../interfaces/hostingInterface";
+} from "../interfaces/becomeAHost";
 
 export const getStartedToHost: IGetStartedToHost[] = [
   {
@@ -40,7 +44,7 @@ export const getStartedToHost: IGetStartedToHost[] = [
     desc: "finish_up_and_publish_desc",
   },
 ];
-export const PropertyHosting: IPropertyHosting[] = [
+export const Propertyhosting: IPropertyhosting[] = [
   { label: "house", icon: <Home size={35} /> },
   { label: "apartment", icon: <Building size={35} /> },
   { label: "barn", icon: <Warehouse size={35} /> },
@@ -76,4 +80,53 @@ export const typeOfPlace: ITypeOfPlace[] = [
     desc: "shared_room_desc",
     icon: <UsersRound size={35} />,
   },
+];
+export const instantBook: IInstantBook[] = [
+  {
+    title: "approve_your_first_5_bookings",
+    text: "approve_your_first_5_bookings_text",
+    desc: "approve_your_first_5_bookings_desc",
+    icon: <CalendarCheck size={35} />,
+  },
+  {
+    title: "use_instant_book",
+    desc: "use_instant_book_desc",
+    icon: <Zap size={35} />,
+  },
+];
+export const visibility: IGetStartedToHost[] = [
+  {
+    title: "any_Trent_guest",
+    desc: "any_Trent_guest_desc",
+  },
+  {
+    title: "an_experienced guest",
+    desc: "an_experienced guest_desc",
+  },
+];
+export const priceBreakdown = (
+  basePrice: number,
+  guestServiceFee: number,
+  totalPrice: number
+): IPriceBreakdown[] => [
+  { label: "base_price", value: basePrice },
+  { label: "guest_service_fee", value: guestServiceFee },
+  { label: "guest_price_before_taxes", value: totalPrice },
+];
+export const discount = [
+  {
+    title: "new_listing_promotion",
+    desc: "new_listing_promotion_desc",
+  },
+  { title: "weekly_discount", desc: "weekly_discount_desc" },
+  { title: "monthly_discount", desc: "monthly_discount_desc" },
+];
+export const LegalSafetyDetails: string[] = [
+  "does_your_place_have_any_of_these_title_1",
+  "does_your_place_have_any_of_these_title_2",
+  "does_your_place_have_any_of_these_title_3",
+];
+export const howAreYouhosting = [
+  "how_are_you_hosting_on_Trent_title_1",
+  "how_are_you_hosting_on_Trent_title_2",
 ];

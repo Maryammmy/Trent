@@ -53,7 +53,7 @@ function DropdownMenu() {
             >
               <Link
                 onClick={() => dispatch(setIsDropdownOpen(false))}
-                to={item === "host_an_experience" ? "/hosting" : ""}
+                to={item === "host_an_experience" ? "/become-a-host" : ""}
                 className="w-full text-start"
               >
                 <span>{t(item)}</span>

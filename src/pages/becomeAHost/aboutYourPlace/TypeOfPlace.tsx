@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Button from "../../../components/ui/Button";
-import { typeOfPlace } from "../../../data/hosting";
-import BackAndNext from "../../../components/hosting/BackAndNext";
+import { typeOfPlace } from "../../../data/becomeAHost";
 import { useTranslation } from "react-i18next";
-import ProgressBarsWrapper from "../../../components/hosting/ProgressBarsWrapper";
+import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
+import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 
 function TypeOfPlace() {
   const { t } = useTranslation();
@@ -19,15 +19,16 @@ function TypeOfPlace() {
         </h3>
         <div className="grid grid-cols-1 gap-4">
           {typeOfPlace.map((item, index) => {
+            const idx = index + 1;
             const { title, desc, icon } = item;
-            const isSelected = selectedIndex === index;
+            const isSelected = selectedIndex === idx;
             const translatedTitle = t(title);
             const translatedDesc = t(desc);
 
             return (
               <Button
-                key={index}
-                onClick={() => handleSelect(index)}
+                key={idx}
+                onClick={() => handleSelect(idx)}
                 className={`flex gap-4 justify-between items-center min-h-28 p-4 border rounded-lg bg-white ${
                   isSelected && "bg-zinc-50 border-2 border-black"
                 }`}
@@ -48,8 +49,8 @@ function TypeOfPlace() {
       </div>
       <ProgressBarsWrapper progressBarsData={["40%", "0px", "0px"]} />
       <BackAndNext
-        back="/hosting/choose-place"
-        next="/hosting/location"
+        back="/become-a-host/choose-place"
+        next="/become-a-host/location"
         isNextDisabled={!selectedIndex}
       />
     </div>

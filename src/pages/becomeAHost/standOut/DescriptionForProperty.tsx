@@ -1,8 +1,8 @@
 import { useState } from "react";
-import BackAndNext from "../../../components/hosting/BackAndNext";
-import ProgressBarsWrapper from "../../../components/hosting/ProgressBarsWrapper";
 import { useTranslation } from "react-i18next";
 import TextArea from "../../../components/ui/TextArea";
+import BackAndNext from "../../../components/becomeAHost/BackAndNext";
+import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 
 function DescriptionForProperty() {
   const [desctextArea, setDesctextArea] = useState<string>("");
@@ -17,6 +17,8 @@ function DescriptionForProperty() {
           {t("desc_for_property_desc")}
         </p>
         <TextArea
+          maxLength={10000}
+          minLength={50}
           onChange={(e) => setDesctextArea(e.target.value)}
           name="description"
           value={desctextArea}
@@ -27,9 +29,9 @@ function DescriptionForProperty() {
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "60%", "0px"]} />
       <BackAndNext
-        back="/hosting/title"
-        next="/hosting/finish-setup"
-        isNextDisabled={desctextArea.length < 5}
+        back="/become-a-host/title"
+        next="/become-a-host/finish-setup"
+        isNextDisabled={desctextArea.length < 10}
       />
     </div>
   );

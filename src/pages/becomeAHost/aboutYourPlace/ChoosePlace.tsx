@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Button from "../../../components/ui/Button";
-import { PropertyHosting } from "../../../data/hosting";
-import BackAndNext from "../../../components/hosting/BackAndNext";
+import { Propertyhosting } from "../../../data/becomeAHost";
 import { useTranslation } from "react-i18next";
-import ProgressBarsWrapper from "../../../components/hosting/ProgressBarsWrapper";
+import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
+import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 
 function ChoosePlace() {
   const { t } = useTranslation();
@@ -19,15 +19,16 @@ function ChoosePlace() {
           {t("describe_your_place")}
         </h3>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {PropertyHosting.map((item, index) => {
+          {Propertyhosting.map((item, index) => {
+            const idx = index + 1;
             const { label, icon } = item;
             const translatedLabel = t(label);
-            const isSelected = selectedIndex === index;
+            const isSelected = selectedIndex === idx;
 
             return (
               <Button
-                key={index}
-                onClick={() => handleSelect(index)}
+                key={idx}
+                onClick={() => handleSelect(idx)}
                 className={`flex flex-col justify-center gap-1 p-4 border rounded-lg min-h-28 bg-white ${
                   isSelected && "bg-zinc-50 border-2 border-black"
                 }`}
@@ -43,8 +44,8 @@ function ChoosePlace() {
       </div>
       <ProgressBarsWrapper progressBarsData={["20%", "0px", "0px"]} />
       <BackAndNext
-        back="/hosting"
-        next="/hosting/type-of-place"
+        back="/become-a-host"
+        next="/become-a-host/type-of-place"
         isNextDisabled={!selectedIndex}
       />
     </div>

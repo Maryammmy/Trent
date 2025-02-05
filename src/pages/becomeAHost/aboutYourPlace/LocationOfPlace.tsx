@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import BackAndNext from "../../../components/hosting/BackAndNext";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 import toast from "react-hot-toast";
 import "leaflet/dist/leaflet.css";
 import { useTranslation } from "react-i18next";
-import ProgressBarsWrapper from "../../../components/hosting/ProgressBarsWrapper";
+import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
+import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 
 function LocationOfPlace() {
   const { t } = useTranslation();
@@ -53,8 +53,8 @@ function LocationOfPlace() {
       </div>
       <ProgressBarsWrapper progressBarsData={["50%", "0px", "0px"]} />
       <BackAndNext
-        back="/hosting/type-of-place"
-        next="/hosting/floor-plan"
+        back="/become-a-host/type-of-place"
+        next="/become-a-host/floor-plan"
         isNextDisabled={!position}
       />
     </div>

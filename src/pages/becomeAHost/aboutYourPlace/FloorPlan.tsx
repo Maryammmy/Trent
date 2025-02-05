@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Counter from "../../../components/home/Counter";
 import { filterRoomsAndBeds } from "../../../data";
-import BackAndNext from "../../../components/hosting/BackAndNext";
 import { useTranslation } from "react-i18next";
-import ProgressBarsWrapper from "../../../components/hosting/ProgressBarsWrapper";
+import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
+import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 
 // Initialize counters outside to avoid reinitialization on re-renders
 const initialCounters = Object.fromEntries(
@@ -50,8 +50,8 @@ function FloorPlan() {
 
       <ProgressBarsWrapper progressBarsData={["80%", "0px", "0px"]} />
       <BackAndNext
-        back="/hosting/location"
-        next="/hosting/stand-out"
+        back="/become-a-host/location"
+        next="/become-a-host/stand-out"
         isNextDisabled={isNextDisabled}
       />
     </div>

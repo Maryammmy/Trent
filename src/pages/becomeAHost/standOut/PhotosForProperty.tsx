@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Upload } from "lucide-react";
-import BackAndNext from "../../../components/hosting/BackAndNext";
-import ProgressBarsWrapper from "../../../components/hosting/ProgressBarsWrapper";
 import Image from "../../../components/ui/Image";
 import Input from "../../../components/ui/Input";
 import { useTranslation } from "react-i18next";
+import BackAndNext from "../../../components/becomeAHost/BackAndNext";
+import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 
 const PhotosForProperty = () => {
   const { t } = useTranslation();
@@ -51,8 +51,8 @@ const PhotosForProperty = () => {
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "40%", "0px"]} />
       <BackAndNext
-        back="/hosting/amenities"
-        next="/hosting/title"
+        back="/become-a-host/amenities"
+        next="/become-a-host/title"
         isNextDisabled={photos.length < 5}
       />
     </div>

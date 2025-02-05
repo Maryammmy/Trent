@@ -25,7 +25,7 @@ const LanguageSwitcher = () => {
             <li key={index}>
               <Button
                 onClick={() => changeLanguage(value)}
-                className="block px-4 py-2 text-left hover:bg-[#F7F7F7]"
+                className="block py-2 w-full text-center hover:bg-[#F7F7F7]"
               >
                 <span>{label}</span>
               </Button>
