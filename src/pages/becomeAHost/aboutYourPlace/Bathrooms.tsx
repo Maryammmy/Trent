@@ -6,7 +6,7 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import { typesOFBathrooms } from "../../../data/becomeAHost";
 
 const initialBathroomsCounters = Object.fromEntries(
-  typesOFBathrooms.map((item) => [item.title, 0]) // Make sure to use `title` as the key
+  typesOFBathrooms.map((item) => [item.title, 0])
 );
 
 function BathRooms() {

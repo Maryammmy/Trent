@@ -1,9 +1,11 @@
 import Slider from "rc-slider";
+import { useTranslation } from "react-i18next";
 interface IProps {
   values: number[];
   handleRangeChange: (newValues: number[]) => void;
 }
 function PriceRange({ values, handleRangeChange }: IProps) {
+  const { t } = useTranslation();
   const histogramData = [5, 20, 50, 100, 80, 40, 30, 20, 10];
   return (
     <div>
@@ -32,10 +34,12 @@ function PriceRange({ values, handleRangeChange }: IProps) {
       />
       <div className="flex font-medium text-secondary justify-between mt-4 text-sm">
         <span>
-          Minimum: <span className="text-black font-semibold">{values[0]}</span>
+          {t("minimum")}:{" "}
+          <span className="text-black font-semibold">{values[0]}</span>
         </span>
         <span>
-          Maximum: <span className="text-black font-medium">{values[1]}</span>
+          {t("maximum")}:{" "}
+          <span className="text-black font-medium">{values[1]}</span>
         </span>
       </div>
     </div>

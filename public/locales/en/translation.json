@@ -235,5 +235,15 @@
   "me": "Me",
   "my_family": "My family",
   "other_guests": "Other guests",
-  "roommates": "Roommates"
+  "roommates": "Roommates",
+  "type_of_place_title": "Type of place",
+  "any_type": "Any type",
+  "filter_room": "Room",
+  "entire_home": "Entire home",
+  "price_range": "Price range",
+  "maximum": "Maximum",
+  "minimum": "Minimum",
+  "amenities": "Amenities",
+  "property_type": "Property type",
+  "rooms_and_beds": "Rooms and beds"
 }

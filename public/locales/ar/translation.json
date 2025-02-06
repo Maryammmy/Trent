@@ -235,5 +235,15 @@
   "me": "أنا",
   "my_family": "عائلتي",
   "other_guests": "ضيوف آخرون",
-  "roommates": "زملاء الغرفة"
+  "roommates": "زملاء الغرفة",
+  "type_of_place_title": "نوع المكان",
+  "any_type": "اي نوع",
+  "filter_room": "غرفة",
+  "entire_home": "مسكن",
+  "price_range": "نطاق السعر",
+  "maximum": "الحد الاقصى",
+  "minimum": "الحد الادنى",
+  "amenities": "المرافق",
+  "property_type": "نوع العقار",
+  "rooms_and_beds": "الغرف والأسرة"
 }

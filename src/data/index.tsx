@@ -58,7 +58,7 @@ export const destinations: IDestinations[] = [
   { city: "Stockholm, Sweden", reason: "For its top-notch dining" },
   { city: "Riga, Latvia", reason: "For its bustling nightlife" },
 ];
-export const filterTypes: string[] = ["Any type", "Room", "Entire home"];
+export const filterTypes: string[] = ["any_type", "room", "entire_home"];
 export const filterRoomsAndBeds: string[] = ["bedrooms", "beds", "bathrooms"];
 export const filterPropertyType: IFilterPropertyType[] = [
   { name: "House", icon: <House /> },
