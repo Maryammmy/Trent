@@ -15,6 +15,7 @@ function BackAndNext({ back, next, isNextDisabled = false }: IProps) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  localStorage.setItem("pathname", back);
   const handleClick = () => {
     if (next === "/hosting/listings") {
       dispatch(setIsFinishUpModal(true));

@@ -20,7 +20,6 @@ import LegalAndCreate from "../pages/becomeAHost/finishSetup/LegalAndCreate";
 import BecomeAHostLayout from "../layouts/BecomeAHost";
 import BathRooms from "../pages/becomeAHost/aboutYourPlace/Bathrooms";
 import Occupancy from "../pages/becomeAHost/aboutYourPlace/Occupancy";
-
 export const BecomeAHostRoutes = (
   <Route
     path="/become-a-host"

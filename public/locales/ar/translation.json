@@ -253,5 +253,7 @@
   "price_details": "تفاصيل السعر",
   "choose_how_to_pay": "اختر طريقة الدفع",
   "insurance_fee": "رسوم التأمين",
-  "Trent_service_fee": "رسوم خدمة Trent"
+  "Trent_service_fee": "رسوم خدمة Trent",
+  "image_too_small": "الصورة صغيرة جدًا! يجب أن يكون حجم الصورة على الأقل 50KB.",
+  "image_already_uploaded": "هذه الصورة مرفوعة بالفعل! لا يمكن رفع نفس الصورة مرتين."
 }

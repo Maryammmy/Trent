@@ -5,14 +5,28 @@ import Input from "../../../components/ui/Input";
 import { useTranslation } from "react-i18next";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
+import toast from "react-hot-toast";
 
 const PhotosForProperty = () => {
   const { t } = useTranslation();
   const [photos, setPhotos] = useState<File[]>([]);
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const selectedFiles = Array.from(event.target.files);
-      setPhotos((prevPhotos) => [...prevPhotos, ...selectedFiles]);
+      const newPhotos: File[] = [];
+      selectedFiles.forEach((file) => {
+        if (file.size < 51200) {
+          toast.error(t("image_too_small"));
+          return;
+        }
+        if (!photos.some((p) => p.name === file.name && p.size === file.size)) {
+          newPhotos.push(file);
+        } else {
+          toast.error(t("image_already_uploaded"));
+        }
+      });
+      setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos]);
     }
   };
   return (
