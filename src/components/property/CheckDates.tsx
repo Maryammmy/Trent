@@ -5,6 +5,7 @@ import DatePicker from "../ui/DatePicker";
 import { DateValueType } from "react-tailwindcss-datepicker";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 function CheckDates() {
   const [counter, setCounter] = useState(0);
@@ -17,9 +18,11 @@ function CheckDates() {
     startDate: null,
     endDate: null,
   });
+
   const updateCounter = (value: number) => {
     setCounter((prevCounter) => prevCounter + value);
   };
+
   const handleStartValueChange = (newValue: DateValueType) => {
     const { startDate } = newValue || {};
     const today = new Date();
@@ -38,6 +41,7 @@ function CheckDates() {
     }
     setStartDateValue(newValue);
   };
+
   const handleEndValueChange = (newValue: DateValueType) => {
     const { startDate } = newValue || {};
     const today = new Date();
@@ -58,6 +62,10 @@ function CheckDates() {
 
     setEndDateValue(newValue);
   };
+
+  // Check if both dates are selected and if at least one guest is added
+  const isButtonEnabled =
+    counter > 0 && startDateValue?.startDate && endDateValue?.startDate;
 
   return (
     <div className="flex-1">
@@ -100,9 +108,14 @@ function CheckDates() {
             </div>
           </div>
         </div>
-        <Button className="bg-primary text-lg text-white font-semibold w-full py-2 rounded-md mt-4">
-          <span>{t("check_availability")}</span>
-        </Button>
+        <Link
+          to={isButtonEnabled ? "/confirm-and-pay" : ""}
+          className={`bg-primary text-lg block text-center w-full text-white font-semibold py-2 rounded-md mt-4 `}
+        >
+          <span>
+            {isButtonEnabled ? t("reserve") : t("check_availability")}
+          </span>
+        </Link>
       </div>
     </div>
   );

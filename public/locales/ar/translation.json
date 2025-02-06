@@ -245,5 +245,13 @@
   "minimum": "الحد الادنى",
   "amenities": "المرافق",
   "property_type": "نوع العقار",
-  "rooms_and_beds": "الغرف والأسرة"
+  "rooms_and_beds": "الغرف والأسرة",
+  "reserve": "احجز",
+  "confirm_and_pay": "تاكيد ودفع",
+  "your_trip": "رحلتك",
+  "dates": "التواريخ",
+  "price_details": "تفاصيل السعر",
+  "choose_how_to_pay": "اختر طريقة الدفع",
+  "insurance_fee": "رسوم التأمين",
+  "Trent_service_fee": "رسوم خدمة Trent"
 }

@@ -245,5 +245,13 @@
   "minimum": "Minimum",
   "amenities": "Amenities",
   "property_type": "Property type",
-  "rooms_and_beds": "Rooms and beds"
+  "rooms_and_beds": "Rooms and beds",
+  "reserve": "Reserve",
+  "confirm_and_pay": "Confirm and pay",
+  "your_trip": "Your trip",
+  "dates": "Dates",
+  "price_details": "Price details",
+  "choose_how_to_pay": "Choose how to pay",
+  "insurance_fee": "Insurance fee",
+  "Trent_service_fee": "Trent service fee"
 }
