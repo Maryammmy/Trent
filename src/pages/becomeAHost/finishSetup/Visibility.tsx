@@ -27,7 +27,6 @@ function Visibility() {
             const idx = index + 1;
             const { title, desc } = item;
             const isSelected = selectedIndex === idx;
-
             return (
               <div key={idx}>
                 <label

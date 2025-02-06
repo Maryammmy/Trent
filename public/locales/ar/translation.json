@@ -218,5 +218,22 @@
   "become_a_host_finish_up_desc": "بمجرد الانتهاء من ذلك، يمكنك نشر إعلان مسكنك والبدء في تلقي الحجوزات.",
   "cancel": "الإلغاء",
   "finish_up": "الإكمال",
-  "craete_listing": "إنشاء إعلان مسكن"
+  "craete_listing": "إنشاء إعلان مسكن",
+  "does_every_bedroom_have_a_lock": "هل كل غرفة تحتوي على قفل؟",
+  "yes": "نعم",
+  "no": "لا",
+  "what_kind_of_bathrooms_are_available_to_guests": "ما نوع الحمامات التي يمكن للضيوف استخدامها؟",
+  "private_and_attached": "حمامات خاصة ومربوطة",
+  "private_and_attached_desc": "إنه متصله بغرفة الضيوف ومخصص لهم فقط.",
+  "dedicated": "مخصص",
+  "dedicated_desc": "إنه خاص، ولكن يتم الوصول إليه عبر مساحة مشتركة مثل الممر.",
+  "shared": "مشترك",
+  "shared_desc": "يتم مشاركته مع أشخاص آخرين.",
+  "occupancy_title": "من يمكن أن يكون هناك أيضًا؟",
+  "occupancy_desc": "يحتاج الضيوف إلى معرفة ما إذا كانوا سيواجهون أشخاصًا آخرين خلال إقامتهم.",
+  "occupancy_result": "سنعرض هذه المعلومات في قائمتك وفي نتائج البحث.",
+  "me": "أنا",
+  "my_family": "عائلتي",
+  "other_guests": "ضيوف آخرون",
+  "roommates": "زملاء الغرفة"
 }

@@ -18,6 +18,8 @@ import Price from "../pages/becomeAHost/finishSetup/Price";
 import Discount from "../pages/becomeAHost/finishSetup/Discount";
 import LegalAndCreate from "../pages/becomeAHost/finishSetup/LegalAndCreate";
 import BecomeAHostLayout from "../layouts/BecomeAHost";
+import BathRooms from "../pages/becomeAHost/aboutYourPlace/Bathrooms";
+import Occupancy from "../pages/becomeAHost/aboutYourPlace/Occupancy";
 
 export const BecomeAHostRoutes = (
   <Route
@@ -31,6 +33,8 @@ export const BecomeAHostRoutes = (
     <Route path="type-of-place" element={<TypeOfPlace />} />
     <Route path="location" element={<LocationOfPlace />} />
     <Route path="floor-plan" element={<FloorPlan />} />
+    <Route path="bathrooms" element={<BathRooms />} />
+    <Route path="occupancy" element={<Occupancy />} />
     <Route path="stand-out" element={<StandOut />} />
     <Route path="amenities" element={<AmenitiesForProperty />} />
     <Route path="photos" element={<PhotosForProperty />} />

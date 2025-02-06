@@ -7,9 +7,10 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 
 function TypeOfPlace() {
   const { t } = useTranslation();
-  const [selectedIndex, setSelectedIndex] = useState<null | number>(null);
-  const handleSelect = (index: number) => {
-    setSelectedIndex(index);
+  const [selectedPlace, setSelectedPlace] = useState<string>("");
+  const handleSelect = (place: string) => {
+    setSelectedPlace(place);
+    localStorage.setItem("selectedPlace", place);
   };
   return (
     <div className="py-10">
@@ -21,14 +22,14 @@ function TypeOfPlace() {
           {typeOfPlace.map((item, index) => {
             const idx = index + 1;
             const { title, desc, icon } = item;
-            const isSelected = selectedIndex === idx;
+            const isSelected = selectedPlace === title;
             const translatedTitle = t(title);
             const translatedDesc = t(desc);
 
             return (
               <Button
                 key={idx}
-                onClick={() => handleSelect(idx)}
+                onClick={() => handleSelect(title)}
                 className={`flex gap-4 justify-between items-center min-h-28 p-4 border rounded-lg bg-white ${
                   isSelected && "bg-zinc-50 border-2 border-black"
                 }`}
@@ -51,7 +52,7 @@ function TypeOfPlace() {
       <BackAndNext
         back="/become-a-host/choose-place"
         next="/become-a-host/location"
-        isNextDisabled={!selectedIndex}
+        isNextDisabled={!selectedPlace}
       />
     </div>
   );
