@@ -20,6 +20,7 @@ import LegalAndCreate from "../pages/becomeAHost/finishSetup/LegalAndCreate";
 import BecomeAHostLayout from "../layouts/BecomeAHost";
 import BathRooms from "../pages/becomeAHost/aboutYourPlace/Bathrooms";
 import Occupancy from "../pages/becomeAHost/aboutYourPlace/Occupancy";
+import RedirectRoute from "../middleware/RedirectRoute";
 export const BecomeAHostRoutes = (
   <Route
     path="/become-a-host"
@@ -28,22 +29,127 @@ export const BecomeAHostRoutes = (
   >
     <Route index element={<GetStartedToHost />} />
     <Route path="about-your-place" element={<AboutYourPlace />} />
-    <Route path="choose-place" element={<ChoosePlace />} />
-    <Route path="type-of-place" element={<TypeOfPlace />} />
-    <Route path="location" element={<LocationOfPlace />} />
-    <Route path="floor-plan" element={<FloorPlan />} />
-    <Route path="bathrooms" element={<BathRooms />} />
-    <Route path="occupancy" element={<Occupancy />} />
+    <Route
+      path="choose-place"
+      element={
+        <RedirectRoute>
+          <ChoosePlace />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="type-of-place"
+      element={
+        <RedirectRoute>
+          <TypeOfPlace />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="location"
+      element={
+        <RedirectRoute>
+          <LocationOfPlace />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="floor-plan"
+      element={
+        <RedirectRoute>
+          <FloorPlan />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="bathrooms"
+      element={
+        <RedirectRoute>
+          <BathRooms />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="occupancy"
+      element={
+        <RedirectRoute>
+          <Occupancy />
+        </RedirectRoute>
+      }
+    />
     <Route path="stand-out" element={<StandOut />} />
-    <Route path="amenities" element={<AmenitiesForProperty />} />
-    <Route path="photos" element={<PhotosForProperty />} />
-    <Route path="title" element={<TitleForProperty />} />
-    <Route path="description" element={<DescriptionForProperty />} />
+    <Route
+      path="amenities"
+      element={
+        <RedirectRoute>
+          <AmenitiesForProperty />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="photos"
+      element={
+        <RedirectRoute>
+          <PhotosForProperty />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="title"
+      element={
+        <RedirectRoute>
+          <TitleForProperty />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="description"
+      element={
+        <RedirectRoute>
+          <DescriptionForProperty />
+        </RedirectRoute>
+      }
+    />
     <Route path="finish-setup" element={<FinishSetup />} />
-    <Route path="instant-book" element={<InstantBook />} />
-    <Route path="visibility" element={<Visibility />} />
-    <Route path="price" element={<Price />} />
-    <Route path="discount" element={<Discount />} />
-    <Route path="legal-and-create" element={<LegalAndCreate />} />
+    <Route
+      path="instant-book"
+      element={
+        <RedirectRoute>
+          <InstantBook />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="visibility"
+      element={
+        <RedirectRoute>
+          <Visibility />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="price"
+      element={
+        <RedirectRoute>
+          <Price />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="discount"
+      element={
+        <RedirectRoute>
+          <Discount />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="legal-and-create"
+      element={
+        <RedirectRoute>
+          <LegalAndCreate />
+        </RedirectRoute>
+      }
+    />
   </Route>
 );

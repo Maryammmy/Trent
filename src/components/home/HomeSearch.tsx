@@ -99,15 +99,11 @@ function HomeSearch() {
             />
           </div>
 
-          <div className="hidden xl:block">
-            <div className="flex text-sm items-center justify-around w-[900px] rounded-full py-3 px-5 border shadow hover:shadow-lg">
+          <div className="hidden xl:block  ">
+            <div className="flex text-sm items-end  justify-between bg-white rounded-lg w-[900px] py-3 px-5 border shadow hover:shadow-lg">
               {homeSearch.map((item, index) => {
                 const title = t(item.title);
                 const text = t(item.text);
-                const borderBottom =
-                  index === homeSearch.length - 1
-                    ? ""
-                    : "border-r rtl:border-l rtl:border-r-0";
 
                 return (
                   <Button
@@ -116,13 +112,13 @@ function HomeSearch() {
                       title === t("where") && handleDestinationToggle()
                     }
                     key={index}
-                    className={`px-2 font-medium ${borderBottom} flex flex-col`}
+                    className={`px-2 font-medium  flex flex-col`}
                   >
-                    <h2>{title}</h2>
+                    <h2 className="pb-2">{title}</h2>
                     <div>
                       {text === t("add_guests") ? (
-                        <div className="flex items-center gap-2 text-sm">
-                          <p className="text-secondary w-[90px] text-start">
+                        <div className="flex items-center gap-2 text-sm bg-gray-100 px-4 h-10 rounded-md">
+                          <p className=" w-[90px] text-start">
                             {counter === 0
                               ? t("add_guests")
                               : counter === 1
@@ -150,15 +146,17 @@ function HomeSearch() {
                           handleValueChange={handleEndValueChange}
                         />
                       ) : (
-                        <p className="text-secondary">{text}</p>
+                        <p className=" bg-gray-100 px-4 h-10 rounded-md flex items-center">
+                          {text}
+                        </p>
                       )}
                     </div>
                   </Button>
                 );
               })}
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary">
-                <Search strokeWidth={2.75} size={15} className="text-white" />
-              </div>
+              <Button className="text-white font-medium bg-primary px-4 h-10 rounded-md">
+                <span>Search</span>
+              </Button>
             </div>
             <div className="relative bg-black" ref={destinationCardRef}>
               {isDestinationOpen && <DestinationCard />}

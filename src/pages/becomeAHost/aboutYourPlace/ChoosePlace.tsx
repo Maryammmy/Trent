@@ -8,6 +8,7 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 function ChoosePlace() {
   const { t } = useTranslation();
   const [selectedIndex, setSelectedIndex] = useState<null | number>(null);
+  const backButton = "/become-a-host";
   const handleSelect = (index: number) => {
     setSelectedIndex(index);
   };
@@ -44,9 +45,10 @@ function ChoosePlace() {
       </div>
       <ProgressBarsWrapper progressBarsData={["20%", "0px", "0px"]} />
       <BackAndNext
-        back="/become-a-host"
+        back={backButton}
         next="/become-a-host/type-of-place"
         isNextDisabled={!selectedIndex}
+        allowNext={backButton}
       />
     </div>
   );

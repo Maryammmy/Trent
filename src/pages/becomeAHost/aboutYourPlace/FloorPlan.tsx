@@ -18,6 +18,7 @@ const initialFloorPlanCounters = Object.fromEntries(
 );
 
 function FloorPlan() {
+  const backButton = "/become-a-host/location";
   const { t } = useTranslation();
   const [roomCounters, setRoomCounters] = useState<{ [key: string]: number }>(
     initialRoomCounters
@@ -123,9 +124,10 @@ function FloorPlan() {
         progressBarsData={[isRoom ? "70%" : "80%", "0px", "0px"]}
       />
       <BackAndNext
-        back="/become-a-host/location"
+        back={backButton}
         next={isRoom ? "/become-a-host/bathrooms" : "/become-a-host/stand-out"}
         isNextDisabled={isNextDisabled}
+        allowNext={backButton}
       />
     </div>
   );

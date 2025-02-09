@@ -2,24 +2,32 @@ import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
 import { useAppDispatch } from "../../store/hooks";
-import { setIsFinishUpModal } from "../../store/features/becomeAHost/becomeAHostSlice";
+import {
+  addCompletedStep,
+  setIsFinishUpModal,
+} from "../../store/features/becomeAHost/becomeAHostSlice";
 
 interface IProps {
   back: string;
   next: string;
   isNextDisabled?: boolean;
+  allowNext?: string;
 }
-
-function BackAndNext({ back, next, isNextDisabled = false }: IProps) {
+function BackAndNext({
+  back,
+  next,
+  isNextDisabled = false,
+  allowNext,
+}: IProps) {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  localStorage.setItem("pathname", back);
   const handleClick = () => {
     if (next === "/hosting/listings") {
       dispatch(setIsFinishUpModal(true));
     }
+    dispatch(addCompletedStep(allowNext));
     navigate(next);
   };
   return (

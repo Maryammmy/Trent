@@ -13,7 +13,7 @@ function LocationOfPlace() {
     26.8206, 30.8025,
   ]);
   const [zoomLevel] = useState(6);
-
+  const backButton = "/become-a-host/type-of-place";
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -53,9 +53,10 @@ function LocationOfPlace() {
       </div>
       <ProgressBarsWrapper progressBarsData={["50%", "0px", "0px"]} />
       <BackAndNext
-        back="/become-a-host/type-of-place"
+        back={backButton}
         next="/become-a-host/floor-plan"
         isNextDisabled={!position}
+        allowNext={backButton}
       />
     </div>
   );

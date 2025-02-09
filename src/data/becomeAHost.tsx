@@ -32,20 +32,16 @@ import {
 } from "../interfaces/becomeAHost";
 import { PiUsersBold, PiUsersFourBold, PiUsersThreeBold } from "react-icons/pi";
 export const stepsOrder: string[] = [
-  "get-started",
-  "about-your-place",
   "choose-place",
   "type-of-place",
   "location",
   "floor-plan",
   "bathrooms",
   "occupancy",
-  "stand-out",
   "amenities",
   "photos",
   "title",
   "description",
-  "finish-setup",
   "instant-book",
   "visibility",
   "price",

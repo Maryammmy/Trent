@@ -7,11 +7,11 @@ import PersonalInfo from "../pages/accountSettings/PersonalInfo";
 import LoginAndSecurity from "../pages/accountSettings/LoginAndSecurity";
 import Preferences from "../pages/accountSettings/Preferences";
 import NotFoundPage from "../pages/NotFoundPage";
-import Home from "../pages";
 import AccountSettings from "../pages/accountSettings";
 import Property from "../pages/property";
 import Gallery from "../pages/property/Gallery";
 import ConfirmAndPay from "../pages/property/ConfirmAndPay";
+import Home from "../pages/Home";
 
 export const RootRoutes = (
   <>

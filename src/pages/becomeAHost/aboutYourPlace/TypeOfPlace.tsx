@@ -8,6 +8,7 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 function TypeOfPlace() {
   const { t } = useTranslation();
   const [selectedPlace, setSelectedPlace] = useState<string>("");
+  const backButton = "/become-a-host/choose-place";
   const handleSelect = (place: string) => {
     setSelectedPlace(place);
     localStorage.setItem("selectedPlace", place);
@@ -50,9 +51,10 @@ function TypeOfPlace() {
       </div>
       <ProgressBarsWrapper progressBarsData={["40%", "0px", "0px"]} />
       <BackAndNext
-        back="/become-a-host/choose-place"
+        back={backButton}
         next="/become-a-host/location"
         isNextDisabled={!selectedPlace}
+        allowNext={backButton}
       />
     </div>
   );

@@ -10,6 +10,16 @@ p {
 span {
   overflow-wrap: anywhere;
 }
+.bg-home {
+  background-image: url("./assets/iamges/bgHome.png"),
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  background-blend-mode: overlay;
+}
+.bg-home2 {
+  background-image: url("./assets/iamges/bgHome2.png"),
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  background-blend-mode: overlay;
+}
 /* hosting page */
 .hosting-layout {
   min-height: calc(100vh - 234px);

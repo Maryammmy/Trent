@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import Cart from "../components/Card";
-import CategoryBar from "../components/CategoryBar";
 import Button from "../components/ui/Button";
 import Switcher from "../components/ui/Switcher";
 import { useState } from "react";
@@ -8,7 +7,7 @@ import FilterModal from "../components/home/filter/FilterModal";
 import { SlidersHorizontal } from "lucide-react";
 import PropertyCardSkeleton from "../components/skeleton/PropertyCardSkeleton";
 
-export default function Home() {
+export default function Home1() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(10);
   const [loading, setLoading] = useState(false);
@@ -26,9 +25,9 @@ export default function Home() {
 
   return (
     <>
-      <div>
+      <div className="">
         <div>
-          <CategoryBar />
+          {/* <CategoryBar /> */}
           <div className="px-5 xl:px-20 flex gap-3 justify-end">
             <Button className="mt-14 xl:mt-20 flex items-center gap-2 border p-2 rounded-md bg-white">
               <span className="text-sm">{t("display_total_before_taxes")}</span>
