@@ -2,29 +2,30 @@ import { Link } from "react-router-dom";
 import Carsoul from "./ui/Carsoul";
 import Image from "./ui/Image";
 import { images } from "../data";
-import { FaStar } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../store/hooks";
+import Rating from "./ui/Rating";
+import { Heart, MapPin } from "lucide-react";
+import Button from "./ui/Button";
 
 function Card() {
   const { t } = useTranslation();
   const { enableTaxes } = useAppSelector((state) => state.taxes);
-  const distance = 18;
-  const startDate = "May 11";
-  const endDate = "May 15";
   const basePrice = 500;
   const taxRate = 14 / 100;
-
   const priceBeforeTaxes = basePrice;
   const priceWithTaxes = basePrice * (1 + taxRate);
 
   return (
-    <div>
+    <div className="bg-white shadow-md rounded-md p-4">
       <div className="overflow-hidden rounded-md">
         <Carsoul showDot={true} left="5px" right="5px" padding="1px">
           {images?.map((item: string, index: number) => (
-            <Link key={index} to={"/properties/1"}>
-              <div className="rounded-md overflow-hidden h-[280px]">
+            <Link key={index} to={"/properties/1"} className="relative">
+              <div className="absolute top-2 right-1 z-10">
+                <Heart strokeWidth={3} className="text-primary" />
+              </div>
+              <div className="rounded-md overflow-hidden h-[230px]">
                 <Image
                   imageUrl={item}
                   alt={`Slide ${index}`}
@@ -37,25 +38,44 @@ function Card() {
       </div>
       <div className="px-2">
         <div className="flex items-center justify-between pt-2">
-          <h3 className="font-bold">{t("name")}</h3>
-          <p className="flex gap-1 items-center font-medium">
-            <FaStar size={15} />
-            <span>{t("rating", { rating: 5.0 })}</span>
-          </p>
+          <div>
+            <h3 className="font-bold pb-1">{t("name")}</h3>
+            <p className="text-dark font-medium">Cairo,Marina</p>
+          </div>
+          <div>
+            <div className="flex gap-1 font-medium pb-1">
+              <span className="text-secondary">
+                <span className="font-medium">
+                  {enableTaxes
+                    ? t("price_per_night", {
+                        price: priceBeforeTaxes.toFixed(0),
+                      })
+                    : t("price_per_night", {
+                        price: priceWithTaxes.toFixed(0),
+                      })}
+                </span>
+              </span>{" "}
+              <span>/ night</span>
+            </div>
+            <div className="flex gap-1 items-center font-medium">
+              <Rating rating={4} />
+              <span className="text-sm text-dark">(4)</span>
+            </div>
+          </div>
         </div>
-        <p className="text-stone-500 font-medium">
-          {t("kilometers_away", { distance })}
-        </p>
-        <p className="text-stone-500 font-medium">
-          {t("date_range", { start_date: startDate, end_date: endDate })}
-        </p>
-        <p className="font-medium">
-          {enableTaxes
-            ? t("price_per_night", { price: priceBeforeTaxes.toFixed(2) })
-            : t("price_per_night", { price: priceWithTaxes.toFixed(2) })}
-        </p>
+        <div className="flex gap-5 mt-2">
+          <Button className="flex-[2] py-1 bg-primary rounded-md text-white font-medium">
+            <span>Book Now</span>
+          </Button>
+          <Button className="flex-[1] py-1 bg-[#CAE0FE] rounded-md flex justify-center items-center">
+            <span>
+              <MapPin className="text-primary" size={22} />
+            </span>
+          </Button>
+        </div>
+
         {enableTaxes && (
-          <p className="text-sm text-gray-500">{t("total_before_taxes")}</p>
+          <p className="text-sm text-dark">{t("total_before_taxes")}</p>
         )}
       </div>
     </div>

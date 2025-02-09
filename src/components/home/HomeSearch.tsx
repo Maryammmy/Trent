@@ -137,6 +137,7 @@ function HomeSearch() {
                           useRange={true}
                           dateValue={startDateValue}
                           handleValueChange={handleStartValueChange}
+                          className="h-10 bg-gray-100"
                         />
                       ) : title === t("check_out") ? (
                         <DatePicker
@@ -144,6 +145,7 @@ function HomeSearch() {
                           useRange={true}
                           dateValue={endDateValue}
                           handleValueChange={handleEndValueChange}
+                          className="h-10 bg-gray-100"
                         />
                       ) : (
                         <p className=" bg-gray-100 px-4 h-10 rounded-md flex items-center">

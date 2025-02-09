@@ -2,7 +2,7 @@
   "name": "Villa Bird",
   "kilometers_away": "{{distance}} kilometers away",
   "date_range": "{{start_date}} - {{end_date}}",
-  "price_per_night": "{{price}} EGP night",
+  "price_per_night": "{{price}}EGP",
   "rating": "{{rating}}",
   "where": "Where",
   "search_destinations": "Search destinations",

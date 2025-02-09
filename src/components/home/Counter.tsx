@@ -19,7 +19,7 @@ function Counter({
       <Button
         disabled={counter === 0}
         onClick={decreaseCounter}
-        className={`rounded-full bg-white text-secondary border-2 flex justify-center items-center ${
+        className={`rounded-full bg-white text-black border-2 flex justify-center items-center ${
           counter === 0 ? "opacity-50 cursor-not-allowed" : ""
         }`}
         style={{ width: width, height: height }}
@@ -31,7 +31,7 @@ function Counter({
       <span className="font-medium w-4 text-center">{counter}</span>
       <Button
         onClick={increaseCounter}
-        className="rounded-full bg-white text-secondary border-2 flex justify-center items-center"
+        className="rounded-full bg-white text-black border-2 flex justify-center items-center"
         style={{ width: width, height: height }}
       >
         <span>

@@ -11,13 +11,13 @@ import AccountSettings from "../pages/accountSettings";
 import Property from "../pages/property";
 import Gallery from "../pages/property/Gallery";
 import ConfirmAndPay from "../pages/property/ConfirmAndPay";
-import Home from "../pages/Home";
+import LandingPage from "../pages";
 
 export const RootRoutes = (
   <>
     <Route path="/" element={<RootLayout />} errorElement={<ErrorHandler />}>
-      <Route index element={<Home />} />
-      <Route path="properties" element={<Home />} />
+      <Route index element={<LandingPage />} />
+      <Route path="properties" element={<LandingPage />} />
       <Route path="properties/:id" element={<Property />} />
       <Route path="contact-us" element={<ContactUs />} />
       <Route path="about-us" element={<AboutUs />} />

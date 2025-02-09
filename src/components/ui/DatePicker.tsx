@@ -6,12 +6,14 @@ interface IProps {
   useRange?: boolean;
   dateValue: DateValueType;
   handleValueChange: (newValue: DateValueType) => void;
+  className?: string;
 }
 const DatePicker = ({
   showShortcuts = false,
   useRange = false,
   dateValue,
   handleValueChange,
+  className,
 }: IProps) => {
   const { t } = useTranslation();
 
@@ -25,7 +27,7 @@ const DatePicker = ({
         value={dateValue}
         asSingle={true}
         onChange={handleValueChange}
-        inputClassName="outline-none text-center h-10 bg-gray-100 rounded-lg font-medium placeholder:text-black"
+        inputClassName={`outline-none text-center rounded-lg font-medium placeholder:text-black ${className}`}
         placeholder={t("add_dates")}
       />
       <style>

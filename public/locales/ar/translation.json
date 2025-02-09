@@ -2,7 +2,7 @@
   "name": "فيلا بيرد",
   "kilometers_away": "{{distance}} كيلومترًا بعيدًا",
   "date_range": "{{start_date}} - {{end_date}}",
-  "price_per_night": "{{price}} جنيه في الليلة",
+  "price_per_night": "{{price}}جنيهة",
   "rating": "{{rating}}",
   "where": "المكان",
   "search_destinations": "البحث عن الجهات",
