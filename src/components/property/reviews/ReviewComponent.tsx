@@ -16,7 +16,7 @@ function ReviewComponent() {
         <div className="flex flex-col items-center gap-1 pb-10">
           <h2 className="text-[80px] font-bold">4.95</h2>
           <h4 className="text-2xl font-medium">{t("guest_favorite")}</h4>
-          <p className="max-w-xs text-center text-secondary font-medium">
+          <p className="max-w-xs text-center text-dark font-medium">
             {t("guest_favorite_desc")}
           </p>
         </div>

@@ -80,6 +80,7 @@ function CheckDates() {
               <DatePicker
                 dateValue={startDateValue}
                 handleValueChange={handleStartValueChange}
+                className="w-20 placeholder:text-dark"
               />
             </Button>
             <Button className="border-l rtl:border-r rtl:border-l-0 ps-3 py-1 flex flex-col items-start">
@@ -87,13 +88,14 @@ function CheckDates() {
               <DatePicker
                 dateValue={endDateValue}
                 handleValueChange={handleEndValueChange}
+                className="w-20 placeholder:text-dark"
               />
             </Button>
           </div>
           <div className="ps-3 py-1 text-sm">
             <h2 className="text-black font-bold">{t("guests")}</h2>
             <div className="flex items-center gap-2 text-sm">
-              <p className="text-secondary w-[90px] text-start">
+              <p className="text-dark font-medium w-[90px] text-start">
                 {counter === 0
                   ? t("add_guests")
                   : counter === 1

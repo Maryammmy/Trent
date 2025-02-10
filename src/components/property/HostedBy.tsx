@@ -17,7 +17,7 @@ function HostedBy() {
         </div>
         <div>
           <h2 className="text-black font-bold">{t("hosted_by")} Alys</h2>
-          <p className="text-secondary">Superhost.6 years hosting</p>
+          <p className="text-dark">Superhost.6 years hosting</p>
         </div>
       </div>
       <div className="py-5">
@@ -28,7 +28,7 @@ function HostedBy() {
             </span>
             <div>
               <h3 className="text-black">Great check-in experience</h3>
-              <p className="text-secondary">
+              <p className="text-dark">
                 Recent guests loved the smooth start to this stay.
               </p>
             </div>
@@ -39,7 +39,7 @@ function HostedBy() {
             </span>
             <div>
               <h3 className="text-black">Beautiful area</h3>
-              <p className="text-secondary">
+              <p className="text-dark">
                 Guests love this home’s scenic location.
               </p>
             </div>
@@ -50,9 +50,7 @@ function HostedBy() {
             </span>
             <div>
               <h3 className="text-black font-semibold">Garden view</h3>
-              <p className="text-secondary">
-                Soak up the view during your stay.
-              </p>
+              <p className="text-dark">Soak up the view during your stay.</p>
             </div>
           </li>
         </ul>

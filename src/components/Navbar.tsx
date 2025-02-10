@@ -3,14 +3,16 @@ import logo from "../assets/iamges/trentLogo.svg";
 import { Menu } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../store/hooks";
+import { setIsloggedin, setIsSignup } from "../store/features/auth/authSlice";
 const navItems = [
-  { label: "Home", href: "#", isActive: true },
-  { label: "About Us", href: "#" },
+  { label: "Home", href: "#" },
+  { label: "About Us", href: "/about-us" },
   { label: "Services", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "Contact", href: "/contact-us" },
 ];
 const authItems = [
-  { label: "Log in", href: "#", isPrimary: true },
+  { label: "Log in", href: "#" },
   { label: "Sign up", href: "#" },
 ];
 const sections = [
@@ -18,6 +20,7 @@ const sections = [
   { id: "auth-section", items: authItems },
 ];
 const Navbar = () => {
+  const dispatch = useAppDispatch();
   return (
     <nav className="bg-transparent absolute top-0 left-0 w-full z-20">
       <div className="max-w-[1450px] flex flex-wrap items-center justify-between mx-auto p-4">
@@ -51,6 +54,13 @@ const Navbar = () => {
               {section.items.map((item, itemIndex) => (
                 <li key={itemIndex}>
                   <NavLink
+                    onClick={
+                      item.label === "Log in"
+                        ? () => dispatch(setIsloggedin(true))
+                        : item.label === "Sign up"
+                        ? () => dispatch(setIsSignup(true))
+                        : undefined
+                    }
                     to={item.href}
                     className={`block text-lg text-center font-semibold ${
                       item.label === "Log in"
