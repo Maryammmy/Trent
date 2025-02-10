@@ -2,6 +2,7 @@ import Image from "./ui/Image";
 import logo from "../assets/iamges/trentLogo.svg";
 import { Menu } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 const navItems = [
   { label: "Home", href: "#", isActive: true },
   { label: "About Us", href: "#" },
@@ -19,14 +20,20 @@ const sections = [
 const Navbar = () => {
   return (
     <nav className="bg-transparent absolute top-0 left-0 w-full z-20">
-      <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <Image imageUrl={logo} className="h-8" alt="Flowbite Logo" />
-        </a>
+      <div className="max-w-[1450px] flex flex-wrap items-center justify-between mx-auto p-4">
+        <Link
+          to="/"
+          className="flex flex-col items-center space-y-1 rtl:space-y-reverse"
+        >
+          <Image imageUrl={logo} className="h-8" alt="Trent Logo" />
+          <span className="text-xs text-white font-medium">
+            Travel.rent.easy
+          </span>
+        </Link>
         <button
           data-collapse-toggle="navbar-default"
           type="button"
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           aria-controls="navbar-default"
           aria-expanded="false"
         >
@@ -37,7 +44,7 @@ const Navbar = () => {
         {sections.map((section, sectionIndex) => (
           <div
             key={sectionIndex}
-            className="hidden w-full md:block md:w-auto"
+            className="hidden w-full lg:block lg:w-auto"
             id={section.id}
           >
             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">

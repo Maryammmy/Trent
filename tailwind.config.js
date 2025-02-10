@@ -13,6 +13,9 @@ export default {
         secondary: "#FFC227",
         dark: "#828282",
       },
+      fontFamily: {
+        sans: ["Poppins", "sans-serif"],
+      },
     },
   },
   plugins: [require("tailwindcss-rtl")],

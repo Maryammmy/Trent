@@ -6,6 +6,7 @@ import { useState } from "react";
 import FilterModal from "../components/home/filter/FilterModal";
 import { SlidersHorizontal } from "lucide-react";
 import PropertyCardSkeleton from "../components/skeleton/PropertyCardSkeleton";
+import CategoryBar from "../components/CategoryBar";
 
 export default function Properties() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -26,13 +27,13 @@ export default function Properties() {
   return (
     <>
       <div>
-        <div className="px-5 xl:px-20 mt-5 flex gap-3 justify-end">
+        <div className="px-5 xl:px-20 mt-5 flex flex-wrap gap-3 justify-end">
           <Button className="flex items-center gap-2 border p-2 rounded-md bg-white">
             <span className="text-sm">{t("display_total_before_taxes")}</span>
             <Switcher />
           </Button>
           <Button
-            className="flex gap-2 items-center border rounded-md px-3 text-primary"
+            className="flex gap-2 items-center border rounded-md px-3 py-2 text-primary"
             onClick={() => setIsFilterOpen(!isFilterOpen)}
           >
             <SlidersHorizontal
@@ -43,7 +44,8 @@ export default function Properties() {
             <span className="font-medium text-sm">{t("filters")}</span>
           </Button>
         </div>
-        <div className="py-5 px-5 xl:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
+        <CategoryBar />
+        <div className="px-5 xl:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {cartItems.slice(0, visibleCount).map((_, index) => (
             <Cart key={index} />
           ))}
@@ -60,7 +62,6 @@ export default function Properties() {
           </div>
         )}
       </div>
-
       <FilterModal
         isFilterOpen={isFilterOpen}
         close={() => setIsFilterOpen(false)}

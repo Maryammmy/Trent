@@ -12,11 +12,23 @@ import { ResponsiveSetting } from "../interfaces";
 export const navbarIcons = [
   {
     icon: <School className="m-auto" />,
-    title: "Tiny Homes",
+    title: "Villa",
   },
   {
-    icon: <WavesLadder className="m-auto" />,
-    title: "Amazing pools",
+    icon: <House className="m-auto" />,
+    title: "Home",
+  },
+  {
+    icon: <School className="m-auto" />,
+    title: "Apartment",
+  },
+  {
+    icon: <School className="m-auto" />,
+    title: "Hotel",
+  },
+  {
+    icon: <House className="m-auto" />,
+    title: "Resort",
   },
   {
     icon: <WavesLadder className="m-auto" />,
@@ -27,20 +39,12 @@ export const navbarIcons = [
     title: "National parks",
   },
   {
-    icon: <House className="m-auto" />,
-    title: "Cabins",
-  },
-  {
     icon: <Castle className="m-auto" />,
     title: "Castles",
   },
   {
     icon: <Flame className="m-auto" />,
     title: "Trending",
-  },
-  {
-    icon: <School className="m-auto" />,
-    title: "Rooms",
   },
   {
     icon: <Waves className="m-auto" />,
@@ -88,6 +92,14 @@ export const responsive: ResponsiveSetting[] = [
       slidesToShow: 4,
     },
   },
+  {
+    breakpoint: 480,
+    settings: {
+      slidesToShow: 2,
+    },
+  },
+];
+export const responsiveHomeSearch: ResponsiveSetting[] = [
   {
     breakpoint: 480,
     settings: {

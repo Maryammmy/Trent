@@ -37,10 +37,10 @@ export const menuItems: string[] = [
   "help_center",
 ];
 export const homeSearch: IHomeSearch[] = [
-  { title: "where", text: "search_destinations" },
+  { title: "destination", text: "search_destinations" },
   { title: "check_in", text: "add_dates" },
   { title: "check_out", text: "add_dates" },
-  { title: "who", text: "add_guests" },
+  { title: "home_search_guests", text: "add_guests" },
 ];
 export const destinations: IDestinations[] = [
   {

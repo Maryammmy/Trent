@@ -90,17 +90,16 @@ function HomeSearch() {
     <>
       {(pathname === "/" || pathname === "/property/1") && (
         <>
-          <div className="flex xl:hidden items-center justify-center gap-2 w-full md:w-[500px] rounded-full py-2 px-5 border shadow hover:shadow-lg">
-            <Search />
+          <div className="flex lg:hidden items-center justify-center gap-2 w-full md:w-[500px] rounded-full py-2 px-5 border shadow hover:shadow-lg">
+            <Search className="text-primary" strokeWidth={2.7} />
             <Input
               type="search"
-              className="w-full outline-none bg-transparent"
+              className="w-full outline-none bg-transparent placeholder:text-primary placeholder:font-medium"
               placeholder={t("placeholder_search")}
             />
           </div>
-
-          <div className="hidden xl:block  ">
-            <div className="flex text-sm items-end  justify-between bg-white rounded-lg w-[900px] py-3 px-5 border shadow hover:shadow-lg">
+          <div className="hidden lg:block">
+            <div className="flex text-sm items-end  justify-between bg-white rounded-lg w-[1000px] py-3 px-5 border shadow hover:shadow-lg">
               {homeSearch.map((item, index) => {
                 const title = t(item.title);
                 const text = t(item.text);
@@ -114,7 +113,7 @@ function HomeSearch() {
                     key={index}
                     className={`px-2 font-medium  flex flex-col`}
                   >
-                    <h2 className="pb-2">{title}</h2>
+                    <h2 className="pb-2 text-dark">{title}</h2>
                     <div>
                       {text === t("add_guests") ? (
                         <div className="flex items-center gap-2 text-sm bg-gray-100 px-4 h-10 rounded-md">

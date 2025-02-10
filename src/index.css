@@ -10,20 +10,10 @@ p {
 span {
   overflow-wrap: anywhere;
 }
-.lobster-regular {
-  font-family: "Lobster", serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
+/* home page */
 .bg-home {
   background-image: url("./assets/iamges/bgHome.png"),
     linear-gradient(rgb(28, 72, 134), rgba(153, 153, 153, 0));
-  background-blend-mode: overlay;
-}
-.bg-home2 {
-  background-image: url("./assets/iamges/bgHome2.png"),
-    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
   background-blend-mode: overlay;
 }
 /* hosting page */

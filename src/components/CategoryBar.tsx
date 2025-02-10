@@ -1,20 +1,10 @@
-// import { SlidersHorizontal } from "lucide-react";
 import Button from "./ui/Button";
 import { navbarIcons, responsive } from "../data/categoryBar";
 import Carsoul from "./ui/Carsoul";
-import useScrollShadow from "../hooks/useScrollShadow";
-import { useAppSelector } from "../store/hooks";
 
 function CategoryBar() {
-  const { shadow } = useAppSelector((state) => state.categoryBar);
-  useScrollShadow();
-
   return (
-    <div
-      className={`fixed top-[81px] xl:top-[105px] z-20 w-full  bg-white px-5 xl:px-20 py-5 transition-shadow ${
-        shadow ? "shadow-lg" : ""
-      }`}
-    >
+    <div className={`w-full  px-5 xl:px-20 py-5 bg-white transition-shadow`}>
       <Carsoul
         slidesToShow={10}
         borderColor="2px solid gainsboro"
@@ -22,16 +12,19 @@ function CategoryBar() {
         responsive={responsive}
       >
         {navbarIcons.map((item, index) => (
-          <Button key={index} className="">
-            <div>{item.icon}</div>
-            <div className="text-sm font-medium ">{item.title}</div>
+          <Button
+            key={index}
+            className="flex flex-col justify-center items-center px-4"
+          >
+            <div className="w-fit mx-auto mb-2">
+              <div className="w-12 h-12 flex justify-center items-center rounded-full border hover:border-black border-dark">
+                {item.icon}
+              </div>
+            </div>
+            <div className="text-sm font-semibold text-dark">{item.title}</div>
           </Button>
         ))}
       </Carsoul>
-      {/* <Button className="flex items-center justify-center border py-2 px-2 rounded-lg gap-1 hover:border-black">
-        <SlidersHorizontal strokeWidth={3} size={15} />
-        <span className="text-sm font-medium">Filter</span>
-      </Button> */}
     </div>
   );
 }
