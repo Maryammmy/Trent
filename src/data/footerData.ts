@@ -1,7 +1,7 @@
 import { IFooterLinks } from "../interfaces";
-import icon1 from "../assets/iamges/facebook.png";
-import icon2 from "../assets/iamges/insta.jpg";
-import icon3 from "../assets/iamges/twitter.png";
+import faceIcon from "../assets/iamges/faceFooter.svg";
+import instaIcon from "../assets/iamges/instaFooter.svg";
+import twitterIcon from "../assets/iamges/twitterFooter.svg";
 
 export const titles: string[] = ["support", "hosting", "Trent"];
 export const support: string[] = [
@@ -26,4 +26,4 @@ export const Trent: IFooterLinks[] = [
   { title: "Contact Us", to: "/contact-us" },
   { title: "About Us", to: "/about-us" },
 ];
-export const icons: string[] = [icon1, icon2, icon3];
+export const icons: string[] = [faceIcon, instaIcon, twitterIcon];

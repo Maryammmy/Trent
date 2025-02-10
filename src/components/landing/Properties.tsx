@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
-import Cart from "../components/Card";
-import Button from "../components/ui/Button";
-import Switcher from "../components/ui/Switcher";
+import Cart from "../Card";
+import Button from "../ui/Button";
+import Switcher from "../ui/Switcher";
 import { useState } from "react";
-import FilterModal from "../components/home/filter/FilterModal";
+import FilterModal from "../home/filter/FilterModal";
 import { SlidersHorizontal } from "lucide-react";
-import PropertyCardSkeleton from "../components/skeleton/PropertyCardSkeleton";
-import CategoryBar from "../components/CategoryBar";
+import PropertyCardSkeleton from "../skeleton/PropertyCardSkeleton";
+import CategoryBar from "../CategoryBar";
 
 export default function Properties() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);

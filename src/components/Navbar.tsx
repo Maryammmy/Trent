@@ -28,7 +28,13 @@ const Navbar = () => {
           to="/"
           className="flex flex-col items-center space-y-1 rtl:space-y-reverse"
         >
-          <Image imageUrl={logo} className="h-8" alt="Trent Logo" />
+          <div className="">
+            <Image
+              imageUrl={logo}
+              className="w-full h-full object-cover"
+              alt="Trent Logo"
+            />
+          </div>
           <span className="text-xs text-white font-medium">
             Travel.rent.easy
           </span>

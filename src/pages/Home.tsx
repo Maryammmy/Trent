@@ -9,6 +9,7 @@ import place4 from "../assets/iamges/place4.png";
 import { responsiveHomeSearch } from "../data/categoryBar";
 import LoginModal from "../components/LoginModal";
 import SignupModal from "../components/SignupModal";
+
 function Home() {
   const bgImages: string[] = [place1, place2, place3, place4];
   return (
