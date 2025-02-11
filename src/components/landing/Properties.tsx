@@ -52,7 +52,7 @@ export default function Properties() {
           {loading && <PropertyCardSkeleton cards={ITEMS_TO_LOAD} />}
         </div>
         {visibleCount < cartItems.length && !loading && (
-          <div className="flex justify-center my-5">
+          <div className="flex justify-center mt-10 mb-5">
             <Button
               onClick={handleShowMore}
               className="bg-white text-primary border-2 border-primary font-medium py-2 px-4 rounded-lg text-center"
