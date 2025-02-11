@@ -10,7 +10,7 @@ import CategoryBar from "../CategoryBar";
 
 export default function Properties() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(10);
+  const [visibleCount, setVisibleCount] = useState(8);
   const [loading, setLoading] = useState(false);
   const cartItems = Array.from({ length: 60 });
   const ITEMS_TO_LOAD = 20;

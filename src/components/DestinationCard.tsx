@@ -15,11 +15,11 @@ function DestinationCard() {
             className="p-2 hover:bg-gray-100 cursor-pointer rounded-md flex gap-4 items-center"
           >
             <div className="  bg-blue-50 p-2 rounded-lg">
-              <School className="text-secondary" />
+              <School className="text-dark" />
             </div>
             <div>
               <h3 className="font-medium text-sm">{item.city}</h3>
-              <p className="text-sm text-secondary">{item.reason}</p>
+              <p className="text-sm dark">{item.reason}</p>
             </div>
           </div>
         ))}

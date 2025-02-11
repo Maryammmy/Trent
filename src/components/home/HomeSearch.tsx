@@ -102,9 +102,9 @@ function HomeSearch() {
 
             return (
               <Button
-                ref={title === t("where") ? destinationButtonRef : null}
+                ref={title === t("destination") ? destinationButtonRef : null}
                 onClick={() =>
-                  title === t("where") && handleDestinationToggle()
+                  title === t("destination") && handleDestinationToggle()
                 }
                 key={index}
                 className={`px-2 font-medium  flex flex-col`}
@@ -113,7 +113,7 @@ function HomeSearch() {
                 <div>
                   {text === t("add_guests") ? (
                     <div className="flex items-center gap-2 text-sm bg-gray-100 px-4 h-10 rounded-md">
-                      <p className=" w-[90px] text-start">
+                      <p className="w-[90px] text-start">
                         {counter === 0
                           ? t("add_guests")
                           : counter === 1
@@ -155,7 +155,7 @@ function HomeSearch() {
             <span>{t("search")}</span>
           </Button>
         </div>
-        <div className="relative bg-black" ref={destinationCardRef}>
+        <div className="relative" ref={destinationCardRef}>
           {isDestinationOpen && <DestinationCard />}
         </div>
       </div>
