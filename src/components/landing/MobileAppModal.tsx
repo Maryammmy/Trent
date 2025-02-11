@@ -11,9 +11,17 @@ function MobileAppModal() {
   const [platform, setPlatform] = useState("desktop");
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsOpenMobileAppModal(true);
-    }, 1000);
+    const hasSeenModal = sessionStorage.getItem("hasSeenMobileAppModal");
+
+    if (!hasSeenModal) {
+      const timeout = setTimeout(() => {
+        setIsOpenMobileAppModal(true);
+        sessionStorage.setItem("hasSeenMobileAppModal", "true");
+      }, 1000);
+
+      return () => clearTimeout(timeout);
+    }
+
     const userAgent = navigator.userAgent || navigator.vendor;
     if (/android/i.test(userAgent)) {
       setPlatform("android");
@@ -22,7 +30,6 @@ function MobileAppModal() {
     } else {
       setPlatform("desktop");
     }
-    return () => clearTimeout(timeout);
   }, []);
 
   const renderButtons = () => {

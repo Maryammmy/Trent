@@ -22,7 +22,7 @@ function ContactInfo() {
                 <div>{icon}</div>
                 <div>
                   <h3 className="font-semibold">{title}</h3>
-                  <p className="text-secondary font-medium">{text}</p>
+                  <p className="text-dark font-medium">{text}</p>
                 </div>
               </li>
             );

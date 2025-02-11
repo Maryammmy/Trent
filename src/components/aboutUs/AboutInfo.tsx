@@ -14,7 +14,7 @@ function AboutInfo() {
       </div>
       <div className="max-w-[500px]">
         <h2 className="text-3xl font-bold"> This is Trent</h2>
-        <p className="text-primary font-medium py-4">
+        <p className="text-dark font-semibold py-4">
           We believe that travel has the power to transform lives and bring
           people closer together.
         </p>
@@ -24,7 +24,7 @@ function AboutInfo() {
             return (
               <div key={index}>
                 <h3 className="text-xl font-semibold">{title}</h3>
-                <p>{text}</p>
+                <p className="text-dark">{text}</p>
               </div>
             );
           })}

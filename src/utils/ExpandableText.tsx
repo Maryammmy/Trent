@@ -18,7 +18,7 @@ export const ExpandableText = ({ text, maxLength }: ExpandableTextProps) => {
       {text.length > maxLength && (
         <Button
           onClick={toggleTruncation}
-          className="text-secondary underline hover:text-stone-600 font-bold ml-1"
+          className="text-dark underline hover:text-stone-500 font-bold ml-1"
         >
           <span> {isTruncated ? "Show more" : "Show less"}</span>
         </Button>

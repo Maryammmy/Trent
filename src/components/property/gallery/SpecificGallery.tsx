@@ -17,7 +17,7 @@ function SpecificGallery() {
           >
             <div className="flex-1">
               <h2 className="text-2xl font-medium pb-2">{title}</h2>
-              <p className="text-secondary text-lg">
+              <p className="text-dark text-lg">
                 <ExpandableText text={description} maxLength={50} />
               </p>
             </div>
@@ -52,23 +52,3 @@ function SpecificGallery() {
 }
 
 export default SpecificGallery;
-
-// import { PhotoProvider, PhotoView } from "react-photo-view";
-// import "react-photo-view/dist/react-photo-view.css";
-// import { images } from "../../data";
-
-// export default function Gallery() {
-//   return (
-//     <PhotoProvider>
-//       {images.map((src, index) => (
-//         <PhotoView key={index} src={src}>
-//           <img
-//             className="w-40 h-[200px] object-cover"
-//             src={`${src.replace(".jpg", "-thumbnail.jpg")}`}
-//             alt=""
-//           />
-//         </PhotoView>
-//       ))}
-//     </PhotoProvider>
-//   );
-// }
