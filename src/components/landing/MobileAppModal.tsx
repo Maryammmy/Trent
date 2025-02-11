@@ -4,7 +4,7 @@ import Button from "../ui/Button";
 import { X } from "lucide-react";
 import mobile from "../../assets/iamges/mobileIsolated.png";
 import Image from "../ui/Image";
-import { FaApple, FaGooglePlay } from "react-icons/fa";
+import { buttonData } from "../../data/landingData";
 
 function MobileAppModal() {
   const [isOpenMobileAppModal, setIsOpenMobileAppModal] = useState(false);
@@ -17,18 +17,34 @@ function MobileAppModal() {
     const userAgent = navigator.userAgent || navigator.vendor;
     if (/android/i.test(userAgent)) {
       setPlatform("android");
-    } else if (
-      /iPad|iPhone|iPod/.test(userAgent) &&
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      !(window as any).MSStream
-    ) {
+    } else if (/iPad|iPhone|iPod/.test(userAgent)) {
       setPlatform("ios");
     } else {
       setPlatform("desktop");
     }
-
     return () => clearTimeout(timeout);
   }, []);
+
+  const renderButtons = () => {
+    return buttonData
+      .filter(
+        (button) => platform === "desktop" || button.platform === platform
+      )
+      .map((button, index) => (
+        <Button
+          key={index}
+          className="text-primary bg-white w-52 py-1 px-2 rounded-md flex"
+        >
+          <div className="flex justify-center items-center gap-2">
+            <span>{button.icon}</span>
+            <div className="font-medium flex flex-col items-start">
+              <span>Download on the</span>
+              <span>{button.label}</span>
+            </div>
+          </div>
+        </Button>
+      ));
+  };
 
   return (
     <Modal
@@ -57,62 +73,10 @@ function MobileAppModal() {
             platform === "desktop" ? "justify-between" : "justify-center"
           }`}
         >
-          {platform === "android" && (
-            <Button className="text-primary bg-white w-52 py-1 px-2 rounded-md flex">
-              <div className="flex justify-center items-center gap-2">
-                <span>
-                  <FaGooglePlay size={38} />
-                </span>
-                <div className="font-medium flex flex-col items-start">
-                  <span>Download on the</span>
-                  <span>Google Play</span>
-                </div>
-              </div>
-            </Button>
-          )}
-          {platform === "ios" && (
-            <Button className="text-primary bg-white w-52 py-1 px-1 rounded-md flex">
-              <div className="flex justify-center items-center gap-2">
-                <span>
-                  <FaApple size={45} />
-                </span>
-                <div className="font-medium flex flex-col items-start">
-                  <span>Download on the</span>
-                  <span>App Store</span>
-                </div>
-              </div>
-            </Button>
-          )}
-          {platform === "desktop" && (
-            <>
-              <Button className="text-primary bg-white w-52 py-1 px-2 rounded-md flex">
-                <div className="flex justify-center items-center gap-2">
-                  <span>
-                    <FaGooglePlay size={38} />
-                  </span>
-                  <div className="font-medium flex flex-col items-start">
-                    <span>Download on the</span>
-                    <span>Google Play</span>
-                  </div>
-                </div>
-              </Button>
-              <Button className="text-primary bg-white w-52 py-1 px-1 rounded-md flex">
-                <div className="flex justify-center items-center gap-2">
-                  <span>
-                    <FaApple size={45} />
-                  </span>
-                  <div className="font-medium flex flex-col items-start">
-                    <span>Download on the</span>
-                    <span>App Store</span>
-                  </div>
-                </div>
-              </Button>
-            </>
-          )}
+          {renderButtons()}
         </div>
       </div>
     </Modal>
   );
 }
-
 export default MobileAppModal;

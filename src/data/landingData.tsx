@@ -4,6 +4,7 @@ import pyramidsLogo from "../assets/iamges/pyramids.svg";
 import { HandCoins } from "lucide-react";
 import { RiCustomerServiceFill } from "react-icons/ri";
 import { IChooseUs } from "../interfaces/landingInterface";
+import { FaApple, FaGooglePlay } from "react-icons/fa";
 
 export const chooseUs: IChooseUs[] = [
   {
@@ -25,5 +26,17 @@ export const chooseUs: IChooseUs[] = [
   {
     icon: <RiCustomerServiceFill size={40} className="text-white" />,
     title: "Customer Service 24/7",
+  },
+];
+export const buttonData = [
+  {
+    platform: "android",
+    label: "Google Play",
+    icon: <FaGooglePlay size={38} />,
+  },
+  {
+    platform: "ios",
+    label: "App Store",
+    icon: <FaApple size={45} />,
   },
 ];

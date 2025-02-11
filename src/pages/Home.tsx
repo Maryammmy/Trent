@@ -20,7 +20,7 @@ function Home() {
           <div className="w-full px-5 md:max-w-xl absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <h1 className="text-3xl md:text-6xl font-bold text-white">
               Book your next adventure
-              <span className="text-secondary lobster-regular">Today</span>
+              <span className="text-secondary">Today</span>
             </h1>
           </div>
           <div className="absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -37,7 +37,7 @@ function Home() {
           padding="5px"
         >
           {bgImages.map((item: string, index: number) => (
-            <div className="h-[40vh] w-full px-4">
+            <div key={index} className="h-[40vh] w-full px-4">
               <Image
                 alt="slider"
                 imageUrl={item}

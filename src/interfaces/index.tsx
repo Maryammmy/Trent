@@ -15,10 +15,6 @@ export interface ResponsiveSetting {
     slidesToShow: number;
   };
 }
-export interface IFooterLinks {
-  title: string;
-  to: string;
-}
 export interface IHomeSearch {
   title: string;
   text: string;
@@ -30,4 +26,8 @@ export interface IDestinations {
 export interface IFilterPropertyType {
   name: string;
   icon: ReactNode;
+}
+export interface IFooterSection {
+  title: string;
+  items: ReactNode[];
 }
