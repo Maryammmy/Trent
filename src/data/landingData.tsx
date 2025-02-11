@@ -3,7 +3,7 @@ import percentageLogo from "../assets/iamges/discount-shape.svg";
 import pyramidsLogo from "../assets/iamges/pyramids.svg";
 import { HandCoins } from "lucide-react";
 import { RiCustomerServiceFill } from "react-icons/ri";
-import { IChooseUs } from "../interfaces/landingInterface";
+import { IChooseUs, IFilterButton } from "../interfaces/landingInterface";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import { ResponsiveSetting } from "../interfaces";
 export const responsiveHomeSearch: ResponsiveSetting[] = [
@@ -58,5 +58,15 @@ export const buttonData = [
     platform: "ios",
     label: "App Store",
     icon: <FaApple size={45} />,
+  },
+];
+export const filterButtons: IFilterButton[] = [
+  {
+    text: "clear",
+    className: "hover:bg-gray-100",
+  },
+  {
+    text: "apply",
+    className: "bg-primary text-white",
   },
 ];

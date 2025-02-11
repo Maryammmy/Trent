@@ -32,7 +32,7 @@ function PriceRange({ values, handleRangeChange }: IProps) {
         }
         trackStyle={[{ backgroundColor: "#223f7f" }]}
       />
-      <div className="flex font-medium text-secondary justify-between mt-4 text-sm">
+      <div className="flex font-medium text-dark justify-between mt-4 text-sm">
         <span>
           {t("minimum")}:{" "}
           <span className="text-black font-semibold">{values[0]}</span>
