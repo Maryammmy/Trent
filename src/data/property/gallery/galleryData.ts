@@ -1,3 +1,4 @@
+import { ResponsiveSetting } from "../../../interfaces";
 import { IGallery } from "../../../interfaces/propertyInterface";
 
 export const gallery: IGallery[] = [
@@ -96,5 +97,19 @@ export const gallery: IGallery[] = [
     title: "Hot tub",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtnXb399qdcYqZUXUpw0AZO7mfzT0dBQpRIg&s",
+  },
+];
+export const galleyCarsoulResponsive: ResponsiveSetting[] = [
+  {
+    breakpoint: 768,
+    settings: {
+      slidesToShow: 4,
+    },
+  },
+  {
+    breakpoint: 480,
+    settings: {
+      slidesToShow: 2,
+    },
   },
 ];

@@ -1,12 +1,14 @@
 import { ChevronLeft } from "lucide-react";
-import { gallery } from "../../data/property/gallery/galleryData";
+import {
+  gallery,
+  galleyCarsoulResponsive,
+} from "../../data/property/gallery/galleryData";
 import Image from "../../components/ui/Image";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import Carsoul from "../../components/ui/Carsoul";
 import { useMediaQuery } from "react-responsive";
 import SpecificGallery from "../../components/property/gallery/SpecificGallery";
-import { responsive } from "../../data/categoryBar";
 
 function Gallery() {
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
@@ -38,12 +40,12 @@ function Gallery() {
             })}
           </div>
         ) : (
-          <Carsoul showArrow={false} responsive={responsive}>
+          <Carsoul showArrow={false} responsive={galleyCarsoulResponsive}>
             {gallery.map((item, index) => {
               const { image, title } = item;
               return (
                 <div key={index}>
-                  <div className="w-[130px] h-[100px]  overflow-hidden rounded-md shadow-md">
+                  <div className="w-[130px] h-[100px] overflow-hidden rounded-md shadow-md">
                     <Image
                       imageUrl={image}
                       alt={title}

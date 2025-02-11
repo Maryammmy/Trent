@@ -5,7 +5,27 @@ import { HandCoins } from "lucide-react";
 import { RiCustomerServiceFill } from "react-icons/ri";
 import { IChooseUs } from "../interfaces/landingInterface";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
-
+import { ResponsiveSetting } from "../interfaces";
+export const responsiveHomeSearch: ResponsiveSetting[] = [
+  {
+    breakpoint: 1440,
+    settings: {
+      slidesToShow: 3,
+    },
+  },
+  {
+    breakpoint: 768,
+    settings: {
+      slidesToShow: 2,
+    },
+  },
+  {
+    breakpoint: 480,
+    settings: {
+      slidesToShow: 1,
+    },
+  },
+];
 export const chooseUs: IChooseUs[] = [
   {
     icon: priceLogo,

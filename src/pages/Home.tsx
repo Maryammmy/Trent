@@ -7,9 +7,9 @@ import place1 from "../assets/iamges/place1.png";
 import place2 from "../assets/iamges/place2.png";
 import place3 from "../assets/iamges/place3.png";
 import place4 from "../assets/iamges/place4.png";
-import { responsiveHomeSearch } from "../data/categoryBar";
 import LoginModal from "../components/LoginModal";
 import SignupModal from "../components/SignupModal";
+import { responsiveHomeSearch } from "../data/landingData";
 
 function Home() {
   const bgImages: string[] = [place1, place2, place3, place4];

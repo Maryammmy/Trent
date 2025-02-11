@@ -4,9 +4,9 @@ import Image from "../ui/Image";
 
 function ChooseUs() {
   return (
-    <div className="max-w-screen-xl mx-auto py-10">
+    <div className="px-5 2xl:px-0 max-w-screen-xl mx-auto py-10">
       <div className="flex justify-center items-center gap-4">
-        <h2 className="text-4xl font-bold">Why You Should Choose</h2>
+        <h2 className="text-lg md:text-4xl font-bold">Why You Should Choose</h2>
         <div className="w-10 h-10">
           <Image
             imageUrl={logo}
@@ -25,7 +25,7 @@ function ChooseUs() {
           return (
             <div
               key={index}
-              className="h-40 w-40 overflow-hidden flex flex-col gap-2 justify-center items-center rounded-full bg-primary"
+              className="h-40 w-40 overflow-hidden flex flex-col gap-2 justify-center items-center rounded-lg md:rounded-full bg-primary"
             >
               {typeof icon === "string" ? (
                 <div className="w-[25%]">
@@ -38,7 +38,7 @@ function ChooseUs() {
               ) : (
                 <div>{icon}</div>
               )}
-              <div className="h-16 flex items-center justify-center">
+              <div className="flex items-center justify-center">
                 <p className="text-center text-sm text-white font-medium px-2">
                   {title}
                 </p>
