@@ -4,7 +4,7 @@ import { destinations } from "../data";
 function DestinationCard() {
   return (
     <div
-      className={`hidden xl:block absolute top-0 max-w-md mt-2 shadow-lg ps-4 pe-1 py-4 bg-white rounded-3xl ${
+      className={`hidden lg:block absolute top-0 max-w-md mt-2 shadow-lg ps-4 pe-1 py-4 bg-white rounded-3xl ${
         document.documentElement.dir === "rtl" ? "right-0" : "left-0"
       }`}
     >

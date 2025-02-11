@@ -86,7 +86,7 @@ function HomeSearch() {
 
   return (
     <>
-      <div className="flex lg:hidden items-center justify-center gap-2 w-full md:w-[500px] rounded-full py-2 px-5 border shadow hover:shadow-lg">
+      <div className="flex lg:hidden items-center justify-center gap-2 w-[250px] md:w-[500px] rounded-full py-2 px-5 border shadow hover:shadow-lg">
         <Search className="text-primary" strokeWidth={2.7} />
         <Input
           type="search"

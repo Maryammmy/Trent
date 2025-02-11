@@ -14,7 +14,7 @@ function CategoryBar() {
         {navbarIcons.map((item, index) => (
           <Button
             key={index}
-            className="flex flex-col justify-center items-center px-4"
+            className="flex flex-col justify-center items-center"
           >
             <div className="w-fit mx-auto mb-2">
               <div className="w-12 h-12 flex justify-center items-center rounded-full border hover:border-black border-dark">
