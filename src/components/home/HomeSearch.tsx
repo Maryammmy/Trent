@@ -152,7 +152,7 @@ function HomeSearch() {
             );
           })}
           <Button className="text-white font-medium bg-primary px-4 h-10 rounded-md">
-            <span>Search</span>
+            <span>{t("search")}</span>
           </Button>
         </div>
         <div className="relative bg-black" ref={destinationCardRef}>
