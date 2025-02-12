@@ -1,100 +1,30 @@
-import { Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { homeSearch } from "../../data";
-import Counter from "./Counter";
-import Input from "../ui/Input";
 import Button from "../ui/Button";
-import DatePicker from "../ui/DatePicker";
-import DestinationCard from "../DestinationCard";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import {
-  setIsDestinationOpen,
-  setIsDropdownOpen,
-  setIsLangSwitcherOpen,
-} from "../../store/features/homeSearch/homeSearchSlice";
-import useClickOutside from "../../hooks/useClickOutside";
-import { useRef, useState } from "react";
-import { DateValueType } from "react-tailwindcss-datepicker";
-import toast from "react-hot-toast";
+import { useAppDispatch } from "../../store/hooks";
+import { setIsSearchOpen } from "../../store/features/homeSearch/homeSearchSlice";
+import SearchModal from "./SearchModal";
+import { Search } from "lucide-react";
+import SearchComponent from "./SearchComponent";
 
 function HomeSearch() {
   const { t } = useTranslation();
-  const [counter, setCounter] = useState(0);
-  const { isDestinationOpen } = useAppSelector((state) => state.homeSearch);
-  const [startDateValue, setStartDateValue] = useState<DateValueType>({
-    startDate: null,
-    endDate: null,
-  });
-  const [endDateValue, setEndDateValue] = useState<DateValueType>({
-    startDate: null,
-    endDate: null,
-  });
-  const handleStartValueChange = (newValue: DateValueType) => {
-    const { startDate } = newValue || {};
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (startDate && new Date(startDate) < today) {
-      toast.error(t("error_Check_in_after_today"));
-      return;
-    }
-    if (
-      startDate &&
-      endDateValue?.startDate &&
-      new Date(startDate) > new Date(endDateValue.startDate)
-    ) {
-      toast.error(t("error_check_in"));
-      return;
-    }
-    setStartDateValue(newValue);
-  };
-  const handleEndValueChange = (newValue: DateValueType) => {
-    const { startDate } = newValue || {};
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (startDate && new Date(startDate) < today) {
-      toast.error(t("error_Check_out_after_today"));
-      return;
-    }
-    if (
-      startDate &&
-      startDateValue?.startDate &&
-      new Date(startDate) < new Date(startDateValue.startDate)
-    ) {
-      toast.error(t("error_check_out"));
-      setEndDateValue({ startDate: null, endDate: null });
-      return;
-    }
-
-    setEndDateValue(newValue);
-  };
   const dispatch = useAppDispatch();
-  const destinationButtonRef = useRef<HTMLButtonElement>(null);
-  const destinationCardRef = useRef<HTMLDivElement>(null);
-  const handleDestinationToggle = () => {
-    dispatch(setIsDestinationOpen(!isDestinationOpen));
-    dispatch(setIsDropdownOpen(false));
-    dispatch(setIsLangSwitcherOpen(false));
-  };
-  useClickOutside(
-    destinationCardRef,
-    () => dispatch(setIsDestinationOpen(false)),
-    destinationButtonRef
-  );
-  const updateCounter = (value: number) => {
-    setCounter((prevCounter) => prevCounter + value);
-  };
 
   return (
     <>
-      <div className="flex lg:hidden items-center justify-center gap-2 w-[250px] md:w-[500px] rounded-full py-2 px-5 border shadow hover:shadow-lg">
-        <Search className="text-primary" strokeWidth={2.7} />
-        <Input
+      <Button
+        onClick={() => dispatch(setIsSearchOpen(true))}
+        className="flex lg:hidden bg-white items-center gap-2 w-[250px] md:w-[500px] rounded-full py-2 px-5 border shadow hover:shadow-lg"
+      >
+        <Search />
+        <p className="text-primary font-medium">{t("placeholder_search")}</p>
+        {/* <Input
           type="search"
           className="w-full outline-none bg-transparent placeholder:text-primary placeholder:font-medium"
           placeholder={t("placeholder_search")}
-        />
-      </div>
-      <div className="hidden lg:block">
+        /> */}
+      </Button>
+      {/* <div className="hidden lg:block">
         <div className="flex text-sm items-end  justify-between bg-white rounded-lg w-[1000px] py-3 px-5 border shadow hover:shadow-lg">
           {homeSearch.map((item, index) => {
             const title = t(item.title);
@@ -158,7 +88,9 @@ function HomeSearch() {
         <div className="relative" ref={destinationCardRef}>
           {isDestinationOpen && <DestinationCard />}
         </div>
-      </div>
+      </div> */}
+      <SearchComponent />
+      <SearchModal />
     </>
   );
 }

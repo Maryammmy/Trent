@@ -28,7 +28,7 @@ const DatePicker = ({
         asSingle={true}
         onChange={handleValueChange}
         inputClassName={`outline-none text-center rounded-lg font-medium placeholder:text-black ${className}`}
-        placeholder={t("add_dates")}
+        placeholder={t("add_date")}
       />
       <style>
         {`
