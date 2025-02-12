@@ -66,85 +66,83 @@ function SearchComponent() {
     setEndDateValue(newValue);
   };
   const dispatch = useAppDispatch();
-  const destinationButtonRef = useRef<HTMLButtonElement>(null);
   const destinationCardRef = useRef<HTMLDivElement>(null);
   const handleDestinationToggle = () => {
     dispatch(setIsDestinationOpen(!isDestinationOpen));
     dispatch(setIsDropdownOpen(false));
     dispatch(setIsLangSwitcherOpen(false));
   };
-  useClickOutside(
-    destinationCardRef,
-    () => dispatch(setIsDestinationOpen(false)),
-    destinationButtonRef
+  useClickOutside(destinationCardRef, () =>
+    dispatch(setIsDestinationOpen(false))
   );
   const updateCounter = (value: number) => {
     setCounter((prevCounter) => prevCounter + value);
   };
   return (
     <div className="">
-      <div className="grid grid-cols-1 lg:flex lg:flex-wrap gap-4 text-sm items-end justify-between bg-white rounded-lg lg:w-[1000px] py-6 lg:py-3 px-5 lg:border shadow hover:shadow-lg">
+      <div className="grid grid-cols-1 lg:flex lg:flex-wrap gap-4 lg:gap-0 text-sm items-end justify-between bg-white rounded-lg lg:w-[1000px] py-6 lg:py-3 px-5 lg:border shadow hover:shadow-lg">
         {homeSearch.map((item, index) => {
           const title = t(item.title);
           const text = t(item.text);
+          const destination = title === t("destination");
 
           return (
-            <Button
-              ref={title === t("destination") ? destinationButtonRef : null}
-              onClick={() =>
-                title === t("destination") && handleDestinationToggle()
-              }
+            <div
               key={index}
-              className={`px-2 font-medium flex flex-col`}
+              className={` ${destination && "relative"}`}
+              ref={destination ? destinationCardRef : null}
             >
-              <h2 className="pb-2 text-dark">{title}</h2>
-              <div className="w-full">
-                {text === t("add_guests") ? (
-                  <div className="flex items-center gap-4 text-sm bg-gray-100 px-4 h-10 rounded-md">
-                    <p className="text-start">
-                      {counter === 0
-                        ? t("add_guests")
-                        : counter === 1
-                        ? `${counter} ${t("guest")}`
-                        : `${counter} ${t("guests")}`}
-                    </p>
-                    <Counter
-                      counter={counter}
-                      increaseCounter={() => updateCounter(1)}
-                      decreaseCounter={() => updateCounter(-1)}
+              <Button
+                onClick={() =>
+                  title === t("destination") && handleDestinationToggle()
+                }
+                className={`px-2 font-medium w-full flex flex-col`}
+              >
+                <h2 className="pb-2 text-dark">{title}</h2>
+                <div className="w-full">
+                  {text === t("add_guests") ? (
+                    <div className="flex items-center gap-4 text-sm bg-gray-100 px-4 h-10 rounded-md">
+                      <p className="text-start">
+                        {counter === 0
+                          ? t("add_guests")
+                          : counter === 1
+                          ? `${counter} ${t("guest")}`
+                          : `${counter} ${t("guests")}`}
+                      </p>
+                      <Counter
+                        counter={counter}
+                        increaseCounter={() => updateCounter(1)}
+                        decreaseCounter={() => updateCounter(-1)}
+                      />
+                    </div>
+                  ) : title === t("check_in") ? (
+                    <DatePicker
+                      dateValue={startDateValue}
+                      handleValueChange={handleStartValueChange}
+                      className="h-10 bg-gray-100 w-full"
                     />
-                  </div>
-                ) : title === t("check_in") ? (
-                  <DatePicker
-                    showShortcuts={true}
-                    useRange={true}
-                    dateValue={startDateValue}
-                    handleValueChange={handleStartValueChange}
-                    className="h-10 bg-gray-100 w-full"
-                  />
-                ) : title === t("check_out") ? (
-                  <DatePicker
-                    showShortcuts={true}
-                    useRange={true}
-                    dateValue={endDateValue}
-                    handleValueChange={handleEndValueChange}
-                    className="h-10 bg-gray-100 w-full"
-                  />
-                ) : (
-                  <p className="relative w-full bg-gray-100 px-4 h-10 rounded-md flex items-center">
-                    {text}
-                  </p>
-                )}
-              </div>
-            </Button>
+                  ) : title === t("check_out") ? (
+                    <DatePicker
+                      dateValue={endDateValue}
+                      handleValueChange={handleEndValueChange}
+                      className="h-10 bg-gray-100 w-full"
+                    />
+                  ) : (
+                    <div>
+                      <p className=" bg-gray-100 px-4 h-10 rounded-md flex items-center">
+                        {text}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </Button>
+              {destination && isDestinationOpen && <DestinationCard />}
+            </div>
           );
         })}
         <Button className="text-white font-medium bg-primary px-4 h-10 rounded-md">
           <span>{t("search")}</span>
         </Button>
-      </div>
-      <div className="relative" ref={destinationCardRef}>
-        {isDestinationOpen && <DestinationCard />}
       </div>
     </div>
   );

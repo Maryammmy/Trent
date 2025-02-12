@@ -2,27 +2,18 @@ import { useTranslation } from "react-i18next";
 import Datepicker from "react-tailwindcss-datepicker";
 import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 interface IProps {
-  showShortcuts?: boolean;
-  useRange?: boolean;
   dateValue: DateValueType;
   handleValueChange: (newValue: DateValueType) => void;
   className?: string;
 }
-const DatePicker = ({
-  showShortcuts = false,
-  useRange = false,
-  dateValue,
-  handleValueChange,
-  className,
-}: IProps) => {
+const DatePicker = ({ dateValue, handleValueChange, className }: IProps) => {
   const { t } = useTranslation();
 
   return (
     <div className="remove-icon">
       <Datepicker
         popoverDirection="down"
-        showShortcuts={showShortcuts}
-        useRange={useRange}
+        useRange={false}
         showFooter={true}
         value={dateValue}
         asSingle={true}

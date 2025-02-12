@@ -58,7 +58,7 @@ export default function Header() {
             <div className="hidden 2xl:block font-semibold py-2 px-4 rounded-full hover:bg-[#F7F7F7]">
               <h3>{t("trent_your_home")}</h3>
             </div>
-            <div className="relative" ref={languageSwitcherRef}>
+            <div className="relative bg-slate-400" ref={languageSwitcherRef}>
               <Button
                 onClick={toggleLangSwitcher}
                 className="hidden xl:block py-2 px-4 rounded-full hover:bg-[#F7F7F7]"
