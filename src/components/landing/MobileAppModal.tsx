@@ -67,16 +67,20 @@ function MobileAppModal() {
             </span>
           </Button>
         </div>
-        <h2 className="text-white font-semibold text-3xl pt-5">
+        <h2 className="text-white font-semibold text-3xl pt-2">
           Get our Mobile App for a better experience!
         </h2>
-        <div className="flex justify-center py-2">
-          <div className="w-[200px] h-[250px]">
-            <Image imageUrl={mobile} alt="mobile" className="w-full h-full" />
+        <div className="flex justify-center py-4">
+          <div className="">
+            <Image
+              imageUrl={mobile}
+              alt="mobile"
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
         <div
-          className={`flex flex-col lg:flex-row gap-5 items-center pt-5 ${
+          className={`flex flex-col lg:flex-row gap-5 items-center pt-2 ${
             platform === "desktop" ? "justify-between" : "justify-center"
           }`}
         >

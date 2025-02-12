@@ -25,7 +25,7 @@ function ChooseUs() {
           return (
             <div
               key={index}
-              className="h-40 w-40 overflow-hidden flex flex-col gap-2 justify-center items-center rounded-lg md:rounded-full bg-primary"
+              className="h-40 w-40 overflow-hidden flex flex-col gap-2 justify-center items-center rounded-full bg-primary"
             >
               {typeof icon === "string" ? (
                 <div className="w-[25%]">

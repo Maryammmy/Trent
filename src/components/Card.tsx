@@ -49,23 +49,25 @@ function Card() {
             <h3 className="font-bold pb-1">{t("name")}</h3>
             <p className="text-dark font-medium">Cairo,Marina</p>
           </div>
-          <div className="flex gap-1 justify-between items-center font-medium">
-            <Rating rating={4} />
-            <span className="text-sm text-dark">(4)</span>
-          </div>
-        </div>
-        <div className="flex gap-1 font-medium pt-1">
-          <span className="font-bold text-primary">
-            {enableTaxes
-              ? t("price_per_night", {
-                  price: priceBeforeTaxes.toFixed(0),
-                })
-              : t("price_per_night", {
-                  price: priceWithTaxes.toFixed(0),
-                })}
-          </span>
+          <div>
+            <div className="flex gap-1 font-medium pb-1">
+              <span className="font-bold text-primary">
+                {enableTaxes
+                  ? t("price_per_night", {
+                      price: priceBeforeTaxes.toFixed(0),
+                    })
+                  : t("price_per_night", {
+                      price: priceWithTaxes.toFixed(0),
+                    })}
+              </span>
 
-          <span className="text-dark">/ night</span>
+              <span className="text-dark">/ night</span>
+            </div>
+            <div className="flex gap-1 justify-between items-center font-medium">
+              <Rating rating={4} />
+              <span className="text-sm text-dark">(4)</span>
+            </div>
+          </div>
         </div>
         {enableTaxes && (
           <p className="text-sm text-dark pt-1">{t("total_before_taxes")}</p>
