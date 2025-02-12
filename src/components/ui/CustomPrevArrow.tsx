@@ -15,7 +15,7 @@ export default function CustomPrevArrow({
 }: IProps) {
   return (
     <div
-      className={`absolute top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-white p-2 rounded-full shadow-md hover:bg-gray-200 transition-all`}
+      className={`absolute top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-all`}
       style={{ border: borderColor, left: left, top: top, padding: padding }}
       onClick={onClick}
     >
