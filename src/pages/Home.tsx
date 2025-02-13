@@ -53,7 +53,7 @@ function Home() {
                   alt="slider"
                   imageUrl={item}
                   key={index}
-                  className="w-full h-full"
+                  className="w-full h-full rounded-md"
                 />
               </div>
             ))}
