@@ -1,9 +1,7 @@
 import ContactInfo from "../components/contactUs/ContactInfo";
 import ContactForm from "../components/contactUs/ContactForm";
-import useScrollToTop from "../hooks/useScrollToTop";
 
 function ContactUs() {
-  useScrollToTop();
   return (
     <div>
       <div className="bg-contact-us bg-no-repeat bg-fixed bg-[length:100%_100%]  h-[30vh] md:h-[50vh] w-full">

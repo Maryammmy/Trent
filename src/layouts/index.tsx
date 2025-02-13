@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 
 const RootLayout = () => {
   const { pathname } = useLocation();
+
   return (
     <>
       <Navbar />

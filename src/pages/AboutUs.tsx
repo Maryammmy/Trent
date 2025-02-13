@@ -1,8 +1,6 @@
 import AboutInfo from "../components/aboutUs/AboutInfo";
-import useScrollToTop from "../hooks/useScrollToTop";
 
 function AboutUs() {
-  useScrollToTop();
   return (
     <div>
       <div className="bg-about-us bg-no-repeat bg-fixed bg-[length:100%_100%]  h-[30vh] md:h-[50vh] w-full">

@@ -5,8 +5,9 @@ import { useAppSelector } from "../store/hooks";
 
 function DashboardLayout() {
   const { darkMode } = useAppSelector((state) => state.darkMode);
+
   return (
-    <div  className={darkMode ? "dark" : "light"}>
+    <div className={darkMode ? "dark" : "light"}>
       <Navbar />
       <Sidebar />
       <Outlet />

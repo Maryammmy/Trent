@@ -1,15 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import darkModeSlice from "./features/darkMode/darkModeSlice";
-import categoryBarSlice from "./features/categoryBar/categoryBarSlice";
 import homeSearchSlice from "./features/homeSearch/homeSearchSlice";
 import authSlice from "./features/auth/authSlice";
 import taxesSlice from "./features/taxes/taxesSlice";
 import becomeAHostSlice from "./features/becomeAHost/becomeAHostSlice";
+import navbarSlice from "./features/navbar/navbarSlice";
 
 export const store = configureStore({
   reducer: {
     darkMode: darkModeSlice,
-    categoryBar: categoryBarSlice,
+    navbar: navbarSlice,
     homeSearch: homeSearchSlice,
     auth: authSlice,
     taxes: taxesSlice,

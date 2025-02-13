@@ -17,7 +17,6 @@ function App() {
       i18n.off("languageChanged", updateDirection);
     };
   }, []);
-
   return (
     <>
       <PhotoProvider>
