@@ -58,7 +58,7 @@ const Navbar = () => {
   return (
     <nav
       className={` top-0 left-0 w-full z-30 fixed ${
-        pathname === "/" && !bg ? "bg-transparent" : "bg-primary"
+        pathname === "/" && !bg ? "bg-transparent absolute" : "bg-primary"
       }`}
     >
       <div className="max-w-[1450px] flex flex-wrap items-center justify-between mx-auto p-4">

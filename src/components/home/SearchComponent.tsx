@@ -9,7 +9,10 @@ import { setIsDestinationOpen } from "../../store/features/homeSearch/homeSearch
 import DestinationCard from "../DestinationCard";
 import DatePicker from "../ui/DatePicker";
 import Counter from "./Counter";
-import { validateEndDate, validateStartDate } from "../../utils/dateUtils";
+import {
+  validateEndDate,
+  validateStartDate,
+} from "../../utils/handleChangeDate";
 
 function SearchComponent() {
   const { t } = useTranslation();

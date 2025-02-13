@@ -5,7 +5,10 @@ import { DateValueType } from "react-tailwindcss-datepicker";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { validateEndDate, validateStartDate } from "../../utils/dateUtils";
+import {
+  validateEndDate,
+  validateStartDate,
+} from "../../utils/handleChangeDate";
 
 function CheckDates() {
   const [counter, setCounter] = useState(0);
