@@ -57,7 +57,7 @@ const Navbar = () => {
   useNavbarBg();
   return (
     <nav
-      className={` top-0 left-0 w-full z-30 ${bg ? "fixed" : "absolute"} ${
+      className={` top-0 left-0 w-full z-30 fixed ${
         pathname === "/" && !bg ? "bg-transparent" : "bg-primary"
       }`}
     >
