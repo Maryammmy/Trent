@@ -53,7 +53,7 @@ function SearchComponent() {
               className={isDestination ? "relative" : ""}
               ref={isDestination ? destinationCardRef : null}
             >
-              <Button
+              <div
                 onClick={() =>
                   isDestination &&
                   dispatch(setIsDestinationOpen(!isDestinationOpen))
@@ -95,13 +95,13 @@ function SearchComponent() {
                     </div>
                   )}
                 </div>
-              </Button>
+              </div>
               {isDestination && isDestinationOpen && <DestinationCard />}
             </div>
           );
         })}
         <Button className="text-white font-medium bg-primary px-4 h-10 rounded-md">
-          {t("search")}
+          <span>{t("search")}</span>
         </Button>
       </div>
     </div>

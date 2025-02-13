@@ -28,10 +28,10 @@ export default function Properties() {
     <>
       <div>
         <div className="px-5 xl:px-20 mt-5 flex flex-wrap gap-3 justify-end">
-          <Button className="flex items-center gap-2 border p-2 rounded-md bg-white">
+          <div className="flex items-center gap-2 border p-2 rounded-md bg-white">
             <span className="text-sm">{t("display_total_before_taxes")}</span>
             <Switcher />
-          </Button>
+          </div>
           <Button
             className="flex gap-2 items-center border rounded-md px-3 py-2 text-primary"
             onClick={() => setIsFilterOpen(!isFilterOpen)}
