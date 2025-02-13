@@ -28,7 +28,7 @@ function Counter({
           <Minus size={15} />
         </span>
       </Button>
-      <span className="font-medium w-4 text-center">{counter}</span>
+      <span className="font-medium text-center">{counter}</span>
       <Button
         onClick={increaseCounter}
         className="rounded-full bg-white text-black border-2 flex justify-center items-center"

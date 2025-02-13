@@ -3,9 +3,28 @@ import percentageLogo from "../assets/iamges/discount-shape.svg";
 import pyramidsLogo from "../assets/iamges/pyramids.svg";
 import { HandCoins } from "lucide-react";
 import { RiCustomerServiceFill } from "react-icons/ri";
-import { IChooseUs, IFilterButton } from "../interfaces/landingInterface";
+import {
+  IChooseUs,
+  IFilterButton,
+  INavItem,
+  INavSection,
+} from "../interfaces/landingInterface";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import { ResponsiveSetting } from "../interfaces";
+export const navItems: INavItem[] = [
+  { label: "Home", to: "/" },
+  { label: "About Us", to: "/about-us" },
+  { label: "Services", to: "/services" },
+  { label: "Contact", to: "/contact-us" },
+];
+export const authItems: INavItem[] = [
+  { label: "Log in", to: "" },
+  { label: "Sign up", to: "" },
+];
+export const NavbarSections: INavSection[] = [
+  { id: "nav-section", items: navItems },
+  { id: "auth-section", items: authItems },
+];
 export const responsiveHomeSearch: ResponsiveSetting[] = [
   {
     breakpoint: 1440,

@@ -60,8 +60,8 @@ function SearchComponent() {
                 <h2 className="pb-2 text-dark">{title}</h2>
                 <div className="w-full">
                   {text === t("add_guests") ? (
-                    <div className="flex items-center gap-4 text-sm bg-gray-100 px-4 h-10 rounded-md">
-                      <p className="text-start">
+                    <div className="flex items-center gap-4 text-sm bg-gray-100 px-4 h-10 w-full rounded-md">
+                      <p className="text-start w-[90px]">
                         {counter === 0
                           ? t("add_guests")
                           : `${counter} ${

@@ -11,6 +11,9 @@ span {
   overflow-wrap: anywhere;
 }
 /* home page */
+.home-navlink.active {
+  color: #ffc227;
+}
 .bg-home {
   background-image: url("./assets/iamges/bgHome.png"),
     linear-gradient(rgb(28, 72, 134), rgba(153, 153, 153, 0));
