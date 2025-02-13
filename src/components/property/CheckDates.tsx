@@ -1,4 +1,3 @@
-import toast from "react-hot-toast";
 import Counter from "../home/Counter";
 import Button from "../ui/Button";
 import DatePicker from "../ui/DatePicker";
@@ -6,6 +5,7 @@ import { DateValueType } from "react-tailwindcss-datepicker";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { validateEndDate, validateStartDate } from "../../utils/dateUtils";
 
 function CheckDates() {
   const [counter, setCounter] = useState(0);
@@ -22,48 +22,14 @@ function CheckDates() {
   const updateCounter = (value: number) => {
     setCounter((prevCounter) => prevCounter + value);
   };
-
   const handleStartValueChange = (newValue: DateValueType) => {
-    const { startDate } = newValue || {};
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (startDate && new Date(startDate) < today) {
-      toast.error(t("error_Check_in_after_today"));
-      return;
-    }
-    if (
-      startDate &&
-      endDateValue?.startDate &&
-      new Date(startDate) > new Date(endDateValue.startDate)
-    ) {
-      toast.error(t("error_check_in"));
-      return;
-    }
-    setStartDateValue(newValue);
+    const validatedValue = validateStartDate(newValue, endDateValue, t);
+    if (validatedValue) setStartDateValue(validatedValue);
   };
-
   const handleEndValueChange = (newValue: DateValueType) => {
-    const { startDate } = newValue || {};
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (startDate && new Date(startDate) < today) {
-      toast.error(t("error_Check_out_after_today"));
-      return;
-    }
-    if (
-      startDate &&
-      startDateValue?.startDate &&
-      new Date(startDate) < new Date(startDateValue.startDate)
-    ) {
-      toast.error(t("error_check_out"));
-      setEndDateValue({ startDate: null, endDate: null });
-      return;
-    }
-
-    setEndDateValue(newValue);
+    const validatedValue = validateEndDate(newValue, startDateValue, t);
+    if (validatedValue) setEndDateValue(validatedValue);
   };
-
-  // Check if both dates are selected and if at least one guest is added
   const isButtonEnabled =
     counter > 0 && startDateValue?.startDate && endDateValue?.startDate;
 
