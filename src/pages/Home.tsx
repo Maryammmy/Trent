@@ -27,7 +27,7 @@ function Home() {
     <>
       <div>
         <div className="bg-home h-[50vh] bg-[length:100%_100%] bg-no-repeat mb-[10vh]">
-          <Navbar />
+          {/* <Navbar /> */}
           <div className="w-full px-5 md:max-w-xl absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <h1 className="text-3xl md:!leading-[60px] lg:!leading-[70px] md:text-5xl lg:text-6xl font-bold text-white text-center">
               Book your next adventure

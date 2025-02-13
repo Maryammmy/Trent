@@ -1,17 +1,25 @@
 import Image from "./ui/Image";
 import logo from "../assets/iamges/trentLogo.svg";
 import { Menu } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setIsloggedin, setIsSignup } from "../store/features/auth/authSlice";
 import { NavbarSections } from "../data/landingData";
 import Button from "./ui/Button";
+import useScrollShadow from "../hooks/useScrollShadow";
 
 const Navbar = () => {
+  const { pathname } = useLocation();
+  const { shadow } = useAppSelector((state) => state.categoryBar);
   const dispatch = useAppDispatch();
+  useScrollShadow();
   return (
-    <nav className="bg-transparent absolute top-0 left-0 w-full z-20">
+    <nav
+      className={` top-0 left-0 w-full z-30 ${shadow ? "fixed" : "absolute"} ${
+        pathname === "/" && !shadow ? "bg-transparent" : "bg-primary"
+      }`}
+    >
       <div className="max-w-[1450px] flex flex-wrap items-center justify-between mx-auto p-4">
         <Link
           to="/"

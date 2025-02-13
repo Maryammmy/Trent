@@ -7,7 +7,7 @@ const useScrollShadow = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 300) {
+      if (window.scrollY > 200) {
         dispatch(setShadow(true));
       } else {
         dispatch(setShadow(false));
