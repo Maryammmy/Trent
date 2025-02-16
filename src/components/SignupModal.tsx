@@ -1,16 +1,48 @@
 import { X } from "lucide-react";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
-import Image from "./ui/Image";
 import Input from "./ui/Input";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { buttons } from "../data";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { signupData } from "../data/authData";
 import { setIsSignup } from "../store/features/auth/authSlice";
+import SocialAuthButtons from "./SocialAuthButtons";
+import { SignupNameInputs } from "../interfaces/authInterface";
+import { signupAPI } from "../services/authService";
+import toast from "react-hot-toast";
+// import { useState } from "react";
+import { ErrorResponse } from "../interfaces";
+import { signupSchema } from "../validation/signupSchema ";
+import InputErrorMessage from "./ui/InputErrorMessage";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 function SignupModal() {
+  // const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const { isSignup } = useAppSelector((state) => state.auth);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignupNameInputs>({
+    resolver: yupResolver(signupSchema),
+  });
+
+  const onSubmit: SubmitHandler<SignupNameInputs> = async (data) => {
+    try {
+      const response = await signupAPI(data);
+      toast.success(response?.data?.ResponseMsg);
+    } catch (error) {
+      const customError = error as ErrorResponse;
+      const message = customError?.response?.data.message;
+      console.log(error);
+      if (message) {
+        toast.error(message);
+      }
+    } finally {
+      console.log(data);
+    }
+  };
   return (
     <Modal
       maxWidth="600px"
@@ -31,47 +63,52 @@ function SignupModal() {
         <div className="pb-4">
           <h2 className="text-lg font-semibold">Welcome to Trent</h2>
         </div>
-        {signupData.map((input, index) => {
-          const { label, name, placeholder, type } = input;
-          return (
-            <div key={index} className="mb-4">
-              <label className="block text-sm font-medium mb-1">{label}</label>
-              <Input
-                name={name}
-                type={type}
-                placeholder={placeholder}
-                className="w-full border border-gray-300 rounded-lg focus:outline-primary p-2"
-              />
-            </div>
-          );
-        })}
-        <Button className="w-full bg-primary text-white py-2 rounded-lg font-bold">
-          <span> Sign up</span>
-        </Button>
-        <div className="mt-4 text-center">
-          <p className="text-sm text-gray-500">or</p>
-          <div className="flex flex-col gap-2 mt-2">
-            {buttons.map((button) => (
-              <Button
-                key={button.id}
-                className="w-full border font-semibold border-gray-300 rounded-lg py-2 px-5 flex items-center gap-2"
-              >
-                {typeof button.icon === "string" ? (
-                  <div>
-                    <Image
-                      imageUrl={button.icon}
-                      alt={`image ${button.id}`}
-                      className="w-8 h-8 rounded-full"
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {signupData.map((input, index) => {
+            const { label, name, placeholder, type } = input;
+            return (
+              <div key={index} className="mb-4">
+                <label className="block text-sm font-medium mb-1">
+                  {label}
+                </label>
+                {name === "mobile" ? (
+                  <div className="flex items-center">
+                    <Input
+                      type="text"
+                      value="+20"
+                      {...register("ccode")}
+                      disabled
+                      className="w-16 border border-gray-300 rounded-l-lg bg-gray-100 text-center p-2"
+                    />
+                    <Input
+                      type={type}
+                      placeholder={placeholder}
+                      {...register(name)}
+                      className="flex-1 border border-gray-300 rounded-r-lg focus:outline-primary p-2"
                     />
                   </div>
                 ) : (
-                  <div>{button.icon}</div>
+                  <Input
+                    type={type}
+                    placeholder={placeholder}
+                    {...register(name)}
+                    className="w-full border border-gray-300 rounded-lg focus:outline-primary p-2"
+                  />
                 )}
-                <span className="text-center flex-1">{button.label}</span>
-              </Button>
-            ))}
-          </div>
-        </div>
+                {errors[input.name] && (
+                  <InputErrorMessage msg={errors[input.name]?.message} />
+                )}
+              </div>
+            );
+          })}
+          <Button
+            type="submit"
+            className="w-full bg-primary text-white py-2 rounded-lg font-bold"
+          >
+            <span> Sign up</span>
+          </Button>
+        </form>
+        <SocialAuthButtons />
       </div>
     </Modal>
   );

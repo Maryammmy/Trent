@@ -2,7 +2,7 @@ import { IAuth } from "../interfaces/authInterface";
 
 export const loginData: IAuth[] = [
   {
-    name: "phoneNumber",
+    name: "mobile",
     label: "Phone number",
     placeholder: "+20**********",
     type: "text",
@@ -16,21 +16,21 @@ export const loginData: IAuth[] = [
 ];
 export const signupData: IAuth[] = [
   {
-    name: "firstName",
-    label: "First name",
-    placeholder: "Enter your first name",
+    name: "name",
+    label: "Name",
+    placeholder: "Enter your name",
     type: "text",
   },
   {
-    name: "lastName",
-    label: "Last name",
-    placeholder: "Enter your last name",
+    name: "email",
+    label: "Email",
+    placeholder: "Enter your email",
     type: "text",
   },
   {
-    name: "phoneNumber",
+    name: "mobile",
     label: "Phone number",
-    placeholder: "+20**********",
+    placeholder: "**********",
     type: "text",
   },
   {

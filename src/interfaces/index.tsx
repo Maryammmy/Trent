@@ -31,3 +31,10 @@ export interface IFooterSection {
   title: string;
   items: ReactNode[];
 }
+export interface ErrorResponse {
+  response?: {
+    data: {
+      message?: string;
+    };
+  };
+}

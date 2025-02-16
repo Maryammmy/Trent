@@ -1,12 +1,11 @@
 import { X } from "lucide-react";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
-import Image from "./ui/Image";
 import Input from "./ui/Input";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { buttons } from "../data";
 import { loginData } from "../data/authData";
 import { setIsloggedin } from "../store/features/auth/authSlice";
+import SocialAuthButtons from "./SocialAuthButtons";
 
 function LoginModal() {
   const dispatch = useAppDispatch();
@@ -48,30 +47,7 @@ function LoginModal() {
         <Button className="w-full bg-primary text-white py-2 rounded-lg font-bold">
           <span>Log in</span>
         </Button>
-        <div className="mt-4 text-center">
-          <p className="text-sm text-gray-500">or</p>
-          <div className="flex flex-col gap-2 mt-2">
-            {buttons.map((button) => (
-              <Button
-                key={button.id}
-                className="w-full border font-semibold border-gray-300 rounded-lg py-2 px-5 flex items-center gap-2"
-              >
-                {typeof button.icon === "string" ? (
-                  <div>
-                    <Image
-                      imageUrl={button.icon}
-                      alt={`image ${button.id}`}
-                      className="w-8 h-8 rounded-full"
-                    />
-                  </div>
-                ) : (
-                  <div>{button.icon}</div>
-                )}
-                <span className="text-center flex-1">{button.label}</span>
-              </Button>
-            ))}
-          </div>
-        </div>
+        <SocialAuthButtons />
       </div>
     </Modal>
   );
