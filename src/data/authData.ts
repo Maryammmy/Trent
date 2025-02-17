@@ -1,10 +1,10 @@
-import { IAuth } from "../interfaces/authInterface";
+import { ILoginInputs, ISignupInputs } from "../interfaces/authInterface";
 
-export const loginData: IAuth[] = [
+export const loginData: ILoginInputs[] = [
   {
     name: "mobile",
     label: "Phone number",
-    placeholder: "+20**********",
+    placeholder: "**********",
     type: "text",
   },
   {
@@ -14,7 +14,7 @@ export const loginData: IAuth[] = [
     type: "password",
   },
 ];
-export const signupData: IAuth[] = [
+export const signupData: ISignupInputs[] = [
   {
     name: "name",
     label: "Name",

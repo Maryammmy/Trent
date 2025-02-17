@@ -10,14 +10,15 @@ import SocialAuthButtons from "./SocialAuthButtons";
 import { SignupNameInputs } from "../interfaces/authInterface";
 import { signupAPI } from "../services/authService";
 import toast from "react-hot-toast";
-// import { useState } from "react";
-import { ErrorResponse } from "../interfaces";
+import { useState } from "react";
 import { signupSchema } from "../validation/signupSchema ";
 import InputErrorMessage from "./ui/InputErrorMessage";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Loader from "./loader/Loader";
+import { AxiosError } from "axios";
 
 function SignupModal() {
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const { isSignup } = useAppSelector((state) => state.auth);
   const {
@@ -27,20 +28,20 @@ function SignupModal() {
   } = useForm<SignupNameInputs>({
     resolver: yupResolver(signupSchema),
   });
-
   const onSubmit: SubmitHandler<SignupNameInputs> = async (data) => {
     try {
+      setLoading(true);
       const response = await signupAPI(data);
-      toast.success(response?.data?.ResponseMsg);
-    } catch (error) {
-      const customError = error as ErrorResponse;
-      const message = customError?.response?.data.message;
-      console.log(error);
-      if (message) {
-        toast.error(message);
+      if (response?.data?.ResponseCode === "200") {
+        toast.success(response?.data?.ResponseMsg);
+      } else {
+        toast.error(response?.data?.ResponseMsg);
       }
+    } catch (error) {
+      const customError = error as AxiosError;
+      toast.error(customError?.message);
     } finally {
-      console.log(data);
+      setLoading(false);
     }
   };
   return (
@@ -105,7 +106,7 @@ function SignupModal() {
             type="submit"
             className="w-full bg-primary text-white py-2 rounded-lg font-bold"
           >
-            <span> Sign up</span>
+            <span> {loading ? <Loader /> : "Sign up"}</span>
           </Button>
         </form>
         <SocialAuthButtons />
