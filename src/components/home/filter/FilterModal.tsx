@@ -10,6 +10,7 @@ import RoomsAndBedsFilter from "./RoomsAndBedsFilter";
 import AmenitiesFilter from "./AmenitiesFilter";
 import PropertyTypeFilter from "./PropertyTypeFilter";
 import FilterActions from "./FilterActions";
+import { useGetData } from "../../../hooks/useGetData";
 
 interface IProps {
   isFilterOpen: boolean;
@@ -28,7 +29,14 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   const [selectedPlace, setSelectedPlace] = useState<string>("");
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   const [selectedProperty, setSelectedProperty] = useState<string>("");
-  const [values, setValues] = useState([500, 50000]);
+  const { data } = useGetData(
+    ["min_max_price"],
+    "/user_api/u_min_max_price.php?lang=en"
+  );
+  const [values, setValues] = useState([
+    data?.data?.min_price,
+    data?.data?.max_price,
+  ]);
   const handleSelectedAmenities = (amenity: string) => {
     setSelectedAmenities((prev) =>
       prev.includes(amenity)
