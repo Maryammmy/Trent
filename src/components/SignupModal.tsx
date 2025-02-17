@@ -34,6 +34,10 @@ function SignupModal() {
       const response = await signupAPI(data);
       if (response?.data?.ResponseCode === "200") {
         toast.success(response?.data?.ResponseMsg);
+        setTimeout(() => {
+          dispatch(setIsSignup(false));
+          window.location.reload();
+        }, 500);
       } else {
         toast.error(response?.data?.ResponseMsg);
       }

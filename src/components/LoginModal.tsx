@@ -34,6 +34,10 @@ function LoginModal() {
       const response = await loginAPI(data);
       if (response?.data?.ResponseCode === "200") {
         toast.success(response?.data?.ResponseMsg);
+        setTimeout(() => {
+          dispatch(setIsloggedin(false));
+          window.location.reload();
+        }, 500);
       } else {
         toast.error(response?.data?.ResponseMsg);
       }
