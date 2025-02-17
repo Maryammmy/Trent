@@ -5,14 +5,29 @@ import { amenities } from "../../../data/property/amenities";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 
+const storedAmenities = sessionStorage.getItem("selectedAmenities");
+const initialSelectedAmenities = storedAmenities
+  ? JSON.parse(storedAmenities)
+  : [];
+
 function AmenitiesForProperty() {
   const { t } = useTranslation();
-  const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
+  const [selectedAmenities, setSelectedAmenities] = useState<string[]>(
+    initialSelectedAmenities
+  );
 
-  const handleSelect = (index: number) => {
-    setSelectedIndexes((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
+  const handleSelect = (amenity: string) => {
+    setSelectedAmenities((prev) => {
+      const updatedIndexes = prev.includes(amenity)
+        ? prev.filter((item) => item !== amenity)
+        : [...prev, amenity];
+
+      sessionStorage.setItem(
+        "selectedAmenities",
+        JSON.stringify(updatedIndexes)
+      );
+      return updatedIndexes;
+    });
   };
 
   return (
@@ -25,11 +40,11 @@ function AmenitiesForProperty() {
           {amenities.map((item, index) => {
             const idx = index + 1;
             const { text, icon } = item;
-            const isSelected = selectedIndexes.includes(idx);
+            const isSelected = selectedAmenities.includes(text);
             return (
               <Button
                 key={idx}
-                onClick={() => handleSelect(idx)}
+                onClick={() => handleSelect(text)}
                 className={`flex flex-col justify-center gap-1 p-4 border rounded-lg min-h-28 bg-white ${
                   isSelected ? "bg-zinc-50 border-2 border-black" : ""
                 }`}
@@ -45,7 +60,7 @@ function AmenitiesForProperty() {
       <BackAndNext
         back="/become-a-host/stand-out"
         next="/become-a-host/photos"
-        isNextDisabled={!selectedIndexes.length}
+        isNextDisabled={!selectedAmenities.length}
       />
     </div>
   );

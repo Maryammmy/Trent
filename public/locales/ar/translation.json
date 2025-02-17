@@ -258,5 +258,7 @@
   "insurance_fee": "رسوم التأمين",
   "Trent_service_fee": "رسوم خدمة Trent",
   "image_too_small": "الصورة صغيرة جدًا! يجب أن يكون حجم الصورة على الأقل 50KB.",
-  "image_already_uploaded": "هذه الصورة مرفوعة بالفعل! لا يمكن رفع نفس الصورة مرتين."
+  "image_already_uploaded": "هذه الصورة مرفوعة بالفعل! لا يمكن رفع نفس الصورة مرتين.",
+  "Geolocation_not_supported": "الموقع غير مدعوم في هذا المتصفح.",
+  "get_your_current_location": "الحصول على موقعك الحالي"
 }

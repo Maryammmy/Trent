@@ -5,9 +5,10 @@ import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWra
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import { typesOFBathrooms } from "../../../data/becomeAHost";
 
-const initialBathroomsCounters = Object.fromEntries(
-  typesOFBathrooms.map((item) => [item.title, 0])
-);
+const storedBathrooms = sessionStorage.getItem("bathroomsCounters");
+const initialBathroomsCounters = storedBathrooms
+  ? JSON.parse(storedBathrooms)
+  : Object.fromEntries(typesOFBathrooms.map((item) => [item.title, 0]));
 
 function BathRooms() {
   const { t } = useTranslation();
@@ -16,11 +17,19 @@ function BathRooms() {
   }>(initialBathroomsCounters);
 
   const updateBathroomsCounter = (key: string, value: number) => {
-    setBathroomsCounters((prev) => ({
-      ...prev,
-      [key]: Math.max(0, prev[key] + value),
-    }));
+    setBathroomsCounters((prev) => {
+      const updatedCounters = {
+        ...prev,
+        [key]: Math.max(0, prev[key] + value),
+      };
+      sessionStorage.setItem(
+        "bathroomsCounters",
+        JSON.stringify(updatedCounters)
+      );
+      return updatedCounters;
+    });
   };
+  console.log(bathroomsCounters);
   const isNextDisabled = Object.values(bathroomsCounters).every(
     (value) => value === 0
   );
@@ -43,7 +52,7 @@ function BathRooms() {
             >
               <div>
                 <h5 className="font-medium text-lg pb-2">{t(title)}</h5>
-                <p className="text-secondary font-medium text-sm">{t(desc)}</p>
+                <p className="text-dark font-medium text-sm">{t(desc)}</p>
               </div>
               <Counter
                 width="30px"

@@ -7,10 +7,12 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 
 function ChoosePlace() {
   const { t } = useTranslation();
-  const [selectedIndex, setSelectedIndex] = useState<null | number>(null);
+  const storedPlace = sessionStorage.getItem("selectedPlace");
+  const [selectedPlace, setSelectedPlace] = useState<string>(storedPlace || "");
   const backButton = "/become-a-host";
-  const handleSelect = (index: number) => {
-    setSelectedIndex(index);
+  const handleSelect = (label: string) => {
+    setSelectedPlace(label);
+    sessionStorage.setItem("selectedPlace", label);
   };
 
   return (
@@ -24,12 +26,12 @@ function ChoosePlace() {
             const idx = index + 1;
             const { label, icon } = item;
             const translatedLabel = t(label);
-            const isSelected = selectedIndex === idx;
+            const isSelected = selectedPlace === label;
 
             return (
               <Button
                 key={idx}
-                onClick={() => handleSelect(idx)}
+                onClick={() => handleSelect(label)}
                 className={`flex flex-col justify-center gap-1 p-4 border rounded-lg min-h-28 bg-white ${
                   isSelected && "bg-zinc-50 border-2 border-black"
                 }`}
@@ -47,7 +49,7 @@ function ChoosePlace() {
       <BackAndNext
         back={backButton}
         next="/become-a-host/type-of-place"
-        isNextDisabled={!selectedIndex}
+        isNextDisabled={!selectedPlace}
         allowNext={backButton}
       />
     </div>

@@ -14,7 +14,7 @@ function AboutYourPlace() {
             <h2 className="text-3xl xl:text-4xl font-bold">
               {t("about_your_place")}
             </h2>
-            <p className="xl:text-lg text-secondary font-medium">
+            <p className="xl:text-lg text-dark font-medium">
               {t("about_your_place_desc")}
             </p>
           </div>

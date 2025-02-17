@@ -27,7 +27,7 @@ function GetStartedToHost() {
                   <h2 className="xl:text-2xl font-semibold">
                     {translatedTitle}
                   </h2>
-                  <p className="text-secondary font-medium xl:text-lg max-w-lg">
+                  <p className="text-dark font-medium xl:text-lg max-w-lg">
                     {translatedDesc}
                   </p>
                 </div>

@@ -5,7 +5,7 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 function StandOut() {
   const { t } = useTranslation();
-  const isRoom = localStorage.getItem("selectedPlace") === "room";
+  const isRoom = sessionStorage.getItem("selectedTypeOfPlace") === "room";
   return (
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-xl mx-auto px-5 xl:px-0 pb-10">
@@ -13,7 +13,7 @@ function StandOut() {
           <div className="flex flex-col gap-8 flex-1">
             <h4 className="font-medium xl:text-xl">{t("step_2")}</h4>
             <h2 className="text-3xl xl:text-4xl font-bold">{t("stand_out")}</h2>
-            <p className="xl:text-lg text-secondary font-medium">
+            <p className="xl:text-lg text-dark font-medium">
               {t("stand_out_desc")}
             </p>
           </div>

@@ -33,6 +33,7 @@ function FilterModal({ isFilterOpen, close }: IProps) {
     ["min_max_price"],
     "/user_api/u_min_max_price.php?lang=en"
   );
+  console.log(data?.data);
   const [values, setValues] = useState([
     data?.data?.min_price,
     data?.data?.max_price,

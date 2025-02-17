@@ -7,11 +7,14 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 
 function TypeOfPlace() {
   const { t } = useTranslation();
-  const [selectedPlace, setSelectedPlace] = useState<string>("");
+  const storedTypeOfPlace = sessionStorage.getItem("selectedTypeOfPlace");
+  const [selectedTypeOfPlace, setSelectedTypeOfPlace] = useState<string>(
+    storedTypeOfPlace || ""
+  );
   const backButton = "/become-a-host/choose-place";
   const handleSelect = (place: string) => {
-    setSelectedPlace(place);
-    localStorage.setItem("selectedPlace", place);
+    setSelectedTypeOfPlace(place);
+    sessionStorage.setItem("selectedTypeOfPlace", place);
   };
   return (
     <div className="py-10">
@@ -23,7 +26,7 @@ function TypeOfPlace() {
           {typeOfPlace.map((item, index) => {
             const idx = index + 1;
             const { title, desc, icon } = item;
-            const isSelected = selectedPlace === title;
+            const isSelected = selectedTypeOfPlace === title;
             const translatedTitle = t(title);
             const translatedDesc = t(desc);
 
@@ -39,7 +42,7 @@ function TypeOfPlace() {
                   <h4 className="font-bold text-lg text-start">
                     {translatedTitle}
                   </h4>
-                  <p className="max-w-lg text-start text-secondary font-medium">
+                  <p className="max-w-lg text-start text-dark font-medium">
                     {translatedDesc}
                   </p>
                 </div>
@@ -53,7 +56,7 @@ function TypeOfPlace() {
       <BackAndNext
         back={backButton}
         next="/become-a-host/location"
-        isNextDisabled={!selectedPlace}
+        isNextDisabled={!selectedTypeOfPlace}
         allowNext={backButton}
       />
     </div>
