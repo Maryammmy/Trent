@@ -5,9 +5,9 @@ import { useTranslation } from "react-i18next";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 
+const storedTypeOfPlace = sessionStorage.getItem("selectedTypeOfPlace");
 function TypeOfPlace() {
   const { t } = useTranslation();
-  const storedTypeOfPlace = sessionStorage.getItem("selectedTypeOfPlace");
   const [selectedTypeOfPlace, setSelectedTypeOfPlace] = useState<string>(
     storedTypeOfPlace || ""
   );

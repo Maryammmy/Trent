@@ -6,10 +6,15 @@ import { numberWithCommas } from "../../../utils/numberWithCommas";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 
+const storedPrice = sessionStorage.getItem("price");
+
 function Price() {
   const { t } = useTranslation();
-  const [price, setPrice] = useState<number | "">("");
-  const [error, setError] = useState<string | null>(null);
+  const [price, setPrice] = useState<number | "">(
+    storedPrice ? JSON.parse(storedPrice) : ""
+  );
+  const [error, setError] = useState<string>("");
+
   const feesPercentage = 10;
   const userEarningPercentage = 90;
   const basePrice = price || 0;
@@ -17,29 +22,29 @@ function Price() {
   const totalPrice = basePrice + guestServiceFee;
   const userEarning = Math.floor((totalPrice * userEarningPercentage) / 100);
   const breakdown = priceBreakdown(basePrice, guestServiceFee, totalPrice);
+
   const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.replace(/[^0-9]/g, "");
-    const numericValue = inputValue ? parseInt(inputValue) : "";
-    if (
-      typeof numericValue === "number" &&
-      (numericValue < 30 || numericValue > 20000)
-    ) {
-      setError(t("error_for_price"));
-    } else {
-      setError(null);
-    }
-
+    const numericValue = inputValue ? parseInt(inputValue, 10) : "";
     setPrice(numericValue);
+    setError(
+      numericValue && (numericValue < 30 || numericValue > 20000)
+        ? t("error_for_price")
+        : ""
+    );
+    sessionStorage.setItem("price", JSON.stringify(numericValue));
   };
+
   return (
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
         <h3 className="text-2xl md:text-3xl font-semibold pb-3">
           {t("price_title")}
         </h3>
-        <p className="max-w-2xl text-secondary font-medium pb-10">
+        <p className="max-w-2xl text-dark font-medium pb-10">
           {t("price_desc")}
         </p>
+
         <div
           className={`flex justify-center items-center ${
             error ? "pb-5" : "pb-10"
@@ -53,11 +58,13 @@ function Price() {
             placeholder="0EGP"
           />
         </div>
+
         {error && (
           <p className="text-red-600 text-center font-medium pb-5 text-xs md:text-sm">
             {error}
           </p>
         )}
+
         <div className="max-w-md mx-auto">
           <div className="border p-4 rounded-lg border-black">
             {breakdown.map((item, index) => (
@@ -75,10 +82,9 @@ function Price() {
               </div>
             ))}
           </div>
+
           <div className="border rounded-lg p-4 max-w-md mx-auto mt-6">
-            <div
-              className={`flex justify-between gap-1 md:gap-5 text-sm md:text-lg font-medium mb-2 `}
-            >
+            <div className="flex justify-between gap-1 md:gap-5 text-sm md:text-lg font-medium mb-2">
               <h4>{t("you_earn")}</h4>
               <span>
                 {numberWithCommas(userEarning)}

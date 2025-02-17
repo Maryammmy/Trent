@@ -7,10 +7,10 @@ import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWra
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import Button from "../../../components/ui/Button";
 
+const storedLocation = sessionStorage.getItem("selectedLocation");
 function LocationOfPlace() {
   const { t } = useTranslation();
   const backButton = "/become-a-host/type-of-place";
-  const storedLocation = sessionStorage.getItem("selectedLocation");
   const [position, setPosition] = useState<[number, number] | null>(
     storedLocation ? JSON.parse(storedLocation) : null
   );

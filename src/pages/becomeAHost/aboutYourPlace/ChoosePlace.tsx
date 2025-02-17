@@ -5,9 +5,9 @@ import { useTranslation } from "react-i18next";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 
+const storedPlace = sessionStorage.getItem("selectedPlace");
 function ChoosePlace() {
   const { t } = useTranslation();
-  const storedPlace = sessionStorage.getItem("selectedPlace");
   const [selectedPlace, setSelectedPlace] = useState<string>(storedPlace || "");
   const backButton = "/become-a-host";
   const handleSelect = (label: string) => {

@@ -6,14 +6,11 @@ import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWra
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 
 const storedAmenities = sessionStorage.getItem("selectedAmenities");
-const initialSelectedAmenities = storedAmenities
-  ? JSON.parse(storedAmenities)
-  : [];
 
 function AmenitiesForProperty() {
   const { t } = useTranslation();
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>(
-    initialSelectedAmenities
+    storedAmenities ? JSON.parse(storedAmenities) : []
   );
 
   const handleSelect = (amenity: string) => {

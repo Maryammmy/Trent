@@ -14,7 +14,7 @@ function FinishSetup() {
             <h2 className="text-3xl xl:text-4xl font-bold">
               {t("finish_setup")}
             </h2>
-            <p className="xl:text-lg text-secondary font-medium">
+            <p className="xl:text-lg text-dark font-medium">
               {t("finish_setup_desc")}
             </p>
           </div>

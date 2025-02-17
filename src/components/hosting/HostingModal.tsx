@@ -28,7 +28,7 @@ function HostingModal() {
         <h3 className="font-bold text-2xl text-center py-2">
           {t("become_a_host_finish_up")}
         </h3>
-        <p className="text-center mx-auto text-secondary font-medium pb-5 max-w-sm">
+        <p className="text-center mx-auto text-dark font-medium pb-5 max-w-sm">
           {t("become_a_host_finish_up_desc")}
         </p>
         <div className="flex flex-col gap-2 items-center justify-center">
@@ -40,9 +40,7 @@ function HostingModal() {
             />
           </div>
           <h5 className="font-semibold">cozy home</h5>
-          <p className="text-secondary  max-w-sm">
-            مساكن شيراتون, Cairo Governorate
-          </p>
+          <p className="text-dark max-w-sm">مساكن شيراتون, Cairo Governorate</p>
         </div>
         <div className="flex items-center justify-between my-4">
           <Button
