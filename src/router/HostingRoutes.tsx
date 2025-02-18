@@ -13,6 +13,6 @@ export const HostingRoutes = (
   >
     <Route index element={<Hosting />} />
     <Route path="listings" element={<Listings />} />
-    <Route path="listing/1" element={<Listing />} />
+    <Route path="listings/:id" element={<Listing />} />
   </Route>
 );

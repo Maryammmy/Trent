@@ -261,5 +261,6 @@
   "image_already_uploaded": "هذه الصورة مرفوعة بالفعل! لا يمكن رفع نفس الصورة مرتين.",
   "Geolocation_not_supported": "الموقع غير مدعوم في هذا المتصفح.",
   "get_your_current_location": "الحصول على موقعك الحالي",
-  "your_listings": "قوائمك"
+  "your_listings": "قوائمك",
+  "listing": "القائمة"
 }

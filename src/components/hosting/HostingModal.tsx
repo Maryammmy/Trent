@@ -50,7 +50,7 @@ function HostingModal() {
             {t("cancel")}
           </Button>
           <Link
-            to={"/hosting/listing/1"}
+            to={"/hosting/listings/1"}
             className="text-primary py-2 px-6 rounded-md font-medium hover:bg-gray-100"
           >
             {t("finish_up")}

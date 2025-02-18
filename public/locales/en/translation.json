@@ -261,5 +261,6 @@
   "image_already_uploaded": "This image is already uploaded! You cannot upload the same image twice.",
   "Geolocation_not_supported": "Geolocation is not supported by this browser.",
   "get_your_current_location": "Get your current location",
-  "your_listings": "Your listings"
+  "your_listings": "Your listings",
+  "listing": "Listing"
 }

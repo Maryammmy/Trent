@@ -5,24 +5,21 @@ import ListingItem from "../../components/hosting/listings/ListingItem";
 function Listings() {
   const { t } = useTranslation();
   const listings = Array.from({ length: 10 });
+
   return (
     <>
       <div className="px-5 lg:px-20 py-10">
-        <h2 className="text-3xl font-semibold">{t("your_listings")}</h2>
-        <table className="w-full table-fixed border-separate border-spacing-y-5">
-          <thead>
-            <tr>
-              <th className="text-left">Listing</th>
-              <th className="text-left">Location</th>
-              <th className="text-left">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {listings.map((_, index) => (
-              <ListingItem key={index} />
-            ))}
-          </tbody>
-        </table>
+        <h2 className="text-3xl font-semibold mb-4">{t("your_listings")}</h2>
+        <div className="grid grid-cols-3 font-semibold py-3 px-4 bg-gray-100 rounded-md mb-4">
+          <h3>Listing</h3>
+          <h3>Location</h3>
+          <h3>Status</h3>
+        </div>
+        <div className="space-y-5">
+          {listings.map((_, index) => (
+            <ListingItem key={index} id={index + 1} />
+          ))}
+        </div>
       </div>
       <HostingModal />
     </>
