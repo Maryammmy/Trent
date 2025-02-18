@@ -8,8 +8,9 @@ import place3 from "../assets/iamges/place3.png";
 import place4 from "../assets/iamges/place4.png";
 import LoginModal from "../components/LoginModal";
 import SignupModal from "../components/SignupModal";
-import { getResponsiveSettings } from "../data/landingData";
+import { getResponsiveSettings, responsiveSettings } from "../data/landingData";
 import { useGetData } from "../hooks/useGetData";
+import SilderSkeleton from "../components/skeleton/SilderSkeleton";
 
 function Home() {
   const bgImages: string[] = [place1, place2, place3, place4];
@@ -23,7 +24,7 @@ function Home() {
     ? { padding: "5px" }
     : { padding: "10px" };
   const { data } = useGetData(["slider"], "user_api/u_slider.php?lang=en");
-  const sliderList = data?.data?.sliderlist || [];
+  const sliderList = data?.data?.sliderlist;
   return (
     <>
       <div>
@@ -40,25 +41,37 @@ function Home() {
         </div>
         <div className="sm:px-4">
           <Carsoul
-            slidesToShow={Math.min(sliderList.length, 4)}
+            slidesToShow={
+              sliderList?.length ? Math.min(sliderList?.length, 4) : 4
+            }
             showDot={false}
             showArrow={true}
             autoplay={true}
-            responsive={getResponsiveSettings(sliderList.length)}
+            responsive={
+              sliderList?.length
+                ? getResponsiveSettings(sliderList?.length)
+                : responsiveSettings
+            }
             padding={carouselProps.padding}
             right={carouselProps.right}
             left={carouselProps.left}
           >
-            {bgImages.map((item: string, index: number) => (
-              <div key={index} className="h-[40vh] w-full sm:px-4">
-                <Image
-                  alt="slider"
-                  imageUrl={item}
-                  key={index}
-                  className="w-full h-full rounded-md"
-                />
-              </div>
-            ))}
+            {sliderList?.length
+              ? bgImages.map((item: string, index: number) => (
+                  <div key={index} className="h-[40vh] w-full sm:px-4">
+                    <Image
+                      alt="slider"
+                      imageUrl={item}
+                      key={index}
+                      className="w-full h-full rounded-md"
+                    />
+                  </div>
+                ))
+              : Array.from({ length: 4 }).map((_, index) => (
+                  <div key={index} className="h-[40vh] w-full sm:px-4">
+                    <SilderSkeleton key={index} />
+                  </div>
+                ))}
           </Carsoul>
         </div>
       </div>

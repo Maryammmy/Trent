@@ -4,7 +4,7 @@ import Carsoul from "./ui/Carsoul";
 
 function CategoryBar() {
   return (
-    <div className="w-full  px-5 xl:px-20 py-5">
+    <div className="w-full px-5 xl:px-20 py-5">
       <Carsoul
         slidesToShow={10}
         borderColor="2px solid gainsboro"

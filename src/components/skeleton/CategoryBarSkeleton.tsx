@@ -1,13 +1,6 @@
-import { useAppSelector } from "../../store/hooks";
-
 export default function CategoryBarSkeleton({ cards }: { cards: number }) {
-  const { shadow } = useAppSelector((state) => state.categoryBar);
   return (
-    <div
-      className={`fixed top-[81px] xl:top-[105px] z-20 w-full  bg-white  px-5 xl:px-20 py-5 transition-shadow ${
-        shadow ? "shadow-lg" : ""
-      } `}
-    >
+    <div className="w-full px-5 xl:px-20 py-5">
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
         {Array(cards)
           .fill(0)
@@ -23,12 +16,4 @@ export default function CategoryBarSkeleton({ cards }: { cards: number }) {
       </div>
     </div>
   );
-}
-
-{
-  /* <div
-  className={`fixed top-[81px] xl:top-[105px] z-20 w-full  bg-white px-5 xl:px-20 py-5 transition-shadow ${
-    shadow ? "shadow-lg" : ""
-  }`}
-></div>; */
 }

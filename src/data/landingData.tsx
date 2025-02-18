@@ -47,7 +47,26 @@ export const getResponsiveSettings = (
     },
   },
 ];
-
+export const responsiveSettings = [
+  {
+    breakpoint: 1440,
+    settings: {
+      slidesToShow: 3,
+    },
+  },
+  {
+    breakpoint: 768,
+    settings: {
+      slidesToShow: 2,
+    },
+  },
+  {
+    breakpoint: 480,
+    settings: {
+      slidesToShow: 1,
+    },
+  },
+];
 export const chooseUs: IChooseUs[] = [
   {
     icon: priceLogo,

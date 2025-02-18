@@ -12,7 +12,7 @@ import { ResponsiveSetting } from "../interfaces";
 export const categoryBar = [
   {
     icon: <School className="m-auto" />,
-    title: "Villanbhjebhyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+    title: "Villa",
   },
   {
     icon: <House className="m-auto" />,
