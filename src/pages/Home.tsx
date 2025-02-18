@@ -8,7 +8,8 @@ import place3 from "../assets/iamges/place3.png";
 import place4 from "../assets/iamges/place4.png";
 import LoginModal from "../components/LoginModal";
 import SignupModal from "../components/SignupModal";
-import { responsiveHomeSearch } from "../data/landingData";
+import { getResponsiveSettings } from "../data/landingData";
+import { useGetData } from "../hooks/useGetData";
 
 function Home() {
   const bgImages: string[] = [place1, place2, place3, place4];
@@ -21,7 +22,8 @@ function Home() {
     : isTablet
     ? { padding: "5px" }
     : { padding: "10px" };
-
+  const { data } = useGetData(["slider"], "user_api/u_slider.php?lang=en");
+  const sliderList = data?.data?.sliderlist || [];
   return (
     <>
       <div>
@@ -38,11 +40,11 @@ function Home() {
         </div>
         <div className="sm:px-4">
           <Carsoul
+            slidesToShow={Math.min(sliderList.length, 4)}
             showDot={false}
             showArrow={true}
             autoplay={true}
-            slidesToShow={4}
-            responsive={responsiveHomeSearch}
+            responsive={getResponsiveSettings(sliderList.length)}
             padding={carouselProps.padding}
             right={carouselProps.right}
             left={carouselProps.left}

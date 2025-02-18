@@ -30,13 +30,12 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   const [selectedProperty, setSelectedProperty] = useState<string>("");
   const { data } = useGetData(
-    ["min_max_price"],
+    ["minMaxPrice"],
     "/user_api/u_min_max_price.php?lang=en"
   );
-  console.log(data?.data);
   const [values, setValues] = useState([
-    data?.data?.min_price,
-    data?.data?.max_price,
+    data?.data?.min_price || 500,
+    data?.data?.max_price || 50000,
   ]);
   const handleSelectedAmenities = (amenity: string) => {
     setSelectedAmenities((prev) =>

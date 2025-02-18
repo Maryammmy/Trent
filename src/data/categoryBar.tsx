@@ -9,10 +9,10 @@ import {
 } from "lucide-react";
 import { ResponsiveSetting } from "../interfaces";
 
-export const navbarIcons = [
+export const categoryBar = [
   {
     icon: <School className="m-auto" />,
-    title: "Villa",
+    title: "Villanbhjebhyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
   },
   {
     icon: <House className="m-auto" />,

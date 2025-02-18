@@ -6,7 +6,6 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import { occupancy } from "../../../data/becomeAHost";
 
 const storedOccupancy = sessionStorage.getItem("selectedOccupancy");
-
 function Occupancy() {
   const { t } = useTranslation();
   const [selectedOccupancy, setSelectedOccupancy] = useState<string[]>(

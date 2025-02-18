@@ -25,26 +25,29 @@ export const NavbarSections: INavSection[] = [
   { id: "nav-section", items: navItems },
   { id: "auth-section", items: authItems },
 ];
-export const responsiveHomeSearch: ResponsiveSetting[] = [
+export const getResponsiveSettings = (
+  sliderLength: number
+): ResponsiveSetting[] => [
   {
     breakpoint: 1440,
     settings: {
-      slidesToShow: 3,
+      slidesToShow: Math.min(sliderLength, 3),
     },
   },
   {
     breakpoint: 768,
     settings: {
-      slidesToShow: 2,
+      slidesToShow: Math.min(sliderLength, 2),
     },
   },
   {
     breakpoint: 480,
     settings: {
-      slidesToShow: 1,
+      slidesToShow: Math.min(sliderLength, 1),
     },
   },
 ];
+
 export const chooseUs: IChooseUs[] = [
   {
     icon: priceLogo,

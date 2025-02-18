@@ -1,6 +1,7 @@
 import Button from "../../ui/Button";
 import { amenities } from "../../../data/property/amenities";
 import { useTranslation } from "react-i18next";
+import { useGetData } from "../../../hooks/useGetData";
 
 interface Props {
   selectedAmenities: string[];
@@ -12,7 +13,8 @@ function AmenitiesFilter({
   handleSelectedAmenities,
 }: Props) {
   const { t } = useTranslation();
-
+  const { data } = useGetData(["amenities"], "user_api/u_facility.php?lang=ar");
+  console.log(data);
   return (
     <div className="py-4 border-b">
       <h2 className="text-lg font-bold pb-4">{t("amenities")}</h2>
