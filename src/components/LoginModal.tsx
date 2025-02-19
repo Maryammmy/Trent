@@ -5,7 +5,6 @@ import Input from "./ui/Input";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { loginData } from "../data/authData";
 import { setIsloggedin } from "../store/features/auth/authSlice";
-import SocialAuthButtons from "./SocialAuthButtons";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -115,7 +114,6 @@ function LoginModal() {
             <span>{loading ? <Loader /> : "Log in"}</span>
           </Button>
         </form>
-        <SocialAuthButtons />
       </div>
     </Modal>
   );
