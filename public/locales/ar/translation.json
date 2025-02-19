@@ -262,5 +262,6 @@
   "Geolocation_not_supported": "الموقع غير مدعوم في هذا المتصفح.",
   "get_your_current_location": "الحصول على موقعك الحالي",
   "your_listings": "قوائمك",
-  "listing": "القائمة"
+  "listing": "القائمة",
+  "log_out": "تسجيل الخروج"
 }

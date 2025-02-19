@@ -42,7 +42,7 @@ function SearchComponent() {
 
   return (
     <div className="bg-white rounded-lg lg:w-[1000px] py-6 lg:py-3 px-5 lg:border shadow hover:shadow-lg">
-      <div className="grid grid-cols-1 lg:flex lg:flex-wrap gap-4 lg:gap-0 text-sm items-end justify-between">
+      <div className="grid grid-cols-1 lg:flex gap-4 lg:gap-0 text-sm items-end justify-between">
         {homeSearch.map((item, index) => {
           const title = t(item.title);
           const text = t(item.text);

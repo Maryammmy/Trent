@@ -7,7 +7,6 @@ import {
   IChooseUs,
   IFilterButton,
   INavItem,
-  INavSection,
 } from "../interfaces/landingInterface";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import { ResponsiveSetting } from "../interfaces";
@@ -16,14 +15,6 @@ export const navItems: INavItem[] = [
   { label: "About Us", to: "/about-us" },
   { label: "Services", to: "/services" },
   { label: "Contact", to: "/contact-us" },
-];
-export const authItems: INavItem[] = [
-  { label: "Log in", to: "" },
-  { label: "Sign up", to: "" },
-];
-export const NavbarSections: INavSection[] = [
-  { id: "nav-section", items: navItems },
-  { id: "auth-section", items: authItems },
 ];
 export const getResponsiveSettings = (
   sliderLength: number

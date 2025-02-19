@@ -12,7 +12,7 @@ export interface INavItem {
   label: string;
   to: string;
 }
-export interface INavSection {
+export interface ITypeList {
   id: string;
-  items: INavItem[];
+  title: string;
 }

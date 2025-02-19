@@ -105,3 +105,31 @@ export const responsive: ResponsiveSetting[] = [
     },
   },
 ];
+export const getResponsiveSettingsForCategory = (
+  sliderLength: number
+): ResponsiveSetting[] => [
+  {
+    breakpoint: 1440,
+    settings: {
+      slidesToShow: Math.min(sliderLength, 5),
+    },
+  },
+  {
+    breakpoint: 768,
+    settings: {
+      slidesToShow: Math.min(sliderLength, 4),
+    },
+  },
+  {
+    breakpoint: 480,
+    settings: {
+      slidesToShow: Math.min(sliderLength, 3),
+    },
+  },
+  {
+    breakpoint: 375,
+    settings: {
+      slidesToShow: 2,
+    },
+  },
+];

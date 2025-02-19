@@ -16,6 +16,7 @@ import InputErrorMessage from "./ui/InputErrorMessage";
 import Loader from "./loader/Loader";
 import { useState } from "react";
 import { AxiosError } from "axios";
+import Cookies from "js-cookie";
 
 function LoginModal() {
   const [loading, setLoading] = useState(false);
@@ -34,6 +35,7 @@ function LoginModal() {
       const response = await loginAPI(data);
       if (response?.data?.ResponseCode === "200") {
         toast.success(response?.data?.ResponseMsg);
+        Cookies.set("user_id", response?.data?.UserLogin?.id, { expires: 365 });
         setTimeout(() => {
           dispatch(setIsloggedin(false));
           window.location.reload();

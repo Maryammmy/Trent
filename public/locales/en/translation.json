@@ -262,5 +262,6 @@
   "Geolocation_not_supported": "Geolocation is not supported by this browser.",
   "get_your_current_location": "Get your current location",
   "your_listings": "Your listings",
-  "listing": "Listing"
+  "listing": "Listing",
+  "log_out": "Log out"
 }
