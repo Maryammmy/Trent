@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { signupData } from "../data/authData";
 import { setIsSignup } from "../store/features/auth/authSlice";
-import SocialAuthButtons from "./SocialAuthButtons";
 import { SignupNameInputs } from "../interfaces/authInterface";
 import { signupAPI } from "../services/authService";
 import toast from "react-hot-toast";
@@ -113,7 +112,6 @@ function SignupModal() {
             <span> {loading ? <Loader /> : "Sign up"}</span>
           </Button>
         </form>
-        <SocialAuthButtons />
       </div>
     </Modal>
   );
