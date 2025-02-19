@@ -5,9 +5,7 @@ export const signupSchema = Yup.object({
     .min(4, "The name must be at least 4 characters.")
     .max(10, "The name may not be greater than 8 characters.")
     .required("name is required."),
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required."),
+  email: Yup.string().email("Invalid email address"),
   mobile: Yup.string()
     .matches(/^\d+$/, "The phone number must contain only digits.")
     .required("Phone number is required."),
