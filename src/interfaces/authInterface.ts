@@ -12,7 +12,7 @@ export interface ISignupInputs {
 }
 export type SignupNameInputs = {
   name: string;
-  email: string;
+  email?: string;
   mobile: string;
   ccode: string;
   password: string;

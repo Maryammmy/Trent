@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { Eye, EyeOff, X } from "lucide-react";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
 import Input from "./ui/Input";
@@ -16,9 +16,11 @@ import Loader from "./loader/Loader";
 import { useState } from "react";
 import { AxiosError } from "axios";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 
 function LoginModal() {
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
   const { isLoggedin } = useAppSelector((state) => state.auth);
   const {
@@ -77,29 +79,36 @@ function LoginModal() {
                 <label className="block text-sm font-medium mb-1">
                   {label}
                 </label>
-                {name === "mobile" ? (
-                  <div className="flex items-center">
+                {name === "password" ? (
+                  <div className="flex w-full border border-gray-300 rounded-lg focus-within:border-2 focus-within:border-primary p-2">
                     <Input
-                      {...register("ccode")}
-                      type="text"
-                      value="+20"
-                      disabled
-                      className="w-16 border border-gray-300 rounded-l-lg bg-gray-100 text-center p-2"
+                      {...register(name)}
+                      type={showPassword ? "text" : "password"}
+                      placeholder={placeholder}
+                      className="w-full bg-transparent outline-none"
                     />
+                    <Button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      <span>
+                        {showPassword ? (
+                          <EyeOff strokeWidth={2.5} className="text-dark" />
+                        ) : (
+                          <Eye strokeWidth={2.5} className="text-dark" />
+                        )}
+                      </span>
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="border border-gray-300 rounded-lg focus-within:border-2 focus-within:border-primary p-2">
                     <Input
                       {...register(name)}
                       type={type}
                       placeholder={placeholder}
-                      className="flex-1 border border-gray-300 rounded-r-lg focus:outline-primary p-2"
+                      className="w-full bg-transparent outline-none"
                     />
                   </div>
-                ) : (
-                  <Input
-                    {...register(name)}
-                    type={type}
-                    placeholder={placeholder}
-                    className="w-full border border-gray-300 rounded-lg focus:outline-primary p-2"
-                  />
                 )}
                 {errors[name] && (
                   <InputErrorMessage msg={errors[name]?.message} />
@@ -107,6 +116,11 @@ function LoginModal() {
               </div>
             );
           })}
+          <div className="flex justify-end mb-4">
+            <Link to="/" className="font-medium">
+              <span>Forget password?</span>
+            </Link>
+          </div>
           <Button
             type="submit"
             className="w-full bg-primary text-white py-2 rounded-lg font-bold"

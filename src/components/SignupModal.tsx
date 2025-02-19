@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { Eye, EyeOff, X } from "lucide-react";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
 import Input from "./ui/Input";
@@ -18,6 +18,7 @@ import { AxiosError } from "axios";
 
 function SignupModal() {
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
   const { isSignup } = useAppSelector((state) => state.auth);
   const {
@@ -75,29 +76,36 @@ function SignupModal() {
                 <label className="block text-sm font-medium mb-1">
                   {label}
                 </label>
-                {name === "mobile" ? (
-                  <div className="flex items-center">
+                {name === "password" ? (
+                  <div className="flex w-full border border-gray-300 rounded-lg focus-within:border-2 focus-within:border-primary p-2">
                     <Input
-                      type="text"
-                      value="+20"
-                      {...register("ccode")}
-                      disabled
-                      className="w-16 border border-gray-300 rounded-l-lg bg-gray-100 text-center p-2"
-                    />
-                    <Input
-                      type={type}
-                      placeholder={placeholder}
                       {...register(name)}
-                      className="flex-1 border border-gray-300 rounded-r-lg focus:outline-primary p-2"
+                      type={showPassword ? "text" : "password"}
+                      placeholder={placeholder}
+                      className="w-full bg-transparent outline-none"
                     />
+                    <Button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      <span>
+                        {showPassword ? (
+                          <EyeOff strokeWidth={2.5} className="text-dark" />
+                        ) : (
+                          <Eye strokeWidth={2.5} className="text-dark" />
+                        )}
+                      </span>
+                    </Button>
                   </div>
                 ) : (
-                  <Input
-                    type={type}
-                    placeholder={placeholder}
-                    {...register(name)}
-                    className="w-full border border-gray-300 rounded-lg focus:outline-primary p-2"
-                  />
+                  <div className="border border-gray-300 rounded-lg focus-within:border-2 focus-within:border-primary p-2">
+                    <Input
+                      {...register(name)}
+                      type={type}
+                      placeholder={placeholder}
+                      className="w-full bg-transparent outline-none"
+                    />
+                  </div>
                 )}
                 {errors[input.name] && (
                   <InputErrorMessage msg={errors[input.name]?.message} />
