@@ -5,6 +5,6 @@ export const useGetData = (queryKey: string[], url: string) => {
   return useQuery({
     queryKey,
     queryFn: () => baseAPI.get(url),
-    refetchInterval: 5000,
+    refetchInterval: 10000,
   });
 };

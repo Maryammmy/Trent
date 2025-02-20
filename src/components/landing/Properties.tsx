@@ -7,6 +7,7 @@ import FilterModal from "../home/filter/FilterModal";
 import { SlidersHorizontal } from "lucide-react";
 import PropertyCardSkeleton from "../skeleton/PropertyCardSkeleton";
 import CategoryBar from "../CategoryBar";
+// import { useGetData } from "../../hooks/useGetData";
 
 export default function Properties() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -15,7 +16,11 @@ export default function Properties() {
   const cartItems = Array.from({ length: 60 });
   const ITEMS_TO_LOAD = 20;
   const { t } = useTranslation();
-
+  // const { data } = useGetData(
+  //   ["propertyList"],
+  //   `user_api/u_property_list.php?lang=en`
+  // );
+  // console.log(data);
   const handleShowMore = () => {
     setLoading(true);
     setTimeout(() => {
@@ -23,7 +28,6 @@ export default function Properties() {
       setLoading(false);
     }, 1000);
   };
-
   return (
     <>
       <div>

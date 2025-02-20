@@ -24,13 +24,13 @@ function PropertyTypeFilter({
       <h2 className="text-lg font-bold pb-4">{t("property_type")}</h2>
       <div className="flex flex-wrap gap-2">
         {typeList?.map((item, index) => {
-          const { title } = item;
+          const { title, id } = item;
           return (
             <Button
               key={index}
-              onClick={() => handleSelectedProperty(title)}
+              onClick={() => handleSelectedProperty(id)}
               className={`flex gap-2 font-medium border rounded-full py-2 px-4 ${
-                selectedProperty === title && "bg-zinc-50 border-black"
+                selectedProperty === id && "bg-zinc-50 border-black"
               }`}
             >
               <span>{title}</span>

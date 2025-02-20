@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { number } from "yup";
 
 export interface IChooseUs {
   title: string;
@@ -19,4 +20,14 @@ export interface ITypeList {
 export interface IFacilityList {
   id: string;
   title: string;
+}
+export interface IFilterProps {
+  uid?: number;
+  government_id?: number;
+  facilities_ids?: string[];
+  prop_type_id?: number;
+  min_price?: number;
+  max_price?: number;
+  beds?: number;
+  bathrooms?: number;
 }

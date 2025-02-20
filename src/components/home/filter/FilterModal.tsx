@@ -37,11 +37,9 @@ function FilterModal({ isFilterOpen, close }: IProps) {
     data?.data?.min_price || 500,
     data?.data?.max_price || 50000,
   ]);
-  const handleSelectedAmenities = (amenity: string) => {
+  const handleSelectedAmenities = (id: string) => {
     setSelectedAmenities((prev) =>
-      prev.includes(amenity)
-        ? prev.filter((item) => item !== amenity)
-        : [...prev, amenity]
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
   };
   const updateCounter = (key: string, value: number) => {
@@ -88,11 +86,9 @@ function FilterModal({ isFilterOpen, close }: IProps) {
         />
         <PropertyTypeFilter
           selectedProperty={selectedProperty}
-          handleSelectedProperty={(property: string) =>
-            setSelectedProperty(property)
-          }
+          handleSelectedProperty={(id: string) => setSelectedProperty(id)}
         />
-        <FilterActions handleClear={handleClear} />
+        <FilterActions close={close} handleClear={handleClear} />
       </div>
     </Modal>
   );
