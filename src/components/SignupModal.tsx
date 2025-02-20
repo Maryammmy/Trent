@@ -3,7 +3,7 @@ import Button from "./ui/Button";
 import Modal from "./ui/Modal";
 import Input from "./ui/Input";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { signupData } from "../data/authData";
 import { setIsSignup } from "../store/features/auth/authSlice";
 import { SignupNameInputs } from "../interfaces/authInterface";
@@ -15,6 +15,7 @@ import InputErrorMessage from "./ui/InputErrorMessage";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Loader from "./loader/Loader";
 import { AxiosError } from "axios";
+import CountrySelector from "./ui/CountrySelector";
 
 function SignupModal() {
   const [loading, setLoading] = useState(false);
@@ -22,11 +23,19 @@ function SignupModal() {
   const dispatch = useAppDispatch();
   const { isSignup } = useAppSelector((state) => state.auth);
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<SignupNameInputs>({
     resolver: yupResolver(signupSchema),
+    defaultValues: {
+      mobile: "",
+      password: "",
+      ccode: "EG",
+      confirmPassword: "",
+      email: "",
+      name: "",
+    },
   });
   const onSubmit: SubmitHandler<SignupNameInputs> = async (data) => {
     try {
@@ -69,55 +78,68 @@ function SignupModal() {
           <h2 className="text-lg font-semibold">Welcome to Trent</h2>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {signupData.map((input, index) => {
-            const { label, name, placeholder, type } = input;
-            return (
-              <div key={index} className="mb-4">
-                <label className="block text-sm font-medium mb-1">
-                  {label}
-                </label>
-                {name === "password" ? (
-                  <div className="flex w-full border border-gray-300 rounded-lg focus-within:border-2 focus-within:border-primary p-2">
-                    <Input
-                      {...register(name)}
-                      type={showPassword ? "text" : "password"}
-                      placeholder={placeholder}
-                      className="w-full bg-transparent outline-none"
-                    />
-                    <Button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      <span>
-                        {showPassword ? (
-                          <EyeOff strokeWidth={2.5} className="text-dark" />
-                        ) : (
-                          <Eye strokeWidth={2.5} className="text-dark" />
-                        )}
-                      </span>
-                    </Button>
+          {signupData.map(({ name, label, type, placeholder }) => (
+            <Controller
+              key={name}
+              name={name}
+              control={control}
+              render={({ field }) => (
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-1">
+                    {label}
+                  </label>
+                  <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+                    {name === "password" || name === "confirmPassword" ? (
+                      <>
+                        <Input
+                          {...field}
+                          type={showPassword ? "text" : "password"}
+                          placeholder={placeholder}
+                          className="w-full outline-none bg-transparent"
+                        />
+                        <Button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          {showPassword ? (
+                            <EyeOff strokeWidth={2.5} />
+                          ) : (
+                            <Eye strokeWidth={2.5} />
+                          )}
+                        </Button>
+                      </>
+                    ) : (
+                      <Input
+                        {...field}
+                        type={type}
+                        placeholder={placeholder}
+                        className="w-full outline-none bg-transparent"
+                      />
+                    )}
                   </div>
-                ) : (
-                  <div className="border border-gray-300 rounded-lg focus-within:border-2 focus-within:border-primary p-2">
-                    <Input
-                      {...register(name)}
-                      type={type}
-                      placeholder={placeholder}
-                      className="w-full bg-transparent outline-none"
-                    />
-                  </div>
-                )}
-                {errors[input.name] && (
-                  <InputErrorMessage msg={errors[input.name]?.message} />
-                )}
-              </div>
-            );
-          })}
+                  {errors[name] && (
+                    <InputErrorMessage msg={errors[name]?.message} />
+                  )}
+                </div>
+              )}
+            />
+          ))}
+          <Controller
+            name="ccode"
+            control={control}
+            render={({ field }) => (
+              <CountrySelector
+                selectedCountry={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
           <Button
+            disabled={loading}
             type="submit"
             className="w-full bg-primary text-white py-2 rounded-lg font-bold"
           >
-            <span> {loading ? <Loader /> : "Sign up"}</span>
+            {loading ? <Loader /> : "Sign up"}
           </Button>
         </form>
       </div>

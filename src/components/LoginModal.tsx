@@ -1,35 +1,39 @@
+import { useState } from "react";
 import { Eye, EyeOff, X } from "lucide-react";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+import { AxiosError } from "axios";
+import { Link } from "react-router-dom";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
 import Input from "./ui/Input";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { loginData } from "../data/authData";
-import { setIsloggedin } from "../store/features/auth/authSlice";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm, SubmitHandler } from "react-hook-form";
-import toast from "react-hot-toast";
-import { LoginNameInputs } from "../interfaces/authInterface";
-import { loginAPI } from "../services/authService";
-import { loginSchema } from "../validation/loginSchema";
 import InputErrorMessage from "./ui/InputErrorMessage";
 import Loader from "./loader/Loader";
-import { useState } from "react";
-import { AxiosError } from "axios";
-import Cookies from "js-cookie";
-import { Link } from "react-router-dom";
+import CountrySelector from "./ui/CountrySelector";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { setIsloggedin } from "../store/features/auth/authSlice";
+import { loginSchema } from "../validation/loginSchema";
+import { LoginNameInputs } from "../interfaces/authInterface";
+import { loginAPI } from "../services/authService";
+import { loginData } from "../data/authData";
 
 function LoginModal() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
   const { isLoggedin } = useAppSelector((state) => state.auth);
+
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginNameInputs>({
     resolver: yupResolver(loginSchema),
+    defaultValues: { mobile: "", password: "", ccode: "EG" },
   });
+
   const onSubmit: SubmitHandler<LoginNameInputs> = async (data) => {
     try {
       setLoading(true);
@@ -51,6 +55,7 @@ function LoginModal() {
       setLoading(false);
     }
   };
+
   return (
     <Modal
       maxWidth="600px"
@@ -68,64 +73,76 @@ function LoginModal() {
         </span>
       </Button>
       <div className="p-6">
-        <div className="pb-4">
-          <h2 className="text-lg font-semibold">Welcome to Trent</h2>
-        </div>
+        <h2 className="text-lg font-semibold pb-4">Welcome to Trent</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {loginData.map((input, index) => {
-            const { label, name, placeholder, type } = input;
-            return (
-              <div key={index} className="mb-4">
-                <label className="block text-sm font-medium mb-1">
-                  {label}
-                </label>
-                {name === "password" ? (
-                  <div className="flex w-full border border-gray-300 rounded-lg focus-within:border-2 focus-within:border-primary p-2">
-                    <Input
-                      {...register(name)}
-                      type={showPassword ? "text" : "password"}
-                      placeholder={placeholder}
-                      className="w-full bg-transparent outline-none"
-                    />
-                    <Button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      <span>
-                        {showPassword ? (
-                          <EyeOff strokeWidth={2.5} className="text-dark" />
-                        ) : (
-                          <Eye strokeWidth={2.5} className="text-dark" />
-                        )}
-                      </span>
-                    </Button>
+          {loginData.map(({ name, label, type, placeholder }) => (
+            <Controller
+              key={name}
+              name={name}
+              control={control}
+              render={({ field }) => (
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-1">
+                    {label}
+                  </label>
+                  <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+                    {name === "password" ? (
+                      <>
+                        <Input
+                          {...field}
+                          type={showPassword ? "text" : "password"}
+                          placeholder={placeholder}
+                          className="w-full outline-none bg-transparent"
+                        />
+                        <Button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          {showPassword ? (
+                            <EyeOff strokeWidth={2.5} />
+                          ) : (
+                            <Eye strokeWidth={2.5} />
+                          )}
+                        </Button>
+                      </>
+                    ) : (
+                      <Input
+                        {...field}
+                        type={type}
+                        placeholder={placeholder}
+                        className="w-full outline-none bg-transparent"
+                      />
+                    )}
                   </div>
-                ) : (
-                  <div className="border border-gray-300 rounded-lg focus-within:border-2 focus-within:border-primary p-2">
-                    <Input
-                      {...register(name)}
-                      type={type}
-                      placeholder={placeholder}
-                      className="w-full bg-transparent outline-none"
-                    />
-                  </div>
-                )}
-                {errors[name] && (
-                  <InputErrorMessage msg={errors[name]?.message} />
-                )}
-              </div>
-            );
-          })}
+                  {errors[name] && (
+                    <InputErrorMessage msg={errors[name]?.message} />
+                  )}
+                </div>
+              )}
+            />
+          ))}
+          <Controller
+            name="ccode"
+            control={control}
+            render={({ field }) => (
+              <CountrySelector
+                selectedCountry={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
+
           <div className="flex justify-end mb-4">
             <Link to="/" className="font-medium">
-              <span>Forget password?</span>
+              Forget password?
             </Link>
           </div>
           <Button
+            disabled={loading}
             type="submit"
             className="w-full bg-primary text-white py-2 rounded-lg font-bold"
           >
-            <span>{loading ? <Loader /> : "Log in"}</span>
+            {loading ? <Loader /> : "Log in"}
           </Button>
         </form>
       </div>

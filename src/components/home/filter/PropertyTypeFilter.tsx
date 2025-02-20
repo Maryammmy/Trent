@@ -1,13 +1,14 @@
 import Button from "../../ui/Button";
-import { filterPropertyType } from "../../../data";
 import { useTranslation } from "react-i18next";
 import { useGetData } from "../../../hooks/useGetData";
+import { ITypeList } from "../../../interfaces/landingInterface";
+import { Home } from "lucide-react";
 
 interface Props {
   selectedProperty: string;
   handleSelectedProperty: (property: string) => void;
 }
-
+const currentLanguage = localStorage.getItem("i18nextLng");
 function PropertyTypeFilter({
   selectedProperty,
   handleSelectedProperty,
@@ -15,25 +16,27 @@ function PropertyTypeFilter({
   const { t } = useTranslation();
   const { data } = useGetData(
     ["propertyType"],
-    "user_api/u_property_type.php?lang=en"
+    `user_api/u_property_type.php?lang=${currentLanguage}`
   );
-  console.log(data);
+  const typeList: ITypeList[] = data?.data.typelist;
   return (
     <div className="py-4">
       <h2 className="text-lg font-bold pb-4">{t("property_type")}</h2>
       <div className="flex flex-wrap gap-2">
-        {filterPropertyType.map((item, index) => {
-          const { name, icon } = item;
+        {typeList?.map((item, index) => {
+          const { title } = item;
           return (
             <Button
               key={index}
-              onClick={() => handleSelectedProperty(name)}
+              onClick={() => handleSelectedProperty(title)}
               className={`flex gap-2 font-medium border rounded-full py-2 px-4 ${
-                selectedProperty === name && "bg-zinc-50 border-black"
+                selectedProperty === title && "bg-zinc-50 border-black"
               }`}
             >
-              <span>{name}</span>
-              <span>{icon}</span>
+              <span>{title}</span>
+              <span>
+                <Home />
+              </span>
             </Button>
           );
         })}

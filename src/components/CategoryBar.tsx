@@ -20,7 +20,7 @@ function CategoryBar() {
     <>
       <div className="w-full px-5 xl:px-20 py-5">
         <Carsoul
-          slidesToShow={typeList?.length ? Math.min(typeList.length, 10) : 10}
+          slidesToShow={10}
           borderColor="2px solid gainsboro"
           padding="1px"
           responsive={

@@ -16,3 +16,7 @@ export interface ITypeList {
   id: string;
   title: string;
 }
+export interface IFacilityList {
+  id: string;
+  title: string;
+}
