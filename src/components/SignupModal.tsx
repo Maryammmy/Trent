@@ -73,7 +73,7 @@ function SignupModal() {
           <X className="text-black" size={20} />
         </span>
       </Button>
-      <div className="p-6 max-h-[80vh] overflow-y-auto">
+      <div className="p-6">
         <div className="pb-4">
           <h2 className="text-lg font-semibold">Welcome to Trent</h2>
         </div>
