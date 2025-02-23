@@ -29,12 +29,13 @@ export const buttons: IButton[] = [
   },
   { id: 4, label: "Continue with Facebook", icon: faceIcon },
 ];
-export const authItems: string[] = ["log_in", "sign_up"];
+// export const authItems: string[] = ["log_in", "sign_up"];
 export const menuItems: string[] = [
   "gift_cards",
   "trent_your_home",
   "host_an_experience",
   "help_center",
+  "log_out",
 ];
 export const homeSearch: IHomeSearch[] = [
   { title: "destination", text: "search_destinations" },

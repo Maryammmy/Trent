@@ -31,12 +31,13 @@ function LoginModal() {
     formState: { errors },
   } = useForm<LoginNameInputs>({
     resolver: yupResolver(loginSchema),
-    defaultValues: { mobile: "", password: "", ccode: "EG" },
+    defaultValues: { mobile: "", password: "", ccode: "+20" },
   });
 
   const onSubmit: SubmitHandler<LoginNameInputs> = async (data) => {
     try {
       setLoading(true);
+      console.log(data);
       const response = await loginAPI(data);
       if (response?.data?.ResponseCode === "200") {
         toast.success(response?.data?.ResponseMsg);

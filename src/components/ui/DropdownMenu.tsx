@@ -1,27 +1,13 @@
-import { authItems, menuItems } from "../../data";
+import { menuItems } from "../../data";
 import Cookies from "js-cookie";
 import { useAppDispatch } from "../../store/hooks";
 import { useTranslation } from "react-i18next";
 import { setIsDropdownOpen } from "../../store/features/homeSearch/homeSearchSlice";
-import Button from "./Button";
-import {
-  setIsloggedin,
-  setIsSignup,
-} from "../../store/features/auth/authSlice";
 import { Link } from "react-router-dom";
 
-const isLoggedin = Cookies.get("user_id");
 function DropdownMenu() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const openLoginModal = () => {
-    dispatch(setIsloggedin(true));
-    dispatch(setIsDropdownOpen(false));
-  };
-  const openSignupModal = () => {
-    dispatch(setIsSignup(true));
-    dispatch(setIsDropdownOpen(false));
-  };
   const logout = () => {
     Cookies.remove("user_id");
     setTimeout(() => {
@@ -36,31 +22,20 @@ function DropdownMenu() {
           document.documentElement.dir === "rtl" ? "left-0" : "right-0"
         }`}
       >
-        <ul className={`border-b pb-2 mb-2 ${isLoggedin ? "hidden" : "block"}`}>
-          {authItems.map((item, index) => (
-            <li
-              key={index}
-              className={`px-4 py-2 hover:bg-gray-100 cursor-pointer`}
-            >
-              <Button
-                className="w-full text-start"
-                onClick={() =>
-                  item === "log_in" ? openLoginModal() : openSignupModal()
-                }
-              >
-                <span>{t(item)}</span>
-              </Button>
-            </li>
-          ))}
-        </ul>
-        <ul>
+        <ul className="space-y-1">
           {menuItems.map((item, index) => (
             <li
               key={index}
-              className={`px-4 py-2 hover:bg-gray-100 cursor-pointer`}
+              className={`px-4 py-2 hover:bg-gray-100 cursor-pointer ${
+                item === "log_out" && "border-t"
+              }`}
             >
               <Link
-                onClick={() => dispatch(setIsDropdownOpen(false))}
+                onClick={
+                  item === "log_out"
+                    ? logout
+                    : () => dispatch(setIsDropdownOpen(false))
+                }
                 to={item === "host_an_experience" ? "/become-a-host" : ""}
                 className="w-full text-start"
               >
@@ -68,13 +43,6 @@ function DropdownMenu() {
               </Link>
             </li>
           ))}
-        </ul>
-        <ul className={`border-t mt-2 ${isLoggedin ? "block" : "hidden"}`}>
-          <li className={`px-4 py-2 hover:bg-gray-100 cursor-pointer`}>
-            <Button className="w-full text-start" onClick={logout}>
-              <span>{t("log_out")}</span>
-            </Button>
-          </li>
         </ul>
       </div>
     </>

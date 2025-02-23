@@ -10,12 +10,14 @@ import {
 } from "../interfaces/landingInterface";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import { ResponsiveSetting } from "../interfaces";
+
 export const navItems: INavItem[] = [
   { label: "Home", to: "/" },
   { label: "About Us", to: "/about-us" },
   { label: "Services", to: "/services" },
   { label: "Contact", to: "/contact-us" },
 ];
+export const authItems: string[] = ["log_in", "sign_up"];
 export const getResponsiveSettings = (
   sliderLength: number
 ): ResponsiveSetting[] => [

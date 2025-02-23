@@ -32,7 +32,7 @@ export default function CountrySelector({
     fetchCountries();
   }, []);
   const formattedCountries = countries.map((country) => ({
-    value: country.code,
+    value: country.dial_code,
     label: (
       <div className="flex items-center">
         <Image
@@ -56,7 +56,7 @@ export default function CountrySelector({
         id="country"
         options={formattedCountries}
         value={formattedCountries.find((c) => c.value === selectedCountry)}
-        onChange={(selected) => onChange(selected?.value || "EG")}
+        onChange={(selected) => onChange(selected?.value || "+20")}
         className="w-full"
         styles={{
           control: (base, state) => ({

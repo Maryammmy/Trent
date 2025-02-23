@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { number } from "yup";
 
 export interface IChooseUs {
   title: string;

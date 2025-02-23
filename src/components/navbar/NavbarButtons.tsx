@@ -11,8 +11,6 @@ import {
 import Button from "../ui/Button";
 import LanguageSwitcher from "../LanguageSwitcher";
 import DropdownMenu from "../ui/DropdownMenu";
-import avatar from "../../assets/iamges/avatar.png";
-import Image from "../ui/Image";
 
 const isLoggedin = Cookies.get("user_id");
 const NavbarButtons = () => {
@@ -42,35 +40,31 @@ const NavbarButtons = () => {
   };
 
   return (
-    <div className="flex items-center gap-4">
-      <div className="relative" ref={languageSwitcherRef}>
-        <Button
-          onClick={toggleLangSwitcher}
-          className="hidden xl:block py-2 px-4 rounded-full hover:bg-[#F7F7F7]"
-        >
-          <Globe size={18} className="text-white" />
-        </Button>
-        {isLangSwitcherOpen && <LanguageSwitcher />}
-      </div>
-      <div className="relative" ref={dropdownRef}>
-        <Button
-          onClick={toggleMenu}
-          className="flex items-center border py-2 px-3 rounded-full gap-2 hover:shadow-lg"
-        >
-          <Menu size={18} className="text-white" />
-          {isLoggedin ? (
-            <Image
-              imageUrl={avatar}
-              alt="avatar"
-              className="w-6 h-6 rounded-full"
-            />
-          ) : (
-            <UserRound className="text-white" />
-          )}
-        </Button>
-        {isDropdownOpen && <DropdownMenu />}
-      </div>
-    </div>
+    <>
+      {isLoggedin && (
+        <div className="flex items-center gap-4">
+          <div className="relative" ref={languageSwitcherRef}>
+            <Button
+              onClick={toggleLangSwitcher}
+              className="hidden xl:block py-2 px-4 rounded-full hover:bg-[#F7F7F7]"
+            >
+              <Globe size={18} className="text-white" />
+            </Button>
+            {isLangSwitcherOpen && <LanguageSwitcher />}
+          </div>
+          <div className="relative" ref={dropdownRef}>
+            <Button
+              onClick={toggleMenu}
+              className="flex items-center border py-2 px-3 rounded-full gap-2 hover:shadow-lg"
+            >
+              <Menu size={18} className="text-white" />
+              <UserRound className="text-white" />
+            </Button>
+            {isDropdownOpen && <DropdownMenu />}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
