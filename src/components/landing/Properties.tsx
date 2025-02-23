@@ -67,7 +67,7 @@ export default function Properties() {
           <div className="flex justify-center mt-10 mb-5">
             <Button
               onClick={handleShowMore}
-              className="bg-white text-primary border-2 border-primary font-medium py-2 px-4 rounded-lg text-center"
+              className="bg-white zoom text-primary border-2 border-primary font-medium py-2 px-4 rounded-lg text-center"
             >
               <span>{t("show_more")}</span>
             </Button>

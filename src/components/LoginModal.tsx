@@ -141,7 +141,7 @@ function LoginModal() {
           <Button
             disabled={loading}
             type="submit"
-            className="w-full bg-primary text-white py-2 rounded-lg font-bold"
+            className="w-full zoom bg-primary text-white py-2 rounded-lg font-bold"
           >
             {loading ? <Loader /> : "Log in"}
           </Button>

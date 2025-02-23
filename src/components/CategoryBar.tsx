@@ -15,7 +15,7 @@ function CategoryBar() {
   const categoryBarSkeleton = Array.from({ length: 10 });
   return (
     <>
-      <div className="w-full px-5 xl:px-20 py-5">
+      <div className="w-full px-5 xl:px-20 pt-5 pb-5">
         {!typeList ? (
           <Carsoul
             slidesToShow={10}
@@ -39,7 +39,7 @@ function CategoryBar() {
             {typeList?.map((item, index) => (
               <Button
                 key={index}
-                className="flex flex-col justify-center items-center"
+                className="flex flex-col justify-center items-center pt-2 zoom"
               >
                 <span className="w-fit mx-auto mb-2 block">
                   <span className="w-12 h-12 flex justify-center items-center rounded-full border hover:border-black border-dark">

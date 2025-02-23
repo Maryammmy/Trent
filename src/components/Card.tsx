@@ -28,7 +28,7 @@ function Card({ property }: IProps) {
   const priceWithTaxes = basePrice * (1 + taxRate);
   console.log(image);
   return (
-    <div className="bg-white shadow-md rounded-md p-4">
+    <div className="bg-white shadow-md rounded-md p-4 zoom">
       {image?.length > 0 && (
         <div className="overflow-hidden rounded-md">
           <Carsoul
@@ -89,10 +89,10 @@ function Card({ property }: IProps) {
           <p className="text-sm text-dark pt-1">{t("total_before_taxes")}</p>
         )}
         <div className="flex gap-5 mt-2">
-          <Button className="flex-[2] py-1 bg-primary rounded-md text-white font-medium">
+          <Button className="flex-[2] zoom py-1 bg-primary rounded-md text-white font-medium">
             <span>Book Now</span>
           </Button>
-          <Button className="flex-[1] py-1 bg-[#CAE0FE] rounded-md flex justify-center items-center">
+          <Button className="flex-[1] zoom py-1 bg-[#CAE0FE] rounded-md flex justify-center items-center">
             <span>
               <MapPin className="text-primary" size={22} />
             </span>
