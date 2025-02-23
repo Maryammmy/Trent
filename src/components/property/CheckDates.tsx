@@ -1,5 +1,4 @@
 import Counter from "../home/Counter";
-import Button from "../ui/Button";
 import DatePicker from "../ui/DatePicker";
 import { DateValueType } from "react-tailwindcss-datepicker";
 import { useState } from "react";
@@ -44,22 +43,22 @@ function CheckDates() {
         </h2>
         <div className="border border-stone-300 rounded-lg flex flex-col">
           <div className="grid grid-cols-2 border-b border-stone-300 text-sm">
-            <Button className="ps-3 py-1 flex flex-col items-start">
+            <div className="ps-3 py-1 flex flex-col items-start">
               <h3 className="text-black font-bold">{t("check_in")}</h3>
               <DatePicker
                 dateValue={startDateValue}
                 handleValueChange={handleStartValueChange}
                 className="w-20 placeholder:text-dark"
               />
-            </Button>
-            <Button className="border-l rtl:border-r rtl:border-l-0 ps-3 py-1 flex flex-col items-start">
+            </div>
+            <div className="border-l rtl:border-r rtl:border-l-0 ps-3 py-1 flex flex-col items-start">
               <h3 className="text-black font-bold">{t("check_out")}</h3>
               <DatePicker
                 dateValue={endDateValue}
                 handleValueChange={handleEndValueChange}
                 className="w-20 placeholder:text-dark"
               />
-            </Button>
+            </div>
           </div>
           <div className="ps-3 py-1 text-sm">
             <h2 className="text-black font-bold">{t("guests")}</h2>

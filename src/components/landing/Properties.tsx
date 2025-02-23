@@ -59,9 +59,7 @@ export default function Properties() {
           ) : (
             propertyList
               .slice(0, visibleCount)
-              .map((property, index) => (
-                <Cart key={index} property={property} />
-              ))
+              .map((property) => <Cart key={property.id} property={property} />)
           )}
           {loading && <PropertyCardSkeleton cards={ITEMS_TO_LOAD} />}
         </div>

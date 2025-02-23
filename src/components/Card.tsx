@@ -19,7 +19,7 @@ interface IProps {
 
 const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 function Card({ property }: IProps) {
-  const { address, price, property_title, image } = property;
+  const { address, price, property_title, image, id } = property;
   const { t } = useTranslation();
   const { enableTaxes } = useAppSelector((state) => state.taxes);
   const basePrice = Number(price);
@@ -40,7 +40,7 @@ function Card({ property }: IProps) {
             infinite={image.length > 1}
           >
             {image.map((item, index) => (
-              <Link key={index} to={"/properties/1"} className="relative">
+              <Link key={index} to={`/properties/${id}`} className="relative">
                 <div className="absolute top-2 right-1 z-10">
                   <FaHeart size={20} className="text-primary" />
                 </div>
