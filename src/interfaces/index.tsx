@@ -31,3 +31,4 @@ export interface IFooterSection {
   title: string;
   items: ReactNode[];
 }
+export type CurrentLanguage = "en" | "ar";

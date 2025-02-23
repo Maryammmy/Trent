@@ -7,20 +7,23 @@ import FilterModal from "../home/filter/FilterModal";
 import { SlidersHorizontal } from "lucide-react";
 import PropertyCardSkeleton from "../skeleton/PropertyCardSkeleton";
 import CategoryBar from "../CategoryBar";
-// import { useGetData } from "../../hooks/useGetData";
+import { useGetData } from "../../hooks/useGetData";
+import { IProperty } from "../../interfaces/propertyInterface";
 
+const currentLanguage = localStorage.getItem("i18nextLng");
 export default function Properties() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(8);
   const [loading, setLoading] = useState(false);
-  const cartItems = Array.from({ length: 60 });
   const ITEMS_TO_LOAD = 20;
   const { t } = useTranslation();
-  // const { data } = useGetData(
-  //   ["propertyList"],
-  //   `user_api/u_property_list.php?lang=en`
-  // );
-  // console.log(data);
+  const { data } = useGetData(
+    ["propertyList"],
+    `user_api/u_property_list.php?lang=${currentLanguage}`
+  );
+
+  const propertyList: IProperty[] = data?.data?.proplist;
+
   const handleShowMore = () => {
     setLoading(true);
     setTimeout(() => {
@@ -28,6 +31,7 @@ export default function Properties() {
       setLoading(false);
     }, 1000);
   };
+
   return (
     <>
       <div>
@@ -50,12 +54,18 @@ export default function Properties() {
         </div>
         <CategoryBar />
         <div className="px-5 xl:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {cartItems.slice(0, visibleCount).map((_, index) => (
-            <Cart key={index} />
-          ))}
+          {!propertyList ? (
+            <PropertyCardSkeleton cards={8} />
+          ) : (
+            propertyList
+              .slice(0, visibleCount)
+              .map((property, index) => (
+                <Cart key={index} property={property} />
+              ))
+          )}
           {loading && <PropertyCardSkeleton cards={ITEMS_TO_LOAD} />}
         </div>
-        {visibleCount < cartItems.length && !loading && (
+        {visibleCount < propertyList?.length && !loading && (
           <div className="flex justify-center mt-10 mb-5">
             <Button
               onClick={handleShowMore}

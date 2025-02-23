@@ -1,8 +1,5 @@
 import Button from "./ui/Button";
-import {
-  getResponsiveSettingsForCategory,
-  responsive,
-} from "../data/categoryBar";
+import { responsive } from "../data/categoryBar";
 import Carsoul from "./ui/Carsoul";
 import { useGetData } from "../hooks/useGetData";
 import { Home } from "lucide-react";
@@ -15,22 +12,31 @@ function CategoryBar() {
     "user_api/u_property_type.php?lang=en"
   );
   const typeList: ITypeList[] = data?.data?.typelist;
-
+  const categoryBarSkeleton = Array.from({ length: 10 });
   return (
     <>
       <div className="w-full px-5 xl:px-20 py-5">
-        <Carsoul
-          slidesToShow={10}
-          borderColor="2px solid gainsboro"
-          padding="1px"
-          responsive={
-            typeList?.length
-              ? getResponsiveSettingsForCategory(typeList.length)
-              : responsive
-          }
-        >
-          {typeList?.length > 0 ? (
-            typeList.map((item, index) => (
+        {!typeList ? (
+          <Carsoul
+            slidesToShow={10}
+            borderColor="2px solid gainsboro"
+            padding="1px"
+            infinite={false}
+            responsive={responsive}
+          >
+            {categoryBarSkeleton.map((_, index) => (
+              <CategoryBarSkeleton key={index} />
+            ))}
+          </Carsoul>
+        ) : typeList?.length ? (
+          <Carsoul
+            slidesToShow={10}
+            borderColor="2px solid gainsboro"
+            padding="1px"
+            infinite={false}
+            responsive={responsive}
+          >
+            {typeList?.map((item, index) => (
               <Button
                 key={index}
                 className="flex flex-col justify-center items-center"
@@ -44,11 +50,11 @@ function CategoryBar() {
                   {item?.title}
                 </span>
               </Button>
-            ))
-          ) : (
-            <CategoryBarSkeleton cards={10} />
-          )}
-        </Carsoul>
+            ))}
+          </Carsoul>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );

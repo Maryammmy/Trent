@@ -16,6 +16,7 @@ interface IProps {
   autoplay?: boolean;
   autoplaySpeed?: number;
   responsive?: ResponsiveSetting[];
+  infinite?: boolean;
 }
 
 function Carsoul({
@@ -31,13 +32,14 @@ function Carsoul({
   autoplay,
   autoplaySpeed = 5000,
   responsive,
+  infinite = false,
 }: IProps) {
   const settings = {
     slidesToShow: slidesToShow,
     slidesToScroll: 1,
     autoplay: autoplay,
     autoplaySpeed: autoplaySpeed,
-    infinite: true,
+    infinite: infinite,
     arrows: showArrow,
     dots: showDot,
     dotsClass: "custom-dots",
