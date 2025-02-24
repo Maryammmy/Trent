@@ -24,10 +24,6 @@ function MobileAppModal() {
         ? "android"
         : /iPad|iPhone|iPod/i.test(userAgent)
         ? "ios"
-        : /Win/i.test(userAgent)
-        ? "windows"
-        : /Mac/i.test(userAgent)
-        ? "mac"
         : "desktop"
     );
   }, []);
@@ -43,12 +39,14 @@ function MobileAppModal() {
         <h2 className="text-white text-center font-semibold text-3xl pt-2">
           Get our Mobile App for a better experience!
         </h2>
-        <div className="flex justify-center py-4">
+        <div className="flex justify-center py-2">
           <Image imageUrl={mobile} alt="mobile" className="w-40 h-auto" />
         </div>
-        <div className="flex flex-col items-center gap-3">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-3">
           {buttonData
-            .filter((btn) => btn.platform === platform)
+            .filter(
+              (btn) => btn.platform === platform || platform === "desktop"
+            )
             .map((btn, i) => (
               <Button
                 key={i}

@@ -94,16 +94,6 @@ export const buttonData = [
     label: "App Store",
     icon: <FaApple size={45} />,
   },
-  {
-    platform: "windows",
-    label: "Google Play",
-    icon: <FaGooglePlay size={38} />,
-  },
-  {
-    platform: "mac",
-    label: "App Store",
-    icon: <FaApple size={45} />,
-  },
 ];
 
 export const filterButtons: IFilterButton[] = [
