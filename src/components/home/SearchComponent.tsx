@@ -6,9 +6,9 @@ import { Button } from "@headlessui/react";
 import { homeSearch } from "../../data";
 import useClickOutside from "../../hooks/useClickOutside";
 import { setIsDestinationOpen } from "../../store/features/homeSearch/homeSearchSlice";
-import DestinationCard from "../DestinationCard";
+import DestinationCard from "./DestinationCard";
 import DatePicker from "../ui/DatePicker";
-import Counter from "./Counter";
+import Counter from "../ui/Counter";
 import {
   validateEndDate,
   validateStartDate,

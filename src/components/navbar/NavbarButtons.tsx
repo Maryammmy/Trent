@@ -9,8 +9,8 @@ import {
   setIsLangSwitcherOpen,
 } from "../../store/features/homeSearch/homeSearchSlice";
 import Button from "../ui/Button";
-import LanguageSwitcher from "../LanguageSwitcher";
-import DropdownMenu from "../ui/DropdownMenu";
+import LanguageSwitcher from "./LanguageSwitcher";
+import DropdownMenu from "./DropdownMenu";
 
 const isLoggedin = Cookies.get("user_id");
 const NavbarButtons = () => {

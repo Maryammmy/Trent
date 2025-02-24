@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Counter from "../../../components/home/Counter";
+import Counter from "../../../components/ui/Counter";
 import { useTranslation } from "react-i18next";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";

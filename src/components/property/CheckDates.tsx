@@ -1,4 +1,4 @@
-import Counter from "../home/Counter";
+import Counter from "../ui/Counter";
 import DatePicker from "../ui/DatePicker";
 import { DateValueType } from "react-tailwindcss-datepicker";
 import { useState } from "react";

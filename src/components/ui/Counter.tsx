@@ -1,4 +1,4 @@
-import Button from "../ui/Button";
+import Button from "./Button";
 import { Minus, Plus } from "lucide-react";
 interface Iprops {
   width?: string;

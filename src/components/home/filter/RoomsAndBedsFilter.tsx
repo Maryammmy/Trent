@@ -1,4 +1,4 @@
-import Counter from "../Counter";
+import Counter from "../../ui/Counter";
 import { filterRoomsAndBeds } from "../../../data";
 import { useTranslation } from "react-i18next";
 

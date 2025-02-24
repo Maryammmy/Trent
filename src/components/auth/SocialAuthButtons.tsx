@@ -1,6 +1,6 @@
-import Button from "./ui/Button";
-import Image from "./ui/Image";
-import { buttons } from "../data";
+import Button from "../ui/Button";
+import Image from "../ui/Image";
+import { buttons } from "../../data";
 
 function SocialAuthButtons() {
   return (

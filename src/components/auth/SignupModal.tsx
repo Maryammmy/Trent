@@ -1,49 +1,50 @@
-import { useState } from "react";
 import { Eye, EyeOff, X } from "lucide-react";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import Button from "../ui/Button";
+import Modal from "../ui/Modal";
+import Input from "../ui/Input";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { signupData } from "../../data/authData";
+import { setIsSignup } from "../../store/features/auth/authSlice";
+import { SignupNameInputs } from "../../interfaces/authInterface";
+import { signupAPI } from "../../services/authService";
 import toast from "react-hot-toast";
-import Cookies from "js-cookie";
+import { useState } from "react";
+import { signupSchema } from "../../validation/signupSchema ";
+import InputErrorMessage from "../ui/InputErrorMessage";
+import { yupResolver } from "@hookform/resolvers/yup";
+import Loader from "../loader/Loader";
 import { AxiosError } from "axios";
-import { Link } from "react-router-dom";
-import Button from "./ui/Button";
-import Modal from "./ui/Modal";
-import Input from "./ui/Input";
-import InputErrorMessage from "./ui/InputErrorMessage";
-import Loader from "./loader/Loader";
-import CountrySelector from "./ui/CountrySelector";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setIsloggedin } from "../store/features/auth/authSlice";
-import { loginSchema } from "../validation/loginSchema";
-import { LoginNameInputs } from "../interfaces/authInterface";
-import { loginAPI } from "../services/authService";
-import { loginData } from "../data/authData";
+import CountrySelector from "../ui/CountrySelector";
 
-function LoginModal() {
+function SignupModal() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
-  const { isLoggedin } = useAppSelector((state) => state.auth);
-
+  const { isSignup } = useAppSelector((state) => state.auth);
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginNameInputs>({
-    resolver: yupResolver(loginSchema),
-    defaultValues: { mobile: "", password: "", ccode: "+20" },
+  } = useForm<SignupNameInputs>({
+    resolver: yupResolver(signupSchema),
+    defaultValues: {
+      mobile: "",
+      password: "",
+      ccode: "+20",
+      confirmPassword: "",
+      email: "",
+      name: "",
+    },
   });
-
-  const onSubmit: SubmitHandler<LoginNameInputs> = async (data) => {
+  const onSubmit: SubmitHandler<SignupNameInputs> = async (data) => {
     try {
       setLoading(true);
-      console.log(data);
-      const response = await loginAPI(data);
+      const response = await signupAPI(data);
       if (response?.data?.ResponseCode === "200") {
         toast.success(response?.data?.ResponseMsg);
-        Cookies.set("user_id", response?.data?.UserLogin?.id, { expires: 365 });
         setTimeout(() => {
-          dispatch(setIsloggedin(false));
+          dispatch(setIsSignup(false));
           window.location.reload();
         }, 500);
       } else {
@@ -56,27 +57,28 @@ function LoginModal() {
       setLoading(false);
     }
   };
-
   return (
     <Modal
       maxWidth="600px"
-      className="text-lg text-center p-4 border-b font-semibold"
-      title="Log in"
-      close={() => dispatch(setIsloggedin(false))}
-      isOpen={isLoggedin}
+      className="text-2xl text-center p-4 border-b font-semibold"
+      title="Sign up"
+      close={() => dispatch(setIsSignup(false))}
+      isOpen={isSignup}
     >
       <Button
-        onClick={() => dispatch(setIsloggedin(false))}
-        className="absolute top-5 right-4 text-gray-500 hover:text-black"
+        onClick={() => dispatch(setIsSignup(false))}
+        className="absolute top-5 right-4 text-gray-500"
       >
         <span>
           <X className="text-black" size={20} />
         </span>
       </Button>
-      <div className="p-6">
-        <h2 className="text-lg font-semibold pb-4">Welcome to Trent</h2>
+      <div className="p-10">
+        <div className="pb-4">
+          <h2 className="text-lg font-semibold">Welcome to Trent</h2>
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {loginData.map(({ name, label, type, placeholder }) => (
+          {signupData.map(({ name, label, type, placeholder }) => (
             <Controller
               key={name}
               name={name}
@@ -86,8 +88,8 @@ function LoginModal() {
                   <label className="block text-sm font-medium mb-1">
                     {label}
                   </label>
-                  <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
-                    {name === "password" ? (
+                  <div className="flex w-full border hover:border-black border-gray-300 rounded-lg p-3 focus-within:border-2 !focus-within:border-primary">
+                    {name === "password" || name === "confirmPassword" ? (
                       <>
                         <Input
                           {...field}
@@ -132,18 +134,12 @@ function LoginModal() {
               />
             )}
           />
-
-          <div className="flex justify-end mb-4">
-            <Link to="/" className="font-medium">
-              Forget password?
-            </Link>
-          </div>
           <Button
             disabled={loading}
             type="submit"
             className="w-full zoom bg-primary text-white py-2 rounded-lg font-bold"
           >
-            {loading ? <Loader /> : "Log in"}
+            {loading ? <Loader /> : "Sign up"}
           </Button>
         </form>
       </div>
@@ -151,4 +147,4 @@ function LoginModal() {
   );
 }
 
-export default LoginModal;
+export default SignupModal;

@@ -1,11 +1,11 @@
 import { Globe, Menu, UserRound } from "lucide-react";
 import Button from "./ui/Button";
-import DropdownMenu from "./ui/DropdownMenu";
+import DropdownMenu from "./navbar/DropdownMenu";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import HomeSearch from "./home/HomeSearch";
 import logo from "../assets/iamges/logo.png";
 import Image from "./ui/Image";
-import LanguageSwitcher from "./LanguageSwitcher";
+import LanguageSwitcher from "./navbar/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
@@ -13,10 +13,10 @@ import {
   setIsDropdownOpen,
   setIsLangSwitcherOpen,
 } from "../store/features/homeSearch/homeSearchSlice";
-import LoginModal from "./LoginModal";
+import LoginModal from "./auth/LoginModal";
 import { useRef } from "react";
 import useClickOutside from "../hooks/useClickOutside";
-import SignupModal from "./SignupModal";
+import SignupModal from "./auth/SignupModal";
 
 export default function Header() {
   const { t } = useTranslation();
