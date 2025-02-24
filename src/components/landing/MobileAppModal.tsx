@@ -12,16 +12,13 @@ function MobileAppModal() {
 
   useEffect(() => {
     const hasSeenModal = sessionStorage.getItem("hasSeenMobileAppModal");
-
     if (!hasSeenModal) {
       const timeout = setTimeout(() => {
         setIsOpenMobileAppModal(true);
         sessionStorage.setItem("hasSeenMobileAppModal", "true");
       }, 1000);
-
       return () => clearTimeout(timeout);
     }
-
     const userAgent = navigator.userAgent || navigator.vendor;
     if (/android/i.test(userAgent)) {
       setPlatform("android");
@@ -34,9 +31,7 @@ function MobileAppModal() {
 
   const renderButtons = () => {
     return buttonData
-      .filter(
-        (button) => platform === "desktop" || button.platform === platform
-      )
+      .filter((button) => button.platform === platform)
       .map((button, index) => (
         <Button
           key={index}
@@ -79,15 +74,12 @@ function MobileAppModal() {
             />
           </div>
         </div>
-        <div
-          className={`flex flex-col lg:flex-row gap-5 items-center pt-2 ${
-            platform === "desktop" ? "justify-between" : "justify-center"
-          }`}
-        >
+        <div className="flex flex-col items-center gap-5 pt-2">
           {renderButtons()}
         </div>
       </div>
     </Modal>
   );
 }
+
 export default MobileAppModal;
