@@ -1,8 +1,5 @@
 import { X } from "lucide-react";
-import {
-  setIsForgetPassword,
-  setIsloggedin,
-} from "../../store/features/auth/authSlice";
+import { setIsForgetPassword } from "../../store/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import Button from "../ui/Button";
 import Modal from "../ui/Modal";
