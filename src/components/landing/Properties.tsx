@@ -18,12 +18,10 @@ export default function Properties() {
   const ITEMS_TO_LOAD = 20;
   const { t } = useTranslation();
   const { data } = useGetData(
-    ["propertyList"],
+    ["properties"],
     `user_api/u_property_list.php?lang=${currentLanguage}`
   );
-
-  const propertyList: IProperty[] = data?.data?.proplist;
-
+  const properties: IProperty[] = data?.data?.proplist;
   const handleShowMore = () => {
     setLoading(true);
     setTimeout(() => {
@@ -31,7 +29,6 @@ export default function Properties() {
       setLoading(false);
     }, 1000);
   };
-
   return (
     <>
       <div>
@@ -53,17 +50,27 @@ export default function Properties() {
           </Button>
         </div>
         <CategoryBar />
-        <div className="px-5 xl:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {!propertyList ? (
+        <div
+          className={`px-5 xl:px-20 ${
+            properties?.length || !properties
+              ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
+              : ""
+          }`}
+        >
+          {!data ? (
             <PropertyCardSkeleton cards={8} />
-          ) : (
-            propertyList
-              .slice(0, visibleCount)
+          ) : properties?.length ? (
+            properties
+              ?.slice(0, visibleCount)
               .map((property) => <Cart key={property.id} property={property} />)
+          ) : (
+            <div className="flex justify-center items-center bg-slate-400 h-[50vh] text-dark font-medium w-full">
+              No properties found
+            </div>
           )}
           {loading && <PropertyCardSkeleton cards={ITEMS_TO_LOAD} />}
         </div>
-        {visibleCount < propertyList?.length && !loading && (
+        {visibleCount < properties?.length && !loading && (
           <div className="flex justify-center mt-10 mb-5">
             <Button
               onClick={handleShowMore}

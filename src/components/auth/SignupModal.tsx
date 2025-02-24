@@ -9,7 +9,7 @@ import { setIsSignup } from "../../store/features/auth/authSlice";
 import { SignupNameInputs } from "../../interfaces/authInterface";
 import { signupAPI } from "../../services/authService";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { signupSchema } from "../../validation/signupSchema ";
 import InputErrorMessage from "../ui/InputErrorMessage";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -79,7 +79,7 @@ function SignupModal() {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           {signupData.map(({ name, label, type, placeholder }) => (
-            <>
+            <Fragment key={name}>
               {name === "mobile" && (
                 <Controller
                   key="ccode"
@@ -137,7 +137,7 @@ function SignupModal() {
                   </div>
                 )}
               />
-            </>
+            </Fragment>
           ))}
 
           <Button

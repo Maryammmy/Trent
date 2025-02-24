@@ -15,7 +15,7 @@ export default function PropertyCardSkeleton({ cards }: { cards: number }) {
                   />
                 ))}
               </div>
-              <div className="h-4 w-12 rounded-md bg-stone-200   animate-pulse"></div>
+              <div className="h-4 w-12 rounded-md bg-stone-200 animate-pulse"></div>
             </div>
           </div>
         ))}

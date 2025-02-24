@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CheckDates from "../../components/property/CheckDates";
 import HostedBy from "../../components/property/HostedBy";
 import Image from "../../components/ui/Image";
@@ -11,8 +11,7 @@ import { useTranslation } from "react-i18next";
 
 function Property() {
   const { t } = useTranslation();
-  const { id } = useParams();
-  console.log(id);
+  // const { id } = useParams();
   return (
     <>
       <div className="px-5 xl:px-20 py-2 lg:py-6">

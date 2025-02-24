@@ -10,18 +10,20 @@ import { getResponsiveSettings, responsiveSettings } from "../data/landingData";
 import { useGetData } from "../hooks/useGetData";
 import SilderSkeleton from "../components/skeleton/SilderSkeleton";
 
+const currentLanguage = localStorage.getItem("i18nextLng");
 function Home() {
   const bgImages: string[] = [place1, place2, place3, place4];
-
   const isMobile = useMediaQuery({ maxWidth: 480 });
   const isTablet = useMediaQuery({ maxWidth: 768 });
-
   const carouselProps = isMobile
     ? { padding: "2px", right: "5px", left: "5px" }
     : isTablet
     ? { padding: "5px" }
     : { padding: "10px" };
-  const { data } = useGetData(["slider"], "user_api/u_slider.php?lang=en");
+  const { data } = useGetData(
+    ["slider"],
+    `user_api/u_slider.php?lang=${currentLanguage}`
+  );
   const sliderList = data?.data?.sliderlist;
   return (
     <>

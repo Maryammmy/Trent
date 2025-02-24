@@ -6,7 +6,7 @@ interface Props {
   handleClear: () => void;
   close: () => void;
   selectedPlace: string;
-  selectedAmenities: string[];
+  selectedFacilities: string[];
   selectedProperty: string;
   values: number[];
 }

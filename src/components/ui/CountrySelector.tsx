@@ -25,8 +25,8 @@ export default function CountrySelector({
           const data: Country[] = await response.json();
           setCountries(data);
         }
-      } catch (error) {
-        console.error("Error fetching countries:", error);
+      } catch {
+        return null;
       }
     };
     fetchCountries();

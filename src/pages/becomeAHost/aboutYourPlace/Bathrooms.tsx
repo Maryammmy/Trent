@@ -29,7 +29,6 @@ function BathRooms() {
       return updatedCounters;
     });
   };
-  console.log(bathroomsCounters);
   const isNextDisabled = Object.values(bathroomsCounters).every(
     (value) => value === 0
   );

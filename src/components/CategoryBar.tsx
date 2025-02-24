@@ -6,10 +6,11 @@ import { Home } from "lucide-react";
 import { ITypeList } from "../interfaces/landingInterface";
 import CategoryBarSkeleton from "./skeleton/CategoryBarSkeleton";
 
+const currentLanguage = localStorage.getItem("i18nextLng");
 function CategoryBar() {
   const { data } = useGetData(
     ["propertyType"],
-    "user_api/u_property_type.php?lang=en"
+    `user_api/u_property_type.php?lang=${currentLanguage}`
   );
   const typeList: ITypeList[] = data?.data?.typelist;
   const categoryBarSkeleton = Array.from({ length: 10 });

@@ -1,17 +1,18 @@
 import { X } from "lucide-react";
 import Modal from "../../ui/Modal";
 import Button from "../../ui/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { filterRoomsAndBeds } from "../../../data";
 import Range from "./Range";
 import TypeOfPlaceFilter from "./TypeOfPlaceFilter";
 import RoomsAndBedsFilter from "./RoomsAndBedsFilter";
-import AmenitiesFilter from "./AmenitiesFilter";
 import PropertyTypeFilter from "./PropertyTypeFilter";
 import FilterActions from "./FilterActions";
 import { useGetData } from "../../../hooks/useGetData";
+import FacilitiesFilter from "./FacilitiesFilter";
 
+const currentLanguage = localStorage.getItem("i18nextLng");
 interface IProps {
   isFilterOpen: boolean;
   close: () => void;
@@ -25,20 +26,20 @@ function FilterModal({ isFilterOpen, close }: IProps) {
     initialCounters
   );
   const [selectedPlace, setSelectedPlace] = useState<string>("");
-  const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
+  const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
   const [selectedProperty, setSelectedProperty] = useState<string>("");
   const { data } = useGetData(
     ["minMaxPrice"],
-    "/user_api/u_min_max_price.php?lang=en"
+    `user_api/u_min_max_price.php?lang=${currentLanguage}`
   );
-  const [values, setValues] = useState(() => [
-    data?.data?.min_price,
-    data?.data?.max_price,
-  ]);
-
-  console.log(data?.data);
-  const handleSelectedAmenities = (id: string) => {
-    setSelectedAmenities((prev) =>
+  const [values, setValues] = useState<number[]>([]);
+  useEffect(() => {
+    if (data?.data?.min_price && data?.data?.max_price) {
+      setValues([data?.data?.min_price, data?.data?.max_price]);
+    }
+  }, [data]);
+  const handleSelectedFacilities = (id: string) => {
+    setSelectedFacilities((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
   };
@@ -49,7 +50,7 @@ function FilterModal({ isFilterOpen, close }: IProps) {
     setSelectedPlace("");
     setValues([500, 50000]);
     setCounters(initialCounters);
-    setSelectedAmenities([]);
+    setSelectedFacilities([]);
     setSelectedProperty("");
   };
 
@@ -80,9 +81,9 @@ function FilterModal({ isFilterOpen, close }: IProps) {
           />
         </div>
         <RoomsAndBedsFilter counters={counters} updateCounter={updateCounter} />
-        <AmenitiesFilter
-          selectedAmenities={selectedAmenities}
-          handleSelectedAmenities={handleSelectedAmenities}
+        <FacilitiesFilter
+          selectedFacilities={selectedFacilities}
+          handleSelectedFacilities={handleSelectedFacilities}
         />
         <PropertyTypeFilter
           selectedProperty={selectedProperty}
@@ -92,7 +93,7 @@ function FilterModal({ isFilterOpen, close }: IProps) {
           close={close}
           handleClear={handleClear}
           selectedPlace={""}
-          selectedAmenities={[]}
+          selectedFacilities={[]}
           selectedProperty={""}
           values={[]}
         />

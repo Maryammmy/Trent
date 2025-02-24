@@ -12,11 +12,11 @@ export interface INavItem {
   label: string;
   to: string;
 }
-export interface ITypeList {
+export interface IPropertyTypeList {
   id: string;
   title: string;
 }
-export interface IFacilityList {
+export interface IFacility {
   id: string;
   title: string;
 }

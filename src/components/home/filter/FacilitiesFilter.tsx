@@ -1,40 +1,40 @@
 import Button from "../../ui/Button";
 import { useTranslation } from "react-i18next";
 import { useGetData } from "../../../hooks/useGetData";
-import { IPropertyTypeList } from "../../../interfaces/landingInterface";
 import { Home } from "lucide-react";
 import PropertyTypeSkeleton from "../../skeleton/propertyTypeSkeleton";
+import { IFacility } from "../../../interfaces/landingInterface";
 
 interface Props {
-  selectedProperty: string;
-  handleSelectedProperty: (property: string) => void;
+  selectedFacilities: string[];
+  handleSelectedFacilities: (amenity: string) => void;
 }
 const currentLanguage = localStorage.getItem("i18nextLng");
-function PropertyTypeFilter({
-  selectedProperty,
-  handleSelectedProperty,
+function FacilitiesFilter({
+  selectedFacilities,
+  handleSelectedFacilities,
 }: Props) {
   const { t } = useTranslation();
   const { data } = useGetData(
-    ["propertyTypeList"],
-    `user_api/u_property_type.php?lang=${currentLanguage}`
+    ["facilities"],
+    `user_api/u_facility.php?lang=${currentLanguage}`
   );
-  const propertyTypeList: IPropertyTypeList[] = data?.data.typelist;
+  const facilities: IFacility[] = data?.data?.facilitylist;
   return (
-    <div className="py-4">
-      <h2 className="text-lg font-bold pb-4">{t("property_type")}</h2>
+    <div className="py-4 border-b">
+      <h2 className="text-lg font-bold pb-4">{t("facilities")}</h2>
       <div className="flex flex-wrap gap-2">
-        {!propertyTypeList ? (
+        {!facilities ? (
           <PropertyTypeSkeleton cards={8} />
-        ) : propertyTypeList?.length ? (
-          propertyTypeList?.map((item, index) => {
+        ) : facilities?.length ? (
+          facilities?.map((item, index) => {
             const { title, id } = item;
             return (
               <Button
                 key={index}
-                onClick={() => handleSelectedProperty(id)}
-                className={`flex gap-2 font-medium border rounded-full py-2 px-4 ${
-                  selectedProperty === id && "bg-zinc-50 border-black"
+                onClick={() => handleSelectedFacilities(id)}
+                className={`flex flex-wrap gap-2 font-medium border rounded-full py-2 px-3 ${
+                  selectedFacilities.includes(id) && "bg-zinc-50 border-black"
                 }`}
               >
                 <span>{title}</span>
@@ -46,7 +46,7 @@ function PropertyTypeFilter({
           })
         ) : (
           <div className="flex justify-center items-center text-dark font-medium w-full">
-            No property type found
+            No facilities found
           </div>
         )}
       </div>
@@ -54,4 +54,4 @@ function PropertyTypeFilter({
   );
 }
 
-export default PropertyTypeFilter;
+export default FacilitiesFilter;
