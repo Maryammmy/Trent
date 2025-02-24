@@ -4,10 +4,16 @@ import Navbar from "../components/navbar/Navbar";
 import LoginModal from "../components/auth/LoginModal";
 import SignupModal from "../components/auth/SignupModal";
 import ForgetPasswordModal from "../components/auth/ForgetPasswordModal";
+import { useEffect } from "react";
+import { useAppDispatch } from "../store/hooks";
+import { setToggle } from "../store/features/navbar/navbarSlice";
 
 const RootLayout = () => {
   const { pathname } = useLocation();
-
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(setToggle(false));
+  }, [pathname]);
   return (
     <>
       <Navbar />

@@ -6,7 +6,9 @@ function ContactUs() {
     <div>
       <div className="bg-contact-us bg-no-repeat bg-fixed bg-[length:100%_100%] h-[50vh] w-full">
         <div className="flex justify-center items-center h-full">
-          <h2 className="text-6xl font-bold text-white">Contact Us</h2>
+          <h2 className="text-3xl md:text-6xl font-bold text-white">
+            Contact Us
+          </h2>
         </div>
       </div>
       <div className="py-10 px-5 xl:px-20 flex flex-col md:flex-row gap-10 md:gap-0 md:justify-between">
