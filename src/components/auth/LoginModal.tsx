@@ -77,6 +77,16 @@ function LoginModal() {
       <div className="p-10">
         <h2 className="text-lg font-semibold pb-4">Welcome to Trent</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            name="ccode"
+            control={control}
+            render={({ field }) => (
+              <CountrySelector
+                selectedCountry={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
           {loginData.map(({ name, label, type, placeholder }) => (
             <Controller
               key={name}
@@ -123,17 +133,6 @@ function LoginModal() {
               )}
             />
           ))}
-          <Controller
-            name="ccode"
-            control={control}
-            render={({ field }) => (
-              <CountrySelector
-                selectedCountry={field.value}
-                onChange={field.onChange}
-              />
-            )}
-          />
-
           <div className="flex justify-end mb-4">
             <Button
               type="button"

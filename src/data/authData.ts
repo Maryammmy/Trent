@@ -30,7 +30,7 @@ export const signupData: ISignupInputs[] = [
   {
     name: "mobile",
     label: "Phone number",
-    placeholder: "**********",
+    placeholder: "Enter your phone number",
     type: "text",
   },
   {

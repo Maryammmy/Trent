@@ -79,61 +79,67 @@ function SignupModal() {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           {signupData.map(({ name, label, type, placeholder }) => (
-            <Controller
-              key={name}
-              name={name}
-              control={control}
-              render={({ field }) => (
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-1">
-                    {label}
-                  </label>
-                  <div className="flex w-full border hover:border-black border-gray-300 rounded-lg p-3 focus-within:border-2 !focus-within:border-primary">
-                    {name === "password" || name === "confirmPassword" ? (
-                      <>
+            <>
+              {name === "mobile" && (
+                <Controller
+                  key="ccode"
+                  name="ccode"
+                  control={control}
+                  render={({ field }) => (
+                    <CountrySelector
+                      selectedCountry={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              )}
+              <Controller
+                key={name}
+                name={name}
+                control={control}
+                render={({ field }) => (
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium mb-1">
+                      {label}
+                    </label>
+                    <div className="flex w-full border hover:border-black border-gray-300 rounded-lg p-3 focus-within:border-2 !focus-within:border-primary">
+                      {name === "password" || name === "confirmPassword" ? (
+                        <>
+                          <Input
+                            {...field}
+                            type={showPassword ? "text" : "password"}
+                            placeholder={placeholder}
+                            className="w-full outline-none bg-transparent"
+                          />
+                          <Button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                          >
+                            {showPassword ? (
+                              <EyeOff strokeWidth={2.5} />
+                            ) : (
+                              <Eye strokeWidth={2.5} />
+                            )}
+                          </Button>
+                        </>
+                      ) : (
                         <Input
                           {...field}
-                          type={showPassword ? "text" : "password"}
+                          type={type}
                           placeholder={placeholder}
                           className="w-full outline-none bg-transparent"
                         />
-                        <Button
-                          type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          {showPassword ? (
-                            <EyeOff strokeWidth={2.5} />
-                          ) : (
-                            <Eye strokeWidth={2.5} />
-                          )}
-                        </Button>
-                      </>
-                    ) : (
-                      <Input
-                        {...field}
-                        type={type}
-                        placeholder={placeholder}
-                        className="w-full outline-none bg-transparent"
-                      />
+                      )}
+                    </div>
+                    {errors[name] && (
+                      <InputErrorMessage msg={errors[name]?.message} />
                     )}
                   </div>
-                  {errors[name] && (
-                    <InputErrorMessage msg={errors[name]?.message} />
-                  )}
-                </div>
-              )}
-            />
-          ))}
-          <Controller
-            name="ccode"
-            control={control}
-            render={({ field }) => (
-              <CountrySelector
-                selectedCountry={field.value}
-                onChange={field.onChange}
+                )}
               />
-            )}
-          />
+            </>
+          ))}
+
           <Button
             disabled={loading}
             type="submit"
