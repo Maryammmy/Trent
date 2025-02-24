@@ -95,12 +95,12 @@ export const buttonData = [
     icon: <FaApple size={45} />,
   },
   {
-    platform: "windows", // جديد
+    platform: "windows",
     label: "Google Play",
     icon: <FaGooglePlay size={38} />,
   },
   {
-    platform: "mac", // جديد
+    platform: "mac",
     label: "App Store",
     icon: <FaApple size={45} />,
   },

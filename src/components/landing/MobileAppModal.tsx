@@ -7,81 +7,60 @@ import Image from "../ui/Image";
 import { buttonData } from "../../data/landingData";
 
 function MobileAppModal() {
-  const [isOpenMobileAppModal, setIsOpenMobileAppModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [platform, setPlatform] = useState("desktop");
 
   useEffect(() => {
-    const hasSeenModal = sessionStorage.getItem("hasSeenMobileAppModal");
-    if (!hasSeenModal) {
-      const timeout = setTimeout(() => {
-        setIsOpenMobileAppModal(true);
+    if (!sessionStorage.getItem("hasSeenMobileAppModal")) {
+      setTimeout(() => {
+        setIsOpen(true);
         sessionStorage.setItem("hasSeenMobileAppModal", "true");
       }, 1000);
-      return () => clearTimeout(timeout);
     }
 
     const userAgent = navigator.userAgent || navigator.vendor;
-
-    if (/android/i.test(userAgent)) {
-      setPlatform("android");
-    } else if (/iPad|iPhone|iPod/i.test(userAgent)) {
-      setPlatform("ios");
-    } else if (/Win/i.test(userAgent)) {
-      setPlatform("windows"); // لو الجهاز Windows
-    } else if (/Mac/i.test(userAgent)) {
-      setPlatform("mac"); // لو الجهاز Mac
-    } else {
-      setPlatform("desktop"); // باقي الأنظمة
-    }
+    setPlatform(
+      /android/i.test(userAgent)
+        ? "android"
+        : /iPad|iPhone|iPod/i.test(userAgent)
+        ? "ios"
+        : /Win/i.test(userAgent)
+        ? "windows"
+        : /Mac/i.test(userAgent)
+        ? "mac"
+        : "desktop"
+    );
   }, []);
 
-  const renderButtons = () => {
-    return buttonData
-      .filter((button) => button.platform === platform)
-      .map((button, index) => (
-        <Button
-          key={index}
-          className="text-primary bg-white w-52 py-1 px-2 rounded-md flex"
-        >
-          <div className="flex justify-center items-center gap-2">
-            <span>{button.icon}</span>
-            <div className="font-medium flex flex-col items-start">
-              <span>Download on the</span>
-              <span>{button.label}</span>
-            </div>
-          </div>
-        </Button>
-      ));
-  };
-
   return (
-    <Modal
-      isOpen={isOpenMobileAppModal}
-      close={() => setIsOpenMobileAppModal(false)}
-      maxWidth="600px"
-    >
+    <Modal isOpen={isOpen} close={() => setIsOpen(false)} maxWidth="600px">
       <div className="p-6 rounded-lg bg-primary">
-        <div className="flex justify-end items-center">
-          <Button onClick={() => setIsOpenMobileAppModal(false)}>
-            <span>
-              <X className="text-white" />
-            </span>
+        <div className="flex justify-end">
+          <Button onClick={() => setIsOpen(false)}>
+            <X className="text-white" />
           </Button>
         </div>
-        <h2 className="text-white font-semibold text-3xl pt-2">
+        <h2 className="text-white text-center font-semibold text-3xl pt-2">
           Get our Mobile App for a better experience!
         </h2>
         <div className="flex justify-center py-4">
-          <div className="">
-            <Image
-              imageUrl={mobile}
-              alt="mobile"
-              className="w-full h-full object-cover"
-            />
-          </div>
+          <Image imageUrl={mobile} alt="mobile" className="w-40 h-auto" />
         </div>
-        <div className="flex flex-col items-center gap-5 pt-2">
-          {renderButtons()}
+        <div className="flex flex-col items-center gap-3">
+          {buttonData
+            .filter((btn) => btn.platform === platform)
+            .map((btn, i) => (
+              <Button
+                key={i}
+                className="bg-white text-primary rounded-md w-52 p-2 flex items-center gap-2"
+              >
+                <span>{btn.icon}</span>
+                <span className="font-medium flex flex-col items-start">
+                  <span>Download on the</span>
+                  <span>{btn.label}</span>
+                </span>
+              </Button>
+            ))}
         </div>
       </div>
     </Modal>
