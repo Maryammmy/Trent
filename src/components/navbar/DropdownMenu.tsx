@@ -18,7 +18,7 @@ function DropdownMenu() {
   return (
     <>
       <div
-        className={`z-50 hidden md:block absolute top-10 mt-2 min-w-48 bg-white border border-gray-300 rounded-lg shadow-lg p-2 ${
+        className={`z-50 absolute top-10 mt-2 min-w-48 bg-white border border-gray-300 rounded-lg shadow-lg p-2 ${
           document.documentElement.dir === "rtl" ? "left-0" : "right-0"
         }`}
       >

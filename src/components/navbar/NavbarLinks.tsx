@@ -37,8 +37,8 @@ const NavbarLinks = () => {
                     ? () => dispatch(setIsSignup(true))
                     : () => dispatch(setIsloggedin(true))
                 }
-                className={`px-6 h-12 text-white font-semibold rounded-lg hover:bg-gray-300 transition ${
-                  item === "log_in" ? "border" : "bg-primary"
+                className={`px-6 lg:h-12 text-white font-semibold rounded-lg hover:bg-gray-300 transition ${
+                  item === "log_in" ? "lg:border" : "bg-primary"
                 }`}
               >
                 {t(item)}

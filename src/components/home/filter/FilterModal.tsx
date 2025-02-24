@@ -34,9 +34,11 @@ function FilterModal({ isFilterOpen, close }: IProps) {
     "/user_api/u_min_max_price.php?lang=en"
   );
   const [values, setValues] = useState([
-    data?.data?.min_price || 500,
-    data?.data?.max_price || 50000,
+    data?.data?.min_price ?? 500,
+    data?.data?.max_price ?? 50000,
   ]);
+
+  console.log(data?.data);
   const handleSelectedAmenities = (id: string) => {
     setSelectedAmenities((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
@@ -88,7 +90,14 @@ function FilterModal({ isFilterOpen, close }: IProps) {
           selectedProperty={selectedProperty}
           handleSelectedProperty={(id: string) => setSelectedProperty(id)}
         />
-        <FilterActions close={close} handleClear={handleClear} />
+        <FilterActions
+          close={close}
+          handleClear={handleClear}
+          selectedPlace={""}
+          selectedAmenities={[]}
+          selectedProperty={""}
+          values={[]}
+        />
       </div>
     </Modal>
   );

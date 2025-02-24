@@ -11,6 +11,7 @@ import {
 import Button from "../ui/Button";
 import LanguageSwitcher from "./LanguageSwitcher";
 import DropdownMenu from "./DropdownMenu";
+import { setToggle } from "../../store/features/navbar/navbarSlice";
 
 const isLoggedin = Cookies.get("user_id");
 const NavbarButtons = () => {
@@ -37,6 +38,7 @@ const NavbarButtons = () => {
     dispatch(setIsDropdownOpen(!isDropdownOpen));
     dispatch(setIsLangSwitcherOpen(false));
     dispatch(setIsDestinationOpen(false));
+    dispatch(setToggle(false));
   };
 
   return (
@@ -46,19 +48,19 @@ const NavbarButtons = () => {
           <div className="relative" ref={languageSwitcherRef}>
             <Button
               onClick={toggleLangSwitcher}
-              className="hidden xl:block py-2 px-4 rounded-full hover:bg-[#F7F7F7]"
+              className="hidden xl:block py-2 px-4 rounded-full text-white hover:bg-[#F7F7F7] hover:text-dark"
             >
-              <Globe size={18} className="text-white" />
+              <Globe size={18} />
             </Button>
             {isLangSwitcherOpen && <LanguageSwitcher />}
           </div>
           <div className="relative" ref={dropdownRef}>
             <Button
               onClick={toggleMenu}
-              className="flex items-center border py-2 px-3 rounded-full gap-2 hover:shadow-lg"
+              className="flex items-center border py-2 px-3 rounded-full gap-2 text-white hover:bg-[#F7F7F7] hover:text-dark"
             >
-              <Menu size={18} className="text-white" />
-              <UserRound className="text-white" />
+              <Menu size={18} />
+              <UserRound />
             </Button>
             {isDropdownOpen && <DropdownMenu />}
           </div>
