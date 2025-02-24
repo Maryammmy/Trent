@@ -19,13 +19,19 @@ function MobileAppModal() {
       }, 1000);
       return () => clearTimeout(timeout);
     }
+
     const userAgent = navigator.userAgent || navigator.vendor;
+
     if (/android/i.test(userAgent)) {
       setPlatform("android");
-    } else if (/iPad|iPhone|iPod/.test(userAgent)) {
+    } else if (/iPad|iPhone|iPod/i.test(userAgent)) {
       setPlatform("ios");
+    } else if (/Win/i.test(userAgent)) {
+      setPlatform("windows"); // لو الجهاز Windows
+    } else if (/Mac/i.test(userAgent)) {
+      setPlatform("mac"); // لو الجهاز Mac
     } else {
-      setPlatform("desktop");
+      setPlatform("desktop"); // باقي الأنظمة
     }
   }, []);
 

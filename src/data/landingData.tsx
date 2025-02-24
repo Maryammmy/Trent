@@ -82,6 +82,7 @@ export const chooseUs: IChooseUs[] = [
     title: "Customer Service 24/7",
   },
 ];
+
 export const buttonData = [
   {
     platform: "android",
@@ -93,7 +94,18 @@ export const buttonData = [
     label: "App Store",
     icon: <FaApple size={45} />,
   },
+  {
+    platform: "windows", // جديد
+    label: "Google Play",
+    icon: <FaGooglePlay size={38} />,
+  },
+  {
+    platform: "mac", // جديد
+    label: "App Store",
+    icon: <FaApple size={45} />,
+  },
 ];
+
 export const filterButtons: IFilterButton[] = [
   {
     text: "clear",
