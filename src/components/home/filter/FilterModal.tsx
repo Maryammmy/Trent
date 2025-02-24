@@ -16,11 +16,9 @@ interface IProps {
   isFilterOpen: boolean;
   close: () => void;
 }
-
 const initialCounters = Object.fromEntries(
   filterRoomsAndBeds.map((key) => [key, 0])
 );
-
 function FilterModal({ isFilterOpen, close }: IProps) {
   const { t } = useTranslation();
   const [counters, setCounters] = useState<{ [key: string]: number }>(
@@ -34,8 +32,8 @@ function FilterModal({ isFilterOpen, close }: IProps) {
     "/user_api/u_min_max_price.php?lang=en"
   );
   const [values, setValues] = useState(() => [
-    data?.data?.min_price ?? 500,
-    data?.data?.max_price ?? 50000,
+    data?.data?.min_price,
+    data?.data?.max_price,
   ]);
 
   console.log(data?.data);

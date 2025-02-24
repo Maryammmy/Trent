@@ -20,7 +20,6 @@ import { loginSchema } from "../../validation/loginSchema";
 import { LoginNameInputs } from "../../interfaces/authInterface";
 import { loginAPI } from "../../services/authService";
 import { loginData } from "../../data/authData";
-import ForgetPasswordModal from "./ForgetPasswordModal";
 
 function LoginModal() {
   const [loading, setLoading] = useState(false);
@@ -60,106 +59,103 @@ function LoginModal() {
   };
 
   return (
-    <>
-      <Modal
-        maxWidth="600px"
-        className="text-2xl text-center p-4 border-b font-semibold"
-        title="Log in"
-        close={() => dispatch(setIsloggedin(false))}
-        isOpen={isLoggedin}
+    <Modal
+      maxWidth="600px"
+      className="text-2xl text-center p-4 border-b font-semibold"
+      title="Log in"
+      close={() => dispatch(setIsloggedin(false))}
+      isOpen={isLoggedin}
+    >
+      <Button
+        onClick={() => dispatch(setIsloggedin(false))}
+        className="absolute top-5 right-4"
       >
-        <Button
-          onClick={() => dispatch(setIsloggedin(false))}
-          className="absolute top-5 right-4"
-        >
-          <span>
-            <X className="text-black" size={20} />
-          </span>
-        </Button>
-        <div className="p-10">
-          <h2 className="text-lg font-semibold pb-4">Welcome to Trent</h2>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            {loginData.map(({ name, label, type, placeholder }) => (
-              <Controller
-                key={name}
-                name={name}
-                control={control}
-                render={({ field }) => (
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">
-                      {label}
-                    </label>
-                    <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
-                      {name === "password" ? (
-                        <>
-                          <Input
-                            {...field}
-                            type={showPassword ? "text" : "password"}
-                            placeholder={placeholder}
-                            className="w-full outline-none bg-transparent"
-                          />
-                          <Button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                          >
-                            {showPassword ? (
-                              <EyeOff strokeWidth={2.5} />
-                            ) : (
-                              <Eye strokeWidth={2.5} />
-                            )}
-                          </Button>
-                        </>
-                      ) : (
+        <span>
+          <X className="text-black" size={20} />
+        </span>
+      </Button>
+      <div className="p-10">
+        <h2 className="text-lg font-semibold pb-4">Welcome to Trent</h2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {loginData.map(({ name, label, type, placeholder }) => (
+            <Controller
+              key={name}
+              name={name}
+              control={control}
+              render={({ field }) => (
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-1">
+                    {label}
+                  </label>
+                  <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+                    {name === "password" ? (
+                      <>
                         <Input
                           {...field}
-                          type={type}
+                          type={showPassword ? "text" : "password"}
                           placeholder={placeholder}
                           className="w-full outline-none bg-transparent"
                         />
-                      )}
-                    </div>
-                    {errors[name] && (
-                      <InputErrorMessage msg={errors[name]?.message} />
+                        <Button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          {showPassword ? (
+                            <EyeOff strokeWidth={2.5} />
+                          ) : (
+                            <Eye strokeWidth={2.5} />
+                          )}
+                        </Button>
+                      </>
+                    ) : (
+                      <Input
+                        {...field}
+                        type={type}
+                        placeholder={placeholder}
+                        className="w-full outline-none bg-transparent"
+                      />
                     )}
                   </div>
-                )}
-              />
-            ))}
-            <Controller
-              name="ccode"
-              control={control}
-              render={({ field }) => (
-                <CountrySelector
-                  selectedCountry={field.value}
-                  onChange={field.onChange}
-                />
+                  {errors[name] && (
+                    <InputErrorMessage msg={errors[name]?.message} />
+                  )}
+                </div>
               )}
             />
+          ))}
+          <Controller
+            name="ccode"
+            control={control}
+            render={({ field }) => (
+              <CountrySelector
+                selectedCountry={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
 
-            <div className="flex justify-end mb-4">
-              <Button
-                type="button"
-                onClick={() => {
-                  dispatch(setIsForgetPassword(true));
-                  dispatch(setIsloggedin(false));
-                }}
-                className="font-medium"
-              >
-                <span> Forget password?</span>
-              </Button>
-            </div>
+          <div className="flex justify-end mb-4">
             <Button
-              disabled={loading}
-              type="submit"
-              className="w-full zoom bg-primary text-white py-2 rounded-lg font-bold"
+              type="button"
+              onClick={() => {
+                dispatch(setIsForgetPassword(true));
+                dispatch(setIsloggedin(false));
+              }}
+              className="font-medium"
             >
-              {loading ? <Loader /> : "Log in"}
+              <span> Forget password?</span>
             </Button>
-          </form>
-        </div>
-      </Modal>
-      <ForgetPasswordModal />
-    </>
+          </div>
+          <Button
+            disabled={loading}
+            type="submit"
+            className="w-full zoom bg-primary text-white py-2 rounded-lg font-bold"
+          >
+            {loading ? <Loader /> : "Log in"}
+          </Button>
+        </form>
+      </div>
+    </Modal>
   );
 }
 

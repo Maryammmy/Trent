@@ -26,7 +26,6 @@ function Card({ property }: IProps) {
   const taxRate = 14 / 100;
   const priceBeforeTaxes = basePrice;
   const priceWithTaxes = basePrice * (1 + taxRate);
-  console.log(property);
   return (
     <div className="bg-white shadow-md rounded-md p-4 zoom">
       {image?.length > 0 && (
