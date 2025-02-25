@@ -28,7 +28,7 @@ function AboutYourPlace() {
         </div>
       </div>
       <ProgressBarsWrapper progressBarsData={["0px", "0px", "0px"]} />
-      <BackAndNext back="/become-a-host" next="/become-a-host/choose-place" />
+      <BackAndNext back="/become-a-host" next="/become-a-host/property-type" />
     </div>
   );
 }

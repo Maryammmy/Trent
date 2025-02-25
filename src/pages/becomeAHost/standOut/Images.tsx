@@ -7,11 +7,13 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import toast from "react-hot-toast";
 
-const storedPhotos = sessionStorage.getItem("propertyPhotos");
+const storedImages = sessionStorage.getItem("images");
 
-const PhotosForProperty = () => {
+const Images = () => {
   const { t } = useTranslation();
-  const [photos, setPhotos] = useState<string[]>(storedPhotos ? JSON.parse(storedPhotos) : []);
+  const [images, setImages] = useState<string[]>(
+    storedImages ? JSON.parse(storedImages) : []
+  );
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -25,14 +27,11 @@ const PhotosForProperty = () => {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
           const imageDataUrl = reader.result as string;
-          if (!photos.includes(imageDataUrl)) {
-            const updatedPhotos = [...photos, imageDataUrl];
-            sessionStorage.setItem(
-              "propertyPhotos",
-              JSON.stringify(updatedPhotos)
-            );
+          if (!images.includes(imageDataUrl)) {
+            const updatedPhotos = [...images, imageDataUrl];
+            sessionStorage.setItem("images", JSON.stringify(updatedPhotos));
 
-            setPhotos(updatedPhotos);
+            setImages(updatedPhotos);
           } else {
             toast.error(t("image_already_uploaded"));
           }
@@ -64,10 +63,10 @@ const PhotosForProperty = () => {
           </label>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {photos.map((photo, index) => (
+          {images.map((image, index) => (
             <div key={index} className="rounded-lg overflow-hidden w-full h-28">
               <Image
-                imageUrl={photo}
+                imageUrl={image}
                 alt={`Uploaded photo ${index}`}
                 className="w-full h-full object-cover"
               />
@@ -77,12 +76,12 @@ const PhotosForProperty = () => {
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "40%", "0px"]} />
       <BackAndNext
-        back="/become-a-host/amenities"
+        back="/become-a-host/facilities"
         next="/become-a-host/title"
-        isNextDisabled={photos.length < 5}
+        isNextDisabled={images.length < 3}
       />
     </div>
   );
 };
 
-export default PhotosForProperty;
+export default Images;

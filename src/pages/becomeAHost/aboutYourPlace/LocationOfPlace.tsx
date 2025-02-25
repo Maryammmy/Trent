@@ -10,7 +10,7 @@ import Button from "../../../components/ui/Button";
 const storedLocation = sessionStorage.getItem("selectedLocation");
 function LocationOfPlace() {
   const { t } = useTranslation();
-  const backButton = "/become-a-host/type-of-place";
+  const backButton = "/become-a-host/floor-plan";
   const [position, setPosition] = useState<[number, number] | null>(
     storedLocation ? JSON.parse(storedLocation) : null
   );
@@ -70,7 +70,7 @@ function LocationOfPlace() {
       <ProgressBarsWrapper progressBarsData={["50%", "0px", "0px"]} />
       <BackAndNext
         back={backButton}
-        next="/become-a-host/floor-plan"
+        next="/become-a-host/stand-out"
         isNextDisabled={!position}
         allowNext={backButton}
       />

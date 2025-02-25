@@ -5,7 +5,7 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 
 const storedDesc = sessionStorage.getItem("propertyDescription");
-function DescriptionForProperty() {
+function Description() {
   const [desctextArea, setDesctextArea] = useState<string>(storedDesc || "");
   const { t } = useTranslation();
   const handleDescriptionChange = (
@@ -46,4 +46,4 @@ function DescriptionForProperty() {
   );
 }
 
-export default DescriptionForProperty;
+export default Description;

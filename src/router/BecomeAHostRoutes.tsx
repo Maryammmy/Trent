@@ -2,15 +2,10 @@ import { Route } from "react-router-dom";
 import ErrorHandler from "../components/errors/ErrorHandler";
 import GetStartedToHost from "../pages/becomeAHost";
 import AboutYourPlace from "../pages/becomeAHost/aboutYourPlace";
-import ChoosePlace from "../pages/becomeAHost/aboutYourPlace/ChoosePlace";
-import TypeOfPlace from "../pages/becomeAHost/aboutYourPlace/TypeOfPlace";
+import PropertyType from "../pages/becomeAHost/aboutYourPlace/PropertyType";
 import LocationOfPlace from "../pages/becomeAHost/aboutYourPlace/LocationOfPlace";
 import FloorPlan from "../pages/becomeAHost/aboutYourPlace/FloorPlan";
 import StandOut from "../pages/becomeAHost/standOut";
-import AmenitiesForProperty from "../pages/becomeAHost/standOut/AmenitiesForProperty";
-import PhotosForProperty from "../pages/becomeAHost/standOut/PhotosForProperty";
-import TitleForProperty from "../pages/becomeAHost/standOut/TitleForProperty";
-import DescriptionForProperty from "../pages/becomeAHost/standOut/DescriptionForProperty";
 import FinishSetup from "../pages/becomeAHost/finishSetup";
 import InstantBook from "../pages/becomeAHost/finishSetup/InstantBook";
 import Visibility from "../pages/becomeAHost/finishSetup/Visibility";
@@ -18,9 +13,11 @@ import Price from "../pages/becomeAHost/finishSetup/Price";
 import Discount from "../pages/becomeAHost/finishSetup/Discount";
 import LegalAndCreate from "../pages/becomeAHost/finishSetup/LegalAndCreate";
 import BecomeAHostLayout from "../layouts/BecomeAHost";
-import BathRooms from "../pages/becomeAHost/aboutYourPlace/Bathrooms";
-import Occupancy from "../pages/becomeAHost/aboutYourPlace/Occupancy";
 import RedirectRoute from "../middleware/RedirectRoute";
+import Facilities from "../pages/becomeAHost/standOut/Facilities";
+import Images from "../pages/becomeAHost/standOut/Images";
+import Description from "../pages/becomeAHost/standOut/Description";
+import Title from "../pages/becomeAHost/standOut/Title";
 export const BecomeAHostRoutes = (
   <Route
     path="/become-a-host"
@@ -30,26 +27,10 @@ export const BecomeAHostRoutes = (
     <Route index element={<GetStartedToHost />} />
     <Route path="about-your-place" element={<AboutYourPlace />} />
     <Route
-      path="choose-place"
+      path="property-type"
       element={
         <RedirectRoute>
-          <ChoosePlace />
-        </RedirectRoute>
-      }
-    />
-    <Route
-      path="type-of-place"
-      element={
-        <RedirectRoute>
-          <TypeOfPlace />
-        </RedirectRoute>
-      }
-    />
-    <Route
-      path="location"
-      element={
-        <RedirectRoute>
-          <LocationOfPlace />
+          <PropertyType />
         </RedirectRoute>
       }
     />
@@ -62,35 +43,27 @@ export const BecomeAHostRoutes = (
       }
     />
     <Route
-      path="bathrooms"
+      path="location"
       element={
         <RedirectRoute>
-          <BathRooms />
-        </RedirectRoute>
-      }
-    />
-    <Route
-      path="occupancy"
-      element={
-        <RedirectRoute>
-          <Occupancy />
+          <LocationOfPlace />
         </RedirectRoute>
       }
     />
     <Route path="stand-out" element={<StandOut />} />
     <Route
-      path="amenities"
+      path="facilities"
       element={
         <RedirectRoute>
-          <AmenitiesForProperty />
+          <Facilities />
         </RedirectRoute>
       }
     />
     <Route
-      path="photos"
+      path="images"
       element={
         <RedirectRoute>
-          <PhotosForProperty />
+          <Images />
         </RedirectRoute>
       }
     />
@@ -98,7 +71,7 @@ export const BecomeAHostRoutes = (
       path="title"
       element={
         <RedirectRoute>
-          <TitleForProperty />
+          <Title />
         </RedirectRoute>
       }
     />
@@ -106,7 +79,7 @@ export const BecomeAHostRoutes = (
       path="description"
       element={
         <RedirectRoute>
-          <DescriptionForProperty />
+          <Description />
         </RedirectRoute>
       }
     />

@@ -27,11 +27,11 @@ function PropertyTypeFilter({
         {!propertyTypeList ? (
           <PropertyTypeSkeleton cards={8} />
         ) : propertyTypeList?.length ? (
-          propertyTypeList?.map((item, index) => {
+          propertyTypeList?.map((item) => {
             const { title, id } = item;
             return (
               <Button
-                key={index}
+                key={id}
                 onClick={() => handleSelectedProperty(id)}
                 className={`flex gap-2 font-medium border rounded-full py-2 px-4 ${
                   selectedProperty === id && "bg-zinc-50 border-black"

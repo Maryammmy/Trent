@@ -5,7 +5,6 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 function StandOut() {
   const { t } = useTranslation();
-  const isRoom = sessionStorage.getItem("selectedTypeOfPlace") === "room";
   return (
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-xl mx-auto px-5 xl:px-0 pb-10">
@@ -28,8 +27,8 @@ function StandOut() {
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "0px", "0px"]} />
       <BackAndNext
-        back={isRoom ? "/become-a-host/occupancy" : "/become-a-host/floor-plan"}
-        next="/become-a-host/amenities"
+        back={"/become-a-host/floor-plan"}
+        next="/become-a-host/facilities"
       />
     </div>
   );

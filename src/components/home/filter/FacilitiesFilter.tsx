@@ -27,11 +27,11 @@ function FacilitiesFilter({
         {!facilities ? (
           <PropertyTypeSkeleton cards={8} />
         ) : facilities?.length ? (
-          facilities?.map((item, index) => {
+          facilities?.map((item) => {
             const { title, id } = item;
             return (
               <Button
-                key={index}
+                key={id}
                 onClick={() => handleSelectedFacilities(id)}
                 className={`flex flex-wrap gap-2 font-medium border rounded-full py-2 px-3 ${
                   selectedFacilities.includes(id) && "bg-zinc-50 border-black"

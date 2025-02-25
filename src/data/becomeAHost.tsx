@@ -148,17 +148,7 @@ export const howAreYouhosting = [
   "how_are_you_hosting_on_Trent_title_1",
   "how_are_you_hosting_on_Trent_title_2",
 ];
-export const floorPlan: string[] = ["guests", "bedrooms", "beds", "bathrooms"];
-export const floorPlanForRoom = ["guests", "bedrooms", "beds"];
-export const doYouHaveLockForRoom = ["yes", "no"];
-export const typesOFBathrooms: IGetStartedToHost[] = [
-  {
-    title: "private_and_attached",
-    desc: "private_and_attached_desc",
-  },
-  { title: "dedicated", desc: "dedicated_desc" },
-  { title: "shared", desc: "shared_desc" },
-];
+export const floorPlan: string[] = ["plimit", "beds", "bathroom"];
 export const occupancy: IPropertyhosting[] = [
   { label: "me", icon: <UserRound size={35} /> },
   { label: "my_family", icon: <PiUsersFourBold size={35} /> },
