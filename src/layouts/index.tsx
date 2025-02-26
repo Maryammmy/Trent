@@ -13,7 +13,7 @@ const RootLayout = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(setToggle(false));
-  }, [pathname]);
+  }, [pathname, dispatch]);
   return (
     <>
       <Navbar />

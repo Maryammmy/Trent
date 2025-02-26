@@ -6,6 +6,7 @@ import Input from "../../../components/ui/Input";
 import { useGetData } from "../../../hooks/useGetData";
 import { IGovernement } from "../../../interfaces";
 import Select from "../../../components/ui/Select";
+import SelectSkeleton from "../../../components/skeleton/SelectSkeleton";
 
 const currentLanguage = localStorage.getItem("i18nextLng") || "en";
 const storedCityAr = sessionStorage.getItem("city_ar") || "";
@@ -57,10 +58,10 @@ const City = () => {
         <p className="max-w-2xl text-dark font-medium pb-5">
           {t("city_for_property_desc")}
         </p>
-        <div className="mb-5 flex flex-col">
-          <label className="font-medium mb-1">Governement</label>
+        <div className="flex flex-col gap-1 mb-5">
+          <label className="font-medium">{t("government")}</label>
           {!governmentList ? (
-            <div className="h-10 w-full bg-stone-200 animate-pulse rounded-md"></div>
+            <SelectSkeleton />
           ) : governmentList.length > 1 ? (
             <Select
               options={governmentList.map((gov: IGovernement) => ({
@@ -76,26 +77,32 @@ const City = () => {
             </p>
           )}
         </div>
-        <label className="font-medium mb-1">{t("city_in_english")}</label>
-        <Input
-          maxLength={100}
-          minLength={2}
-          value={cityEn}
-          onChange={(e) => handleCityChange(e, "en")}
-          placeholder={t("city_for_property_placeholder_en")}
-          className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary mb-5"
-        />
-        <label className="font-medium mb-1">{t("city_in_arabic")}</label>
-        <Input
-          maxLength={100}
-          minLength={2}
-          value={cityAr}
-          onChange={(e) => handleCityChange(e, "ar")}
-          placeholder={t("city_for_property_placeholder_ar")}
-          className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
-        />
+        <div className="flex flex-col gap-1 mb-5">
+          <label className="font-medium mb-1">{t("city_in_english")}</label>
+          <Input
+            type="text"
+            maxLength={100}
+            minLength={2}
+            value={cityEn}
+            onChange={(e) => handleCityChange(e, "en")}
+            placeholder={t("city_for_property_placeholder_en")}
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="font-medium">{t("city_in_arabic")}</label>
+          <Input
+            type="text"
+            maxLength={100}
+            minLength={2}
+            value={cityAr}
+            onChange={(e) => handleCityChange(e, "ar")}
+            placeholder={t("city_for_property_placeholder_ar")}
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+          />
+        </div>
       </div>
-      <ProgressBarsWrapper progressBarsData={["100%", "60%", "0px"]} />
+      <ProgressBarsWrapper progressBarsData={["100%", "66.66%", "0px"]} />
       <BackAndNext
         back="/become-a-host/title"
         next="/become-a-host/compound"

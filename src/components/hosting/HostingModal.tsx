@@ -19,12 +19,14 @@ function HostingModal() {
       maxWidth="600px"
     >
       <div className="p-6">
-        <Button
-          onClick={() => dispatch(setIsFinishUpModal(false))}
-          className="w-8 h-8 hover:bg-gray-100 rounded-full flex items-center justify-center"
-        >
-          <X strokeWidth={2.5} />
-        </Button>
+        <div className="flex items-center justify-end">
+          <Button
+            onClick={() => dispatch(setIsFinishUpModal(false))}
+            className="w-8 h-8 hover:bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <X strokeWidth={2.5} />
+          </Button>
+        </div>
         <h3 className="font-bold text-2xl text-center py-2">
           {t("become_a_host_finish_up")}
         </h3>

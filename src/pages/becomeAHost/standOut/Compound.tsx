@@ -35,31 +35,35 @@ function Compound() {
         <p className="max-w-2xl text-dark font-medium pb-5">
           {t("compound_name_for_property_desc")}
         </p>
-        <label className="font-medium">{t("compound_name_in_english")}</label>
-        <Input
-          maxLength={100}
-          minLength={2}
-          onChange={(e) => handleCompoundChange(e, "en")}
-          name="compound_name_en"
-          value={compoundEn}
-          placeholder={t("compound_name_for_property_placeholder_en")}
-          className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary mb-5"
-        />
-        <label className="font-medium">{t("compound_name_in_arabic")}</label>
-        <Input
-          maxLength={100}
-          minLength={2}
-          onChange={(e) => handleCompoundChange(e, "ar")}
-          name="compound_name_ar"
-          value={compoundAr}
-          placeholder={t("compound_name_for_property_placeholder_ar")}
-          className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
-        />
+        <div className="flex flex-col gap-1 mb-5">
+          <label className="font-medium">{t("compound_name_in_english")}</label>
+          <Input
+            maxLength={100}
+            minLength={2}
+            onChange={(e) => handleCompoundChange(e, "en")}
+            name="compound_name_en"
+            value={compoundEn}
+            placeholder={t("compound_name_for_property_placeholder_en")}
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="font-medium">{t("compound_name_in_arabic")}</label>
+          <Input
+            maxLength={100}
+            minLength={2}
+            onChange={(e) => handleCompoundChange(e, "ar")}
+            name="compound_name_ar"
+            value={compoundAr}
+            placeholder={t("compound_name_for_property_placeholder_ar")}
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+          />
+        </div>
       </div>
-      <ProgressBarsWrapper progressBarsData={["100%", "60%", "0px"]} />
+      <ProgressBarsWrapper progressBarsData={["100%", "77.77%", "0px"]} />
       <BackAndNext
         back="/become-a-host/city"
-        next="/become-a-host"
+        next="/become-a-host/address-and-floor"
         isNextDisabled={isNextDisabled}
       />
     </div>

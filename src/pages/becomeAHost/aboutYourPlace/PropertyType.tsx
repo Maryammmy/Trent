@@ -59,7 +59,7 @@ function PropertyType() {
           )}
         </div>
       </div>
-      <ProgressBarsWrapper progressBarsData={["20%", "0px", "0px"]} />
+      <ProgressBarsWrapper progressBarsData={["25%", "0px", "0px"]} />
       <BackAndNext
         back={backButton}
         next="/become-a-host/floor-plan"

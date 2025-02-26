@@ -35,31 +35,34 @@ function Description() {
         <p className="max-w-2xl text-dark font-medium pb-10">
           {t("desc_for_property_desc")}
         </p>
-        <label className="font-medium mb-1">{t("desc_in_english")}</label>
-        <TextArea
-          maxLength={10000}
-          minLength={50}
-          onChange={(e) => handleDescriptionChange(e, "en")}
-          name="description_en"
-          value={descTextAreaEn}
-          placeholder={t("desc_for_property_placeholder_en")}
-          className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary mb-5"
-          rows={5}
-        ></TextArea>
-
-        <label className="font-medium mb-1">{t("desc_in_arabic")}</label>
-        <TextArea
-          maxLength={10000}
-          minLength={50}
-          onChange={(e) => handleDescriptionChange(e, "ar")}
-          name="description_ar"
-          value={descTextAreaAr}
-          placeholder={t("desc_for_property_placeholder_ar")}
-          className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
-          rows={5}
-        ></TextArea>
+        <div className="flex flex-col gap-1 mb-5">
+          <label className="font-medium">{t("desc_in_english")}</label>
+          <TextArea
+            maxLength={10000}
+            minLength={50}
+            onChange={(e) => handleDescriptionChange(e, "en")}
+            name="description_en"
+            value={descTextAreaEn}
+            placeholder={t("desc_for_property_placeholder_en")}
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            rows={5}
+          ></TextArea>
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="font-medium">{t("desc_in_arabic")}</label>
+          <TextArea
+            maxLength={10000}
+            minLength={50}
+            onChange={(e) => handleDescriptionChange(e, "ar")}
+            name="description_ar"
+            value={descTextAreaAr}
+            placeholder={t("desc_for_property_placeholder_ar")}
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            rows={5}
+          ></TextArea>
+        </div>
       </div>
-      <ProgressBarsWrapper progressBarsData={["100%", "60%", "0px"]} />
+      <ProgressBarsWrapper progressBarsData={["100%", "55.55%", "0px"]} />
       <BackAndNext
         back="/become-a-host/title"
         next="/become-a-host/city"

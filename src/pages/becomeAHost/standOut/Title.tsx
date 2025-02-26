@@ -35,28 +35,34 @@ function Title() {
         <p className="max-w-2xl text-dark font-medium pb-5">
           {t("title_for_property_desc")}
         </p>
-        <label className="font-medium mb-1">{t("title_in_english")}</label>
-        <Input
-          maxLength={100}
-          minLength={5}
-          onChange={(e) => handleTitleChange(e, "en")}
-          name="title_en"
-          value={titleEn}
-          placeholder={t("title_for_property_placeholder_en")}
-          className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary mb-5"
-        />
-        <label className="font-medium mb-1">{t("title_in_arabic")}</label>
-        <Input
-          maxLength={100}
-          minLength={5}
-          onChange={(e) => handleTitleChange(e, "ar")}
-          name="title_ar"
-          value={titleAr}
-          placeholder={t("title_for_property_placeholder_ar")}
-          className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
-        />
+        <div className="flex flex-col gap-1 mb-5">
+          <label className="font-medium">{t("title_in_english")}</label>
+          <Input
+            type="text"
+            maxLength={100}
+            minLength={5}
+            onChange={(e) => handleTitleChange(e, "en")}
+            name="title_en"
+            value={titleEn}
+            placeholder={t("title_for_property_placeholder_en")}
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="font-medium mb-1">{t("title_in_arabic")}</label>
+          <Input
+            type="text"
+            maxLength={100}
+            minLength={5}
+            onChange={(e) => handleTitleChange(e, "ar")}
+            name="title_ar"
+            value={titleAr}
+            placeholder={t("title_for_property_placeholder_ar")}
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+          />
+        </div>
       </div>
-      <ProgressBarsWrapper progressBarsData={["100%", "60%", "0px"]} />
+      <ProgressBarsWrapper progressBarsData={["100%", "44.44%", "0px"]} />
       <BackAndNext
         back="/become-a-host/images"
         next="/become-a-host/description"

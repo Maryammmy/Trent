@@ -3,6 +3,51 @@ export interface IImage {
   image: string;
   is_panorama: number;
 }
+export interface IPropertyData {
+  uid: string;
+  images: string[];
+  video: string;
+  price: number;
+  facility: string[];
+  beds: number;
+  sqft: number;
+  bathroom: number;
+  ptype: string;
+  plimit: number;
+  min_days: number;
+  max_days: number;
+  government: string;
+  security_deposit: number;
+  google_maps_url: string;
+  guest_rules: {
+    ar: string;
+    en: string;
+  };
+  floor: {
+    ar: string;
+    en: string;
+  };
+  title: {
+    ar: string;
+    en: string;
+  };
+  address: {
+    ar: string;
+    en: string;
+  };
+  description: {
+    ar: string;
+    en: string;
+  };
+  city: {
+    ar: string;
+    en: string;
+  };
+  compound_name: {
+    ar: string;
+    en: string;
+  };
+}
 export interface IProperty {
   id: string;
   title: {

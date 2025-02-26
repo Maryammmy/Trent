@@ -1,4 +1,5 @@
 import { baseAPI } from ".";
+import { IPropertyData } from "../interfaces/propertyInterface";
 
 // export const usePropertyAPI = (id: number) => {
 //   return useQuery({
@@ -15,11 +16,11 @@ import { baseAPI } from ".";
 //   });
 //   return response;
 // };
-export const addPropertyAPI = (payload: unknown) => {
+export const addPropertyAPI = (payload: IPropertyData) => {
   const response = baseAPI.post("user_api/u_property_add.php", payload);
   return response;
 };
-export const editPropertyAPI = (payload: unknown) => {
+export const editPropertyAPI = (payload: IPropertyData) => {
   const response = baseAPI.post("user_api/u_property_edit.php", payload);
   return response;
 };

@@ -9,6 +9,10 @@ import { IButton, ISelectOption } from "../interfaces";
 import { Mail } from "lucide-react";
 import { INavItem } from "../interfaces/landingInterface";
 
+export const priceType: ISelectOption[] = [
+  { label: "daliy", value: "daliy" },
+  { label: "monthly", value: "monthly" },
+];
 export const images: string[] = [image1, image2, image3, image4];
 export const languageOptions: ISelectOption[] = [
   { label: "English", value: "en" },

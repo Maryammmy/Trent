@@ -66,7 +66,7 @@ function Facilities() {
           )}
         </div>
       </div>
-      <ProgressBarsWrapper progressBarsData={["100%", "20%", "0px"]} />
+      <ProgressBarsWrapper progressBarsData={["100%", "11.11%", "0px"]} />
       <BackAndNext
         back="/become-a-host/stand-out"
         next="/become-a-host/images"

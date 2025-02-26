@@ -74,10 +74,10 @@ const Images = () => {
           ))}
         </div>
       </div>
-      <ProgressBarsWrapper progressBarsData={["100%", "40%", "0px"]} />
+      <ProgressBarsWrapper progressBarsData={["100%", "22.22%", "0px"]} />
       <BackAndNext
         back="/become-a-host/facilities"
-        next="/become-a-host/title"
+        next="/become-a-host/video"
         isNextDisabled={images.length < 3}
       />
     </div>
