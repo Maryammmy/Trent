@@ -272,6 +272,8 @@
   "video_uploaded_successfully": "تم رفع الفيديو بنجاح!",
   "invalid_video_format": "تنسيق الفيديو غير صالح. يرجى تحميل ملف فيديو صالح.",
   "video_too_large": "الفيديو كبير جدًا. الحد الأقصى المسموح به هو 50 ميجابايت.",
+  "delete_video": "حذف الفيديو",
+  "video_deleted_successfully": "تم حذف الفيديو بنجاح!",
   "your_listings": "قوائمك",
   "listing": "القائمة",
   "log_out": "تسجيل الخروج"

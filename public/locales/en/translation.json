@@ -273,6 +273,8 @@
   "video_uploaded_successfully": "Video uploaded successfully!",
   "invalid_video_format": "Invalid video format. Please upload a valid video file.",
   "video_too_large": "The video is too large. Maximum allowed size is 50MB.",
+  "delete_video": "Delete Video",
+  "video_deleted_successfully": "Video deleted successfully!",
   "your_listings": "Your listings",
   "listing": "Listing",
   "log_out": "Log out"
