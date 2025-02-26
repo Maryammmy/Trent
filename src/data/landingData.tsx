@@ -3,21 +3,10 @@ import percentageLogo from "../assets/iamges/discount-shape.svg";
 import pyramidsLogo from "../assets/iamges/pyramids.svg";
 import { HandCoins } from "lucide-react";
 import { RiCustomerServiceFill } from "react-icons/ri";
-import {
-  IChooseUs,
-  IFilterButton,
-  INavItem,
-} from "../interfaces/landingInterface";
+import { IChooseUs, IFilterButton } from "../interfaces/landingInterface";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
-import { ResponsiveSetting } from "../interfaces";
+import { IDestinations, IHomeSearch, ResponsiveSetting } from "../interfaces";
 
-export const navItems: INavItem[] = [
-  { label: "Home", to: "/" },
-  { label: "About Us", to: "/about-us" },
-  { label: "Services", to: "/services" },
-  { label: "Contact", to: "/contact-us" },
-];
-export const authItems: string[] = ["log_in", "sign_up"];
 export const getResponsiveSettings = (
   sliderLength: number
 ): ResponsiveSetting[] => [
@@ -82,7 +71,6 @@ export const chooseUs: IChooseUs[] = [
     title: "Customer Service 24/7",
   },
 ];
-
 export const buttonData = [
   {
     platform: "android",
@@ -95,7 +83,6 @@ export const buttonData = [
     icon: <FaApple size={45} />,
   },
 ];
-
 export const filterButtons: IFilterButton[] = [
   {
     text: "clear",
@@ -106,3 +93,27 @@ export const filterButtons: IFilterButton[] = [
     className: "bg-primary text-white",
   },
 ];
+export const homeSearch: IHomeSearch[] = [
+  { title: "destination", text: "search_destinations" },
+  { title: "check_in", text: "add_dates" },
+  { title: "check_out", text: "add_dates" },
+  { title: "home_search_guests", text: "add_guests" },
+];
+export const destinations: IDestinations[] = [
+  {
+    city: "Sofia, Bulgaria",
+    reason: "For sights like Alexander Nevsky Cathedral",
+  },
+  { city: "Tallinn, Estonia", reason: "For its bustling nightlife" },
+  { city: "Warsaw, Poland", reason: "For its stunning architecture" },
+  { city: "Helsinki, Finland", reason: "For sights like Suomenlinna" },
+  { city: "Stockholm, Sweden", reason: "For its top-notch dining" },
+  { city: "Riga, Latvia", reason: "For its bustling nightlife" },
+  { city: "Tallinn, Estonia", reason: "For its bustling nightlife" },
+  { city: "Warsaw, Poland", reason: "For its stunning architecture" },
+  { city: "Helsinki, Finland", reason: "For sights like Suomenlinna" },
+  { city: "Stockholm, Sweden", reason: "For its top-notch dining" },
+  { city: "Riga, Latvia", reason: "For its bustling nightlife" },
+];
+export const filterTypes: string[] = ["any_type", "room", "entire_home"];
+export const filterRoomsAndBeds: string[] = ["bedrooms", "beds", "bathrooms"];

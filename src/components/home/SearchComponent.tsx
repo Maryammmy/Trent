@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { DateValueType } from "react-tailwindcss-datepicker";
 import { Button } from "@headlessui/react";
-import { homeSearch } from "../../data";
 import useClickOutside from "../../hooks/useClickOutside";
 import { setIsDestinationOpen } from "../../store/features/homeSearch/homeSearchSlice";
 import DestinationCard from "./DestinationCard";
@@ -13,6 +12,7 @@ import {
   validateEndDate,
   validateStartDate,
 } from "../../utils/handleChangeDate";
+import { homeSearch } from "../../data/landingData";
 
 function SearchComponent() {
   const { t } = useTranslation();

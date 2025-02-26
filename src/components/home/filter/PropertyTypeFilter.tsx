@@ -1,9 +1,9 @@
 import Button from "../../ui/Button";
 import { useTranslation } from "react-i18next";
 import { useGetData } from "../../../hooks/useGetData";
-import { IPropertyTypeList } from "../../../interfaces/landingInterface";
 import { Home } from "lucide-react";
 import PropertyTypeSkeleton from "../../skeleton/propertyTypeSkeleton";
+import { IPropertyTypeList } from "../../../interfaces";
 
 interface Props {
   selectedProperty: string;

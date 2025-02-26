@@ -1,5 +1,5 @@
+import { filterTypes } from "../../../data/landingData";
 import Button from "../../ui/Button";
-import { filterTypes } from "../../../data";
 import { useTranslation } from "react-i18next";
 
 interface Props {

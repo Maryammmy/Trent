@@ -4,16 +4,26 @@ import TextArea from "../../../components/ui/TextArea";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 
-const storedDesc = sessionStorage.getItem("propertyDescription");
+const storedDescEn = sessionStorage.getItem("description_en") || "";
+const storedDescAr = sessionStorage.getItem("description_ar") || "";
+
 function Description() {
-  const [desctextArea, setDesctextArea] = useState<string>(storedDesc || "");
   const { t } = useTranslation();
+  const [descTextAreaEn, setDescTextAreaEn] = useState<string>(storedDescEn);
+  const [descTextAreaAr, setDescTextAreaAr] = useState<string>(storedDescAr);
+
   const handleDescriptionChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    lang: "en" | "ar"
   ) => {
     const newValue = e.target.value;
-    setDesctextArea(newValue);
-    sessionStorage.setItem("propertyDescription", newValue);
+    if (lang === "en") {
+      setDescTextAreaEn(newValue);
+      sessionStorage.setItem("description_en", newValue);
+    } else {
+      setDescTextAreaAr(newValue);
+      sessionStorage.setItem("description_ar", newValue);
+    }
   };
 
   return (
@@ -25,22 +35,37 @@ function Description() {
         <p className="max-w-2xl text-dark font-medium pb-10">
           {t("desc_for_property_desc")}
         </p>
+        <label className="font-medium mb-1">{t("desc_in_english")}</label>
         <TextArea
           maxLength={10000}
           minLength={50}
-          onChange={handleDescriptionChange}
-          name="description"
-          value={desctextArea}
-          placeholder={t("desc_for_property_placeholder")}
+          onChange={(e) => handleDescriptionChange(e, "en")}
+          name="description_en"
+          value={descTextAreaEn}
+          placeholder={t("desc_for_property_placeholder_en")}
+          className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary mb-5"
+          rows={5}
+        ></TextArea>
+
+        <label className="font-medium mb-1">{t("desc_in_arabic")}</label>
+        <TextArea
+          maxLength={10000}
+          minLength={50}
+          onChange={(e) => handleDescriptionChange(e, "ar")}
+          name="description_ar"
+          value={descTextAreaAr}
+          placeholder={t("desc_for_property_placeholder_ar")}
           className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
-          rows={10}
+          rows={5}
         ></TextArea>
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "60%", "0px"]} />
       <BackAndNext
         back="/become-a-host/title"
-        next="/become-a-host/finish-setup"
-        isNextDisabled={desctextArea.length < 10}
+        next="/become-a-host/city"
+        isNextDisabled={
+          descTextAreaEn.length < 10 || descTextAreaAr.length < 10
+        }
       />
     </div>
   );

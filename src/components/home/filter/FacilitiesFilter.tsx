@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useGetData } from "../../../hooks/useGetData";
 import { Home } from "lucide-react";
 import PropertyTypeSkeleton from "../../skeleton/propertyTypeSkeleton";
-import { IFacility } from "../../../interfaces/landingInterface";
+import { IFacility } from "../../../interfaces";
 
 interface Props {
   selectedFacilities: string[];

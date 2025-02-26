@@ -18,6 +18,8 @@ import Facilities from "../pages/becomeAHost/standOut/Facilities";
 import Images from "../pages/becomeAHost/standOut/Images";
 import Description from "../pages/becomeAHost/standOut/Description";
 import Title from "../pages/becomeAHost/standOut/Title";
+import City from "../pages/becomeAHost/standOut/City";
+import Compound from "../pages/becomeAHost/standOut/Compound";
 export const BecomeAHostRoutes = (
   <Route
     path="/become-a-host"
@@ -80,6 +82,22 @@ export const BecomeAHostRoutes = (
       element={
         <RedirectRoute>
           <Description />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="city"
+      element={
+        <RedirectRoute>
+          <City />
+        </RedirectRoute>
+      }
+    />
+    <Route
+      path="compound"
+      element={
+        <RedirectRoute>
+          <Compound />
         </RedirectRoute>
       }
     />

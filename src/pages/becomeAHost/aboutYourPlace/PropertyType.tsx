@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import { useGetData } from "../../../hooks/useGetData";
-import { IPropertyTypeList } from "../../../interfaces/landingInterface";
 import { Home } from "lucide-react";
 import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkeleton";
+import { IPropertyTypeList } from "../../../interfaces";
 
 const currentLanguage = localStorage.getItem("i18nextLng");
 const storedPropertyType = sessionStorage.getItem("ptype");
@@ -31,7 +31,7 @@ function PropertyType() {
         <h3 className="text-2xl md:text-3xl font-semibold text-center pb-5 md:pb-10">
           {t("property_type")}
         </h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {!propertyTypeList ? (
             <PropertyTypeSkeleton cards={8} />
           ) : propertyTypeList?.length ? (

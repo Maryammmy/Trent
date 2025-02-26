@@ -1,5 +1,5 @@
+import { filterRoomsAndBeds } from "../../../data/landingData";
 import Counter from "../../ui/Counter";
-import { filterRoomsAndBeds } from "../../../data";
 import { useTranslation } from "react-i18next";
 
 interface Props {

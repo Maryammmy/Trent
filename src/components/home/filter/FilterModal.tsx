@@ -3,7 +3,6 @@ import Modal from "../../ui/Modal";
 import Button from "../../ui/Button";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { filterRoomsAndBeds } from "../../../data";
 import Range from "./Range";
 import TypeOfPlaceFilter from "./TypeOfPlaceFilter";
 import RoomsAndBedsFilter from "./RoomsAndBedsFilter";
@@ -11,6 +10,7 @@ import PropertyTypeFilter from "./PropertyTypeFilter";
 import FilterActions from "./FilterActions";
 import { useGetData } from "../../../hooks/useGetData";
 import FacilitiesFilter from "./FacilitiesFilter";
+import { filterRoomsAndBeds } from "../../../data/landingData";
 
 const currentLanguage = localStorage.getItem("i18nextLng");
 interface IProps {

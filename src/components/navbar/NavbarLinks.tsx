@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import { authItems, navItems } from "../../data/landingData";
 import Button from "../ui/Button";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
@@ -9,6 +8,7 @@ import {
   setIsSignup,
 } from "../../store/features/auth/authSlice";
 import { setToggle } from "../../store/features/navbar/navbarSlice";
+import { authItems, navItems } from "../../data";
 
 const isLoggedin = Cookies.get("user_id");
 const NavbarLinks = () => {

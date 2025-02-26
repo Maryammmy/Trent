@@ -1,5 +1,17 @@
 import { ReactNode } from "react";
 
+export interface IPropertyTypeList {
+  id: string;
+  title: string;
+}
+export interface IFacility {
+  id: string;
+  title: string;
+}
+export interface IGovernement {
+  id: string;
+  name: string;
+}
 export interface ISelectOption {
   value: string;
   label: string;
@@ -22,10 +34,6 @@ export interface IHomeSearch {
 export interface IDestinations {
   city: string;
   reason: string;
-}
-export interface IFilterPropertyType {
-  name: string;
-  icon: ReactNode;
 }
 export interface IFooterSection {
   title: string;

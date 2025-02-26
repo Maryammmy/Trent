@@ -1,5 +1,5 @@
 import { School } from "lucide-react";
-import { destinations } from "../../data";
+import { destinations } from "../../data/landingData";
 
 const DestinationCard = () => {
   return (

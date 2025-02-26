@@ -12,14 +12,6 @@ export interface INavItem {
   label: string;
   to: string;
 }
-export interface IPropertyTypeList {
-  id: string;
-  title: string;
-}
-export interface IFacility {
-  id: string;
-  title: string;
-}
 export interface IFilterProps {
   uid?: number;
   government_id?: number;

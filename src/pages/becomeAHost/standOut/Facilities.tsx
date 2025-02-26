@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import { useGetData } from "../../../hooks/useGetData";
-import { IFacility } from "../../../interfaces/landingInterface";
 import { Home } from "lucide-react";
 import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkeleton";
+import { IFacility } from "../../../interfaces";
 
 const currentLanguage = localStorage.getItem("i18nextLng");
 const storedFacilities = sessionStorage.getItem("facility");
@@ -38,24 +38,7 @@ function Facilities() {
         <h3 className="text-2xl md:text-3xl font-semibold pb-5 md:pb-10">
           {t("tell_us_about_amenities")}
         </h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {/* {amenities.map((item, index) => {
-            const idx = index + 1;
-            const { text, icon } = item;
-            const isSelected = selectedFacilities.includes(text);
-            return (
-              <Button
-                key={idx}
-                onClick={() => handleSelectedFacilities(text)}
-                className={`flex flex-col justify-center gap-1 p-4 border rounded-lg min-h-28 bg-white ${
-                  isSelected ? "bg-zinc-50 border-2 border-black" : ""
-                }`}
-              >
-                <span>{icon}</span>
-                <p className="font-medium text-lg text-start">{text}</p>
-              </Button>
-            );
-          })} */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {!facilities ? (
             <PropertyTypeSkeleton cards={8} />
           ) : facilities?.length ? (
