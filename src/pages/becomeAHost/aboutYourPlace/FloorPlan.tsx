@@ -66,8 +66,9 @@ function FloorPlan() {
         <div className="flex flex-col gap-1 mt-5">
           <label className="font-medium">{t("property_sqft")}</label>
           <Input
+            name="sqft"
             type="text"
-            value={sqft || ""}
+            value={sqft}
             onChange={handleSqftChange}
             className="outline-none border py-3 px-2 rounded-md focus:border-primary"
             placeholder={t("enter_property_sqft_placeholder")}

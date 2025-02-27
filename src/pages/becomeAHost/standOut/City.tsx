@@ -8,7 +8,7 @@ import { IGovernement } from "../../../interfaces";
 import Select from "../../../components/ui/Select";
 import SelectSkeleton from "../../../components/skeleton/SelectSkeleton";
 
-const currentLanguage = localStorage.getItem("i18nextLng") || "en";
+const currentLanguage = localStorage.getItem("i18nextLng");
 const storedCityAr = sessionStorage.getItem("city_ar") || "";
 const storedCityEn = sessionStorage.getItem("city_en") || "";
 const storedGovId = sessionStorage.getItem("government") || "";
@@ -80,6 +80,7 @@ const City = () => {
         <div className="flex flex-col gap-1 mb-5">
           <label className="font-medium mb-1">{t("city_in_english")}</label>
           <Input
+            name="city_en"
             type="text"
             maxLength={100}
             minLength={2}
@@ -92,6 +93,7 @@ const City = () => {
         <div className="flex flex-col gap-1">
           <label className="font-medium">{t("city_in_arabic")}</label>
           <Input
+            name="city_ar"
             type="text"
             maxLength={100}
             minLength={2}

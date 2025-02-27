@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import Image from "../../ui/Image";
 import property from "../../../assets/iamges/property.jpg";
 
-const ListingItem = ({ id }: { id: number }) => {
+const PropertyItem = ({ id }: { id: number }) => {
   return (
     <Link
-      to={`/hosting/listings/${id}`}
+      to={`/hosting/properties/${id}`}
       className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center bg-white shadow rounded-md p-4 hover:bg-gray-100 transition cursor-pointer"
     >
       <div className="flex items-center gap-3">
@@ -24,4 +24,4 @@ const ListingItem = ({ id }: { id: number }) => {
   );
 };
 
-export default ListingItem;
+export default PropertyItem;

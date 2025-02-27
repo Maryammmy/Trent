@@ -6,7 +6,7 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import { useGetData } from "../../../hooks/useGetData";
 import { Home } from "lucide-react";
 import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkeleton";
-import { IPropertyTypeList } from "../../../interfaces";
+import { IPropertyType } from "../../../interfaces";
 
 const currentLanguage = localStorage.getItem("i18nextLng");
 const storedPropertyType = sessionStorage.getItem("ptype");
@@ -20,7 +20,7 @@ function PropertyType() {
     ["propertyTypeList"],
     `user_api/u_property_type.php?lang=${currentLanguage}`
   );
-  const propertyTypeList: IPropertyTypeList[] = data?.data.typelist;
+  const propertyTypeList: IPropertyType[] = data?.data.typelist;
   const handleSelectedPropertyType = (id: string) => {
     setSelectedPropertyType(id);
     sessionStorage.setItem("ptype", id);

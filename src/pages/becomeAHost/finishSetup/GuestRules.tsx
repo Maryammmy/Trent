@@ -65,7 +65,7 @@ function GuestRules() {
       <ProgressBarsWrapper progressBarsData={["100%", "100%", "75%"]} />
       <BackAndNext
         back="/become-a-host/price-and-deposit"
-        next="/hosting/listings"
+        next="/hosting/properties"
         isNextDisabled={
           rulesTextAreaEn.length < 10 || rulesTextAreaAr.length < 10
         }

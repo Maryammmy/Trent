@@ -48,7 +48,7 @@ function BackAndNext({
   }, []);
   console.log(video);
   const handleClick = async () => {
-    if (next === "/hosting/listings") {
+    if (next === "/hosting/properties") {
       dispatch(setIsFinishUpModal(true));
     }
     dispatch(addCompletedStep(allowNext));

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useGetData } from "../../../hooks/useGetData";
 import { Home } from "lucide-react";
 import PropertyTypeSkeleton from "../../skeleton/propertyTypeSkeleton";
-import { IPropertyTypeList } from "../../../interfaces";
+import { IPropertyType } from "../../../interfaces";
 
 interface Props {
   selectedProperty: string;
@@ -19,7 +19,7 @@ function PropertyTypeFilter({
     ["propertyTypeList"],
     `user_api/u_property_type.php?lang=${currentLanguage}`
   );
-  const propertyTypeList: IPropertyTypeList[] = data?.data.typelist;
+  const propertyTypeList: IPropertyType[] = data?.data.typelist;
   return (
     <div className="py-4">
       <h2 className="text-lg font-bold pb-4">{t("property_type")}</h2>

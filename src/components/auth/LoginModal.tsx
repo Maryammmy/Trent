@@ -17,9 +17,9 @@ import {
   setIsloggedin,
 } from "../../store/features/auth/authSlice";
 import { loginSchema } from "../../validation/loginSchema";
-import { LoginNameInputs } from "../../interfaces/authInterface";
 import { loginAPI } from "../../services/authService";
 import { loginData } from "../../data/authData";
+import { LoginNameInputs } from "../../types";
 
 function LoginModal() {
   const [loading, setLoading] = useState(false);

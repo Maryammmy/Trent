@@ -1,7 +1,13 @@
-import { TextareaHTMLAttributes } from "react";
-type IProps = TextareaHTMLAttributes<HTMLTextAreaElement>;
-function TextArea({ ...rest }: IProps) {
-  return <textarea {...rest}></textarea>;
+import { forwardRef, TextareaHTMLAttributes } from "react";
+
+interface IProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  className?: string;
 }
+
+const TextArea = forwardRef<HTMLTextAreaElement, IProps>(
+  ({ className, ...rest }, ref) => {
+    return <textarea ref={ref} {...rest} className={`w-full ${className}`} />;
+  }
+);
 
 export default TextArea;

@@ -68,7 +68,6 @@ function PriceAndDeposit() {
           <label className="font-medium">{t("pricing_type")}</label>
           <Select
             options={priceType}
-            value={pricingType}
             onChange={handlePricingTypeChange}
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
           />
@@ -76,6 +75,7 @@ function PriceAndDeposit() {
         <div className="flex flex-col gap-1 mb-5">
           <label className="font-medium">{t("price")}</label>
           <Input
+            name="price"
             type="text"
             value={price || ""}
             onChange={(e) => handleChange(e, "price")}
@@ -89,6 +89,7 @@ function PriceAndDeposit() {
         <div className="flex flex-col gap-1 mb-5">
           <label className="font-medium">{t("security_deposit")}</label>
           <Input
+            name="security_deposit"
             type="text"
             value={securityDeposit || ""}
             onChange={(e) => handleChange(e, "security_deposit")}

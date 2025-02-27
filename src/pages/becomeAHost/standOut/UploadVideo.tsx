@@ -86,7 +86,6 @@ const UploadVideo = () => {
         toast.error(t("video_too_large"));
         return;
       }
-
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = async () => {

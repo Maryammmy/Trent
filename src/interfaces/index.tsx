@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export interface IPropertyTypeList {
+export interface IPropertyType {
   id: string;
   title: string;
 }

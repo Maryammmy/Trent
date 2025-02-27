@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { signupData } from "../../data/authData";
 import { setIsSignup } from "../../store/features/auth/authSlice";
-import { SignupNameInputs } from "../../interfaces/authInterface";
 import { signupAPI } from "../../services/authService";
 import toast from "react-hot-toast";
 import { Fragment, useState } from "react";
@@ -16,6 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Loader from "../loader/Loader";
 import { AxiosError } from "axios";
 import CountrySelector from "../ui/CountrySelector";
+import { SignupNameInputs } from "../../types";
 
 function SignupModal() {
   const [loading, setLoading] = useState(false);

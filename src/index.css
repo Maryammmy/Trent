@@ -33,6 +33,12 @@ span {
 .hosting-layout {
   min-height: calc(100vh - 234px);
 }
+/* update property bg */
+.bg-update-property {
+  background-image: url("./assets/iamges/bgHome.png"),
+    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
+  background-blend-mode: overlay;
+}
 /* gallery page */
 .PhotoView__PhotoBox {
   width: 70% !important;

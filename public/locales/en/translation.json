@@ -133,6 +133,9 @@
   "floor_plan_desc": "You'll add more details later, like bed types.",
   "beds": "Beds",
   "bathroom": "Bathrooms",
+  "enter_beds": "Enter Number of Beds",
+  "enter_bathroom": "Enter Number of Bathrooms",
+  "enter_guest_limit": "Maximum Number of Guests",
   "plimit": "Guests limit",
   "property_sqft": "Total area (sqft)",
   "enter_property_sqft_placeholder": "Enter the total area in sqft",
@@ -275,7 +278,7 @@
   "video_too_large": "The video is too large. Maximum allowed size is 50MB.",
   "delete_video": "Delete Video",
   "video_deleted_successfully": "Video deleted successfully!",
-  "your_listings": "Your listings",
-  "listing": "Listing",
+  "your_properties": "Your properties",
+  "property": "Property",
   "log_out": "Log out"
 }
