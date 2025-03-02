@@ -1,8 +1,7 @@
 import PreferencesData from "../../components/accountSettings/preferences/PreferencesData";
 import DynamicTitle from "../../components/accountSettings/DynamicTitle";
-
 import { useTranslation } from "react-i18next";
-import PreferencesCard from "../../components/accountSettings/preferences/preferencesCard";
+import PreferencesCard from "../../components/accountSettings/preferences/PreferencesCard";
 
 function Preferences() {
   const { t } = useTranslation();
