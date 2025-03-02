@@ -209,6 +209,7 @@
   "enter_security_deposit_placeholder": "Enter the security deposit",
   "error_for_security_deposit": "Security deposit must be between 30 EGP and 20,000 EGP.",
   "pricing_type": "Pricing Type",
+  "daily_small": "daily",
   "daily": "Daily",
   "monthly": "Monthly",
   "add_discounts": "Add discounts",

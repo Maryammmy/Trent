@@ -1,5 +1,6 @@
 import { forwardRef, SelectHTMLAttributes } from "react";
 import { ISelectOption } from "../../interfaces";
+import { useTranslation } from "react-i18next";
 
 interface IProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options: ISelectOption[];
@@ -15,11 +16,12 @@ const Select = forwardRef<HTMLSelectElement, IProps>(
     },
     ref
   ) => {
+    const { t } = useTranslation();
     return (
       <select ref={ref} className={`w-full ${className}`} {...rest}>
         {options.map((option, index) => (
           <option key={index} value={option.value}>
-            {option.label}
+            {t(option.label)}
           </option>
         ))}
       </select>

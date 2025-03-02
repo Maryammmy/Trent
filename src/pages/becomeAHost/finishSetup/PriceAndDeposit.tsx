@@ -106,7 +106,11 @@ function PriceAndDeposit() {
         back="/become-a-host/min-max-price"
         next="/become-a-host/guest-rules"
         isNextDisabled={
-          !price || !!priceError || !securityDeposit || !!depositError
+          !price ||
+          !!priceError ||
+          !securityDeposit ||
+          !!depositError ||
+          !pricingType
         }
       />
     </div>

@@ -208,6 +208,7 @@
   "enter_security_deposit_placeholder": "أدخل التأمين",
   "error_for_security_deposit": "يجب أن يكون مبلغ التأمين بين 30 جنيهًا و 20,000 جنيه.",
   "pricing_type": "نوع التسعير",
+  "daily_small": "يومي",
   "daily": "يومي",
   "monthly": "شهري",
   "add_discounts": "إضافة الخصومات",

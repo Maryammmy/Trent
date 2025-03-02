@@ -76,7 +76,7 @@ function Card({ property }: IProps) {
                     })}
               </span>
 
-              <span className="text-dark">/ night</span>
+              <span className="text-dark">/ daily</span>
             </div>
             <div className="flex gap-1 justify-between items-center font-medium">
               <Rating rating={4} />

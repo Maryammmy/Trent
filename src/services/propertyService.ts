@@ -1,3 +1,4 @@
+// import { useQuery } from "@tanstack/react-query";
 import { baseAPI } from ".";
 import { IPropertyData } from "../interfaces/propertyInterface";
 
@@ -10,12 +11,12 @@ import { IPropertyData } from "../interfaces/propertyInterface";
 //     enabled: !!id,
 //   });
 // };
-// export const getPropertyAPI = (id: number) => {
-//   const response = baseAPI.post("user_api/u_property_details.php?lang=ar", {
-//     prop_id: id,
-//   });
-//   return response;
-// };
+export const getPropertyAPI = (id: number) => {
+  const response = baseAPI.post("user_api/u_property_details.php?lang=ar", {
+    prop_id: id,
+  });
+  return response;
+};
 export const addPropertyAPI = (payload: IPropertyData) => {
   const response = baseAPI.post("user_api/u_property_add.php", payload);
   return response;

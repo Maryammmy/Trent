@@ -14,8 +14,8 @@ import PricingTypeSelector from "./PricingTypeSelector";
 import PropertyInputs from "./PropertyInputs";
 import PropertyTextArea from "./PropertyTextArea";
 import { useParams } from "react-router-dom";
-import { updatePropertySchema } from "../../../validation/UpdatePropertyValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { updatePropertySchema } from "../../../validation/updatePropertyValidation";
 
 const userId = Cookies.get("user_id");
 function UpdateProperty() {

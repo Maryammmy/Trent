@@ -1,16 +1,5 @@
-import { PropertyNameInputs } from "../../types";
+import { IPropertyInput, IPropertyTextArea } from "../interfaces/hosting";
 
-export interface IPropertyInput {
-  name: keyof PropertyNameInputs;
-  label: string;
-  type: string;
-  placeholder: string;
-}
-export interface IPropertyTextArea {
-  name: keyof PropertyNameInputs;
-  label: string;
-  placeholder: string;
-}
 export const propertyInputsData: IPropertyInput[] = [
   {
     name: "city_en",
