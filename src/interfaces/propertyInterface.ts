@@ -129,3 +129,7 @@ export interface IReview {
   when: string;
   text: string;
 }
+export interface IAmenity {
+  text: string;
+  icon: ReactNode;
+}

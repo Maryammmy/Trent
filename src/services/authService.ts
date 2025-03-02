@@ -1,5 +1,5 @@
 import { baseAPI } from ".";
-import { LoginNameInputs, SignupNameInputs } from "../interfaces/authInterface";
+import { LoginNameInputs, SignupNameInputs } from "../types";
 
 export const signupAPI = (payload: SignupNameInputs) => {
   const response = baseAPI.post("user_api/u_reg_user.php", payload);

@@ -3,8 +3,8 @@ import { responsive } from "../data/categoryBar";
 import Carsoul from "./ui/Carsoul";
 import { useGetData } from "../hooks/useGetData";
 import { Home } from "lucide-react";
-import { ITypeList } from "../interfaces/landingInterface";
 import CategoryBarSkeleton from "./skeleton/CategoryBarSkeleton";
+import { IPropertyType } from "../interfaces";
 
 const currentLanguage = localStorage.getItem("i18nextLng");
 function CategoryBar() {
@@ -12,12 +12,12 @@ function CategoryBar() {
     ["propertyType"],
     `user_api/u_property_type.php?lang=${currentLanguage}`
   );
-  const typeList: ITypeList[] = data?.data?.typelist;
+  const propertyTypeList: IPropertyType[] = data?.data?.typelist;
   const categoryBarSkeleton = Array.from({ length: 10 });
   return (
     <>
       <div className="w-full px-5 xl:px-20 pt-5 pb-5">
-        {!typeList ? (
+        {!propertyTypeList ? (
           <Carsoul
             slidesToShow={10}
             borderColor="2px solid gainsboro"
@@ -29,7 +29,7 @@ function CategoryBar() {
               <CategoryBarSkeleton key={index} />
             ))}
           </Carsoul>
-        ) : typeList?.length ? (
+        ) : propertyTypeList?.length ? (
           <Carsoul
             slidesToShow={10}
             borderColor="2px solid gainsboro"
@@ -37,7 +37,7 @@ function CategoryBar() {
             infinite={false}
             responsive={responsive}
           >
-            {typeList?.map((item, index) => (
+            {propertyTypeList?.map((item, index) => (
               <Button
                 key={index}
                 className="flex flex-col justify-center items-center pt-2 zoom"
