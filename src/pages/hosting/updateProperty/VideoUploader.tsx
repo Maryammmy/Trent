@@ -1,0 +1,70 @@
+import { Upload, X } from "lucide-react";
+import Button from "../../../components/ui/Button";
+import Input from "../../../components/ui/Input";
+import Video from "../../../components/ui/Video";
+import InputErrorMessage from "../../../components/ui/InputErrorMessage";
+import { useTranslation } from "react-i18next";
+import { FieldErrors } from "react-hook-form";
+import { PropertyNameInputs } from "../../../types";
+
+interface VideoUploaderProps {
+  videos: string[];
+  handleVideoChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleDeleteVideo: (video: string) => void;
+  videoError: string | null;
+  errors: FieldErrors<PropertyNameInputs>;
+}
+
+const VideoUploader: React.FC<VideoUploaderProps> = ({
+  videos,
+  handleVideoChange,
+  handleDeleteVideo,
+  videoError,
+  errors,
+}) => {
+  const { t } = useTranslation();
+  return (
+    <div>
+      <div>
+        <label className="border-dashed border-2 border-gray-300 bg-white rounded-lg p-4 flex flex-col items-center cursor-pointer hover:bg-gray-100">
+          <Upload size={32} className="text-dark mb-3" />
+          <span className="text-dark">{t("add_videos")}</span>
+          <Input
+            name="videos"
+            type="file"
+            accept="video/*"
+            multiple
+            className="hidden"
+            onChange={handleVideoChange}
+          />
+        </label>
+      </div>
+      {videos.length > 0 && (
+        <div className="mt-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {videos.map((video) => (
+              <div key={video} className="relative">
+                <div className="w-full h-28">
+                  <Video
+                    videoUrl={video}
+                    className="w-full h-full rounded-lg"
+                  />
+                </div>
+                <Button
+                  onClick={() => handleDeleteVideo(video)}
+                  className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                >
+                  <X size={15} />
+                </Button>
+              </div>
+            ))}
+          </div>
+          {videoError && <InputErrorMessage msg={videoError} />}
+        </div>
+      )}
+      {errors["video"] && <InputErrorMessage msg={errors["video"]?.message} />}
+    </div>
+  );
+};
+
+export default VideoUploader;

@@ -14,10 +14,10 @@ export type LoginNameInputs = {
 export type PropertyNameInputs = {
   uid: string;
   prop_id: string;
-  video: string;
-  images: string;
+  video: string[];
+  images: string[];
   price: string;
-  facility: string;
+  facility: string[];
   beds: string;
   bathroom: string;
   sqft: string;

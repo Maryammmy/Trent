@@ -1,16 +1,15 @@
-import { Control, Controller } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { Control, Controller, FieldErrors } from "react-hook-form";
 import { propertyTextAreasData } from "../../../data/property";
 import TextArea from "../../../components/ui/TextArea";
 import { PropertyNameInputs } from "../../../types";
-
-interface PropertyTextAreasProps {
+import { useTranslation } from "react-i18next";
+import InputErrorMessage from "../../../components/ui/InputErrorMessage";
+interface IProps {
   control: Control<PropertyNameInputs>;
+  errors: FieldErrors<PropertyNameInputs>;
 }
-
-function PropertyTextAreas({ control }: PropertyTextAreasProps) {
+function PropertyTextArea({ control, errors }: IProps) {
   const { t } = useTranslation();
-
   return (
     <>
       {propertyTextAreasData.map(({ name, label, placeholder }) => (
@@ -24,11 +23,14 @@ function PropertyTextAreas({ control }: PropertyTextAreasProps) {
               <TextArea
                 {...field}
                 placeholder={t(placeholder)}
-                className="w-full border bg-white py-3 px-2 rounded-md outline-none focus:border-primary"
-                rows={5}
+                className="w-full border bg-white py-3 px-2 rounded-md outline-none focus:border-2 focus:border-primary"
                 maxLength={10000}
                 minLength={50}
+                rows={5}
               />
+              {errors[name] && (
+                <InputErrorMessage msg={errors[name]?.message} />
+              )}
             </div>
           )}
         />
@@ -37,4 +39,4 @@ function PropertyTextAreas({ control }: PropertyTextAreasProps) {
   );
 }
 
-export default PropertyTextAreas;
+export default PropertyTextArea;
