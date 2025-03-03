@@ -48,7 +48,7 @@ function CheckDates() {
               <DatePicker
                 dateValue={startDateValue}
                 handleValueChange={handleStartValueChange}
-                className="w-28 text-dark placeholder:text-dark !text-left"
+                className="w-28 text-dark placeholder:text-dark"
               />
             </div>
             <div className="border-l rtl:border-r rtl:border-l-0 ps-3 py-1 flex flex-col items-start">
@@ -56,7 +56,7 @@ function CheckDates() {
               <DatePicker
                 dateValue={endDateValue}
                 handleValueChange={handleEndValueChange}
-                className="w-28 text-dark placeholder:text-dark !text-left"
+                className="w-28 text-dark placeholder:text-dark"
               />
             </div>
           </div>

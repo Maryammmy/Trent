@@ -1,24 +1,27 @@
 import { useTranslation } from "react-i18next";
 import Datepicker from "react-tailwindcss-datepicker";
 import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
+import { CurrentLanguage } from "../../interfaces";
 interface IProps {
   dateValue: DateValueType;
   handleValueChange: (newValue: DateValueType) => void;
   className?: string;
 }
+const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 const DatePicker = ({ dateValue, handleValueChange, className }: IProps) => {
   const { t } = useTranslation();
 
   return (
     <div className="remove-icon">
       <Datepicker
+        i18n={currentLanguage}
         popoverDirection="down"
         useRange={false}
-        showFooter={true}
+        // showFooter={true}
         value={dateValue}
         asSingle={true}
         onChange={handleValueChange}
-        inputClassName={`outline-none text-center rounded-lg font-medium placeholder:text-black ${className}`}
+        inputClassName={`outline-none rounded-lg font-medium placeholder:text-black ${className}`}
         placeholder={t("add_date")}
       />
       <style>

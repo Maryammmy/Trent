@@ -41,8 +41,8 @@ function SearchComponent() {
   };
 
   return (
-    <div className="bg-white rounded-lg lg:w-[1000px] py-6 lg:py-3 px-5 lg:border shadow hover:shadow-lg">
-      <div className="grid grid-cols-1 lg:flex gap-4 lg:gap-0 text-sm items-end justify-between">
+    <div className="bg-white rounded-lg p-8 shadow hover:shadow-lg">
+      <div className="grid grid-cols-1 gap-4 text-sm md:text-base">
         {homeSearch.map((item, index) => {
           const title = t(item.title);
           const text = t(item.text);
@@ -81,13 +81,13 @@ function SearchComponent() {
                     <DatePicker
                       dateValue={startDateValue}
                       handleValueChange={handleStartValueChange}
-                      className="h-10 bg-gray-100 w-full"
+                      className="h-10 bg-gray-100 w-full px-4"
                     />
                   ) : title === t("check_out") ? (
                     <DatePicker
                       dateValue={endDateValue}
                       handleValueChange={handleEndValueChange}
-                      className="h-10 bg-gray-100 w-full"
+                      className="h-10 bg-gray-100 w-full px-4"
                     />
                   ) : (
                     <div className="bg-gray-100 px-4 h-10 rounded-md flex items-center">
