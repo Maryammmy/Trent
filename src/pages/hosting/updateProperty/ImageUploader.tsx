@@ -26,7 +26,7 @@ const ImageUploader = ({
       <div>
         <label className="border-dashed border-2 border-gray-300 bg-white rounded-lg p-4 flex flex-col items-center cursor-pointer hover:bg-gray-100">
           <Upload size={32} className="text-dark mb-3" />
-          <span className="text-dark">{t("add_photos")}</span>
+          <span className="text-dark">{t("upload_images")}</span>
           <Input
             name="images"
             type="file"

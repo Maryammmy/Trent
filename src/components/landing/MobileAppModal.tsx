@@ -40,7 +40,7 @@ function MobileAppModal() {
           Get our Mobile App for a better experience!
         </h2>
         <div className="flex justify-center py-2">
-          <Image imageUrl={mobile} alt="mobile" className="w-40 h-auto" />
+          <Image imageUrl={mobile} alt="mobile" className="w-40 h-full" />
         </div>
         <div className="flex flex-col md:flex-row justify-between items-center gap-3">
           {buttonData

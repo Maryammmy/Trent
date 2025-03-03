@@ -28,7 +28,6 @@ function BackAndNext({
   const navigate = useNavigate();
   const [video, setVideo] = useState<string | null>(null);
 
-  // 1️⃣ **جلب الفيديو من IndexedDB عند تحميل الصفحة**
   useEffect(() => {
     const getVideoFromIndexedDB = async () => {
       try {

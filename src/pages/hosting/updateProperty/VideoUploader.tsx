@@ -8,7 +8,7 @@ import { FieldErrors } from "react-hook-form";
 import { PropertyNameInputs } from "../../../types";
 
 interface VideoUploaderProps {
-  videos: string[];
+  video: string;
   handleVideoChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleDeleteVideo: (video: string) => void;
   videoError: string | null;
@@ -16,7 +16,7 @@ interface VideoUploaderProps {
 }
 
 const VideoUploader: React.FC<VideoUploaderProps> = ({
-  videos,
+  video,
   handleVideoChange,
   handleDeleteVideo,
   videoError,
@@ -28,7 +28,7 @@ const VideoUploader: React.FC<VideoUploaderProps> = ({
       <div>
         <label className="border-dashed border-2 border-gray-300 bg-white rounded-lg p-4 flex flex-col items-center cursor-pointer hover:bg-gray-100">
           <Upload size={32} className="text-dark mb-3" />
-          <span className="text-dark">{t("add_videos")}</span>
+          <span className="text-dark">{t("upload_video")}</span>
           <Input
             name="videos"
             type="file"
@@ -39,25 +39,20 @@ const VideoUploader: React.FC<VideoUploaderProps> = ({
           />
         </label>
       </div>
-      {videos.length > 0 && (
+      {video && (
         <div className="mt-4">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {videos.map((video) => (
-              <div key={video} className="relative">
-                <div className="w-full h-28">
-                  <Video
-                    videoUrl={video}
-                    className="w-full h-full rounded-lg"
-                  />
-                </div>
-                <Button
-                  onClick={() => handleDeleteVideo(video)}
-                  className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
-                >
-                  <X size={15} />
-                </Button>
+            <div className="relative">
+              <div className="w-full h-28">
+                <Video videoUrl={video} className="w-full h-full rounded-lg" />
               </div>
-            ))}
+              <Button
+                onClick={() => handleDeleteVideo(video)}
+                className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+              >
+                <X size={15} />
+              </Button>
+            </div>
           </div>
           {videoError && <InputErrorMessage msg={videoError} />}
         </div>

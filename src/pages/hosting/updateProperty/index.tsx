@@ -10,21 +10,40 @@ import toast from "react-hot-toast";
 import PropertyTypeSelector from "./PropertyTypeSelector";
 import GovernmentSelector from "./GovernmentSelector";
 import FacilitiesSelector from "./FacilitiesSelector";
-import PricingTypeSelector from "./PricingTypeSelector";
 import PropertyInputs from "./PropertyInputs";
 import PropertyTextArea from "./PropertyTextArea";
 import { useParams } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { updatePropertySchema } from "../../../validation/updatePropertyValidation";
+import PeriodSelector from "./PeriodSelector";
+import { useGetData } from "../../../hooks/useGetData";
+import { IFacility, IGovernement, IPropertyType } from "../../../interfaces";
+import { periods } from "../../../data";
 
+const currentLanguage = localStorage.getItem("i18nextLng");
 const userId = Cookies.get("user_id");
 function UpdateProperty() {
   const { t } = useTranslation();
-  const [videos, setVideos] = useState<string[]>([]);
+  const [video, setVideo] = useState<string>("");
   const [images, setImages] = useState<string[]>([]);
   const [imageError, setImageError] = useState<string | null>(null);
   const [videoError, setVideoError] = useState<string | null>(null);
   const { id } = useParams();
+  const { data: propertyType } = useGetData(
+    ["propertyTypeList"],
+    `user_api/u_property_type.php?lang=${currentLanguage}`
+  );
+  const propertyTypeList: IPropertyType[] = propertyType?.data.typelist;
+  const { data: facilityList } = useGetData(
+    ["facilities"],
+    `user_api/u_facility.php?lang=${currentLanguage}`
+  );
+  const facilities: IFacility[] = facilityList?.data?.facilitylist;
+  const { data: government } = useGetData(
+    ["governmentList"],
+    `user_api/u_government.php?lang=${currentLanguage}`
+  );
+  const governmentList: IGovernement[] = government?.data?.governmentlist;
   const {
     control,
     handleSubmit,
@@ -35,17 +54,17 @@ function UpdateProperty() {
     defaultValues: {
       uid: userId,
       prop_id: id,
-      video: [],
+      video: "",
       images: [],
       price: "",
       facility: [],
       beds: "",
       bathroom: "",
       sqft: "",
-      ptype: "",
+      ptype: propertyTypeList?.[0]?.id,
       google_maps_url: "",
       security_deposit: "",
-      government: "",
+      government: governmentList?.[0]?.id,
       city_en: "",
       city_ar: "",
       title_en: "",
@@ -59,7 +78,7 @@ function UpdateProperty() {
       plimit: "",
       min_days: "",
       max_days: "",
-      price_type: "",
+      period: periods[0].value,
       description_en: "",
       description_ar: "",
       guest_rules_en: "",
@@ -86,6 +105,7 @@ function UpdateProperty() {
             const updatedPhotos = [...images, imageDataUrl];
             setImages(updatedPhotos);
             setValue("images", updatedPhotos);
+            toast.success(t("image_uploaded_successfully"));
             setImageError(null);
           } else {
             setImageError(t("image_already_uploaded"));
@@ -97,40 +117,34 @@ function UpdateProperty() {
   const handleDeleteImage = (image: string) => {
     setImages((prevImages) => prevImages.filter((item) => item !== image));
     setImageError(null);
-    toast.success(t("iamge_deleted_successfully"));
+    toast.error(t("iamge_deleted_successfully"));
   };
-  console.log(errors);
   const handleVideoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      const selectedFiles = Array.from(event.target.files);
-      selectedFiles.forEach((file) => {
-        if (!file.type.startsWith("video/")) {
-          setVideoError(t("invalid_video_format"));
-          return;
-        }
-        if (file.size > 50 * 1024 * 1024) {
-          setVideoError(t("video_too_large"));
-          return;
-        }
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-          const videoDataUrl = reader.result as string;
-          if (!videos.includes(videoDataUrl)) {
-            setVideos((prevVideos) => [...prevVideos, videoDataUrl]);
-            setValue("video", [...videos, videoDataUrl]);
-            setVideoError(null);
-          } else {
-            setVideoError(t("video_already_uploaded"));
-          }
-        };
-      });
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      if (!file.type.startsWith("video/")) {
+        setVideoError(t("invalid_video_format"));
+        return;
+      }
+      if (file.size > 50 * 1024 * 1024) {
+        setVideoError(t("video_too_large"));
+        return;
+      }
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        const videoDataUrl = reader.result as string;
+        setVideo(videoDataUrl);
+        setValue("video", videoDataUrl);
+        toast.success(t("video_uploaded_successfully"));
+        setVideoError(null);
+      };
     }
   };
-  const handleDeleteVideo = (video: string) => {
-    setVideos((prevVideos) => prevVideos.filter((item) => item !== video));
+  const handleDeleteVideo = () => {
+    setVideo("");
     setVideoError(null);
-    toast.success(t("video_deleted_successfully"));
+    toast.error(t("video_deleted_successfully"));
   };
   return (
     <div className="bg-update-property bg-fixed bg-cover bg-no-repeat">
@@ -139,12 +153,24 @@ function UpdateProperty() {
           Update property
         </h2>
         <form onSubmit={handleSubmit(onUpdate)} className="space-y-4">
-          <PropertyTypeSelector control={control} errors={errors} />
-          <GovernmentSelector control={control} errors={errors} />
-          <PricingTypeSelector control={control} errors={errors} />
+          <PropertyTypeSelector
+            control={control}
+            errors={errors}
+            propertyTypeList={propertyTypeList}
+          />
+          <GovernmentSelector
+            control={control}
+            errors={errors}
+            governmentList={governmentList}
+          />
+          <PeriodSelector control={control} errors={errors} periods={periods} />
           <PropertyInputs control={control} errors={errors} />
           <PropertyTextArea control={control} errors={errors} />
-          <FacilitiesSelector control={control} errors={errors} />
+          <FacilitiesSelector
+            control={control}
+            errors={errors}
+            facilities={facilities}
+          />
           <ImageUploader
             images={images}
             handleImageChange={handleImageChange}
@@ -155,7 +181,7 @@ function UpdateProperty() {
           <VideoUploader
             handleDeleteVideo={handleDeleteVideo}
             handleVideoChange={handleVideoChange}
-            videos={videos}
+            video={video}
             videoError={videoError}
             errors={errors}
           />

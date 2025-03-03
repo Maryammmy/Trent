@@ -41,7 +41,8 @@ export const updatePropertySchema = yup.object().shape({
     .string()
     .url("Invalid Google Maps URL")
     .required("Google Maps URL is required"),
-  government: yup.string().required("Government field is required"),
+  government: yup.string().required("Government is required"),
+  period: yup.string().required("Period is required"),
   city_en: yup.string().required("City (English) is required"),
   city_ar: yup.string().required("City (Arabic) is required"),
   title_en: yup.string().required("Title (English) is required"),
@@ -54,7 +55,6 @@ export const updatePropertySchema = yup.object().shape({
   address_ar: yup.string().required("Address (Arabic) is required"),
   floor_en: yup.string().required("Floor (English) is required"),
   floor_ar: yup.string().required("Floor (Arabic) is required"),
-  price_type: yup.string().required("Price type is required"),
   description_en: yup.string().required("Description (English) is required"),
   description_ar: yup.string().required("Description (Arabic) is required"),
   guest_rules_en: yup.string().required("Guest Rules (English) are required"),
@@ -63,8 +63,5 @@ export const updatePropertySchema = yup.object().shape({
     .array()
     .min(3, "At least three images are required")
     .required("Images are required"),
-  video: yup
-    .array()
-    .min(1, "At least one video is required")
-    .required("Videos are required"),
+  video: yup.string().required("Video is required"),
 });

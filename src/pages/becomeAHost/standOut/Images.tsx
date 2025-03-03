@@ -1,26 +1,28 @@
 import { useState } from "react";
-import { Upload } from "lucide-react";
+import { Upload, X } from "lucide-react";
 import Image from "../../../components/ui/Image";
 import Input from "../../../components/ui/Input";
 import { useTranslation } from "react-i18next";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import toast from "react-hot-toast";
+import Button from "../../../components/ui/Button";
+import InputErrorMessage from "../../../components/ui/InputErrorMessage";
 
 const storedImages = sessionStorage.getItem("images");
 
 const Images = () => {
   const { t } = useTranslation();
+  const [imageError, setImageError] = useState<string | null>(null);
   const [images, setImages] = useState<string[]>(
     storedImages ? JSON.parse(storedImages) : []
   );
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const selectedFiles = Array.from(event.target.files);
       selectedFiles.forEach((file) => {
         if (file.size < 51200) {
-          toast.error(t("image_too_small"));
+          setImageError(t("image_too_small"));
           return;
         }
         const reader = new FileReader();
@@ -30,14 +32,19 @@ const Images = () => {
           if (!images.includes(imageDataUrl)) {
             const updatedPhotos = [...images, imageDataUrl];
             sessionStorage.setItem("images", JSON.stringify(updatedPhotos));
-
             setImages(updatedPhotos);
+            setImageError(null);
           } else {
-            toast.error(t("image_already_uploaded"));
+            setImageError(t("image_already_uploaded"));
           }
         };
       });
     }
+  };
+  const handleDeleteImage = (image: string) => {
+    setImages((prevImages) => prevImages.filter((item) => item !== image));
+    setImageError(null);
+    toast.success(t("iamge_deleted_successfully"));
   };
 
   return (
@@ -52,27 +59,40 @@ const Images = () => {
         <div className="py-8">
           <label className="border-dashed border-2 border-gray-300 rounded-lg p-6 flex flex-col items-center cursor-pointer hover:bg-gray-100">
             <Upload size={32} className="text-dark mb-3" />
-            <span className="text-dark">{t("add_photos")}</span>
+            <span className="text-dark">{t("upload_images")}</span>
             <Input
               type="file"
               multiple
               accept="image/*"
               className="hidden"
-              onChange={handleFileChange}
+              onChange={handleImageChange}
             />
           </label>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {images.map((image, index) => (
-            <div key={index} className="rounded-lg overflow-hidden w-full h-28">
-              <Image
-                imageUrl={image}
-                alt={`Uploaded photo ${index}`}
-                className="w-full h-full object-cover"
-              />
+        {images.length > 0 && (
+          <div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {images.map((image, index) => (
+                <div className="relative" key={image}>
+                  <div className="rounded-lg overflow-hidden w-full h-28">
+                    <Image
+                      imageUrl={image}
+                      alt={`Uploaded photo ${index}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <Button
+                    onClick={() => handleDeleteImage(image)}
+                    className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                  >
+                    <X size={15} />
+                  </Button>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+            {imageError && <InputErrorMessage msg={imageError} />}
+          </div>
+        )}
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "22.22%", "0px"]} />
       <BackAndNext

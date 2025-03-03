@@ -26,6 +26,7 @@ const City = () => {
   useEffect(() => {
     if (governmentList?.length === 1) {
       setGovernmentId(governmentList?.[0].id);
+      sessionStorage.setItem("government", governmentList?.[0].id);
     }
   }, [governmentList]);
   const handleCityChange = (
@@ -62,7 +63,7 @@ const City = () => {
           <label className="font-medium">{t("government")}</label>
           {!governmentList ? (
             <SelectSkeleton />
-          ) : governmentList.length > 1 ? (
+          ) : governmentList?.length ? (
             <Select
               options={governmentList.map((gov: IGovernement) => ({
                 value: gov.id,
@@ -72,8 +73,8 @@ const City = () => {
               className="bg-zinc-50 border border-dark py-3 px-2 rounded-md"
             />
           ) : (
-            <p className="bg-zinc-50 border border-dark py-3 px-2 rounded-md">
-              {governmentList[0]?.name}
+            <p className="border bg-white py-3 px-2 rounded-md">
+              No government found
             </p>
           )}
         </div>

@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Input from "../../../components/ui/Input";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import Select from "../../../components/ui/Select";
-import { priceType } from "../../../data";
+import { periods } from "../../../data";
 
 const storedPrice = sessionStorage.getItem("price");
 const storedSecurityDeposit = sessionStorage.getItem("security_deposit");
-const storedPricingType = sessionStorage.getItem("pricing_type");
+const storedPeriod = sessionStorage.getItem("period");
 
 function PriceAndDeposit() {
   const { t } = useTranslation();
@@ -18,11 +18,12 @@ function PriceAndDeposit() {
   const [securityDeposit, setSecurityDeposit] = useState<number | "">(
     storedSecurityDeposit ? JSON.parse(storedSecurityDeposit) : ""
   );
-  const [pricingType, setPricingType] = useState<string>(
-    storedPricingType || ""
-  );
-  const [priceError, setPriceError] = useState<string>("");
-  const [depositError, setDepositError] = useState<string>("");
+  const [period, setPeriod] = useState<string>(storedPeriod || "d");
+  useEffect(() => {
+    if (!storedPeriod) {
+      sessionStorage.setItem("period", "d");
+    }
+  }, []);
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     type: "price" | "security_deposit"
@@ -32,27 +33,17 @@ function PriceAndDeposit() {
     if (type === "price") {
       setPrice(numericValue);
       sessionStorage.setItem("price", JSON.stringify(numericValue));
-      setPriceError(
-        numericValue && (numericValue < 30 || numericValue > 20000)
-          ? t("error_for_price")
-          : ""
-      );
     } else {
       setSecurityDeposit(numericValue);
       sessionStorage.setItem("security_deposit", JSON.stringify(numericValue));
-      setDepositError(
-        numericValue && (numericValue < 30 || numericValue > 20000)
-          ? t("error_for_security_deposit")
-          : ""
-      );
     }
   };
   const handlePricingTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    const newPricingType = event.target.value;
-    setPricingType(newPricingType);
-    sessionStorage.setItem("pricing_type", newPricingType);
+    const newPeriod = event.target.value;
+    setPeriod(newPeriod);
+    sessionStorage.setItem("period", newPeriod);
   };
 
   return (
@@ -65,9 +56,9 @@ function PriceAndDeposit() {
           {t("price_and_deposit_desc")}
         </p>
         <div className="flex flex-col gap-1 mb-5">
-          <label className="font-medium">{t("pricing_type")}</label>
+          <label className="font-medium">{t("period")}</label>
           <Select
-            options={priceType}
+            options={periods}
             onChange={handlePricingTypeChange}
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
           />
@@ -82,9 +73,6 @@ function PriceAndDeposit() {
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
             placeholder={t("enter_price_placeholder")}
           />
-          {priceError && (
-            <p className="text-red-600 text-xs md:text-sm">{priceError}</p>
-          )}
         </div>
         <div className="flex flex-col gap-1 mb-5">
           <label className="font-medium">{t("security_deposit")}</label>
@@ -96,22 +84,13 @@ function PriceAndDeposit() {
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
             placeholder={t("enter_security_deposit_placeholder")}
           />
-          {depositError && (
-            <p className="text-red-600 text-xs md:text-sm">{depositError}</p>
-          )}
         </div>
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "100%", "50%"]} />
       <BackAndNext
         back="/become-a-host/min-max-price"
         next="/become-a-host/guest-rules"
-        isNextDisabled={
-          !price ||
-          !!priceError ||
-          !securityDeposit ||
-          !!depositError ||
-          !pricingType
-        }
+        isNextDisabled={!price || !period}
       />
     </div>
   );

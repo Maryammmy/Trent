@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Upload } from "lucide-react";
+import { Upload, X } from "lucide-react";
 import Input from "../../../components/ui/Input";
 import { useTranslation } from "react-i18next";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
@@ -23,10 +23,11 @@ const initDB = async () => {
     return null;
   }
 };
-const storeVideoInIndexedDB = async (videoDataUrl: string) => {
+const storeVideoInIndexedDB = async (videoDataUrl: string): Promise<void> => {
   try {
     const db = await initDB();
-    if (!db) return;
+    if (!db) throw new Error("Failed to open IndexedDB");
+
     const tx = db.transaction("videos", "readwrite");
     const store = tx.objectStore("videos");
     await store.put(videoDataUrl, "uploadedVideo");
@@ -34,6 +35,7 @@ const storeVideoInIndexedDB = async (videoDataUrl: string) => {
     console.log("✅ Video stored successfully in IndexedDB");
   } catch (error) {
     console.error("❌ Error storing video in IndexedDB:", error);
+    throw error;
   }
 };
 const getVideoFromIndexedDB = async () => {
@@ -64,7 +66,6 @@ const deleteVideoFromIndexedDB = async () => {
     console.error("❌ Error deleting video from IndexedDB:", error);
   }
 };
-
 const UploadVideo = () => {
   const { t } = useTranslation();
   const [video, setVideo] = useState<string | null>(null);
@@ -75,9 +76,12 @@ const UploadVideo = () => {
       }
     });
   }, []);
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
+
       if (!file.type.startsWith("video/")) {
         toast.error(t("invalid_video_format"));
         return;
@@ -86,20 +90,25 @@ const UploadVideo = () => {
         toast.error(t("video_too_large"));
         return;
       }
+
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = async () => {
         const videoDataUrl = reader.result as string;
-        await storeVideoInIndexedDB(videoDataUrl);
-        setVideo(videoDataUrl);
-        toast.success(t("video_uploaded_successfully"));
+        try {
+          await storeVideoInIndexedDB(videoDataUrl);
+          setVideo(videoDataUrl);
+          toast.success(t("video_uploaded_successfully"));
+        } catch {
+          toast.error(t("error_saving_video"));
+        }
       };
     }
   };
   const handleDeleteVideo = async () => {
     await deleteVideoFromIndexedDB();
     setVideo(null);
-    toast.success(t("video_deleted_successfully"));
+    toast.error(t("video_deleted_successfully"));
   };
 
   return (
@@ -114,7 +123,7 @@ const UploadVideo = () => {
         <div className="py-8">
           <label className="border-dashed border-2 border-gray-300 rounded-lg p-6 flex flex-col items-center cursor-pointer hover:bg-gray-100">
             <Upload size={32} className="text-dark mb-3" />
-            <span className="text-dark">{t("add_video")}</span>
+            <span className="text-dark">{t("upload_video")}</span>
             <Input
               type="file"
               accept="video/*"
@@ -124,25 +133,19 @@ const UploadVideo = () => {
           </label>
         </div>
         {video && (
-          <div className="mt-4">
+          <div className="relative w-full rounded-lg overflow-hidden">
             <Video videoUrl={video} className="w-full rounded-lg" />
-            <div className="flex items-center justify-end">
-              <Button
-                onClick={handleDeleteVideo}
-                className="mt-4 bg-red-500 font-medium text-white px-4 py-2 rounded-lg"
-              >
-                {t("delete_video")}
-              </Button>
-            </div>
+            <Button
+              onClick={handleDeleteVideo}
+              className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+            >
+              <X size={15} />
+            </Button>
           </div>
         )}
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "33.33%", "0px"]} />
-      <BackAndNext
-        back="/become-a-host/images"
-        next="/become-a-host/title"
-        isNextDisabled={!video}
-      />
+      <BackAndNext back="/become-a-host/images" next="/become-a-host/title" />
     </div>
   );
 };

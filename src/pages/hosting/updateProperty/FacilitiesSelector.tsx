@@ -3,21 +3,15 @@ import SelectSkeleton from "../../../components/skeleton/SelectSkeleton";
 import { PropertyNameInputs } from "../../../types";
 import Input from "../../../components/ui/Input";
 import { IFacility } from "../../../interfaces";
-import { useGetData } from "../../../hooks/useGetData";
 import { useTranslation } from "react-i18next";
 import InputErrorMessage from "../../../components/ui/InputErrorMessage";
 interface IProps {
   control: Control<PropertyNameInputs>;
   errors: FieldErrors<PropertyNameInputs>;
+  facilities: IFacility[];
 }
-const currentLanguage = localStorage.getItem("i18nextLng");
-function FacilitiesSelector({ control, errors }: IProps) {
+function FacilitiesSelector({ control, errors, facilities }: IProps) {
   const { t } = useTranslation();
-  const { data: facilityList } = useGetData(
-    ["facilities"],
-    `user_api/u_facility.php?lang=${currentLanguage}`
-  );
-  const facilities: IFacility[] = facilityList?.data?.facilitylist;
   return (
     <div className="flex flex-col gap-1">
       <label className="font-medium text-white">{t("facilities")}</label>
