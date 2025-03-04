@@ -22,16 +22,16 @@ const PropertyTypeSelector = ({
       <label className="font-medium text-white">{t("property_type")}</label>
       {!propertyTypeList ? (
         <SelectSkeleton />
-      ) : propertyTypeList.length ? (
+      ) : propertyTypeList?.length ? (
         <Controller
           name="ptype"
           control={control}
           render={({ field }) => (
             <Select
               {...field}
-              options={propertyTypeList.map((propertyType: IPropertyType) => ({
-                value: propertyType.id,
-                label: propertyType.title,
+              options={propertyTypeList?.map((propertyType: IPropertyType) => ({
+                value: propertyType?.id,
+                label: propertyType?.title,
               }))}
               className="border py-3 px-2 bg-white rounded-md outline-none focus:border-2 focus:border-primary"
             />

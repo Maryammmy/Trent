@@ -6,20 +6,16 @@ import { useAppSelector } from "../store/hooks";
 import Rating from "./ui/Rating";
 import { MapPin } from "lucide-react";
 import Button from "./ui/Button";
-import { FaHeart } from "react-icons/fa";
 import { IProperty } from "../interfaces/propertyInterface";
-import { CurrentLanguage } from "../interfaces";
 import { truncateText } from "../utils/truncateText";
 import { baseURL } from "../services";
 import placeholderImage from "../../src/assets/iamges/placeholder.jpg";
-
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 interface IProps {
   property: IProperty;
 }
-
-const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 function Card({ property }: IProps) {
-  const { address, price, property_title, image, id } = property;
+  const { IS_FAVOURITE, price, title, images, id, city } = property;
   const { t } = useTranslation();
   const { enableTaxes } = useAppSelector((state) => state.taxes);
   const basePrice = Number(price);
@@ -28,7 +24,7 @@ function Card({ property }: IProps) {
   const priceWithTaxes = basePrice * (1 + taxRate);
   return (
     <div className="bg-white shadow-md rounded-md p-4 zoom">
-      {image?.length > 0 && (
+      {images?.length > 0 && (
         <div className="overflow-hidden rounded-md">
           <Carsoul
             showDot={true}
@@ -36,12 +32,16 @@ function Card({ property }: IProps) {
             left="5px"
             right="5px"
             padding="1px"
-            infinite={image.length > 1}
+            infinite={images.length > 1}
           >
-            {image.map((item, index) => (
+            {images.map((item, index) => (
               <Link key={index} to={`/properties/${id}`} className="relative">
-                <div className="absolute top-2 right-1 z-10">
-                  <FaHeart size={20} className="text-primary" />
+                <div className="absolute top-2 right-2 z-10">
+                  {IS_FAVOURITE ? (
+                    <FaHeart size={20} className="text-white" />
+                  ) : (
+                    <FaRegHeart size={20} className="text-white" />
+                  )}
                 </div>
                 <div className="rounded-md overflow-hidden h-[230px] bg-gray-200">
                   <Image
@@ -59,10 +59,8 @@ function Card({ property }: IProps) {
       <div>
         <div className="flex items-start justify-between pt-2">
           <div>
-            <h3 className="font-bold pb-1">
-              {truncateText(property_title?.[currentLanguage], 10)}
-            </h3>
-            {truncateText(address?.[currentLanguage], 10)}
+            <h3 className="font-bold pb-1">{truncateText(title, 10)}</h3>
+            {truncateText(city, 10)}
           </div>
           <div>
             <div className="flex gap-1 font-medium pb-1">

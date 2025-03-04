@@ -1,5 +1,12 @@
 import { ReactNode } from "react";
-
+export interface IPeriod {
+  id: string;
+  name: string;
+}
+export interface ICompound {
+  id: string;
+  name: string;
+}
 export interface IPropertyType {
   id: string;
   title: string;

@@ -1,5 +1,18 @@
 import { ReactNode } from "react";
 
+export interface IHomeDataParams {
+  category_id?: string;
+  uid?: string;
+  only_featured?: boolean;
+  period?: string;
+  min_price?: string;
+  max_price?: string;
+  government_id?: string;
+  facilities?: string[];
+  beds_count?: number;
+  bathrooms_count?: number;
+  guest_count?: number;
+}
 export interface IChooseUs {
   title: string;
   icon: string | ReactNode;

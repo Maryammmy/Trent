@@ -12,7 +12,7 @@ function CategoryBar() {
     ["propertyType"],
     `user_api/u_property_type.php?lang=${currentLanguage}`
   );
-  const propertyTypeList: IPropertyType[] = data?.data?.typelist;
+  const propertyTypeList: IPropertyType[] = data?.data?.type_list;
   const categoryBarSkeleton = Array.from({ length: 10 });
   return (
     <>

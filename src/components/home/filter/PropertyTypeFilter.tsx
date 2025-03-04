@@ -19,7 +19,7 @@ function PropertyTypeFilter({
     ["propertyTypeList"],
     `user_api/u_property_type.php?lang=${currentLanguage}`
   );
-  const propertyTypeList: IPropertyType[] = data?.data.typelist;
+  const propertyTypeList: IPropertyType[] = data?.data?.type_list;
   return (
     <div className="py-4">
       <h2 className="text-lg font-bold pb-4">{t("property_type")}</h2>

@@ -33,7 +33,7 @@ function UpdateProperty() {
     ["propertyTypeList"],
     `user_api/u_property_type.php?lang=${currentLanguage}`
   );
-  const propertyTypeList: IPropertyType[] = propertyType?.data.typelist;
+  const propertyTypeList: IPropertyType[] = propertyType?.data?.type_list;
   const { data: facilityList } = useGetData(
     ["facilities"],
     `user_api/u_facility.php?lang=${currentLanguage}`
@@ -156,7 +156,7 @@ function UpdateProperty() {
           <PropertyTypeSelector
             control={control}
             errors={errors}
-            propertyTypeList={propertyTypeList}
+            propertyTypeList={propertyType?.data.type_list}
           />
           <GovernmentSelector
             control={control}

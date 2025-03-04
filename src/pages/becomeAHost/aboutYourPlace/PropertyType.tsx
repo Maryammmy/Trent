@@ -20,7 +20,7 @@ function PropertyType() {
     ["propertyTypeList"],
     `user_api/u_property_type.php?lang=${currentLanguage}`
   );
-  const propertyTypeList: IPropertyType[] = data?.data.typelist;
+  const propertyTypeList: IPropertyType[] = data?.data?.type_list;
   const handleSelectedPropertyType = (id: string) => {
     setSelectedPropertyType(id);
     sessionStorage.setItem("ptype", id);

@@ -24,7 +24,7 @@ function Home() {
     ["slider"],
     `user_api/u_slider.php?lang=${currentLanguage}`
   );
-  const sliderList = data?.data?.sliderlist;
+  const sliderList = data?.data?.slider_list;
   return (
     <>
       <div>

@@ -38,9 +38,7 @@ function PriceAndDeposit() {
       sessionStorage.setItem("security_deposit", JSON.stringify(numericValue));
     }
   };
-  const handlePricingTypeChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handlePeriodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newPeriod = event.target.value;
     setPeriod(newPeriod);
     sessionStorage.setItem("period", newPeriod);
@@ -59,7 +57,7 @@ function PriceAndDeposit() {
           <label className="font-medium">{t("period")}</label>
           <Select
             options={periods}
-            onChange={handlePricingTypeChange}
+            onChange={handlePeriodChange}
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
           />
         </div>

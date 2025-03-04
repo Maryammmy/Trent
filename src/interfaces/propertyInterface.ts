@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 export interface IImage {
   image: string;
-  is_panorama: number;
 }
 export interface IPropertyData {
   uid: string;
@@ -49,57 +48,21 @@ export interface IPropertyData {
   };
 }
 export interface IProperty {
-  id: string;
-  title: {
-    en: string;
-    ar: string;
-  };
-  address: {
-    en: string;
-    ar: string;
-  };
+  IS_FAVOURITE: number;
   bathroom: string;
   beds: string;
-  buyorrent: string;
-  city: {
-    en: string;
-    ar: string;
-  };
-  compound_name: {
-    en: string;
-    ar: string;
-  };
-  description: {
-    en: string;
-    ar: string;
-  };
-  facility_select: string[];
-  floor: {
-    en: string;
-    ar: string;
-  };
-  google_maps_url: string;
-  guest_rules: {
-    en: string;
-    ar: string;
-  };
-  image: IImage[];
-  is_sell: string;
-  max_days: string;
-  min_days: string;
-  plimit: string;
+  city: string;
+  compound_name: string;
+  guest_count: string;
+  id: string;
+  images: IImage[];
+  maps_url: string;
+  period: string;
   price: string;
-  property_title: {
-    en: string;
-    ar: string;
-  };
-  property_type_id: string;
-  rate: number | null;
-  security_deposit: string;
+  property_type: string;
+  rate: string;
   sqrft: string;
-  status: string;
-  user_id: string;
-  video: string;
+  title: string;
 }
 export interface IGallery {
   id: string;

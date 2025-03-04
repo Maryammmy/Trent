@@ -11,8 +11,8 @@ function TypeOfPlaceFilter({ selectedPlace, handleSelectedPlace }: Props) {
   const { t } = useTranslation();
 
   return (
-    <div className="border-b pb-4">
-      <h2 className="text-lg font-bold pb-4">{t("type_of_place_title")}</h2>
+    <div className="pb-4">
+      <h2 className="text-lg font-bold pb-1">{t("type_of_place_title")}</h2>
       <div className="border rounded-lg grid gird-cols-1 sm:grid-cols-3 overflow-hidden">
         {filterTypes.map((type, index) => {
           const lastIndex =

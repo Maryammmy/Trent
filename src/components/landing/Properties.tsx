@@ -7,21 +7,17 @@ import FilterModal from "../home/filter/FilterModal";
 import { SlidersHorizontal } from "lucide-react";
 import PropertyCardSkeleton from "../skeleton/PropertyCardSkeleton";
 import CategoryBar from "../CategoryBar";
-import { useGetData } from "../../hooks/useGetData";
+import { useHomeDataAPI } from "../../services/homeService";
 import { IProperty } from "../../interfaces/propertyInterface";
 
-const currentLanguage = localStorage.getItem("i18nextLng");
 export default function Properties() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(8);
   const [loading, setLoading] = useState(false);
   const ITEMS_TO_LOAD = 20;
   const { t } = useTranslation();
-  const { data } = useGetData(
-    ["properties"],
-    `user_api/u_property_list.php?lang=${currentLanguage}`
-  );
-  const properties: IProperty[] = data?.data?.proplist;
+  const { data } = useHomeDataAPI({}, true);
+  const properties: IProperty[] = data?.data?.Properties;
   const handleShowMore = () => {
     setLoading(true);
     setTimeout(() => {
@@ -57,7 +53,7 @@ export default function Properties() {
               : ""
           }`}
         >
-          {!data ? (
+          {!properties ? (
             <PropertyCardSkeleton cards={8} />
           ) : properties?.length ? (
             properties
