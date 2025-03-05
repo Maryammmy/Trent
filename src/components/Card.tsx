@@ -15,7 +15,8 @@ interface IProps {
   property: IProperty;
 }
 function Card({ property }: IProps) {
-  const { IS_FAVOURITE, price, title, images, id, city } = property;
+  const { IS_FAVOURITE, price, title, image_list, id, city, government_name } =
+    property;
   const { t } = useTranslation();
   const { enableTaxes } = useAppSelector((state) => state.taxes);
   const basePrice = Number(price);
@@ -24,7 +25,7 @@ function Card({ property }: IProps) {
   const priceWithTaxes = basePrice * (1 + taxRate);
   return (
     <div className="bg-white shadow-md rounded-md p-4 zoom">
-      {images?.length > 0 && (
+      {image_list?.length > 0 && (
         <div className="overflow-hidden rounded-md">
           <Carsoul
             showDot={true}
@@ -32,9 +33,9 @@ function Card({ property }: IProps) {
             left="5px"
             right="5px"
             padding="1px"
-            infinite={images.length > 1}
+            infinite={image_list?.length > 1}
           >
-            {images.map((item, index) => (
+            {image_list?.map((item, index) => (
               <Link key={index} to={`/properties/${id}`} className="relative">
                 <div className="absolute top-2 right-2 z-10">
                   {IS_FAVOURITE ? (
@@ -45,7 +46,7 @@ function Card({ property }: IProps) {
                 </div>
                 <div className="rounded-md overflow-hidden h-[230px] bg-gray-200">
                   <Image
-                    imageUrl={baseURL + item.image}
+                    imageUrl={baseURL + item.img}
                     alt={`Slide ${index}`}
                     className="w-full h-full object-cover"
                     onError={(e) => (e.currentTarget.src = placeholderImage)}
@@ -60,7 +61,10 @@ function Card({ property }: IProps) {
         <div className="flex items-start justify-between pt-2">
           <div>
             <h3 className="font-bold pb-1">{truncateText(title, 10)}</h3>
-            {truncateText(city, 10)}
+            <div className="flex gap-1">
+              <p>{truncateText(city, 10)}</p>,
+              <p>{truncateText(government_name, 10)}</p>
+            </div>
           </div>
           <div>
             <div className="flex gap-1 font-medium pb-1">
@@ -73,7 +77,6 @@ function Card({ property }: IProps) {
                       price: priceWithTaxes.toFixed(0),
                     })}
               </span>
-
               <span className="text-dark">/ daily</span>
             </div>
             <div className="flex gap-1 justify-between items-center font-medium">

@@ -7,15 +7,16 @@ import Range from "./Range";
 import PropertyTypeFilter from "./PropertyTypeFilter";
 import FilterActions from "./FilterActions";
 import FacilitiesFilter from "./FacilitiesFilter";
-import { useFiltersAPI } from "../../../services/filtersService";
+import {
+  useFiltersAPI,
+  useGovernmentsAPI,
+} from "../../../services/filtersService";
 import PeriodFilter from "./PeriodFilter";
 import CompoundFilter from "./CompoundFilter";
-import { useGetData } from "../../../hooks/useGetData";
 import GovernmentFilter from "./GovernmentFilter";
 import CounterFilter from "./CounterFilter";
 import { floorPlan } from "../../../data/becomeAHost";
 
-const currentLanguage = localStorage.getItem("i18nextLng");
 interface IProps {
   isFilterOpen: boolean;
   close: () => void;
@@ -33,30 +34,25 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   const [selectedPropertyType, setSelectedPropertyType] = useState<string>("");
   const [values, setValues] = useState<number[]>([]);
   const { data } = useFiltersAPI();
-  const { data: governments } = useGetData(
-    ["government"],
-    `user_api/u_government.php?lang=${currentLanguage}`
-  );
+  const { data: governments } = useGovernmentsAPI();
+  const priceRange = data?.data?.price_range;
+  const periodList = data?.data?.period_list;
+  const compoundList = data?.data?.compound_list;
+  const governmentList = governments?.data?.government_list;
   useEffect(() => {
-    if (data?.data?.period?.length) {
-      setPeriod(data?.data?.period?.[0]?.id);
+    if (periodList?.length) {
+      setPeriod(periodList?.[0]?.id);
     }
-    if (data?.data?.compound_names?.length) {
-      setCompound(data?.data?.compound_names?.[0]?.id);
+    if (compoundList?.length) {
+      setCompound(compoundList?.[0]?.id);
     }
-    if (governments?.data?.government_list?.length) {
-      setGovernment(governments?.data?.government_list?.[0]?.id);
+    if (governmentList?.length) {
+      setGovernment(governmentList?.[0]?.id);
     }
-    if (
-      data?.data?.price_range?.min_price &&
-      data?.data?.price_range?.max_price
-    ) {
-      setValues([
-        data?.data?.price_range?.min_price,
-        data?.data?.price_range?.max_price,
-      ]);
+    if (priceRange?.min_price && priceRange?.max_price) {
+      setValues([priceRange?.min_price, priceRange?.max_price]);
     }
-  }, [data, governments]);
+  }, [compoundList, governmentList, periodList, priceRange]);
   const handleSelectedFacilities = (id: number) => {
     setSelectedFacilities((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
@@ -110,15 +106,15 @@ function FilterModal({ isFilterOpen, close }: IProps) {
       <div className="p-6 max-h-[80vh] overflow-y-auto">
         <PeriodFilter
           handlePeriodChange={handlePeriodChange}
-          periods={data?.data?.period}
+          periods={periodList}
         />
         <CompoundFilter
           handleCompoundChange={handleCompoundChange}
-          compounds={data?.data?.compound_names}
+          compounds={compoundList}
         />
         <GovernmentFilter
           handleGovernmentChange={handleGovernmentChange}
-          governments={governments?.data?.government_list}
+          governments={governmentList}
         />
         <div className="border-b py-4">
           <h2 className="text-lg font-bold pb-4">{t("price_range")}</h2>

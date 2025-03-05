@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { filterButtons } from "../../../data/landingData";
 import { useHomeDataAPI } from "../../../services/homeService";
 import Button from "../../ui/Button";
 import { useTranslation } from "react-i18next";
+import { FilterDataContext } from "../../../context/FilterDataContext";
 
 interface IProps {
   handleClear: () => void;
@@ -32,6 +33,7 @@ function FilterActions({
 }: IProps) {
   const { t } = useTranslation();
   const [enabled, setEnabled] = useState(false);
+  const { setFilterData } = useContext(FilterDataContext);
   const filters = Object.fromEntries(
     Object.entries({
       period: period || undefined,
@@ -54,9 +56,9 @@ function FilterActions({
 
   const handleApply = () => {
     setEnabled(true);
-    console.log(data);
+    setFilterData(data?.data?.Properties);
   };
-
+  console.log(data);
   return (
     <div className="flex justify-between py-2">
       {filterButtons.map((button, index) => (

@@ -1,8 +1,17 @@
 import logo from "../../assets/iamges/Trent.svg";
 import { chooseUs } from "../../data/landingData";
+import { useGetData } from "../../hooks/useGetData";
+import { IWhyChooseUs } from "../../interfaces/landingInterface";
 import Image from "../ui/Image";
 
+const currentLanguage = localStorage.getItem("i18nextLng");
 function ChooseUs() {
+  const { data } = useGetData(
+    ["whyChooseUs"],
+    `user_api/u_why_choose_us.php?lang=${currentLanguage}`
+  );
+  const whyChooseUs: IWhyChooseUs[] = data?.data?.why_choose_us;
+  console.log(whyChooseUs);
   return (
     <div className="px-5 2xl:px-0 max-w-screen-xl mx-auto py-10">
       <div className="flex justify-center items-center gap-4">

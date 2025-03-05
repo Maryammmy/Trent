@@ -1,18 +1,14 @@
 import Button from "./ui/Button";
 import { responsive } from "../data/categoryBar";
 import Carsoul from "./ui/Carsoul";
-import { useGetData } from "../hooks/useGetData";
 import { Home } from "lucide-react";
 import CategoryBarSkeleton from "./skeleton/CategoryBarSkeleton";
 import { IPropertyType } from "../interfaces";
+import { usePropertyTypesAPI } from "../services/filtersService";
 
-const currentLanguage = localStorage.getItem("i18nextLng");
 function CategoryBar() {
-  const { data } = useGetData(
-    ["propertyType"],
-    `user_api/u_property_type.php?lang=${currentLanguage}`
-  );
-  const propertyTypeList: IPropertyType[] = data?.data?.type_list;
+  const { data } = usePropertyTypesAPI();
+  const propertyTypeList: IPropertyType[] = data?.data?.category_list;
   const categoryBarSkeleton = Array.from({ length: 10 });
   return (
     <>

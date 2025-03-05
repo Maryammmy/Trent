@@ -4,6 +4,7 @@ import { RouterProvider } from "react-router-dom";
 import i18n from "./i18n";
 import { useEffect } from "react";
 import { PhotoProvider } from "react-photo-view";
+import FilterDataContextProvider from "./context/FilterDataContext";
 
 function App() {
   useEffect(() => {
@@ -19,10 +20,12 @@ function App() {
   }, []);
   return (
     <>
-      <PhotoProvider>
-        <RouterProvider router={router} />
-        <Toaster />
-      </PhotoProvider>
+      <FilterDataContextProvider>
+        <PhotoProvider>
+          <RouterProvider router={router} />
+          <Toaster />
+        </PhotoProvider>
+      </FilterDataContextProvider>
     </>
   );
 }

@@ -1,25 +1,21 @@
 import Button from "../../ui/Button";
 import { useTranslation } from "react-i18next";
-import { useGetData } from "../../../hooks/useGetData";
 import { Home } from "lucide-react";
 import PropertyTypeSkeleton from "../../skeleton/propertyTypeSkeleton";
 import { IFacility } from "../../../interfaces";
+import { useFacilitiesAPI } from "../../../services/filtersService";
 
 interface Props {
   selectedFacilities: number[];
   handleSelectedFacilities: (id: number) => void;
 }
-const currentLanguage = localStorage.getItem("i18nextLng");
 function FacilitiesFilter({
   selectedFacilities,
   handleSelectedFacilities,
 }: Props) {
   const { t } = useTranslation();
-  const { data } = useGetData(
-    ["facilities"],
-    `user_api/u_facility.php?lang=${currentLanguage}`
-  );
-  const facilities: IFacility[] = data?.data?.facilitylist;
+  const { data } = useFacilitiesAPI();
+  const facilities: IFacility[] = data?.data?.facility_list;
   return (
     <div className="py-4 border-b">
       <h2 className="text-lg font-bold pb-4">{t("facilities")}</h2>

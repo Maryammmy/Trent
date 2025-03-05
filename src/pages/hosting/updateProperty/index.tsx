@@ -16,11 +16,14 @@ import { useParams } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { updatePropertySchema } from "../../../validation/updatePropertyValidation";
 import PeriodSelector from "./PeriodSelector";
-import { useGetData } from "../../../hooks/useGetData";
 import { IFacility, IGovernement, IPropertyType } from "../../../interfaces";
 import { periods } from "../../../data";
+import {
+  useFacilitiesAPI,
+  useGovernmentsAPI,
+  usePropertyTypesAPI,
+} from "../../../services/filtersService";
 
-const currentLanguage = localStorage.getItem("i18nextLng");
 const userId = Cookies.get("user_id");
 function UpdateProperty() {
   const { t } = useTranslation();
@@ -29,21 +32,12 @@ function UpdateProperty() {
   const [imageError, setImageError] = useState<string | null>(null);
   const [videoError, setVideoError] = useState<string | null>(null);
   const { id } = useParams();
-  const { data: propertyType } = useGetData(
-    ["propertyTypeList"],
-    `user_api/u_property_type.php?lang=${currentLanguage}`
-  );
-  const propertyTypeList: IPropertyType[] = propertyType?.data?.type_list;
-  const { data: facilityList } = useGetData(
-    ["facilities"],
-    `user_api/u_facility.php?lang=${currentLanguage}`
-  );
-  const facilities: IFacility[] = facilityList?.data?.facilitylist;
-  const { data: government } = useGetData(
-    ["governmentList"],
-    `user_api/u_government.php?lang=${currentLanguage}`
-  );
-  const governmentList: IGovernement[] = government?.data?.governmentlist;
+  const { data: propertyTypes } = usePropertyTypesAPI();
+  const propertyTypeList: IPropertyType[] = propertyTypes?.data?.category_list;
+  const { data: facilityList } = useFacilitiesAPI();
+  const facilities: IFacility[] = facilityList?.data?.facility_list;
+  const { data: governments } = useGovernmentsAPI();
+  const governmentList: IGovernement[] = governments?.data?.government_list;
   const {
     control,
     handleSubmit,
@@ -156,7 +150,7 @@ function UpdateProperty() {
           <PropertyTypeSelector
             control={control}
             errors={errors}
-            propertyTypeList={propertyType?.data.type_list}
+            propertyTypeList={propertyTypeList}
           />
           <GovernmentSelector
             control={control}

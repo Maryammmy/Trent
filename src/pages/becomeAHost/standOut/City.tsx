@@ -1,14 +1,13 @@
 import { useTranslation } from "react-i18next";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import Input from "../../../components/ui/Input";
-import { useGetData } from "../../../hooks/useGetData";
 import { IGovernement } from "../../../interfaces";
 import Select from "../../../components/ui/Select";
 import SelectSkeleton from "../../../components/skeleton/SelectSkeleton";
+import { useGovernmentsAPI } from "../../../services/filtersService";
 
-const currentLanguage = localStorage.getItem("i18nextLng");
 const storedCityAr = sessionStorage.getItem("city_ar") || "";
 const storedCityEn = sessionStorage.getItem("city_en") || "";
 const storedGovId = sessionStorage.getItem("government") || "";
@@ -18,11 +17,8 @@ const City = () => {
   const [cityEn, setCityEn] = useState(storedCityEn);
   const [governmentId, setGovernmentId] = useState(storedGovId);
 
-  const { data } = useGetData(
-    ["governmentList"],
-    `user_api/u_government.php?lang=${currentLanguage}`
-  );
-  const governmentList = useMemo(() => data?.data?.governmentlist, [data]);
+  const { data } = useGovernmentsAPI();
+  const governmentList = data?.data?.government_list;
   useEffect(() => {
     if (governmentList?.length === 1) {
       setGovernmentId(governmentList?.[0].id);

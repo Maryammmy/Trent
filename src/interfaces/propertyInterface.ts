@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 export interface IImage {
-  image: string;
+  img: string;
 }
 export interface IPropertyData {
   uid: string;
@@ -49,17 +49,18 @@ export interface IPropertyData {
 }
 export interface IProperty {
   IS_FAVOURITE: number;
-  bathroom: string;
-  beds: string;
+  bathrooms_count: string;
+  beds_count: string;
+  category_type: string;
   city: string;
   compound_name: string;
+  government_name: string;
   guest_count: string;
   id: string;
-  images: IImage[];
+  image_list: IImage[];
   maps_url: string;
-  period: string;
+  period_name: string;
   price: string;
-  property_type: string;
   rate: string;
   sqrft: string;
   title: string;

@@ -3,12 +3,11 @@ import Button from "../../../components/ui/Button";
 import { useTranslation } from "react-i18next";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
-import { useGetData } from "../../../hooks/useGetData";
 import { Home } from "lucide-react";
 import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkeleton";
 import { IFacility } from "../../../interfaces";
+import { useFacilitiesAPI } from "../../../services/filtersService";
 
-const currentLanguage = localStorage.getItem("i18nextLng");
 const storedFacilities = sessionStorage.getItem("facility");
 
 function Facilities() {
@@ -16,11 +15,8 @@ function Facilities() {
   const [selectedFacilities, setSelectedFacilities] = useState<string[]>(
     storedFacilities ? JSON.parse(storedFacilities) : []
   );
-  const { data } = useGetData(
-    ["facilities"],
-    `user_api/u_facility.php?lang=${currentLanguage}`
-  );
-  const facilities: IFacility[] = data?.data?.facilitylist;
+  const { data } = useFacilitiesAPI();
+  const facilities: IFacility[] = data?.data?.facility_list;
   const handleSelectedFacilities = (id: string) => {
     setSelectedFacilities((prev) => {
       const updatedFacilities = prev.includes(id)

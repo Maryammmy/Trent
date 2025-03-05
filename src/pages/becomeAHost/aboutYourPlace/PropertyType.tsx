@@ -3,12 +3,11 @@ import Button from "../../../components/ui/Button";
 import { useTranslation } from "react-i18next";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
-import { useGetData } from "../../../hooks/useGetData";
 import { Home } from "lucide-react";
 import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkeleton";
 import { IPropertyType } from "../../../interfaces";
+import { usePropertyTypesAPI } from "../../../services/filtersService";
 
-const currentLanguage = localStorage.getItem("i18nextLng");
 const storedPropertyType = sessionStorage.getItem("ptype");
 function PropertyType() {
   const { t } = useTranslation();
@@ -16,11 +15,8 @@ function PropertyType() {
     storedPropertyType || ""
   );
   const backButton = "/become-a-host/about-your-place";
-  const { data } = useGetData(
-    ["propertyTypeList"],
-    `user_api/u_property_type.php?lang=${currentLanguage}`
-  );
-  const propertyTypeList: IPropertyType[] = data?.data?.type_list;
+  const { data } = usePropertyTypesAPI();
+  const propertyTypeList: IPropertyType[] = data?.data?.category_list;
   const handleSelectedPropertyType = (id: string) => {
     setSelectedPropertyType(id);
     sessionStorage.setItem("ptype", id);

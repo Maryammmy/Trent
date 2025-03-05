@@ -13,6 +13,12 @@ export interface IHomeDataParams {
   bathrooms_count?: number;
   guest_count?: number;
 }
+export interface IWhyChooseUs {
+  why_choose_us_description: string;
+  why_choose_us_title: string;
+  why_choose_us_img: string;
+  why_choose_us_bg: string;
+}
 export interface IChooseUs {
   title: string;
   icon: string | ReactNode;
