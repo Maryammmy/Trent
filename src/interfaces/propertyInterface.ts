@@ -1,6 +1,64 @@
 import { ReactNode } from "react";
 export interface IImage {
   img: string;
+  is_panorama: number;
+}
+export interface ISingleProperty {
+  IS_FAVOURITE: number;
+  address: {
+    en: string;
+    ar: string;
+  };
+  bathrooms_count: string;
+  beds_count: string;
+  buyorrent: string;
+  category_type: string;
+  city: {
+    en: string;
+    ar: string;
+  };
+  compound_name: string | null;
+  description: {
+    en: string;
+    ar: string;
+  };
+  floor: {
+    en: string;
+    ar: string;
+  };
+  government: {
+    id: string;
+    name: {
+      en: string;
+      ar: string;
+    };
+  };
+  guest_count: string;
+  guest_rules: {
+    en: string;
+    ar: string;
+  };
+  id: string;
+  image_list: IImage[];
+  is_enquiry: number;
+  maps_url: string;
+  max_days: string;
+  min_days: string;
+  owner: {
+    img: string;
+    name: string;
+  };
+  period_name: string | null;
+  price: string;
+  rate: string | null;
+  security_deposit: string;
+  sqrft: string;
+  title: {
+    en: string;
+    ar: string;
+  };
+  user_id: string;
+  video: string;
 }
 export interface IPropertyData {
   uid: string;

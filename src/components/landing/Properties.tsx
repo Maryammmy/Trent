@@ -2,14 +2,14 @@ import { useTranslation } from "react-i18next";
 import Cart from "../Card";
 import Button from "../ui/Button";
 import Switcher from "../ui/Switcher";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import FilterModal from "../home/filter/FilterModal";
 import { SlidersHorizontal } from "lucide-react";
 import PropertyCardSkeleton from "../skeleton/PropertyCardSkeleton";
 import CategoryBar from "../CategoryBar";
 import { useHomeDataAPI } from "../../services/homeService";
 import { IProperty } from "../../interfaces/propertyInterface";
-import { FilterDataContext } from "../../context/FilterDataContext";
+// import { FilterDataContext } from "../../context/FilterDataContext";
 
 export default function Properties() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -17,11 +17,9 @@ export default function Properties() {
   const [loading, setLoading] = useState(false);
   const ITEMS_TO_LOAD = 20;
   const { t } = useTranslation();
-  const { filterData } = useContext(FilterDataContext);
+  // const { filterData } = useContext(FilterDataContext);
   const { data } = useHomeDataAPI({}, true);
-  const properties: IProperty[] = filterData
-    ? filterData
-    : data?.data?.Properties;
+  const properties: IProperty[] = data?.data?.Properties;
   const handleShowMore = () => {
     setLoading(true);
     setTimeout(() => {

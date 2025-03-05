@@ -9,18 +9,22 @@ import Amenities from "../../components/property/Amenities";
 import { Grip } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePropertyAPI } from "../../services/propertyService";
+import { ISingleProperty } from "../../interfaces/propertyInterface";
+import { CurrentLanguage } from "../../interfaces";
 
+const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 function Property() {
   const { t } = useTranslation();
   const { id } = useParams();
   const { data } = usePropertyAPI(id || "");
-  console.log(data);
+  const property: ISingleProperty = data?.data?.property_details;
+
   return (
     <>
       <div className="px-5 xl:px-20 py-2 lg:py-6">
         <div className="pb-6">
           <h2 className="font-bold text-2xl text-stone-800">
-            Tiny house close to Rotterdam
+            {property?.title?.[currentLanguage]}
           </h2>
         </div>
         <div className="relative flex gap-5 flex-col xl:flex-row flex-wrap">
@@ -64,12 +68,26 @@ function Property() {
         <div className="py-8 flex flex-col lg:flex-row gap-10 xl:gap-20 md:justify-between">
           <div className="flex-[2]">
             <div className="pb-5">
-              <p className="font-medium text-black text-2xl">
-                ntire home in IJmuiden, Netherlands
-              </p>
-              <p className="text-black font-medium">
-                10guests.4bedrooms.9beds.3.5baths
-              </p>
+              <div className="font-medium text-black text-2xl flex gap-1">
+                <p> {property?.city?.[currentLanguage]}</p>,
+                <p> {property?.government?.name?.[currentLanguage]}</p>
+              </div>
+              <div className="text-black font-medium flex gap-1">
+                <div className="flex gap-1">
+                  <p>{t("guest_count")}</p>
+                  <span>{property?.guest_count}</span>
+                </div>
+                <span>,</span>
+                <div className="flex gap-1">
+                  <p>{t("beds_count")}</p>
+                  <span>{property?.beds_count}</span>
+                </div>
+                <span>,</span>
+                <div className="flex gap-1">
+                  <p>{t("bathrooms_count")}</p>
+                  <span>{property?.bathrooms_count}</span>
+                </div>
+              </div>
             </div>
             <HostedBy />
             <Amenities />
