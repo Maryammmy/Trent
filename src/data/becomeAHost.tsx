@@ -21,7 +21,6 @@ import {
   UsersRound,
   Zap,
   CalendarCheck,
-  UserRound,
 } from "lucide-react";
 import {
   IGetStartedToHost,
@@ -30,7 +29,6 @@ import {
   IPropertyhosting,
   ITypeOfPlace,
 } from "../interfaces/becomeAHost";
-import { PiUsersBold, PiUsersFourBold, PiUsersThreeBold } from "react-icons/pi";
 export const stepsOrder: string[] = [
   "choose-place",
   "type-of-place",
@@ -148,10 +146,8 @@ export const howAreYouhosting = [
   "how_are_you_hosting_on_Trent_title_1",
   "how_are_you_hosting_on_Trent_title_2",
 ];
-export const floorPlan: string[] = ["plimit", "beds", "bathroom"];
-export const occupancy: IPropertyhosting[] = [
-  { label: "me", icon: <UserRound size={35} /> },
-  { label: "my_family", icon: <PiUsersFourBold size={35} /> },
-  { label: "other_guests", icon: <PiUsersThreeBold size={35} /> },
-  { label: "roommates", icon: <PiUsersBold size={35} /> },
+export const floorPlan: string[] = [
+  "guest_count",
+  "beds_count",
+  "bathrooms_count",
 ];

@@ -8,7 +8,7 @@ export interface IHomeDataParams {
   min_price?: string;
   max_price?: string;
   government_id?: string;
-  facilities?: string[];
+  facilities?: number[];
   beds_count?: number;
   bathrooms_count?: number;
   guest_count?: number;

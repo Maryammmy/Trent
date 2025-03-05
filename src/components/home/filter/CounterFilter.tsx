@@ -1,4 +1,4 @@
-import { filterRoomsAndBeds } from "../../../data/landingData";
+import { floorPlan } from "../../../data/becomeAHost";
 import Counter from "../../ui/Counter";
 import { useTranslation } from "react-i18next";
 
@@ -7,13 +7,15 @@ interface Props {
   updateCounter: (key: string, value: number) => void;
 }
 
-function RoomsAndBedsFilter({ counters, updateCounter }: Props) {
+function CounterFilter({ counters, updateCounter }: Props) {
   const { t } = useTranslation();
 
   return (
     <div className="py-4 border-b">
-      <h2 className="text-lg font-bold pb-4">{t("rooms_and_beds")}</h2>
-      {filterRoomsAndBeds.map((item, index) => (
+      <h2 className="text-lg font-bold pb-4">
+        {t("beds_and_bathrooms_and_guests_limit")}
+      </h2>
+      {floorPlan.map((item, index) => (
         <div key={index} className="flex mb-2 justify-between items-center">
           <span className="font-medium">{t(item)}</span>
           <Counter
@@ -29,4 +31,4 @@ function RoomsAndBedsFilter({ counters, updateCounter }: Props) {
   );
 }
 
-export default RoomsAndBedsFilter;
+export default CounterFilter;

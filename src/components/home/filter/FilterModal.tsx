@@ -4,41 +4,48 @@ import Button from "../../ui/Button";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Range from "./Range";
-import TypeOfPlaceFilter from "./TypeOfPlaceFilter";
-import RoomsAndBedsFilter from "./RoomsAndBedsFilter";
 import PropertyTypeFilter from "./PropertyTypeFilter";
 import FilterActions from "./FilterActions";
 import FacilitiesFilter from "./FacilitiesFilter";
-import { filterRoomsAndBeds } from "../../../data/landingData";
 import { useFiltersAPI } from "../../../services/filtersService";
 import PeriodFilter from "./PeriodFilter";
 import CompoundFilter from "./CompoundFilter";
+import { useGetData } from "../../../hooks/useGetData";
+import GovernmentFilter from "./GovernmentFilter";
+import CounterFilter from "./CounterFilter";
+import { floorPlan } from "../../../data/becomeAHost";
 
+const currentLanguage = localStorage.getItem("i18nextLng");
 interface IProps {
   isFilterOpen: boolean;
   close: () => void;
 }
-const initialCounters = Object.fromEntries(
-  filterRoomsAndBeds.map((key) => [key, 0])
-);
+const initialCounters = Object.fromEntries(floorPlan.map((key) => [key, 0]));
 function FilterModal({ isFilterOpen, close }: IProps) {
   const { t } = useTranslation();
   const [counters, setCounters] = useState<{ [key: string]: number }>(
     initialCounters
   );
-  const [selectedPlace, setSelectedPlace] = useState<string>("");
   const [period, setPeriod] = useState<string>("");
   const [compound, setCompound] = useState<string>("");
-  const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
+  const [government, setGovernment] = useState<string>("");
+  const [selectedFacilities, setSelectedFacilities] = useState<number[]>([]);
   const [selectedPropertyType, setSelectedPropertyType] = useState<string>("");
-  const { data } = useFiltersAPI();
   const [values, setValues] = useState<number[]>([]);
+  const { data } = useFiltersAPI();
+  const { data: governments } = useGetData(
+    ["government"],
+    `user_api/u_government.php?lang=${currentLanguage}`
+  );
   useEffect(() => {
     if (data?.data?.period?.length) {
-      setPeriod(data.data.period?.[0]?.id);
+      setPeriod(data?.data?.period?.[0]?.id);
     }
     if (data?.data?.compound_names?.length) {
       setCompound(data?.data?.compound_names?.[0]?.id);
+    }
+    if (governments?.data?.government_list?.length) {
+      setGovernment(governments?.data?.government_list?.[0]?.id);
     }
     if (
       data?.data?.price_range?.min_price &&
@@ -49,8 +56,8 @@ function FilterModal({ isFilterOpen, close }: IProps) {
         data?.data?.price_range?.max_price,
       ]);
     }
-  }, [data]);
-  const handleSelectedFacilities = (id: string) => {
+  }, [data, governments]);
+  const handleSelectedFacilities = (id: number) => {
     setSelectedFacilities((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
@@ -65,11 +72,16 @@ function FilterModal({ isFilterOpen, close }: IProps) {
     const newcompound = event.target.value;
     setCompound(newcompound);
   };
+  const handleGovernmentChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const newGovernement = event.target.value;
+    setGovernment(newGovernement);
+  };
   const updateCounter = (key: string, value: number) => {
     setCounters((prev) => ({ ...prev, [key]: Math.max(0, prev[key] + value) }));
   };
   const handleClear = () => {
-    setSelectedPlace("");
     setValues([
       data?.data?.price_range?.min_price,
       data?.data?.price_range?.max_price,
@@ -77,10 +89,10 @@ function FilterModal({ isFilterOpen, close }: IProps) {
     setCounters(initialCounters);
     setSelectedFacilities([]);
     setSelectedPropertyType("");
-    setPeriod("");
-    setCompound("");
+    setPeriod(data?.data?.period?.[0]?.id);
+    setCompound(data?.data?.compound_names?.[0]?.id);
+    setGovernment(governments?.data?.government_list?.[0]?.id);
   };
-  console.log(values);
   return (
     <Modal
       maxWidth="600px"
@@ -96,10 +108,6 @@ function FilterModal({ isFilterOpen, close }: IProps) {
         <X className="text-black" size={20} />
       </Button>
       <div className="p-6 max-h-[80vh] overflow-y-auto">
-        <TypeOfPlaceFilter
-          selectedPlace={selectedPlace}
-          handleSelectedPlace={(place: string) => setSelectedPlace(place)}
-        />
         <PeriodFilter
           handlePeriodChange={handlePeriodChange}
           periods={data?.data?.period}
@@ -108,6 +116,10 @@ function FilterModal({ isFilterOpen, close }: IProps) {
           handleCompoundChange={handleCompoundChange}
           compounds={data?.data?.compound_names}
         />
+        <GovernmentFilter
+          handleGovernmentChange={handleGovernmentChange}
+          governments={governments?.data?.government_list}
+        />
         <div className="border-b py-4">
           <h2 className="text-lg font-bold pb-4">{t("price_range")}</h2>
           <Range
@@ -115,7 +127,7 @@ function FilterModal({ isFilterOpen, close }: IProps) {
             handleRangeChange={(newValues: number[]) => setValues(newValues)}
           />
         </div>
-        <RoomsAndBedsFilter counters={counters} updateCounter={updateCounter} />
+        <CounterFilter counters={counters} updateCounter={updateCounter} />
         <FacilitiesFilter
           selectedFacilities={selectedFacilities}
           handleSelectedFacilities={handleSelectedFacilities}
@@ -127,13 +139,16 @@ function FilterModal({ isFilterOpen, close }: IProps) {
         <FilterActions
           close={close}
           handleClear={handleClear}
-          selectedPlace={""}
           selectedFacilities={selectedFacilities}
           selectedPropertyType={selectedPropertyType}
           period={period}
           compound={compound}
           minPrice={values[0]?.toString()}
           maxPrice={values[1]?.toString()}
+          government={government}
+          bedsCount={counters["beds_count"]}
+          bathroomsCount={counters["bathrooms_count"]}
+          guestCount={counters["guest_count"]}
         />
       </div>
     </Modal>

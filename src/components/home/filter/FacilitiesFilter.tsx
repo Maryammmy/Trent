@@ -6,8 +6,8 @@ import PropertyTypeSkeleton from "../../skeleton/propertyTypeSkeleton";
 import { IFacility } from "../../../interfaces";
 
 interface Props {
-  selectedFacilities: string[];
-  handleSelectedFacilities: (amenity: string) => void;
+  selectedFacilities: number[];
+  handleSelectedFacilities: (id: number) => void;
 }
 const currentLanguage = localStorage.getItem("i18nextLng");
 function FacilitiesFilter({
@@ -32,9 +32,10 @@ function FacilitiesFilter({
             return (
               <Button
                 key={id}
-                onClick={() => handleSelectedFacilities(id)}
+                onClick={() => handleSelectedFacilities(Number(id))}
                 className={`flex flex-wrap gap-2 font-medium border rounded-full py-2 px-3 ${
-                  selectedFacilities.includes(id) && "bg-zinc-50 border-black"
+                  selectedFacilities.includes(Number(id)) &&
+                  "bg-zinc-50 border-black"
                 }`}
               >
                 <span>{title}</span>
