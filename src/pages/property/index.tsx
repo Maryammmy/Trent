@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CheckDates from "../../components/property/CheckDates";
 import HostedBy from "../../components/property/HostedBy";
 import Image from "../../components/ui/Image";
@@ -8,17 +8,13 @@ import Iframe from "../../components/ui/Iframe";
 import Amenities from "../../components/property/Amenities";
 import { Grip } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { usePropertyAPI } from "../../services/propertyService";
 
 function Property() {
   const { t } = useTranslation();
-  // const { id } = useParams();
-  // const getProperty = async () => {
-  //   const respone = await getPropertyAPI(Number(id));
-  //   console.log(respone);
-  // };
-  // useEffect(() => {
-  //   getProperty();
-  // });
+  const { id } = useParams();
+  const { data } = usePropertyAPI(id || "");
+  console.log(data);
   return (
     <>
       <div className="px-5 xl:px-20 py-2 lg:py-6">
