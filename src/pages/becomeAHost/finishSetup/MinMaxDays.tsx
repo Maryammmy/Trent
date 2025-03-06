@@ -50,7 +50,7 @@ function MinMaxDays() {
             name="min_days"
             value={minDays}
             placeholder={t("min_days_placeholder")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>
         <div className="flex flex-col gap-1">
@@ -62,7 +62,7 @@ function MinMaxDays() {
             name="max_days"
             value={maxDays}
             placeholder={t("max_days_placeholder")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>
       </div>

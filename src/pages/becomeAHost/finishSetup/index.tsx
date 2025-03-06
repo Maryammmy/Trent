@@ -30,7 +30,7 @@ function FinishSetup() {
       <ProgressBarsWrapper progressBarsData={["100%", "100%", "0px"]} />
       <BackAndNext
         back="/become-a-host/address-and-floor"
-        next="/become-a-host/min-max-days"
+        next="/become-a-host/min-and-max-days"
       />
     </div>
   );

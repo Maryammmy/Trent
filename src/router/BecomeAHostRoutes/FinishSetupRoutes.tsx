@@ -9,7 +9,7 @@ const FinishSetupRoutes = (
   <>
     <Route path="finish-setup" element={<FinishSetup />} />
     <Route
-      path="min-max-days"
+      path="min-and-max-days"
       element={
         <RedirectRoute>
           <MinMaxDays />

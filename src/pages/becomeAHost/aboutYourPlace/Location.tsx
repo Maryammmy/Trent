@@ -4,7 +4,7 @@ import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWra
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import Input from "../../../components/ui/Input";
 
-const storedLocation = sessionStorage.getItem("google_maps_url");
+const storedLocation = sessionStorage.getItem("maps_url");
 
 function Location() {
   const { t } = useTranslation();
@@ -21,7 +21,7 @@ function Location() {
     setError(isValidUrl ? "" : t("invalid_google_maps_url"));
 
     if (isValidUrl) {
-      sessionStorage.setItem("google_maps_url", JSON.stringify(url));
+      sessionStorage.setItem("maps_url", JSON.stringify(url));
     }
   };
 
@@ -42,7 +42,7 @@ function Location() {
             type="text"
             value={googleMapsUrl}
             onChange={handleUrlChange}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
             placeholder={t("enter_google_maps_url_placeholder")}
           />
           {error && <p className="text-red-600 text-xs md:text-sm">{error}</p>}

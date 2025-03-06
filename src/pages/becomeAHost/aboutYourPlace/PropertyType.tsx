@@ -8,7 +8,7 @@ import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkele
 import { IPropertyType } from "../../../interfaces";
 import { usePropertyTypesAPI } from "../../../services/filtersService";
 
-const storedPropertyType = sessionStorage.getItem("ptype");
+const storedPropertyType = sessionStorage.getItem("category_id");
 function PropertyType() {
   const { t } = useTranslation();
   const [selectedPropertyType, setSelectedPropertyType] = useState<string>(
@@ -19,7 +19,7 @@ function PropertyType() {
   const propertyTypeList: IPropertyType[] = data?.data?.data?.category_list;
   const handleSelectedPropertyType = (id: string) => {
     setSelectedPropertyType(id);
-    sessionStorage.setItem("ptype", id);
+    sessionStorage.setItem("category_id", id);
   };
   return (
     <div className="py-10">

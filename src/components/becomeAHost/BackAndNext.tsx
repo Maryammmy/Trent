@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
@@ -7,7 +6,6 @@ import {
   addCompletedStep,
   setIsFinishUpModal,
 } from "../../store/features/becomeAHost/becomeAHostSlice";
-import { openDB } from "idb";
 
 interface IProps {
   back: string;
@@ -26,26 +24,26 @@ function BackAndNext({
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [video, setVideo] = useState<string | null>(null);
+  // const [video, setVideo] = useState<string | null>(null);
 
-  useEffect(() => {
-    const getVideoFromIndexedDB = async () => {
-      try {
-        const db = await openDB("videoDB", 1);
-        const tx = db.transaction("videos", "readonly");
-        const store = tx.objectStore("videos");
-        const storedVideo = await store.get("uploadedVideo");
-        await tx.done;
-        if (storedVideo) {
-          setVideo(storedVideo);
-        }
-      } catch (error) {
-        console.error("❌ Error retrieving video:", error);
-      }
-    };
-    getVideoFromIndexedDB();
-  }, []);
-  console.log(video);
+  // useEffect(() => {
+  //   const getVideoFromIndexedDB = async () => {
+  //     try {
+  //       const db = await openDB("videoDB", 1);
+  //       const tx = db.transaction("videos", "readonly");
+  //       const store = tx.objectStore("videos");
+  //       const storedVideo = await store.get("uploadedVideo");
+  //       await tx.done;
+  //       if (storedVideo) {
+  //         setVideo(storedVideo);
+  //       }
+  //     } catch (error) {
+  //       console.error("❌ Error retrieving video:", error);
+  //     }
+  //   };
+  //   getVideoFromIndexedDB();
+  // }, []);
+  // console.log(video);
   const handleClick = async () => {
     if (next === "/hosting/properties") {
       dispatch(setIsFinishUpModal(true));

@@ -44,7 +44,7 @@ function Compound() {
             name="compound_name_en"
             value={compoundEn}
             placeholder={t("compound_name_for_property_placeholder_en")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>
         <div className="flex flex-col gap-1">
@@ -56,7 +56,7 @@ function Compound() {
             name="compound_name_ar"
             value={compoundAr}
             placeholder={t("compound_name_for_property_placeholder_ar")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>
       </div>

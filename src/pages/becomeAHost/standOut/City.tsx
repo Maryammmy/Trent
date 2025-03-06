@@ -10,7 +10,7 @@ import { useGovernmentsAPI } from "../../../services/filtersService";
 
 const storedCityAr = sessionStorage.getItem("city_ar") || "";
 const storedCityEn = sessionStorage.getItem("city_en") || "";
-const storedGovId = sessionStorage.getItem("government") || "";
+const storedGovId = sessionStorage.getItem("government_id") || "";
 const City = () => {
   const { t } = useTranslation();
   const [cityAr, setCityAr] = useState(storedCityAr);
@@ -35,7 +35,7 @@ const City = () => {
   const handleGovernmentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newGovId = e.target.value;
     setGovernmentId(newGovId);
-    sessionStorage.setItem("government", newGovId);
+    sessionStorage.setItem("government_id", newGovId);
   };
   const isNextDisabled =
     cityAr.length < 2 || cityEn.length < 2 || !governmentId;
@@ -49,7 +49,7 @@ const City = () => {
         <p className="max-w-2xl text-dark font-medium pb-5">
           {t("city_for_property_desc")}
         </p>
-        <div className="flex flex-col gap-1 mb-5">
+        <div className="flex flex-col gap-2 mb-5">
           <label className="font-medium">{t("government")}</label>
           {!governmentList ? (
             <SelectSkeleton />
@@ -60,7 +60,7 @@ const City = () => {
                 label: gov.name,
               }))}
               onChange={handleGovernmentChange}
-              className="bg-zinc-50 border border-dark py-3 px-2 rounded-md"
+              className="bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
             />
           ) : (
             <p className="border bg-white py-3 px-2 rounded-md">
@@ -68,7 +68,7 @@ const City = () => {
             </p>
           )}
         </div>
-        <div className="flex flex-col gap-1 mb-5">
+        <div className="flex flex-col gap-2 mb-5">
           <label className="font-medium mb-1">{t("city_in_english")}</label>
           <Input
             name="city_en"
@@ -78,10 +78,10 @@ const City = () => {
             value={cityEn}
             onChange={(e) => handleCityChange(e, "en")}
             placeholder={t("city_for_property_placeholder_en")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           <label className="font-medium">{t("city_in_arabic")}</label>
           <Input
             name="city_ar"
@@ -91,7 +91,7 @@ const City = () => {
             value={cityAr}
             onChange={(e) => handleCityChange(e, "ar")}
             placeholder={t("city_for_property_placeholder_ar")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>
       </div>

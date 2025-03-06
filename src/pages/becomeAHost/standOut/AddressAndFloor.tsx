@@ -65,7 +65,7 @@ function AddressAndFloor() {
             name="address_en"
             value={addressEn}
             placeholder={t("address_placeholder_en")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>
         <div className="flex flex-col gap-1 mb-5">
@@ -78,7 +78,7 @@ function AddressAndFloor() {
             name="address_ar"
             value={addressAr}
             placeholder={t("address_placeholder_ar")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>
         <div className="flex flex-col gap-1 mb-5">
@@ -90,7 +90,7 @@ function AddressAndFloor() {
             name="floor_en"
             value={floorEn}
             placeholder={t("floor_placeholder_en")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>
         <div className="flex flex-col gap-1">
@@ -102,7 +102,7 @@ function AddressAndFloor() {
             name="floor_ar"
             value={floorAr}
             placeholder={t("floor_placeholder_ar")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>
       </div>

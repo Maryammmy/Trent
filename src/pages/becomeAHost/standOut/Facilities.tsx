@@ -8,7 +8,7 @@ import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkele
 import { IFacility } from "../../../interfaces";
 import { useFacilitiesAPI } from "../../../services/filtersService";
 
-const storedFacilities = sessionStorage.getItem("facility");
+const storedFacilities = sessionStorage.getItem("ffacilities");
 
 function Facilities() {
   const { t } = useTranslation();
@@ -23,7 +23,7 @@ function Facilities() {
         ? prev.filter((item) => item !== id)
         : [...prev, id];
 
-      sessionStorage.setItem("facility", JSON.stringify(updatedFacilities));
+      sessionStorage.setItem("facilities", JSON.stringify(updatedFacilities));
       return updatedFacilities;
     });
   };

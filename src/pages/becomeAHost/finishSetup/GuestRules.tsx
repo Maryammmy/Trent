@@ -35,7 +35,7 @@ function GuestRules() {
         <p className="max-w-2xl text-dark font-medium pb-10">
           {t("guest_rules_desc")}
         </p>
-        <div className="flex flex-col gap-1 mb-5">
+        <div className="flex flex-col gap-2 mb-5">
           <label className="font-medium">{t("guest_rules_in_english")}</label>
           <TextArea
             maxLength={10000}
@@ -44,7 +44,7 @@ function GuestRules() {
             name="guest_rules_en"
             value={rulesTextAreaEn}
             placeholder={t("guest_rules_placeholder_en")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
             rows={5}
           ></TextArea>
         </div>
@@ -57,7 +57,7 @@ function GuestRules() {
             name="guest_rules_ar"
             value={rulesTextAreaAr}
             placeholder={t("guest_rules_placeholder_ar")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-primary"
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
             rows={5}
           ></TextArea>
         </div>
