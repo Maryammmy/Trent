@@ -15,8 +15,16 @@ interface IProps {
   property: IProperty;
 }
 function Card({ property }: IProps) {
-  const { IS_FAVOURITE, price, title, image_list, id, city, government_name } =
-    property;
+  const {
+    IS_FAVOURITE,
+    price,
+    title,
+    image_list,
+    id,
+    city,
+    government_name,
+    period_name,
+  } = property;
   const { t } = useTranslation();
   const { enableTaxes } = useAppSelector((state) => state.taxes);
   const basePrice = Number(price);
@@ -70,14 +78,10 @@ function Card({ property }: IProps) {
             <div className="flex gap-1 font-medium pb-1">
               <span className="font-bold text-primary">
                 {enableTaxes
-                  ? t("price_per_night", {
-                      price: priceBeforeTaxes.toFixed(0),
-                    })
-                  : t("price_per_night", {
-                      price: priceWithTaxes.toFixed(0),
-                    })}
+                  ? `${priceBeforeTaxes.toFixed(0)} ${t("price_per_night")}`
+                  : `${priceWithTaxes.toFixed(0)} ${t("price_per_night")}`}
               </span>
-              <span className="text-dark">/ daily</span>
+              <span className="text-dark">/ {period_name}</span>
             </div>
             <div className="flex gap-1 justify-between items-center font-medium">
               <Rating rating={4} />

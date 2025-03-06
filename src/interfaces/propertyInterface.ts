@@ -4,20 +4,21 @@ export interface IImage {
   is_panorama: number;
 }
 export interface ISingleProperty {
-  IS_FAVOURITE: number;
   address: {
     en: string;
     ar: string;
   };
-  bathrooms_count: string;
-  beds_count: string;
-  buyorrent: string;
-  category_type: string;
   city: {
     en: string;
     ar: string;
   };
-  compound_name: string | null;
+  compound: {
+    id: string;
+    name: {
+      en: string;
+      ar: string;
+    };
+  };
   description: {
     en: string;
     ar: string;
@@ -33,30 +34,41 @@ export interface ISingleProperty {
       ar: string;
     };
   };
-  guest_count: string;
+  period: {
+    id: string;
+    name: {
+      en: string;
+      ar: string;
+    };
+  };
+  owner: {
+    img: string;
+    name: string;
+  };
   guest_rules: {
     en: string;
     ar: string;
   };
+  title: {
+    en: string;
+    ar: string;
+  };
+  IS_FAVOURITE: number;
+  guest_count: string;
+  bathrooms_count: string;
+  beds_count: string;
+  buyorrent: string;
+  category_type: string;
   id: string;
   image_list: IImage[];
   is_enquiry: number;
   maps_url: string;
   max_days: string;
   min_days: string;
-  owner: {
-    img: string;
-    name: string;
-  };
-  period_name: string | null;
   price: string;
-  rate: string | null;
+  rate: string;
   security_deposit: string;
   sqrft: string;
-  title: {
-    en: string;
-    ar: string;
-  };
   user_id: string;
   video: string;
 }
