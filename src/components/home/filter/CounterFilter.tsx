@@ -12,7 +12,7 @@ function CounterFilter({ counters, updateCounter }: Props) {
 
   return (
     <div className="py-4 border-b">
-      <h2 className="text-lg font-bold pb-4">
+      <h2 className="text-lg font-bold pb-2">
         {t("beds_and_bathrooms_and_guests_limit")}
       </h2>
       {floorPlan.map((item, index) => (

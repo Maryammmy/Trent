@@ -16,6 +16,7 @@ import CompoundFilter from "./CompoundFilter";
 import GovernmentFilter from "./GovernmentFilter";
 import CounterFilter from "./CounterFilter";
 import { floorPlan } from "../../../data/becomeAHost";
+import RatingFilter from "./RatingFilter";
 
 interface IProps {
   isFilterOpen: boolean;
@@ -33,26 +34,18 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   const [selectedFacilities, setSelectedFacilities] = useState<number[]>([]);
   const [selectedPropertyType, setSelectedPropertyType] = useState<string>("");
   const [values, setValues] = useState<number[]>([]);
+  const [rating, setRating] = useState(0);
   const { data } = useFiltersAPI();
   const { data: governments } = useGovernmentsAPI();
-  const priceRange = data?.data?.price_range;
-  const periodList = data?.data?.period_list;
-  const compoundList = data?.data?.compound_list;
-  const governmentList = governments?.data?.government_list;
+  const priceRange = data?.data?.data?.price_range;
+  const periodList = data?.data?.data?.period_list;
+  const compoundList = data?.data?.data?.compound_list;
+  const governmentList = governments?.data?.data?.government_list;
   useEffect(() => {
-    if (periodList?.length) {
-      setPeriod(periodList?.[0]?.id);
-    }
-    if (compoundList?.length) {
-      setCompound(compoundList?.[0]?.id);
-    }
-    if (governmentList?.length) {
-      setGovernment(governmentList?.[0]?.id);
-    }
     if (priceRange?.min_price && priceRange?.max_price) {
       setValues([priceRange?.min_price, priceRange?.max_price]);
     }
-  }, [compoundList, governmentList, periodList, priceRange]);
+  }, [priceRange]);
   const handleSelectedFacilities = (id: number) => {
     setSelectedFacilities((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
@@ -74,20 +67,21 @@ function FilterModal({ isFilterOpen, close }: IProps) {
     const newGovernement = event.target.value;
     setGovernment(newGovernement);
   };
+  const handleRatingChange = (newRating: number) => {
+    setRating(newRating);
+  };
   const updateCounter = (key: string, value: number) => {
     setCounters((prev) => ({ ...prev, [key]: Math.max(0, prev[key] + value) }));
   };
   const handleClear = () => {
-    setValues([
-      data?.data?.price_range?.min_price,
-      data?.data?.price_range?.max_price,
-    ]);
+    setValues([priceRange?.min_price, priceRange?.max_price]);
     setCounters(initialCounters);
     setSelectedFacilities([]);
     setSelectedPropertyType("");
-    setPeriod(data?.data?.period?.[0]?.id);
-    setCompound(data?.data?.compound_names?.[0]?.id);
-    setGovernment(governments?.data?.government_list?.[0]?.id);
+    setPeriod("");
+    setCompound("");
+    setGovernment("");
+    setRating(0);
   };
   return (
     <Modal
@@ -117,7 +111,7 @@ function FilterModal({ isFilterOpen, close }: IProps) {
           governments={governmentList}
         />
         <div className="border-b py-4">
-          <h2 className="text-lg font-bold pb-4">{t("price_range")}</h2>
+          <h2 className="text-lg font-bold pb-2">{t("price_range")}</h2>
           <Range
             values={values}
             handleRangeChange={(newValues: number[]) => setValues(newValues)}
@@ -132,11 +126,13 @@ function FilterModal({ isFilterOpen, close }: IProps) {
           selectedProperty={selectedPropertyType}
           handleSelectedProperty={(id: string) => setSelectedPropertyType(id)}
         />
+        <RatingFilter rating={rating} handleRatingChange={handleRatingChange} />
         <FilterActions
           close={close}
           handleClear={handleClear}
           selectedFacilities={selectedFacilities}
           selectedPropertyType={selectedPropertyType}
+          rate={rating}
           period={period}
           compound={compound}
           minPrice={values[0]?.toString()}

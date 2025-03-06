@@ -10,7 +10,7 @@ interface IProps {
 function PeriodFilter({ handlePeriodChange, periods }: IProps) {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col gap-1 pb-4">
+    <div className="flex flex-col gap-2 pb-4">
       <label className="text-lg font-bold">{t("period")}</label>
       {!periods ? (
         <SelectSkeleton />

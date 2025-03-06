@@ -14,7 +14,7 @@ export const useGovernmentsAPI = () => {
   return useQuery({
     queryKey: ["governments"],
     queryFn: () =>
-      baseAPI.get(`user_api/u_government.php?lang=${currentLanguage}`),
+      baseAPI.get(`user_api/u_government_list.php?lang=${currentLanguage}`),
     refetchInterval: 10000,
   });
 };
@@ -22,7 +22,7 @@ export const usePropertyTypesAPI = () => {
   return useQuery({
     queryKey: ["propertyTypes"],
     queryFn: () =>
-      baseAPI.get(`user_api/u_property_type.php?lang=${currentLanguage}`),
+      baseAPI.get(`user_api/u_category_list.php?lang=${currentLanguage}`),
     refetchInterval: 10000,
   });
 };
@@ -30,7 +30,7 @@ export const useFacilitiesAPI = () => {
   return useQuery({
     queryKey: ["facilities"],
     queryFn: () =>
-      baseAPI.get(`user_api/u_facility.php?lang=${currentLanguage}`),
+      baseAPI.get(`user_api/u_facility_list.php?lang=${currentLanguage}`),
     refetchInterval: 10000,
   });
 };

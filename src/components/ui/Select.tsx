@@ -19,6 +19,7 @@ const Select = forwardRef<HTMLSelectElement, IProps>(
     const { t } = useTranslation();
     return (
       <select ref={ref} className={`w-full ${className}`} {...rest}>
+        <option value="">{t("choose_option")}</option>
         {options.map((option, index) => (
           <option key={index} value={option.value}>
             {t(option.label)}

@@ -9,7 +9,7 @@ interface IProps {
 function GovernmentFilter({ handleGovernmentChange, governments }: IProps) {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-2">
       <label className="text-lg font-bold">{t("government")}</label>
       {!governments ? (
         <SelectSkeleton />

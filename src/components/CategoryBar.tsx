@@ -8,7 +8,7 @@ import { usePropertyTypesAPI } from "../services/filtersService";
 
 function CategoryBar() {
   const { data } = usePropertyTypesAPI();
-  const propertyTypeList: IPropertyType[] = data?.data?.category_list;
+  const propertyTypeList: IPropertyType[] = data?.data?.data?.category_list;
   const categoryBarSkeleton = Array.from({ length: 10 });
   return (
     <>

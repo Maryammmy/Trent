@@ -17,7 +17,7 @@ function Property() {
   const { t } = useTranslation();
   const { id } = useParams();
   const { data } = usePropertyAPI(id || "");
-  const property: ISingleProperty = data?.data?.property_details;
+  const property: ISingleProperty = data?.data?.data?.property_details;
 
   return (
     <>

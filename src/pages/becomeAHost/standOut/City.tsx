@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import Input from "../../../components/ui/Input";
@@ -18,13 +18,7 @@ const City = () => {
   const [governmentId, setGovernmentId] = useState(storedGovId);
 
   const { data } = useGovernmentsAPI();
-  const governmentList = data?.data?.government_list;
-  useEffect(() => {
-    if (governmentList?.length === 1) {
-      setGovernmentId(governmentList?.[0].id);
-      sessionStorage.setItem("government", governmentList?.[0].id);
-    }
-  }, [governmentList]);
+  const governmentList = data?.data?.data?.government_list;
   const handleCityChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     lang: "en" | "ar"

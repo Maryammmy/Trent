@@ -37,7 +37,8 @@ function UpdateProperty() {
   const { data: facilityList } = useFacilitiesAPI();
   const facilities: IFacility[] = facilityList?.data?.facility_list;
   const { data: governments } = useGovernmentsAPI();
-  const governmentList: IGovernement[] = governments?.data?.government_list;
+  const governmentList: IGovernement[] =
+    governments?.data?.data?.government_list;
   const {
     control,
     handleSubmit,

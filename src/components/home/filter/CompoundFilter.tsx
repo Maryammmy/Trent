@@ -9,7 +9,7 @@ interface IProps {
 function CompoundFilter({ handleCompoundChange, compounds }: IProps) {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col gap-1 pb-4">
+    <div className="flex flex-col gap-2 pb-4">
       <label className="text-lg font-bold">{t("compound")}</label>
       {!compounds ? (
         <SelectSkeleton />

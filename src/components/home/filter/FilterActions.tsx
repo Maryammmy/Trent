@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { filterButtons } from "../../../data/landingData";
 import { useHomeDataAPI } from "../../../services/homeService";
 import Button from "../../ui/Button";
@@ -18,6 +18,7 @@ interface IProps {
   bedsCount: number;
   bathroomsCount: number;
   guestCount: number;
+  rate: number;
 }
 function FilterActions({
   handleClear,
@@ -30,6 +31,8 @@ function FilterActions({
   bedsCount,
   bathroomsCount,
   guestCount,
+  rate,
+  close,
 }: IProps) {
   const { t } = useTranslation();
   const [enabled, setEnabled] = useState(false);
@@ -46,19 +49,27 @@ function FilterActions({
       beds_count: bedsCount || undefined,
       bathrooms_count: bathroomsCount || undefined,
       guest_count: guestCount || undefined,
+      rate: rate || undefined,
     }).filter(([, value]) => value !== undefined && value !== null)
   );
+  console.log(rate);
   const { data } = useHomeDataAPI(filters, enabled);
+  const filteredProperties = data?.data?.data?.property_list;
   const handleClearFilters = () => {
     setEnabled(false);
+    setFilterData(null);
     handleClear();
+    close();
   };
-
   const handleApply = () => {
     setEnabled(true);
-    setFilterData(data?.data?.Properties);
   };
-  console.log(data);
+  useEffect(() => {
+    if (filteredProperties) {
+      setFilterData(filteredProperties);
+    }
+  }, [filteredProperties, setFilterData]);
+
   return (
     <div className="flex justify-between py-2">
       {filterButtons.map((button, index) => (

@@ -12,6 +12,7 @@ export interface IHomeDataParams {
   beds_count?: number;
   bathrooms_count?: number;
   guest_count?: number;
+  rate?: number;
 }
 export interface IWhyChooseUs {
   why_choose_us_description: string;

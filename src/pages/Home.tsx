@@ -22,9 +22,9 @@ function Home() {
     : { padding: "10px" };
   const { data } = useGetData(
     ["slider"],
-    `user_api/u_slider.php?lang=${currentLanguage}`
+    `user_api/u_slider_list.php?lang=${currentLanguage}`
   );
-  const sliderList = data?.data?.slider_list;
+  const sliderList = data?.data?.data?.slider_list;
   return (
     <>
       <div>

@@ -1,6 +1,6 @@
 {
-  "price_per_night": "{{price}}EGP",
-  "rating": "{{rating}}",
+  "price_per_night": "EGP",
+  "rating": "Rating",
   "destination": "Destination",
   "home_search_guests": "Guests",
   "search_destinations": "Search destinations",
@@ -133,6 +133,7 @@
   "floor_plan_desc": "You'll add more details later, like bed types.",
   "beds_count": "Beds",
   "bathrooms_count": "Bathrooms",
+  "choose_option": "Choose an option",
   "guest_count": "Guests limit",
   "enter_beds": "Enter Number of Beds",
   "enter_bathroom": "Enter Number of Bathrooms",

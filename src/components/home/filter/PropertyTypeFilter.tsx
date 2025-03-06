@@ -15,10 +15,10 @@ function PropertyTypeFilter({
 }: Props) {
   const { t } = useTranslation();
   const { data } = usePropertyTypesAPI();
-  const propertyTypeList: IPropertyType[] = data?.data?.category_list;
+  const propertyTypeList: IPropertyType[] = data?.data?.data?.category_list;
   return (
     <div className="py-4">
-      <h2 className="text-lg font-bold pb-4">{t("property_type")}</h2>
+      <h2 className="text-lg font-bold pb-2">{t("property_type")}</h2>
       <div className="flex flex-wrap gap-2">
         {!propertyTypeList ? (
           <PropertyTypeSkeleton cards={8} />

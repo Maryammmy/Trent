@@ -1,6 +1,6 @@
 {
-  "price_per_night": "{{price}}جنيهة",
-  "rating": "{{rating}}",
+  "price_per_night": "جنيهة",
+  "rating": "التقييم",
   "destination": "الجهه",
   "home_search_guests": "الضيوف",
   "search_destinations": "البحث عن الجهات",
@@ -135,6 +135,7 @@
   "guest_count": "الحد الأقصى للضيوف",
   "enter_beds": "أدخل عدد الأسرّة",
   "enter_bathroom": "أدخل عدد الحمامات",
+  "choose_option": "اختر خيار",
   "property_sqft": "المساحة الإجمالية (قدم مربع)",
   "enter_property_sqft_placeholder": "أدخل المساحة الإجمالية بالقدم المربع",
   "enter_guest_limit": "أدخل الحد الأقصى للضيوف",

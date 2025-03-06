@@ -16,7 +16,7 @@ function PropertyType() {
   );
   const backButton = "/become-a-host/about-your-place";
   const { data } = usePropertyTypesAPI();
-  const propertyTypeList: IPropertyType[] = data?.data?.category_list;
+  const propertyTypeList: IPropertyType[] = data?.data?.data?.category_list;
   const handleSelectedPropertyType = (id: string) => {
     setSelectedPropertyType(id);
     sessionStorage.setItem("ptype", id);

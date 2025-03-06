@@ -16,7 +16,7 @@ function Facilities() {
     storedFacilities ? JSON.parse(storedFacilities) : []
   );
   const { data } = useFacilitiesAPI();
-  const facilities: IFacility[] = data?.data?.facility_list;
+  const facilities: IFacility[] = data?.data?.data?.facility_list;
   const handleSelectedFacilities = (id: string) => {
     setSelectedFacilities((prev) => {
       const updatedFacilities = prev.includes(id)

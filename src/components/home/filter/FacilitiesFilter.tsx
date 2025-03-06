@@ -15,10 +15,10 @@ function FacilitiesFilter({
 }: Props) {
   const { t } = useTranslation();
   const { data } = useFacilitiesAPI();
-  const facilities: IFacility[] = data?.data?.facility_list;
+  const facilities: IFacility[] = data?.data?.data?.facility_list;
   return (
     <div className="py-4 border-b">
-      <h2 className="text-lg font-bold pb-4">{t("facilities")}</h2>
+      <h2 className="text-lg font-bold pb-2">{t("facilities")}</h2>
       <div className="flex flex-wrap gap-2">
         {!facilities ? (
           <PropertyTypeSkeleton cards={8} />
