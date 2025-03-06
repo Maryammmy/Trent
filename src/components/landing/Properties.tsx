@@ -20,8 +20,7 @@ export default function Properties() {
   const { data } = useHomeDataAPI({}, true);
   const { filterData } = useContext(FilterDataContext);
   const [properties, setProperties] = useState<IProperty[] | null>(null);
-  // const allProperties: IProperty[] = data?.data?.data?.property_list;
-  console.log(filterData);
+  const allProperties: IProperty[] = data?.data?.data?.property_list;
   const handleShowMore = () => {
     setLoading(true);
     setTimeout(() => {
@@ -30,8 +29,8 @@ export default function Properties() {
     }, 1000);
   };
   useEffect(() => {
-    setProperties(filterData || data?.data?.data?.property_list);
-  }, [filterData, data]);
+    setProperties(filterData || allProperties);
+  }, [filterData, allProperties]);
 
   return (
     <>

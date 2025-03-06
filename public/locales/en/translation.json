@@ -286,5 +286,6 @@
   "your_properties": "Your properties",
   "property": "Property",
   "log_out": "Log out",
-  "compound": "Compound"
+  "compound": "Compound",
+  "host_rules": "Host rules"
 }

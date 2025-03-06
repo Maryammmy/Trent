@@ -1,59 +1,31 @@
 import Image from "../ui/Image";
-import user from "../../assets/iamges/home1.avif";
-import { Fence, KeyRound, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
-
-function HostedBy() {
+import { IDetailsProperty } from "../../interfaces/propertyInterface";
+interface IProps {
+  host: IDetailsProperty["owner"];
+  guestRules: string;
+}
+function HostedBy({ host, guestRules }: IProps) {
   const { t } = useTranslation();
   return (
     <div className="border-t border-b py-4">
       <div className="flex items-center gap-5">
         <div className="w-12 h-12 rounded-full overflow-hidden">
           <Image
-            imageUrl={user}
+            imageUrl={host?.img}
             alt="User Image"
             className="w-full h-full object-cover"
           />
         </div>
         <div>
-          <h2 className="text-black font-bold">{t("hosted_by")} Alys</h2>
-          <p className="text-dark">Superhost.6 years hosting</p>
+          <h2 className="font-bold">
+            {t("hosted_by")} {host?.name}
+          </h2>
         </div>
       </div>
-      <div className="py-5">
-        <ul className="flex flex-col gap-5">
-          <li className="flex gap-5">
-            <span className="pt-2">
-              <KeyRound className="text-black" />
-            </span>
-            <div>
-              <h3 className="text-black">Great check-in experience</h3>
-              <p className="text-dark">
-                Recent guests loved the smooth start to this stay.
-              </p>
-            </div>
-          </li>
-          <li className="flex gap-5">
-            <span className="pt-2">
-              <MapPin className="text-black" />
-            </span>
-            <div>
-              <h3 className="text-black">Beautiful area</h3>
-              <p className="text-dark">
-                Guests love this home’s scenic location.
-              </p>
-            </div>
-          </li>
-          <li className="flex gap-5">
-            <span className="pt-2">
-              <Fence className="text-black" />
-            </span>
-            <div>
-              <h3 className="text-black font-semibold">Garden view</h3>
-              <p className="text-dark">Soak up the view during your stay.</p>
-            </div>
-          </li>
-        </ul>
+      <div className="flex flex-col gap-1 pt-4">
+        <h3 className="font-bold">{t("host_rules")}</h3>
+        <p className="text-dark font-medium">{guestRules}</p>
       </div>
     </div>
   );

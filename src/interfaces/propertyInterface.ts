@@ -1,9 +1,10 @@
 import { ReactNode } from "react";
-export interface IImage {
-  img: string;
-  is_panorama: number;
-}
+
 export interface ISingleProperty {
+  property_details: IDetailsProperty;
+  facility_list: IFacilityProperty[];
+}
+export interface IDetailsProperty {
   address: {
     en: string;
     ar: string;
@@ -71,6 +72,18 @@ export interface ISingleProperty {
   sqrft: string;
   user_id: string;
   video: string;
+}
+export interface IFacilityProperty {
+  id: string;
+  img: string;
+  title: {
+    en: string;
+    ar: string;
+  };
+}
+export interface IImage {
+  img: string;
+  is_panorama: number;
 }
 export interface IPropertyData {
   uid: string;
@@ -162,8 +175,4 @@ export interface IReview {
   duration: string;
   when: string;
   text: string;
-}
-export interface IAmenity {
-  text: string;
-  icon: ReactNode;
 }

@@ -8,7 +8,11 @@ import Iframe from "../../components/ui/Iframe";
 import Amenities from "../../components/property/Amenities";
 import { useTranslation } from "react-i18next";
 import { usePropertyAPI } from "../../services/propertyService";
-import { ISingleProperty } from "../../interfaces/propertyInterface";
+import {
+  IDetailsProperty,
+  IFacilityProperty,
+  ISingleProperty,
+} from "../../interfaces/propertyInterface";
 import { CurrentLanguage } from "../../interfaces";
 import { Grip } from "lucide-react";
 
@@ -17,14 +21,16 @@ function Property() {
   const { t } = useTranslation();
   const { id } = useParams();
   const { data } = usePropertyAPI(id || "");
-  const property: ISingleProperty = data?.data?.data?.property_details;
+  const property: ISingleProperty = data?.data?.data;
+  const propertyDetails: IDetailsProperty = property?.property_details;
+  const facilities: IFacilityProperty[] = property?.facility_list;
 
   return (
     <>
       <div className="px-5 xl:px-20 py-5 lg:py-6">
         <div className="pb-6">
           <h2 className="font-bold text-2xl text-stone-800">
-            {property?.title?.[currentLanguage]}
+            {propertyDetails?.title?.[currentLanguage]}
           </h2>
         </div>
         <div className="relative">
@@ -53,38 +59,41 @@ function Property() {
           <div className="flex-[2]">
             <div className="flex flex-col gap-1 pb-5">
               <div className="font-medium text-black text-2xl flex gap-1">
-                <p> {property?.city?.[currentLanguage]}</p>,
-                <p> {property?.government?.name?.[currentLanguage]}</p>
+                <p> {propertyDetails?.city?.[currentLanguage]}</p>,
+                <p> {propertyDetails?.government?.name?.[currentLanguage]}</p>
               </div>
               <div className="font-medium flex gap-1">
                 <div className="flex gap-1">
                   <p>{t("guest_count")}</p>
-                  <span>{property?.guest_count}</span>
+                  <span>{propertyDetails?.guest_count}</span>
                 </div>
                 <span>,</span>
                 <div className="flex gap-1">
                   <p>{t("beds_count")}</p>
-                  <span>{property?.beds_count}</span>
+                  <span>{propertyDetails?.beds_count}</span>
                 </div>
                 <span>,</span>
                 <div className="flex gap-1">
                   <p>{t("bathrooms_count")}</p>
-                  <span>{property?.bathrooms_count}</span>
+                  <span>{propertyDetails?.bathrooms_count}</span>
                 </div>
               </div>
               <div className="font-semibold">
                 <p>
                   <span className="text-primary">
-                    {property?.price} {t("price_per_night")}
+                    {propertyDetails?.price} {t("price_per_night")}
                   </span>{" "}
                   <span className="text-dark">
-                    / {property?.period?.name?.[currentLanguage]}
+                    / {propertyDetails?.period?.name?.[currentLanguage]}
                   </span>
                 </p>
               </div>
             </div>
-            <HostedBy />
-            <Amenities />
+            <HostedBy
+              host={propertyDetails?.owner}
+              guestRules={propertyDetails?.guest_rules?.[currentLanguage]}
+            />
+            <Amenities facilities={facilities} />
           </div>
           <CheckDates />
         </div>

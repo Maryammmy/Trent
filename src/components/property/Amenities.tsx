@@ -1,7 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { amenities } from "../../data/property/amenities";
-
-function Amenities() {
+import { IFacilityProperty } from "../../interfaces/propertyInterface";
+import { CurrentLanguage } from "../../interfaces";
+import Image from "../ui/Image";
+interface IProps {
+  facilities: IFacilityProperty[];
+}
+const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
+function Amenities({ facilities }: IProps) {
   const { t } = useTranslation();
   return (
     <div>
@@ -9,12 +14,18 @@ function Amenities() {
         {t("what_this_place_offers")}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 max-w-lg">
-        {amenities.map((item, index) => {
-          const { text, icon } = item;
+        {facilities?.map((item, index) => {
+          const { title, img } = item;
           return (
-            <div key={index} className="flex  items-center gap-2">
-              <span>{icon}</span>
-              <p className="font-medium">{text}</p>
+            <div key={index} className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-md overflow-hidden">
+                <Image
+                  imageUrl={img}
+                  alt="facility"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="font-medium">{title?.[currentLanguage]}</p>
             </div>
           );
         })}

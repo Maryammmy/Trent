@@ -52,7 +52,6 @@ function FilterActions({
       rate: rate || undefined,
     }).filter(([, value]) => value !== undefined && value !== null)
   );
-  console.log(rate);
   const { data } = useHomeDataAPI(filters, enabled);
   const filteredProperties = data?.data?.data?.property_list;
   const handleClearFilters = () => {

@@ -9,7 +9,6 @@ import Button from "./ui/Button";
 import { IProperty } from "../interfaces/propertyInterface";
 import { truncateText } from "../utils/truncateText";
 import { baseURL } from "../services";
-import placeholderImage from "../../src/assets/iamges/placeholder.jpg";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 interface IProps {
   property: IProperty;
@@ -57,7 +56,6 @@ function Card({ property }: IProps) {
                     imageUrl={baseURL + item.img}
                     alt={`Slide ${index}`}
                     className="w-full h-full object-cover"
-                    onError={(e) => (e.currentTarget.src = placeholderImage)}
                   />
                 </div>
               </Link>
