@@ -12,6 +12,7 @@ function Image({ imageUrl, alt, className }: IProps) {
       src={imageUrl}
       alt={alt}
       className={className}
+      loading="lazy"
       onError={(e) => (e.currentTarget.src = placeholderImage)}
     />
   );
