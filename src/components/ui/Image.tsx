@@ -4,7 +4,6 @@ interface IProps {
   imageUrl: string;
   alt: string;
   className: string;
-  // onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
 }
 
 function Image({ imageUrl, alt, className }: IProps) {
