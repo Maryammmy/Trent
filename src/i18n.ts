@@ -2,7 +2,6 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import HttpApi from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
-import { CurrentLanguage } from "./interfaces";
 
 i18n
   .use(HttpApi) // Load translations from backend
@@ -27,10 +26,11 @@ i18n
     },
   });
 
-// Ensure that localStorage stores just "en" and not "en-US"
-const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage; // Set default to "en" if not set
-
-// Update the language in i18next based on what's in localStorage
-i18n.changeLanguage(currentLanguage);
+// Get the language from localStorage or use a default "en"
+let currentLanguage = localStorage.getItem("i18nextLng") || "en";
+if (currentLanguage.includes("-")) {
+  currentLanguage = currentLanguage.split("-")[0]; // Extract "en" from "en-US"
+}
+localStorage.setItem("i18nextLng", currentLanguage);
 
 export default i18n;
