@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import Video from "../../../components/ui/Video";
 import { openDB } from "idb";
 import Button from "../../../components/ui/Button";
+import InputErrorMessage from "../../../components/ui/InputErrorMessage";
 
 const initDB = async () => {
   try {
@@ -69,6 +70,7 @@ const deleteVideoFromIndexedDB = async () => {
 const UploadVideo = () => {
   const { t } = useTranslation();
   const [video, setVideo] = useState<string | null>(null);
+  const [videoError, setVideoError] = useState<string | null>(null);
   useEffect(() => {
     getVideoFromIndexedDB().then((storedVideo) => {
       if (storedVideo) {
@@ -88,11 +90,11 @@ const UploadVideo = () => {
         "video/mkv",
       ];
       if (!allowedVideoTypes.includes(file.type)) {
-        toast.error(t("invalid_video_format"));
+        setVideoError(t("invalid_video_format"));
         return;
       }
       if (file.size > 50 * 1024 * 1024) {
-        toast.error(t("video_too_large"));
+        setVideoError(t("video_too_large"));
         return;
       }
       const reader = new FileReader();
@@ -113,7 +115,7 @@ const UploadVideo = () => {
   const handleDeleteVideo = async () => {
     await deleteVideoFromIndexedDB();
     setVideo(null);
-    toast.error(t("video_deleted_successfully"));
+    toast.success(t("video_deleted_successfully"));
   };
   return (
     <div className="py-10">
@@ -147,6 +149,7 @@ const UploadVideo = () => {
             </Button>
           </div>
         )}
+        {videoError && <InputErrorMessage msg={videoError} />}
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "33.33%", "0px"]} />
       <BackAndNext back="/become-a-host/images" next="/become-a-host/title" />

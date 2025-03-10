@@ -26,6 +26,7 @@ const Images = () => {
         "image/gif",
         "image/jpg",
       ];
+      console.log(selectedFiles);
       selectedFiles.forEach((file) => {
         if (!allowedImageTypes.includes(file.type)) {
           setImageError(t("invalid_image_format"));
@@ -81,8 +82,8 @@ const Images = () => {
             />
           </label>
         </div>
-        {images.length > 0 && (
-          <div>
+        <div>
+          {images.length > 0 && (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {images.map((image, index) => (
                 <div className="relative" key={image}>
@@ -102,9 +103,9 @@ const Images = () => {
                 </div>
               ))}
             </div>
-            {imageError && <InputErrorMessage msg={imageError} />}
-          </div>
-        )}
+          )}
+          {imageError && <InputErrorMessage msg={imageError} />}
+        </div>
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "22.22%", "0px"]} />
       <BackAndNext
