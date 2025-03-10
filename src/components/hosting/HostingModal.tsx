@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import Image from "../ui/Image";
 import property from "../../assets/iamges/property.jpg";
 import { Link } from "react-router-dom";
-import { CurrentLanguage } from "../../interfaces";
+import { CurrentLanguage } from "../../types";
 
 const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 function HostingModal() {

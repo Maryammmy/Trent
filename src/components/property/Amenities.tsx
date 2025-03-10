@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { IFacilityProperty } from "../../interfaces/propertyInterface";
-import { CurrentLanguage } from "../../interfaces";
 import Image from "../ui/Image";
+import { CurrentLanguage } from "../../types";
 interface IProps {
   facilities: IFacilityProperty[];
 }

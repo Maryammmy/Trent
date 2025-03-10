@@ -13,8 +13,8 @@ import {
   IFacilityProperty,
   ISingleProperty,
 } from "../../interfaces/propertyInterface";
-import { CurrentLanguage } from "../../interfaces";
 import { Grip } from "lucide-react";
+import { CurrentLanguage } from "../../types";
 
 const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 function Property() {

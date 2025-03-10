@@ -2,12 +2,13 @@ import logo from "../../assets/iamges/Trent.svg";
 import { chooseUs } from "../../data/landingData";
 import { useGetData } from "../../hooks/useGetData";
 import { IWhyChooseUs } from "../../interfaces/landingInterface";
+import { CurrentLanguage } from "../../types";
 import Image from "../ui/Image";
 
-const currentLanguage = localStorage.getItem("i18nextLng");
+const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 function ChooseUs() {
   const { data } = useGetData(
-    ["whyChooseUs"],
+    ["whyChooseUs", currentLanguage],
     `user_api/u_why_choose_us.php?lang=${currentLanguage}`
   );
   const whyChooseUs: IWhyChooseUs[] = data?.data?.why_choose_us;

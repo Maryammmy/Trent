@@ -9,8 +9,9 @@ import place4 from "../assets/iamges/place4.png";
 import { getResponsiveSettings, responsiveSettings } from "../data/landingData";
 import { useGetData } from "../hooks/useGetData";
 import SilderSkeleton from "../components/skeleton/SilderSkeleton";
+import { CurrentLanguage } from "../types";
 
-const currentLanguage = localStorage.getItem("i18nextLng");
+const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 function Home() {
   const bgImages: string[] = [place1, place2, place3, place4];
   const isMobile = useMediaQuery({ maxWidth: 480 });

@@ -6,7 +6,6 @@ export interface ApiError {
     };
   };
 }
-
 export interface IPeriod {
   id: string;
   name: string;
@@ -54,4 +53,3 @@ export interface IFooterSection {
   title: string;
   items: ReactNode[];
 }
-export type CurrentLanguage = "en" | "ar";

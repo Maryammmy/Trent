@@ -44,3 +44,5 @@ export type PropertyNameInputs = {
   guest_rules_en: string;
   guest_rules_ar: string;
 };
+
+export type CurrentLanguage = "en" | "ar";

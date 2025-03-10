@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI } from ".";
 import { IHomeDataParams } from "../interfaces/landingInterface";
-import { CurrentLanguage } from "../interfaces";
+import { CurrentLanguage } from "../types";
 
 const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 
@@ -23,7 +23,7 @@ export const useHomeDataAPI = (
     )
   );
   return useQuery({
-    queryKey: ["home", filteredParams],
+    queryKey: ["home", filteredParams, currentLanguage],
     queryFn: () =>
       baseAPI.get("user_api/u_home_data.php", {
         params: {

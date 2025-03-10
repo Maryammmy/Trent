@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
 import Datepicker from "react-tailwindcss-datepicker";
 import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
-import { CurrentLanguage } from "../../interfaces";
+import { CurrentLanguage } from "../../types";
+
 interface IProps {
   dateValue: DateValueType;
   handleValueChange: (newValue: DateValueType) => void;
