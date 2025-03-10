@@ -8,13 +8,18 @@ i18n
   .use(LanguageDetector) // Detect browser language
   .use(initReactI18next) // Pass to React
   .init({
-    fallbackLng: "en", // Default language
-    debug: false, // Debugging in console
+    fallbackLng: "en", // Default language if detection fails
+    debug: false, // Optional: to see the debug logs in the console
     interpolation: {
-      escapeValue: false, // React already escapes
+      escapeValue: false, // React already escapes values
     },
     backend: {
       loadPath: "/locales/{{lng}}/translation.json", // Path to translations
+    },
+    detection: {
+      order: ["localStorage", "navigator"], // Check in localStorage first, then navigator
+      caches: ["localStorage"], // Only store the language in localStorage
+      lookupLocalStorage: "i18nextLng", // Custom key to store language
     },
   });
 

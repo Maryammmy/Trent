@@ -13,9 +13,6 @@ export default defineConfig({
           if (id.includes("react")) {
             return "react-lib";
           }
-          if (id.includes("lodash")) {
-            return "lodash-lib";
-          }
           if (id.includes("some-large-module")) {
             return "large-module";
           }
