@@ -76,13 +76,18 @@ const UploadVideo = () => {
       }
     });
   }, []);
-  const handleFileChange = async (
+  const handleVideoChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-
-      if (!file.type.startsWith("video/")) {
+      const allowedVideoTypes = [
+        "video/mp4",
+        "video/avi",
+        "video/mov",
+        "video/mkv",
+      ];
+      if (!allowedVideoTypes.includes(file.type)) {
         toast.error(t("invalid_video_format"));
         return;
       }
@@ -90,7 +95,6 @@ const UploadVideo = () => {
         toast.error(t("video_too_large"));
         return;
       }
-
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = async () => {
@@ -105,12 +109,12 @@ const UploadVideo = () => {
       };
     }
   };
+
   const handleDeleteVideo = async () => {
     await deleteVideoFromIndexedDB();
     setVideo(null);
     toast.error(t("video_deleted_successfully"));
   };
-
   return (
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
@@ -128,7 +132,7 @@ const UploadVideo = () => {
               type="file"
               accept="video/*"
               className="hidden"
-              onChange={handleFileChange}
+              onChange={handleVideoChange}
             />
           </label>
         </div>

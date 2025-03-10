@@ -88,54 +88,42 @@ export interface IImage {
 export interface IPropertyData {
   uid: string;
   images: string[];
-  video: string;
+  video?: string;
   price: number;
-  facility: string[];
-  beds: number;
+  facilities: string;
+  beds_count: number;
   sqft: number;
-  bathroom: number;
-  ptype: string;
-  plimit: number;
+  bathrooms_count: number;
+  category_id: string;
+  guest_count: number;
   min_days: number;
   max_days: number;
-  government: string;
+  government_id: string;
   security_deposit: number;
-  google_maps_url: string;
-  guest_rules: {
-    ar: string;
-    en: string;
-  };
-  floor: {
-    ar: string;
-    en: string;
-  };
-  title: {
-    ar: string;
-    en: string;
-  };
-  address: {
-    ar: string;
-    en: string;
-  };
-  description: {
-    ar: string;
-    en: string;
-  };
-  city: {
-    ar: string;
-    en: string;
-  };
-  compound_name: {
-    ar: string;
-    en: string;
-  };
+  maps_url: string;
+  guest_rules_ar: string;
+  guest_rules_en: string;
+  floor_ar: string;
+  floor_en: string;
+  title_ar: string;
+  title_en: string;
+  address_ar: string;
+  address_en: string;
+  description_ar: string;
+  description_en: string;
+  city_ar: string;
+  city_en: string;
+  compound_ar: string;
+  compound_en: string;
+  period: string;
+  is_featured?: boolean;
 }
 export interface IProperty {
   IS_FAVOURITE: number;
   bathrooms_count: string;
   beds_count: string;
   category_type: string;
-  city: string;
+  city_name: string;
   compound_name: string;
   government_name: string;
   guest_count: string;

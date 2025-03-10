@@ -8,16 +8,16 @@ import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkele
 import { IFacility } from "../../../interfaces";
 import { useFacilitiesAPI } from "../../../services/filtersService";
 
-const storedFacilities = sessionStorage.getItem("ffacilities");
+const storedFacilities = sessionStorage.getItem("facilities");
 
 function Facilities() {
   const { t } = useTranslation();
-  const [selectedFacilities, setSelectedFacilities] = useState<string[]>(
+  const [selectedFacilities, setSelectedFacilities] = useState<number[]>(
     storedFacilities ? JSON.parse(storedFacilities) : []
   );
   const { data } = useFacilitiesAPI();
   const facilities: IFacility[] = data?.data?.data?.facility_list;
-  const handleSelectedFacilities = (id: string) => {
+  const handleSelectedFacilities = (id: number) => {
     setSelectedFacilities((prev) => {
       const updatedFacilities = prev.includes(id)
         ? prev.filter((item) => item !== id)
@@ -43,9 +43,10 @@ function Facilities() {
               return (
                 <Button
                   key={index}
-                  onClick={() => handleSelectedFacilities(id)}
+                  onClick={() => handleSelectedFacilities(Number(id))}
                   className={`flex flex-wrap gap-2 font-medium border rounded-full py-2 px-3 ${
-                    selectedFacilities.includes(id) && "bg-zinc-50 border-black"
+                    selectedFacilities.includes(Number(id)) &&
+                    "bg-zinc-50 border-black"
                   }`}
                 >
                   <span>{title}</span>

@@ -59,6 +59,7 @@ const City = () => {
                 value: gov.id,
                 label: gov.name,
               }))}
+              value={governmentId}
               onChange={handleGovernmentChange}
               className="bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
             />

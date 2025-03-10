@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
@@ -6,6 +7,8 @@ import {
   addCompletedStep,
   setIsFinishUpModal,
 } from "../../store/features/becomeAHost/becomeAHostSlice";
+import Loader from "../loader/Loader";
+import { useSendDataToAPI } from "../../services/addPropertyService";
 
 interface IProps {
   back: string;
@@ -24,32 +27,22 @@ function BackAndNext({
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  // const [video, setVideo] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const { sendDataToAPI } = useSendDataToAPI();
 
-  // useEffect(() => {
-  //   const getVideoFromIndexedDB = async () => {
-  //     try {
-  //       const db = await openDB("videoDB", 1);
-  //       const tx = db.transaction("videos", "readonly");
-  //       const store = tx.objectStore("videos");
-  //       const storedVideo = await store.get("uploadedVideo");
-  //       await tx.done;
-  //       if (storedVideo) {
-  //         setVideo(storedVideo);
-  //       }
-  //     } catch (error) {
-  //       console.error("❌ Error retrieving video:", error);
-  //     }
-  //   };
-  //   getVideoFromIndexedDB();
-  // }, []);
-  // console.log(video);
   const handleClick = async () => {
     if (next === "/hosting/properties") {
-      dispatch(setIsFinishUpModal(true));
+      setLoading(true);
+      const isSuccess = await sendDataToAPI();
+      setLoading(false);
+      if (isSuccess) {
+        dispatch(setIsFinishUpModal(true));
+        navigate(next);
+      }
+    } else {
+      dispatch(addCompletedStep(allowNext));
+      navigate(next);
     }
-    dispatch(addCompletedStep(allowNext));
-    navigate(next);
   };
 
   return (
@@ -62,12 +55,18 @@ function BackAndNext({
       </Link>
       <Button
         onClick={handleClick}
-        disabled={isNextDisabled}
-        className="text-white bg-primary disabled:bg-gray-100 disabled:text-dark disabled:opacity-60 py-2 px-8 rounded-md font-medium text-lg disabled:cursor-not-allowed"
+        disabled={isNextDisabled || loading}
+        className="flex items-center text-white bg-primary disabled:bg-gray-100 disabled:text-dark disabled:opacity-60 py-2 px-8 rounded-md font-medium text-lg disabled:cursor-not-allowed"
       >
-        {pathname === "/become-a-host/legal-and-create"
-          ? t("create_listing")
-          : t("next")}
+        {loading ? (
+          <Loader borderColor="#828282" />
+        ) : (
+          <span>
+            {pathname === "/become-a-host/legal-and-create"
+              ? t("create_listing")
+              : t("next")}
+          </span>
+        )}
       </Button>
     </div>
   );

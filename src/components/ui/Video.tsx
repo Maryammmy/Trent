@@ -8,7 +8,7 @@ interface IProps extends VideoHTMLAttributes<HTMLVideoElement> {
 function Video({ videoUrl, className }: IProps) {
   return (
     <video controls autoPlay className={className}>
-      <source src={videoUrl} type="video/mp4" />
+      <source src={videoUrl} />
       Your browser does not support the video tag.
     </video>
   );

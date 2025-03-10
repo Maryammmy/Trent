@@ -7,10 +7,14 @@ import { useTranslation } from "react-i18next";
 import Image from "../ui/Image";
 import property from "../../assets/iamges/property.jpg";
 import { Link } from "react-router-dom";
+import { CurrentLanguage } from "../../interfaces";
 
+const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 function HostingModal() {
   const { t } = useTranslation();
-  const { isFinishUpModal } = useAppSelector((state) => state.becomeAHost);
+  const { isFinishUpModal, createdProperty } = useAppSelector(
+    (state) => state.becomeAHost
+  );
   const dispatch = useAppDispatch();
   return (
     <Modal
@@ -41,7 +45,9 @@ function HostingModal() {
               className="w-full h-full object-cover"
             />
           </div>
-          <h5 className="font-semibold">cozy home</h5>
+          <h5 className="font-semibold">
+            {createdProperty?.title?.[currentLanguage]}
+          </h5>
           <p className="text-dark max-w-sm">مساكن شيراتون, Cairo Governorate</p>
         </div>
         <div className="flex items-center justify-between my-4">

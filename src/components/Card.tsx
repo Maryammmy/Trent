@@ -20,7 +20,7 @@ function Card({ property }: IProps) {
     title,
     image_list,
     id,
-    city,
+    city_name,
     government_name,
     period_name,
   } = property;
@@ -68,7 +68,7 @@ function Card({ property }: IProps) {
           <div>
             <h3 className="font-bold pb-1">{truncateText(title, 10)}</h3>
             <div className="flex gap-1">
-              <p>{truncateText(city, 10)}</p>,
+              <p>{truncateText(city_name, 10)}</p>,
               <p>{truncateText(government_name, 10)}</p>
             </div>
           </div>

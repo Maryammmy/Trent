@@ -1,4 +1,12 @@
 import { ReactNode } from "react";
+export interface ApiError {
+  response?: {
+    data: {
+      response_message: string;
+    };
+  };
+}
+
 export interface IPeriod {
   id: string;
   name: string;

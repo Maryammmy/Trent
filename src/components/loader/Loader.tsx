@@ -1,4 +1,12 @@
 import "./loader.css";
-export default function Loader() {
-  return <span className="loader"></span>;
+interface IProps {
+  borderColor?: string;
+}
+export default function Loader({ borderColor = "#fff" }: IProps) {
+  return (
+    <span
+      style={{ border: `3px solid ${borderColor}` }}
+      className="loader"
+    ></span>
+  );
 }

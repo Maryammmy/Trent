@@ -63,6 +63,7 @@ function PriceAndDeposit() {
                 value: period.id,
                 label: period.name,
               }))}
+              value={period}
               className="bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
             />
           ) : (

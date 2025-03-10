@@ -4,8 +4,8 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import Input from "../../../components/ui/Input";
 
-const storedCompoundAr = sessionStorage.getItem("compound_name_ar") || "";
-const storedCompoundEn = sessionStorage.getItem("compound_name_en") || "";
+const storedCompoundAr = sessionStorage.getItem("compound_ar") || "";
+const storedCompoundEn = sessionStorage.getItem("compound_en") || "";
 
 function Compound() {
   const { t } = useTranslation();
@@ -18,10 +18,10 @@ function Compound() {
     const newValue = e.target.value;
     if (lang === "en") {
       setCompoundEn(newValue);
-      sessionStorage.setItem("compound_name_en", newValue);
+      sessionStorage.setItem("compound_en", newValue);
     } else {
       setCompoundAr(newValue);
-      sessionStorage.setItem("compound_name_ar", newValue);
+      sessionStorage.setItem("compound_ar", newValue);
     }
   };
   const isNextDisabled = compoundAr.length < 2 || compoundEn.length < 2;
@@ -36,7 +36,7 @@ function Compound() {
           {t("compound_name_for_property_desc")}
         </p>
         <div className="flex flex-col gap-1 mb-5">
-          <label className="font-medium">{t("compound_name_in_english")}</label>
+          <label className="font-medium">{t("compound_in_english")}</label>
           <Input
             maxLength={100}
             minLength={2}
@@ -48,7 +48,7 @@ function Compound() {
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="font-medium">{t("compound_name_in_arabic")}</label>
+          <label className="font-medium">{t("compound_in_arabic")}</label>
           <Input
             maxLength={100}
             minLength={2}
