@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export interface IHomeDataParams {
   category_id?: string;
   uid?: string;
@@ -15,14 +13,10 @@ export interface IHomeDataParams {
   rate?: number;
 }
 export interface IWhyChooseUs {
-  why_choose_us_description: string;
-  why_choose_us_title: string;
-  why_choose_us_img: string;
-  why_choose_us_bg: string;
-}
-export interface IChooseUs {
+  background_color: string;
+  description: string;
+  img: string;
   title: string;
-  icon: string | ReactNode;
 }
 export interface IFilterButton {
   text: string;

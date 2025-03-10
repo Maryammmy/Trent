@@ -1,5 +1,4 @@
 import logo from "../../assets/iamges/Trent.svg";
-import { chooseUs } from "../../data/landingData";
 import { useGetData } from "../../hooks/useGetData";
 import { IWhyChooseUs } from "../../interfaces/landingInterface";
 import { CurrentLanguage } from "../../types";
@@ -11,8 +10,8 @@ function ChooseUs() {
     ["whyChooseUs"],
     `user_api/u_why_choose_us.php?lang=${currentLanguage}`
   );
-  const whyChooseUs: IWhyChooseUs[] = data?.data?.why_choose_us;
-  console.log(whyChooseUs);
+  const whyChooseUsList: IWhyChooseUs[] = data?.data?.data?.why_choose_us_list;
+  console.log(whyChooseUsList);
   return (
     <div className="px-5 2xl:px-0 max-w-screen-xl mx-auto py-10">
       <div className="flex justify-center items-center gap-4">
@@ -30,27 +29,24 @@ function ChooseUs() {
         have sorted all the hotels here based on their quality.
       </p>
       <div className="flex flex-wrap gap-5 justify-evenly pt-10">
-        {chooseUs.map((item, index) => {
-          const { title, icon } = item;
+        {whyChooseUsList?.map((item, index) => {
+          const { background_color, description, img } = item;
           return (
             <div
               key={index}
-              className="h-40 w-40 zoom overflow-hidden flex flex-col gap-2 justify-center items-center rounded-full bg-primary"
+              style={{ backgroundColor: background_color }}
+              className="h-40 w-40 zoom overflow-hidden flex flex-col gap-2 justify-center items-center rounded-full"
             >
-              {typeof icon === "string" ? (
-                <div className="w-[25%]">
-                  <Image
-                    imageUrl={icon}
-                    alt={`image ${index}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ) : (
-                <div>{icon}</div>
-              )}
+              <div className="w-[25%]">
+                <Image
+                  imageUrl={img}
+                  alt={`image ${index}`}
+                  className="w-full h-full object-cover rounded-md"
+                />
+              </div>
               <div className="flex items-center justify-center">
-                <p className="text-center text-sm text-white font-medium px-2">
-                  {title}
+                <p className="text-center text-sm text-dark font-medium px-2">
+                  {description}
                 </p>
               </div>
             </div>
