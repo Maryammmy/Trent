@@ -1,15 +1,16 @@
+import { lazy, Suspense, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Cart from "../Card";
 import Button from "../ui/Button";
 import Switcher from "../ui/Switcher";
-import { useContext, useEffect, useState } from "react";
-import FilterModal from "../home/filter/FilterModal";
 import { SlidersHorizontal } from "lucide-react";
 import PropertyCardSkeleton from "../skeleton/PropertyCardSkeleton";
 import CategoryBar from "../CategoryBar";
 import { useHomeDataAPI } from "../../services/homeService";
 import { IProperty } from "../../interfaces/propertyInterface";
 import { FilterDataContext } from "../../context/FilterDataContext";
+import FilterModal from "../home/filter/FilterModal";
+
+const Cart = lazy(() => import("../Card"));
 
 export default function Properties() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -21,6 +22,7 @@ export default function Properties() {
   const { filterData } = useContext(FilterDataContext);
   const [properties, setProperties] = useState<IProperty[] | null>(null);
   const allProperties: IProperty[] = data?.data?.data?.property_list;
+
   const handleShowMore = () => {
     setLoading(true);
     setTimeout(() => {
@@ -28,6 +30,7 @@ export default function Properties() {
       setLoading(false);
     }, 1000);
   };
+
   useEffect(() => {
     setProperties(filterData || allProperties);
   }, [filterData, allProperties]);
@@ -63,15 +66,20 @@ export default function Properties() {
           {!properties ? (
             <PropertyCardSkeleton cards={8} />
           ) : properties?.length ? (
-            properties
-              ?.slice(0, visibleCount)
-              .map((property) => <Cart key={property.id} property={property} />)
+            properties?.slice(0, visibleCount).map((property) => (
+              <Suspense
+                fallback={<PropertyCardSkeleton cards={8} />}
+                key={property.id}
+              >
+                <Cart property={property} />
+              </Suspense>
+            ))
           ) : (
             <div className="flex justify-center items-center h-[50vh] text-dark font-medium w-full">
               No properties found
             </div>
           )}
-          {loading && <PropertyCardSkeleton cards={ITEMS_TO_LOAD} />}
+          {loading && <PropertyCardSkeleton cards={8} />}
         </div>
         {properties && visibleCount < properties.length && !loading && (
           <div className="flex justify-center mt-10 mb-5">

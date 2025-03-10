@@ -2,7 +2,7 @@ import { Toaster } from "react-hot-toast";
 import router from "./router";
 import { RouterProvider } from "react-router-dom";
 import i18n from "./i18n";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { PhotoProvider } from "react-photo-view";
 import FilterDataContextProvider from "./context/FilterDataContext";
 import SystemLoader from "./components/loader/SystemLoader";
@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsMount(false);
-    }, 5000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -34,7 +34,10 @@ function App() {
     <>
       <FilterDataContextProvider>
         <PhotoProvider>
-          <RouterProvider router={router} />
+          {/* ✅ لفّ `RouterProvider` بـ `Suspense` عشان تحمل الصفحات عند الحاجة */}
+          <Suspense fallback={<SystemLoader />}>
+            <RouterProvider router={router} />
+          </Suspense>
           <Toaster />
         </PhotoProvider>
       </FilterDataContextProvider>
