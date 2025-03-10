@@ -7,7 +7,7 @@ const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 
 export const usePropertyAPI = (id: string) => {
   return useQuery({
-    queryKey: ["property", id, currentLanguage],
+    queryKey: ["property", id],
     queryFn: () =>
       baseAPI.get(
         `user_api/u_property_details.php?lang=${currentLanguage}&prop_id=${id}`

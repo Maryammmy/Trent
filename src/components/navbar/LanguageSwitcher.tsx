@@ -9,6 +9,7 @@ const LanguageSwitcher = () => {
   const dispatch = useAppDispatch();
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
+    window.location.reload();
     dispatch(setIsLangSwitcherOpen(false));
   };
 

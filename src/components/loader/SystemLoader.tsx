@@ -4,7 +4,7 @@ import "./systemLoader.css";
 
 export default function SystemLoader() {
   return (
-    <div className={"loadingOverlay"}>
+    <div className={"loadingOverlay"} dir="ltr">
       <div className={"wavingText"}>
         <span>
           <Image imageUrl={logo} className="" alt="logo" />

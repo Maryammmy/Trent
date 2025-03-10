@@ -18,7 +18,6 @@ const DatePicker = ({ dateValue, handleValueChange, className }: IProps) => {
         i18n={currentLanguage}
         popoverDirection="down"
         useRange={false}
-        // showFooter={true}
         value={dateValue}
         asSingle={true}
         onChange={handleValueChange}

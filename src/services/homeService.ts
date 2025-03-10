@@ -23,7 +23,7 @@ export const useHomeDataAPI = (
     )
   );
   return useQuery({
-    queryKey: ["home", filteredParams, currentLanguage],
+    queryKey: ["home", filteredParams],
     queryFn: () =>
       baseAPI.get("user_api/u_home_data.php", {
         params: {

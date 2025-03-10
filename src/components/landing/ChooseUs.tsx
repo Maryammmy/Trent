@@ -8,7 +8,7 @@ import Image from "../ui/Image";
 const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 function ChooseUs() {
   const { data } = useGetData(
-    ["whyChooseUs", currentLanguage],
+    ["whyChooseUs"],
     `user_api/u_why_choose_us.php?lang=${currentLanguage}`
   );
   const whyChooseUs: IWhyChooseUs[] = data?.data?.why_choose_us;
