@@ -1,6 +1,7 @@
 import Image from "../ui/Image";
 import { useTranslation } from "react-i18next";
 import { IDetailsProperty } from "../../interfaces/propertyInterface";
+import { baseURL } from "../../services";
 interface IProps {
   host: IDetailsProperty["owner"];
   guestRules: string;
@@ -12,7 +13,7 @@ function HostedBy({ host, guestRules }: IProps) {
       <div className="flex items-center gap-5">
         <div className="w-12 h-12 rounded-full overflow-hidden">
           <Image
-            imageUrl={host?.img}
+            imageUrl={baseURL + host?.img}
             alt="User Image"
             className="w-full h-full object-cover"
           />

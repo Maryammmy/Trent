@@ -1,10 +1,11 @@
 import Button from "./ui/Button";
 import { responsive } from "../data/categoryBar";
 import Carsoul from "./ui/Carsoul";
-import { Home } from "lucide-react";
 import CategoryBarSkeleton from "./skeleton/CategoryBarSkeleton";
 import { IPropertyType } from "../interfaces";
 import { usePropertyTypesAPI } from "../services/filtersService";
+import Image from "./ui/Image";
+import { baseURL } from "../services";
 
 function CategoryBar() {
   const { data } = usePropertyTypesAPI();
@@ -38,14 +39,20 @@ function CategoryBar() {
                 key={index}
                 className="flex flex-col justify-center items-center pt-2 zoom"
               >
-                <span className="w-fit mx-auto mb-2 block">
-                  <span className="w-12 h-12 flex justify-center items-center rounded-full border hover:border-black border-dark">
-                    <Home />
-                  </span>
-                </span>
-                <span className="text-sm font-semibold text-dark block">
+                <div className="w-fit mx-auto mb-2 block">
+                  <div className="w-12 h-12 flex justify-center items-center rounded-full border hover:border-black border-dark">
+                    <div className="w-8 h-8 rounded-full overflow-hidden">
+                      <Image
+                        imageUrl={baseURL + item.img}
+                        alt={item?.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm font-semibold text-dark block">
                   {item?.title}
-                </span>
+                </p>
               </Button>
             ))}
           </Carsoul>

@@ -164,3 +164,7 @@ export interface IReview {
   when: string;
   text: string;
 }
+export interface IToggleProperty {
+  uid: string;
+  prop_id: string;
+}

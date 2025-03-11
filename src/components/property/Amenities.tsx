@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { IFacilityProperty } from "../../interfaces/propertyInterface";
 import Image from "../ui/Image";
 import { CurrentLanguage } from "../../types";
+import { baseURL } from "../../services";
 interface IProps {
   facilities: IFacilityProperty[];
 }
@@ -20,7 +21,7 @@ function Amenities({ facilities }: IProps) {
             <div key={index} className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-md overflow-hidden">
                 <Image
-                  imageUrl={img}
+                  imageUrl={baseURL + img}
                   alt="facility"
                   className="w-full h-full object-cover"
                 />

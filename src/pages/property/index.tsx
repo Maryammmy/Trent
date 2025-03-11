@@ -36,9 +36,12 @@ function Property() {
         <div className="relative">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {propertyDetails?.image_list?.slice(0, 3)?.map((image, i) => (
-              <div key={i} className={`w-full h-[250px] lg:h-[300px]`}>
+              <div
+                key={i}
+                className={`w-full h-[250px] lg:h-[300px] rounded-md overflow-hidden`}
+              >
                 <Image
-                  className="w-full h-full object-cover rounded-md"
+                  className="w-full h-full object-cover"
                   imageUrl={baseURL + image.img}
                   alt={`Image ${i + 1}`}
                 />

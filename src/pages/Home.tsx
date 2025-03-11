@@ -67,7 +67,10 @@ function Home() {
               infinite={sliderList?.length > 1}
             >
               {sliderList?.map((item: string, index: number) => (
-                <div key={index} className="h-[40vh] w-full sm:px-4">
+                <div
+                  key={index}
+                  className="h-[40vh] w-full sm:px-4 rounded-md overflow-hidden"
+                >
                   <Image
                     alt="slider"
                     imageUrl={baseURL + item}

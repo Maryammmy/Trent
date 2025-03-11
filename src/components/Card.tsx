@@ -10,9 +10,13 @@ import { IProperty } from "../interfaces/propertyInterface";
 import { truncateText } from "../utils/truncateText";
 import { baseURL } from "../services";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { togglePropertyAPI } from "../services/propertyService";
+import Cookies from "js-cookie";
 interface IProps {
   property: IProperty;
 }
+
+const uid = Cookies.get("user_id") || "";
 function Card({ property }: IProps) {
   const {
     IS_FAVOURITE,
@@ -30,8 +34,20 @@ function Card({ property }: IProps) {
   const taxRate = 14 / 100;
   const priceBeforeTaxes = basePrice;
   const priceWithTaxes = basePrice * (1 + taxRate);
+  const toggleProperty = async (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    e.preventDefault();
+    try {
+      const response = await togglePropertyAPI({ uid, prop_id: id });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <div className="bg-white shadow-md rounded-md p-4 zoom">
+    <div className="bg-white shadow-md rounded-md overflow-hidden p-4 zoom">
       {image_list?.length > 0 && (
         <div className="overflow-hidden rounded-md">
           <Carsoul
@@ -44,7 +60,10 @@ function Card({ property }: IProps) {
           >
             {image_list?.map((item, index) => (
               <Link key={index} to={`/properties/${id}`} className="relative">
-                <div className="absolute top-2 right-2 z-10">
+                <div
+                  className="absolute top-2 right-2 z-10 bg-slate-400"
+                  onClick={toggleProperty}
+                >
                   {IS_FAVOURITE ? (
                     <FaHeart size={20} className="text-white" />
                   ) : (

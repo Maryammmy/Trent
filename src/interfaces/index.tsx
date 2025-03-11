@@ -17,6 +17,7 @@ export interface ICompound {
 export interface IPropertyType {
   id: string;
   title: string;
+  img: string;
 }
 export interface IFacility {
   id: string;
