@@ -12,6 +12,7 @@ import { baseURL } from "../services";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { togglePropertyAPI } from "../services/propertyService";
 import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 interface IProps {
   property: IProperty;
 }
@@ -42,6 +43,12 @@ function Card({ property }: IProps) {
     try {
       const response = await togglePropertyAPI({ uid, prop_id: id });
       console.log(response);
+      if (
+        response?.data?.response_code === 201 ||
+        response?.data?.response_code === 200
+      ) {
+        toast.success(response?.data?.response_message);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -61,7 +68,7 @@ function Card({ property }: IProps) {
             {image_list?.map((item, index) => (
               <Link key={index} to={`/properties/${id}`} className="relative">
                 <div
-                  className="absolute top-2 right-2 z-10 bg-slate-400"
+                  className="absolute top-2 right-2 z-10 cursor-pointer"
                   onClick={toggleProperty}
                 >
                   {IS_FAVOURITE ? (
