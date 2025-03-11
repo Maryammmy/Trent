@@ -38,11 +38,13 @@ function Card({ property }: IProps) {
   const toggleProperty = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
-    e.stopPropagation();
     e.preventDefault();
+    if (!uid) {
+      toast.error(t("fav_error"));
+      return;
+    }
     try {
       const response = await togglePropertyAPI({ uid, prop_id: id });
-      console.log(response);
       if (
         response?.data?.response_code === 201 ||
         response?.data?.response_code === 200

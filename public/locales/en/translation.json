@@ -287,5 +287,6 @@
   "property": "Property",
   "log_out": "Log out",
   "compound": "Compound",
-  "host_rules": "Host rules"
+  "host_rules": "Host rules",
+  "fav_error": "You must log in to add a property to your favorites."
 }
