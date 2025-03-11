@@ -2,18 +2,14 @@ import { useMediaQuery } from "react-responsive";
 import HomeSearch from "../components/home/HomeSearch";
 import Image from "../components/ui/Image";
 import Carsoul from "../components/ui/Carsoul";
-import place1 from "../assets/iamges/place1.png";
-import place2 from "../assets/iamges/place2.png";
-import place3 from "../assets/iamges/place3.png";
-import place4 from "../assets/iamges/place4.png";
 import { getResponsiveSettings, responsiveSettings } from "../data/landingData";
 import { useGetData } from "../hooks/useGetData";
 import SilderSkeleton from "../components/skeleton/SilderSkeleton";
 import { CurrentLanguage } from "../types";
+import { baseURL } from "../services";
 
 const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 function Home() {
-  const bgImages: string[] = [place1, place2, place3, place4];
   const isMobile = useMediaQuery({ maxWidth: 480 });
   const isTablet = useMediaQuery({ maxWidth: 768 });
   const carouselProps = isMobile
@@ -70,11 +66,11 @@ function Home() {
               left={carouselProps.left}
               infinite={sliderList?.length > 1}
             >
-              {bgImages.map((item: string, index: number) => (
+              {sliderList?.map((item: string, index: number) => (
                 <div key={index} className="h-[40vh] w-full sm:px-4">
                   <Image
                     alt="slider"
-                    imageUrl={item}
+                    imageUrl={baseURL + item}
                     className="w-full h-full rounded-md"
                   />
                 </div>

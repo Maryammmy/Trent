@@ -1,4 +1,4 @@
-import logo from "../../assets/iamges/trentLogo.svg";
+import logo from "../../assets/iamges/Trent-white.svg";
 import { Link } from "react-router-dom";
 import Image from "../ui/Image";
 

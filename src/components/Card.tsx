@@ -51,7 +51,7 @@ function Card({ property }: IProps) {
                     <FaRegHeart size={20} className="text-white" />
                   )}
                 </div>
-                <div className="rounded-md overflow-hidden h-[230px] bg-gray-200">
+                <div className="rounded-md overflow-hidden h-[230px] md:h-[300px] bg-gray-200">
                   <Image
                     imageUrl={baseURL + item.img}
                     alt={`Slide ${index}`}

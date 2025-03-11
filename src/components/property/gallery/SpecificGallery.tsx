@@ -1,6 +1,5 @@
 import { specificGallery } from "../../../data/property/gallery/specificGalleryData";
 import { ExpandableText } from "../../../utils/ExpandableText";
-
 import Image from "../../ui/Image";
 import PhotoViewer from "../../ui/PhotoViewer";
 

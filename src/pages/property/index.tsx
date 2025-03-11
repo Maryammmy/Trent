@@ -2,7 +2,6 @@ import { Link, useParams } from "react-router-dom";
 import CheckDates from "../../components/property/CheckDates";
 import HostedBy from "../../components/property/HostedBy";
 import Image from "../../components/ui/Image";
-import { images } from "../../data";
 import ReviewComponent from "../../components/property/reviews/ReviewComponent";
 import Iframe from "../../components/ui/Iframe";
 import Amenities from "../../components/property/Amenities";
@@ -15,6 +14,7 @@ import {
 } from "../../interfaces/propertyInterface";
 import { Grip } from "lucide-react";
 import { CurrentLanguage } from "../../types";
+import { baseURL } from "../../services";
 
 const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
 function Property() {
@@ -35,11 +35,11 @@ function Property() {
         </div>
         <div className="relative">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {images?.slice(0, 3)?.map((image: string, i: number) => (
+            {propertyDetails?.image_list?.slice(0, 3)?.map((image, i) => (
               <div key={i} className={`w-full h-[250px] lg:h-[300px]`}>
                 <Image
                   className="w-full h-full object-cover rounded-md"
-                  imageUrl={image}
+                  imageUrl={baseURL + image.img}
                   alt={`Image ${i + 1}`}
                 />
               </div>

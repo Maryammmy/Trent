@@ -1,5 +1,5 @@
 import Image from "./ui/Image";
-import logo from "../assets/iamges/TrentFooter.svg";
+import logo from "../assets/iamges/Trent-blue.svg";
 import { icons, sections } from "../data/footerData";
 
 function Footer() {

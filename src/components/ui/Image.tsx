@@ -1,4 +1,4 @@
-import placeholderImage from "../../assets/iamges/placeholder.jpg";
+import TrentLogo from "../../assets/iamges/Trent-logo-pdf.png";
 
 interface IProps {
   imageUrl: string;
@@ -13,7 +13,9 @@ function Image({ imageUrl, alt, className }: IProps) {
       alt={alt}
       className={className}
       loading="lazy"
-      onError={(e) => (e.currentTarget.src = placeholderImage)}
+      onError={(e) => {
+        e.currentTarget.src = TrentLogo;
+      }}
     />
   );
 }

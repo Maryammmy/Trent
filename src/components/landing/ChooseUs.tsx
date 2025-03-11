@@ -1,6 +1,7 @@
-import logo from "../../assets/iamges/Trent.svg";
+import logo from "../../assets/iamges/Trent-tilted.svg";
 import { useGetData } from "../../hooks/useGetData";
 import { IWhyChooseUs } from "../../interfaces/landingInterface";
+import { baseURL } from "../../services";
 import { CurrentLanguage } from "../../types";
 import Image from "../ui/Image";
 
@@ -11,7 +12,6 @@ function ChooseUs() {
     `user_api/u_why_choose_us.php?lang=${currentLanguage}`
   );
   const whyChooseUsList: IWhyChooseUs[] = data?.data?.data?.why_choose_us_list;
-  console.log(whyChooseUsList);
   return (
     <div className="px-5 2xl:px-0 max-w-screen-xl mx-auto py-10">
       <div className="flex justify-center items-center gap-4">
@@ -39,7 +39,7 @@ function ChooseUs() {
             >
               <div className="w-[25%]">
                 <Image
-                  imageUrl={img}
+                  imageUrl={baseURL + img}
                   alt={`image ${index}`}
                   className="w-full h-full object-cover rounded-md"
                 />
