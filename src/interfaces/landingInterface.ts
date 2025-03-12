@@ -11,6 +11,7 @@ export interface IHomeDataParams {
   bathrooms_count?: number;
   guest_count?: number;
   rate?: number;
+  compound_name?: string;
 }
 export interface IWhyChooseUs {
   background_color: string;

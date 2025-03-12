@@ -32,6 +32,7 @@ function FilterActions({
   bathroomsCount,
   guestCount,
   rate,
+  compound,
   close,
 }: IProps) {
   const { t } = useTranslation();
@@ -48,6 +49,7 @@ function FilterActions({
     bathrooms_count: bathroomsCount,
     guest_count: guestCount,
     rate: rate,
+    compound_name: compound,
   };
   const { data } = useHomeDataAPI(filters, enabled);
   const filteredProperties = data?.data?.data?.property_list;
