@@ -3,7 +3,8 @@ import { baseAPI, baseAPIForm } from ".";
 import { IToggleProperty } from "../interfaces/propertyInterface";
 import { CurrentLanguage } from "../types";
 
-const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
+const currentLanguage = (localStorage.getItem("i18nextLng") ||
+  "en") as CurrentLanguage;
 export const usePropertyAPI = (id: string, uid?: string) => {
   return useQuery({
     queryKey: ["property", id, uid],

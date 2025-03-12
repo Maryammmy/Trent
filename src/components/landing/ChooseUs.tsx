@@ -5,7 +5,8 @@ import { baseURL } from "../../services";
 import { CurrentLanguage } from "../../types";
 import Image from "../ui/Image";
 
-const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
+const currentLanguage = (localStorage.getItem("i18nextLng") ||
+  "en") as CurrentLanguage;
 function ChooseUs() {
   const { data } = useGetData(
     ["whyChooseUs"],

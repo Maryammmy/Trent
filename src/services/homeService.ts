@@ -3,7 +3,8 @@ import { baseAPI } from ".";
 import { IHomeDataParams } from "../interfaces/landingInterface";
 import { CurrentLanguage } from "../types";
 
-const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
+const currentLanguage = (localStorage.getItem("i18nextLng") ||
+  "en") as CurrentLanguage;
 
 export const useHomeDataAPI = (
   params?: IHomeDataParams,

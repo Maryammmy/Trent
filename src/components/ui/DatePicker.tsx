@@ -8,7 +8,8 @@ interface IProps {
   handleValueChange: (newValue: DateValueType) => void;
   className?: string;
 }
-const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
+const currentLanguage = (localStorage.getItem("i18nextLng") ||
+  "en") as CurrentLanguage;
 const DatePicker = ({ dateValue, handleValueChange, className }: IProps) => {
   const { t } = useTranslation();
 

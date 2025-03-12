@@ -6,7 +6,8 @@ import { baseURL } from "../../services";
 interface IProps {
   facilities: IFacilityProperty[];
 }
-const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
+const currentLanguage = (localStorage.getItem("i18nextLng") ||
+  "en") as CurrentLanguage;
 function Amenities({ facilities }: IProps) {
   const { t } = useTranslation();
   return (

@@ -8,7 +8,8 @@ import SilderSkeleton from "../components/skeleton/SilderSkeleton";
 import { CurrentLanguage } from "../types";
 import { baseURL } from "../services";
 
-const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
+const currentLanguage = (localStorage.getItem("i18nextLng") ||
+  "en") as CurrentLanguage;
 function Home() {
   const isMobile = useMediaQuery({ maxWidth: 480 });
   const isTablet = useMediaQuery({ maxWidth: 768 });

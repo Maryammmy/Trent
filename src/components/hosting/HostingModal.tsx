@@ -9,7 +9,8 @@ import property from "../../assets/iamges/property.jpg";
 import { Link } from "react-router-dom";
 import { CurrentLanguage } from "../../types";
 
-const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
+const currentLanguage = (localStorage.getItem("i18nextLng") ||
+  "en") as CurrentLanguage;
 function HostingModal() {
   const { t } = useTranslation();
   const { isFinishUpModal, createdProperty } = useAppSelector(
