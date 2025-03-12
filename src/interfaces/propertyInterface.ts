@@ -1,9 +1,5 @@
 import { ReactNode } from "react";
 
-export interface ISingleProperty {
-  property_details: IDetailsProperty;
-  facility_list: IFacilityProperty[];
-}
 export interface IDetailsProperty {
   address: {
     en: string;
@@ -14,11 +10,8 @@ export interface IDetailsProperty {
     ar: string;
   };
   compound: {
-    id: string;
-    name: {
-      en: string;
-      ar: string;
-    };
+    en: string;
+    ar: string;
   };
   description: {
     en: string;
@@ -54,12 +47,18 @@ export interface IDetailsProperty {
     en: string;
     ar: string;
   };
+  category: {
+    id: string;
+    type: {
+      en: string;
+      ar: string;
+    };
+  };
   IS_FAVOURITE: number;
   guest_count: string;
   bathrooms_count: string;
   beds_count: string;
   buyorrent: string;
-  category_type: string;
   id: string;
   image_list: IImage[];
   is_enquiry: number;

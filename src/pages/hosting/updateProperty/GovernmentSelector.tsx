@@ -19,9 +19,8 @@ function GovernmentSelector({ control, errors, governmentList }: IProps) {
         <SelectSkeleton />
       ) : governmentList?.length ? (
         <Controller
-          name="government"
+          name="government_id"
           control={control}
-          defaultValue={governmentList?.[0]?.id}
           render={({ field }) => (
             <Select
               {...field}
@@ -38,8 +37,8 @@ function GovernmentSelector({ control, errors, governmentList }: IProps) {
           No government found
         </p>
       )}
-      {errors["government"] && (
-        <InputErrorMessage msg={errors["government"]?.message} />
+      {errors["government_id"] && (
+        <InputErrorMessage msg={errors["government_id"]?.message} />
       )}
     </div>
   );

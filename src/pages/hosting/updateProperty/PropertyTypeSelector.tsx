@@ -24,7 +24,7 @@ const PropertyTypeSelector = ({
         <SelectSkeleton />
       ) : propertyTypeList?.length ? (
         <Controller
-          name="ptype"
+          name="category_id"
           control={control}
           render={({ field }) => (
             <Select
@@ -42,7 +42,9 @@ const PropertyTypeSelector = ({
           No property type found
         </p>
       )}
-      {errors["ptype"] && <InputErrorMessage msg={errors["ptype"]?.message} />}
+      {errors["category_id"] && (
+        <InputErrorMessage msg={errors["category_id"]?.message} />
+      )}
     </div>
   );
 };

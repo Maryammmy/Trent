@@ -19,7 +19,7 @@ function FacilitiesSelector({ control, errors, facilities }: IProps) {
         <SelectSkeleton />
       ) : facilities?.length ? (
         <Controller
-          name="facility"
+          name="facilities"
           control={control}
           render={({ field }) => (
             <div className="border py-3 px-2 rounded-md bg-white">
@@ -53,8 +53,8 @@ function FacilitiesSelector({ control, errors, facilities }: IProps) {
           No facilities found
         </p>
       )}
-      {errors["facility"] && (
-        <InputErrorMessage msg={errors["facility"]?.message} />
+      {errors["facilities"] && (
+        <InputErrorMessage msg={errors["facilities"]?.message} />
       )}
     </div>
   );

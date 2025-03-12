@@ -1,11 +1,16 @@
 import { useTranslation } from "react-i18next";
 import HostingModal from "../../components/hosting/HostingModal";
-import ListingItem from "../../components/hosting/properties/propertyItem";
+import { useHomeDataAPI } from "../../services/homeService";
+import { IProperty } from "../../interfaces/propertyInterface";
+import PropertyItem from "../../components/hosting/properties/propertyItem";
+import Cookies from "js-cookie";
+import PropertyHostingSkeleton from "../../components/skeleton/PropertyHostingSkeleton";
 
+const uid = Cookies.get("user_id");
 function Properties() {
   const { t } = useTranslation();
-  const listings = Array.from({ length: 10 });
-
+  const { data } = useHomeDataAPI({ uid }, true);
+  const properties: IProperty[] = data?.data?.data?.property_list;
   return (
     <>
       <div className="px-5 lg:px-20 py-10">
@@ -16,9 +21,17 @@ function Properties() {
           <h3>Status</h3>
         </div>
         <div className="space-y-5">
-          {listings.map((_, index) => (
-            <ListingItem key={index} id={index + 1} />
-          ))}
+          {!properties ? (
+            <PropertyHostingSkeleton cards={5} />
+          ) : properties.length ? (
+            properties?.map((property) => (
+              <PropertyItem key={property.id} property={property} />
+            ))
+          ) : (
+            <div className="flex justify-center items-center h-[50vh] text-dark font-medium w-full">
+              No properties found
+            </div>
+          )}
         </div>
       </div>
       <HostingModal />

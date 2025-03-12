@@ -10,7 +10,6 @@ import { usePropertyAPI } from "../../services/propertyService";
 import {
   IDetailsProperty,
   IFacilityProperty,
-  ISingleProperty,
 } from "../../interfaces/propertyInterface";
 import { Grip } from "lucide-react";
 import { CurrentLanguage } from "../../types";
@@ -21,9 +20,8 @@ function Property() {
   const { t } = useTranslation();
   const { id } = useParams();
   const { data } = usePropertyAPI(id || "");
-  const property: ISingleProperty = data?.data?.data;
-  const propertyDetails: IDetailsProperty = property?.property_details;
-  const facilities: IFacilityProperty[] = property?.facility_list;
+  const propertyDetails: IDetailsProperty = data?.data?.data?.property_details;
+  const facilities: IFacilityProperty[] = data?.data?.data?.facility_list;
 
   return (
     <>

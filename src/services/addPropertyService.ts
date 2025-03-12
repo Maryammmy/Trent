@@ -1,3 +1,4 @@
+import { IPropertyData } from "./../interfaces/propertyInterface";
 import toast from "react-hot-toast";
 import { ApiError } from "../interfaces";
 import getVideoFromIndexedDB from "../utils/getVideoFromIndexedDB";
@@ -6,7 +7,7 @@ import Cookies from "js-cookie";
 import { setCreatedProperty } from "../store/features/becomeAHost/becomeAHostSlice";
 import { useAppDispatch } from "../store/hooks";
 
-const propertyData = async () => {
+const propertyData = async (): Promise<IPropertyData> => {
   const video = await getVideoFromIndexedDB();
   const uid = Cookies.get("user_id");
   return {

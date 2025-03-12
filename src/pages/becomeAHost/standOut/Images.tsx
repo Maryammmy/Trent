@@ -86,7 +86,7 @@ const Images = () => {
           {images.length > 0 && (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {images.map((image, index) => (
-                <div className="relative" key={image}>
+                <div className="relative" key={index}>
                   <div className="rounded-lg overflow-hidden w-full h-28">
                     <Image
                       imageUrl={image}

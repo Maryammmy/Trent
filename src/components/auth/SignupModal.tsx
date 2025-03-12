@@ -82,7 +82,6 @@ function SignupModal() {
             <Fragment key={name}>
               {name === "mobile" && (
                 <Controller
-                  key="ccode"
                   name="ccode"
                   control={control}
                   render={({ field }) => (
@@ -94,7 +93,6 @@ function SignupModal() {
                 />
               )}
               <Controller
-                key={name}
                 name={name}
                 control={control}
                 render={({ field }) => (
