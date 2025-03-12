@@ -9,27 +9,23 @@ import InputErrorMessage from "../../../components/ui/InputErrorMessage";
 interface IProps {
   control: Control<PropertyNameInputs>;
   errors: FieldErrors<PropertyNameInputs>;
-  propertyTypeList: IPropertyType[];
+  propertyTypes: IPropertyType[];
 }
-const PropertyTypeSelector = ({
-  control,
-  errors,
-  propertyTypeList,
-}: IProps) => {
+const PropertyTypeSelector = ({ control, errors, propertyTypes }: IProps) => {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-1">
       <label className="font-medium text-white">{t("property_type")}</label>
-      {!propertyTypeList ? (
+      {!propertyTypes ? (
         <SelectSkeleton />
-      ) : propertyTypeList?.length ? (
+      ) : propertyTypes?.length ? (
         <Controller
           name="category_id"
           control={control}
           render={({ field }) => (
             <Select
               {...field}
-              options={propertyTypeList?.map((propertyType: IPropertyType) => ({
+              options={propertyTypes?.map((propertyType: IPropertyType) => ({
                 value: propertyType?.id,
                 label: propertyType?.title,
               }))}

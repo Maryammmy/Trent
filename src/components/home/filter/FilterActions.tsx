@@ -37,21 +37,18 @@ function FilterActions({
   const { t } = useTranslation();
   const [enabled, setEnabled] = useState(false);
   const { setFilterData } = useContext(FilterDataContext);
-  const filters = Object.fromEntries(
-    Object.entries({
-      period: period || undefined,
-      facilities:
-        selectedFacilities.length > 0 ? selectedFacilities : undefined,
-      category_id: selectedPropertyType || undefined,
-      min_price: minPrice || undefined,
-      max_price: maxPrice || undefined,
-      government: government || undefined,
-      beds_count: bedsCount || undefined,
-      bathrooms_count: bathroomsCount || undefined,
-      guest_count: guestCount || undefined,
-      rate: rate || undefined,
-    }).filter(([, value]) => value !== undefined && value !== null)
-  );
+  const filters = {
+    period: period,
+    facilities: selectedFacilities.length > 0 ? selectedFacilities : undefined,
+    category_id: selectedPropertyType,
+    min_price: minPrice,
+    max_price: maxPrice,
+    government: government,
+    beds_count: bedsCount,
+    bathrooms_count: bathroomsCount,
+    guest_count: guestCount,
+    rate: rate,
+  };
   const { data } = useHomeDataAPI(filters, enabled);
   const filteredProperties = data?.data?.data?.property_list;
   const handleClearFilters = () => {
@@ -62,6 +59,7 @@ function FilterActions({
   };
   const handleApply = () => {
     setEnabled(true);
+    close();
   };
   useEffect(() => {
     if (filteredProperties) {

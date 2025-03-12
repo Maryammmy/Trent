@@ -6,14 +6,18 @@ import { IPropertyType } from "../interfaces";
 import { usePropertyTypesAPI } from "../services/filtersService";
 import Image from "./ui/Image";
 import { baseURL } from "../services";
+import { useContext } from "react";
+import { FilterDataContext } from "../context/FilterDataContext";
 
 function CategoryBar() {
+  const { category, setCategory } = useContext(FilterDataContext);
   const { data } = usePropertyTypesAPI();
   const propertyTypeList: IPropertyType[] = data?.data?.data?.category_list;
   const categoryBarSkeleton = Array.from({ length: 10 });
+  const handleSelectedPropertyType = (id: string) => setCategory(id);
   return (
     <>
-      <div className="w-full px-5 xl:px-20 pt-5 pb-5">
+      <div className="w-full px-5 xl:px-20 py-5">
         {!propertyTypeList ? (
           <Carsoul
             slidesToShow={10}
@@ -34,13 +38,20 @@ function CategoryBar() {
             infinite={false}
             responsive={responsive}
           >
-            {propertyTypeList?.map((item, index) => (
+            {propertyTypeList?.map((item) => (
               <Button
-                key={index}
+                onClick={() => handleSelectedPropertyType(item?.id)}
+                key={item?.id}
                 className="flex flex-col justify-center items-center pt-2 zoom"
               >
                 <div className="w-fit mx-auto mb-2 block">
-                  <div className="w-12 h-12 flex justify-center items-center rounded-full border hover:border-black border-dark">
+                  <div
+                    className={`w-12 h-12 flex justify-center items-center rounded-full  ${
+                      category === item?.id
+                        ? "border-2 border-primary"
+                        : "border border-dark"
+                    }`}
+                  >
                     <div className="w-8 h-8 rounded-full overflow-hidden">
                       <Image
                         imageUrl={baseURL + item.img}

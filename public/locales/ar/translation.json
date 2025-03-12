@@ -287,5 +287,6 @@
   "compound": "مجمع",
   "host_rules": "قواعد المضيف",
   "fav_error": "يجب تسجيل الدخول لاضافة عقار لمفضلتك.",
-  "update_Property": "تعديل العقار"
+  "update_Property": "تعديل العقار",
+  "something_went_wrong": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
 }

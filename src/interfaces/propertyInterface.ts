@@ -1,5 +1,8 @@
 import { ReactNode } from "react";
-
+export interface ISingleProperty {
+  property_details: IDetailsProperty;
+  facility_list: IFacilityProperty[];
+}
 export interface IDetailsProperty {
   address: {
     en: string;

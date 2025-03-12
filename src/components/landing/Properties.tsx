@@ -18,11 +18,10 @@ export default function Properties() {
   const [loading, setLoading] = useState(false);
   const ITEMS_TO_LOAD = 20;
   const { t } = useTranslation();
-  const { data } = useHomeDataAPI({}, true);
-  const { filterData } = useContext(FilterDataContext);
+  const { filterData, category } = useContext(FilterDataContext);
+  const { data } = useHomeDataAPI({ category_id: category }, true);
   const [properties, setProperties] = useState<IProperty[] | null>(null);
   const allProperties: IProperty[] = data?.data?.data?.property_list;
-
   const handleShowMore = () => {
     setLoading(true);
     setTimeout(() => {
@@ -57,7 +56,7 @@ export default function Properties() {
         </div>
         <CategoryBar />
         <div
-          className={`px-5 xl:px-20 ${
+          className={`px-5 xl:px-20 pb-10 ${
             properties?.length || !properties
               ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
               : ""
@@ -82,7 +81,7 @@ export default function Properties() {
           {loading && <PropertyCardSkeleton cards={8} />}
         </div>
         {properties && visibleCount < properties.length && !loading && (
-          <div className="flex justify-center mt-10 mb-5">
+          <div className="flex justify-center my-5">
             <Button
               onClick={handleShowMore}
               className="bg-white zoom text-primary border-2 border-primary font-medium py-2 px-4 rounded-lg text-center"

@@ -8,23 +8,23 @@ import InputErrorMessage from "../../../components/ui/InputErrorMessage";
 interface IProps {
   control: Control<PropertyNameInputs>;
   errors: FieldErrors<PropertyNameInputs>;
-  governmentList: IGovernement[];
+  governments: IGovernement[];
 }
-function GovernmentSelector({ control, errors, governmentList }: IProps) {
+function GovernmentSelector({ control, errors, governments }: IProps) {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-1">
       <label className="font-medium text-white">{t("government")}</label>
-      {!governmentList ? (
+      {!governments ? (
         <SelectSkeleton />
-      ) : governmentList?.length ? (
+      ) : governments?.length ? (
         <Controller
           name="government_id"
           control={control}
           render={({ field }) => (
             <Select
               {...field}
-              options={governmentList?.map((gov: IGovernement) => ({
+              options={governments?.map((gov: IGovernement) => ({
                 value: gov?.id,
                 label: gov?.name,
               }))}

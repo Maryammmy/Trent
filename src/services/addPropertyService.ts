@@ -6,6 +6,7 @@ import { addPropertyAPI } from "./propertyService";
 import Cookies from "js-cookie";
 import { setCreatedProperty } from "../store/features/becomeAHost/becomeAHostSlice";
 import { useAppDispatch } from "../store/hooks";
+import { useTranslation } from "react-i18next";
 
 const propertyData = async (): Promise<IPropertyData> => {
   const video = await getVideoFromIndexedDB();
@@ -79,6 +80,7 @@ const formData = async () => {
   return formData;
 };
 export const useSendDataToAPI = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const sendDataToAPI = async (): Promise<boolean> => {
     try {
@@ -100,11 +102,11 @@ export const useSendDataToAPI = () => {
       }
       return true;
     } catch (error) {
-      console.error("❌ Error sending data:", error);
       const customError = error as ApiError;
-      if (customError?.response?.data?.response_message) {
-        toast.error(customError?.response?.data?.response_message);
-      }
+      const errorMessage =
+        customError?.response?.data?.response_message ||
+        t("something_went_wrong");
+      toast.error(errorMessage);
       return false;
     }
   };

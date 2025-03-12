@@ -25,24 +25,24 @@ function FacilitiesSelector({ control, errors, facilities }: IProps) {
             <div className="border py-3 px-2 rounded-md bg-white">
               {facilities?.map((facility: IFacility) => (
                 <label
-                  key={facility.id}
+                  key={facility?.id}
                   className="flex items-center gap-2 py-1 font-medium"
                 >
                   <Input
                     type="checkbox"
-                    checked={field.value?.includes(facility.id)}
+                    checked={field.value?.includes(facility?.id)}
                     onChange={(e) => {
                       const selectedValues = new Set(field.value || []);
                       if (e.target.checked) {
-                        selectedValues.add(facility.id);
+                        selectedValues.add(facility?.id);
                       } else {
-                        selectedValues.delete(facility.id);
+                        selectedValues.delete(facility?.id);
                       }
                       field.onChange(Array.from(selectedValues));
                     }}
                     className="accent-dark w-4 h-4"
                   />
-                  {facility.title}
+                  {facility?.title}
                 </label>
               ))}
             </div>
