@@ -35,7 +35,7 @@ function ChooseUs() {
         have sorted all the hotels here based on their quality.
       </p>
       <div
-        className="flex flex-wrap gap-5 justify-evenly pt-10"
+        className="flex flex-wrap gap-10 justify-evenly pt-10"
         data-aos="fade-down"
       >
         {whyChooseUsList?.map((item, index) => {

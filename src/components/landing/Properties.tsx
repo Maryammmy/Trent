@@ -29,7 +29,6 @@ export default function Properties() {
       setLoading(false);
     }, 1000);
   };
-
   useEffect(() => {
     setProperties(filterData || allProperties);
   }, [filterData, allProperties]);

@@ -36,7 +36,7 @@ function FilterActions({
 }: IProps) {
   const { t } = useTranslation();
   const [enabled, setEnabled] = useState(false);
-  const { setFilterData } = useContext(FilterDataContext);
+  const { setFilterData, setCategory } = useContext(FilterDataContext);
   const filters = {
     period: period,
     facilities: selectedFacilities.length > 0 ? selectedFacilities : undefined,
@@ -52,12 +52,14 @@ function FilterActions({
   const { data } = useHomeDataAPI(filters, enabled);
   const filteredProperties = data?.data?.data?.property_list;
   const handleClearFilters = () => {
+    setCategory("");
     setEnabled(false);
     setFilterData(null);
     handleClear();
     close();
   };
   const handleApply = () => {
+    setCategory("");
     setEnabled(true);
     close();
   };

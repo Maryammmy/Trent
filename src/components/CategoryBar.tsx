@@ -10,11 +10,15 @@ import { useContext } from "react";
 import { FilterDataContext } from "../context/FilterDataContext";
 
 function CategoryBar() {
-  const { category, setCategory } = useContext(FilterDataContext);
+  const { category, setCategory, setFilterData } =
+    useContext(FilterDataContext);
   const { data } = usePropertyTypesAPI();
   const propertyTypeList: IPropertyType[] = data?.data?.data?.category_list;
   const categoryBarSkeleton = Array.from({ length: 10 });
-  const handleSelectedPropertyType = (id: string) => setCategory(id);
+  const handleSelectedPropertyType = (id: string) => {
+    setCategory(id);
+    setFilterData(null);
+  };
   return (
     <>
       <div className="w-full px-5 xl:px-20 py-5" data-aos="fade-right">
