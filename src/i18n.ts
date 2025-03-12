@@ -22,9 +22,13 @@ i18n
       lookupLocalStorage: "i18nextLng",
     },
   });
-const currentLanguage = (localStorage.getItem("i18nextLng") || "en").split(
-  "-"
-)[0];
-localStorage.setItem("i18nextLng", currentLanguage);
+let currentLanguage = localStorage.getItem("i18nextLng");
+
+if (!currentLanguage) {
+  currentLanguage = "en";
+  localStorage.setItem("i18nextLng", currentLanguage);
+} else {
+  currentLanguage = currentLanguage.split("-")[0];
+}
 
 export default i18n;

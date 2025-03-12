@@ -3,7 +3,6 @@ import { baseAPI } from ".";
 import { CurrentLanguage } from "../types";
 
 const currentLanguage = localStorage.getItem("i18nextLng") as CurrentLanguage;
-console.log(currentLanguage);
 export const useFiltersAPI = () => {
   return useQuery({
     queryKey: ["filters"],
