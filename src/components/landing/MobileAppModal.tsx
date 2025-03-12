@@ -30,7 +30,7 @@ function MobileAppModal() {
 
   return (
     <Modal isOpen={isOpen} close={() => setIsOpen(false)} maxWidth="600px">
-      <div className="p-6 rounded-lg bg-primary">
+      <div className="p-6 rounded-lg bg-primary" data-aos="fade-up">
         <div className="flex justify-end">
           <Button onClick={() => setIsOpen(false)}>
             <X className="text-white" />

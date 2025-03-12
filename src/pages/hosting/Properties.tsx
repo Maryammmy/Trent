@@ -2,9 +2,9 @@ import { useTranslation } from "react-i18next";
 import HostingModal from "../../components/hosting/HostingModal";
 import { useHomeDataAPI } from "../../services/homeService";
 import { IProperty } from "../../interfaces/propertyInterface";
-import PropertyItem from "../../components/hosting/properties/propertyItem";
 import Cookies from "js-cookie";
 import PropertyHostingSkeleton from "../../components/skeleton/PropertyHostingSkeleton";
+import PropertyItem from "../../components/hosting/properties/PropertyItem";
 
 const uid = Cookies.get("user_id");
 function Properties() {
