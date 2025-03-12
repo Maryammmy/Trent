@@ -63,7 +63,9 @@ function FilterActions({
   const handleApply = () => {
     setCategory("");
     setEnabled(true);
-    close();
+    setTimeout(() => {
+      close();
+    }, 1000);
   };
   useEffect(() => {
     if (filteredProperties) {
