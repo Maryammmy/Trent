@@ -1,5 +1,4 @@
 import Image from "../../ui/Image";
-import property from "../../../assets/iamges/property.jpg";
 import { FaStar } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
@@ -24,7 +23,7 @@ function PriceDetails() {
       <div className="flex flex-col md:flex-row gap-5 border-b pb-6">
         <div className="w-28 h-28 rounded-lg overflow-hidden bg-slate-400">
           <Image
-            imageUrl={property}
+            imageUrl="/images/property.jpg"
             alt="property"
             className="w-full h-full object-cover"
           />

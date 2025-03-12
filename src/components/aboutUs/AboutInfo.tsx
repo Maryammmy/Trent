@@ -1,4 +1,3 @@
-import home from "../../assets/iamges/home1.avif";
 import { aboutInfo } from "../../data/aboutData";
 import Image from "../ui/Image";
 
@@ -7,7 +6,7 @@ function AboutInfo() {
     <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
       <div className=" w-full h-[400px] md:w-[500px] lg:w-[400px] rounded-md overflow-hidden">
         <Image
-          imageUrl={home}
+          imageUrl="/images/home1.avif"
           alt="home"
           className="w-full h-full object-cover"
         />

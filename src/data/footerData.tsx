@@ -1,6 +1,3 @@
-import faceIcon from "../assets/iamges/faceFooter.svg";
-import instaIcon from "../assets/iamges/instaFooter.svg";
-import twitterIcon from "../assets/iamges/twitterFooter.svg";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import { IFooterSection } from "../interfaces";
@@ -37,4 +34,8 @@ export const sections: IFooterSection[] = [
     ],
   },
 ];
-export const icons: string[] = [faceIcon, instaIcon, twitterIcon];
+export const icons: string[] = [
+  "/images/faceFooter.svg",
+  "/images/instaFooter.svg",
+  "/images/twitterFooter.svg",
+];

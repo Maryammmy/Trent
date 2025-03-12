@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Modal from "../ui/Modal";
 import Button from "../ui/Button";
 import { X } from "lucide-react";
-import mobile from "../../assets/iamges/mobileIsolated.png";
 import Image from "../ui/Image";
 import { buttonData } from "../../data/landingData";
 
@@ -40,7 +39,11 @@ function MobileAppModal() {
           Get our Mobile App for a better experience!
         </h2>
         <div className="flex justify-center py-2">
-          <Image imageUrl={mobile} alt="mobile" className="w-40 h-full" />
+          <Image
+            imageUrl="/images/mobileIsolated.png"
+            alt="mobile"
+            className="w-40 h-full"
+          />
         </div>
         <div className="flex flex-col md:flex-row justify-between items-center gap-3">
           {buttonData

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import banner from "../../assets/iamges/mobileIsolated.png";
 import { buttonData } from "../../data/landingData";
 import Button from "../ui/Button";
 import Image from "../ui/Image";
@@ -31,7 +30,7 @@ function MobileAppBanner() {
             </h2>
             <div className="w-40 h-full">
               <Image
-                imageUrl={banner}
+                imageUrl="/images/mobileIsolated.png"
                 alt="bannerMobile"
                 className="w-full h-full"
               />
@@ -88,7 +87,7 @@ function MobileAppBanner() {
             </div>
             <div className="w-40 h-full">
               <Image
-                imageUrl={banner}
+                imageUrl="/images/mobileIsolated.png"
                 alt="bannerMobile"
                 className="w-full h-full"
               />

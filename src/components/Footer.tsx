@@ -1,5 +1,4 @@
 import Image from "./ui/Image";
-import logo from "../assets/iamges/Trent-blue.svg";
 import { icons, sections } from "../data/footerData";
 
 function Footer() {
@@ -10,7 +9,7 @@ function Footer() {
           <div className="flex flex-col gap-5">
             <div className="w-[40%]">
               <Image
-                imageUrl={logo}
+                imageUrl="/images/Trent-blue.svg"
                 alt="logo"
                 className="w-full h-full object-cover"
               />

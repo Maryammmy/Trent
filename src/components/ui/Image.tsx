@@ -1,5 +1,3 @@
-import TrentLogo from "../../assets/iamges/Trent-logo-pdf.png";
-
 interface IProps {
   imageUrl: string;
   alt: string;
@@ -14,7 +12,7 @@ function Image({ imageUrl, alt, className }: IProps) {
       className={className}
       loading="lazy"
       onError={(e) => {
-        e.currentTarget.src = TrentLogo;
+        e.currentTarget.src = "/images/Trent-logo-pdf.png";
       }}
     />
   );

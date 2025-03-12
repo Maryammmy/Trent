@@ -1,5 +1,4 @@
 import Image from "../ui/Image";
-import logo from "../../assets/iamges/logo_white.png";
 import "./systemLoader.css";
 
 export default function SystemLoader() {
@@ -7,7 +6,7 @@ export default function SystemLoader() {
     <div className={"loadingOverlay"} dir="ltr">
       <div className={"wavingText"}>
         <span>
-          <Image imageUrl={logo} className="" alt="logo" />
+          <Image imageUrl="/images/logo_white.png" className="" alt="logo" />
         </span>
         <span>T</span>
         <span>r</span>

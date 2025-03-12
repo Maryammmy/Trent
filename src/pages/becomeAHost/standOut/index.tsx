@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import home from "../../../assets/iamges/ownProperty.avif";
 import Image from "../../../components/ui/Image";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
@@ -18,7 +17,7 @@ function StandOut() {
           </div>
           <div className="w-full lg:w-1/2 h-[500px] flex-1 rounded-md overflow-hidden">
             <Image
-              imageUrl={home}
+              imageUrl="/images/ownProperty.avif"
               alt="home"
               className="w-full h-full object-cover"
             />

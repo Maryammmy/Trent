@@ -1,4 +1,3 @@
-import logo from "../../assets/iamges/Trent-tilted.svg";
 import { useGetData } from "../../hooks/useGetData";
 import { IWhyChooseUs } from "../../interfaces/landingInterface";
 import { baseURL } from "../../services";
@@ -22,7 +21,7 @@ function ChooseUs() {
         <h2 className="text-lg md:text-4xl font-bold">Why You Should Choose</h2>
         <div className="w-10 h-10">
           <Image
-            imageUrl={logo}
+            imageUrl="/images/Trent-tilted.svg"
             className="w-full h-full object-cover"
             alt="logo"
           />

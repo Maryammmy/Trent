@@ -5,7 +5,6 @@ import Modal from "../ui/Modal";
 import Button from "../ui/Button";
 import { useTranslation } from "react-i18next";
 import Image from "../ui/Image";
-import property from "../../assets/iamges/property.jpg";
 import { Link } from "react-router-dom";
 import { CurrentLanguage } from "../../types";
 
@@ -41,7 +40,7 @@ function HostingModal() {
         <div className="flex flex-col gap-2 items-center justify-center">
           <div className="w-32 h-32 rounded-lg overflow-hidden">
             <Image
-              imageUrl={property}
+              imageUrl="/images/property.jpg"
               alt="Property image"
               className="w-full h-full object-cover"
             />

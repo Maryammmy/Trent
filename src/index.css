@@ -25,7 +25,7 @@ span {
   color: #ffc227;
 }
 .bg-home {
-  background-image: url("./assets/iamges/bgHome.png"),
+  background-image: url("/images/bgHome.png"),
     linear-gradient(rgb(28, 72, 134), rgba(153, 153, 153, 0));
   background-blend-mode: overlay;
 }
@@ -35,7 +35,7 @@ span {
 }
 /* update property bg */
 .bg-update-property {
-  background-image: url("./assets/iamges/bgHome.png"),
+  background-image: url("/images/bgHome.png"),
     linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
   background-blend-mode: overlay;
 }
@@ -68,13 +68,13 @@ span {
 }
 /* contact us page */
 .bg-contact-us {
-  background-image: url("./assets/iamges/contact.avif"),
+  background-image: url("/images/contact.avif"),
     linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
   background-blend-mode: overlay;
 }
 /* about us page */
 .bg-about-us {
-  background-image: url("./assets/iamges/property.jpg"),
+  background-image: url("/images/property.jpg"),
     linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
   background-blend-mode: overlay;
 }
