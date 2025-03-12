@@ -15,23 +15,25 @@ function UpdateProperty() {
   const owner: string = data?.data?.data?.property_details?.user_id;
 
   return (
-    <div className="bg-update-property bg-fixed bg-cover bg-no-repeat min-h-screen">
-      <div className="max-w-screen-md py-5 md:py-10 px-5 2xl:px-20">
-        <h2 className="font-semibold text-xl md:text-3xl py-8 text-white">
-          {t("update_Property")}
-        </h2>
-        <AuthorizationCheck owner={owner} userId={userId} />
-        {data ? (
-          <UpdatePropertyForm
-            propertyData={data?.data?.data}
-            userId={userId}
-            propertyId={id}
-          />
-        ) : (
-          <UpdateSkeleton cards={12} />
-        )}
+    <>
+      <AuthorizationCheck owner={owner} userId={userId} />
+      <div className="bg-update-property bg-fixed bg-cover bg-no-repeat min-h-screen">
+        <div className="max-w-screen-md py-5 md:py-10 px-5 2xl:px-20">
+          <h2 className="font-semibold text-xl md:text-3xl py-8 text-white">
+            {t("update_Property")}
+          </h2>
+          {data ? (
+            <UpdatePropertyForm
+              propertyData={data?.data?.data}
+              userId={userId}
+              propertyId={id}
+            />
+          ) : (
+            <UpdateSkeleton cards={12} />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
