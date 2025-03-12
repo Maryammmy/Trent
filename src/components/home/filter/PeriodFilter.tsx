@@ -5,9 +5,10 @@ import { IPeriod } from "../../../interfaces";
 interface IProps {
   handlePeriodChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   periods: IPeriod[];
+  period: string;
 }
 
-function PeriodFilter({ handlePeriodChange, periods }: IProps) {
+function PeriodFilter({ handlePeriodChange, periods, period }: IProps) {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-2 pb-4">
@@ -16,6 +17,7 @@ function PeriodFilter({ handlePeriodChange, periods }: IProps) {
         <SelectSkeleton />
       ) : periods?.length ? (
         <Select
+          value={period}
           onChange={handlePeriodChange}
           options={periods?.map((period) => ({
             value: period.id,

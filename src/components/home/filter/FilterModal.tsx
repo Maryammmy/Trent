@@ -99,14 +99,17 @@ function FilterModal({ isFilterOpen, close }: IProps) {
       </Button>
       <div className="p-6 max-h-[80vh] overflow-y-auto">
         <PeriodFilter
+          period={period}
           handlePeriodChange={handlePeriodChange}
           periods={periodList}
         />
         <CompoundFilter
+          compound={compound}
           handleCompoundChange={handleCompoundChange}
           compounds={compoundList}
         />
         <GovernmentFilter
+          government={government}
           handleGovernmentChange={handleGovernmentChange}
           governments={governmentList}
         />

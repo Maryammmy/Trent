@@ -5,8 +5,9 @@ import Select from "../../ui/Select";
 interface IProps {
   handleCompoundChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   compounds: ICompound[];
+  compound: string;
 }
-function CompoundFilter({ handleCompoundChange, compounds }: IProps) {
+function CompoundFilter({ handleCompoundChange, compounds, compound }: IProps) {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-2 pb-4">
@@ -15,6 +16,7 @@ function CompoundFilter({ handleCompoundChange, compounds }: IProps) {
         <SelectSkeleton />
       ) : compounds?.length ? (
         <Select
+          value={compound}
           onChange={handleCompoundChange}
           options={compounds?.map((compound) => ({
             value: compound?.id,

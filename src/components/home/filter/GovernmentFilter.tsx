@@ -5,8 +5,13 @@ import Select from "../../ui/Select";
 interface IProps {
   handleGovernmentChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   governments: IGovernement[];
+  government: string;
 }
-function GovernmentFilter({ handleGovernmentChange, governments }: IProps) {
+function GovernmentFilter({
+  handleGovernmentChange,
+  governments,
+  government,
+}: IProps) {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-2">
@@ -15,6 +20,7 @@ function GovernmentFilter({ handleGovernmentChange, governments }: IProps) {
         <SelectSkeleton />
       ) : governments?.length ? (
         <Select
+          value={government}
           onChange={handleGovernmentChange}
           options={governments?.map((government) => ({
             value: government?.id,
