@@ -56,7 +56,10 @@ function Card({ property }: IProps) {
     }
   };
   return (
-    <div className="bg-white shadow-md rounded-md overflow-hidden p-4 zoom">
+    <div
+      className="bg-white shadow-md rounded-md overflow-hidden p-4 zoom"
+      data-aos="fade-up"
+    >
       {image_list?.length > 0 && (
         <div className="overflow-hidden rounded-md">
           <Carsoul

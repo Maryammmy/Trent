@@ -12,6 +12,7 @@ function HomeSearch() {
   return (
     <>
       <Button
+        data-aos="fade-down"
         onClick={() => dispatch(setIsSearchOpen(true))}
         className="flex bg-white items-center gap-2 w-[250px] md:w-[500px] rounded-full py-3 px-5 border shadow hover:shadow-lg"
       >

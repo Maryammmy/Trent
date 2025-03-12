@@ -21,7 +21,7 @@ export default function Modal({
       <Dialog
         open={isOpen}
         as="div"
-        className="relative z-[1000]"
+        className="relative z-[3000]"
         onClose={close}
         __demoMode
       >

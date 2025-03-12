@@ -6,8 +6,10 @@ import { Suspense, useEffect, useState } from "react";
 import { PhotoProvider } from "react-photo-view";
 import FilterDataContextProvider from "./context/FilterDataContext";
 import SystemLoader from "./components/loader/SystemLoader";
+import AOS from "aos";
 
 function App() {
+  AOS.init();
   const [isMount, setIsMount] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => {

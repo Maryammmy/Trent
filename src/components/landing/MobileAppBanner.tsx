@@ -23,7 +23,10 @@ function MobileAppBanner() {
       <div className="flex flex-col md:flex-row justify-around items-center p-5">
         {isSmallScreen ? (
           <>
-            <h2 className="text-white text-lg md:text-3xl font-semibold max-w-md">
+            <h2
+              className="text-white text-lg md:text-3xl font-semibold max-w-md"
+              data-aos="fade-up"
+            >
               Get our Mobile App for a better experience!
             </h2>
             <div className="w-40 h-full">
@@ -40,6 +43,7 @@ function MobileAppBanner() {
                 )
                 .map((btn, i) => (
                   <Button
+                    data-aos="fade-left"
                     key={i}
                     className="bg-black text-white rounded-md w-52 p-2 flex items-center gap-2"
                   >
@@ -56,7 +60,10 @@ function MobileAppBanner() {
           <>
             {" "}
             <div className="flex flex-col gap-5">
-              <h2 className="text-white text-lg md:text-3xl font-semibold max-w-md">
+              <h2
+                className="text-white text-lg md:text-3xl font-semibold max-w-md"
+                data-aos="fade-up"
+              >
                 Get our Mobile App for a better experience!
               </h2>
               <div className="flex flex-col items-center md:flex-row gap-10">
@@ -66,6 +73,7 @@ function MobileAppBanner() {
                   )
                   .map((btn, i) => (
                     <Button
+                      data-aos="fade-right"
                       key={i}
                       className="bg-black text-white rounded-md w-52 p-2 flex items-center gap-2"
                     >

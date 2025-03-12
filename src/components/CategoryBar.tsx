@@ -17,7 +17,7 @@ function CategoryBar() {
   const handleSelectedPropertyType = (id: string) => setCategory(id);
   return (
     <>
-      <div className="w-full px-5 xl:px-20 py-5">
+      <div className="w-full px-5 xl:px-20 py-5" data-aos="fade-right">
         {!propertyTypeList ? (
           <Carsoul
             slidesToShow={10}

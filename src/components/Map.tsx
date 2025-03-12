@@ -2,7 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 // import L from "leaflet";
 
 const Map = () => {
-  const position: [number, number] = [51.505, -0.09]; // إحداثيات البداية
+  const position: [number, number] = [51.505, -0.09];
   //   const customIcon = new L.Icon({
   //     iconUrl: "/custom-icon.png",
   //     iconSize: [30, 40],
@@ -35,7 +35,6 @@ const Map = () => {
       zoom={6}
       style={{ height: "500px", width: "100%" }}
     >
-      {/* طبقة الخريطة */}
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

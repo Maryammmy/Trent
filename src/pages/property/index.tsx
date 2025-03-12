@@ -30,7 +30,10 @@ function Property() {
         {data ? (
           <>
             <div className="pb-6">
-              <h2 className="font-bold text-2xl text-stone-800">
+              <h2
+                className="font-bold text-2xl text-stone-800"
+                data-aos="fade-down"
+              >
                 {propertyDetails?.title?.[currentLanguage]}
               </h2>
             </div>
@@ -38,6 +41,7 @@ function Property() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {propertyDetails?.image_list?.slice(0, 3)?.map((image, i) => (
                   <div
+                    data-aos="fade-down"
                     key={i}
                     className={`w-full h-[250px] lg:h-[300px] rounded-md overflow-hidden`}
                   >
@@ -64,14 +68,16 @@ function Property() {
             <div className="py-8 flex flex-col lg:flex-row gap-10 xl:gap-20 md:justify-between">
               <div className="flex-[2]">
                 <div className="flex flex-col gap-1 pb-5">
-                  <div className="font-medium text-black text-2xl flex gap-1">
+                  <div
+                    className="font-medium text-black text-2xl flex gap-1"
+                    data-aos="fade-up"
+                  >
                     <p> {propertyDetails?.city?.[currentLanguage]}</p>,
                     <p>
-                      {" "}
                       {propertyDetails?.government?.name?.[currentLanguage]}
                     </p>
                   </div>
-                  <div className="font-medium flex gap-1">
+                  <div className="font-medium flex gap-1" data-aos="fade-left">
                     <div className="flex gap-1">
                       <p>{t("guest_count")}</p>
                       <span>{propertyDetails?.guest_count}</span>
@@ -87,7 +93,7 @@ function Property() {
                       <span>{propertyDetails?.bathrooms_count}</span>
                     </div>
                   </div>
-                  <div className="font-semibold">
+                  <div className="font-semibold" data-aos="fade-down">
                     <p>
                       <span className="text-primary">
                         {propertyDetails?.price} {t("price_per_night")}
