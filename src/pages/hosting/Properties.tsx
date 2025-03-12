@@ -4,7 +4,7 @@ import { useHomeDataAPI } from "../../services/homeService";
 import { IProperty } from "../../interfaces/propertyInterface";
 import Cookies from "js-cookie";
 import PropertyHostingSkeleton from "../../components/skeleton/PropertyHostingSkeleton";
-import PropertyItem from "../../components/hosting/properties/PropertyItem";
+import Property from "../../components/hosting/properties/Property";
 
 const uid = Cookies.get("user_id");
 function Properties() {
@@ -25,7 +25,7 @@ function Properties() {
             <PropertyHostingSkeleton cards={5} />
           ) : properties.length ? (
             properties?.map((property) => (
-              <PropertyItem key={property.id} property={property} />
+              <Property key={property.id} property={property} />
             ))
           ) : (
             <div className="flex justify-center items-center h-[50vh] text-dark font-medium w-full">

@@ -5,7 +5,7 @@ import { baseURL } from "../../../services";
 interface IProps {
   property: IProperty;
 }
-const PropertyItem = ({ property }: IProps) => {
+const Property = ({ property }: IProps) => {
   const { id, title, compound_name, image_list } = property;
   return (
     <Link
@@ -28,4 +28,4 @@ const PropertyItem = ({ property }: IProps) => {
   );
 };
 
-export default PropertyItem;
+export default Property;
