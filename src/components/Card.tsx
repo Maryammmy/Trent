@@ -96,8 +96,8 @@ function Card({ property }: IProps) {
         </div>
       )}
       <div>
-        <div className="flex flex-col sm:flex-row gap-1 items-start sm:justify-between pt-2">
-          <div className="flex flex-row sm:flex-col gap-4 sm:gap-1">
+        <div className="flex items-start justify-between pt-2">
+          <div className="flex flex-col gap-1">
             <h3 className="font-bold">{truncateText(title, 10)}</h3>
             <div className="flex">
               <p>{truncateText(city_name, 5)}</p>,
@@ -111,9 +111,9 @@ function Card({ property }: IProps) {
                   ? `${priceBeforeTaxes.toFixed(0)} ${t("price_per_night")}`
                   : `${priceWithTaxes.toFixed(0)} ${t("price_per_night")}`}
               </span>
-              <span className="text-dark">/ {period_name}</span>
+              <span className="text-dark">/{period_name}</span>
             </div>
-            <div className="flex gap-1 justify-between items-center font-medium">
+            <div className="flex gap-1 justify-end items-center font-medium">
               <Rating rating={Number(rate)} />
               <span className="text-sm text-dark">({Number(rate)})</span>
             </div>
