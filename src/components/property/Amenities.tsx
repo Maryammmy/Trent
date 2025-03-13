@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { IFacilityProperty } from "../../interfaces/propertyInterface";
+import { IFacilityProperty } from "../../interfaces/property/propertyInterface";
 import Image from "../ui/Image";
 import { CurrentLanguage } from "../../types";
 import { baseURL } from "../../services";

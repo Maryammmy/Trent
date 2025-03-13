@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import HostingModal from "../../components/hosting/HostingModal";
 import { useHomeDataAPI } from "../../services/homeService";
-import { IProperty } from "../../interfaces/propertyInterface";
+import { IProperty } from "../../interfaces/property/propertyInterface";
 import Cookies from "js-cookie";
 import PropertyHostingSkeleton from "../../components/skeleton/PropertyHostingSkeleton";
 import Property from "../../components/hosting/properties/Property";

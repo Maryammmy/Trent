@@ -6,9 +6,10 @@ import { SlidersHorizontal } from "lucide-react";
 import PropertyCardSkeleton from "../skeleton/PropertyCardSkeleton";
 import CategoryBar from "../CategoryBar";
 import { useHomeDataAPI } from "../../services/homeService";
-import { IProperty } from "../../interfaces/propertyInterface";
+import { IProperty } from "../../interfaces/property/propertyInterface";
 import { FilterDataContext } from "../../context/FilterDataContext";
 import FilterModal from "../home/filter/FilterModal";
+import Map from "../map/Map";
 
 const Cart = lazy(() => import("../Card"));
 
@@ -32,7 +33,6 @@ export default function Properties() {
   useEffect(() => {
     setProperties(filterData || allProperties);
   }, [filterData, allProperties]);
-
   return (
     <>
       <div>
@@ -95,6 +95,7 @@ export default function Properties() {
         isFilterOpen={isFilterOpen}
         close={() => setIsFilterOpen(false)}
       />
+      <Map properties={properties} />
     </>
   );
 }

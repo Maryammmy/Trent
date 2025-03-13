@@ -137,17 +137,8 @@ export interface IProperty {
   rate: string;
   sqrft: string;
   title: string;
-}
-export interface IGallery {
-  id: string;
-  title: string;
-  image: string;
-}
-export interface ISpecificGallery {
-  id: string;
-  title: string;
-  description: string;
-  images: string[];
+  latitude: string;
+  longitude: string;
 }
 export interface IReviewInstruction {
   icon: ReactNode;

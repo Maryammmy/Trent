@@ -18,7 +18,7 @@ import {
   IDetailsProperty,
   IFacilityProperty,
   ISingleProperty,
-} from "../../../interfaces/propertyInterface";
+} from "../../../interfaces/property/propertyInterface";
 import GovernmentSelector from "./GovernmentSelector";
 import PeriodSelector from "./PeriodSelector";
 import {

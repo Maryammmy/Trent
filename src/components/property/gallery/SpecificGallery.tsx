@@ -4,10 +4,11 @@ import Image from "../../ui/Image";
 import PhotoViewer from "../../ui/PhotoViewer";
 
 function SpecificGallery() {
+  const images = Array.from({ length: 2 });
   return (
     <div>
       {specificGallery.map((item, index) => {
-        const { title, description, images, id } = item;
+        const { title, description, id } = item;
         return (
           <div
             id={id}
@@ -21,11 +22,11 @@ function SpecificGallery() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3 lg:gap-4 flex-[2]">
-              {images.map((image, index) => {
+              {images.map((_, index) => {
                 const isEven = images.length % 2 === 0;
                 const firstIndex = index === 0;
                 return (
-                  <PhotoViewer key={index} src={image}>
+                  <PhotoViewer key={index} src="/images/Trent-logo-pdf.png">
                     <div
                       className={`${
                         !isEven && firstIndex
@@ -34,7 +35,7 @@ function SpecificGallery() {
                       } rounded-md overflow-hidden`}
                     >
                       <Image
-                        imageUrl={image}
+                        imageUrl="/images/Trent-logo-pdf.png"
                         alt={title}
                         className="w-full h-full object-cover"
                       />

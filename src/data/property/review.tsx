@@ -10,7 +10,7 @@ import {
   IReview,
   IReviewInstruction,
   IWidth,
-} from "../../interfaces/propertyInterface";
+} from "../../interfaces/property/propertyInterface";
 import { ISelectOption } from "../../interfaces";
 
 export const reviewInstruction: IReviewInstruction[] = [

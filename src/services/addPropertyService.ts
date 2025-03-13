@@ -1,4 +1,4 @@
-import { IPropertyData } from "./../interfaces/propertyInterface";
+import { IPropertyData } from "../interfaces/property/propertyInterface";
 import toast from "react-hot-toast";
 import { ApiError } from "../interfaces";
 import getVideoFromIndexedDB from "../utils/getVideoFromIndexedDB";

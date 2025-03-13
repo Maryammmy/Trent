@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Image from "../../ui/Image";
-import { IProperty } from "../../../interfaces/propertyInterface";
+import { IProperty } from "../../../interfaces/property/propertyInterface";
 import { baseURL } from "../../../services";
 interface IProps {
   property: IProperty;

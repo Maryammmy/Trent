@@ -1,18 +1,16 @@
 import { Link } from "react-router-dom";
-import Carsoul from "./ui/Carsoul";
-import Image from "./ui/Image";
-import { useTranslation } from "react-i18next";
-import { useAppSelector } from "../store/hooks";
-import Rating from "./ui/Rating";
-import { MapPin } from "lucide-react";
-import Button from "./ui/Button";
-import { IProperty } from "../interfaces/property/propertyInterface";
-import { truncateText } from "../utils/truncateText";
-import { baseURL } from "../services";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { togglePropertyAPI } from "../services/propertyService";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { IProperty } from "../../interfaces/property/propertyInterface";
+import { baseURL } from "../../services";
+import { togglePropertyAPI } from "../../services/propertyService";
+import { useAppSelector } from "../../store/hooks";
+import { truncateText } from "../../utils/truncateText";
+import Carsoul from "../ui/Carsoul";
+import Rating from "../ui/Rating";
+import Image from "../ui/Image";
 interface IProps {
   property: IProperty;
 }
@@ -57,10 +55,7 @@ function Card({ property }: IProps) {
     }
   };
   return (
-    <div
-      className="bg-white shadow-md rounded-md overflow-hidden p-4 zoom"
-      data-aos="fade-up"
-    >
+    <div className="w-[300px] overflow-hidden">
       {image_list?.length > 0 && (
         <div className="overflow-hidden rounded-md">
           <Carsoul
@@ -83,7 +78,7 @@ function Card({ property }: IProps) {
                     <FaRegHeart size={20} className="text-white" />
                   )}
                 </div>
-                <div className="rounded-md overflow-hidden h-[230px] md:h-[300px] bg-gray-200">
+                <div className="rounded-md overflow-hidden h-[230px] md:h-[250px] w-full">
                   <Image
                     imageUrl={baseURL + item.img}
                     alt={`Slide ${index}`}
@@ -96,16 +91,16 @@ function Card({ property }: IProps) {
         </div>
       )}
       <div>
-        <div className="flex flex-col sm:flex-row gap-1 items-start sm:justify-between pt-2">
-          <div className="flex flex-row sm:flex-col gap-4 sm:gap-1">
+        <div className="flex items-start justify-between pt-2">
+          <div className="flex flex-col gap-1">
             <h3 className="font-bold">{truncateText(title, 10)}</h3>
-            <div className="flex">
-              <p>{truncateText(city_name, 5)}</p>,
-              <p>{truncateText(government_name, 5)}</p>
+            <div className="flex flex-row gap-1">
+              <span>{truncateText(city_name, 10)}</span>
+              <span>{truncateText(government_name, 10)}</span>
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <div className="flex gap-1 font-medium">
+            <div className="flex gap-1 items-center justify-end font-medium">
               <span className="font-bold text-primary">
                 {enableTaxes
                   ? `${priceBeforeTaxes.toFixed(0)} ${t("price_per_night")}`
@@ -120,18 +115,10 @@ function Card({ property }: IProps) {
           </div>
         </div>
         {enableTaxes && (
-          <p className="text-sm text-dark pt-1">{t("total_before_taxes")}</p>
+          <span className="text-sm text-dark pt-1">
+            {t("total_before_taxes")}
+          </span>
         )}
-        <div className="flex gap-5 mt-2">
-          <Button className="flex-[2] zoom py-1 bg-primary rounded-md text-white font-medium">
-            <span>Book Now</span>
-          </Button>
-          <Button className="flex-[1] zoom py-1 bg-[#CAE0FE] rounded-md flex justify-center items-center">
-            <span>
-              <MapPin className="text-primary" size={22} />
-            </span>
-          </Button>
-        </div>
       </div>
     </div>
   );

@@ -24,12 +24,12 @@ function Gallery() {
         {isLargeScreen ? (
           <div className="flex flex-wrap gap-5">
             {gallery.map((item, index) => {
-              const { image, title, id } = item;
+              const { title, id } = item;
               return (
                 <HashLink to={`#${id}`} key={index}>
                   <div className="w-[150px] h-[100px] overflow-hidden rounded-md shadow-md">
                     <Image
-                      imageUrl={image}
+                      imageUrl="/images/Trent-logo-pdf.png"
                       alt={title}
                       className="w-full h-full object-cover"
                     />
@@ -42,12 +42,12 @@ function Gallery() {
         ) : (
           <Carsoul showArrow={false} responsive={galleyCarsoulResponsive}>
             {gallery.map((item, index) => {
-              const { image, title } = item;
+              const { title } = item;
               return (
                 <div key={index}>
                   <div className="w-[130px] h-[100px] overflow-hidden rounded-md shadow-md">
                     <Image
-                      imageUrl={image}
+                      imageUrl="/images/Trent-logo-pdf.png"
                       alt={title}
                       className="w-full h-full object-cover"
                     />

@@ -10,7 +10,7 @@ import { usePropertyAPI } from "../../services/propertyService";
 import {
   IDetailsProperty,
   IFacilityProperty,
-} from "../../interfaces/propertyInterface";
+} from "../../interfaces/property/propertyInterface";
 import { Grip } from "lucide-react";
 import { CurrentLanguage } from "../../types";
 import { baseURL } from "../../services";

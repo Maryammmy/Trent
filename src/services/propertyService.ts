@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
-import { IToggleProperty } from "../interfaces/propertyInterface";
+import { IToggleProperty } from "../interfaces/property/propertyInterface";
 import { CurrentLanguage } from "../types";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||

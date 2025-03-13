@@ -5,7 +5,7 @@ interface TaxesState {
 }
 
 const initialState: TaxesState = {
-  enableTaxes: false,
+  enableTaxes: true,
 };
 
 const taxesSlice = createSlice({

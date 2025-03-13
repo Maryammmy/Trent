@@ -1,6 +1,6 @@
 import Image from "../ui/Image";
 import { useTranslation } from "react-i18next";
-import { IDetailsProperty } from "../../interfaces/propertyInterface";
+import { IDetailsProperty } from "../../interfaces/property/propertyInterface";
 import { baseURL } from "../../services";
 interface IProps {
   host: IDetailsProperty["owner"];
