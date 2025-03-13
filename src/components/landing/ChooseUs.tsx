@@ -2,6 +2,7 @@ import { useGetData } from "../../hooks/useGetData";
 import { IWhyChooseUs } from "../../interfaces/landingInterface";
 import { baseURL } from "../../services";
 import { CurrentLanguage } from "../../types";
+import ChooseUsSkeleton from "../skeleton/ChooseUsSkeleton";
 import Image from "../ui/Image";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
@@ -38,29 +39,37 @@ function ChooseUs() {
         className="flex flex-wrap gap-10 justify-evenly pt-10"
         data-aos="fade-down"
       >
-        {whyChooseUsList?.map((item, index) => {
-          const { background_color, description, img } = item;
-          return (
-            <div
-              key={index}
-              style={{ backgroundColor: background_color }}
-              className="h-40 w-40 zoom overflow-hidden flex flex-col gap-2 justify-center items-center rounded-full"
-            >
-              <div className="w-[25%]">
-                <Image
-                  imageUrl={baseURL + img}
-                  alt={`image ${index}`}
-                  className="w-full h-full object-cover rounded-md"
-                />
+        {!whyChooseUsList ? (
+          <ChooseUsSkeleton cards={5} />
+        ) : whyChooseUsList?.length ? (
+          whyChooseUsList?.map((item, index) => {
+            const { background_color, description, img } = item;
+            return (
+              <div
+                key={index}
+                style={{ backgroundColor: background_color }}
+                className="h-40 w-40 zoom overflow-hidden flex flex-col gap-2 justify-center items-center rounded-full"
+              >
+                <div className="w-[25%]">
+                  <Image
+                    imageUrl={baseURL + img}
+                    alt={`image ${index}`}
+                    className="w-full h-full object-cover rounded-md"
+                  />
+                </div>
+                <div className="flex items-center justify-center">
+                  <p className="text-center text-sm text-dark font-medium px-2">
+                    {description}
+                  </p>
+                </div>
               </div>
-              <div className="flex items-center justify-center">
-                <p className="text-center text-sm text-dark font-medium px-2">
-                  {description}
-                </p>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div className="flex justify-center items-center h-[50vh] text-dark font-medium w-full">
+            No why choose us found
+          </div>
+        )}
       </div>
     </div>
   );
