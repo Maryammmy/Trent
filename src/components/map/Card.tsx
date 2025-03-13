@@ -55,7 +55,7 @@ function Card({ property }: IProps) {
     }
   };
   return (
-    <div className="w-[300px] overflow-hidden">
+    <div className="w-[165px] sm:w-[250px] rounded-md overflow-hidden">
       {image_list?.length > 0 && (
         <div className="overflow-hidden rounded-md">
           <Carsoul
@@ -78,7 +78,7 @@ function Card({ property }: IProps) {
                     <FaRegHeart size={20} className="text-white" />
                   )}
                 </div>
-                <div className="rounded-md overflow-hidden h-[230px] md:h-[250px] w-full">
+                <div className="rounded-md overflow-hidden h-[150px] w-full">
                   <Image
                     imageUrl={baseURL + item.img}
                     alt={`Slide ${index}`}
@@ -91,7 +91,7 @@ function Card({ property }: IProps) {
         </div>
       )}
       <div>
-        <div className="flex items-start justify-between pt-2">
+        <div className="flex sm:flex-row flex-col gap-1 items-start justify-between pt-2">
           <div className="flex flex-col gap-1">
             <h3 className="font-bold">{truncateText(title, 10)}</h3>
             <div className="flex flex-row gap-1">
@@ -99,8 +99,8 @@ function Card({ property }: IProps) {
               <span>{truncateText(government_name, 10)}</span>
             </div>
           </div>
-          <div className="flex flex-col gap-1">
-            <div className="flex gap-1 items-center justify-end font-medium">
+          <div className="flex flex-col sm:items-end gap-1">
+            <div className="flex gap-1 font-medium">
               <span className="font-bold text-primary">
                 {enableTaxes
                   ? `${priceBeforeTaxes.toFixed(0)} ${t("price_per_night")}`
@@ -108,7 +108,7 @@ function Card({ property }: IProps) {
               </span>
               <span className="text-dark">/ {period_name}</span>
             </div>
-            <div className="flex gap-1 justify-between items-center font-medium">
+            <div className="flex gap-1 items-center font-medium">
               <Rating rating={Number(rate)} />
               <span className="text-sm text-dark">({Number(rate)})</span>
             </div>

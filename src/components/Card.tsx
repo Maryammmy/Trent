@@ -104,7 +104,7 @@ function Card({ property }: IProps) {
               <p>{truncateText(government_name, 5)}</p>
             </div>
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 items-end">
             <div className="flex gap-1 font-medium">
               <span className="font-bold text-primary">
                 {enableTaxes
@@ -113,7 +113,7 @@ function Card({ property }: IProps) {
               </span>
               <span className="text-dark">/{period_name}</span>
             </div>
-            <div className="flex gap-1 justify-end items-center font-medium">
+            <div className="flex gap-1 items-center font-medium">
               <Rating rating={Number(rate)} />
               <span className="text-sm text-dark">({Number(rate)})</span>
             </div>

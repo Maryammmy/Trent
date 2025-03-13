@@ -80,8 +80,8 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 26.8206,
-  lng: 30.8025,
+  lat: 30.0444,
+  lng: 31.2357,
 };
 
 const API_KEY = "AIzaSyDbeg4RQW5M5LL7P-2LKaVjOnsMghPDR9o"; // استبدل بمفتاح API الخاص بك
@@ -118,9 +118,7 @@ const Map = ({ properties }: IProps) => {
           }}
           onCloseClick={() => setSelectedProperty(null)} // إغلاق InfoWindow عند النقر على ×
         >
-          <div>
-            <Card property={selectedProperty} />
-          </div>
+          <Card property={selectedProperty} />
         </InfoWindow>
       )}
     </GoogleMap>

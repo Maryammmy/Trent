@@ -9,7 +9,7 @@ import SystemLoader from "./components/loader/SystemLoader";
 import AOS from "aos";
 
 function App() {
-  AOS.init();
+  AOS.init({ duration: 1000 });
   const [isMount, setIsMount] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => {
