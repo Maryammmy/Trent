@@ -10,9 +10,10 @@ import { IProperty } from "../../interfaces/property/propertyInterface";
 import { FilterDataContext } from "../../context/FilterDataContext";
 import FilterModal from "../home/filter/FilterModal";
 import Map from "../map/Map";
+import Cookies from "js-cookie";
 
 const Cart = lazy(() => import("../Card"));
-
+const uid = Cookies.get("user_id");
 export default function Properties() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(8);
@@ -20,7 +21,7 @@ export default function Properties() {
   const ITEMS_TO_LOAD = 20;
   const { t } = useTranslation();
   const { filterData, category } = useContext(FilterDataContext);
-  const { data } = useHomeDataAPI({ category_id: category }, true);
+  const { data } = useHomeDataAPI({ category_id: category, uid }, true);
   const [properties, setProperties] = useState<IProperty[] | null>(null);
   const allProperties: IProperty[] = data?.data?.data?.property_list;
   const handleShowMore = () => {

@@ -18,6 +18,7 @@ import PropertySkeleton from "../../components/skeleton/PropertySkeleton";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
+
 function Property() {
   const { t } = useTranslation();
   const { id } = useParams();
