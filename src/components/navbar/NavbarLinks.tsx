@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
@@ -14,6 +14,7 @@ const isLoggedin = Cookies.get("user_id");
 const NavbarLinks = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   return (
     <>
       <ul className="font-medium flex flex-col justify-center items-center lg:flex-row lg:space-x-8">
@@ -38,10 +39,12 @@ const NavbarLinks = () => {
                     ? () => {
                         dispatch(setIsSignup(true));
                         dispatch(setToggle(false));
+                        navigate("/");
                       }
                     : () => {
                         dispatch(setIsloggedin(true));
                         dispatch(setToggle(false));
+                        navigate("/");
                       }
                 }
                 className={`px-6 lg:h-12 text-white font-semibold rounded-lg hover:bg-gray-300 transition ${
