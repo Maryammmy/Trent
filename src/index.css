@@ -24,6 +24,10 @@ span {
 .home-navlink.active {
   color: #ffc227;
 }
+/* google maps */
+.gm-style-iw {
+  max-width: 400px !important;
+}
 .bg-home {
   background-image: url("/images/bgHome.png"),
     linear-gradient(rgb(28, 72, 134), rgba(153, 153, 153, 0));

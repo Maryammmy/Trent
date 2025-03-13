@@ -55,7 +55,7 @@ function Card({ property }: IProps) {
     }
   };
   return (
-    <div className="w-[165px] sm:w-[250px] rounded-md overflow-hidden">
+    <div className="w-[250px] rounded-md overflow-hidden">
       {image_list?.length > 0 && (
         <div className="overflow-hidden rounded-md">
           <Carsoul

@@ -84,7 +84,7 @@ const center = {
   lng: 31.2357,
 };
 
-const API_KEY = "AIzaSyDbeg4RQW5M5LL7P-2LKaVjOnsMghPDR9o"; // استبدل بمفتاح API الخاص بك
+const API_KEY = "AIzaSyDbeg4RQW5M5LL7P-2LKaVjOnsMghPDR9o";
 
 const Map = ({ properties }: IProps) => {
   const { isLoaded } = useJsApiLoader({
@@ -106,7 +106,7 @@ const Map = ({ properties }: IProps) => {
             lat: Number(property?.latitude),
             lng: Number(property?.longitude),
           }}
-          onClick={() => setSelectedProperty(property)} // فتح InfoWindow عند النقر
+          onClick={() => setSelectedProperty(property)}
         />
       ))}
 
@@ -116,7 +116,7 @@ const Map = ({ properties }: IProps) => {
             lat: Number(selectedProperty.latitude),
             lng: Number(selectedProperty.longitude),
           }}
-          onCloseClick={() => setSelectedProperty(null)} // إغلاق InfoWindow عند النقر على ×
+          onCloseClick={() => setSelectedProperty(null)}
         >
           <Card property={selectedProperty} />
         </InfoWindow>
