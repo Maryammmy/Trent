@@ -42,7 +42,7 @@ function MobileAppBanner() {
                 )
                 .map((btn, i) => (
                   <Button
-                    data-aos="fade-left"
+                    data-aos="fade-down"
                     key={i}
                     className="bg-black text-white rounded-md w-52 p-2 flex items-center gap-2"
                   >
@@ -72,7 +72,7 @@ function MobileAppBanner() {
                   )
                   .map((btn, i) => (
                     <Button
-                      data-aos="fade-right"
+                      data-aos="fade-up"
                       key={i}
                       className="bg-black text-white rounded-md w-52 p-2 flex items-center gap-2"
                     >

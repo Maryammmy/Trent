@@ -22,7 +22,7 @@ function Amenities({ facilities }: IProps) {
             <div
               key={index}
               className="flex items-center gap-2"
-              data-aos="fade-left"
+              data-aos="fade-down"
             >
               <div className="w-8 h-8 rounded-md overflow-hidden">
                 <Image

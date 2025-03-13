@@ -80,7 +80,7 @@ function Property() {
                   </div>
                   <div
                     className="font-medium flex flex-wrap gap-1"
-                    data-aos="fade-left"
+                    data-aos="fade-down"
                   >
                     <div className="flex gap-1">
                       <p>{t("guest_count")}</p>
