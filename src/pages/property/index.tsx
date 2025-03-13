@@ -78,7 +78,10 @@ function Property() {
                       {propertyDetails?.government?.name?.[currentLanguage]}
                     </p>
                   </div>
-                  <div className="font-medium flex gap-1" data-aos="fade-left">
+                  <div
+                    className="font-medium flex flex-wrap gap-1"
+                    data-aos="fade-left"
+                  >
                     <div className="flex gap-1">
                       <p>{t("guest_count")}</p>
                       <span>{propertyDetails?.guest_count}</span>
