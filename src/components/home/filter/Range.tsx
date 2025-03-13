@@ -23,16 +23,20 @@ function PriceRange({ values, handleRangeChange }: IProps) {
           ></div>
         ))}
       </div>
-      <Slider
-        range
-        min={10}
-        max={100}
-        defaultValue={values}
-        onChange={(value) =>
-          handleRangeChange(Array.isArray(value) ? value : [value])
-        }
-        trackStyle={[{ backgroundColor: "#223f7f" }]}
-      />
+      {values.length > 1 && (
+        <Slider
+          range
+          defaultValue={values}
+          min={10}
+          max={879788000}
+          value={values}
+          onChange={(value) =>
+            handleRangeChange(Array.isArray(value) ? value : [value])
+          }
+          trackStyle={[{ backgroundColor: "#223f7f" }]}
+        />
+      )}
+
       <div className="flex font-medium text-dark justify-between mt-4 text-sm">
         <div className="flex items-center gap-2">
           <span>{t("minimum")}</span>:{" "}

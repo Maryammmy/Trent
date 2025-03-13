@@ -43,7 +43,9 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   const governmentList = governments?.data?.data?.government_list;
   useEffect(() => {
     if (priceRange?.min_price && priceRange?.max_price) {
-      setValues([priceRange?.min_price, priceRange?.max_price]);
+      const min = Number(priceRange.min_price);
+      const max = Number(priceRange.max_price);
+      setValues([min, max]);
     }
   }, [priceRange]);
   const handleSelectedFacilities = (id: number) => {

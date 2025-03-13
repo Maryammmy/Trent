@@ -63,16 +63,13 @@ function FilterActions({
   const handleApply = () => {
     setCategory("");
     setEnabled(true);
-    setTimeout(() => {
-      close();
-    }, 1000);
   };
   useEffect(() => {
-    if (filteredProperties) {
+    if (filteredProperties && enabled) {
       setFilterData(filteredProperties);
+      close();
     }
-  }, [filteredProperties, setFilterData]);
-
+  }, [filteredProperties, setFilterData, close, enabled]);
   return (
     <div className="flex justify-between py-2">
       {filterButtons.map((button, index) => (
