@@ -36,7 +36,6 @@ function App() {
     <>
       <FilterDataContextProvider>
         <PhotoProvider>
-          {/* ✅ لفّ `RouterProvider` بـ `Suspense` عشان تحمل الصفحات عند الحاجة */}
           <Suspense fallback={<SystemLoader />}>
             <RouterProvider router={router} />
           </Suspense>
