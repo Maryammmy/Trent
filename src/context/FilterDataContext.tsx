@@ -7,14 +7,15 @@ import {
 } from "react";
 import { IProperty } from "../interfaces/property/propertyInterface";
 
-interface FilterDataContextType {
+interface IFilterData {
   filterData: null | IProperty[];
   setFilterData: Dispatch<SetStateAction<null | IProperty[]>>;
   category: string;
   setCategory: Dispatch<SetStateAction<string>>;
 }
+
 // eslint-disable-next-line react-refresh/only-export-components
-export const FilterDataContext = createContext({} as FilterDataContextType);
+export const FilterDataContext = createContext({} as IFilterData);
 const FilterDataContextProvider = ({ children }: { children: ReactNode }) => {
   const [filterData, setFilterData] = useState<null | IProperty[]>(null);
   const [category, setCategory] = useState("");
