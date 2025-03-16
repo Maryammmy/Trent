@@ -9,6 +9,7 @@ import Video from "../../../components/ui/Video";
 import { openDB } from "idb";
 import Button from "../../../components/ui/Button";
 import InputErrorMessage from "../../../components/ui/InputErrorMessage";
+import { allowedVideoTypes } from "../../../constants";
 
 const initDB = async () => {
   try {
@@ -83,12 +84,6 @@ const UploadVideo = () => {
   ) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-      const allowedVideoTypes = [
-        "video/mp4",
-        "video/avi",
-        "video/mov",
-        "video/mkv",
-      ];
       if (!allowedVideoTypes.includes(file.type)) {
         setVideoError(t("invalid_video_format"));
         return;

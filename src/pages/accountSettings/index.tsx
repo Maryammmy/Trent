@@ -2,19 +2,33 @@ import { Link } from "react-router-dom";
 import AccountSettingsCard from "../../components/accountSettings/AccountSettingsCard";
 import { accountSettingsData } from "../../data/accountSettingsData";
 import { useTranslation } from "react-i18next";
+import { useUserAPI } from "../../services/userService";
+import { IUser } from "../../interfaces/accountSettingsInterface";
+import SelectSkeleton from "../../components/skeleton/SelectSkeleton";
 
 function AccountSettings() {
   const { t } = useTranslation();
+  const { data } = useUserAPI();
+  const user: IUser = data?.data?.data?.user_data;
   return (
     <div className="max-w-6xl  mx-auto py-5 md:py-10 px-5 xl:px-0">
       <div>
         <h2 className="text-4xl font-semibold">Account</h2>
         <div className="flex flex-col md:flex-row gap-2 md:items-center pt-4 pb-10">
-          <div className="flex items-center gap-1">
-            <span className="font-medium text-xl">Omar,</span>
-            <p className="text-xl">omar@gmail.com</p>
-          </div>
-          <Link to={`/`} className=" underline font-medium text-xl">
+          {!user ? (
+            <div className="w-1/5">
+              <SelectSkeleton />
+            </div>
+          ) : (
+            <div className="flex items-center gap-1">
+              <span className="font-medium text-xl">{user?.full_name},</span>
+              <p className="text-xl">{user?.email}</p>
+            </div>
+          )}
+          <Link
+            to="/account-settings/personal-info"
+            className=" underline font-medium text-xl"
+          >
             {t("go_to_profile")}
           </Link>
         </div>

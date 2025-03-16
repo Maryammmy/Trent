@@ -37,6 +37,7 @@ import { baseURL } from "../../../services";
 import VideoUploader from "./VideoUploader";
 import ImageUploader from "./ImageUploader";
 import { useNavigate } from "react-router-dom";
+import { allowedImageTypes, allowedVideoTypes } from "../../../constants";
 
 interface UpdatePropertyFormProps {
   propertyData: ISingleProperty;
@@ -82,6 +83,10 @@ function UpdatePropertyForm({
     if (event.target.files) {
       const selectedFiles = Array.from(event.target.files);
       selectedFiles.forEach((file) => {
+        if (!allowedImageTypes.includes(file.type)) {
+          setImageError(t("invalid_image_format"));
+          return;
+        }
         if (file.size < 51200) {
           setImageError(t("image_too_small"));
           return;
@@ -111,7 +116,7 @@ function UpdatePropertyForm({
   const handleVideoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-      if (!file.type.startsWith("video/")) {
+      if (!allowedVideoTypes.includes(file.type)) {
         setVideoError(t("invalid_video_format"));
         return;
       }
@@ -177,7 +182,7 @@ function UpdatePropertyForm({
     }
   }, [propertyDetails, facilityListProperty, reset, propertyId, userId]);
 
-  const onUpdate = async (data: PropertyNameInputs) => {
+  const onSubmit = async (data: PropertyNameInputs) => {
     const formData = convertToFormData(data);
     try {
       setLoading(true);
@@ -199,7 +204,7 @@ function UpdatePropertyForm({
     }
   };
   return (
-    <form onSubmit={handleSubmit(onUpdate)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <PropertyTypeSelector
         control={control}
         errors={errors}

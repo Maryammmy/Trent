@@ -8,6 +8,7 @@ import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWra
 import toast from "react-hot-toast";
 import Button from "../../../components/ui/Button";
 import InputErrorMessage from "../../../components/ui/InputErrorMessage";
+import { allowedImageTypes } from "../../../constants";
 
 const storedImages = sessionStorage.getItem("images");
 
@@ -20,13 +21,6 @@ const Images = () => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const selectedFiles = Array.from(event.target.files);
-      const allowedImageTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/gif",
-        "image/jpg",
-      ];
-      console.log(selectedFiles);
       selectedFiles.forEach((file) => {
         if (!allowedImageTypes.includes(file.type)) {
           setImageError(t("invalid_image_format"));
@@ -40,7 +34,6 @@ const Images = () => {
         reader.readAsDataURL(file);
         reader.onloadend = () => {
           const imageDataUrl = reader.result as string;
-
           if (!images.includes(imageDataUrl)) {
             const updatedPhotos = [...images, imageDataUrl];
             sessionStorage.setItem("images", JSON.stringify(updatedPhotos));
@@ -83,7 +76,7 @@ const Images = () => {
           </label>
         </div>
         <div>
-          {images.length > 0 && (
+          {images.length ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {images.map((image, index) => (
                 <div className="relative" key={index}>
@@ -103,6 +96,8 @@ const Images = () => {
                 </div>
               ))}
             </div>
+          ) : (
+            ""
           )}
           {imageError && <InputErrorMessage msg={imageError} />}
         </div>

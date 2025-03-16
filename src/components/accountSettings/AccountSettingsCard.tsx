@@ -17,7 +17,7 @@ function AccountSettingsCard({ item }: IProps) {
       <div className="pb-4">{icon}</div>
       <div>
         <h3 className="font-medium text-lg">{t(title)}</h3>
-        <p className="text-secondary font-medium">{t(description)}</p>
+        <p className="text-dark font-medium">{t(description)}</p>
       </div>
     </Link>
   );

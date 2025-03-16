@@ -6,6 +6,7 @@ import InputErrorMessage from "../../../components/ui/InputErrorMessage";
 import { useTranslation } from "react-i18next";
 import { FieldErrors } from "react-hook-form";
 import { PropertyNameInputs } from "../../../types";
+import { baseURL } from "../../../services";
 
 interface VideoUploaderProps {
   video: string;
@@ -23,6 +24,7 @@ const VideoUploader: React.FC<VideoUploaderProps> = ({
   errors,
 }) => {
   const { t } = useTranslation();
+  const isFromBackend = video.startsWith(baseURL);
   return (
     <div>
       <div>
@@ -46,17 +48,19 @@ const VideoUploader: React.FC<VideoUploaderProps> = ({
               <div className="w-full h-28">
                 <Video videoUrl={video} className="w-full h-full rounded-lg" />
               </div>
-              <Button
-                onClick={() => handleDeleteVideo(video)}
-                className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
-              >
-                <X size={15} />
-              </Button>
+              {!isFromBackend && (
+                <Button
+                  onClick={() => handleDeleteVideo(video)}
+                  className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                >
+                  <X size={15} />
+                </Button>
+              )}
             </div>
           </div>
-          {videoError && <InputErrorMessage msg={videoError} />}
         </div>
       )}
+      {videoError && <InputErrorMessage msg={videoError} />}
       {errors["video"] && <InputErrorMessage msg={errors["video"]?.message} />}
     </div>
   );

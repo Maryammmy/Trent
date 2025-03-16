@@ -6,6 +6,7 @@ import InputErrorMessage from "../../../components/ui/InputErrorMessage";
 import { useTranslation } from "react-i18next";
 import { FieldErrors } from "react-hook-form";
 import { PropertyNameInputs } from "../../../types";
+import { baseURL } from "../../../services";
 interface IProps {
   images: string[];
   handleImageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -37,30 +38,37 @@ const ImageUploader = ({
           />
         </label>
       </div>
-      {images?.length && (
+      {images?.length ? (
         <div className="mt-4">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {images?.map((image, index) => (
-              <div className="relative" key={index}>
-                <div className="rounded-lg overflow-hidden w-full h-28">
-                  <Image
-                    imageUrl={image}
-                    alt={`Uploaded photo ${index}`}
-                    className="w-full h-full object-cover"
-                  />
+            {images?.map((image, index) => {
+              const isFromBackend = image.startsWith(baseURL);
+              return (
+                <div className="relative" key={index}>
+                  <div className="rounded-lg overflow-hidden w-full h-28">
+                    <Image
+                      imageUrl={image}
+                      alt={`Uploaded photo ${index}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  {!isFromBackend && (
+                    <Button
+                      onClick={() => handleDeleteImage(image)}
+                      className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                    >
+                      <X size={15} />
+                    </Button>
+                  )}
                 </div>
-                <Button
-                  onClick={() => handleDeleteImage(image)}
-                  className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
-                >
-                  <X size={15} />
-                </Button>
-              </div>
-            ))}
+              );
+            })}
           </div>
-          {imageError && <InputErrorMessage msg={imageError} />}
         </div>
+      ) : (
+        ""
       )}
+      {imageError && <InputErrorMessage msg={imageError} />}
       {errors["images"] && (
         <InputErrorMessage msg={errors["images"]?.message} />
       )}
