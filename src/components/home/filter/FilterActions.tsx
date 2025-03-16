@@ -44,7 +44,7 @@ function FilterActions({
     category_id: selectedPropertyType,
     min_price: minPrice,
     max_price: maxPrice,
-    government: government,
+    government_id: government,
     beds_count: bedsCount,
     bathrooms_count: bathroomsCount,
     guest_count: guestCount,

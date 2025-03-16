@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { baseAPI } from ".";
 import { IHomeDataParams } from "../interfaces/landingInterface";
 import { CurrentLanguage } from "../types";
+import Cookies from "js-cookie";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
-
+const uid = Cookies.get("user_id");
 export const useHomeDataAPI = (
   params?: IHomeDataParams,
   enabled: boolean = false
@@ -35,6 +36,7 @@ export const useHomeDataAPI = (
         params: {
           ...filteredParams,
           facilities: JSON.stringify(filteredParams.facilities),
+          uid,
         },
       }),
     refetchInterval: 10000,

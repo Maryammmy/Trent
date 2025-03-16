@@ -16,7 +16,7 @@ function DynamicTitle({ title }: IProps) {
         >
           {t("account")}
         </Link>
-        <ChevronRight className="text-secondary" size={20} />
+        <ChevronRight className="text-dark" size={20} />
         <h2 className="text-stone-700 font-semibold text-lg">{title}</h2>
       </div>
       <h2 className="text-stone-700 text-4xl font-bold">{title}</h2>

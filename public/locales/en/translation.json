@@ -292,5 +292,9 @@
   "update_Property": "Update Property",
   "something_went_wrong": " Something went wrong. Please try again.",
   "show_list": "Show list",
-  "show_map": "Show map"
+  "show_map": "Show map",
+  "gender": "Gender",
+  "male": "Male",
+  "female": "Female",
+  "invalid_image_format": "Unsupported file type. Please upload an image in JPEG, PNG, or GIF format."
 }

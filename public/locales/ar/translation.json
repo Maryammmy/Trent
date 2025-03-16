@@ -290,5 +290,9 @@
   "update_Property": "تعديل العقار",
   "something_went_wrong": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
   "show_list": "اظهار قائمة",
-  "show_map": "اظهار الخريطة"
+  "show_map": "اظهار الخريطة",
+  "gender": "الجنس",
+  "male": "ذكر",
+  "female": "انثى",
+  "invalid_image_format": "نوع الملف غير مدعوم، الرجاء رفع صورة بصيغة JPEG أو PNG أو GIF."
 }

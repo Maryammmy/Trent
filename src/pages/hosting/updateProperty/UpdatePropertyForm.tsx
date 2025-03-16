@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import Button from "../../../components/ui/Button";
 import Loader from "../../../components/loader/Loader";
-import { updatePropertySchema } from "../../../validation/updatePropertyValidation";
+import { updatePropertySchema } from "../../../validation/updatePropertySchema";
 import { convertToFormData } from "../../../utils/convertToFormData";
 import { editPropertyAPI } from "../../../services/propertyService";
 import { defaultPropertyValues } from "../../../utils/defaultValues";
