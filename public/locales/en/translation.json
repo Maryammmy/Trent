@@ -290,5 +290,7 @@
   "host_rules": "Host rules",
   "fav_error": "You must log in to add a property to your favorites.",
   "update_Property": "Update Property",
-  "something_went_wrong": " Something went wrong. Please try again."
+  "something_went_wrong": " Something went wrong. Please try again.",
+  "show_list": "Show list",
+  "show_map": "Show map"
 }
