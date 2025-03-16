@@ -16,11 +16,11 @@ function AccountSettings() {
         <h2 className="text-4xl font-semibold">Account</h2>
         <div className="flex flex-col md:flex-row gap-2 md:items-center pt-4 pb-10">
           {!user ? (
-            <div className="w-1/5">
+            <div className="md:w-1/5">
               <SelectSkeleton />
             </div>
           ) : (
-            <div className="flex items-center gap-1">
+            <div className="flex flex-wrap items-center gap-1">
               <span className="font-medium text-xl">{user?.full_name},</span>
               <p className="text-xl">{user?.email}</p>
             </div>
