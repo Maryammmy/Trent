@@ -18,10 +18,8 @@ function ChatList({
 
   return (
     <div
-      className={`bg-white p-4 lg:border-r ${
-        selectedChat
-          ? "hidden lg:flex lg:flex-col lg:w-1/3 2xl:w-1/4"
-          : "w-full flex flex-col"
+      className={`bg-white p-4 lg:border-r lg:w-1/3 2xl:w-1/4 ${
+        selectedChat ? "hidden lg:flex lg:flex-col" : "flex flex-col w-full"
       }`}
     >
       <h2 className="text-xl font-semibold mb-4">Chats</h2>

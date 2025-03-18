@@ -21,7 +21,9 @@ function ChatWindow({
   return chatId ? (
     <div
       className={`${
-        selectedChat ? "flex flex-col flex-1" : "hidden lg:flex lg:flex-1"
+        selectedChat
+          ? "flex flex-col flex-1"
+          : "hidden lg:flex lg:flex-col lg:flex-1"
       }`}
     >
       <div className="p-4 border-b bg-white flex items-center gap-3">
@@ -83,10 +85,10 @@ function ChatWindow({
     </div>
   ) : (
     <div
-      className={` ${
+      className={`${
         selectedChat
-          ? "flex-1 flex items-center justify-center"
-          : "hidden lg:flex lg:flex-1 lg:flex-col lg:justify-center lg:items-center"
+          ? "flex flex-1 items-center justify-center"
+          : "hidden lg:flex lg:flex-col lg:flex-1 lg:justify-center lg:items-center"
       }`}
     >
       <p className="text-gray-400 text-lg text-center font-medium">

@@ -2,6 +2,8 @@ import Image from "../ui/Image";
 import { useTranslation } from "react-i18next";
 import { IDetailsProperty } from "../../interfaces/property/propertyInterface";
 import { baseURL } from "../../services";
+import { MessageCircleMore } from "lucide-react";
+import { Link } from "react-router-dom";
 interface IProps {
   host: IDetailsProperty["owner"];
   guestRules: string;
@@ -23,6 +25,9 @@ function HostedBy({ host, guestRules }: IProps) {
             {t("hosted_by")} {host?.name}
           </h2>
         </div>
+        <Link to={"/chat"}>
+          <MessageCircleMore />
+        </Link>
       </div>
       <div className="flex flex-col gap-1 pt-4" data-aos="fade-down">
         <h3 className="font-bold">{t("host_rules")}</h3>
