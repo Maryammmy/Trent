@@ -12,7 +12,7 @@ import Property from "../pages/property";
 import Gallery from "../pages/property/Gallery";
 import ConfirmAndPay from "../pages/property/ConfirmAndPay";
 import LandingPage from "../pages";
-import Chat from "../pages/Chat";
+import Chat from "../pages/ChatApp";
 
 export const RootRoutes = (
   <>
