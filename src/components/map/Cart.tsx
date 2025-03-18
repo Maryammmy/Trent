@@ -16,7 +16,7 @@ interface IProps {
 }
 
 const uid = Cookies.get("user_id") || "";
-function Card({ property }: IProps) {
+function Cart({ property }: IProps) {
   const {
     IS_FAVOURITE,
     price,
@@ -55,7 +55,7 @@ function Card({ property }: IProps) {
     }
   };
   return (
-    <div className="w-[250px] rounded-md overflow-hidden">
+    <div className="w-[250px] h-full rounded-md overflow-hidden mb-4">
       {image_list?.length > 0 && (
         <div className="overflow-hidden rounded-md">
           <Carsoul
@@ -93,7 +93,7 @@ function Card({ property }: IProps) {
       <div>
         <div className="flex sm:flex-row flex-col gap-1 items-start justify-between pt-2">
           <div className="flex flex-col gap-1">
-            <h3 className="font-bold">{truncateText(title, 10)}</h3>
+            <h3 className="font-bold">{truncateText(title, 8)}</h3>
             <div className="flex flex-row gap-1">
               <span>{truncateText(city_name, 10)}</span>
               <span>{truncateText(government_name, 10)}</span>
@@ -124,4 +124,4 @@ function Card({ property }: IProps) {
   );
 }
 
-export default Card;
+export default Cart;

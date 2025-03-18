@@ -18,7 +18,7 @@ interface IProps {
 }
 
 const uid = Cookies.get("user_id") || "";
-function Card({ property }: IProps) {
+function Cart({ property }: IProps) {
   const {
     IS_FAVOURITE,
     price,
@@ -98,7 +98,7 @@ function Card({ property }: IProps) {
       <div>
         <div className="flex items-start justify-between pt-2">
           <div className="flex flex-col gap-1">
-            <h3 className="font-bold">{truncateText(title, 10)}</h3>
+            <h3 className="font-bold">{truncateText(title, 8)}</h3>
             <div className="flex">
               <p>{truncateText(city_name, 5)}</p>,
               <p>{truncateText(government_name, 5)}</p>
@@ -137,4 +137,4 @@ function Card({ property }: IProps) {
   );
 }
 
-export default Card;
+export default Cart;

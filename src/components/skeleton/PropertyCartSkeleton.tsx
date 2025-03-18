@@ -1,11 +1,28 @@
-export default function PropertyCardSkeleton({ cards }: { cards: number }) {
+interface IProps {
+  cards: number;
+  width?: string;
+  height?: string;
+}
+
+export default function PropertyCartSkeleton({
+  cards,
+  width,
+  height = "300px",
+}: IProps) {
   return (
     <>
       {Array(cards)
         .fill(0)
         .map((_, index) => (
-          <div key={index} className=" flex flex-col gap-2">
-            <div className="rounded-md  bg-stone-200 animate-pulse overflow-hidden h-[300px]"></div>
+          <div
+            key={index}
+            className="flex flex-col gap-2"
+            style={{ width: width }}
+          >
+            <div
+              className="rounded-md bg-stone-200 animate-pulse overflow-hidden"
+              style={{ height: height }}
+            ></div>
             <div className=" flex justify-between">
               <div>
                 {Array.from({ length: 3 }).map((_, index) => (

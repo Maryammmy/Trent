@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import Button from "../ui/Button";
 import Switcher from "../ui/Switcher";
 import { SlidersHorizontal } from "lucide-react";
-import PropertyCardSkeleton from "../skeleton/PropertyCardSkeleton";
+import PropertyCartSkeleton from "../skeleton/PropertyCartSkeleton";
 import CategoryBar from "../CategoryBar";
 import { useHomeDataAPI } from "../../services/homeService";
 import { IProperty } from "../../interfaces/property/propertyInterface";
@@ -13,9 +13,9 @@ import Map from "../map/Map";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setEnableMap } from "../../store/features/map/mapSlice";
 
-const Cart = lazy(() => import("../Card"));
+const Cart = lazy(() => import("../Cart"));
 export default function Properties() {
-  const ITEMS_TO_LOAD = 20;
+  const ITEMS_TO_LOAD = 10;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const propertiesSectionRef = useRef<HTMLDivElement | null>(null);
@@ -88,11 +88,11 @@ export default function Properties() {
               }`}
             >
               {!properties ? (
-                <PropertyCardSkeleton cards={8} />
+                <PropertyCartSkeleton cards={8} />
               ) : properties?.length ? (
                 properties?.slice(0, visibleCount).map((property) => (
                   <Suspense
-                    fallback={<PropertyCardSkeleton cards={8} />}
+                    fallback={<PropertyCartSkeleton cards={1} />}
                     key={property.id}
                   >
                     <Cart property={property} />
@@ -103,7 +103,7 @@ export default function Properties() {
                   No properties found
                 </div>
               )}
-              {loading && <PropertyCardSkeleton cards={8} />}
+              {loading && <PropertyCartSkeleton cards={8} />}
             </div>
             {properties && visibleCount < properties.length && !loading && (
               <div className="flex justify-center my-5">
