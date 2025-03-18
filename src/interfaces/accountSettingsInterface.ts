@@ -18,9 +18,9 @@ export interface IAccountSettings {
 }
 export interface IUser {
   uid: string;
-  email: string;
+  email?: string;
   full_name: string;
   gender: string;
-  pro_img: string | File;
+  pro_img?: string | File;
   phone: string;
 }
