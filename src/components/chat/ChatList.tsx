@@ -2,7 +2,13 @@ import { useState } from "react";
 import { dummyChats } from "../../data";
 import Input from "../ui/Input";
 
-function ChatList({ onSelectChat }: { onSelectChat: (id: number) => void }) {
+function ChatList({
+  onSelectChat,
+  selectedChat,
+}: {
+  onSelectChat: (id: number) => void;
+  selectedChat: number | null;
+}) {
   const [search, setSearch] = useState("");
   const filteredChats = search
     ? dummyChats.filter((chat) =>
@@ -11,7 +17,13 @@ function ChatList({ onSelectChat }: { onSelectChat: (id: number) => void }) {
     : dummyChats;
 
   return (
-    <div className="w-1/4 flex flex-col bg-white p-4 border-r">
+    <div
+      className={`bg-white p-4 lg:border-r ${
+        selectedChat
+          ? "hidden lg:flex lg:flex-col lg:w-1/3 2xl:w-1/4"
+          : "w-full flex flex-col"
+      }`}
+    >
       <h2 className="text-xl font-semibold mb-4">Chats</h2>
       <Input
         type="search"

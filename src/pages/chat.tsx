@@ -4,10 +4,18 @@ import ChatWindow from "../components/chat/ChatWindow";
 
 export default function ChatApp() {
   const [selectedChat, setSelectedChat] = useState<number | null>(null);
+  console.log(selectedChat);
   return (
     <div className="flex h-[90vh]">
-      <ChatList onSelectChat={setSelectedChat} />
-      <ChatWindow chatId={selectedChat} />
+      <ChatList
+        onSelectChat={(id: number) => setSelectedChat(id)}
+        selectedChat={selectedChat}
+      />
+      <ChatWindow
+        chatId={selectedChat}
+        selectedChat={selectedChat}
+        onClose={() => setSelectedChat(null)}
+      />
     </div>
   );
 }
