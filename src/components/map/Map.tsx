@@ -117,7 +117,7 @@ const Map = ({ properties }: IProps) => {
             pixelOffset: new window.google.maps.Size(0, -30),
           }}
         >
-          <div>
+          <>
             {selectedProperties?.slice(0, visibleCount).map((property) => (
               <Suspense
                 fallback={
@@ -147,7 +147,7 @@ const Map = ({ properties }: IProps) => {
             {loading && (
               <PropertyCartSkeleton cards={1} width="250px" height="150px" />
             )}
-          </div>
+          </>
         </InfoWindowF>
       )}
     </GoogleMap>
