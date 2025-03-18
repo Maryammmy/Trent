@@ -46,3 +46,4 @@ export type PropertyNameInputs = {
 };
 
 export type CurrentLanguage = "en" | "ar";
+export type Person = "sender" | "receiver";

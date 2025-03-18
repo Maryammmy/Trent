@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Person } from "../types";
 export interface ApiError {
   response?: {
     data: {
@@ -48,4 +49,18 @@ export interface IDestinations {
 export interface IFooterSection {
   title: string;
   items: ReactNode[];
+}
+export interface IChat {
+  id: number;
+  name: string;
+  message: string;
+  unread: number;
+}
+interface IPerson {
+  sender: string;
+  receiver: string;
+}
+export interface IMessage extends Partial<IPerson> {
+  text: string;
+  time: string;
 }

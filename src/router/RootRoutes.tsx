@@ -12,6 +12,7 @@ import Property from "../pages/property";
 import Gallery from "../pages/property/Gallery";
 import ConfirmAndPay from "../pages/property/ConfirmAndPay";
 import LandingPage from "../pages";
+import ChatApp from "../pages/chat";
 
 export const RootRoutes = (
   <>
@@ -22,6 +23,7 @@ export const RootRoutes = (
       <Route path="about-us" element={<AboutUs />} />
       <Route path="account-settings" element={<AccountSettings />}></Route>
       <Route path="account-settings/personal-info" element={<PersonalInfo />} />
+      <Route path="chat" element={<ChatApp />} />
       <Route
         path="account-settings/login-and-security"
         element={<LoginAndSecurity />}
