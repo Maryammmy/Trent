@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Person } from "../types";
 export interface ApiError {
   response?: {
     data: {

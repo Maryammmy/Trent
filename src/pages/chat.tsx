@@ -2,7 +2,7 @@ import { useState } from "react";
 import ChatList from "../components/chat/ChatList";
 import ChatWindow from "../components/chat/ChatWindow";
 
-export default function ChatApp() {
+export default function Chat() {
   const [selectedChat, setSelectedChat] = useState<number | null>(null);
   return (
     <div className="flex h-[90vh]">
