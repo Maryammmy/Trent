@@ -11,7 +11,7 @@ export default function ProtectedRoutes({ children }: { children: ReactNode }) {
   console.log(location);
   if (!uid) {
     dispatch(setIsloggedin(true));
-    return <Navigate to="/" state={{ from: location.pathname }} replace />;
+    return <Navigate to="/" state={location.pathname} replace />;
   }
   return children;
 }

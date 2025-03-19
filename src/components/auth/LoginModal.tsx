@@ -29,8 +29,7 @@ function LoginModal() {
   const navigate = useNavigate();
   const location = useLocation();
   const { isLoggedin } = useAppSelector((state) => state.auth);
-  const from = location.state?.from?.pathname || "/";
-
+  const from = location.state || "/";
   const {
     control,
     handleSubmit,
@@ -49,8 +48,8 @@ function LoginModal() {
         Cookies.set("user_id", response?.data?.UserLogin?.id, { expires: 365 });
         setTimeout(() => {
           dispatch(setIsloggedin(false));
-          window.location.reload();
           navigate(from, { replace: true });
+          window.location.reload();
         }, 500);
       } else {
         toast.error(response?.data?.ResponseMsg);
