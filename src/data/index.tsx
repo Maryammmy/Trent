@@ -40,10 +40,8 @@ export const navItems: INavItem[] = [
   { label: "Contact", to: "/contact-us" },
 ];
 export const authItems: string[] = ["log_in", "sign_up"];
-export const menuItems: string[] = [
-  "gift_cards",
-  "trent_your_home",
-  "host_an_experience",
-  "help_center",
-  "log_out",
+export const menuItems: INavItem[] = [
+  { label: "host_your_house", to: "/become-a-host" },
+  { label: "profile", to: "/account-settings/personal-info" },
+  { label: "log_out", to: "#" },
 ];
