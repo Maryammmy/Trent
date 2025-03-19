@@ -1,9 +1,9 @@
 import { Route } from "react-router-dom";
-import RedirectRoute from "../../middleware/RedirectRoute";
 import FinishSetup from "../../pages/becomeAHost/finishSetup";
 import MinMaxDays from "../../pages/becomeAHost/finishSetup/MinMaxDays";
 import GuestRules from "../../pages/becomeAHost/finishSetup/GuestRules";
 import PriceAndDeposit from "../../pages/becomeAHost/finishSetup/PriceAndDeposit";
+import ProtectedRoutes from "../../middleware/ProtectedRoutes";
 
 const FinishSetupRoutes = (
   <>
@@ -11,25 +11,25 @@ const FinishSetupRoutes = (
     <Route
       path="min-and-max-days"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <MinMaxDays />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
     <Route
       path="guest-rules"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <GuestRules />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
     <Route
       path="price-and-deposit"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <PriceAndDeposit />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
   </>

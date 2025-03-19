@@ -1,9 +1,9 @@
 import { Route } from "react-router-dom";
-import RedirectRoute from "../../middleware/RedirectRoute";
 import AboutYourPlace from "../../pages/becomeAHost/aboutYourPlace";
 import PropertyType from "../../pages/becomeAHost/aboutYourPlace/PropertyType";
 import FloorPlan from "../../pages/becomeAHost/aboutYourPlace/FloorPlan";
 import Location from "../../pages/becomeAHost/aboutYourPlace/Location";
+import ProtectedRoutes from "../../middleware/ProtectedRoutes";
 
 const AboutYourPlaceRoutes = (
   <>
@@ -11,25 +11,25 @@ const AboutYourPlaceRoutes = (
     <Route
       path="property-type"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <PropertyType />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
     <Route
       path="floor-plan"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <FloorPlan />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
     <Route
       path="location"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <Location />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
   </>

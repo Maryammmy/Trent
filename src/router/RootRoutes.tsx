@@ -13,6 +13,7 @@ import Gallery from "../pages/property/Gallery";
 import ConfirmAndPay from "../pages/property/ConfirmAndPay";
 import LandingPage from "../pages";
 import ChatApp from "../pages/ChatApp";
+import ProtectedRoutes from "../middleware/ProtectedRoutes";
 
 export const RootRoutes = (
   <>
@@ -21,15 +22,54 @@ export const RootRoutes = (
       <Route path="properties/:id" element={<Property />} />
       <Route path="contact-us" element={<ContactUs />} />
       <Route path="about-us" element={<AboutUs />} />
-      <Route path="account-settings" element={<AccountSettings />}></Route>
-      <Route path="account-settings/personal-info" element={<PersonalInfo />} />
-      <Route path="chat" element={<ChatApp />} />
+      <Route
+        path="account-settings"
+        element={
+          <ProtectedRoutes>
+            <AccountSettings />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
+        path="account-settings/personal-info"
+        element={
+          <ProtectedRoutes>
+            <PersonalInfo />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
+        path="chat"
+        element={
+          <ProtectedRoutes>
+            <ChatApp />
+          </ProtectedRoutes>
+        }
+      />
       <Route
         path="account-settings/login-and-security"
-        element={<LoginAndSecurity />}
+        element={
+          <ProtectedRoutes>
+            <LoginAndSecurity />
+          </ProtectedRoutes>
+        }
       />
-      <Route path="account-settings/preferences" element={<Preferences />} />
-      <Route path="confirm-and-pay" element={<ConfirmAndPay />} />
+      <Route
+        path="account-settings/preferences"
+        element={
+          <ProtectedRoutes>
+            <Preferences />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
+        path="confirm-and-pay"
+        element={
+          <ProtectedRoutes>
+            <ConfirmAndPay />
+          </ProtectedRoutes>
+        }
+      />
       <Route path="*" element={<NotFoundPage />} />
     </Route>
     <Route path="properties/:id/gallery" element={<Gallery />} />

@@ -20,12 +20,16 @@ import { loginSchema } from "../../validation/loginSchema";
 import { loginAPI } from "../../services/authService";
 import { loginData } from "../../data/authData";
 import { LoginNameInputs } from "../../types";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function LoginModal() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { isLoggedin } = useAppSelector((state) => state.auth);
+  const from = location.state?.from?.pathname || "/";
 
   const {
     control,
@@ -46,6 +50,7 @@ function LoginModal() {
         setTimeout(() => {
           dispatch(setIsloggedin(false));
           window.location.reload();
+          navigate(from, { replace: true });
         }, 500);
       } else {
         toast.error(response?.data?.ResponseMsg);

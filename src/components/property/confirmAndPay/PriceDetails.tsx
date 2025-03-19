@@ -21,7 +21,7 @@ function PriceDetails() {
   return (
     <div className="border p-6 w-full rounded-lg md:w-[500px]">
       <div className="flex flex-col md:flex-row gap-5 border-b pb-6">
-        <div className="w-28 h-28 rounded-lg overflow-hidden bg-slate-400">
+        <div className="w-28 h-28 rounded-lg overflow-hidden">
           <Image
             imageUrl="/images/property.jpg"
             alt="property"

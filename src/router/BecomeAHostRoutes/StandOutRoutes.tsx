@@ -1,5 +1,4 @@
 import { Route } from "react-router-dom";
-import RedirectRoute from "../../middleware/RedirectRoute";
 import StandOut from "../../pages/becomeAHost/standOut";
 import Facilities from "../../pages/becomeAHost/standOut/Facilities";
 import Images from "../../pages/becomeAHost/standOut/Images";
@@ -9,6 +8,7 @@ import Title from "../../pages/becomeAHost/standOut/Title";
 import City from "../../pages/becomeAHost/standOut/City";
 import Compound from "../../pages/becomeAHost/standOut/Compound";
 import AddressAndFloor from "../../pages/becomeAHost/standOut/AddressAndFloor";
+import ProtectedRoutes from "../../middleware/ProtectedRoutes";
 
 const StandOutRoutes = (
   <>
@@ -16,65 +16,65 @@ const StandOutRoutes = (
     <Route
       path="facilities"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <Facilities />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
     <Route
       path="images"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <Images />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
     <Route
       path="video"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <UploadVideo />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
     <Route
       path="title"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <Title />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
     <Route
       path="description"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <Description />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
     <Route
       path="city"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <City />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
     <Route
       path="compound"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <Compound />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
     <Route
       path="address-and-floor"
       element={
-        <RedirectRoute>
+        <ProtectedRoutes>
           <AddressAndFloor />
-        </RedirectRoute>
+        </ProtectedRoutes>
       }
     />
   </>

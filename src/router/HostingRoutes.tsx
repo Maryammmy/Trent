@@ -5,6 +5,7 @@ import Hosting from "../pages/hosting";
 import Properties from "../pages/hosting/Properties";
 import Property from "../pages/hosting/Property";
 import UpdateProperty from "../pages/hosting/updateProperty";
+import ProtectedRoutes from "../middleware/ProtectedRoutes";
 
 export const HostingRoutes = (
   <Route
@@ -12,9 +13,37 @@ export const HostingRoutes = (
     element={<HostingLayout />}
     errorElement={<ErrorHandler />}
   >
-    <Route index element={<Hosting />} />
-    <Route path="properties" element={<Properties />} />
-    <Route path="properties/:id" element={<Property />} />
-    <Route path="properties/:id/update" element={<UpdateProperty />} />
+    <Route
+      index
+      element={
+        <ProtectedRoutes>
+          <Hosting />
+        </ProtectedRoutes>
+      }
+    />
+    <Route
+      path="properties"
+      element={
+        <ProtectedRoutes>
+          <Properties />
+        </ProtectedRoutes>
+      }
+    />
+    <Route
+      path="properties/:id"
+      element={
+        <ProtectedRoutes>
+          <Property />
+        </ProtectedRoutes>
+      }
+    />
+    <Route
+      path="properties/:id/update"
+      element={
+        <ProtectedRoutes>
+          <UpdateProperty />
+        </ProtectedRoutes>
+      }
+    />
   </Route>
 );

@@ -42,7 +42,7 @@ const Map = ({ properties }: IProps) => {
     IProperty[] | null
   >(null);
   const groupedProperties = properties?.reduce((acc, property) => {
-    const key = `${property.latitude}-${property.longitude}`;
+    const key = `${property?.latitude}-${property?.longitude}`;
     if (!acc[key]) acc[key] = [];
     acc[key].push(property);
     return acc;
@@ -72,7 +72,7 @@ const Map = ({ properties }: IProps) => {
         Object.entries(groupedProperties).map(([key, group], index) => {
           const [lat, lng] = key.split("-").map(Number);
           const isSelected = selectedProperties?.some((property) =>
-            group.some((p) => p.id === property.id)
+            group.some((p) => p?.id === property?.id)
           );
           return (
             <OverlayView
@@ -98,8 +98,8 @@ const Map = ({ properties }: IProps) => {
                 }}
               >
                 <span className="whitespace-nowrap">
-                  {group.length > 1
-                    ? `${group.length} Properties`
+                  {group?.length > 1
+                    ? `${group?.length} Properties`
                     : `${group[0]?.price} EGP`}
                 </span>
               </Button>
@@ -109,8 +109,8 @@ const Map = ({ properties }: IProps) => {
       {selectedProperties && (
         <InfoWindowF
           position={{
-            lat: Number(selectedProperties[0].latitude),
-            lng: Number(selectedProperties[0].longitude),
+            lat: Number(selectedProperties[0]?.latitude),
+            lng: Number(selectedProperties[0]?.longitude),
           }}
           onCloseClick={() => setSelectedProperties(null)}
           options={{
@@ -118,7 +118,7 @@ const Map = ({ properties }: IProps) => {
           }}
         >
           <>
-            {selectedProperties?.slice(0, visibleCount).map((property) => (
+            {selectedProperties?.slice(0, visibleCount)?.map((property) => (
               <Suspense
                 fallback={
                   <PropertyCartSkeleton
@@ -133,7 +133,7 @@ const Map = ({ properties }: IProps) => {
               </Suspense>
             ))}
             {selectedProperties &&
-              visibleCount < selectedProperties.length &&
+              visibleCount < selectedProperties?.length &&
               !loading && (
                 <div className="flex justify-center items-center pb-4">
                   <Button
