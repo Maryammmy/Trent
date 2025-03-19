@@ -1,8 +1,8 @@
 import { IUser } from "../interfaces/accountSettingsInterface";
-export const convertPersonalDataToFormData = (data: Partial<IUser>) => {
+export const convertPersonalDataToFormData = (data: IUser) => {
   const formData = new FormData();
   for (const [key, value] of Object.entries(data)) {
-    if (!value) continue;
+    if (value === null || value === undefined) continue;
     if (key === "pro_img" && value instanceof File) {
       formData.append(key, value);
     } else {
