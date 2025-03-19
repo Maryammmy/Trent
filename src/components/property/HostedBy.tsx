@@ -12,7 +12,7 @@ function HostedBy({ host, guestRules }: IProps) {
   const { t } = useTranslation();
   return (
     <div className="border-t border-b py-4">
-      <div className="flex items-center gap-5" data-aos="fade-up">
+      <div className="flex items-center gap-5" data-aos="fade-left">
         <div className="w-12 h-12 rounded-full overflow-hidden">
           <Image
             imageUrl={baseURL + host?.img}
@@ -29,7 +29,7 @@ function HostedBy({ host, guestRules }: IProps) {
           <MessageCircleMore />
         </Link>
       </div>
-      <div className="flex flex-col gap-1 pt-4" data-aos="fade-down">
+      <div className="flex flex-col gap-1 pt-4" data-aos="fade-left">
         <h3 className="font-bold">{t("host_rules")}</h3>
         <p className="text-dark font-medium">{guestRules}</p>
       </div>

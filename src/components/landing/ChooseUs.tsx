@@ -30,7 +30,7 @@ function ChooseUs() {
       </div>
       <p
         className="text-dark max-w-3xl mx-auto text-center pt-5"
-        data-aos="fade-down"
+        data-aos="fade-left"
       >
         You should choose us because we provide the best accommodation and we
         have sorted all the hotels here based on their quality.

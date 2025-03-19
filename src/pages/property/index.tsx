@@ -3,7 +3,6 @@ import CheckDates from "../../components/property/CheckDates";
 import HostedBy from "../../components/property/HostedBy";
 import Image from "../../components/ui/Image";
 import ReviewComponent from "../../components/property/reviews/ReviewComponent";
-import Iframe from "../../components/ui/Iframe";
 import Amenities from "../../components/property/Amenities";
 import { useTranslation } from "react-i18next";
 import { usePropertyAPI } from "../../services/propertyService";
@@ -15,6 +14,7 @@ import { Grip } from "lucide-react";
 import { CurrentLanguage } from "../../types";
 import { baseURL } from "../../services";
 import PropertySkeleton from "../../components/skeleton/PropertySkeleton";
+import Map from "../../components/ui/Map";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -34,7 +34,7 @@ function Property() {
             <div className="pb-6">
               <h2
                 className="font-bold text-2xl text-stone-800"
-                data-aos="fade-down"
+                data-aos="fade-up"
               >
                 {propertyDetails?.title?.[currentLanguage]}
               </h2>
@@ -43,7 +43,7 @@ function Property() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {propertyDetails?.image_list?.slice(0, 3)?.map((image, i) => (
                   <div
-                    data-aos="fade-down"
+                    data-aos="fade-left"
                     key={i}
                     className={`w-full h-[250px] lg:h-[300px] rounded-md overflow-hidden`}
                   >
@@ -72,7 +72,7 @@ function Property() {
                 <div className="flex flex-col gap-1 pb-5">
                   <div
                     className="font-medium text-black text-2xl flex gap-1"
-                    data-aos="fade-up"
+                    data-aos="fade-right"
                   >
                     <p> {propertyDetails?.city?.[currentLanguage]}</p>,
                     <p>
@@ -81,7 +81,7 @@ function Property() {
                   </div>
                   <div
                     className="font-medium flex flex-wrap gap-1"
-                    data-aos="fade-down"
+                    data-aos="fade-left"
                   >
                     <div className="flex gap-1">
                       <p>{t("guest_count")}</p>
@@ -98,7 +98,7 @@ function Property() {
                       <span>{propertyDetails?.bathrooms_count}</span>
                     </div>
                   </div>
-                  <div className="font-semibold" data-aos="fade-down">
+                  <div className="font-semibold" data-aos="fade-right">
                     <p>
                       <span className="text-primary">
                         {propertyDetails?.price} {t("price_per_night")}
@@ -119,7 +119,10 @@ function Property() {
             </div>
             <ReviewComponent />
             <div className="max-w-7xl mx-auto py-5">
-              <Iframe width="100%" />
+              <Map
+                latitdude={Number(propertyDetails?.latitude)}
+                longitude={Number(propertyDetails?.longitude)}
+              />
             </div>
           </>
         ) : (

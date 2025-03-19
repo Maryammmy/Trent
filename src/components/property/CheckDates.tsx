@@ -39,7 +39,7 @@ function CheckDates() {
     <div className="flex-1">
       <div
         className="border shadow-lg rounded-lg p-6 max-w-[400px]"
-        data-aos="fade-up"
+        data-aos="fade-right"
       >
         <h2 className="text-black text-2xl font-medium pb-3">
           {t("add_dates_for_prices")}

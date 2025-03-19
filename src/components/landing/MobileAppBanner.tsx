@@ -24,7 +24,7 @@ function MobileAppBanner() {
           <>
             <h2
               className="text-white text-lg md:text-3xl font-semibold max-w-md"
-              data-aos="fade-up"
+              data-aos="fade-left"
             >
               Get our Mobile App for a better experience!
             </h2>
@@ -61,7 +61,7 @@ function MobileAppBanner() {
             <div className="flex flex-col gap-5">
               <h2
                 className="text-white text-lg md:text-3xl font-semibold max-w-md"
-                data-aos="fade-up"
+                data-aos="fade-left"
               >
                 Get our Mobile App for a better experience!
               </h2>

@@ -12,6 +12,7 @@ export interface IHomeDataParams {
   guest_count?: number;
   rate?: number;
   compound_name?: string;
+  owner_mode?: boolean;
 }
 export interface IWhyChooseUs {
   background_color: string;

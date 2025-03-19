@@ -9,7 +9,12 @@ import SystemLoader from "./components/loader/SystemLoader";
 import AOS from "aos";
 
 function App() {
-  AOS.init({ duration: 1000 });
+  AOS.init({
+    duration: 1000, // مدة الأنيميشن بالميلي ثانية
+    offset: 50, // تقليل المسافة قبل بدء الأنيميشن
+    once: true, // تشغيل الأنيميشن مرة واحدة فقط عند الظهور
+  });
+
   const [isMount, setIsMount] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => {

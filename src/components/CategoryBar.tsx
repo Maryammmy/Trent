@@ -21,7 +21,7 @@ function CategoryBar() {
   };
   return (
     <>
-      <div className="w-full px-5 xl:px-20 py-5" data-aos="fade-up">
+      <div className="w-full px-5 xl:px-20 py-5" data-aos="fade-left">
         {!propertyTypeList ? (
           <Carsoul
             slidesToShow={10}

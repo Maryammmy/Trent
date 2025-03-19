@@ -9,7 +9,7 @@ import Property from "../../components/hosting/properties/Property";
 const uid = Cookies.get("user_id");
 function Properties() {
   const { t } = useTranslation();
-  const { data } = useHomeDataAPI({ uid }, true);
+  const { data } = useHomeDataAPI({ uid, owner_mode: true }, true);
   const properties: IProperty[] = data?.data?.data?.property_list;
   return (
     <>

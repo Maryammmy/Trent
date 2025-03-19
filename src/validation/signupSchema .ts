@@ -2,8 +2,8 @@ import * as Yup from "yup";
 
 export const signupSchema = Yup.object({
   name: Yup.string()
-    .min(4, "The name must be at least 4 characters.")
-    .max(10, "The name may not be greater than 10 characters.")
+    .min(3, "The name must be at least 3 characters.")
+    .max(50, "The name may not be greater than 50 characters.")
     .required("name is required."),
   email: Yup.string().email("Invalid email address"),
   mobile: Yup.string()
@@ -12,8 +12,8 @@ export const signupSchema = Yup.object({
   ccode: Yup.string().required("Country code is required."),
   password: Yup.string()
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-      "The password must include at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 6 characters long."
+      /^(?=.*\d).{6,}$/,
+      "The password must be at least 6 characters and include a number."
     )
     .required("Password is required."),
   confirmPassword: Yup.string()

@@ -65,6 +65,8 @@ export interface IDetailsProperty {
   id: string;
   image_list: IImage[];
   is_enquiry: number;
+  latitude: string;
+  longitude: string;
   maps_url: string;
   max_days: string;
   min_days: string;

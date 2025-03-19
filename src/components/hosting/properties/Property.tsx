@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Image from "../../ui/Image";
 import { IProperty } from "../../../interfaces/property/propertyInterface";
 import { baseURL } from "../../../services";
+import { truncateText } from "../../../utils/truncateText";
 interface IProps {
   property: IProperty;
 }
@@ -20,9 +21,9 @@ const Property = ({ property }: IProps) => {
             className="w-full h-full rounded-md"
           />
         </div>
-        <span className="font-medium">{title}</span>
+        <span className="font-medium">{truncateText(title, 10)}</span>
       </div>
-      <p className="text-dark">{compound_name}</p>
+      <p className="text-dark">{truncateText(compound_name, 10)}</p>
       <p className="font-semibold">Action required</p>
     </Link>
   );

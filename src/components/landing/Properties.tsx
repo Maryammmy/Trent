@@ -108,7 +108,7 @@ export default function Properties() {
             {properties && visibleCount < properties.length && !loading && (
               <div className="flex justify-center my-5">
                 <Button
-                  data-aos="fade-down"
+                  data-aos="fade-right"
                   onClick={handleShowMore}
                   className="bg-white zoom text-primary border-2 border-primary font-medium py-2 px-4 rounded-lg text-center"
                 >
