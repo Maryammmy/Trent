@@ -4,14 +4,16 @@ export const convertToFormData = (data: PropertyNameInputs) => {
   const formData = new FormData();
   for (const [key, value] of Object.entries(data)) {
     if (key === "images" && Array.isArray(value)) {
-      value.forEach((base64) => {
-        if (base64.startsWith("data:")) {
-          const [meta, base64Data] = base64.split(",");
+      value.forEach((image, index) => {
+        if (image.startsWith("data:")) {
+          const [meta, base64Data] = image.split(",");
           const blob = new Blob(
             [Uint8Array.from(atob(base64Data), (c) => c.charCodeAt(0))],
             { type: meta.split(":")[1].split(";")[0] }
           );
-          formData.append(`${key}[]`, blob);
+          formData.append(`images[${index}]`, blob);
+        } else {
+          formData.append(`images[${index}]`, image);
         }
       });
     } else if (

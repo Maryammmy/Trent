@@ -160,11 +160,16 @@ function PersonalData() {
               name="phone"
               control={control}
               render={({ field }) => (
-                <Input
-                  {...field}
-                  placeholder="Enter your phone number"
-                  className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
-                />
+                <div className="relative">
+                  <Input
+                    {...field}
+                    placeholder="Enter your phone number"
+                    className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
+                  />
+                  <Button className="absolute right-3 top-3 text-primary font-medium">
+                    {t("change")}
+                  </Button>
+                </div>
               )}
             />
             {errors.phone && <InputErrorMessage msg={errors.phone.message} />}

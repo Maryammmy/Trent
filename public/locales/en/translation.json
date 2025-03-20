@@ -308,5 +308,6 @@
   "get_mobile_app": "Get our Mobile App for a better experience!",
   "download_on": "Download on",
   "image_too_large": "The image size is too large. Maximum allowed size is 2MB.",
-  "update": "Update"
+  "update": "Update",
+  "change": "Change"
 }

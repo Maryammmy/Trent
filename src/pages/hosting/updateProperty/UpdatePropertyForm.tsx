@@ -109,6 +109,7 @@ function UpdatePropertyForm({
             sessionStorage.setItem("images", JSON.stringify(updatedPhotos));
             setImages(updatedPhotos);
             setImageError(null);
+            setValue("images", updatedPhotos);
           }
         };
       });
@@ -194,6 +195,7 @@ function UpdatePropertyForm({
 
   const onSubmit = async (data: PropertyNameInputs) => {
     const formData = convertToFormData(data);
+    console.log(data);
     try {
       setLoading(true);
       const response = await editPropertyAPI(formData);
