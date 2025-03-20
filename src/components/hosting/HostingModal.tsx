@@ -1,21 +1,33 @@
-import { X } from "lucide-react";
+import { CircleDollarSign, House, X } from "lucide-react";
 import { setIsFinishUpModal } from "../../store/features/becomeAHost/becomeAHostSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import Modal from "../ui/Modal";
 import Button from "../ui/Button";
 import { useTranslation } from "react-i18next";
 import Image from "../ui/Image";
-import { Link } from "react-router-dom";
 import { CurrentLanguage } from "../../types";
+import { useSendDataToAPI } from "../../services/addPropertyService";
+import { useState } from "react";
+import Loader from "../loader/Loader";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
+const storedPrice = sessionStorage.getItem("price") || "";
+const storedTitleAr = sessionStorage.getItem("title_ar") || "";
+const storedTitleEn = sessionStorage.getItem("title_en") || "";
 function HostingModal() {
   const { t } = useTranslation();
-  const { isFinishUpModal, createdProperty } = useAppSelector(
-    (state) => state.becomeAHost
-  );
+  const { isFinishUpModal } = useAppSelector((state) => state.becomeAHost);
   const dispatch = useAppDispatch();
+  const trentFees = (Number(storedPrice) * 0.1).toFixed(2);
+  const [loading, setLoading] = useState<boolean>(false);
+  const { sendDataToAPI } = useSendDataToAPI();
+  const handleFinishUp = async () => {
+    setLoading(true);
+    const isSuccess = await sendDataToAPI();
+    if (isSuccess) dispatch(setIsFinishUpModal(false));
+    setLoading(false);
+  };
   return (
     <Modal
       isOpen={isFinishUpModal}
@@ -38,7 +50,7 @@ function HostingModal() {
           {t("become_a_host_finish_up_desc")}
         </p>
         <div className="flex flex-col gap-2 items-center justify-center">
-          <div className="w-32 h-32 rounded-full overflow-hidden">
+          <div className="w-28 h-28 rounded-full overflow-hidden">
             <Image
               imageUrl="/images/Trent-logo-pdf.png"
               alt="Property image"
@@ -46,22 +58,35 @@ function HostingModal() {
             />
           </div>
           <h5 className="font-semibold">
-            {createdProperty?.title?.[currentLanguage]}
+            {currentLanguage === "en" ? storedTitleEn : storedTitleAr}
           </h5>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-1">
+              <House className="text-primary" />
+              <h6 className="font-medium">Rent price:</h6>
+              <span className="font-bold">{storedPrice} EGP</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <CircleDollarSign className="text-primary" />
+              <h6 className="font-medium">Trent fees:</h6>
+              <span className="font-bold">1%({trentFees}) EGP</span>
+            </div>
+          </div>
         </div>
         <div className="flex items-center justify-between my-4">
           <Button
             onClick={() => dispatch(setIsFinishUpModal(false))}
-            className=" text-white bg-primary py-2 px-6 rounded-md font-medium"
+            className=" text-white bg-primary py-2 w-28 rounded-md font-medium"
           >
             {t("cancel")}
           </Button>
-          <Link
-            to={"/hosting/listings/1"}
-            className="text-primary py-2 px-6 rounded-md font-medium hover:bg-gray-100"
+          <Button
+            disabled={loading}
+            onClick={handleFinishUp}
+            className="text-primary py-2 w-28 rounded-md font-medium bg-neutral-200"
           >
-            {t("finish_up")}
-          </Link>
+            {loading ? <Loader /> : t("finish_up")}
+          </Button>
         </div>
       </div>
     </Modal>

@@ -3,18 +3,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface becomeAHostState {
   isFinishUpModal: boolean;
   completedSteps: string[];
-  createdProperty: {
-    id: number | "";
-    title: {
-      en: string;
-      ar: string;
-    };
-  };
 }
 const initialState: becomeAHostState = {
   isFinishUpModal: false,
   completedSteps: [],
-  createdProperty: { id: "", title: { en: "", ar: "" } },
 };
 const becomeAHostSlice = createSlice({
   name: "becomeAHost",
@@ -29,23 +21,13 @@ const becomeAHostSlice = createSlice({
         state.completedSteps.push(step);
       }
     },
-    setCreatedProperty(
-      state,
-      action: PayloadAction<{ id: number; title: { en: string; ar: string } }>
-    ) {
-      state.createdProperty = action.payload;
-    },
     resetSteps(state) {
       state.completedSteps = [];
     },
   },
 });
 
-export const {
-  setIsFinishUpModal,
-  addCompletedStep,
-  resetSteps,
-  setCreatedProperty,
-} = becomeAHostSlice.actions;
+export const { setIsFinishUpModal, addCompletedStep, resetSteps } =
+  becomeAHostSlice.actions;
 
 export default becomeAHostSlice.reducer;

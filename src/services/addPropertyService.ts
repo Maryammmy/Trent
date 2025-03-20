@@ -4,8 +4,6 @@ import { ApiError } from "../interfaces";
 import getVideoFromIndexedDB from "../utils/getVideoFromIndexedDB";
 import { addPropertyAPI } from "./propertyService";
 import Cookies from "js-cookie";
-import { setCreatedProperty } from "../store/features/becomeAHost/becomeAHostSlice";
-import { useAppDispatch } from "../store/hooks";
 import { useTranslation } from "react-i18next";
 
 const propertyData = async (): Promise<IPropertyData> => {
@@ -81,7 +79,6 @@ const formData = async () => {
 };
 export const useSendDataToAPI = () => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
   const sendDataToAPI = async (): Promise<boolean> => {
     try {
       const payload = await formData();
@@ -90,15 +87,6 @@ export const useSendDataToAPI = () => {
 
       if (response?.data?.response_code === 201) {
         toast.success(response?.data?.response_message);
-        dispatch(
-          setCreatedProperty({
-            id: response?.data?.data?.id,
-            title: {
-              en: response?.data?.data?.title?.en,
-              ar: response?.data?.data?.title?.ar,
-            },
-          })
-        );
       }
       return true;
     } catch (error) {
