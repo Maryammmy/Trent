@@ -91,8 +91,8 @@ export interface IImage {
 }
 export interface IPropertyData {
   uid: string;
-  images: string[];
-  video?: string;
+  images: File[];
+  video?: File;
   price: number;
   facilities: string;
   beds_count: number;

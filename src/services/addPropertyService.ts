@@ -1,13 +1,13 @@
 import { IPropertyData } from "../interfaces/property/propertyInterface";
 import toast from "react-hot-toast";
 import { ApiError } from "../interfaces";
-import getVideoFromIndexedDB from "../utils/getVideoFromIndexedDB";
 import { addPropertyAPI } from "./propertyService";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import { HostingContext } from "../context/HostingContext";
 
-const propertyData = async (): Promise<IPropertyData> => {
-  const video = await getVideoFromIndexedDB();
+const propertyData = (images: File[], video?: File): IPropertyData => {
   const uid = Cookies.get("user_id");
   return {
     category_id: sessionStorage.getItem("category_id") || "",
@@ -17,7 +17,7 @@ const propertyData = async (): Promise<IPropertyData> => {
     sqft: Number(sessionStorage.getItem("sqft")),
     maps_url: JSON.parse(sessionStorage.getItem("maps_url") || '""'),
     facilities: sessionStorage.getItem("facilities") || "[]",
-    images: JSON.parse(sessionStorage.getItem("images") || "[]"),
+    images,
     title_en: sessionStorage.getItem("title_en") || "",
     title_ar: sessionStorage.getItem("title_ar") || "",
     description_en: sessionStorage.getItem("description_en") || "",
@@ -39,49 +39,32 @@ const propertyData = async (): Promise<IPropertyData> => {
     guest_rules_en: sessionStorage.getItem("guest_rules_en") || "",
     guest_rules_ar: sessionStorage.getItem("guest_rules_ar") || "",
     uid: uid || "",
-    video: video || "",
+    video,
   };
 };
 
-const formData = async () => {
-  const property = await propertyData();
+const formData = (images: File[], video?: File) => {
+  const property = propertyData(images, video);
   const formData = new FormData();
   for (const [key, value] of Object.entries(property)) {
     if (key === "images" && Array.isArray(value)) {
-      value.forEach((base64) => {
-        if (base64.startsWith("data:")) {
-          const [meta, base64Data] = base64.split(",");
-          formData.append(
-            `${key}[]`,
-            new Blob(
-              [Uint8Array.from(atob(base64Data), (c) => c.charCodeAt(0))],
-              {
-                type: meta.split(":")[1].split(";")[0],
-              }
-            )
-          );
-        }
+      value.forEach((image, index) => {
+        formData.append(`images[${index}]`, image);
       });
-    } else if (key === "video" && value.startsWith("data:")) {
-      const [meta, base64] = value.split(",");
-      formData.append(
-        key,
-        new Blob([Uint8Array.from(atob(base64), (c) => c.charCodeAt(0))], {
-          type: meta.split(":")[1].split(";")[0],
-        })
-      );
+    } else if (key === "video" && value instanceof File) {
+      formData.append(key, value);
     } else {
       formData.append(key, value);
     }
   }
-
   return formData;
 };
 export const useSendDataToAPI = () => {
   const { t } = useTranslation();
+  const { selectedImages, selectedVideo } = useContext(HostingContext);
   const sendDataToAPI = async (): Promise<boolean> => {
     try {
-      const payload = await formData();
+      const payload = formData(selectedImages, selectedVideo);
       const response = await addPropertyAPI(payload);
       console.log(response);
 

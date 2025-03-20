@@ -85,5 +85,5 @@ export const updatePropertySchema = yup.object().shape({
     .array()
     .min(3, "At least three images are required")
     .required("Images are required"),
-  video: yup.string(),
+  video: yup.mixed<File | string>(),
 });

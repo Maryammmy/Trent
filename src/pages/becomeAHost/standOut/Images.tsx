@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Upload, X } from "lucide-react";
 import Image from "../../../components/ui/Image";
 import Input from "../../../components/ui/Input";
@@ -9,48 +9,36 @@ import toast from "react-hot-toast";
 import Button from "../../../components/ui/Button";
 import InputErrorMessage from "../../../components/ui/InputErrorMessage";
 import { allowedImageTypes } from "../../../constants";
-
-const storedImages = sessionStorage.getItem("images");
+import { HostingContext } from "../../../context/HostingContext";
 
 const Images = () => {
   const { t } = useTranslation();
+  const { setSelectedImages } = useContext(HostingContext);
   const [imageError, setImageError] = useState<string | null>(null);
-  const [images, setImages] = useState<string[]>(
-    storedImages ? JSON.parse(storedImages) : []
-  );
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [images, setImages] = useState<string[]>([]);
+  const handleImageChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (event.target.files) {
       const selectedFiles = Array.from(event.target.files);
-      const validImages: string[] = [];
-      selectedFiles.forEach((file) => {
+      const validFiles = selectedFiles.filter((file) => {
         if (!allowedImageTypes.includes(file.type)) {
           setImageError(t("invalid_image_format"));
-          return;
+          return false;
         }
         if (file.size > 2097152) {
           setImageError(t("image_too_large"));
-          return;
+          return false;
         }
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-          const imageDataUrl = reader.result as string;
-          if (
-            !images.includes(imageDataUrl) &&
-            !validImages.includes(imageDataUrl)
-          ) {
-            validImages.push(imageDataUrl);
-          } else {
-            setImageError(t("image_already_uploaded"));
-          }
-          if (validImages.length > 0) {
-            const updatedPhotos = [...images, ...validImages];
-            sessionStorage.setItem("images", JSON.stringify(updatedPhotos));
-            setImages(updatedPhotos);
-            setImageError(null);
-          }
-        };
+        return true;
       });
+      if (validFiles.length === 0) return;
+      const fileUrls = validFiles.map((file) => URL.createObjectURL(file));
+      setImages((prev) => [...prev, ...fileUrls]);
+      setSelectedImages((prev) => [...prev, ...validFiles]);
+      toast.success(t("image_uploaded_successfully"));
+      sessionStorage.setItem("hasUploadedImages", "true");
+      setImageError(null);
     }
   };
   const handleDeleteImage = (image: string) => {

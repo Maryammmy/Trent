@@ -309,5 +309,6 @@
   "download_on": "Download on",
   "image_too_large": "The image size is too large. Maximum allowed size is 2MB.",
   "update": "Update",
-  "change": "Change"
+  "change": "Change",
+  "refresh_error": "⚠️ The images and videos you uploaded will be deleted upon refresh!"
 }

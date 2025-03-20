@@ -14,8 +14,8 @@ export type LoginNameInputs = {
 export type PropertyNameInputs = {
   uid: string;
   prop_id: string;
-  video?: string;
-  images: string[];
+  video?: string | File;
+  images: (File | string)[];
   price: string;
   facilities: string[];
   beds_count: string;

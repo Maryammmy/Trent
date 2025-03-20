@@ -7,12 +7,13 @@ import { PhotoProvider } from "react-photo-view";
 import FilterDataContextProvider from "./context/FilterDataContext";
 import SystemLoader from "./components/loader/SystemLoader";
 import AOS from "aos";
+import HostingContextProvider from "./context/HostingContext";
 
 function App() {
   AOS.init({
-    duration: 1000, // مدة الأنيميشن بالميلي ثانية
-    offset: 50, // تقليل المسافة قبل بدء الأنيميشن
-    once: true, // تشغيل الأنيميشن مرة واحدة فقط عند الظهور
+    duration: 1000,
+    offset: 50,
+    once: true,
   });
 
   const [isMount, setIsMount] = useState(true);
@@ -40,12 +41,14 @@ function App() {
   return (
     <>
       <FilterDataContextProvider>
-        <PhotoProvider>
-          <Suspense fallback={<SystemLoader />}>
-            <RouterProvider router={router} />
-          </Suspense>
-          <Toaster />
-        </PhotoProvider>
+        <HostingContextProvider>
+          <PhotoProvider>
+            <Suspense fallback={<SystemLoader />}>
+              <RouterProvider router={router} />
+            </Suspense>
+            <Toaster />
+          </PhotoProvider>
+        </HostingContextProvider>
       </FilterDataContextProvider>
     </>
   );

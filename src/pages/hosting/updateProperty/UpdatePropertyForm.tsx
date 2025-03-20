@@ -52,6 +52,7 @@ function UpdatePropertyForm({
 }: UpdatePropertyFormProps) {
   const navigate = useNavigate();
   const [images, setImages] = useState<string[]>([]);
+  const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [video, setVideo] = useState<string>("");
   const [imageError, setImageError] = useState<string | null>(null);
   const [videoError, setVideoError] = useState<string | null>(null);
@@ -79,40 +80,29 @@ function UpdatePropertyForm({
     resolver: yupResolver(updatePropertySchema),
     defaultValues: defaultPropertyValues,
   });
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (event.target.files) {
       const selectedFiles = Array.from(event.target.files);
-      const validImages: string[] = [];
-      selectedFiles.forEach((file) => {
+      const validFiles = selectedFiles.filter((file) => {
         if (!allowedImageTypes.includes(file.type)) {
           setImageError(t("invalid_image_format"));
-          return;
+          return false;
         }
         if (file.size > 2097152) {
           setImageError(t("image_too_large"));
-          return;
+          return false;
         }
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-          const imageDataUrl = reader.result as string;
-          if (
-            !images.includes(imageDataUrl) &&
-            !validImages.includes(imageDataUrl)
-          ) {
-            validImages.push(imageDataUrl);
-          } else {
-            setImageError(t("image_already_uploaded"));
-          }
-          if (validImages.length > 0) {
-            const updatedPhotos = [...images, ...validImages];
-            sessionStorage.setItem("images", JSON.stringify(updatedPhotos));
-            setImages(updatedPhotos);
-            setImageError(null);
-            setValue("images", updatedPhotos);
-          }
-        };
+        return true;
       });
+      if (validFiles.length === 0) return;
+      const fileUrls = validFiles.map((file) => URL.createObjectURL(file));
+      setImages((prev) => [...prev, ...fileUrls]);
+      setSelectedImages((prev) => [...prev, ...validFiles]);
+      setValue("images", [...images, ...selectedImages, ...validFiles]);
+      toast.success(t("image_uploaded_successfully"));
+      setImageError(null);
     }
   };
   const handleDeleteImage = (image: string) => {
@@ -135,15 +125,10 @@ function UpdatePropertyForm({
         setVideoError(t("video_too_large"));
         return;
       }
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        const videoDataUrl = reader.result as string;
-        setVideo(videoDataUrl);
-        setValue("video", videoDataUrl);
-        toast.success(t("video_uploaded_successfully"));
-        setVideoError(null);
-      };
+      setVideo(URL.createObjectURL(file));
+      setValue("video", file);
+      toast.success(t("video_uploaded_successfully"));
+      setVideoError(null);
     }
   };
   const handleDeleteVideo = () => {
