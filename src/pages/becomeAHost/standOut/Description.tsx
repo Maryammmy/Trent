@@ -67,7 +67,7 @@ function Description() {
         back="/become-a-host/title"
         next="/become-a-host/city"
         isNextDisabled={
-          descTextAreaEn.length < 10 || descTextAreaAr.length < 10
+          descTextAreaEn.length < 50 || descTextAreaAr.length < 50
         }
       />
     </div>

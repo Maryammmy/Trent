@@ -24,7 +24,7 @@ function Title() {
       sessionStorage.setItem("title_ar", newValue);
     }
   };
-  const isNextDisabled = titleAr.length < 5 || titleEn.length < 5;
+  const isNextDisabled = titleAr.length < 10 || titleEn.length < 10;
 
   return (
     <div className="py-10">
