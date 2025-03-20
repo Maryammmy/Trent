@@ -17,7 +17,9 @@ function Location() {
     const url = event.target.value;
     setGoogleMapsUrl(url);
 
-    const isValidUrl = url.startsWith("https://www.google.com/maps");
+    const isValidUrl =
+      url.startsWith("https://www.google.com/maps") ||
+      url.startsWith("https://maps.app.goo.gl/");
     setError(isValidUrl ? "" : t("invalid_google_maps_url"));
 
     if (isValidUrl) {
