@@ -5,10 +5,8 @@ interface AuthorizationCheckProps {
   owner: string;
   userId: string | undefined;
 }
-
 function AuthorizationCheck({ owner, userId }: AuthorizationCheckProps) {
   const navigate = useNavigate();
-
   useEffect(() => {
     if (owner && userId && userId !== owner) {
       setTimeout(() => {

@@ -277,7 +277,8 @@
   "video_uploaded_successfully": "Video uploaded successfully!",
   "error_saving_video": "Error saving video. Please try again later.",
   "invalid_video_format": "Please upload a video in MP4, AVI, MOV, or MKV format only.",
-  "video_too_large": "The video is too large. Maximum allowed size is 50MB.",
+  "video_too_small": "The video size is too small. Minimum allowed size is 1MB.",
+  "video_too_large": "The video size is too large. Maximum allowed size is 50MB.",
   "video_already_uploaded": "This video is already uploaded! You cannot upload the same video twice.",
   "delete_video": "Delete Video",
   "video_deleted_successfully": "Video deleted successfully!",
@@ -305,5 +306,7 @@
   "choose_us": "Why You Should Choose Us",
   "choose_us_desc": "You should choose us because we provide the best accommodation and we have sorted all the hotels here based on their quality",
   "get_mobile_app": "Get our Mobile App for a better experience!",
-  "download_on": "Download on"
+  "download_on": "Download on",
+  "image_too_large": "The image size is too large. Maximum allowed size is 2MB.",
+  "update": "Update"
 }

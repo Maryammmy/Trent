@@ -21,6 +21,7 @@ const Images = () => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const selectedFiles = Array.from(event.target.files);
+      const validImages: string[] = [];
       selectedFiles.forEach((file) => {
         if (!allowedImageTypes.includes(file.type)) {
           setImageError(t("invalid_image_format"));
@@ -30,23 +31,32 @@ const Images = () => {
           setImageError(t("image_too_small"));
           return;
         }
+        if (file.size > 2097152) {
+          setImageError(t("image_too_large"));
+          return;
+        }
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
           const imageDataUrl = reader.result as string;
-          if (!images.includes(imageDataUrl)) {
-            const updatedPhotos = [...images, imageDataUrl];
+          if (
+            !images.includes(imageDataUrl) &&
+            !validImages.includes(imageDataUrl)
+          ) {
+            validImages.push(imageDataUrl);
+          } else {
+            setImageError(t("image_already_uploaded"));
+          }
+          if (validImages.length > 0) {
+            const updatedPhotos = [...images, ...validImages];
             sessionStorage.setItem("images", JSON.stringify(updatedPhotos));
             setImages(updatedPhotos);
             setImageError(null);
-          } else {
-            setImageError(t("image_already_uploaded"));
           }
         };
       });
     }
   };
-
   const handleDeleteImage = (image: string) => {
     setImages((prevImages) => prevImages.filter((item) => item !== image));
     setImageError(null);
@@ -69,7 +79,6 @@ const Images = () => {
             <Input
               type="file"
               multiple
-              accept="image/*"
               className="hidden"
               onChange={handleImageChange}
             />

@@ -38,9 +38,9 @@ function HostingModal() {
           {t("become_a_host_finish_up_desc")}
         </p>
         <div className="flex flex-col gap-2 items-center justify-center">
-          <div className="w-32 h-32 rounded-lg overflow-hidden">
+          <div className="w-32 h-32 rounded-full overflow-hidden">
             <Image
-              imageUrl="/images/property.jpg"
+              imageUrl="/images/Trent-logo-pdf.png"
               alt="Property image"
               className="w-full h-full object-cover"
             />

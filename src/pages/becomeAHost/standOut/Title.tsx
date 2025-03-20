@@ -40,7 +40,7 @@ function Title() {
           <Input
             type="text"
             maxLength={100}
-            minLength={5}
+            minLength={10}
             onChange={(e) => handleTitleChange(e, "en")}
             name="title_en"
             value={titleEn}
@@ -53,7 +53,7 @@ function Title() {
           <Input
             type="text"
             maxLength={100}
-            minLength={5}
+            minLength={10}
             onChange={(e) => handleTitleChange(e, "ar")}
             name="title_ar"
             value={titleAr}

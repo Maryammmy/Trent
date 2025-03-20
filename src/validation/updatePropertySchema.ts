@@ -45,8 +45,16 @@ export const updatePropertySchema = yup.object().shape({
   period: yup.string().required("Period is required"),
   city_en: yup.string().required("City (English) is required"),
   city_ar: yup.string().required("City (Arabic) is required"),
-  title_en: yup.string().required("Title (English) is required"),
-  title_ar: yup.string().required("Title (Arabic) is required"),
+  title_en: yup
+    .string()
+    .min(10, "The name must be at least 10 characters.")
+    .max(100, "The name may not be greater than 100 characters.")
+    .required("Title (English) is required"),
+  title_ar: yup
+    .string()
+    .min(10, "The name must be at least 10 characters.")
+    .max(100, "The name may not be greater than 100 characters.")
+    .required("Title (Arabic) is required"),
   compound_en: yup.string().required("Compound Name (English) is required"),
   compound_ar: yup.string().required("Compound Name (Arabic) is required"),
   address_en: yup.string().required("Address (English) is required"),

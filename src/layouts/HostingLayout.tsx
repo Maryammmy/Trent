@@ -1,9 +1,13 @@
 import { Outlet } from "react-router-dom";
+import Navbar from "../components/navbar/Navbar";
 
 function HostingLayout() {
   return (
     <>
-      <Outlet />
+      <Navbar />
+      <div className="mt-[87px]">
+        <Outlet />
+      </div>
     </>
   );
 }

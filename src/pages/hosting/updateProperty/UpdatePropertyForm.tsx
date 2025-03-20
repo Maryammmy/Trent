@@ -82,6 +82,7 @@ function UpdatePropertyForm({
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const selectedFiles = Array.from(event.target.files);
+      const validImages: string[] = [];
       selectedFiles.forEach((file) => {
         if (!allowedImageTypes.includes(file.type)) {
           setImageError(t("invalid_image_format"));
@@ -91,18 +92,27 @@ function UpdatePropertyForm({
           setImageError(t("image_too_small"));
           return;
         }
+        if (file.size > 2097152) {
+          setImageError(t("image_too_large"));
+          return;
+        }
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
           const imageDataUrl = reader.result as string;
-          if (images && !images.includes(imageDataUrl)) {
-            const updatedPhotos = [...images, imageDataUrl];
-            setImages(updatedPhotos);
-            setValue("images", updatedPhotos);
-            toast.success(t("image_uploaded_successfully"));
-            setImageError(null);
+          if (
+            !images.includes(imageDataUrl) &&
+            !validImages.includes(imageDataUrl)
+          ) {
+            validImages.push(imageDataUrl);
           } else {
             setImageError(t("image_already_uploaded"));
+          }
+          if (validImages.length > 0) {
+            const updatedPhotos = [...images, ...validImages];
+            sessionStorage.setItem("images", JSON.stringify(updatedPhotos));
+            setImages(updatedPhotos);
+            setImageError(null);
           }
         };
       });
@@ -120,7 +130,11 @@ function UpdatePropertyForm({
         setVideoError(t("invalid_video_format"));
         return;
       }
-      if (file.size > 50 * 1024 * 1024) {
+      if (file.size < 1048576) {
+        setVideoError(t("video_too_small"));
+        return;
+      }
+      if (file.size > 52428800) {
         setVideoError(t("video_too_large"));
         return;
       }

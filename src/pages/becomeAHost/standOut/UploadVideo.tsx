@@ -88,7 +88,11 @@ const UploadVideo = () => {
         setVideoError(t("invalid_video_format"));
         return;
       }
-      if (file.size > 50 * 1024 * 1024) {
+      if (file.size < 1048576) {
+        setVideoError(t("video_too_small"));
+        return;
+      }
+      if (file.size > 52428800) {
         setVideoError(t("video_too_large"));
         return;
       }
