@@ -8,7 +8,6 @@ import { IUser } from "../../../interfaces/accountSettingsInterface";
 import Select from "../../ui/Select";
 import { gender } from "../../../data/accountSettingsData/personalInfoData";
 import Image from "../../ui/Image";
-import { baseURL } from "../../../services";
 import toast from "react-hot-toast";
 import { personalDataSchema } from "../../../validation/personalDataSchema";
 import Input from "../../ui/Input";
@@ -19,6 +18,7 @@ import InputErrorMessage from "../../ui/InputErrorMessage";
 import Loader from "../../loader/Loader";
 import UserSkeleton from "../../skeleton/UserSkeleton";
 import { ApiError } from "../../../interfaces";
+import { baseURL } from "../../../services";
 
 const uid = Cookies.get("user_id");
 function PersonalData() {
@@ -28,7 +28,6 @@ function PersonalData() {
   const [loading, setLoading] = useState(false);
   const [previewImage, setPreviewImage] = useState<string>("");
   const [imageError, setImageError] = useState<string | null>(null);
-
   const {
     control,
     handleSubmit,
@@ -194,5 +193,4 @@ function PersonalData() {
     </div>
   );
 }
-
 export default PersonalData;

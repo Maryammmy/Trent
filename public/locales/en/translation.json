@@ -294,5 +294,16 @@
   "gender": "Gender",
   "male": "Male",
   "female": "Female",
-  "invalid_image_format": "Unsupported file type. Please upload an image in JPEG, PNG, JPG or GIF format."
+  "invalid_image_format": "Unsupported file type. Please upload an image in JPEG, PNG, JPG or GIF format.",
+  "home": "Home",
+  "about_us": "About us",
+  "services": "Services",
+  "contact": "Contact",
+  "home_title": "Book your next adventure",
+  "today": "Today",
+  "book_now": "Book Now",
+  "choose_us": "Why You Should Choose Us",
+  "choose_us_desc": "You should choose us because we provide the best accommodation and we have sorted all the hotels here based on their quality",
+  "get_mobile_app": "Get our Mobile App for a better experience!",
+  "download_on": "Download on"
 }

@@ -3,8 +3,10 @@ import { buttonData } from "../../data/landingData";
 import Button from "../ui/Button";
 import Image from "../ui/Image";
 import { useMediaQuery } from "react-responsive";
+import { useTranslation } from "react-i18next";
 
 function MobileAppBanner() {
+  const { t } = useTranslation();
   const [platform, setPlatform] = useState("desktop");
   const isSmallScreen = useMediaQuery({ maxWidth: 767 });
   useEffect(() => {
@@ -26,7 +28,7 @@ function MobileAppBanner() {
               className="text-white text-lg md:text-3xl font-semibold max-w-md"
               data-aos="fade-left"
             >
-              Get our Mobile App for a better experience!
+              {t("get_mobile_app")}
             </h2>
             <div className="w-40 h-full">
               <Image
@@ -63,7 +65,7 @@ function MobileAppBanner() {
                 className="text-white text-lg md:text-3xl font-semibold max-w-md"
                 data-aos="fade-left"
               >
-                Get our Mobile App for a better experience!
+                {t("get_mobile_app")}
               </h2>
               <div className="flex flex-col items-center md:flex-row gap-10">
                 {buttonData
@@ -78,7 +80,7 @@ function MobileAppBanner() {
                     >
                       <span>{btn.icon}</span>
                       <span className="font-medium flex flex-col items-start">
-                        <span>Download on the</span>
+                        <span>{t("download_on")}</span>
                         <span>{btn.label}</span>
                       </span>
                     </Button>

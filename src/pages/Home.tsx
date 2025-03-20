@@ -7,10 +7,12 @@ import { useGetData } from "../hooks/useGetData";
 import SilderSkeleton from "../components/skeleton/SilderSkeleton";
 import { CurrentLanguage } from "../types";
 import { baseURL } from "../services";
+import { useTranslation } from "react-i18next";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 function Home() {
+  const { t } = useTranslation();
   const isMobile = useMediaQuery({ maxWidth: 480 });
   const isTablet = useMediaQuery({ maxWidth: 768 });
   const carouselProps = isMobile
@@ -32,8 +34,8 @@ function Home() {
               data-aos="fade-up"
               className="text-3xl md:!leading-[60px] lg:!leading-[70px] md:text-5xl lg:text-6xl font-bold text-white text-center"
             >
-              Book your next adventure{" "}
-              <span className="text-secondary">Today</span>
+              {t("home_title")}{" "}
+              <span className="text-secondary">{t("today")}</span>
             </h1>
           </div>
           <div className="absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

@@ -16,6 +16,7 @@ import Loader from "../loader/Loader";
 import { AxiosError } from "axios";
 import CountrySelector from "../ui/CountrySelector";
 import { SignupNameInputs } from "../../types";
+import Cookies from "js-cookie";
 
 function SignupModal() {
   const [loading, setLoading] = useState(false);
@@ -43,6 +44,7 @@ function SignupModal() {
       const response = await signupAPI(data);
       if (response?.data?.ResponseCode === "200") {
         toast.success(response?.data?.ResponseMsg);
+        Cookies.set("user_id", response?.data?.UserLogin?.id, { expires: 365 });
         setTimeout(() => {
           dispatch(setIsSignup(false));
           window.location.reload();

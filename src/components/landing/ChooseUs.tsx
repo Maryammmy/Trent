@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useGetData } from "../../hooks/useGetData";
 import { IWhyChooseUs } from "../../interfaces/landingInterface";
 import { baseURL } from "../../services";
@@ -8,6 +9,7 @@ import Image from "../ui/Image";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 function ChooseUs() {
+  const { t } = useTranslation();
   const { data } = useGetData(
     ["whyChooseUs"],
     `user_api/u_why_choose_us.php?lang=${currentLanguage}`
@@ -19,7 +21,7 @@ function ChooseUs() {
         className="flex justify-center items-center gap-4"
         data-aos="fade-up"
       >
-        <h2 className="text-lg md:text-4xl font-bold">Why You Should Choose</h2>
+        <h2 className="text-lg md:text-4xl font-bold">{t("choose_us")}</h2>
         <div className="w-10 h-10">
           <Image
             imageUrl="/images/Trent-tilted.svg"
@@ -32,8 +34,7 @@ function ChooseUs() {
         className="text-dark max-w-3xl mx-auto text-center pt-5"
         data-aos="fade-left"
       >
-        You should choose us because we provide the best accommodation and we
-        have sorted all the hotels here based on their quality.
+        {t("choose_us_desc")}
       </p>
       <div
         className="flex flex-wrap gap-10 justify-evenly pt-10"

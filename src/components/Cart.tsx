@@ -124,7 +124,7 @@ function Cart({ property }: IProps) {
         )}
         <div className="flex gap-5 mt-2">
           <Button className="flex-[2] zoom py-1 bg-primary rounded-md text-white font-medium">
-            <span>Book Now</span>
+            {t("book_now")}
           </Button>
           <Button className="flex-[1] zoom py-1 bg-[#CAE0FE] rounded-md flex justify-center items-center">
             <span>

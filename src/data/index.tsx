@@ -34,10 +34,10 @@ export const languageOptions: ISelectOption[] = [
   { label: "العربية", value: "ar" },
 ];
 export const navItems: INavItem[] = [
-  { label: "Home", to: "/" },
-  { label: "About Us", to: "/about-us" },
-  { label: "Services", to: "/services" },
-  { label: "Contact", to: "/contact-us" },
+  { label: "home", to: "/" },
+  { label: "about_us", to: "/about-us" },
+  { label: "services", to: "/services" },
+  { label: "contact", to: "/contact-us" },
 ];
 export const authItems: string[] = ["log_in", "sign_up"];
 export const menuItems: INavItem[] = [

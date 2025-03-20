@@ -24,7 +24,7 @@ const NavbarLinks = () => {
               to={item.to}
               className="px-4 text-lg font-semibold text-white hover:text-gray-300 transition"
             >
-              {item.label}
+              {t(item.label)}
             </NavLink>
           </li>
         ))}
