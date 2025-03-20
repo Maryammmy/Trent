@@ -20,7 +20,7 @@ function HostingModal() {
     <Modal
       isOpen={isFinishUpModal}
       close={() => dispatch(setIsFinishUpModal(false))}
-      maxWidth="600px"
+      maxWidth="500px"
     >
       <div className="p-6">
         <div className="flex items-center justify-end">
@@ -48,7 +48,6 @@ function HostingModal() {
           <h5 className="font-semibold">
             {createdProperty?.title?.[currentLanguage]}
           </h5>
-          <p className="text-dark max-w-sm">مساكن شيراتون, Cairo Governorate</p>
         </div>
         <div className="flex items-center justify-between my-4">
           <Button

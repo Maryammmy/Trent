@@ -4,7 +4,7 @@ export const loginData: ILoginInputs[] = [
   {
     name: "mobile",
     label: "Phone number",
-    placeholder: "**********",
+    placeholder: "Enter your phone number",
     type: "text",
   },
   {

@@ -17,7 +17,7 @@ const propertyData = async (): Promise<IPropertyData> => {
     beds_count: Number(sessionStorage.getItem("beds_count")),
     bathrooms_count: Number(sessionStorage.getItem("bathrooms_count")),
     sqft: Number(sessionStorage.getItem("sqft")),
-    maps_url: sessionStorage.getItem("maps_url") || "",
+    maps_url: JSON.parse(sessionStorage.getItem("maps_url") || '""'),
     facilities: sessionStorage.getItem("facilities") || "[]",
     images: JSON.parse(sessionStorage.getItem("images") || "[]"),
     title_en: sessionStorage.getItem("title_en") || "",

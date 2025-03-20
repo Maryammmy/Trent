@@ -130,6 +130,7 @@ function PersonalData() {
               render={({ field }) => (
                 <Input
                   {...field}
+                  placeholder="Enter your name"
                   className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
                 />
               )}
@@ -146,6 +147,7 @@ function PersonalData() {
               render={({ field }) => (
                 <Input
                   {...field}
+                  placeholder="Enter your email"
                   className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
                 />
               )}
@@ -160,6 +162,7 @@ function PersonalData() {
               render={({ field }) => (
                 <Input
                   {...field}
+                  placeholder="Enter your phone number"
                   className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
                 />
               )}
