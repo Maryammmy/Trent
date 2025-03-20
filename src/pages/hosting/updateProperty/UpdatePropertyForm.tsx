@@ -88,10 +88,6 @@ function UpdatePropertyForm({
           setImageError(t("invalid_image_format"));
           return;
         }
-        if (file.size < 51200) {
-          setImageError(t("image_too_small"));
-          return;
-        }
         if (file.size > 2097152) {
           setImageError(t("image_too_large"));
           return;

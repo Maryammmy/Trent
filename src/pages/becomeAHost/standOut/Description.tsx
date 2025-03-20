@@ -38,7 +38,7 @@ function Description() {
         <div className="flex flex-col gap-2 mb-5">
           <label className="font-medium">{t("desc_in_english")}</label>
           <TextArea
-            maxLength={10000}
+            maxLength={500}
             minLength={50}
             onChange={(e) => handleDescriptionChange(e, "en")}
             name="description_en"
@@ -51,7 +51,7 @@ function Description() {
         <div className="flex flex-col gap-2">
           <label className="font-medium">{t("desc_in_arabic")}</label>
           <TextArea
-            maxLength={10000}
+            maxLength={500}
             minLength={50}
             onChange={(e) => handleDescriptionChange(e, "ar")}
             name="description_ar"

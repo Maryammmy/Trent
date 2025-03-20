@@ -47,13 +47,13 @@ export const updatePropertySchema = yup.object().shape({
   city_ar: yup.string().required("City (Arabic) is required"),
   title_en: yup
     .string()
-    .min(10, "The name must be at least 10 characters.")
-    .max(100, "The name may not be greater than 100 characters.")
+    .min(10, "Title must be at least 10 characters.")
+    .max(100, "Title may not be greater than 100 characters.")
     .required("Title (English) is required"),
   title_ar: yup
     .string()
-    .min(10, "The name must be at least 10 characters.")
-    .max(100, "The name may not be greater than 100 characters.")
+    .min(10, "Title must be at least 10 characters.")
+    .max(100, "Title may not be greater than 100 characters.")
     .required("Title (Arabic) is required"),
   compound_en: yup.string().required("Compound Name (English) is required"),
   compound_ar: yup.string().required("Compound Name (Arabic) is required"),
@@ -61,10 +61,26 @@ export const updatePropertySchema = yup.object().shape({
   address_ar: yup.string().required("Address (Arabic) is required"),
   floor_en: yup.string().required("Floor (English) is required"),
   floor_ar: yup.string().required("Floor (Arabic) is required"),
-  description_en: yup.string().required("Description (English) is required"),
-  description_ar: yup.string().required("Description (Arabic) is required"),
-  guest_rules_en: yup.string().required("Guest Rules (English) are required"),
-  guest_rules_ar: yup.string().required("Guest Rules (Arabic) are required"),
+  description_en: yup
+    .string()
+    .min(50, "Description must be at least 50 characters")
+    .max(500, "Description must be less than 500 characters")
+    .required("Description (English) is required"),
+  description_ar: yup
+    .string()
+    .min(50, "Description must be at least 50 characters")
+    .max(500, "Description must be less than 500 characters")
+    .required("Description (Arabic) is required"),
+  guest_rules_en: yup
+    .string()
+    .min(10, "Guest rules must be at least 10 characters")
+    .max(500, "Guest rules must be less than 500 characters")
+    .required("Guest rules (English) are required"),
+  guest_rules_ar: yup
+    .string()
+    .min(10, "Guest rules must be at least 10 characters")
+    .max(500, "Guest rules must be less than 500 characters")
+    .required("Guest rules (Arabic) are required"),
   images: yup
     .array()
     .min(3, "At least three images are required")

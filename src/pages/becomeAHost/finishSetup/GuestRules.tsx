@@ -38,7 +38,7 @@ function GuestRules() {
         <div className="flex flex-col gap-2 mb-5">
           <label className="font-medium">{t("guest_rules_in_english")}</label>
           <TextArea
-            maxLength={10000}
+            maxLength={500}
             minLength={10}
             onChange={(e) => handleRulesChange(e, "en")}
             name="guest_rules_en"
@@ -51,7 +51,7 @@ function GuestRules() {
         <div className="flex flex-col gap-1">
           <label className="font-medium">{t("guest_rules_in_arabic")}</label>
           <TextArea
-            maxLength={10000}
+            maxLength={500}
             minLength={10}
             onChange={(e) => handleRulesChange(e, "ar")}
             name="guest_rules_ar"
