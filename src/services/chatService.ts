@@ -3,17 +3,11 @@ import { baseAPI } from ".";
 import Cookies from "js-cookie";
 
 const uid = Cookies.get("user_id");
-export const useChatListAPI = (propId?: string, enabled: boolean = true) => {
+export const useChatListAPI = () => {
   return useQuery({
     queryKey: ["chatList"],
-    queryFn: () =>
-      baseAPI.get(
-        `user_api/u_chat_list.php?uid=${uid}${
-          propId ? `&prop_id=${propId}` : ""
-        }`
-      ),
+    queryFn: () => baseAPI.get(`user_api/u_chat_list.php?uid=${uid}`),
     refetchInterval: 10000,
-    enabled: enabled,
   });
 };
 
