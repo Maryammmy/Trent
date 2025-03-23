@@ -25,7 +25,6 @@ function Property() {
   const { data } = usePropertyAPI(id);
   const propertyDetails: IDetailsProperty = data?.data?.data?.property_details;
   const facilities: IFacilityProperty[] = data?.data?.data?.facility_list;
-
   return (
     <>
       <div className="px-5 xl:px-20 py-5 lg:py-6">
@@ -110,7 +109,9 @@ function Property() {
                   </div>
                 </div>
                 <HostedBy
-                  host={propertyDetails?.owner}
+                  id={id}
+                  ownerId={propertyDetails?.owner_id}
+                  owner={propertyDetails?.owner}
                   guestRules={propertyDetails?.guest_rules?.[currentLanguage]}
                 />
                 <Amenities facilities={facilities} />

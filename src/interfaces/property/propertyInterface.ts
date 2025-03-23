@@ -57,6 +57,8 @@ export interface IDetailsProperty {
       ar: string;
     };
   };
+
+  owner_id: string;
   IS_FAVOURITE: number;
   guest_count: string;
   bathrooms_count: string;

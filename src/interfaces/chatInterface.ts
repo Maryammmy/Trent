@@ -4,6 +4,7 @@ export interface IChatList {
   message: string;
   receiver_image: string;
   receiver_name: string;
+  receiver_id: string;
 }
 export interface IMessage {
   created_at: string;
