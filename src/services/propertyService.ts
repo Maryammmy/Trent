@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 const uid = Cookies.get("user_id");
-export const usePropertyAPI = (id: string) => {
+export const usePropertyAPI = (id: string | undefined) => {
   return useQuery({
     queryKey: ["property", id, uid],
     queryFn: () =>

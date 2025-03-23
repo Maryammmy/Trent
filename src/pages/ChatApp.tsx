@@ -11,7 +11,6 @@ export default function ChatApp() {
         selectedChat={selectedChat}
       />
       <ChatWindow
-        chatId={selectedChat}
         selectedChat={selectedChat}
         onClose={() => setSelectedChat(null)}
       />

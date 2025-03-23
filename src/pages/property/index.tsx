@@ -22,7 +22,7 @@ const currentLanguage = (localStorage.getItem("i18nextLng") ||
 function Property() {
   const { t } = useTranslation();
   const { id } = useParams();
-  const { data } = usePropertyAPI(id || "");
+  const { data } = usePropertyAPI(id);
   const propertyDetails: IDetailsProperty = data?.data?.data?.property_details;
   const facilities: IFacilityProperty[] = data?.data?.data?.facility_list;
 

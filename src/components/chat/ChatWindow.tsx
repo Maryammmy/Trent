@@ -1,24 +1,24 @@
 import { useState } from "react";
-import { dummyChats, dummyMessages } from "../../data";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 import Image from "../ui/Image";
 import { ChevronLeft } from "lucide-react";
-
-function ChatWindow({
-  chatId,
-  selectedChat,
-  onClose,
-}: {
-  chatId: number | null;
+import { useMessagesAPI } from "../../services/chatService";
+import { IMessage } from "../../interfaces/chatInterface";
+import {
+  formatDateTime,
+  formatTime12Hour,
+} from "../../utils/formatDateAndTime";
+interface IProps {
   selectedChat: number | null;
   onClose: () => void;
-}) {
+}
+function ChatWindow({ selectedChat, onClose }: IProps) {
   const [newMessage, setNewMessage] = useState("");
-  const chat = dummyChats.find((c) => c.id === chatId);
-  const messages = dummyMessages[chatId as number] || [];
-
-  return chatId ? (
+  const { data } = useMessagesAPI(selectedChat);
+  console.log(data?.data?.data?.chat_messages);
+  const messages: IMessage[] = data?.data?.data?.chat_messages;
+  return selectedChat ? (
     <div
       className={`${
         selectedChat
@@ -37,30 +37,32 @@ function ChatWindow({
             className="w-full h-full object-cover"
           />
         </div>
-        <h2 className="text-lg font-semibold">{chat?.name}</h2>
+        <h2 className="text-lg font-semibold">Mohamed</h2>
       </div>
       <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
-        {messages.map((msg, index) =>
-          msg.sender ? (
-            <div key={index} className="mb-2 flex flex-col gap-1">
-              <p className="text-xs text-gray-400 text-center">{msg.time}</p>
-              <p className="font-medium">{msg.sender}</p>
-              <p className="bg-white w-fit rounded-md rounded-tl-none  p-2 shadow">
-                {msg.text}
+        {messages?.map((msg) => {
+          const { date, time } = formatDateTime(msg?.created_at);
+          const formattedTime = formatTime12Hour(time);
+          const isSender = JSON.parse(msg?.is_sender);
+          console.log(msg?.created_at);
+          return isSender ? (
+            <div key={msg?.id} className="mb-2 flex flex-col gap-1 items-end">
+              <p className="text-xs text-dark text-center w-full">{date}</p>
+              <p className="bg-white w-fit rounded-md rounded-tr-none p-2 shadow">
+                {msg?.message}
               </p>
+              <p>{formattedTime}</p>
             </div>
           ) : (
-            <div key={index} className="mb-2 flex flex-col gap-1 items-end">
-              <p className="text-xs text-gray-400 text-center w-full">
-                {msg.time}
+            <div key={msg?.id} className="mb-2 flex flex-col gap-1">
+              <p className="text-xs text-gray-400 text-center">{date}</p>
+              <p className="bg-white w-fit rounded-md rounded-tl-none p-2 shadow">
+                {msg?.message}
               </p>
-              <p className="bg-white w-fit rounded-md rounded-tr-none  p-2 shadow">
-                {" "}
-                {msg.text}
-              </p>
+              <p>{formattedTime}</p>
             </div>
-          )
-        )}
+          );
+        })}
       </div>
       <div className="border-t bg-white flex p-4 gap-2 flex-wrap">
         <Input
