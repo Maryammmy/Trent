@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 import Image from "../ui/Image";
-import { ChevronLeft, ImageUp, Send } from "lucide-react";
+import { ChevronLeft, ImageUp, MessageCircleMore, Send } from "lucide-react";
 import { useMessagesAPI } from "../../services/chatService";
 import { IMessage } from "../../interfaces/chatInterface";
 import {
@@ -89,14 +89,9 @@ function ChatWindow() {
       </div>
     </div>
   ) : (
-    <div
-      className={`${
-        ownerId
-          ? "flex flex-1 items-center justify-center"
-          : "hidden lg:flex lg:flex-col lg:flex-1 lg:justify-center lg:items-center"
-      }`}
-    >
-      <p className="text-gray-400 text-lg text-center font-medium">
+    <div className="hidden lg:flex lg:flex-col lg:flex-1 lg:gap-5 lg:justify-center lg:items-center">
+      <MessageCircleMore className="text-dark" size={100} />
+      <p className="text-dark text-lg text-center font-medium">
         Select a chat to start messaging
       </p>
     </div>
