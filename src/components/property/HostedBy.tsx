@@ -12,7 +12,7 @@ import Cookies from "js-cookie";
 
 const uid = Cookies.get("user_id");
 interface IProps {
-  id: string;
+  id: string | undefined;
   owner: IDetailsProperty["owner"];
   guestRules: string;
   ownerId: string;
