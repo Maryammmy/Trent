@@ -51,7 +51,7 @@ function ChatWindow({ selectedChat, onClose }: IProps) {
               <p className="bg-white w-fit rounded-md rounded-tr-none p-2 shadow">
                 {msg?.message}
               </p>
-              <p>{formattedTime}</p>
+              <p className="text-xs font-medium text-dark">{formattedTime}</p>
             </div>
           ) : (
             <div key={msg?.id} className="mb-2 flex flex-col gap-1">
@@ -59,7 +59,7 @@ function ChatWindow({ selectedChat, onClose }: IProps) {
               <p className="bg-white w-fit rounded-md rounded-tl-none p-2 shadow">
                 {msg?.message}
               </p>
-              <p>{formattedTime}</p>
+              <p className="text-xs font-medium text-dark">{formattedTime}</p>
             </div>
           );
         })}
