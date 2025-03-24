@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { signupData } from "../../data/authData";
 import { setIsSignup } from "../../store/features/auth/authSlice";
-import { signupAPI } from "../../services/authService";
+import { verifysignupAPI } from "../../services/authService";
 import toast from "react-hot-toast";
 import { Fragment, useState } from "react";
 import { signupSchema } from "../../validation/signupSchema ";
@@ -38,10 +38,11 @@ function SignupModal() {
       name: "",
     },
   });
+  console.log(errors);
   const onSubmit: SubmitHandler<SignupNameInputs> = async (data) => {
     try {
       setLoading(true);
-      const response = await signupAPI(data);
+      const response = await verifysignupAPI(data);
       if (response?.data?.ResponseCode === "200") {
         toast.success(response?.data?.ResponseMsg);
         Cookies.set("user_id", response?.data?.UserLogin?.id, { expires: 365 });
@@ -75,7 +76,7 @@ function SignupModal() {
           <X className="text-black" size={20} />
         </span>
       </Button>
-      <div className="p-10">
+      <div className="p-10 max-h-[80vh] overflow-y-auto">
         <div className="pb-4">
           <h2 className="text-lg font-semibold">Welcome to Trent</h2>
         </div>
@@ -128,6 +129,13 @@ function SignupModal() {
                           type={type}
                           placeholder={placeholder}
                           className="w-full outline-none bg-transparent"
+                          onChange={(e) => {
+                            let value = e.target.value;
+                            if (name === "mobile") {
+                              value = value.replace(/^0+/, "");
+                            }
+                            field.onChange(value);
+                          }}
                         />
                       )}
                     </div>
