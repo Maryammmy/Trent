@@ -27,7 +27,7 @@ function Home() {
   const sliderList = data?.data?.data?.slider_list;
   return (
     <>
-      <div>
+      <div className="">
         <div className="bg-home h-[50vh] bg-[length:100%_100%] bg-no-repeat mb-[10vh]">
           <div className="w-full px-5 md:max-w-xl absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <h1

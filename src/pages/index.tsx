@@ -3,6 +3,8 @@ import Properties from "../components/landing/Properties";
 import ChooseUs from "../components/landing/ChooseUs";
 import MobileAppModal from "../components/landing/MobileAppModal";
 import MobileAppBanner from "../components/landing/MobileAppBanner";
+import LoginModal from "@/components/auth/LoginModal";
+import SignupModal from "@/components/auth/SignupModal";
 
 function LandingPage() {
   return (
@@ -12,6 +14,8 @@ function LandingPage() {
       <ChooseUs />
       <MobileAppBanner />
       <MobileAppModal />
+      <LoginModal />
+      <SignupModal />
     </>
   );
 }

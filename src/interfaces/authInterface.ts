@@ -12,3 +12,7 @@ export interface ISignupInputs {
   placeholder: string;
   type: string;
 }
+export interface IVerifyOtp {
+  otp: string;
+  mobile: string;
+}
