@@ -97,50 +97,6 @@ function LoginModal() {
               )}
             />
             {loginData.map(({ name, label, type, placeholder }) => (
-              // <Controller
-              //   key={name}
-              //   name={name}
-              //   control={control}
-              //   render={({ field }) => (
-              //     <div className="mb-4">
-              //       <label className="block text-sm font-medium mb-1">
-              //         {label}
-              //       </label>
-              //       <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
-              //         {name === "password" ? (
-              //           <>
-              //             <Input
-              //               {...field}
-              //               type={showPassword ? "text" : "password"}
-              //               placeholder={placeholder}
-              //               className="w-full outline-none bg-transparent"
-              //             />
-              //             <Button
-              //               type="button"
-              //               onClick={() => setShowPassword(!showPassword)}
-              //             >
-              //               {showPassword ? (
-              //                 <EyeOff strokeWidth={2.5} />
-              //               ) : (
-              //                 <Eye strokeWidth={2.5} />
-              //               )}
-              //             </Button>
-              //           </>
-              //         ) : (
-              //           <Input
-              //             {...field}
-              //             type={type}
-              //             placeholder={placeholder}
-              //             className="w-full outline-none bg-transparent"
-              //           />
-              //         )}
-              //       </div>
-              //       {errors[name] && (
-              //         <InputErrorMessage msg={errors[name]?.message} />
-              //       )}
-              //     </div>
-              //   )}
-              // />
               <Controller
                 key={name}
                 name={name}
@@ -179,7 +135,7 @@ function LoginModal() {
                           onChange={(e) => {
                             let value = e.target.value;
                             if (name === "mobile") {
-                              value = value.replace(/^0+/, ""); // 🔥 إزالة الأصفار من البداية
+                              value = value.replace(/^0+/, "");
                             }
                             field.onChange(value);
                           }}

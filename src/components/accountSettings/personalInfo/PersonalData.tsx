@@ -4,7 +4,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
 import Button from "../../ui/Button";
 import { updateUserAPI, useUserAPI } from "../../../services/userService";
-import { IUser } from "../../../interfaces/accountSettingsInterface";
+import {
+  IUpdateUser,
+  IUser,
+} from "../../../interfaces/accountSettingsInterface";
 import Select from "../../ui/Select";
 import { gender } from "../../../data/accountSettingsData/personalInfoData";
 import Image from "../../ui/Image";
@@ -19,13 +22,16 @@ import Loader from "../../loader/Loader";
 import UserSkeleton from "../../skeleton/UserSkeleton";
 import { ApiError } from "../../../interfaces";
 import { baseURL } from "../../../services";
+import ChangeMobileModal from "./ChangeMobileModal";
 
 const uid = Cookies.get("user_id");
 function PersonalData() {
   const { t } = useTranslation();
   const { data } = useUserAPI();
+  const [changeMobile, setChangeMobile] = useState(false);
   const user: IUser = data?.data?.data?.user_data;
   const [loading, setLoading] = useState(false);
+  const [phone, setPhone] = useState("");
   const [previewImage, setPreviewImage] = useState<string>("");
   const [imageError, setImageError] = useState<string | null>(null);
   const {
@@ -33,12 +39,11 @@ function PersonalData() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<IUpdateUser>({
     resolver: yupResolver(personalDataSchema),
     defaultValues: {
       full_name: "",
       email: "",
-      phone: "",
       gender: "",
       pro_img: "",
     },
@@ -49,14 +54,14 @@ function PersonalData() {
         uid: uid,
         full_name: user.full_name,
         email: user.email,
-        phone: user.phone,
         gender: user.gender,
         pro_img: user?.pro_img,
       });
       setPreviewImage(baseURL + user?.pro_img);
+      setPhone(user.phone);
     }
   }, [user, reset]);
-  const onSubmit = async (data: IUser) => {
+  const onSubmit = async (data: IUpdateUser) => {
     setImageError(null);
     const formData = convertPersonalDataToFormData(data);
     try {
@@ -77,128 +82,135 @@ function PersonalData() {
   };
 
   return (
-    <div className="flex-[2]">
-      {!user ? (
-        <UserSkeleton cards={4} />
-      ) : (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col items-center">
-            <div className="w-28 h-28 rounded-full overflow-hidden cursor-pointer">
-              <label htmlFor="fileInput">
-                <Image
-                  imageUrl={previewImage}
-                  className="w-full h-full object-cover"
-                  alt="profile"
-                />
-              </label>
-            </div>
-            <Controller
-              name="pro_img"
-              control={control}
-              render={({ field: { onChange } }) => (
-                <input
-                  id="fileInput"
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(event) => {
-                    const file = event.target.files?.[0];
-                    if (file) {
-                      if (!allowedImageTypes.includes(file.type)) {
-                        setImageError(t("invalid_image_format"));
-                        return;
+    <>
+      <div className="flex-[2]">
+        {!user ? (
+          <UserSkeleton cards={4} />
+        ) : (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex flex-col items-center">
+              <div className="w-28 h-28 rounded-full overflow-hidden cursor-pointer">
+                <label htmlFor="fileInput">
+                  <Image
+                    imageUrl={previewImage}
+                    className="w-full h-full object-cover"
+                    alt="profile"
+                  />
+                </label>
+              </div>
+              <Controller
+                name="pro_img"
+                control={control}
+                render={({ field: { onChange } }) => (
+                  <input
+                    id="fileInput"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(event) => {
+                      const file = event.target.files?.[0];
+                      if (file) {
+                        if (!allowedImageTypes.includes(file.type)) {
+                          setImageError(t("invalid_image_format"));
+                          return;
+                        }
+                        toast.success(t("image_uploaded_successfully"));
+                        setImageError(null);
+                        setPreviewImage(URL.createObjectURL(file));
+                        onChange(file);
                       }
-                      toast.success(t("image_uploaded_successfully"));
-                      setImageError(null);
-                      setPreviewImage(URL.createObjectURL(file));
-                      onChange(file);
-                    }
-                  }}
-                />
+                    }}
+                  />
+                )}
+              />
+              {errors.pro_img && (
+                <InputErrorMessage msg={errors.pro_img.message} />
               )}
-            />
-            {errors.pro_img && (
-              <InputErrorMessage msg={errors.pro_img.message} />
-            )}
-            {imageError && <InputErrorMessage msg={imageError} />}
-          </div>
-          <div className="py-2 flex flex-col gap-2">
-            <label className="font-bold">{t("legal_name")}</label>
-            <Controller
-              name="full_name"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  placeholder="Enter your name"
-                  className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
-                />
-              )}
-            />
-            {errors.full_name && (
-              <InputErrorMessage msg={errors.full_name.message} />
-            )}
-          </div>
-          <div className="py-2 flex flex-col gap-2">
-            <label className="font-bold">{t("email")}</label>
-            <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  placeholder="Enter your email"
-                  className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
-                />
-              )}
-            />
-            {errors.email && <InputErrorMessage msg={errors.email.message} />}
-          </div>
-          <div className="py-2 flex flex-col gap-2">
-            <label className="font-bold">{t("phone_number")}</label>
-            <Controller
-              name="phone"
-              control={control}
-              render={({ field }) => (
-                <div className="relative">
+              {imageError && <InputErrorMessage msg={imageError} />}
+            </div>
+            <div className="py-2 flex flex-col gap-2">
+              <label className="font-bold">{t("legal_name")}</label>
+              <Controller
+                name="full_name"
+                control={control}
+                render={({ field }) => (
                   <Input
                     {...field}
-                    placeholder="Enter your phone number"
+                    placeholder="Enter your name"
                     className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
                   />
-                  <Button className="absolute right-3 top-3 text-primary font-medium">
-                    {t("change")}
-                  </Button>
-                </div>
+                )}
+              />
+              {errors.full_name && (
+                <InputErrorMessage msg={errors.full_name.message} />
               )}
-            />
-            {errors.phone && <InputErrorMessage msg={errors.phone.message} />}
-          </div>
-          <div className="py-2 flex flex-col gap-2">
-            <label className="font-bold">{t("gender")}</label>
-            <Controller
-              name="gender"
-              control={control}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  options={gender}
+            </div>
+            <div className="py-2 flex flex-col gap-2">
+              <label className="font-bold">{t("email")}</label>
+              <Controller
+                name="email"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    placeholder="Enter your email"
+                    className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
+                  />
+                )}
+              />
+              {errors.email && <InputErrorMessage msg={errors.email.message} />}
+            </div>
+            <div className="py-2 flex flex-col gap-2">
+              <label className="font-bold">{t("phone_number")}</label>
+              <div className="relative">
+                <Input
+                  value={phone}
+                  placeholder="Enter your phone number"
                   className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
+                  readOnly
                 />
+                <Button
+                  type="button"
+                  onClick={() => setChangeMobile(true)}
+                  className="absolute right-3 top-3 text-primary font-medium"
+                >
+                  {t("change")}
+                </Button>
+              </div>
+            </div>
+            <div className="py-2 flex flex-col gap-2">
+              <label className="font-bold">{t("gender")}</label>
+              <Controller
+                name="gender"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    options={gender}
+                    className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
+                  />
+                )}
+              />
+              {errors.gender && (
+                <InputErrorMessage msg={errors.gender.message} />
               )}
-            />
-            {errors.gender && <InputErrorMessage msg={errors.gender.message} />}
-          </div>
-          <Button
-            type="submit"
-            className="w-full mt-4 bg-primary text-white font-medium py-3 rounded-lg"
-            disabled={loading}
-          >
-            {loading ? <Loader /> : t("update")}
-          </Button>
-        </form>
-      )}
-    </div>
+            </div>
+            <Button
+              type="submit"
+              className="w-full mt-4 bg-primary text-white font-medium py-3 rounded-lg"
+              disabled={loading}
+            >
+              {loading ? <Loader /> : t("update")}
+            </Button>
+          </form>
+        )}
+      </div>
+      <ChangeMobileModal
+        phone={phone}
+        isOpen={changeMobile}
+        close={() => setChangeMobile(false)}
+      />
+    </>
   );
 }
 export default PersonalData;

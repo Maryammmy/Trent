@@ -16,3 +16,7 @@ export interface IVerifyOtp {
   otp: string;
   mobile: string;
 }
+export interface ISendOtp {
+  is_new_user?: boolean;
+  mobile: string;
+}

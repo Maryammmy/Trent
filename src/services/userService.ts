@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
 import Cookies from "js-cookie";
 import { CurrentLanguage } from "../types";
+import { IChangeMobile } from "@/interfaces/accountSettingsInterface";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -17,4 +18,7 @@ export const useUserAPI = () => {
 };
 export const updateUserAPI = (payload: FormData) => {
   return baseAPIForm.post("user_api/u_profile_edit.php", payload);
+};
+export const changeMobileAPI = (payload: IChangeMobile) => {
+  return baseAPI.post("user_api/u-change-mobile.php", payload);
 };

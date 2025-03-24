@@ -1,5 +1,5 @@
-import { IUser } from "../interfaces/accountSettingsInterface";
-export const convertPersonalDataToFormData = (data: IUser) => {
+import { IUpdateUser } from "../interfaces/accountSettingsInterface";
+export const convertPersonalDataToFormData = (data: IUpdateUser) => {
   const formData = new FormData();
   for (const [key, value] of Object.entries(data)) {
     if (value === null || value === undefined) continue;

@@ -24,7 +24,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
         <div className="pb-6">
           <p className="text-[#757575] font-medium px-1 text-center md:px-0 break-words">
             Just enter your email and we will send you the
-            <span className="text-center">verification code</span>
+            <span className="text-center"> verification code</span>
           </p>
         </div>
         <form>

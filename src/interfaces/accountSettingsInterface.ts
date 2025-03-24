@@ -16,6 +16,14 @@ export interface IAccountSettings {
   title: string;
   description: string;
 }
+export interface IUpdateUser {
+  uid: string;
+  email?: string;
+  full_name: string;
+  gender: string;
+  pro_img?: string | File;
+}
+
 export interface IUser {
   uid: string;
   email?: string;
@@ -23,4 +31,8 @@ export interface IUser {
   gender: string;
   pro_img?: string | File;
   phone: string;
+}
+export interface IChangeMobile {
+  new_mobile: string;
+  old_mobile: string;
 }

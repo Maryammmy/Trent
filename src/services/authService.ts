@@ -1,4 +1,4 @@
-import { IVerifyOtp } from "@/interfaces/authInterface";
+import { ISendOtp, IVerifyOtp } from "@/interfaces/authInterface";
 import { baseAPI } from ".";
 import { LoginNameInputs, SignupNameInputs } from "../types";
 
@@ -12,5 +12,12 @@ export const verifyOtpAPI = (payload: IVerifyOtp) => {
 };
 export const loginAPI = (payload: LoginNameInputs) => {
   const response = baseAPI.post("user_api/u_login_user.php", payload);
+  return response;
+};
+export const sendOtpApi = ({ is_new_user = true, mobile }: ISendOtp) => {
+  const response = baseAPI.post("user_api/send_otp.php", {
+    is_new_user,
+    mobile,
+  });
   return response;
 };

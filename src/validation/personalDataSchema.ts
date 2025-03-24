@@ -8,10 +8,6 @@ export const personalDataSchema = yup.object().shape({
     .max(50, "The name may not be greater than 50 characters.")
     .required("Full Name is required"),
   email: yup.string().email("Invalid email address"),
-  phone: yup
-    .string()
-    .matches(/^\d{10,15}$/, "Invalid phone number")
-    .required("Phone number is required"),
   gender: yup.string().required("Gender is required"),
   pro_img: yup.mixed<File | string>(),
 });
