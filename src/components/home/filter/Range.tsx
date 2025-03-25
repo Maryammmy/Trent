@@ -37,21 +37,29 @@ function PriceRange({ values, handleRangeChange }: IProps) {
         />
       )}
 
-      <div className="flex font-medium text-dark justify-between mt-4 text-sm">
+      <div className="flex flex-col gap-2 md:gap-0 md:flex-row font-medium text-dark justify-between mt-4 text-sm">
         <div className="flex items-center gap-2">
           <span>{t("minimum")}</span>:{" "}
-          {!values[0] ? (
-            <PriceSkeleton />
+          {values.length ? (
+            !values[0] ? (
+              <PriceSkeleton />
+            ) : (
+              <span className="text-black font-medium">{values[0]}</span>
+            )
           ) : (
-            <span className="text-black font-medium">{values[0]}</span>
+            "No minprice found"
           )}
         </div>
         <div className="flex items-center gap-2">
           <span>{t("maximum")}</span>:
-          {!values[1] ? (
-            <PriceSkeleton />
+          {values.length ? (
+            !values[1] ? (
+              <PriceSkeleton />
+            ) : (
+              <span className="text-black font-medium">{values[1]}</span>
+            )
           ) : (
-            <span className="text-black font-medium">{values[1]}</span>
+            "No max price found"
           )}
         </div>
       </div>

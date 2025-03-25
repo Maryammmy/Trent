@@ -1,5 +1,5 @@
 import { useMediaQuery } from "react-responsive";
-import HomeSearch from "../components/home/HomeSearch";
+// import HomeSearch from "../components/home/HomeSearch";
 import Image from "../components/ui/Image";
 import Carsoul from "../components/ui/Carsoul";
 import { getResponsiveSettings, responsiveSettings } from "../data/landingData";
@@ -37,9 +37,9 @@ function Home() {
             <span className="text-secondary">{t("today")}</span>
           </h1>
         </div>
-        <div className="absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        {/* <div className="absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <HomeSearch />
-        </div>
+        </div> */}
       </div>
       <div className="sm:px-4" data-aos="fade-down">
         {!sliderList ? (

@@ -11,8 +11,8 @@ export const languageOptions: ISelectOption[] = [
 ];
 export const navItems: INavItem[] = [
   { label: "home", to: "/" },
-  { label: "about_us", to: "/about-us" },
-  { label: "contact", to: "/contact-us" },
+  // { label: "about_us", to: "/about-us" },
+  // { label: "contact", to: "/contact-us" },
 ];
 export const authItems: string[] = ["log_in", "sign_up"];
 export const menuItems: INavItem[] = [

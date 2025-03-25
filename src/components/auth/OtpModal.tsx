@@ -32,7 +32,7 @@ export default function OtpModal({
   verifyOtp,
   is_new_user,
 }: IProps) {
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(60);
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
@@ -44,7 +44,7 @@ export default function OtpModal({
   };
   useEffect(() => {
     if (isOpen) {
-      setTimeLeft(10);
+      setTimeLeft(60);
     }
   }, [isOpen]);
   useEffect(() => {
@@ -65,7 +65,7 @@ export default function OtpModal({
       const response = await sendOtpAPI({ mobile, is_new_user });
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
-        setTimeLeft(10);
+        setTimeLeft(60);
       }
     } catch (error) {
       const customError = error as ApiError;
