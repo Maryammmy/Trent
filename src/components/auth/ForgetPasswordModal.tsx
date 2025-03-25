@@ -28,19 +28,40 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
           </p>
         </div>
         <form>
-          <div className="flex flex-col">
-            <label
-              htmlFor="email"
-              className="text-600 font-medium text-sm pb-1"
-            >
-              Your Email
+          <div className="flex flex-col gap-2 mb-4">
+            <label htmlFor="email" className="text-600 font-medium text-sm">
+              Your phone number
             </label>
             <Input
-              type="email"
+              type="text"
               placeholder="Enter your email"
               className="cursor-pointer p-3 rounded-lg border-2 border-gray-300 hover:border-black focus:border-primary outline-none"
-              id="email"
+              id="mobile"
               name="email"
+            />
+          </div>
+          <div className="flex flex-col gap-2 mb-4">
+            <label htmlFor="mobile" className="text-600 font-medium text-sm">
+              Phone number
+            </label>
+            <Input
+              type="text"
+              placeholder="Enter your email"
+              className="cursor-pointer p-3 rounded-lg border-2 border-gray-300 hover:border-black focus:border-primary outline-none"
+              id="mobile"
+              name="mobile"
+            />
+          </div>
+          <div className="flex flex-col gap-2 mb-4">
+            <label htmlFor="password" className="text-600 font-medium text-sm">
+              Password
+            </label>
+            <Input
+              type="password"
+              placeholder="Enter your email"
+              className="cursor-pointer p-3 rounded-lg border-2 border-gray-300 hover:border-black focus:border-primary outline-none"
+              id="password"
+              name="password"
             />
           </div>
           <Button
