@@ -1,20 +1,21 @@
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import Input from "../../../components/ui/Input";
 
-const storedAddressAr = sessionStorage.getItem("address_ar") || "";
-const storedAddressEn = sessionStorage.getItem("address_en") || "";
-const storedFloorAr = sessionStorage.getItem("floor_ar") || "";
-const storedFloorEn = sessionStorage.getItem("floor_en") || "";
-
 function AddressAndFloor() {
   const { t } = useTranslation();
-  const [addressAr, setAddressAr] = useState<string>(storedAddressAr);
-  const [addressEn, setAddressEn] = useState<string>(storedAddressEn);
-  const [floorAr, setFloorAr] = useState<string>(storedFloorAr);
-  const [floorEn, setFloorEn] = useState<string>(storedFloorEn);
+  const [addressAr, setAddressAr] = useState<string>("");
+  const [addressEn, setAddressEn] = useState<string>("");
+  const [floorAr, setFloorAr] = useState<string>("");
+  const [floorEn, setFloorEn] = useState<string>("");
+  useEffect(() => {
+    setAddressAr(sessionStorage.getItem("address_ar") || "");
+    setAddressEn(sessionStorage.getItem("address_en") || "");
+    setFloorAr(sessionStorage.getItem("floor_ar") || "");
+    setFloorEn(sessionStorage.getItem("floor_en") || "");
+  }, []);
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     type: "address" | "floor",

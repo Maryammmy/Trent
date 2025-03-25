@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import TextArea from "../../../components/ui/TextArea";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 
-const storedDescEn = sessionStorage.getItem("description_en") || "";
-const storedDescAr = sessionStorage.getItem("description_ar") || "";
-
 function Description() {
   const { t } = useTranslation();
-  const [descTextAreaEn, setDescTextAreaEn] = useState<string>(storedDescEn);
-  const [descTextAreaAr, setDescTextAreaAr] = useState<string>(storedDescAr);
-
+  const [descTextAreaEn, setDescTextAreaEn] = useState<string>("");
+  const [descTextAreaAr, setDescTextAreaAr] = useState<string>("");
+  useEffect(() => {
+    setDescTextAreaAr(sessionStorage.getItem("description_ar") || "");
+    setDescTextAreaEn(sessionStorage.getItem("description_en") || "");
+  }, []);
   const handleDescriptionChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
     lang: "en" | "ar"

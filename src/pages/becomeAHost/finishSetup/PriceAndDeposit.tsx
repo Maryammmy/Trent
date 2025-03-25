@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Input from "../../../components/ui/Input";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
@@ -8,21 +8,26 @@ import SelectSkeleton from "../../../components/skeleton/SelectSkeleton";
 import { useFiltersAPI } from "../../../services/filtersService";
 import { IPeriod } from "../../../interfaces";
 
-const storedPrice = sessionStorage.getItem("price");
-const storedSecurityDeposit = sessionStorage.getItem("security_deposit");
-const storedPeriod = sessionStorage.getItem("period");
-
 function PriceAndDeposit() {
   const { t } = useTranslation();
-  const [price, setPrice] = useState<number | "">(
-    storedPrice ? JSON.parse(storedPrice) : ""
-  );
-  const [securityDeposit, setSecurityDeposit] = useState<number | "">(
-    storedSecurityDeposit ? JSON.parse(storedSecurityDeposit) : ""
-  );
-  const [period, setPeriod] = useState<string>(storedPeriod || "");
+  const [price, setPrice] = useState<number | "">("");
+  const [securityDeposit, setSecurityDeposit] = useState<number | "">("");
+  const [period, setPeriod] = useState<string>("");
   const { data } = useFiltersAPI();
   const periods: IPeriod[] = data?.data?.data?.period_list;
+  useEffect(() => {
+    setPrice(
+      sessionStorage.getItem("price")
+        ? JSON.parse(sessionStorage.getItem("price") || "")
+        : ""
+    );
+    setSecurityDeposit(
+      sessionStorage.getItem("security_deposit")
+        ? JSON.parse(sessionStorage.getItem("security_deposit") || "")
+        : ""
+    );
+    setPeriod(sessionStorage.getItem("period") || "");
+  }, []);
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     type: "price" | "security_deposit"

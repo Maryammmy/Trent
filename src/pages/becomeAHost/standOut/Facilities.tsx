@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../../components/ui/Button";
 import { useTranslation } from "react-i18next";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
@@ -8,13 +8,16 @@ import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkele
 import { IFacility } from "../../../interfaces";
 import { useFacilitiesAPI } from "../../../services/filtersService";
 
-const storedFacilities = sessionStorage.getItem("facilities");
-
 function Facilities() {
   const { t } = useTranslation();
-  const [selectedFacilities, setSelectedFacilities] = useState<number[]>(
-    storedFacilities ? JSON.parse(storedFacilities) : []
-  );
+  const [selectedFacilities, setSelectedFacilities] = useState<number[]>([]);
+  useEffect(() => {
+    setSelectedFacilities(
+      sessionStorage.getItem("facilities")
+        ? JSON.parse(sessionStorage.getItem("facilities") || "")
+        : []
+    );
+  }, []);
   const { data } = useFacilitiesAPI();
   const facilities: IFacility[] = data?.data?.data?.facility_list;
   const handleSelectedFacilities = (id: number) => {
@@ -57,7 +60,7 @@ function Facilities() {
               );
             })
           ) : (
-            <div className="flex justify-center items-center text-dark font-medium w-full">
+            <div className="col-span-full flex justify-center items-center text-dark font-medium w-full">
               No facilities found
             </div>
           )}

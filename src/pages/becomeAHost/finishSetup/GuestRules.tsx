@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import TextArea from "../../../components/ui/TextArea";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 
-const storedRulesEn = sessionStorage.getItem("guest_rules_en") || "";
-const storedRulesAr = sessionStorage.getItem("guest_rules_ar") || "";
-
 function GuestRules() {
   const { t } = useTranslation();
-  const [rulesTextAreaEn, setRulesTextAreaEn] = useState<string>(storedRulesEn);
-  const [rulesTextAreaAr, setRulesTextAreaAr] = useState<string>(storedRulesAr);
-
+  const [rulesTextAreaEn, setRulesTextAreaEn] = useState<string>("");
+  const [rulesTextAreaAr, setRulesTextAreaAr] = useState<string>("");
+  useEffect(() => {
+    setRulesTextAreaEn(sessionStorage.getItem("guest_rules_en") || "");
+    setRulesTextAreaAr(sessionStorage.getItem("guest_rules_ar") || "");
+  }, []);
   const handleRulesChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
     lang: "en" | "ar"

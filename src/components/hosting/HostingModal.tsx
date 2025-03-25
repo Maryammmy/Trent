@@ -1,4 +1,4 @@
-import { CircleDollarSign, House, X } from "lucide-react";
+import { X } from "lucide-react";
 import { setIsFinishUpModal } from "../../store/features/becomeAHost/becomeAHostSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import Modal from "../ui/Modal";
@@ -12,9 +12,6 @@ import Loader from "../loader/Loader";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
-// const storedPrice = sessionStorage.getItem("price") || "";
-// const storedTitleAr = sessionStorage.getItem("title_ar") || "";
-// const storedTitleEn = sessionStorage.getItem("title_en") || "";
 function HostingModal() {
   const { t } = useTranslation();
   const { isFinishUpModal } = useAppSelector((state) => state.becomeAHost);
@@ -38,7 +35,6 @@ function HostingModal() {
     if (isSuccess) dispatch(setIsFinishUpModal(false));
     setLoading(false);
   };
-  useEffect(() => {}, []);
   return (
     <Modal
       isOpen={isFinishUpModal}
@@ -73,12 +69,12 @@ function HostingModal() {
           </h5>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-1">
-              <House className="text-primary" />
+              <span>🏡</span>
               <h6 className="font-medium">Rent price:</h6>
               <span className="font-bold">{storedPrice} EGP</span>
             </div>
             <div className="flex items-center gap-1">
-              <CircleDollarSign className="text-primary" />
+              <span>💸</span>
               <h6 className="font-medium">Trent fees:</h6>
               <span className="font-bold">1%({trentFees}) EGP</span>
             </div>

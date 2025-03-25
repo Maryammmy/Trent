@@ -1,8 +1,6 @@
 import { Link, useParams } from "react-router-dom";
-import CheckDates from "../../components/property/CheckDates";
 import HostedBy from "../../components/property/HostedBy";
 import Image from "../../components/ui/Image";
-import ReviewComponent from "../../components/property/reviews/ReviewComponent";
 import Amenities from "../../components/property/Amenities";
 import { useTranslation } from "react-i18next";
 import { usePropertyAPI } from "../../services/propertyService";
@@ -116,9 +114,9 @@ function Property() {
                 />
                 <Amenities facilities={facilities} />
               </div>
-              <CheckDates />
+              {/* <CheckDates /> */}
             </div>
-            <ReviewComponent />
+            {/* <ReviewComponent /> */}
             <div className="max-w-7xl mx-auto py-5">
               <Map
                 latitdude={Number(propertyDetails?.latitude)}

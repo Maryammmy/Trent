@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Counter from "../../../components/ui/Counter";
 import { useTranslation } from "react-i18next";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
@@ -6,19 +6,24 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import { floorPlan } from "../../../data/becomeAHost";
 import Input from "../../../components/ui/Input";
 
-const initialFloorPlanCounters = Object.fromEntries(
-  floorPlan.map((key) => [key, JSON.parse(sessionStorage.getItem(key) || "0")])
-);
-const storedSqft = sessionStorage.getItem("sqft");
 function FloorPlan() {
   const backButton = "/become-a-host/property-type";
   const { t } = useTranslation();
   const [floorPlanCounters, setFloorPlanCounters] = useState<{
     [key: string]: number;
-  }>(initialFloorPlanCounters);
-  const [sqft, setSqft] = useState<number | "">(
-    storedSqft ? JSON.parse(storedSqft) : ""
-  );
+  }>({});
+  const [sqft, setSqft] = useState<number | "">("");
+
+  useEffect(() => {
+    const counters = floorPlan.reduce((acc, key) => {
+      acc[key] = JSON.parse(sessionStorage.getItem(key) || "0");
+      return acc;
+    }, {} as { [key: string]: number });
+
+    setFloorPlanCounters(counters);
+    const storedSqft = sessionStorage.getItem("sqft");
+    setSqft(storedSqft ? JSON.parse(storedSqft) : "");
+  }, []);
 
   const updateFloorPlanCounter = (key: string, value: number) => {
     setFloorPlanCounters((prev) => {
@@ -48,6 +53,7 @@ function FloorPlan() {
           {t("floor_plan_desc")}
         </p>
 
+        {/* Render each floor plan counter */}
         {floorPlan.map((item, index) => (
           <div
             key={index}
@@ -63,6 +69,8 @@ function FloorPlan() {
             />
           </div>
         ))}
+
+        {/* Property Sqft Input */}
         <div className="flex flex-col gap-2 mt-5">
           <label className="font-medium">{t("property_sqft")}</label>
           <Input

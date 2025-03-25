@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import Input from "../../../components/ui/Input";
@@ -8,17 +8,18 @@ import Select from "../../../components/ui/Select";
 import SelectSkeleton from "../../../components/skeleton/SelectSkeleton";
 import { useGovernmentsAPI } from "../../../services/filtersService";
 
-const storedCityAr = sessionStorage.getItem("city_ar") || "";
-const storedCityEn = sessionStorage.getItem("city_en") || "";
-const storedGovId = sessionStorage.getItem("government_id") || "";
 const City = () => {
   const { t } = useTranslation();
-  const [cityAr, setCityAr] = useState(storedCityAr);
-  const [cityEn, setCityEn] = useState(storedCityEn);
-  const [governmentId, setGovernmentId] = useState(storedGovId);
-
+  const [cityAr, setCityAr] = useState("");
+  const [cityEn, setCityEn] = useState("");
+  const [governmentId, setGovernmentId] = useState("");
   const { data } = useGovernmentsAPI();
   const governmentList = data?.data?.data?.government_list;
+  useEffect(() => {
+    setCityAr(sessionStorage.getItem("city_ar") || "");
+    setCityEn(sessionStorage.getItem("city_en") || "");
+    setGovernmentId(sessionStorage.getItem("government_id") || "");
+  }, []);
   const handleCityChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     lang: "en" | "ar"

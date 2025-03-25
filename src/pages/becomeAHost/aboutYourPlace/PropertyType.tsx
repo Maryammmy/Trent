@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../../components/ui/Button";
 import { useTranslation } from "react-i18next";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
@@ -8,15 +8,15 @@ import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkele
 import { IPropertyType } from "../../../interfaces";
 import { usePropertyTypesAPI } from "../../../services/filtersService";
 
-const storedPropertyType = sessionStorage.getItem("category_id");
 function PropertyType() {
   const { t } = useTranslation();
-  const [selectedPropertyType, setSelectedPropertyType] = useState<string>(
-    storedPropertyType || ""
-  );
+  const [selectedPropertyType, setSelectedPropertyType] = useState<string>("");
   const backButton = "/become-a-host/about-your-place";
   const { data } = usePropertyTypesAPI();
   const propertyTypeList: IPropertyType[] = data?.data?.data?.category_list;
+  useEffect(() => {
+    setSelectedPropertyType(sessionStorage.getItem("category_id") || "");
+  }, []);
   const handleSelectedPropertyType = (id: string) => {
     setSelectedPropertyType(id);
     sessionStorage.setItem("category_id", id);
@@ -31,14 +31,14 @@ function PropertyType() {
           {!propertyTypeList ? (
             <PropertyTypeSkeleton cards={8} />
           ) : propertyTypeList?.length ? (
-            propertyTypeList?.map((item) => {
+            propertyTypeList.map((item) => {
               const { title, id } = item;
               return (
                 <Button
                   key={id}
                   onClick={() => handleSelectedPropertyType(id)}
                   className={`flex gap-2 font-medium border rounded-full py-2 px-4 ${
-                    selectedPropertyType === id && "bg-zinc-50 border-black"
+                    selectedPropertyType === id ? "bg-zinc-50 border-black" : ""
                   }`}
                 >
                   <span>{title}</span>
@@ -49,7 +49,7 @@ function PropertyType() {
               );
             })
           ) : (
-            <div className="flex justify-center items-center text-dark font-medium w-full">
+            <div className="col-span-full flex justify-center items-center text-dark font-medium w-full">
               No property type found
             </div>
           )}
