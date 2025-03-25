@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import HostedBy from "../../components/property/HostedBy";
 import Image from "../../components/ui/Image";
 import Amenities from "../../components/property/Amenities";
@@ -8,7 +8,6 @@ import {
   IDetailsProperty,
   IFacilityProperty,
 } from "../../interfaces/property/propertyInterface";
-import { Grip } from "lucide-react";
 import { CurrentLanguage } from "../../types";
 import { baseURL } from "../../services";
 import PropertySkeleton from "../../components/skeleton/PropertySkeleton";
@@ -36,7 +35,7 @@ function Property() {
                 {propertyDetails?.title?.[currentLanguage]}
               </h2>
             </div>
-            <div className="relative">
+            <div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {propertyDetails?.image_list?.slice(0, 3)?.map((image, i) => (
                   <div
@@ -52,7 +51,7 @@ function Property() {
                   </div>
                 ))}
               </div>
-              <Link
+              {/* <Link
                 to={`/properties/1/gallery`}
                 className="absolute bottom-2 right-8 flex items-center gap-1 bg-white py-1 px-2 border border-black rounded-md"
               >
@@ -62,7 +61,7 @@ function Property() {
                 <span className="font-medium text-sm ">
                   {t("show_all_photos")}
                 </span>
-              </Link>
+              </Link> */}
             </div>
             <div className="py-8 flex flex-col lg:flex-row gap-10 xl:gap-20 md:justify-between">
               <div className="flex-[2]">

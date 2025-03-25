@@ -1,30 +1,6 @@
-import { IChat, IMessage, ISelectOption } from "../interfaces";
+import { ISelectOption } from "../interfaces";
 import { INavItem } from "../interfaces/landingInterface";
 
-export const dummyChats: IChat[] = [
-  { id: 1, name: "Malak", message: "hello", unread: 1 },
-  { id: 2, name: "Maryam", message: "I send you a request", unread: 1 },
-  {
-    id: 3,
-    name: "Omar",
-    message: "Yeah omar how are you",
-    unread: 1,
-  },
-  { id: 4, name: "abdelrahman", message: "Sent new media file", unread: 1 },
-];
-
-export const dummyMessages: Record<number, IMessage[]> = {
-  1: [
-    { sender: "Malak", text: "hello", time: "05/09/2024" },
-    { sender: "Malak", text: "hello", time: "05/09/2024" },
-    { receiver: "Maryam", text: "helloz", time: "05/09/2024" },
-    { receiver: "Maryam", text: "helloz", time: "05/09/2024" },
-  ],
-  2: [
-    { sender: "Maryam", text: "hello", time: "05/09/2024" },
-    { sender: "maryam", text: "hello", time: "05/09/2024" },
-  ],
-};
 export const periods: ISelectOption[] = [
   { label: "daily", value: "d" },
   { label: "monthly", value: "m" },
@@ -36,7 +12,6 @@ export const languageOptions: ISelectOption[] = [
 export const navItems: INavItem[] = [
   { label: "home", to: "/" },
   { label: "about_us", to: "/about-us" },
-  { label: "services", to: "/services" },
   { label: "contact", to: "/contact-us" },
 ];
 export const authItems: string[] = ["log_in", "sign_up"];

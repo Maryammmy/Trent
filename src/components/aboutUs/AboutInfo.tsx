@@ -1,12 +1,11 @@
 import { aboutInfo } from "../../data/aboutData";
 import Image from "../ui/Image";
-
 function AboutInfo() {
   return (
-    <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
-      <div className=" w-full h-[400px] md:w-[500px] lg:w-[400px] rounded-md overflow-hidden">
+    <div className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-20">
+      <div className=" w-full h-[300px] md:w-[400px] lg:w-[300px] rounded-md overflow-hidden">
         <Image
-          imageUrl="/images/home1.avif"
+          imageUrl="/images/Trent-logo-pdf.png"
           alt="home"
           className="w-full h-full object-cover"
         />

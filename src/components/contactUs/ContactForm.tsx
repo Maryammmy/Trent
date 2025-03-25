@@ -13,7 +13,7 @@ function ContactForm() {
         {formContactData.map((item, index) => {
           const { name, label, placeholder } = item;
           return (
-            <div key={index} className="flex flex-col mb-3">
+            <div key={index} className="flex flex-col gap-2 mb-3">
               <label htmlFor={name} className="font-medium">
                 {label}
               </label>

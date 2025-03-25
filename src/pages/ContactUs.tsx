@@ -11,7 +11,7 @@ function ContactUs() {
           </h2>
         </div>
       </div>
-      <div className="py-10 px-5 xl:px-20 flex flex-col md:flex-row gap-10 md:gap-0 md:justify-between">
+      <div className="py-10 px-5 xl:px-20 flex flex-col xl:flex-row gap-10 xl:gap-0 xl:justify-between">
         <ContactInfo />
         <ContactForm />
       </div>
