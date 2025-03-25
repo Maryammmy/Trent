@@ -9,7 +9,9 @@ import { HostingContext } from "../context/HostingContext";
 
 const propertyData = (images: File[], video?: File): IPropertyData => {
   const uid = Cookies.get("user_id");
+
   return {
+    uid: uid || "",
     category_id: sessionStorage.getItem("category_id") || "",
     guest_count: Number(sessionStorage.getItem("guest_count")),
     beds_count: Number(sessionStorage.getItem("beds_count")),
@@ -38,8 +40,7 @@ const propertyData = (images: File[], video?: File): IPropertyData => {
     security_deposit: Number(sessionStorage.getItem("security_deposit")),
     guest_rules_en: sessionStorage.getItem("guest_rules_en") || "",
     guest_rules_ar: sessionStorage.getItem("guest_rules_ar") || "",
-    uid: uid || "",
-    video,
+    ...(video && { video }), // ✅ هيضيف الفيديو فقط لو كان موجود
   };
 };
 
@@ -61,7 +62,8 @@ const formData = (images: File[], video?: File) => {
 };
 export const useSendDataToAPI = () => {
   const { t } = useTranslation();
-  const { selectedImages, selectedVideo } = useContext(HostingContext);
+  const { selectedImages, selectedVideo, setSelectedImages, setSelectedVideo } =
+    useContext(HostingContext);
   const sendDataToAPI = async (): Promise<boolean> => {
     try {
       const payload = formData(selectedImages, selectedVideo);
@@ -70,6 +72,8 @@ export const useSendDataToAPI = () => {
 
       if (response?.data?.response_code === 201) {
         toast.success(response?.data?.response_message);
+        setSelectedImages([]);
+        setSelectedVideo(undefined);
       }
       return true;
     } catch (error) {

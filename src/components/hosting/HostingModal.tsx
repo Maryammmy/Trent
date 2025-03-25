@@ -7,27 +7,38 @@ import { useTranslation } from "react-i18next";
 import Image from "../ui/Image";
 import { CurrentLanguage } from "../../types";
 import { useSendDataToAPI } from "../../services/addPropertyService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Loader from "../loader/Loader";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
-const storedPrice = sessionStorage.getItem("price") || "";
-const storedTitleAr = sessionStorage.getItem("title_ar") || "";
-const storedTitleEn = sessionStorage.getItem("title_en") || "";
+// const storedPrice = sessionStorage.getItem("price") || "";
+// const storedTitleAr = sessionStorage.getItem("title_ar") || "";
+// const storedTitleEn = sessionStorage.getItem("title_en") || "";
 function HostingModal() {
   const { t } = useTranslation();
   const { isFinishUpModal } = useAppSelector((state) => state.becomeAHost);
   const dispatch = useAppDispatch();
-  const trentFees = (Number(storedPrice) * 0.1).toFixed(2);
   const [loading, setLoading] = useState<boolean>(false);
   const { sendDataToAPI } = useSendDataToAPI();
+  const [storedPrice, setStoredPrice] = useState<string>("");
+  const [storedTitleAr, setStoredTitleAr] = useState<string>("");
+  const [storedTitleEn, setStoredTitleEn] = useState<string>("");
+  const trentFees = (Number(storedPrice) * 0.1).toFixed(2);
+
+  useEffect(() => {
+    setStoredPrice(sessionStorage.getItem("price") || "");
+    setStoredTitleAr(sessionStorage.getItem("title_ar") || "");
+    setStoredTitleEn(sessionStorage.getItem("title_en") || "");
+  }, []);
+
   const handleFinishUp = async () => {
     setLoading(true);
     const isSuccess = await sendDataToAPI();
     if (isSuccess) dispatch(setIsFinishUpModal(false));
     setLoading(false);
   };
+  useEffect(() => {}, []);
   return (
     <Modal
       isOpen={isFinishUpModal}

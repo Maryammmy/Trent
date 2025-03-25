@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Modal from "@/components/ui/Modal";
 import { ApiError } from "@/interfaces";
+import { verifyOtpAPI } from "@/services/authService";
 import { changeMobileAPI } from "@/services/userService";
 import { X } from "lucide-react";
 import { useState } from "react";
@@ -15,7 +16,6 @@ interface IProps {
   close: () => void;
   phone: string;
 }
-
 function ChangeMobileModal({ isOpen, close, phone }: IProps) {
   const { t } = useTranslation();
   const [newPhone, setNewPhone] = useState("");
@@ -48,6 +48,30 @@ function ChangeMobileModal({ isOpen, close, phone }: IProps) {
       toast.error(errorMessage);
     } finally {
       setLoading(false);
+    }
+  };
+  const verifyOtp = async (
+    e: React.FormEvent<HTMLFormElement>,
+    { otp, mobile }: { otp: string; mobile: string },
+    close: () => void
+  ) => {
+    e.preventDefault();
+    try {
+      const response = await verifyOtpAPI({
+        mobile,
+        otp,
+        is_change_password: false,
+      });
+      if (response?.data?.response_code === 200) {
+        toast.success(response?.data?.response_message);
+        close();
+      }
+    } catch (error) {
+      const customError = error as ApiError;
+      const errorMessage =
+        customError?.response?.data?.response_message ||
+        t("something_went_wrong");
+      toast.error(errorMessage);
     }
   };
   return (
@@ -102,7 +126,7 @@ function ChangeMobileModal({ isOpen, close, phone }: IProps) {
                 value={newPhone}
                 onChange={handleChangeNewMobile}
                 type="text"
-                placeholder="Enter your old phone number"
+                placeholder="Enter your new phone number"
                 className="cursor-pointer p-3 rounded-lg border-2 border-gray-300 hover:border-black focus:border-primary outline-none"
                 id="newMobile"
                 name="new_mobile"
@@ -112,12 +136,17 @@ function ChangeMobileModal({ isOpen, close, phone }: IProps) {
               type="submit"
               className="bg-primary zoom w-full mt-6 py-3 px-3 rounded-lg text-white font-semibold text-sm text-center"
             >
-              {loading ? <Loader /> : "Submit"}
+              {loading ? <Loader /> : "Send OTP"}
             </Button>
           </form>
         </div>
       </Modal>
-      <OtpModal close={() => setOtp(false)} isOpen={otp} mobile={newPhone} />
+      <OtpModal
+        close={() => setOtp(false)}
+        isOpen={otp}
+        mobile={phone}
+        verifyOtp={verifyOtp}
+      />
     </>
   );
 }

@@ -13,9 +13,15 @@ import { HostingContext } from "../../../context/HostingContext";
 
 const Images = () => {
   const { t } = useTranslation();
-  const { setSelectedImages } = useContext(HostingContext);
+  const { setSelectedImages, selectedImages } = useContext(HostingContext);
   const [imageError, setImageError] = useState<string | null>(null);
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<{ url: string; file: File }[]>(
+    selectedImages.map((file) => ({
+      url: URL.createObjectURL(file),
+      file,
+    }))
+  );
+
   const handleImageChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -33,7 +39,10 @@ const Images = () => {
         return true;
       });
       if (validFiles.length === 0) return;
-      const fileUrls = validFiles.map((file) => URL.createObjectURL(file));
+      const fileUrls = validFiles.map((file) => ({
+        url: URL.createObjectURL(file),
+        file,
+      }));
       setImages((prev) => [...prev, ...fileUrls]);
       setSelectedImages((prev) => [...prev, ...validFiles]);
       toast.success(t("image_uploaded_successfully"));
@@ -41,12 +50,18 @@ const Images = () => {
       setImageError(null);
     }
   };
-  const handleDeleteImage = (image: string) => {
-    setImages((prevImages) => prevImages.filter((item) => item !== image));
-    setImageError(null);
-    toast.success(t("iamge_deleted_successfully"));
-  };
 
+  const handleDeleteImage = (imageUrl: string, file: File) => {
+    setSelectedImages((prevSelected) =>
+      prevSelected.filter((fileItem) => fileItem.name !== file.name)
+    );
+    setImages((prevImages) =>
+      prevImages.filter((img) => img.file.name !== file.name)
+    );
+    URL.revokeObjectURL(imageUrl);
+    setImageError(null);
+    toast.success(t("image_deleted_successfully"));
+  };
   return (
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
@@ -71,17 +86,19 @@ const Images = () => {
         <div>
           {images.length ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {images.map((image, index) => (
+              {images.map((imageObj, index) => (
                 <div className="relative" key={index}>
                   <div className="rounded-lg overflow-hidden w-full h-28">
                     <Image
-                      imageUrl={image}
+                      imageUrl={imageObj.url}
                       alt={`Uploaded photo ${index}`}
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <Button
-                    onClick={() => handleDeleteImage(image)}
+                    onClick={() =>
+                      handleDeleteImage(imageObj.url, imageObj.file)
+                    }
                     className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
                   >
                     <X size={15} />

@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { signupData } from "../../data/authData";
 import { setIsSignup } from "../../store/features/auth/authSlice";
-import { verifySignupAPI } from "../../services/authService";
+import { verifyOtpAPI, verifySignupAPI } from "../../services/authService";
 import toast from "react-hot-toast";
 import { Fragment, useState } from "react";
 import { signupSchema } from "../../validation/signupSchema ";
@@ -18,6 +18,7 @@ import { SignupNameInputs } from "../../types";
 import OtpModal from "./OtpModal";
 import { useTranslation } from "react-i18next";
 import { ApiError } from "@/interfaces";
+import Cookies from "js-cookie";
 
 function SignupModal() {
   const { t } = useTranslation();
@@ -43,15 +44,14 @@ function SignupModal() {
     },
   });
   const onSubmit: SubmitHandler<SignupNameInputs> = async (data) => {
+    setLoading(true);
+    setMobile(data.mobile);
     try {
-      setLoading(true);
-      setMobile(data.mobile);
       const response = await verifySignupAPI(data);
-      console.log(response);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
-        setOtp(true);
         dispatch(setIsSignup(false));
+        setOtp(true);
       }
     } catch (error) {
       const customError = error as ApiError;
@@ -61,6 +61,36 @@ function SignupModal() {
       toast.error(errorMessage);
     } finally {
       setLoading(false);
+    }
+  };
+  const verifyOtp = async (
+    e: React.FormEvent<HTMLFormElement>,
+    { otp, mobile }: { otp: string; mobile: string },
+    close: () => void
+  ) => {
+    e.preventDefault();
+    try {
+      const response = await verifyOtpAPI({
+        mobile,
+        otp,
+        is_change_password: null,
+      });
+      if (response?.data?.response_code === 200) {
+        toast.success(response?.data?.response_message);
+        Cookies.set("user_id", response?.data.data?.user_login?.id, {
+          expires: 365,
+        });
+        setTimeout(() => {
+          close();
+          window.location.reload();
+        }, 500);
+      }
+    } catch (error) {
+      const customError = error as ApiError;
+      const errorMessage =
+        customError?.response?.data?.response_message ||
+        t("something_went_wrong");
+      toast.error(errorMessage);
     }
   };
   return (
@@ -80,7 +110,7 @@ function SignupModal() {
             <X className="text-black" size={20} />
           </span>
         </Button>
-        <div className="p-5 md:py-8 md:px-10 max-h-[80vh] overflow-y-auto">
+        <div className="p-5 md:py-8 md:px-10 max-h-[85vh] overflow-y-auto">
           <div className="pb-2">
             <h2 className="text-lg font-semibold">Welcome to Trent</h2>
           </div>
@@ -107,7 +137,7 @@ function SignupModal() {
                       <label className="block text-sm font-medium mb-1">
                         {label}
                       </label>
-                      <div className="flex w-full border hover:border-black border-gray-300 rounded-lg p-3 focus-within:border-2 !focus-within:border-primary">
+                      <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
                         {name === "password" || name === "confirmPassword" ? (
                           <>
                             <Input
@@ -162,7 +192,12 @@ function SignupModal() {
           </form>
         </div>
       </Modal>
-      <OtpModal isOpen={otp} close={() => setOtp(false)} mobile={mobile} />
+      <OtpModal
+        isOpen={otp}
+        close={() => setOtp(false)}
+        mobile={mobile}
+        verifyOtp={verifyOtp}
+      />
     </>
   );
 }

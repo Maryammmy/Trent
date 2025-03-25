@@ -39,10 +39,9 @@ function LoginModal() {
     resolver: yupResolver(loginSchema),
     defaultValues: { mobile: "", password: "", ccode: "+20" },
   });
-
   const onSubmit: SubmitHandler<LoginNameInputs> = async (data) => {
+    setLoading(true);
     try {
-      setLoading(true);
       const response = await loginAPI(data);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);

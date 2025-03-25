@@ -267,7 +267,7 @@
   "Trent_service_fee": "رسوم خدمة Trent",
   "image_too_small": "الصورة صغيرة جدًا! يجب أن يكون حجم الصورة على الأقل 50KB.",
   "image_already_uploaded": "هذه الصورة مرفوعة بالفعل! لا يمكن رفع نفس الصورة مرتين.",
-  "iamge_deleted_successfully": "تم حذف الصورة بنجاح!",
+  "image_deleted_successfully": "تم حذف الصورة بنجاح!",
   "video_for_property": "قم بتحميل فيديو لمكان الإقامة الخاص بك",
   "video_for_property_desc": "يمكن أن يساعد الفيديو القصير الضيوف على التعرف على المكان بشكل أفضل.",
   "upload_video": "تحميل الفيديو",

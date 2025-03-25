@@ -28,7 +28,7 @@ function PriceRange({ values, handleRangeChange }: IProps) {
           range
           defaultValue={values}
           min={10}
-          max={568885}
+          max={2324230}
           value={values}
           onChange={(value) =>
             handleRangeChange(Array.isArray(value) ? value : [value])

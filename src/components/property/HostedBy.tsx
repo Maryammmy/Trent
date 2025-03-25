@@ -19,12 +19,8 @@ interface IProps {
 }
 function HostedBy({ id, owner, guestRules, ownerId }: IProps) {
   const [loading, setLoading] = useState(false);
-  // const [enabled, setEnabled] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
-  // const { data } = useChatListAPI(id, enabled);
-  // const chatId: string = data?.data?.data?.chat_list?.[0]?.chat_id;
-  // console.log(data);
   const handleChatNavigator = async () => {
     setLoading(true);
     try {

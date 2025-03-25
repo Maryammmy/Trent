@@ -269,7 +269,7 @@
   "Trent_service_fee": "Trent service fee",
   "image_too_small": "The image is too small! It must be at least 50KB in size.",
   "image_already_uploaded": "This image is already uploaded! You cannot upload the same image twice.",
-  "iamge_deleted_successfully": "Image deleted successfully!",
+  "image_deleted_successfully": "Image deleted successfully!",
   "video_for_property": "Upload a video of your property",
   "video_for_property_desc": "A short video can help guests get a better feel for your space.",
   "upload_video": "Upload Video",

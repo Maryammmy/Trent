@@ -8,25 +8,35 @@ import Button from "../ui/Button";
 import Loader from "../loader/Loader";
 import React, { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import { sendOtpApi, verifyOtpAPI } from "@/services/authService";
+import { sendOtpAPI } from "@/services/authService";
 import { useTranslation } from "react-i18next";
 import { ApiError } from "@/interfaces";
 import toast from "react-hot-toast";
-import Cookies from "js-cookie";
 
 interface IProps {
   close: () => void;
   isOpen: boolean;
   mobile: string;
+  is_new_user?: boolean;
+  verifyOtp: (
+    e: React.FormEvent<HTMLFormElement>,
+    { otp, mobile }: { otp: string; mobile: string },
+    close: () => void
+  ) => Promise<void>;
 }
 
-export default function OtpModal({ close, isOpen, mobile }: IProps) {
+export default function OtpModal({
+  close,
+  isOpen,
+  mobile,
+  verifyOtp,
+  is_new_user,
+}: IProps) {
   const [timeLeft, setTimeLeft] = useState(10);
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
   const [otp, setOtp] = useState("");
-
   const handleOTPChange = (val: string) => {
     if (/^\d*$/.test(val)) {
       setOtp(val);
@@ -43,36 +53,16 @@ export default function OtpModal({ close, isOpen, mobile }: IProps) {
       return () => clearTimeout(timer);
     }
   }, [timeLeft]);
-  const verifyOtp = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const verifyOTP = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
-    try {
-      const response = await verifyOtpAPI({ mobile, otp });
-      if (response?.data?.response_code === 200) {
-        toast.success(response?.data?.response_message);
-        Cookies.set("user_id", response?.data.data?.user_login?.id, {
-          expires: 365,
-        });
-        setTimeout(() => {
-          close();
-          window.location.reload();
-        }, 500);
-      }
-    } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
-    } finally {
-      setLoading(false);
-    }
+    await verifyOtp(e, { otp, mobile }, close);
+    setLoading(false);
   };
   const reSendOtp = async () => {
     if (timeLeft > 0) return;
     setResendLoading(true);
     try {
-      const response = await sendOtpApi({ mobile });
+      const response = await sendOtpAPI({ mobile, is_new_user });
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
         setTimeLeft(10);
@@ -93,8 +83,11 @@ export default function OtpModal({ close, isOpen, mobile }: IProps) {
       maxWidth="500px"
       className="text-2xl text-center p-4 border-b font-semibold"
       title="Verify Your OTP"
-      close={close}
       isOpen={isOpen}
+      close={() => {
+        close();
+        setOtp("");
+      }}
     >
       <Button onClick={close} className="absolute top-5 right-4">
         <span>
@@ -107,7 +100,7 @@ export default function OtpModal({ close, isOpen, mobile }: IProps) {
             Please enter the 6-digit code sent to your phone
           </p>
         </div>
-        <form onSubmit={verifyOtp}>
+        <form onSubmit={verifyOTP}>
           <div className="pb-6">
             <InputOTP value={otp} onChange={handleOTPChange} maxLength={6}>
               <InputOTPGroup className="flex justify-between items-center gap-2 w-full">
