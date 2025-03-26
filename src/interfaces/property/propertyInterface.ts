@@ -4,6 +4,18 @@ export interface ISingleProperty {
   facility_list: IFacilityProperty[];
 }
 export interface IDetailsProperty {
+  cancellation_policy: {
+    id: string;
+    is_recommended: boolean;
+    title: {
+      ar: string;
+      en: string;
+    };
+    description: {
+      ar: string;
+      en: string;
+    };
+  };
   address: {
     en: string;
     ar: string;
@@ -123,6 +135,7 @@ export interface IPropertyData {
   compound_en: string;
   period: string;
   is_featured?: boolean;
+  cancellation_policy_id: string;
 }
 export interface IProperty {
   IS_FAVOURITE: number;

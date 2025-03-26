@@ -81,6 +81,9 @@ export const updatePropertySchema = yup.object().shape({
     .min(10, "Guest rules must be at least 10 characters")
     .max(500, "Guest rules must be less than 500 characters")
     .required("Guest rules (Arabic) are required"),
+  cancellation_policy_id: yup
+    .string()
+    .required("Cancellation policy is required"),
   images: yup
     .array()
     .min(3, "At least three images are required")

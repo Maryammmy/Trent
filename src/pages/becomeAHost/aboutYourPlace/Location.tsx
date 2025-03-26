@@ -4,12 +4,13 @@ import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWra
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import Input from "../../../components/ui/Input";
 
+const storedLocation = sessionStorage.getItem("maps_url");
 function Location() {
   const { t } = useTranslation();
   const [googleMapsUrl, setGoogleMapsUrl] = useState<string>("");
   const [error, setError] = useState<string>("");
   useEffect(() => {
-    setGoogleMapsUrl(sessionStorage.getItem("maps_url") || "");
+    setGoogleMapsUrl(storedLocation || "");
   }, []);
   const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const url = event.target.value;

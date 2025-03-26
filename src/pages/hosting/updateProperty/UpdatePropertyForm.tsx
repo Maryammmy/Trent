@@ -38,6 +38,9 @@ import VideoUploader from "./VideoUploader";
 import ImageUploader from "./ImageUploader";
 import { useNavigate } from "react-router-dom";
 import { allowedImageTypes, allowedVideoTypes } from "../../../constants";
+import { ICancellationPolicy } from "@/interfaces/hosting";
+import { useCancellationPoliciesAPI } from "@/services/conditionService";
+import CancellationPolicy from "./CancellationPolicy";
 
 interface UpdatePropertyFormProps {
   propertyData: ISingleProperty;
@@ -60,6 +63,7 @@ function UpdatePropertyForm({
   const facilityListProperty: IFacilityProperty[] = propertyData?.facility_list;
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { data: propertyTypeList } = usePropertyTypesAPI();
   const propertyTypes: IPropertyType[] =
     propertyTypeList?.data?.data?.category_list;
@@ -70,6 +74,9 @@ function UpdatePropertyForm({
     governmentList?.data?.data?.government_list;
   const { data: filters } = useFiltersAPI();
   const periods = filters?.data?.data?.period_list;
+  const { data } = useCancellationPoliciesAPI();
+  const cancellationPolicies: ICancellationPolicy[] =
+    data?.data?.data?.cancellation_policies_list;
   const {
     reset,
     control,
@@ -136,6 +143,7 @@ function UpdatePropertyForm({
     setVideoError(null);
     toast.error(t("video_deleted_successfully"));
   };
+  const handleClickCancellationPolicy = () => setIsOpen(!isOpen);
   useEffect(() => {
     if (propertyDetails && facilityListProperty) {
       setVideo(baseURL + propertyDetails?.video);
@@ -174,6 +182,7 @@ function UpdatePropertyForm({
         description_ar: propertyDetails?.description?.ar,
         guest_rules_en: propertyDetails?.guest_rules?.en,
         guest_rules_ar: propertyDetails?.guest_rules?.ar,
+        cancellation_policy_id: propertyDetails?.cancellation_policy?.id,
       });
     }
   }, [propertyDetails, facilityListProperty, reset, propertyId, userId]);
@@ -202,7 +211,7 @@ function UpdatePropertyForm({
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         <PropertyTypeSelector
           control={control}
           errors={errors}
@@ -214,8 +223,13 @@ function UpdatePropertyForm({
           governments={governments}
         />
         <PeriodSelector control={control} errors={errors} periods={periods} />
-        <PropertyInputs control={control} errors={errors} />
-        <PropertyTextArea control={control} errors={errors} />
+        <CancellationPolicy
+          isOpen={isOpen}
+          cancellationPolicies={cancellationPolicies}
+          handleOnClick={handleClickCancellationPolicy}
+          control={control}
+          errors={errors}
+        />
         <FacilitiesSelector
           control={control}
           errors={errors}
@@ -243,7 +257,7 @@ function UpdatePropertyForm({
         <Button
           disabled={loading}
           type="submit"
-          className="bg-primary text-white py-3 rounded-md w-40"
+          className="bg-primary text-white font-semibold py-3 rounded-md w-40"
         >
           {loading ? <Loader /> : t("update_Property")}
         </Button>

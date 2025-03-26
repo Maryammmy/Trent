@@ -5,10 +5,12 @@ import { usePropertyAPI } from "../../../services/propertyService";
 import UpdateSkeleton from "../../../components/skeleton/UpdateSkeleton";
 import AuthorizationCheck from "./AuthorizationCheck";
 import UpdatePropertyForm from "./UpdatePropertyForm";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { CurrentLanguage } from "@/types";
 
 const userId = Cookies.get("user_id");
-
+const currentLanguage = (localStorage.getItem("i18nextLng") ||
+  "en") as CurrentLanguage;
 function UpdateProperty() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -21,7 +23,11 @@ function UpdateProperty() {
         <div className=" max-w-screen-2xl mx-auto py-5 md:py-10 px-5 2xl:px-20">
           <div className="flex gap-3 items-center pb-5">
             <Link to="/hosting/properties">
-              <ChevronLeft className="text-primary" />
+              {currentLanguage === "en" ? (
+                <ChevronLeft className="text-primary" />
+              ) : (
+                <ChevronRight className="text-primary" />
+              )}
             </Link>
             <h2 className="font-semibold text-xl md:text-3xl text-primary">
               {t("update_Property")}

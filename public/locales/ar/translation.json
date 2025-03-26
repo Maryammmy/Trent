@@ -310,5 +310,8 @@
   "change": "تغيير",
   "refresh_error": "⚠️ الصور والفيديوهات التي رفعتها ستُحذف عند التحديث!",
   "terms_and_conditions": "الشروط والاحكام",
-  "privacy_policy": "سياسة الخصوصية"
+  "privacy_policy": "سياسة الخصوصية",
+  "missing_required_fields": "يرجى ملء جميع الحقول المطلوبة.",
+  "select_cancellation_policy": "اختر سياسة الغاء الحجز",
+  "cancellation_policy": "سياسة الغاء الحجز"
 }

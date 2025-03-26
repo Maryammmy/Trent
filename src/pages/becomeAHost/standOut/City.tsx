@@ -8,6 +8,9 @@ import Select from "../../../components/ui/Select";
 import SelectSkeleton from "../../../components/skeleton/SelectSkeleton";
 import { useGovernmentsAPI } from "../../../services/filtersService";
 
+const storedCityAr = sessionStorage.getItem("city_ar");
+const storedCityEn = sessionStorage.getItem("city_en");
+const storedGovernmentId = sessionStorage.getItem("government_id");
 const City = () => {
   const { t } = useTranslation();
   const [cityAr, setCityAr] = useState("");
@@ -16,9 +19,9 @@ const City = () => {
   const { data } = useGovernmentsAPI();
   const governmentList = data?.data?.data?.government_list;
   useEffect(() => {
-    setCityAr(sessionStorage.getItem("city_ar") || "");
-    setCityEn(sessionStorage.getItem("city_en") || "");
-    setGovernmentId(sessionStorage.getItem("government_id") || "");
+    setCityAr(storedCityAr || "");
+    setCityEn(storedCityEn || "");
+    setGovernmentId(storedGovernmentId || "");
   }, []);
   const handleCityChange = (
     e: React.ChangeEvent<HTMLInputElement>,

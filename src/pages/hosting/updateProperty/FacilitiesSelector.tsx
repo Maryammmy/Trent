@@ -14,7 +14,7 @@ function FacilitiesSelector({ control, errors, facilities }: IProps) {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-1">
-      <label className="font-medium text-white">{t("facilities")}</label>
+      <label className="font-medium text-dark">{t("facilities")}</label>
       {!facilities ? (
         <SelectSkeleton />
       ) : facilities?.length ? (

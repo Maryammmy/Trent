@@ -3,14 +3,26 @@ import { useTranslation } from "react-i18next";
 import TextArea from "../../../components/ui/TextArea";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
+import { ICancellationPolicy } from "@/interfaces/hosting";
+import CancellationPolicy from "./CancellationPolicies";
 
-function GuestRules() {
+const storedRulesTextAreaEn = sessionStorage.getItem("guest_rules_en");
+const storedRulesTextAreaAr = sessionStorage.getItem("guest_rules_ar");
+const storedCancellationPolicy = sessionStorage.getItem("cancellation_policy");
+function GuestRulesAndCancellationPolicies() {
   const { t } = useTranslation();
   const [rulesTextAreaEn, setRulesTextAreaEn] = useState<string>("");
   const [rulesTextAreaAr, setRulesTextAreaAr] = useState<string>("");
+  const [selectedPolicy, setSelectedPolicy] = useState<
+    ICancellationPolicy | ""
+  >("");
+  const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
-    setRulesTextAreaEn(sessionStorage.getItem("guest_rules_en") || "");
-    setRulesTextAreaAr(sessionStorage.getItem("guest_rules_ar") || "");
+    setRulesTextAreaEn(storedRulesTextAreaEn || "");
+    setRulesTextAreaAr(storedRulesTextAreaAr || "");
+    setSelectedPolicy(
+      storedCancellationPolicy ? JSON.parse(storedCancellationPolicy) : ""
+    );
   }, []);
   const handleRulesChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -25,7 +37,12 @@ function GuestRules() {
       sessionStorage.setItem("guest_rules_ar", newValue);
     }
   };
-
+  const handleIClick = () => setIsOpen(!isOpen);
+  const handleChangePolicy = (policy: ICancellationPolicy) => {
+    setSelectedPolicy(policy);
+    setIsOpen(false);
+    sessionStorage.setItem("cancellation_policy", JSON.stringify(policy));
+  };
   return (
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
@@ -35,6 +52,12 @@ function GuestRules() {
         <p className="max-w-2xl text-dark font-medium pb-10">
           {t("guest_rules_desc")}
         </p>
+        <CancellationPolicy
+          selectedPolicy={selectedPolicy}
+          isOpen={isOpen}
+          handleOnClick={handleIClick}
+          handleChangePolicy={handleChangePolicy}
+        />
         <div className="flex flex-col gap-2 mb-5">
           <label className="font-medium">{t("guest_rules_in_english")}</label>
           <TextArea
@@ -67,11 +90,13 @@ function GuestRules() {
         back="/become-a-host/price-and-deposit"
         next="/hosting/properties"
         isNextDisabled={
-          rulesTextAreaEn.length < 10 || rulesTextAreaAr.length < 10
+          rulesTextAreaEn.length < 10 ||
+          rulesTextAreaAr.length < 10 ||
+          !selectedPolicy
         }
       />
     </div>
   );
 }
 
-export default GuestRules;
+export default GuestRulesAndCancellationPolicies;

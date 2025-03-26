@@ -20,3 +20,10 @@ export const usePrivacyPolicyAPI = () => {
       baseAPI.get(`user_api/u_privacy_policy.php?lang=${currentLanguage}`),
   });
 };
+export const useCancellationPoliciesAPI = () => {
+  return useQuery({
+    queryKey: ["cancellationPolicies"],
+    queryFn: () =>
+      baseAPI.get(`user_api/u_cancellation_list.php?lang=${currentLanguage}`),
+  });
+};

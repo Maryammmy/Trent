@@ -32,4 +32,5 @@ export const defaultPropertyValues: PropertyNameInputs = {
   description_ar: "",
   guest_rules_en: "",
   guest_rules_ar: "",
+  cancellation_policy_id: "",
 };

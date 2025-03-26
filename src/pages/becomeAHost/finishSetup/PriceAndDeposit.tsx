@@ -8,6 +8,9 @@ import SelectSkeleton from "../../../components/skeleton/SelectSkeleton";
 import { useFiltersAPI } from "../../../services/filtersService";
 import { IPeriod } from "../../../interfaces";
 
+const storedPeriod = sessionStorage.getItem("period");
+const storedPrice = sessionStorage.getItem("price");
+const storedSecurityDeposit = sessionStorage.getItem("security_deposit");
 function PriceAndDeposit() {
   const { t } = useTranslation();
   const [price, setPrice] = useState<number | "">("");
@@ -16,24 +19,19 @@ function PriceAndDeposit() {
   const { data } = useFiltersAPI();
   const periods: IPeriod[] = data?.data?.data?.period_list;
   useEffect(() => {
-    setPrice(
-      sessionStorage.getItem("price")
-        ? JSON.parse(sessionStorage.getItem("price") || "")
-        : ""
-    );
+    setPrice(storedPrice ? JSON.parse(storedPrice) : "");
     setSecurityDeposit(
-      sessionStorage.getItem("security_deposit")
-        ? JSON.parse(sessionStorage.getItem("security_deposit") || "")
-        : ""
+      storedSecurityDeposit ? JSON.parse(storedSecurityDeposit) : ""
     );
-    setPeriod(sessionStorage.getItem("period") || "");
+    setPeriod(storedPeriod ? storedPeriod : "");
   }, []);
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     type: "price" | "security_deposit"
   ) => {
-    const inputValue = event.target.value.replace(/[^0-9]/g, "");
-    const numericValue = inputValue ? parseInt(inputValue, 10) : "";
+    const inputValue = event.target.value.replace(/\D/g, "");
+    const numericValue = inputValue ? Number(inputValue) : "";
+
     if (type === "price") {
       setPrice(numericValue);
       sessionStorage.setItem("price", JSON.stringify(numericValue));
@@ -42,6 +40,7 @@ function PriceAndDeposit() {
       sessionStorage.setItem("security_deposit", JSON.stringify(numericValue));
     }
   };
+
   const handlePeriodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newPeriod = event.target.value;
     setPeriod(newPeriod);
@@ -103,7 +102,7 @@ function PriceAndDeposit() {
       <ProgressBarsWrapper progressBarsData={["100%", "100%", "50%"]} />
       <BackAndNext
         back="/become-a-host/min-and-max-days"
-        next="/become-a-host/guest-rules"
+        next="/become-a-host/guest-rules-and-cancellation-policies"
         isNextDisabled={!price || !period}
       />
     </div>

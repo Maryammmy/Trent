@@ -312,5 +312,8 @@
   "change": "Change",
   "refresh_error": "⚠️ The images and videos you uploaded will be deleted upon refresh!",
   "terms_and_conditions": "Terms and Conditions",
-  "privacy_policy": "Privacy Policy"
+  "privacy_policy": "Privacy Policy",
+  "missing_required_fields": "Please fill in all required fields.",
+  "select_cancellation_policy": "Select a cancellation policy",
+  "cancellation_policy": "Cancellation Policy"
 }

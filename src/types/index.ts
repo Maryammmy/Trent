@@ -43,6 +43,7 @@ export type PropertyNameInputs = {
   description_ar: string;
   guest_rules_en: string;
   guest_rules_ar: string;
+  cancellation_policy_id: string;
 };
 export type PropertyInputs = {
   price: string;

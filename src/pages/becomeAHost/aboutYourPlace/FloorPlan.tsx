@@ -6,6 +6,13 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import { floorPlan } from "../../../data/becomeAHost";
 import Input from "../../../components/ui/Input";
 
+const storedSqft = sessionStorage.getItem("sqft");
+const storedCounters = floorPlan.reduce((acc, key) => {
+  acc[key] = sessionStorage.getItem(key)
+    ? JSON.parse(sessionStorage.getItem(key)!)
+    : 0;
+  return acc;
+}, {} as { [key: string]: number });
 function FloorPlan() {
   const backButton = "/become-a-host/property-type";
   const { t } = useTranslation();
@@ -15,13 +22,7 @@ function FloorPlan() {
   const [sqft, setSqft] = useState<number | "">("");
 
   useEffect(() => {
-    const counters = floorPlan.reduce((acc, key) => {
-      acc[key] = JSON.parse(sessionStorage.getItem(key) || "0");
-      return acc;
-    }, {} as { [key: string]: number });
-
-    setFloorPlanCounters(counters);
-    const storedSqft = sessionStorage.getItem("sqft");
+    setFloorPlanCounters(storedCounters);
     setSqft(storedSqft ? JSON.parse(storedSqft) : "");
   }, []);
 

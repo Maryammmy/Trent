@@ -11,3 +11,9 @@ export interface IPropertyTextArea {
   label: string;
   placeholder: string;
 }
+export interface ICancellationPolicy {
+  description: string;
+  id: string;
+  is_recommended: boolean;
+  title: string;
+}

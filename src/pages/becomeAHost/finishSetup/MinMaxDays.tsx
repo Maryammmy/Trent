@@ -4,13 +4,15 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import Input from "../../../components/ui/Input";
 
+const storedMinDays = sessionStorage.getItem("min_days");
+const storedMaxDays = sessionStorage.getItem("max_days");
 function MinMaxDays() {
   const { t } = useTranslation();
   const [minDays, setMinDays] = useState<string>("");
   const [maxDays, setMaxDays] = useState<string>("");
   useEffect(() => {
-    setMinDays(sessionStorage.getItem("min_days") || "");
-    setMaxDays(sessionStorage.getItem("max_days") || "");
+    setMinDays(storedMinDays || "");
+    setMaxDays(storedMaxDays || "");
   }, []);
   const handleDaysChange = (
     e: React.ChangeEvent<HTMLInputElement>,

@@ -32,7 +32,14 @@ export default function PropertyCartSkeleton({
                   />
                 ))}
               </div>
-              <div className="h-4 w-12 rounded-md bg-stone-200 animate-pulse"></div>
+              <div>
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <div
+                    key={index}
+                    className="h-4 w-28 rounded-md mb-2 bg-stone-200 animate-pulse"
+                  />
+                ))}
+              </div>
             </div>
           </div>
         ))}

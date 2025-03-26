@@ -9,7 +9,7 @@ import { HostingContext } from "../context/HostingContext";
 
 const propertyData = (images: File[], video?: File | null): IPropertyData => {
   const uid = Cookies.get("user_id");
-
+  const cancellationPolicy = sessionStorage.getItem("cancellation_policy");
   return {
     uid: uid || "",
     category_id: sessionStorage.getItem("category_id") || "",
@@ -40,12 +40,16 @@ const propertyData = (images: File[], video?: File | null): IPropertyData => {
     security_deposit: Number(sessionStorage.getItem("security_deposit")),
     guest_rules_en: sessionStorage.getItem("guest_rules_en") || "",
     guest_rules_ar: sessionStorage.getItem("guest_rules_ar") || "",
+    cancellation_policy_id: cancellationPolicy
+      ? JSON.parse(cancellationPolicy)?.id
+      : "",
     ...(video && { video }),
   };
 };
 
 const formData = (images: File[], video?: File | null) => {
   const property = propertyData(images, video);
+  console.log(property);
   const formData = new FormData();
   for (const [key, value] of Object.entries(property)) {
     if (key === "images" && Array.isArray(value)) {
@@ -67,9 +71,14 @@ export const useSendDataToAPI = () => {
   const sendDataToAPI = async (): Promise<boolean> => {
     try {
       const payload = formData(selectedImages, selectedVideo);
+      for (const [, value] of payload.entries()) {
+        if (!value || value === "[]" || !selectedImages.length) {
+          toast.error(t("missing_required_fields"));
+          return false;
+        }
+      }
       const response = await addPropertyAPI(payload);
       console.log(response);
-
       if (response?.data?.response_code === 201) {
         toast.success(response?.data?.response_message);
         setSelectedImages([]);
@@ -82,6 +91,7 @@ export const useSendDataToAPI = () => {
         customError?.response?.data?.response_message ||
         t("something_went_wrong");
       toast.error(errorMessage);
+      console.log(error);
       return false;
     }
   };
