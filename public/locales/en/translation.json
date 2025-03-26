@@ -310,5 +310,7 @@
   "image_too_large": "The image size is too large. Maximum allowed size is 2MB.",
   "update": "Update",
   "change": "Change",
-  "refresh_error": "⚠️ The images and videos you uploaded will be deleted upon refresh!"
+  "refresh_error": "⚠️ The images and videos you uploaded will be deleted upon refresh!",
+  "terms_and_conditions": "Terms and Conditions",
+  "privacy_policy": "Privacy Policy"
 }

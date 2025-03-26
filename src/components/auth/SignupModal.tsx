@@ -19,12 +19,15 @@ import OtpModal from "./OtpModal";
 import { useTranslation } from "react-i18next";
 import { ApiError } from "@/interfaces";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 
 function SignupModal() {
   const { t } = useTranslation();
   const [mobile, setMobile] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [termsError, setTermsError] = useState("");
   const [otp, setOtp] = useState(false);
   const dispatch = useAppDispatch();
   const { isSignup } = useAppSelector((state) => state.auth);
@@ -43,7 +46,17 @@ function SignupModal() {
       name: "",
     },
   });
+  const handleTermsChange = () => {
+    setAcceptedTerms(!acceptedTerms);
+    if (!acceptedTerms) {
+      setTermsError(""); // مسح الخطأ لو المستخدم وافق
+    }
+  };
   const onSubmit: SubmitHandler<SignupNameInputs> = async (data) => {
+    if (!acceptedTerms) {
+      setTermsError("You must accept the Terms and Conditions to proceed.");
+      return;
+    }
     setLoading(true);
     setMobile(data.mobile);
     try {
@@ -110,7 +123,7 @@ function SignupModal() {
             <X className="text-black" size={20} />
           </span>
         </Button>
-        <div className="p-5 md:py-8 md:px-10 max-h-[85vh] overflow-y-auto">
+        <div className="p-5 md:py-8 md:px-10 max-h-[80vh] overflow-y-auto">
           <div className="pb-2">
             <h2 className="text-lg font-semibold">Welcome to Trent</h2>
           </div>
@@ -181,11 +194,32 @@ function SignupModal() {
                 />
               </Fragment>
             ))}
-
+            <div className="my-4">
+              <div className="flex items-center gap-2 font-medium">
+                <input
+                  type="checkbox"
+                  id="terms"
+                  checked={acceptedTerms}
+                  onChange={handleTermsChange}
+                  className="w-5 h-5 accent-primary cursor-pointer"
+                />
+                <label htmlFor="terms" className="text-sm text-dark">
+                  I accept the{" "}
+                  <Link
+                    target="_blank"
+                    to="/terms-and-conditions"
+                    className="text-primary underline"
+                  >
+                    Terms and Conditions
+                  </Link>
+                </label>
+              </div>
+              {termsError && <InputErrorMessage msg={termsError} />}
+            </div>
             <Button
               disabled={loading}
               type="submit"
-              className="w-full zoom bg-primary text-white py-3 rounded-lg font-bold"
+              className="w-full zoom bg-primary mt-2 text-white py-3 rounded-lg font-bold"
             >
               {loading ? <Loader /> : "Sign up"}
             </Button>

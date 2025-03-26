@@ -14,6 +14,8 @@ import ConfirmAndPay from "../pages/property/ConfirmAndPay";
 import LandingPage from "../pages";
 import ChatApp from "../pages/ChatApp";
 import ProtectedRoutes from "../middleware/ProtectedRoutes";
+import TermsAndConditions from "@/pages/TermsAndConditions";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
 
 export const RootRoutes = (
   <>
@@ -22,6 +24,14 @@ export const RootRoutes = (
       <Route path="properties/:id" element={<Property />} />
       <Route path="contact-us" element={<ContactUs />} />
       <Route path="about-us" element={<AboutUs />} />
+      <Route
+        path="chat"
+        element={
+          <ProtectedRoutes>
+            <ChatApp />
+          </ProtectedRoutes>
+        }
+      />
       <Route
         path="account-settings"
         element={
@@ -35,14 +45,6 @@ export const RootRoutes = (
         element={
           <ProtectedRoutes>
             <PersonalInfo />
-          </ProtectedRoutes>
-        }
-      />
-      <Route
-        path="chat"
-        element={
-          <ProtectedRoutes>
-            <ChatApp />
           </ProtectedRoutes>
         }
       />
@@ -70,6 +72,8 @@ export const RootRoutes = (
           </ProtectedRoutes>
         }
       />
+      <Route path="terms-and-conditions" element={<TermsAndConditions />} />
+      <Route path="privacy-policy" element={<PrivacyPolicy />} />
       <Route path="*" element={<NotFoundPage />} />
     </Route>
     <Route path="properties/:id/gallery" element={<Gallery />} />
