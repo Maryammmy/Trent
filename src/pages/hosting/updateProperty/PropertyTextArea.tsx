@@ -19,7 +19,7 @@ function PropertyTextArea({ control, errors }: IProps) {
           control={control}
           render={({ field }) => (
             <div className="flex flex-col gap-1">
-              <label className="font-medium text-white">{t(label)}</label>
+              <label className="font-medium text-dark">{t(label)}</label>
               <TextArea
                 {...field}
                 placeholder={t(placeholder)}

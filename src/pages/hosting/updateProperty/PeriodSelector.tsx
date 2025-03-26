@@ -14,7 +14,7 @@ function PeriodSelector({ control, errors, periods }: IProps) {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-1">
-      <label className="font-medium text-white">{t("period")}</label>
+      <label className="font-medium text-dark">{t("period")}</label>
       {!periods ? (
         <SelectSkeleton />
       ) : periods?.length ? (

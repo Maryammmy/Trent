@@ -14,7 +14,7 @@ function GovernmentSelector({ control, errors, governments }: IProps) {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-1">
-      <label className="font-medium text-white">{t("government")}</label>
+      <label className="font-medium text-dark">{t("government")}</label>
       {!governments ? (
         <SelectSkeleton />
       ) : governments?.length ? (

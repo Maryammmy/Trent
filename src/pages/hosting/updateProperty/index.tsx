@@ -17,13 +17,13 @@ function UpdateProperty() {
   return (
     <>
       <AuthorizationCheck owner={owner} userId={userId} />
-      <div className="bg-update-property bg-fixed bg-cover bg-no-repeat min-h-screen">
-        <div className="max-w-screen-md py-5 md:py-10 px-5 2xl:px-20">
+      <div className="bg-stone-100 bg-fixed bg-cover bg-no-repeat min-h-screen">
+        <div className=" max-w-screen-2xl mx-auto py-5 md:py-10 px-5 2xl:px-20">
           <div className="flex gap-3 items-center pb-5">
             <Link to="/hosting/properties">
-              <ChevronLeft />
+              <ChevronLeft className="text-primary" />
             </Link>
-            <h2 className="font-semibold text-xl md:text-3xl text-white">
+            <h2 className="font-semibold text-xl md:text-3xl text-primary">
               {t("update_Property")}
             </h2>
           </div>

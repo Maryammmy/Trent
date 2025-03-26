@@ -13,8 +13,10 @@ import { allowedVideoTypes } from "../../../constants";
 
 const UploadVideo = () => {
   const { t } = useTranslation();
-  const { setSelectedVideo } = useContext(HostingContext);
-  const [video, setVideo] = useState<string | null>(null);
+  const { setSelectedVideo, selectedVideo } = useContext(HostingContext);
+  const [video, setVideo] = useState<string | null>(
+    selectedVideo ? URL.createObjectURL(selectedVideo) : null
+  );
   const [videoError, setVideoError] = useState<string | null>(null);
   const handleVideoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -40,6 +42,7 @@ const UploadVideo = () => {
   };
   const handleDeleteVideo = () => {
     setVideo("");
+    setSelectedVideo(null);
     setVideoError(null);
     toast.error(t("video_deleted_successfully"));
   };

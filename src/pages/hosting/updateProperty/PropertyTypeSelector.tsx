@@ -15,7 +15,7 @@ const PropertyTypeSelector = ({ control, errors, propertyTypes }: IProps) => {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-1">
-      <label className="font-medium text-white">{t("property_type")}</label>
+      <label className="font-medium text-dark">{t("property_type")}</label>
       {!propertyTypes ? (
         <SelectSkeleton />
       ) : propertyTypes?.length ? (

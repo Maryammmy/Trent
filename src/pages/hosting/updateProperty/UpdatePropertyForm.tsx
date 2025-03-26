@@ -201,41 +201,43 @@ function UpdatePropertyForm({
     }
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <PropertyTypeSelector
-        control={control}
-        errors={errors}
-        propertyTypes={propertyTypes}
-      />
-      <GovernmentSelector
-        control={control}
-        errors={errors}
-        governments={governments}
-      />
-      <PeriodSelector control={control} errors={errors} periods={periods} />
-      <PropertyInputs control={control} errors={errors} />
-      <PropertyTextArea control={control} errors={errors} />
-      <FacilitiesSelector
-        control={control}
-        errors={errors}
-        facilities={facilities}
-      />
-      <PropertyInputs control={control} errors={errors} />
-      <PropertyTextArea control={control} errors={errors} />
-      <ImageUploader
-        images={images}
-        handleImageChange={handleImageChange}
-        handleDeleteImage={handleDeleteImage}
-        errors={errors}
-        imageError={imageError}
-      />
-      <VideoUploader
-        handleVideoChange={handleVideoChange}
-        handleDeleteVideo={handleDeleteVideo}
-        video={video}
-        errors={errors}
-        videoError={videoError}
-      />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <PropertyTypeSelector
+          control={control}
+          errors={errors}
+          propertyTypes={propertyTypes}
+        />
+        <GovernmentSelector
+          control={control}
+          errors={errors}
+          governments={governments}
+        />
+        <PeriodSelector control={control} errors={errors} periods={periods} />
+        <PropertyInputs control={control} errors={errors} />
+        <PropertyTextArea control={control} errors={errors} />
+        <FacilitiesSelector
+          control={control}
+          errors={errors}
+          facilities={facilities}
+        />
+        <PropertyInputs control={control} errors={errors} />
+        <PropertyTextArea control={control} errors={errors} />
+        <ImageUploader
+          images={images}
+          handleImageChange={handleImageChange}
+          handleDeleteImage={handleDeleteImage}
+          errors={errors}
+          imageError={imageError}
+        />
+        <VideoUploader
+          handleVideoChange={handleVideoChange}
+          handleDeleteVideo={handleDeleteVideo}
+          video={video}
+          errors={errors}
+          videoError={videoError}
+        />
+      </div>
 
       <div className="flex justify-end items-center">
         <Button

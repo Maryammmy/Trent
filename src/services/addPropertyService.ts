@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import { HostingContext } from "../context/HostingContext";
 
-const propertyData = (images: File[], video?: File): IPropertyData => {
+const propertyData = (images: File[], video?: File | null): IPropertyData => {
   const uid = Cookies.get("user_id");
 
   return {
@@ -40,11 +40,11 @@ const propertyData = (images: File[], video?: File): IPropertyData => {
     security_deposit: Number(sessionStorage.getItem("security_deposit")),
     guest_rules_en: sessionStorage.getItem("guest_rules_en") || "",
     guest_rules_ar: sessionStorage.getItem("guest_rules_ar") || "",
-    ...(video && { video }), // ✅ هيضيف الفيديو فقط لو كان موجود
+    ...(video && { video }),
   };
 };
 
-const formData = (images: File[], video?: File) => {
+const formData = (images: File[], video?: File | null) => {
   const property = propertyData(images, video);
   const formData = new FormData();
   for (const [key, value] of Object.entries(property)) {
@@ -73,7 +73,7 @@ export const useSendDataToAPI = () => {
       if (response?.data?.response_code === 201) {
         toast.success(response?.data?.response_message);
         setSelectedImages([]);
-        setSelectedVideo(undefined);
+        setSelectedVideo(null);
       }
       return true;
     } catch (error) {
