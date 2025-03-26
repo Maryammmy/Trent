@@ -1,5 +1,5 @@
 import Image from "./ui/Image";
-import { icons, sections } from "../data/footerData";
+import { icons, newsletterSection, sections } from "../data/footerData";
 
 function Footer() {
   return (
@@ -40,11 +40,19 @@ function Footer() {
               <h2 className="font-bold text-lg">{section.title}</h2>
               <div className="flex flex-col gap-2 text-dark font-medium">
                 {section.items.map((item, itemIndex) => (
-                  <div key={itemIndex}>{item}</div>
+                  <div key={itemIndex} className="hover:underline">
+                    {item}
+                  </div>
                 ))}
               </div>
             </div>
           ))}
+          <div className="flex flex-col gap-5">
+            <h2 className="font-bold text-lg">{newsletterSection.title}</h2>
+            <div className="flex flex-col gap-2 text-dark font-medium">
+              {newsletterSection.content}
+            </div>
+          </div>
         </div>
       </div>
       <div className="bg-primary py-2 flex justify-center items-center">
