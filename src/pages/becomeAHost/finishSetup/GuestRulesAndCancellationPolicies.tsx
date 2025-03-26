@@ -46,11 +46,11 @@ function GuestRulesAndCancellationPolicies() {
   return (
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
-        <h3 className="text-2xl md:text-3xl font-semibold pb-3">
-          {t("guest_rules")}
+        <h3 className="text-2xl md:text-3xl font-semibold pb-4">
+          {t("guest_rules_and_cancellation_policies")}
         </h3>
-        <p className="max-w-2xl text-dark font-medium pb-10">
-          {t("guest_rules_desc")}
+        <p className="max-w-2xl text-dark font-medium pb-5">
+          {t("guest_rules_and_cancellation_policies_desc")}
         </p>
         <CancellationPolicy
           selectedPolicy={selectedPolicy}

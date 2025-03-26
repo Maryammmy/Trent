@@ -3,6 +3,7 @@ import { ICancellationPolicy } from "@/interfaces/hosting";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Button from "@/components/ui/Button";
 import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   selectedPolicy: ICancellationPolicy | "";
@@ -17,6 +18,7 @@ function CancellationPolicy({
   handleOnClick,
   handleChangePolicy,
 }: IProps) {
+  const { t } = useTranslation();
   const { data } = useCancellationPoliciesAPI();
   const cancellationPolicies: ICancellationPolicy[] =
     data?.data?.data?.cancellation_policies_list;
@@ -24,7 +26,7 @@ function CancellationPolicy({
   return (
     <div className="relative mb-5">
       <label htmlFor="cancellation-policy" className="font-medium mb-2 block">
-        Cancellation Policy
+        {t("cancellation_policy")}
       </label>
       {!cancellationPolicies ? (
         <SelectSkeleton />
@@ -41,7 +43,7 @@ function CancellationPolicy({
                   <span className="font-semibold">{selectedPolicy.title}</span>
                 </>
               ) : (
-                "Select a cancellation policy"
+                t("select_cancellation_policy")
               )}
             </div>
             {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}

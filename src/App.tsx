@@ -8,6 +8,7 @@ import FilterDataContextProvider from "./context/FilterDataContext";
 import SystemLoader from "./components/loader/SystemLoader";
 import AOS from "aos";
 import HostingContextProvider from "./context/HostingContext";
+import AlertContextProvider from "./context/AlertContext";
 
 function App() {
   AOS.init({
@@ -42,12 +43,14 @@ function App() {
     <>
       <FilterDataContextProvider>
         <HostingContextProvider>
-          <PhotoProvider>
-            <Suspense fallback={<SystemLoader />}>
-              <RouterProvider router={router} />
-            </Suspense>
-            <Toaster />
-          </PhotoProvider>
+          <AlertContextProvider>
+            <PhotoProvider>
+              <Suspense fallback={<SystemLoader />}>
+                <RouterProvider router={router} />
+              </Suspense>
+              <Toaster />
+            </PhotoProvider>
+          </AlertContextProvider>
         </HostingContextProvider>
       </FilterDataContextProvider>
     </>

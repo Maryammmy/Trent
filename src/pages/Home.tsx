@@ -8,6 +8,7 @@ import SilderSkeleton from "../components/skeleton/SilderSkeleton";
 import { CurrentLanguage } from "../types";
 import { baseURL } from "../services";
 import { useTranslation } from "react-i18next";
+import HomeAlert from "@/components/home/HomeAlert";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -27,6 +28,7 @@ function Home() {
   const sliderList = data?.data?.data?.slider_list;
   return (
     <div>
+      <HomeAlert />
       <div className="bg-home h-[50vh] bg-[length:100%_100%] bg-no-repeat mb-[10vh]">
         <div className="w-full px-5 md:max-w-xl absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <h1

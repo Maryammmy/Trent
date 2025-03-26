@@ -43,3 +43,16 @@ export const useHomeDataAPI = (
     enabled,
   });
 };
+
+export const useAlertAPI = () => {
+  return useQuery({
+    queryKey: ["alert"],
+    queryFn: () => baseAPI.get(`user_api/u_alert.php?lang=${currentLanguage}`),
+  });
+};
+export const useContactAPI = () => {
+  return useQuery({
+    queryKey: ["contact"],
+    queryFn: () => baseAPI.get("user_api/u_contact_us.php"),
+  });
+};
