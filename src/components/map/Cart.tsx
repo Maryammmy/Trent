@@ -95,8 +95,8 @@ function Cart({ property }: IProps) {
           <div className="flex flex-col gap-1">
             <h3 className="font-bold">{truncateText(title, 8)}</h3>
             <div className="flex flex-row gap-1">
-              <span>{truncateText(city_name, 10)}</span>
-              <span>{truncateText(government_name, 10)}</span>
+              <span>{truncateText(city_name, 5)}</span>
+              <span>{truncateText(government_name, 5)}</span>
             </div>
           </div>
           <div className="flex flex-col sm:items-end gap-1">

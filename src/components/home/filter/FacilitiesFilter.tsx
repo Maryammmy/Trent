@@ -34,10 +34,10 @@ function FacilitiesFilter({
                   "bg-zinc-50 border-black"
                 }`}
               >
-                <span>{title}</span>
                 <span>
                   <Home />
                 </span>
+                <span>{title}</span>
               </Button>
             );
           })

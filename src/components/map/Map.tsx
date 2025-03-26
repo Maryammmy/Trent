@@ -83,11 +83,11 @@ const Map = ({ properties }: IProps) => {
             >
               <Button
                 style={{
-                  transform: `translateY(${index * 10}px)`,
+                  transform: `translateY(${index * 15}px)`,
                 }}
                 className={`p-2 rounded-full font-bold text-sm
                    text-center cursor-pointer inline-flex items-center justify-center
-                   shadow-md transition-all duration-300 hover:!scale-110 w-auto min-w-[60px] max-w-[200px] ${
+                   shadow-md transition-all duration-300 w-auto min-w-[60px] max-w-[200px] ${
                      isSelected
                        ? "bg-primary text-white relative z-10"
                        : "bg-white text-black"

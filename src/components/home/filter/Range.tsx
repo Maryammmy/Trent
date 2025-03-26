@@ -27,8 +27,8 @@ function PriceRange({ values, handleRangeChange }: IProps) {
         <Slider
           range
           defaultValue={values}
-          min={10}
-          max={2324230}
+          min={1000}
+          max={4500000}
           value={values}
           onChange={(value) =>
             handleRangeChange(Array.isArray(value) ? value : [value])

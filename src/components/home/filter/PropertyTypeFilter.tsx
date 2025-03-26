@@ -29,14 +29,14 @@ function PropertyTypeFilter({
               <Button
                 key={id}
                 onClick={() => handleSelectedProperty(id)}
-                className={`flex gap-2 font-medium border rounded-full py-2 px-4 ${
+                className={`flex gap-2 font-medium border rounded-full py-2 px-3 ${
                   selectedProperty === id && "bg-zinc-50 border-black"
                 }`}
               >
-                <span>{title}</span>
                 <span>
                   <Home />
                 </span>
+                <span>{title}</span>
               </Button>
             );
           })

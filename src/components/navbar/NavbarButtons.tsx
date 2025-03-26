@@ -44,11 +44,11 @@ const NavbarButtons = () => {
   return (
     <>
       {isLoggedin && (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 md:gap-4">
           <div className="relative" ref={languageSwitcherRef}>
             <Button
               onClick={toggleLangSwitcher}
-              className="hidden xl:block py-2 px-4 rounded-full text-white hover:bg-[#F7F7F7] hover:text-dark"
+              className="md:py-2 md:px-4 rounded-full text-white md:hover:bg-[#F7F7F7] md:hover:text-dark"
             >
               <Globe size={18} />
             </Button>
