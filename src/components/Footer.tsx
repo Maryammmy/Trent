@@ -12,7 +12,7 @@ function Footer() {
     <footer className="pt-5 bg-[#FAFAFA]">
       <div className="px-10 max-w-screen-2xl mx-auto pb-5">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-10 lg:gap-5 py-5">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-5">
             <div className="w-[40%]">
               <Image
                 imageUrl="/images/Trent-blue.svg"
