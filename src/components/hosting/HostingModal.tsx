@@ -9,9 +9,11 @@ import { CurrentLanguage } from "../../types";
 import { useSendDataToAPI } from "../../services/addPropertyService";
 import { useEffect, useState } from "react";
 import Loader from "../loader/Loader";
+import Cookies from "js-cookie";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
+const ownerFees = Cookies.get("owner_fees");
 function HostingModal() {
   const { t } = useTranslation();
   const { isFinishUpModal } = useAppSelector((state) => state.becomeAHost);
@@ -21,7 +23,9 @@ function HostingModal() {
   const [storedPrice, setStoredPrice] = useState<string>("");
   const [storedTitleAr, setStoredTitleAr] = useState<string>("");
   const [storedTitleEn, setStoredTitleEn] = useState<string>("");
-  const trentFees = (Number(storedPrice) * 0.1).toFixed(2);
+  const trentFees = (Number(storedPrice) * (Number(ownerFees) / 100)).toFixed(
+    2
+  );
 
   useEffect(() => {
     setStoredPrice(sessionStorage.getItem("price") || "");
@@ -70,13 +74,17 @@ function HostingModal() {
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-1">
               <span>🏡</span>
-              <h6 className="font-medium">Rent price:</h6>
-              <span className="font-bold">{storedPrice} EGP</span>
+              <h6 className="font-medium">{t("rent_price")}:</h6>
+              <span className="font-bold">
+                {storedPrice} {t("price_per_night")}
+              </span>
             </div>
             <div className="flex items-center gap-1">
               <span>💸</span>
-              <h6 className="font-medium">Trent fees:</h6>
-              <span className="font-bold">1%({trentFees}) EGP</span>
+              <h6 className="font-medium bg-primary">{t("trent_fees")}:</h6>
+              <span className="font-bold">
+                {ownerFees}%({trentFees}) {t("price_per_night")}
+              </span>
             </div>
           </div>
         </div>

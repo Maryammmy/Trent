@@ -15,3 +15,7 @@ export interface IMessage {
   receiver_id: string;
   sender_id: string;
 }
+export interface IOwner {
+  receiver_image: string;
+  receiver_name: string;
+}

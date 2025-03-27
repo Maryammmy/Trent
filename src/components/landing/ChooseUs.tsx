@@ -49,7 +49,7 @@ function ChooseUs() {
               <div
                 key={index}
                 style={{ backgroundColor: background_color }}
-                className="h-40 w-40 zoom overflow-hidden flex flex-col gap-2 justify-center items-center rounded-full"
+                className="h-52 w-52 zoom overflow-hidden flex flex-col gap-2 justify-center items-center rounded-full"
               >
                 <div className="w-[25%]">
                   <Image
@@ -59,7 +59,7 @@ function ChooseUs() {
                   />
                 </div>
                 <div className="flex items-center justify-center">
-                  <p className="text-center text-sm text-dark font-medium px-2">
+                  <p className="text-center text-sm text-white font-medium px-2">
                     {description}
                   </p>
                 </div>

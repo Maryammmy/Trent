@@ -1,13 +1,13 @@
 import Image from "./ui/Image";
-import { sections } from "../data/footerData";
 import { useContactUsAPI } from "@/services/homeService";
 import { Link } from "react-router-dom";
 import UpdateSkeleton from "./skeleton/UpdateSkeleton";
+import { useTranslation } from "react-i18next";
 
 function Footer() {
+  const { t } = useTranslation();
   const { data } = useContactUsAPI();
   const contactUs = data?.data?.data?.contact_us;
-  console.log(contactUs);
   return (
     <footer className="pt-5 bg-[#FAFAFA]">
       <div className="px-10 max-w-screen-2xl mx-auto pb-5">
@@ -20,10 +20,7 @@ function Footer() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <p className="text-dark font-medium">
-              Your trusted booking service for seamless reservations and
-              unforgettable experiences.
-            </p>
+            <p className="text-dark font-medium">{t("trent_footer_desc")}</p>
             {/* <div className="flex gap-2">
               {icons.map((icon, index) => (
                 <div
@@ -41,20 +38,39 @@ function Footer() {
               ))}
             </div> */}
           </div>
-          {sections.map((section, index) => (
+          {/* {sections.map((section, index) => (
             <div key={index} className="flex flex-col gap-4">
-              <h2 className="font-bold text-lg">{section.title}</h2>
+              <h2 className="font-bold text-lg">{t(section.title)}</h2>
               <div className="flex flex-col gap-2 text-dark font-medium">
                 {section.items.map((item, itemIndex) => (
-                  <p key={itemIndex} className="hover:underline">
+                  <p key={itemIndex} className="hover:underline bg-slate-400">
                     {item}
                   </p>
                 ))}
               </div>
             </div>
-          ))}
+          ))} */}
           <div className="flex flex-col gap-4">
-            <h2 className="font-bold text-lg">Contact Us</h2>
+            <h2 className="font-bold text-lg">{t("company")}</h2>
+            <div className="flex flex-col gap-2 text-dark font-medium">
+              <Link
+                rel="noopener noreferrer"
+                target="_blank"
+                to="/terms-and-conditions"
+              >
+                {t("terms_and_conditions")}
+              </Link>
+              <Link
+                rel="noopener noreferrer"
+                target="_blank"
+                to="/privacy-policy"
+              >
+                {t("privacy_policy")}
+              </Link>
+            </div>
+          </div>
+          <div className="flex flex-col gap-4">
+            <h2 className="font-bold text-lg">{t("contact_us")}</h2>
             <div className="flex flex-col gap-2 text-dark font-medium">
               {!contactUs ? (
                 <UpdateSkeleton cards={2} />
@@ -70,8 +86,9 @@ function Footer() {
                   </Link>
                   <Link
                     to={`https://wa.me/${contactUs?.mobile.replace("+", "")}`}
-                    className="hover:underline"
+                    className="hover:underline rtl:text-end"
                     target="_blank"
+                    dir="ltr"
                     rel="noopener noreferrer"
                   >
                     {contactUs?.mobile}
@@ -80,12 +97,6 @@ function Footer() {
               )}
             </div>
           </div>
-          {/* <div className="flex flex-col gap-4">
-            <h2 className="font-bold text-lg">{newsletterSection.title}</h2>
-            <div className="flex flex-col gap-2 text-dark font-medium">
-              {newsletterSection.content}
-            </div>
-          </div> */}
         </div>
       </div>
       <div className="bg-primary py-2 flex justify-center items-center">

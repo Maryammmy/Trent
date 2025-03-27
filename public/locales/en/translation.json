@@ -315,5 +315,12 @@
   "privacy_policy": "Privacy Policy",
   "missing_required_fields": "Please fill in all required fields.",
   "select_cancellation_policy": "Select a cancellation policy",
-  "cancellation_policy": "Cancellation Policy"
+  "cancellation_policy": "Cancellation Policy",
+  "rent_price": "Rent Price",
+  "trent_fees": "Trent Fees",
+  "Location": "Location",
+  "status": "Status",
+  "trent_footer_desc": "Your trusted booking service for seamless reservations and unforgettable experiences.",
+  "company": "Company",
+  "contact_us": "Contact Us"
 }

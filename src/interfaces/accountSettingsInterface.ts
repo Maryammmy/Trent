@@ -31,6 +31,8 @@ export interface IUser {
   gender: string;
   pro_img?: string | File;
   phone: string;
+  user_fees_percent: string;
+  owner_fees_percent: string;
 }
 export interface IChangeMobile {
   new_mobile: string;

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { baseAPI } from ".";
+import { baseAPI, baseAPIForm } from ".";
 import Cookies from "js-cookie";
 
 const uid = Cookies.get("user_id");
@@ -22,4 +22,7 @@ export const useMessagesAPI = (
     refetchInterval: 10000,
     enabled: !!chatId,
   });
+};
+export const addChatAPI = (payload: FormData) => {
+  return baseAPIForm.post("user_api/u_add_chat.php", payload);
 };

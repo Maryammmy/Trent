@@ -28,7 +28,7 @@ function DropdownMenu() {
             return (
               <li
                 key={index}
-                className={`px-4 py-2 hover:bg-gray-100 cursor-pointer ${
+                className={`flex flex-col  ${
                   label === "log_out" && "border-t"
                 }`}
               >
@@ -39,7 +39,7 @@ function DropdownMenu() {
                       : () => dispatch(setIsDropdownOpen(false))
                   }
                   to={to}
-                  className="w-full text-start"
+                  className="text-start hover:bg-gray-100 px-4 py-2"
                 >
                   <span>{t(label)}</span>
                 </Link>

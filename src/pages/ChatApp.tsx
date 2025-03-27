@@ -1,5 +1,5 @@
 import ChatList from "../components/chat/ChatList";
-import ChatWindow from "../components/chat/ChatWindow";
+import ChatWindow from "../components/chat/chatWindow/ChatWindow";
 
 export default function ChatApp() {
   return (

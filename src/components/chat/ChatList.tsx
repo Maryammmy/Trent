@@ -36,7 +36,9 @@ function ChatList() {
             key={chat?.chat_id}
             className="p-3 cursor-pointer flex justify-between items-center rounded-md hover:bg-gray-100"
             onClick={() => {
-              navigate(`/chat?user=${chat?.receiver_id}&chat=${chat?.chat_id}`);
+              navigate(
+                `/chat?prop=${chat?.prop_id}&user=${chat?.receiver_id}&chat=${chat?.chat_id}`
+              );
             }}
           >
             <h4 className="font-semibold">{chat?.receiver_name}</h4>

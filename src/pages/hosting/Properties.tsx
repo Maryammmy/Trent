@@ -16,9 +16,9 @@ function Properties() {
       <div className="px-5 lg:px-20 py-10">
         <h2 className="text-3xl font-semibold mb-6">{t("your_properties")}</h2>
         <div className="grid grid-cols-3 font-semibold py-3 px-4 bg-gray-100 rounded-md mb-4">
-          <h3>property</h3>
-          <h3>Location</h3>
-          <h3>Status</h3>
+          <h3>{t("property")}</h3>
+          <h3>{t("location")}</h3>
+          <h3>{t("status")}</h3>
         </div>
         <div className="space-y-5">
           {!properties ? (

@@ -29,7 +29,9 @@ function HostedBy({ id, owner, guestRules, ownerId }: IProps) {
       );
       storeOwnerChat(owner);
       const chatId: string = response?.data?.data?.chat_list?.[0]?.chat_id;
-      navigate(`/chat?user=${ownerId}${chatId ? `&chat=${chatId}` : ""}`);
+      navigate(
+        `/chat?prop=${id}&user=${ownerId}${chatId ? `&chat=${chatId}` : ""}`
+      );
     } catch (error) {
       console.log(error);
     } finally {
