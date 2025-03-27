@@ -1,5 +1,5 @@
 import Image from "./ui/Image";
-import { icons, newsletterSection, sections } from "../data/footerData";
+import { sections } from "../data/footerData";
 import { useContactUsAPI } from "@/services/homeService";
 import { Link } from "react-router-dom";
 import UpdateSkeleton from "./skeleton/UpdateSkeleton";
@@ -23,7 +23,7 @@ function Footer() {
               Your trusted booking service for seamless reservations and
               unforgettable experiences.
             </p>
-            <div className="flex gap-2">
+            {/* <div className="flex gap-2">
               {icons.map((icon, index) => (
                 <div
                   key={index}
@@ -38,7 +38,7 @@ function Footer() {
                   </div>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
           {sections.map((section, index) => (
             <div key={index} className="flex flex-col gap-4">
@@ -75,12 +75,12 @@ function Footer() {
               )}
             </div>
           </div>
-          <div className="flex flex-col gap-4">
+          {/* <div className="flex flex-col gap-4">
             <h2 className="font-bold text-lg">{newsletterSection.title}</h2>
             <div className="flex flex-col gap-2 text-dark font-medium">
               {newsletterSection.content}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="bg-primary py-2 flex justify-center items-center">

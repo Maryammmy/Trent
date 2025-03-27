@@ -48,8 +48,8 @@ export const newsletterSection = {
   ),
 };
 
-export const icons: string[] = [
-  "/images/faceFooter.svg",
-  "/images/instaFooter.svg",
-  "/images/twitterFooter.svg",
-];
+// export const icons: string[] = [
+//   "/images/faceFooter.svg",
+//   "/images/instaFooter.svg",
+//   "/images/twitterFooter.svg",
+// ];
