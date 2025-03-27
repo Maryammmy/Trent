@@ -206,6 +206,7 @@ function SignupModal() {
                 <label htmlFor="terms" className="text-sm text-dark">
                   I accept the{" "}
                   <Link
+                    rel="noopener noreferrer"
                     target="_blank"
                     to="/terms-and-conditions"
                     className="text-primary underline"

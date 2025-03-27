@@ -18,7 +18,12 @@ export const sections: IFooterSection[] = [
       "About Us",
       "Testimonials",
       "Terms of Service",
-      <Link target="_blank" key="privacy-policy" to="/privacy-policy">
+      <Link
+        rel="noopener noreferrer"
+        target="_blank"
+        key="privacy-policy"
+        to="/privacy-policy"
+      >
         Privacy Policy
       </Link>,
     ],
