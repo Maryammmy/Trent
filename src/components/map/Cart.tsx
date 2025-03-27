@@ -103,8 +103,12 @@ function Cart({ property }: IProps) {
             <div className="flex gap-1 font-medium">
               <span className="font-bold text-primary">
                 {enableTaxes
-                  ? `${priceBeforeTaxes.toFixed(0)} ${t("price_per_night")}`
-                  : `${priceWithTaxes.toFixed(0)} ${t("price_per_night")}`}
+                  ? `${truncateText(priceBeforeTaxes.toFixed(0), 5)} ${t(
+                      "price_per_night"
+                    )}`
+                  : `${truncateText(priceWithTaxes.toFixed(0), 5)} ${t(
+                      "price_per_night"
+                    )}`}
               </span>
               <span className="text-dark">/ {period_name}</span>
             </div>
