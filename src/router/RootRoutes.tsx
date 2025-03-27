@@ -17,7 +17,7 @@ import ProtectedRoutes from "../middleware/ProtectedRoutes";
 import TermsAndConditions from "@/pages/TermsAndConditions";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import ConfidenceBooking from "@/pages/ConfidenceBooking";
-import Guidelines from "@/pages/guidelines";
+import Guidelines from "@/pages/Guidelines";
 
 export const RootRoutes = (
   <>
