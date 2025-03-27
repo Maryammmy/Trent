@@ -7,6 +7,7 @@ import UpdateSkeleton from "./skeleton/UpdateSkeleton";
 function Footer() {
   const { data } = useContactUsAPI();
   const contactUs = data?.data?.data?.contact_us;
+  console.log(contactUs);
   return (
     <footer className="pt-5 bg-[#FAFAFA]">
       <div className="px-10 max-w-screen-2xl mx-auto pb-5">
@@ -62,12 +63,16 @@ function Footer() {
                   <Link
                     to={`mailto:${contactUs?.email}`}
                     className="hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     {contactUs?.email}
                   </Link>
                   <Link
-                    to={`tel:${contactUs?.mobile}`}
+                    to={`https://wa.me/${contactUs?.mobile.replace("+", "")}`}
                     className="hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     {contactUs?.mobile}
                   </Link>
