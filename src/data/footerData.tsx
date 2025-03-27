@@ -4,26 +4,27 @@ import { IFooterSection } from "../interfaces";
 import { Link } from "react-router-dom";
 
 export const sections: IFooterSection[] = [
-  {
-    title: "Rooms",
-    items: ["Standard", "Deluxe", "Family"],
-  },
-  {
-    title: "Resources",
-    items: ["Help Center", "Guides", "Partner Network"],
-  },
+  // {
+  //   title: "Rooms",
+  //   items: ["Standard", "Deluxe", "Family"],
+  // },
+  // {
+  //   title: "Resources",
+  //   items: ["Help Center", "Guides", "Partner Network"],
+  // },
   {
     title: "Company",
     items: [
-      "About Us",
-      "Testimonials",
-      "Terms of Service",
+      // "About Us",
+      // "Testimonials",
       <Link
         rel="noopener noreferrer"
         target="_blank"
-        key="privacy-policy"
-        to="/privacy-policy"
+        to="/terms-and-conditions"
       >
+        Terms & Conditions
+      </Link>,
+      <Link rel="noopener noreferrer" target="_blank" to="/privacy-policy">
         Privacy Policy
       </Link>,
     ],
