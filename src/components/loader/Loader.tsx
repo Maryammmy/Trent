@@ -5,7 +5,10 @@ interface IProps {
 export default function Loader({ borderColor = "#fff" }: IProps) {
   return (
     <span
-      style={{ border: `3px solid ${borderColor}` }}
+      style={{
+        border: `3px solid ${borderColor}`,
+        borderBottomColor: "transparent",
+      }}
       className="loader"
     ></span>
   );

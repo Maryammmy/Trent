@@ -88,11 +88,10 @@ function HostingModal() {
             {t("cancel")}
           </Button>
           <Button
-            disabled={loading}
             onClick={handleFinishUp}
-            className="text-primary py-2 w-28 rounded-md font-medium bg-neutral-200"
+            className="bg-gray-100 text-primary py-2 w-28 rounded-md font-medium"
           >
-            {loading ? <Loader /> : t("finish_up")}
+            {loading ? <Loader borderColor="#223f7f" /> : t("finish_up")}
           </Button>
         </div>
       </div>
