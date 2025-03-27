@@ -172,7 +172,7 @@ function PersonalData() {
                 <Button
                   type="button"
                   onClick={() => setChangeMobile(true)}
-                  className="absolute right-3 top-3 text-primary font-medium"
+                  className="absolute ltr:right-3 rtl:left-3 top-3 text-primary font-medium"
                 >
                   {t("change")}
                 </Button>
