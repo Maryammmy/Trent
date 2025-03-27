@@ -6,13 +6,6 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import { floorPlan } from "../../../data/becomeAHost";
 import Input from "../../../components/ui/Input";
 
-const storedSqft = sessionStorage.getItem("sqft");
-const storedCounters = floorPlan.reduce((acc, key) => {
-  acc[key] = sessionStorage.getItem(key)
-    ? JSON.parse(sessionStorage.getItem(key)!)
-    : 0;
-  return acc;
-}, {} as { [key: string]: number });
 function FloorPlan() {
   const backButton = "/become-a-host/property-type";
   const { t } = useTranslation();
@@ -22,8 +15,17 @@ function FloorPlan() {
   const [sqft, setSqft] = useState<number | "">("");
 
   useEffect(() => {
+    const storedCounters = floorPlan.reduce((acc, key) => {
+      acc[key] = sessionStorage.getItem(key)
+        ? JSON.parse(sessionStorage.getItem(key)!)
+        : 0;
+      return acc;
+    }, {} as { [key: string]: number });
+    const storedSqft = sessionStorage.getItem("sqft")
+      ? JSON.parse(sessionStorage.getItem("sqft") || '""')
+      : "";
     setFloorPlanCounters(storedCounters);
-    setSqft(storedSqft ? JSON.parse(storedSqft) : "");
+    setSqft(storedSqft);
   }, []);
 
   const updateFloorPlanCounter = (key: string, value: number) => {
@@ -53,8 +55,6 @@ function FloorPlan() {
         <p className="max-w-2xl text-dark font-medium pb-10">
           {t("floor_plan_desc")}
         </p>
-
-        {/* Render each floor plan counter */}
         {floorPlan.map((item, index) => (
           <div
             key={index}
@@ -70,8 +70,6 @@ function FloorPlan() {
             />
           </div>
         ))}
-
-        {/* Property Sqft Input */}
         <div className="flex flex-col gap-2 mt-5">
           <label className="font-medium">{t("property_sqft")}</label>
           <Input

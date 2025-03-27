@@ -6,9 +6,6 @@ import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWra
 import { ICancellationPolicy } from "@/interfaces/hosting";
 import CancellationPolicy from "./CancellationPolicies";
 
-const storedRulesTextAreaEn = sessionStorage.getItem("guest_rules_en");
-const storedRulesTextAreaAr = sessionStorage.getItem("guest_rules_ar");
-const storedCancellationPolicy = sessionStorage.getItem("cancellation_policy");
 function GuestRulesAndCancellationPolicies() {
   const { t } = useTranslation();
   const [rulesTextAreaEn, setRulesTextAreaEn] = useState<string>("");
@@ -18,10 +15,12 @@ function GuestRulesAndCancellationPolicies() {
   >("");
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
-    setRulesTextAreaEn(storedRulesTextAreaEn || "");
-    setRulesTextAreaAr(storedRulesTextAreaAr || "");
+    setRulesTextAreaEn(sessionStorage.getItem("guest_rules_en") || "");
+    setRulesTextAreaAr(sessionStorage.getItem("guest_rules_ar") || "");
     setSelectedPolicy(
-      storedCancellationPolicy ? JSON.parse(storedCancellationPolicy) : ""
+      sessionStorage.getItem("cancellation_policy")
+        ? JSON.parse(sessionStorage.getItem("cancellation_policy") || '""')
+        : ""
     );
   }, []);
   const handleRulesChange = (

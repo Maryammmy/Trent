@@ -26,7 +26,7 @@ function StandOut() {
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "0px", "0px"]} />
       <BackAndNext
-        back={"/become-a-host/floor-plan"}
+        back={"/become-a-host/location"}
         next="/become-a-host/facilities"
       />
     </div>

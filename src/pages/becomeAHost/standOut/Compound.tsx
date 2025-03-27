@@ -4,15 +4,13 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import Input from "../../../components/ui/Input";
 
-const storedCompoundAr = sessionStorage.getItem("compound_ar");
-const storedCompoundEn = sessionStorage.getItem("compound_en");
 function Compound() {
   const { t } = useTranslation();
   const [compoundAr, setCompoundAr] = useState<string>("");
   const [compoundEn, setCompoundEn] = useState<string>("");
   useEffect(() => {
-    setCompoundAr(storedCompoundAr || "");
-    setCompoundEn(storedCompoundEn || "");
+    setCompoundAr(sessionStorage.getItem("compound_ar") || "");
+    setCompoundEn(sessionStorage.getItem("compound_en") || "");
   }, []);
   const handleCompoundChange = (
     e: React.ChangeEvent<HTMLInputElement>,

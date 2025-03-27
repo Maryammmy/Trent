@@ -4,15 +4,13 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import Input from "../../../components/ui/Input";
 
-const storedTitleAr = sessionStorage.getItem("title_ar");
-const storedTitleEn = sessionStorage.getItem("title_en");
 function Title() {
   const { t } = useTranslation();
   const [titleAr, setTitleAr] = useState<string>("");
   const [titleEn, setTitleEn] = useState<string>("");
   useEffect(() => {
-    setTitleAr(storedTitleAr || "");
-    setTitleEn(storedTitleEn || "");
+    setTitleAr(sessionStorage.getItem("title_ar") || "");
+    setTitleEn(sessionStorage.getItem("title_en") || "");
   }, []);
   const handleTitleChange = (
     e: React.ChangeEvent<HTMLInputElement>,

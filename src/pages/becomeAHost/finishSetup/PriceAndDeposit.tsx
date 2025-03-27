@@ -8,9 +8,6 @@ import SelectSkeleton from "../../../components/skeleton/SelectSkeleton";
 import { useFiltersAPI } from "../../../services/filtersService";
 import { IPeriod } from "../../../interfaces";
 
-const storedPeriod = sessionStorage.getItem("period");
-const storedPrice = sessionStorage.getItem("price");
-const storedSecurityDeposit = sessionStorage.getItem("security_deposit");
 function PriceAndDeposit() {
   const { t } = useTranslation();
   const [price, setPrice] = useState<number | "">("");
@@ -19,11 +16,17 @@ function PriceAndDeposit() {
   const { data } = useFiltersAPI();
   const periods: IPeriod[] = data?.data?.data?.period_list;
   useEffect(() => {
-    setPrice(storedPrice ? JSON.parse(storedPrice) : "");
-    setSecurityDeposit(
-      storedSecurityDeposit ? JSON.parse(storedSecurityDeposit) : ""
+    setPrice(
+      sessionStorage.getItem("price")
+        ? JSON.parse(sessionStorage.getItem("price") || '""')
+        : ""
     );
-    setPeriod(storedPeriod ? storedPeriod : "");
+    setSecurityDeposit(
+      sessionStorage.getItem("security_deposit")
+        ? JSON.parse(sessionStorage.getItem("security_deposit") || '""')
+        : ""
+    );
+    setPeriod(sessionStorage.getItem("period") || "");
   }, []);
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -57,7 +60,7 @@ function PriceAndDeposit() {
           {t("price_and_deposit_desc")}
         </p>
         <div className="flex flex-col gap-2 pb-4">
-          <label className="text-lg font-bold">{t("period")}</label>
+          <label className="text-lg font-medium">{t("period")}</label>
           {!periods ? (
             <SelectSkeleton />
           ) : periods?.length ? (

@@ -8,12 +8,15 @@ import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkele
 import { IFacility } from "../../../interfaces";
 import { useFacilitiesAPI } from "../../../services/filtersService";
 
-const storedFacilities = sessionStorage.getItem("facilities");
 function Facilities() {
   const { t } = useTranslation();
   const [selectedFacilities, setSelectedFacilities] = useState<number[]>([]);
   useEffect(() => {
-    setSelectedFacilities(storedFacilities ? JSON.parse(storedFacilities) : []);
+    setSelectedFacilities(
+      sessionStorage.getItem("facilities")
+        ? JSON.parse(sessionStorage.getItem("facilities") || "[]")
+        : []
+    );
   }, []);
   const { data } = useFacilitiesAPI();
   const facilities: IFacility[] = data?.data?.data?.facility_list;

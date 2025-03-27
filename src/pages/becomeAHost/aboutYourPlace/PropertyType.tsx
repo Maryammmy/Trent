@@ -17,7 +17,7 @@ function PropertyType() {
   const propertyTypeList: IPropertyType[] = data?.data?.data?.category_list;
   useEffect(() => {
     setSelectedPropertyType(storedPropertyType || "");
-  }, []);
+  }, [selectedPropertyType]);
   const handleSelectedPropertyType = (id: string) => {
     setSelectedPropertyType(id);
     sessionStorage.setItem("category_id", id);
