@@ -67,6 +67,16 @@ function Footer() {
               >
                 {t("privacy_policy")}
               </Link>
+              <Link
+                rel="noopener noreferrer"
+                target="_blank"
+                to="/confidence-booking"
+              >
+                {t("confidence_booking")}
+              </Link>
+              <Link rel="noopener noreferrer" target="_blank" to="/guidelines">
+                {t("guidelines")}
+              </Link>
             </div>
           </div>
           <div className="flex flex-col gap-4">

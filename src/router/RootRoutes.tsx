@@ -16,6 +16,8 @@ import ChatApp from "../pages/ChatApp";
 import ProtectedRoutes from "../middleware/ProtectedRoutes";
 import TermsAndConditions from "@/pages/TermsAndConditions";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import ConfidenceBooking from "@/pages/ConfidenceBooking";
+import Guidelines from "@/pages/guidelines";
 
 export const RootRoutes = (
   <>
@@ -72,6 +74,8 @@ export const RootRoutes = (
           </ProtectedRoutes>
         }
       />
+      <Route path="confidence-booking" element={<ConfidenceBooking />} />
+      <Route path="guidelines" element={<Guidelines />} />
       <Route path="terms-and-conditions" element={<TermsAndConditions />} />
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
       <Route path="*" element={<NotFoundPage />} />

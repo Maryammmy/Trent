@@ -322,5 +322,7 @@
   "status": "Status",
   "trent_footer_desc": "Your trusted booking service for seamless reservations and unforgettable experiences.",
   "company": "Company",
-  "contact_us": "Contact Us"
+  "contact_us": "Contact Us",
+  "confidence_booking": "Confidence Booking",
+  "guidelines": "Guidelines"
 }

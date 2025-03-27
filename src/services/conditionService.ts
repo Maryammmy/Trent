@@ -27,3 +27,17 @@ export const useCancellationPoliciesAPI = () => {
       baseAPI.get(`user_api/u_cancellation_list.php?lang=${currentLanguage}`),
   });
 };
+export const useConfidenceBookingAPI = () => {
+  return useQuery({
+    queryKey: ["confidenceBooking"],
+    queryFn: () =>
+      baseAPI.get(`user_api/u_confidence_booking.php?lang=${currentLanguage}`),
+  });
+};
+export const useGuidelinesAPI = () => {
+  return useQuery({
+    queryKey: ["confidenceBooking"],
+    queryFn: () =>
+      baseAPI.get(`user_api/u_guidelines.php?lang=${currentLanguage}`),
+  });
+};
