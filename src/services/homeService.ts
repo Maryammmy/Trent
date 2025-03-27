@@ -50,7 +50,7 @@ export const useAlertAPI = () => {
     queryFn: () => baseAPI.get(`user_api/u_alert.php?lang=${currentLanguage}`),
   });
 };
-export const useContactAPI = () => {
+export const useContactUsAPI = () => {
   return useQuery({
     queryKey: ["contact"],
     queryFn: () => baseAPI.get("user_api/u_contact_us.php"),
