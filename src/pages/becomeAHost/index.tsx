@@ -2,9 +2,20 @@ import { Link } from "react-router-dom";
 import PrograssBar from "../../components/ui/PrograssBar";
 import { getStartedToHost } from "../../data/becomeAHost";
 import { useTranslation } from "react-i18next";
+import { useUserAPI } from "@/services/userService";
+import { IUser } from "@/interfaces/accountSettings";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
 
 function GetStartedToHost() {
   const { t } = useTranslation();
+  const { data } = useUserAPI();
+  const user: IUser = data?.data?.data?.user_data;
+  useEffect(() => {
+    if (user) {
+      Cookies.set("owner_fees", user.owner_fees_percent);
+    }
+  }, [user]);
   return (
     <div className="py-10">
       <div className="flex flex-col lg:flex-row gap-5 items-center justify-between hosting-layout max-w-screen-lg mx-auto px-5 md:px-0 lg:px-20 xl:px-0 pb-10">

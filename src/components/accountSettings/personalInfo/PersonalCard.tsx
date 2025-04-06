@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { personalInfoCard } from "../../../data/accountSettingsData/personalInfoData";
+import { personalInfoCard } from "../../../data/accountSettings/personalInfo";
 
 function PersonalCard() {
   const { t } = useTranslation();

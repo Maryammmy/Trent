@@ -6,7 +6,11 @@ export const updatePropertySchema = yup.object().shape({
   price: yup
     .string()
     .required("Price is required")
-    .matches(/^\d+$/, "Price must be a valid number"),
+    .matches(/^\d+$/, "Price must be a valid number")
+    .test("price-range", "Price must be between 50 and 250,000", (value) => {
+      const numValue = Number(value);
+      return numValue >= 50 && numValue <= 250000;
+    }),
   beds_count: yup
     .string()
     .required("Number of beds is required")
@@ -22,7 +26,15 @@ export const updatePropertySchema = yup.object().shape({
   security_deposit: yup
     .string()
     .required("Security deposit is required")
-    .matches(/^\d+$/, "Security deposit must be a valid number"),
+    .matches(/^\d+$/, "Security deposit must be a valid number")
+    .test(
+      "security-deposit-range",
+      "Security deposit must be between 50 and 250,000",
+      (value) => {
+        const numValue = Number(value);
+        return numValue >= 50 && numValue <= 250000;
+      }
+    ),
   guest_count: yup
     .string()
     .required("People limit is required")
@@ -30,11 +42,34 @@ export const updatePropertySchema = yup.object().shape({
   min_days: yup
     .string()
     .required("Minimum days is required")
-    .matches(/^\d+$/, "Minimum days must be a valid number"),
+    .matches(/^\d+$/, "Minimum days must be a valid number")
+    .test(
+      "min-less-than-max",
+      "Minimum days cannot be greater than Maximum days",
+      function (value) {
+        const { max_days } = this.parent;
+        return value <= max_days || value === "";
+      }
+    ),
   max_days: yup
     .string()
     .required("Maximum days is required")
-    .matches(/^\d+$/, "Maximum days must be a valid number"),
+    .matches(/^\d+$/, "Maximum days must be a valid number")
+    .test(
+      "max-days-range",
+      "Maximum days must be between 1 and 1000",
+      (value) => {
+        return Number(value) >= 1 && Number(value) <= 1000;
+      }
+    )
+    .test(
+      "max-greater-than-min",
+      "Maximum days cannot be less than Minimum days",
+      function (value) {
+        const { min_days } = this.parent;
+        return value >= min_days || value === "";
+      }
+    ),
   facilities: yup.array().min(1, "Facilities are required").required(),
   category_id: yup.string().required("Property type is required"),
   maps_url: yup

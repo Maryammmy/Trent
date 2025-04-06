@@ -1,5 +1,5 @@
 import { ResponsiveSetting } from "../../../interfaces";
-import { IGallery } from "../../../interfaces/property/galleryInterface";
+import { IGallery } from "../../../interfaces/property/gallery";
 
 export const gallery: IGallery[] = [
   {

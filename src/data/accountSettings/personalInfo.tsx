@@ -1,5 +1,5 @@
 import { LockKeyhole, Shield } from "lucide-react";
-import { IPersonalCard } from "../../interfaces/accountSettingsInterface";
+import { IPersonalCard } from "../../interfaces/accountSettings";
 import { ISelectOption } from "../../interfaces";
 export const personalInfoCard: IPersonalCard[] = [
   {

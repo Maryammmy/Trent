@@ -7,11 +7,16 @@ import Select from "../../../components/ui/Select";
 import SelectSkeleton from "../../../components/skeleton/SelectSkeleton";
 import { useFiltersAPI } from "../../../services/filtersService";
 import { IPeriod } from "../../../interfaces";
+import InputErrorMessage from "@/components/ui/InputErrorMessage";
 
 function PriceAndDeposit() {
   const { t } = useTranslation();
   const [price, setPrice] = useState<number | "">("");
   const [securityDeposit, setSecurityDeposit] = useState<number | "">("");
+  const [errors, setErrors] = useState<{
+    price?: string;
+    security_deposit?: string;
+  }>({});
   const [period, setPeriod] = useState<string>("");
   const { data } = useFiltersAPI();
   const periods: IPeriod[] = data?.data?.data?.period_list;
@@ -28,22 +33,37 @@ function PriceAndDeposit() {
     );
     setPeriod(sessionStorage.getItem("period") || "");
   }, []);
+  const validate = (type: "price" | "security_deposit", value: number) => {
+    const newErrors = { ...errors };
+    if (isNaN(value)) {
+      newErrors[type] = "Invalid number";
+    } else if (value < 50 || value > 250000) {
+      newErrors[type] = "Value must be between 50 and 250,000";
+    } else {
+      delete newErrors[type];
+    }
+    setErrors(newErrors);
+  };
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     type: "price" | "security_deposit"
   ) => {
     const inputValue = event.target.value.replace(/\D/g, "");
-    const numericValue = inputValue ? Number(inputValue) : "";
-
-    if (type === "price") {
-      setPrice(numericValue);
-      sessionStorage.setItem("price", JSON.stringify(numericValue));
-    } else {
-      setSecurityDeposit(numericValue);
-      sessionStorage.setItem("security_deposit", JSON.stringify(numericValue));
+    const numericValue = Number(inputValue);
+    if (!isNaN(numericValue)) {
+      if (type === "price") {
+        setPrice(numericValue);
+        sessionStorage.setItem("price", JSON.stringify(numericValue));
+      } else {
+        setSecurityDeposit(numericValue);
+        sessionStorage.setItem(
+          "security_deposit",
+          JSON.stringify(numericValue)
+        );
+      }
     }
+    validate(type, numericValue);
   };
-
   const handlePeriodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newPeriod = event.target.value;
     setPeriod(newPeriod);
@@ -89,6 +109,7 @@ function PriceAndDeposit() {
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
             placeholder={t("enter_price_placeholder")}
           />
+          {errors.price && <InputErrorMessage msg={errors.price} />}
         </div>
         <div className="flex flex-col gap-1 mb-5">
           <label className="font-medium">{t("security_deposit")}</label>
@@ -100,13 +121,18 @@ function PriceAndDeposit() {
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
             placeholder={t("enter_security_deposit_placeholder")}
           />
+          {errors.security_deposit && (
+            <InputErrorMessage msg={errors.security_deposit} />
+          )}
         </div>
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "100%", "50%"]} />
       <BackAndNext
         back="/become-a-host/min-and-max-days"
         next="/become-a-host/guest-rules-and-cancellation-policies"
-        isNextDisabled={!price || !period}
+        isNextDisabled={
+          !price || !period || !!errors.price || !!errors.security_deposit
+        }
       />
     </div>
   );

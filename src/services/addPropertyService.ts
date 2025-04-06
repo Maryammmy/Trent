@@ -1,4 +1,4 @@
-import { IPropertyData } from "../interfaces/property/propertyInterface";
+import { IPropertyData } from "../interfaces/property/property";
 import toast from "react-hot-toast";
 import { ApiError } from "../interfaces";
 import { addPropertyAPI } from "./propertyService";
@@ -83,6 +83,7 @@ export const useSendDataToAPI = () => {
         toast.success(response?.data?.response_message);
         setSelectedImages([]);
         setSelectedVideo(null);
+        window.location.reload();
       }
       return true;
     } catch (error) {

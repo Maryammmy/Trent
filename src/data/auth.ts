@@ -1,4 +1,4 @@
-import { ILoginInputs, ISignupInputs } from "../interfaces/authInterface";
+import { ILoginInputs, ISignupInputs } from "../interfaces/auth";
 
 export const loginData: ILoginInputs[] = [
   {

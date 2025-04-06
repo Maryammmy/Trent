@@ -1,4 +1,4 @@
-import { IFilterButton } from "../interfaces/landingInterface";
+import { IFilterButton } from "../interfaces/landing";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import { IDestinations, IHomeSearch, ResponsiveSetting } from "../interfaces";
 

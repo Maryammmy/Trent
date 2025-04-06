@@ -1,4 +1,4 @@
-import { contactInfo } from "../../data/contactData";
+import { contactInfo } from "../../data/contact";
 
 function ContactInfo() {
   return (

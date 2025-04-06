@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { filterButtons } from "../../../data/landingData";
+import { filterButtons } from "../../../data/landing";
 import { useHomeDataAPI } from "../../../services/homeService";
 import Button from "../../ui/Button";
 import { useTranslation } from "react-i18next";

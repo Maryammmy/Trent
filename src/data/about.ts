@@ -1,4 +1,4 @@
-import { IAboutInfo } from "../interfaces/aboutInterface";
+import { IAboutInfo } from "../interfaces/about";
 
 export const aboutInfo: IAboutInfo[] = [
   {

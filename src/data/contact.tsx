@@ -1,5 +1,5 @@
 import { MapPin, Phone } from "lucide-react";
-import { IFormContact } from "../interfaces/contactInterface";
+import { IFormContact } from "../interfaces/contact";
 
 export const formContactData: IFormContact[] = [
   { label: "Name", name: "name", placeholder: "Enter your name" },

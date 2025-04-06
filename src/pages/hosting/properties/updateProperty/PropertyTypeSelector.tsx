@@ -1,10 +1,11 @@
+import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
+import InputErrorMessage from "@/components/ui/InputErrorMessage";
+import Select from "@/components/ui/Select";
+import { IPropertyType } from "@/interfaces";
+import { PropertyNameInputs } from "@/types";
 import { Control, Controller, FieldErrors } from "react-hook-form";
-import Select from "../../../components/ui/Select";
-import SelectSkeleton from "../../../components/skeleton/SelectSkeleton";
-import { IPropertyType } from "../../../interfaces";
 import { useTranslation } from "react-i18next";
-import { PropertyNameInputs } from "../../../types";
-import InputErrorMessage from "../../../components/ui/InputErrorMessage";
+
 
 interface IProps {
   control: Control<PropertyNameInputs>;

@@ -6,7 +6,7 @@ import { useAppSelector } from "../store/hooks";
 import Rating from "./ui/Rating";
 import { MapPin } from "lucide-react";
 import Button from "./ui/Button";
-import { IProperty } from "../interfaces/property/propertyInterface";
+import { IProperty } from "../interfaces/property/property";
 import { truncateText } from "../utils/truncateText";
 import { baseURL } from "../services";
 import { FaHeart, FaRegHeart } from "react-icons/fa";

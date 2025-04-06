@@ -1,4 +1,4 @@
-import { aboutInfo } from "../../data/aboutData";
+import { aboutInfo } from "../../data/about";
 import Image from "../ui/Image";
 function AboutInfo() {
   return (

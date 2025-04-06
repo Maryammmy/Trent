@@ -21,35 +21,7 @@ function Footer() {
               />
             </div>
             <p className="text-dark font-medium">{t("trent_footer_desc")}</p>
-            {/* <div className="flex gap-2">
-              {icons.map((icon, index) => (
-                <div
-                  key={index}
-                  className="w-10 h-10 rounded-lg bg-gray-300 flex justify-center items-center"
-                >
-                  <div className="w-[40%]">
-                    <Image
-                      imageUrl={icon}
-                      alt={icon}
-                      className="w-full h-full"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div> */}
           </div>
-          {/* {sections.map((section, index) => (
-            <div key={index} className="flex flex-col gap-4">
-              <h2 className="font-bold text-lg">{t(section.title)}</h2>
-              <div className="flex flex-col gap-2 text-dark font-medium">
-                {section.items.map((item, itemIndex) => (
-                  <p key={itemIndex} className="hover:underline bg-slate-400">
-                    {item}
-                  </p>
-                ))}
-              </div>
-            </div>
-          ))} */}
           <div className="flex flex-col gap-4">
             <h2 className="font-bold text-lg">{t("company")}</h2>
             <div className="flex flex-col gap-2 text-dark font-medium">
@@ -74,8 +46,49 @@ function Footer() {
               >
                 {t("confidence_booking")}
               </Link>
-              <Link rel="noopener noreferrer" target="_blank" to="/guidelines">
-                {t("guidelines")}
+            </div>
+          </div>
+          <div className="flex flex-col gap-4">
+            <h2 className="font-bold text-lg">{t("guidelines")}</h2>
+            <div className="flex flex-col gap-2 text-dark font-medium">
+              <Link
+                rel="noopener noreferrer"
+                target="_blank"
+                to="/content-guidelines"
+              >
+                {t("content_guidelines")}
+              </Link>
+              <Link
+                rel="noopener noreferrer"
+                target="_blank"
+                to="/listing-guidelines"
+              >
+                {t("listing_guideLines")}
+              </Link>
+            </div>
+          </div>
+          <div className="flex flex-col gap-4">
+            <h2 className="font-bold text-lg">{t("stay_informed")}</h2>
+            <div className="flex flex-col gap-2 text-dark font-medium">
+              <Link rel="noopener noreferrer" target="_blank" to="/guest-terms">
+                {t("guest_terms")}
+              </Link>
+              <Link
+                rel="noopener noreferrer"
+                target="_blank"
+                to="/guest-cancellation-policies"
+              >
+                {t("guest_cancellation_policies")}
+              </Link>
+              <Link rel="noopener noreferrer" target="_blank" to="/host-terms">
+                {t("host_terms")}
+              </Link>
+              <Link
+                rel="noopener noreferrer"
+                target="_blank"
+                to="/host-cancellation-policy"
+              >
+                {t("host_cancellation_policy")}
               </Link>
             </div>
           </div>

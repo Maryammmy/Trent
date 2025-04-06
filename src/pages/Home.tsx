@@ -2,7 +2,7 @@ import { useMediaQuery } from "react-responsive";
 // import HomeSearch from "../components/home/HomeSearch";
 import Image from "../components/ui/Image";
 import Carsoul from "../components/ui/Carsoul";
-import { getResponsiveSettings, responsiveSettings } from "../data/landingData";
+import { getResponsiveSettings, responsiveSettings } from "../data/landing";
 import { useGetData } from "../hooks/useGetData";
 import SilderSkeleton from "../components/skeleton/SilderSkeleton";
 import { CurrentLanguage } from "../types";

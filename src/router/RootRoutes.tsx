@@ -17,7 +17,12 @@ import ProtectedRoutes from "../middleware/ProtectedRoutes";
 import TermsAndConditions from "@/pages/TermsAndConditions";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import ConfidenceBooking from "@/pages/ConfidenceBooking";
-import Guidelines from "@/pages/Guidelines";
+import ContentGuidelines from "@/pages/ContentGuidelines";
+import ListingGuidelines from "@/pages/ListingGuidelines";
+import GuestTerms from "@/pages/GuestTerms";
+import HostTerms from "@/pages/HostTerms";
+import GuestCancellationPolicy from "@/pages/GuestCancellationPolicy";
+import HostCancellationPolicy from "@/pages/HostCancellationPolicy";
 
 export const RootRoutes = (
   <>
@@ -74,10 +79,21 @@ export const RootRoutes = (
           </ProtectedRoutes>
         }
       />
-      <Route path="confidence-booking" element={<ConfidenceBooking />} />
-      <Route path="guidelines" element={<Guidelines />} />
       <Route path="terms-and-conditions" element={<TermsAndConditions />} />
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="confidence-booking" element={<ConfidenceBooking />} />
+      <Route path="content-guidelines" element={<ContentGuidelines />} />
+      <Route path="listing-guidelines" element={<ListingGuidelines />} />
+      <Route path="guest-terms" element={<GuestTerms />} />
+      <Route
+        path="guest-cancellation-policies"
+        element={<GuestCancellationPolicy />}
+      />
+      <Route
+        path="host-cancellation-policy"
+        element={<HostCancellationPolicy />}
+      />
+      <Route path="host-terms" element={<HostTerms />} />
       <Route path="*" element={<NotFoundPage />} />
     </Route>
     <Route path="properties/:id/gallery" element={<Gallery />} />

@@ -1,4 +1,4 @@
-import { ISpecificGallery } from "../../../interfaces/property/galleryInterface";
+import { ISpecificGallery } from "../../../interfaces/property/gallery";
 
 export const specificGallery: ISpecificGallery[] = [
   {

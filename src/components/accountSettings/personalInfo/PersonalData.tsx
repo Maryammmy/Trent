@@ -4,12 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
 import Button from "../../ui/Button";
 import { updateUserAPI, useUserAPI } from "../../../services/userService";
-import {
-  IUpdateUser,
-  IUser,
-} from "../../../interfaces/accountSettingsInterface";
+import { IUpdateUser, IUser } from "../../../interfaces/accountSettings";
 import Select from "../../ui/Select";
-import { gender } from "../../../data/accountSettingsData/personalInfoData";
+import { gender } from "../../../data/accountSettings/personalInfo";
 import Image from "../../ui/Image";
 import toast from "react-hot-toast";
 import { personalDataSchema } from "../../../validation/personalDataSchema";
@@ -27,13 +24,13 @@ import ChangeMobileModal from "./ChangeMobileModal";
 const uid = Cookies.get("user_id");
 function PersonalData() {
   const { t } = useTranslation();
-  const { data } = useUserAPI();
   const [changeMobile, setChangeMobile] = useState(false);
-  const user: IUser = data?.data?.data?.user_data;
   const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState("");
   const [previewImage, setPreviewImage] = useState<string>("");
   const [imageError, setImageError] = useState<string | null>(null);
+  const { data } = useUserAPI();
+  const user: IUser = data?.data?.data?.user_data;
   const {
     control,
     handleSubmit,

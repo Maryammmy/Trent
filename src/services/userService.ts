@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
 import Cookies from "js-cookie";
 import { CurrentLanguage } from "../types";
-import { IChangeMobile } from "@/interfaces/accountSettingsInterface";
+import { IChangeMobile } from "@/interfaces/accountSettings";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;

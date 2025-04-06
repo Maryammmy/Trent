@@ -7,7 +7,7 @@ import { usePropertyAPI } from "../../services/propertyService";
 import {
   IDetailsProperty,
   IFacilityProperty,
-} from "../../interfaces/property/propertyInterface";
+} from "../../interfaces/property/property";
 import { CurrentLanguage } from "../../types";
 import { baseURL } from "../../services";
 import PropertySkeleton from "../../components/skeleton/PropertySkeleton";

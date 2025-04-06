@@ -2,45 +2,40 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
-import toast from "react-hot-toast";
-import Button from "../../../components/ui/Button";
-import Loader from "../../../components/loader/Loader";
-import { updatePropertySchema } from "../../../validation/updatePropertySchema";
-import { convertToFormData } from "../../../utils/convertToFormData";
-import { editPropertyAPI } from "../../../services/propertyService";
-import { defaultPropertyValues } from "../../../utils/defaultValues";
 import PropertyInputs from "./PropertyInputs";
 import PropertyTextArea from "./PropertyTextArea";
 import FacilitiesSelector from "./FacilitiesSelector";
-import { PropertyNameInputs } from "../../../types";
 import PropertyTypeSelector from "./PropertyTypeSelector";
-import {
-  IDetailsProperty,
-  IFacilityProperty,
-  ISingleProperty,
-} from "../../../interfaces/property/propertyInterface";
 import GovernmentSelector from "./GovernmentSelector";
 import PeriodSelector from "./PeriodSelector";
-import {
-  ApiError,
-  IFacility,
-  IGovernement,
-  IPropertyType,
-} from "../../../interfaces";
-import {
-  useFacilitiesAPI,
-  useFiltersAPI,
-  useGovernmentsAPI,
-  usePropertyTypesAPI,
-} from "../../../services/filtersService";
-import { baseURL } from "../../../services";
 import VideoUploader from "./VideoUploader";
 import ImageUploader from "./ImageUploader";
 import { useNavigate } from "react-router-dom";
-import { allowedImageTypes, allowedVideoTypes } from "../../../constants";
-import { ICancellationPolicy } from "@/interfaces/hosting";
 import { useCancellationPoliciesAPI } from "@/services/conditionService";
 import CancellationPolicy from "./CancellationPolicy";
+import { allowedImageTypes, allowedVideoTypes } from "@/constants";
+import { IPropertyType, IFacility, IGovernement, ApiError } from "@/interfaces";
+import {
+  ISingleProperty,
+  IDetailsProperty,
+  IFacilityProperty,
+} from "@/interfaces/property/property";
+import { baseURL } from "@/services";
+import {
+  usePropertyTypesAPI,
+  useFacilitiesAPI,
+  useGovernmentsAPI,
+  useFiltersAPI,
+} from "@/services/filtersService";
+import { editPropertyAPI } from "@/services/propertyService";
+import { PropertyNameInputs } from "@/types";
+import { convertToFormData } from "@/utils/convertToFormData";
+import { defaultPropertyValues } from "@/utils/defaultValues";
+import { updatePropertySchema } from "@/validation/updatePropertySchema";
+import toast from "react-hot-toast";
+import Loader from "@/components/loader/Loader";
+import Button from "@/components/ui/Button";
+import { ICancellationPolicy } from "@/interfaces/property/updateProperty";
 
 interface UpdatePropertyFormProps {
   propertyData: ISingleProperty;
@@ -77,6 +72,7 @@ function UpdatePropertyForm({
   const { data } = useCancellationPoliciesAPI();
   const cancellationPolicies: ICancellationPolicy[] =
     data?.data?.data?.cancellation_policies_list;
+  console.log(video);
   const {
     reset,
     control,
@@ -146,7 +142,7 @@ function UpdatePropertyForm({
   const handleClickCancellationPolicy = () => setIsOpen(!isOpen);
   useEffect(() => {
     if (propertyDetails && facilityListProperty) {
-      setVideo(baseURL + propertyDetails?.video);
+      setVideo(propertyDetails?.video ? baseURL + propertyDetails?.video : "");
       setImages(
         propertyDetails?.image_list?.map((image) => baseURL + image.img)
       );

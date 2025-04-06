@@ -2,10 +2,9 @@ import { Route } from "react-router-dom";
 import ErrorHandler from "../components/errors/ErrorHandler";
 import HostingLayout from "../layouts/HostingLayout";
 import Hosting from "../pages/hosting";
-import Properties from "../pages/hosting/Properties";
-import Property from "../pages/hosting/Property";
-import UpdateProperty from "../pages/hosting/updateProperty";
+import Properties from "../pages/hosting/properties";
 import ProtectedRoutes from "../middleware/ProtectedRoutes";
+import UpdateProperty from "@/pages/hosting/properties/updateProperty";
 
 export const HostingRoutes = (
   <Route
@@ -26,14 +25,6 @@ export const HostingRoutes = (
       element={
         <ProtectedRoutes>
           <Properties />
-        </ProtectedRoutes>
-      }
-    />
-    <Route
-      path="properties/:id"
-      element={
-        <ProtectedRoutes>
-          <Property />
         </ProtectedRoutes>
       }
     />

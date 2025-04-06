@@ -1,4 +1,4 @@
-import { IUpdateUser } from "../interfaces/accountSettingsInterface";
+import { IUpdateUser } from "../interfaces/accountSettings";
 export const convertPersonalDataToFormData = (data: IUpdateUser) => {
   const formData = new FormData();
   for (const [key, value] of Object.entries(data)) {

@@ -1,8 +1,4 @@
-import {
-  IForgetPassword,
-  ISendOtp,
-  IVerifyOtp,
-} from "@/interfaces/authInterface";
+import { IForgetPassword, ISendOtp, IVerifyOtp } from "@/interfaces/auth";
 import { baseAPI } from ".";
 import { LoginNameInputs, SignupNameInputs } from "../types";
 

@@ -1,6 +1,6 @@
 import Image from "../ui/Image";
 import { useTranslation } from "react-i18next";
-import { IDetailsProperty } from "../../interfaces/property/propertyInterface";
+import { IDetailsProperty } from "../../interfaces/property/property";
 import { baseAPI, baseURL } from "../../services";
 import { MessageCircleMore } from "lucide-react";
 import { useNavigate } from "react-router-dom";

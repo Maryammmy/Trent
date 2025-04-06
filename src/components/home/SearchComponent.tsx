@@ -12,7 +12,7 @@ import {
   validateEndDate,
   validateStartDate,
 } from "../../utils/handleChangeDate";
-import { homeSearch } from "../../data/landingData";
+import { homeSearch } from "../../data/landing";
 
 function SearchComponent() {
   const { t } = useTranslation();

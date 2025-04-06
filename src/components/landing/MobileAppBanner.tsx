@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { buttonData } from "../../data/landingData";
+import { buttonData } from "../../data/landing";
 import Button from "../ui/Button";
 import Image from "../ui/Image";
 import { useMediaQuery } from "react-responsive";

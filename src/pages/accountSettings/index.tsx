@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import AccountSettingsCard from "../../components/accountSettings/AccountSettingsCard";
-import { accountSettingsData } from "../../data/accountSettingsData";
+import { accountSettingsData } from "../../data/accountSettings";
 import { useTranslation } from "react-i18next";
 import { useUserAPI } from "../../services/userService";
-import { IUser } from "../../interfaces/accountSettingsInterface";
+import { IUser } from "../../interfaces/accountSettings";
 import SelectSkeleton from "../../components/skeleton/SelectSkeleton";
 
 function AccountSettings() {

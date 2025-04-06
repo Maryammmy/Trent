@@ -3,7 +3,7 @@ import Modal from "../ui/Modal";
 import Button from "../ui/Button";
 import { X } from "lucide-react";
 import Image from "../ui/Image";
-import { buttonData } from "../../data/landingData";
+import { buttonData } from "../../data/landing";
 
 function MobileAppModal() {
   const [isOpen, setIsOpen] = useState(false);

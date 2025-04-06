@@ -1,4 +1,7 @@
-import { IPropertyInput, IPropertyTextArea } from "../interfaces/hosting";
+import {
+  IPropertyInput,
+  IPropertyTextArea,
+} from "@/interfaces/property/updateProperty";
 
 export const propertyInputsData: IPropertyInput[] = [
   {
@@ -57,26 +60,26 @@ export const propertyInputsData: IPropertyInput[] = [
   },
   {
     name: "beds_count",
-    label: "beds",
-    type: "number",
+    label: "beds_count",
+    type: "text",
     placeholder: "enter_beds",
   },
   {
     name: "bathrooms_count",
-    label: "bathroom",
-    type: "number",
+    label: "bathrooms_count",
+    type: "text",
     placeholder: "enter_bathroom",
   },
   {
     name: "guest_count",
-    label: "plimit",
-    type: "number",
+    label: "guest_count",
+    type: "text",
     placeholder: "enter_guest_limit",
   },
   {
     name: "sqft",
     label: "property_sqft",
-    type: "number",
+    type: "text",
     placeholder: "enter_property_sqft_placeholder",
   },
   {
@@ -94,25 +97,25 @@ export const propertyInputsData: IPropertyInput[] = [
   {
     name: "min_days",
     label: "min_days",
-    type: "number",
+    type: "text",
     placeholder: "min_days_placeholder",
   },
   {
     name: "max_days",
     label: "max_days",
-    type: "number",
+    type: "text",
     placeholder: "max_days_placeholder",
   },
   {
     name: "price",
     label: "price",
-    type: "number",
+    type: "text",
     placeholder: "enter_price_placeholder",
   },
   {
     name: "security_deposit",
     label: "security_deposit",
-    type: "number",
+    type: "text",
     placeholder: "enter_security_deposit_placeholder",
   },
 ];

@@ -1,12 +1,12 @@
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+import InputErrorMessage from "@/components/ui/InputErrorMessage";
+import Video from "@/components/ui/Video";
+import { baseURL } from "@/services";
+import { PropertyNameInputs } from "@/types";
 import { Upload, X } from "lucide-react";
-import Button from "../../../components/ui/Button";
-import Input from "../../../components/ui/Input";
-import Video from "../../../components/ui/Video";
-import InputErrorMessage from "../../../components/ui/InputErrorMessage";
-import { useTranslation } from "react-i18next";
 import { FieldErrors } from "react-hook-form";
-import { PropertyNameInputs } from "../../../types";
-import { baseURL } from "../../../services";
+import { useTranslation } from "react-i18next";
 
 interface VideoUploaderProps {
   video: string;

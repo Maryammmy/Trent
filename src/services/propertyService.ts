@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
-import { IToggleProperty } from "../interfaces/property/propertyInterface";
+import { IToggleProperty } from "../interfaces/property/property";
 import { CurrentLanguage } from "../types";
 import Cookies from "js-cookie";
 

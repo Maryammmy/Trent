@@ -1,19 +1,8 @@
-import { PropertyInputs, PropertyTextArea } from "../types";
+import { ReactNode } from "react";
 
-export interface IPropertyInput {
-  name: keyof PropertyInputs;
+export interface IHosting {
   label: string;
-  type: string;
-  placeholder: string;
-}
-export interface IPropertyTextArea {
-  name: keyof PropertyTextArea;
-  label: string;
-  placeholder: string;
-}
-export interface ICancellationPolicy {
-  description: string;
-  id: string;
-  is_recommended: boolean;
-  title: string;
+  icon: ReactNode;
+  count: number;
+  to: string;
 }

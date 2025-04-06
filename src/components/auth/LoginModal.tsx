@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setIsloggedin } from "../../store/features/auth/authSlice";
 import { loginSchema } from "../../validation/loginSchema";
 import { loginAPI } from "../../services/authService";
-import { loginData } from "../../data/authData";
+import { loginData } from "../../data/auth";
 import { LoginNameInputs } from "../../types";
 import { useLocation, useNavigate } from "react-router-dom";
 import ForgetPasswordModal from "./ForgetPasswordModal";

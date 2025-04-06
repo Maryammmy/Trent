@@ -1,12 +1,13 @@
+import Button from "@/components/ui/Button";
+import Image from "@/components/ui/Image";
+import Input from "@/components/ui/Input";
+import InputErrorMessage from "@/components/ui/InputErrorMessage";
+import { baseURL } from "@/services";
+import { PropertyNameInputs } from "@/types";
 import { Upload, X } from "lucide-react";
-import Input from "../../../components/ui/Input";
-import Image from "../../../components/ui/Image";
-import Button from "../../../components/ui/Button";
-import InputErrorMessage from "../../../components/ui/InputErrorMessage";
-import { useTranslation } from "react-i18next";
 import { FieldErrors } from "react-hook-form";
-import { PropertyNameInputs } from "../../../types";
-import { baseURL } from "../../../services";
+import { useTranslation } from "react-i18next";
+
 interface IProps {
   images: string[];
   handleImageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;

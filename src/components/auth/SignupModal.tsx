@@ -4,7 +4,7 @@ import Modal from "../ui/Modal";
 import Input from "../ui/Input";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { signupData } from "../../data/authData";
+import { signupData } from "../../data/auth";
 import { setIsSignup } from "../../store/features/auth/authSlice";
 import { verifyOtpAPI, verifySignupAPI } from "../../services/authService";
 import toast from "react-hot-toast";

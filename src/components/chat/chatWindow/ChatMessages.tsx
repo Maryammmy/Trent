@@ -1,5 +1,5 @@
 import Image from "@/components/ui/Image";
-import { IMessage } from "@/interfaces/chatInterface";
+import { IMessage } from "@/interfaces/chat";
 import { baseURL } from "@/services";
 import { formatDateTime, formatTime12Hour } from "@/utils/formatDateAndTime";
 

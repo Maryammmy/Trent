@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "../ui/Input";
 import { useChatListAPI } from "../../services/chatService";
-import { IChatList } from "../../interfaces/chatInterface";
+import { IChatList } from "../../interfaces/chat";
 import { useNavigate } from "react-router-dom";
 import { useQueryParam } from "../../utils/getQueryParam";
 

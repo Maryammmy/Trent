@@ -1,9 +1,9 @@
 import { Control, Controller, FieldErrors } from "react-hook-form";
-import TextArea from "../../../components/ui/TextArea";
-import { PropertyNameInputs } from "../../../types";
+import { propertyTextAreasData } from "@/data/property/updateProperty";
+import InputErrorMessage from "@/components/ui/InputErrorMessage";
+import TextArea from "@/components/ui/TextArea";
+import { PropertyNameInputs } from "@/types";
 import { useTranslation } from "react-i18next";
-import InputErrorMessage from "../../../components/ui/InputErrorMessage";
-import { propertyTextAreasData } from "../../../data/hosting";
 interface IProps {
   control: Control<PropertyNameInputs>;
   errors: FieldErrors<PropertyNameInputs>;

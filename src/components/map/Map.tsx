@@ -5,7 +5,7 @@ import {
   OverlayView,
   InfoWindowF,
 } from "@react-google-maps/api";
-import { IProperty } from "../../interfaces/property/propertyInterface";
+import { IProperty } from "../../interfaces/property/property";
 import { API_KEY } from "../../services";
 import Button from "../ui/Button";
 import { useTranslation } from "react-i18next";

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { preferencesData } from "../../../data/accountSettingsData/preferencesData";
+import { preferencesData } from "../../../data/accountSettings/preferences";
 import Button from "../../ui/Button";
 
 function PreferencesData() {

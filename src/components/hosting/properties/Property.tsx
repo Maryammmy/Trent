@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Image from "../../ui/Image";
-import { IProperty } from "../../../interfaces/property/propertyInterface";
+import { IProperty } from "../../../interfaces/property/property";
 import { baseURL } from "../../../services";
 import { truncateText } from "../../../utils/truncateText";
 interface IProps {

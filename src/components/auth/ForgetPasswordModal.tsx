@@ -2,7 +2,7 @@ import { Eye, EyeOff, X } from "lucide-react";
 import Button from "../ui/Button";
 import Modal from "../ui/Modal";
 import Input from "../ui/Input";
-import { IForgetPassword } from "@/interfaces/authInterface";
+import { IForgetPassword } from "@/interfaces/auth";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { forgetPasswordSchema } from "@/validation/forgetPasswordSchema";

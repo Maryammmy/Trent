@@ -8,7 +8,6 @@ import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkele
 import { IPropertyType } from "../../../interfaces";
 import { usePropertyTypesAPI } from "../../../services/filtersService";
 
-const storedPropertyType = sessionStorage.getItem("category_id");
 function PropertyType() {
   const { t } = useTranslation();
   const [selectedPropertyType, setSelectedPropertyType] = useState<string>("");
@@ -16,8 +15,8 @@ function PropertyType() {
   const { data } = usePropertyTypesAPI();
   const propertyTypeList: IPropertyType[] = data?.data?.data?.category_list;
   useEffect(() => {
-    setSelectedPropertyType(storedPropertyType || "");
-  }, [selectedPropertyType]);
+    setSelectedPropertyType(sessionStorage.getItem("category_id") || "");
+  }, []);
   const handleSelectedPropertyType = (id: string) => {
     setSelectedPropertyType(id);
     sessionStorage.setItem("category_id", id);

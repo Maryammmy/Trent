@@ -1,4 +1,4 @@
-import { ISpecificAccountSettings } from "../../interfaces/accountSettingsInterface";
+import { ISpecificAccountSettings } from "../../interfaces/accountSettings";
 
 export const preferencesData: ISpecificAccountSettings[] = [
   { label: "preferred_language", text: "English", button: "edit" },

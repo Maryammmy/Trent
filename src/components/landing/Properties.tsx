@@ -6,7 +6,7 @@ import { SlidersHorizontal } from "lucide-react";
 import PropertyCartSkeleton from "../skeleton/PropertyCartSkeleton";
 import CategoryBar from "../CategoryBar";
 import { useHomeDataAPI } from "../../services/homeService";
-import { IProperty } from "../../interfaces/property/propertyInterface";
+import { IProperty } from "../../interfaces/property/property";
 import { FilterDataContext } from "../../context/FilterDataContext";
 import FilterModal from "../home/filter/FilterModal";
 import Map from "../map/Map";

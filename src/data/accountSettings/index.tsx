@@ -10,7 +10,7 @@ import {
   Gift,
   BetweenVerticalStart,
 } from "lucide-react";
-import { IAccountSettings } from "../../interfaces/accountSettingsInterface";
+import { IAccountSettings } from "../../interfaces/accountSettings";
 
 export const accountSettingsData: IAccountSettings[] = [
   {

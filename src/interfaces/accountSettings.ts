@@ -33,6 +33,7 @@ export interface IUser {
   phone: string;
   user_fees_percent: string;
   owner_fees_percent: string;
+  membership: string;
 }
 export interface IChangeMobile {
   new_mobile: string;

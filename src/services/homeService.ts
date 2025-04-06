@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI } from ".";
-import { IHomeDataParams } from "../interfaces/landingInterface";
+import { IHomeDataParams } from "../interfaces/landing";
 import { CurrentLanguage } from "../types";
 import Cookies from "js-cookie";
 

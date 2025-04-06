@@ -1,6 +1,6 @@
 import Button from "@/components/ui/Button";
 import Image from "@/components/ui/Image";
-import { IOwner } from "@/interfaces/chatInterface";
+import { IOwner } from "@/interfaces/chat";
 import { baseURL } from "@/services";
 import { useQueryParam } from "@/utils/getQueryParam";
 import { ChevronLeft } from "lucide-react";

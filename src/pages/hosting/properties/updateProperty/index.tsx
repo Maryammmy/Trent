@@ -1,12 +1,12 @@
 import { Link, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
-import { usePropertyAPI } from "../../../services/propertyService";
-import UpdateSkeleton from "../../../components/skeleton/UpdateSkeleton";
 import AuthorizationCheck from "./AuthorizationCheck";
 import UpdatePropertyForm from "./UpdatePropertyForm";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CurrentLanguage } from "@/types";
+import UpdateSkeleton from "@/components/skeleton/UpdateSkeleton";
+import { usePropertyAPI } from "@/services/propertyService";
 
 const userId = Cookies.get("user_id");
 const currentLanguage = (localStorage.getItem("i18nextLng") ||

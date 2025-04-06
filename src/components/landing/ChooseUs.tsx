@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useGetData } from "../../hooks/useGetData";
-import { IWhyChooseUs } from "../../interfaces/landingInterface";
+import { IWhyChooseUs } from "../../interfaces/landing";
 import { baseURL } from "../../services";
 import { CurrentLanguage } from "../../types";
 import ChooseUsSkeleton from "../skeleton/ChooseUsSkeleton";

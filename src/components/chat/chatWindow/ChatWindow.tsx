@@ -2,7 +2,7 @@ import ChatHeader from "./ChatHeader";
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
 import { useQueryParam } from "@/utils/getQueryParam";
-import { IMessage } from "@/interfaces/chatInterface";
+import { IMessage } from "@/interfaces/chat";
 import { useMessagesAPI } from "@/services/chatService";
 import { MessageCircleMore } from "lucide-react";
 

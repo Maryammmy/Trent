@@ -1,4 +1,4 @@
-import { formContactData } from "../../data/contactData";
+import { formContactData } from "../../data/contact";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 import TextArea from "../ui/TextArea";
