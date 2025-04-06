@@ -1,9 +1,9 @@
 import { useCancellationPoliciesAPI } from "@/services/conditionService";
-import { ICancellationPolicy } from "@/interfaces/hosting";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Button from "@/components/ui/Button";
 import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
 import { useTranslation } from "react-i18next";
+import { ICancellationPolicy } from "@/interfaces/property/property";
 
 interface IProps {
   selectedPolicy: ICancellationPolicy | "";
