@@ -1,7 +1,7 @@
 import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
 import Button from "@/components/ui/Button";
 import InputErrorMessage from "@/components/ui/InputErrorMessage";
-import { ICancellationPolicy } from "@/interfaces/hosting";
+import { ICancellationPolicy } from "@/interfaces/property/property";
 import { PropertyNameInputs } from "@/types";
 import { ChevronUp, ChevronDown } from "lucide-react";
 import { Control, Controller, FieldErrors } from "react-hook-form";

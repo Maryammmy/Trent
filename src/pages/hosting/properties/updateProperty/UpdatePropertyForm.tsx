@@ -19,6 +19,7 @@ import {
   ISingleProperty,
   IDetailsProperty,
   IFacilityProperty,
+  ICancellationPolicy,
 } from "@/interfaces/property/property";
 import { baseURL } from "@/services";
 import {
@@ -35,7 +36,6 @@ import { updatePropertySchema } from "@/validation/updatePropertySchema";
 import toast from "react-hot-toast";
 import Loader from "@/components/loader/Loader";
 import Button from "@/components/ui/Button";
-import { ICancellationPolicy } from "@/interfaces/property/updateProperty";
 
 interface UpdatePropertyFormProps {
   propertyData: ISingleProperty;

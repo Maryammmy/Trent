@@ -178,3 +178,9 @@ export interface IToggleProperty {
   uid: string;
   prop_id: string;
 }
+export interface ICancellationPolicy {
+  description: string;
+  id: string;
+  is_recommended: boolean;
+  title: string;
+}

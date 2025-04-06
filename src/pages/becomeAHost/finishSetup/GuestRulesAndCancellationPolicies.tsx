@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import TextArea from "../../../components/ui/TextArea";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
-import { ICancellationPolicy } from "@/interfaces/hosting";
 import CancellationPolicy from "./CancellationPolicies";
+import { ICancellationPolicy } from "@/interfaces/property/property";
 
 function GuestRulesAndCancellationPolicies() {
   const { t } = useTranslation();
