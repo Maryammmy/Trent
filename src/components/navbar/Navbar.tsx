@@ -8,8 +8,9 @@ import Button from "../ui/Button";
 import { Menu } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setToggle } from "../../store/features/navbar/navbarSlice";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { AlertContext } from "@/context/AlertContext";
+import useClickOutside from "@/hooks/useClickOutside";
 
 const Navbar = () => {
   const { pathname } = useLocation();
@@ -17,7 +18,9 @@ const Navbar = () => {
   const { bg, toggle } = useAppSelector((state) => state.navbar);
   const { isAlert } = useContext(AlertContext);
   const dispatch = useAppDispatch();
+  const toggleRef = useRef<HTMLButtonElement>(null);
   useNavbarBg();
+  useClickOutside(toggleRef, () => dispatch(setToggle(false)));
   return (
     <nav
       className={`left-0 w-full z-[2000] fixed ${
@@ -35,6 +38,7 @@ const Navbar = () => {
             <div className="flex items-center gap-3 sm:gap-5">
               <NavbarButtons />
               <Button
+                ref={toggleRef}
                 onClick={() => dispatch(setToggle(!toggle))}
                 className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm bg-white rounded-lg lg:hidden"
               >
