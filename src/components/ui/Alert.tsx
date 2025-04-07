@@ -6,7 +6,7 @@ interface IProps {
 }
 function Alert({
   children,
-  className = "px-4 py-3 font-medium text-center rounded bg-red-100 border border-red-400 text-red-700",
+  className = "px-2 py-3 font-medium text-center rounded bg-red-100 border border-red-400 text-red-700",
 }: IProps) {
   return (
     <div className={className} role="alert">
