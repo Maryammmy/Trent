@@ -87,8 +87,11 @@ const Images = () => {
           {images.length ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {images.map((imageObj, index) => (
-                <div className="relative" key={index}>
-                  <div className="rounded-lg overflow-hidden w-full h-28">
+                <div
+                  className="relative rounded-lg overflow-hidden w-full h-28"
+                  key={index}
+                >
+                  <div className="w-full h-full">
                     <Image
                       imageUrl={imageObj.url}
                       alt={`Uploaded photo ${index}`}

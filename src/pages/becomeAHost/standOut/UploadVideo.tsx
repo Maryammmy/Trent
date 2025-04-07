@@ -69,7 +69,9 @@ const UploadVideo = () => {
         </div>
         {video && (
           <div className="relative w-full rounded-lg overflow-hidden">
-            <Video videoUrl={video} className="w-full h-full rounded-lg" />
+            <div className="w-full h-full">
+              <Video videoUrl={video} className="w-full h-full object-cover" />
+            </div>
             <Button
               onClick={handleDeleteVideo}
               className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"

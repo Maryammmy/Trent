@@ -44,9 +44,12 @@ const VideoUploader: React.FC<VideoUploaderProps> = ({
       {video && (
         <div className="mt-4">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div className="relative">
-              <div className="w-full h-28">
-                <Video videoUrl={video} className="w-full h-full rounded-lg" />
+            <div className="w-full h-28 rounded-lg overflow-hidden relative">
+              <div className="w-full h-full">
+                <Video
+                  videoUrl={video}
+                  className="w-full h-full object-cover"
+                />
               </div>
               {!isFromBackend && (
                 <Button
