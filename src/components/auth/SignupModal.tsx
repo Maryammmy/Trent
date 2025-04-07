@@ -209,7 +209,7 @@ function SignupModal() {
                     rel="noopener noreferrer"
                     target="_blank"
                     to="/guest-terms"
-                    className="text-primary underline"
+                    className="text-primary hover:underline"
                   >
                     Guest{" "}
                   </Link>
@@ -218,7 +218,7 @@ function SignupModal() {
                     rel="noopener noreferrer"
                     target="_blank"
                     to="/host-terms"
-                    className="text-primary underline"
+                    className="text-primary hover:underline"
                   >
                     Host{" "}
                   </Link>

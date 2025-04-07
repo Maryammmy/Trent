@@ -29,6 +29,7 @@ function Footer() {
                 rel="noopener noreferrer"
                 target="_blank"
                 to="/privacy-policy"
+                className="hover:underline"
               >
                 {t("privacy_policy")}
               </Link>
@@ -36,6 +37,7 @@ function Footer() {
                 rel="noopener noreferrer"
                 target="_blank"
                 to="/confidence-booking"
+                className="hover:underline"
               >
                 {t("confidence_booking")}
               </Link>
@@ -48,6 +50,7 @@ function Footer() {
                 rel="noopener noreferrer"
                 target="_blank"
                 to="/content-guidelines"
+                className="hover:underline"
               >
                 {t("content_guidelines")}
               </Link>
@@ -55,6 +58,7 @@ function Footer() {
                 rel="noopener noreferrer"
                 target="_blank"
                 to="/listing-guidelines"
+                className="hover:underline"
               >
                 {t("listing_guideLines")}
               </Link>
@@ -63,23 +67,35 @@ function Footer() {
           <div className="flex flex-col gap-4">
             <h2 className="font-bold text-lg">{t("stay_informed")}</h2>
             <div className="flex flex-col gap-2 text-dark font-medium">
-              <Link rel="noopener noreferrer" target="_blank" to="/guest-terms">
+              <Link
+                rel="noopener noreferrer"
+                target="_blank"
+                to="/guest-terms"
+                className="hover:underline"
+              >
                 {t("guest_terms")}
               </Link>
               <Link
                 rel="noopener noreferrer"
                 target="_blank"
                 to="/guest-cancellation-policies"
+                className="hover:underline"
               >
                 {t("guest_cancellation_policies")}
               </Link>
-              <Link rel="noopener noreferrer" target="_blank" to="/host-terms">
+              <Link
+                rel="noopener noreferrer"
+                target="_blank"
+                to="/host-terms"
+                className="hover:underline"
+              >
                 {t("host_terms")}
               </Link>
               <Link
                 rel="noopener noreferrer"
                 target="_blank"
                 to="/host-cancellation-policy"
+                className="hover:underline"
               >
                 {t("host_cancellation_policy")}
               </Link>
