@@ -56,7 +56,6 @@ function PersonalData() {
       });
       setPreviewImage(baseURL + user?.pro_img);
       setPhone(user.phone);
-      Cookies.set("owner_fees", user.owner_fees_percent);
     }
   }, [user, reset]);
   const onSubmit = async (data: IUpdateUser) => {
