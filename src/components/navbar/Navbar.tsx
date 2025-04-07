@@ -26,7 +26,7 @@ const Navbar = () => {
           ? `bg-transparent absolute ${
               isAlert || isAlert === undefined ? "top-10" : "top-0"
             }`
-          : "bg-red-300 top-0"
+          : "bg-primary top-0"
       }`}
     >
       <div className="max-w-[1450px] flex flex-wrap items-center justify-between mx-auto p-4">
@@ -43,7 +43,7 @@ const Navbar = () => {
               </Button>
             </div>
             <div
-              className={`w-full py-2 bg-yellow-200 rounded-md ${
+              className={`w-full py-2 rounded-md bg-primary ${
                 toggle ? "block" : "hidden"
               }`}
             >
