@@ -100,7 +100,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-2 mb-4">
               <label htmlFor="mobile" className="text-600 font-medium text-sm">
-                Phone number
+                {t("phone_number")}
               </label>
               <Controller
                 name="mobile"
@@ -129,7 +129,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
                 htmlFor="password"
                 className="text-600 font-medium text-sm"
               >
-                Password
+                {t("new_password")}
               </label>
               <Controller
                 name="password"
@@ -139,7 +139,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
                     <Input
                       {...field}
                       type={showPassword ? "text" : "password"}
-                      placeholder="Enter your password"
+                      placeholder="Enter your new password"
                       className="w-full outline-none"
                       id="password"
                     />
@@ -165,7 +165,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
                 htmlFor="confirm_password"
                 className="text-600 font-medium text-sm"
               >
-                Confirm password
+                {t("confirm_new_password")}
               </label>
               <Controller
                 name="confirm_password"
@@ -175,7 +175,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
                     <Input
                       {...field}
                       type={showPassword ? "text" : "password"}
-                      placeholder="Enter your confirm password"
+                      placeholder="Confirm your new password"
                       className="w-full outline-none"
                       id="confirm_password"
                     />

@@ -91,6 +91,8 @@
   "personal_info_card_text_2": "Contact info and personal details can be edited. If this info was used to verify your identity.",
   "login": "Login",
   "password": "Password",
+  "new_password": "New password",
+  "confirm_new_password": "Confirm new password",
   "last_updated_password": "Last updated a day ago",
   "login_and_security_card_title": "Keeping your account secure",
   "login_and_security_card_text": "We regularly review accounts to make sure they’re secure as possible. We’ll also let you know if there’s more we can do to increase the security of your account.",

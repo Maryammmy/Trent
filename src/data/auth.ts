@@ -10,7 +10,7 @@ export const loginData: ILoginInputs[] = [
   {
     name: "password",
     label: "Password",
-    placeholder: "**********",
+    placeholder: "Enter your password",
     type: "password",
   },
 ];
@@ -36,13 +36,13 @@ export const signupData: ISignupInputs[] = [
   {
     name: "password",
     label: "Password",
-    placeholder: "**********",
+    placeholder: "Enter your password",
     type: "password",
   },
   {
     name: "confirmPassword",
     label: "Confirm password",
-    placeholder: "**********",
+    placeholder: "Confirm your password",
     type: "password",
   },
 ];
