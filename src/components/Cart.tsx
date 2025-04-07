@@ -98,24 +98,24 @@ function Cart({ property }: IProps) {
       <div>
         <div className="flex flex-col gap-1 sm:flex-row items-start justify-between pt-2">
           <div className="flex flex-col gap-1">
-            <h3 className="font-bold">{truncateText(title, 8)}</h3>
+            <h3 className="font-bold">{truncateText(title, 6)}</h3>
             <div className="flex">
-              <p>{truncateText(city_name, 5)}</p>,
-              <p>{truncateText(government_name, 5)}</p>
+              <p>{truncateText(city_name, 4)}</p>,
+              <p>{truncateText(government_name, 4)}</p>
             </div>
           </div>
           <div className="flex flex-col gap-1 sm:items-end">
             <div className="flex gap-1 font-medium">
               <span className="font-bold text-primary">
                 {enableTaxes
-                  ? `${truncateText(priceBeforeTaxes.toFixed(0), 5)} ${t(
+                  ? `${truncateText(priceBeforeTaxes.toFixed(0), 4)}${t(
                       "price_per_night"
                     )}`
-                  : `${truncateText(priceWithTaxes.toFixed(0), 5)} ${t(
+                  : `${truncateText(priceWithTaxes.toFixed(0), 4)}${t(
                       "price_per_night"
                     )}`}
               </span>
-              <span className="text-dark">/{period_name}</span>
+              <span className="text-dark">/{truncateText(period_name, 5)}</span>
             </div>
             <div className="flex gap-1 items-center font-medium">
               <Rating rating={Number(rate)} />

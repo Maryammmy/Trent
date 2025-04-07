@@ -344,5 +344,6 @@
   "my_payouts": "My payouts",
   "my_extra_images": "My extra images",
   "total_reviews": "Total reviews",
-  "membership": "Membership"
+  "membership": "Membership",
+  "before_taxes": "Total before taxes"
 }

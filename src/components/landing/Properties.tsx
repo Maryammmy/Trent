@@ -2,7 +2,7 @@ import { lazy, Suspense, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Button from "../ui/Button";
 import Switcher from "../ui/Switcher";
-import { SlidersHorizontal } from "lucide-react";
+import { List, MapPinned, SlidersHorizontal } from "lucide-react";
 import PropertyCartSkeleton from "../skeleton/PropertyCartSkeleton";
 import CategoryBar from "../CategoryBar";
 import { useHomeDataAPI } from "../../services/homeService";
@@ -55,25 +55,35 @@ export default function Properties() {
         <div className="px-5 xl:px-20 mt-5 flex flex-wrap gap-3 justify-between">
           <Button
             onClick={handleToggleView}
-            className="rounded-md font-medium py-2 w-28 text-white bg-primary"
+            className="rounded-md font-medium text-sm py-2 w-[120px] text-primary border flex items-center justify-center gap-2"
           >
-            {enableMap ? t("show_list") : t("show_map")}
+            {enableMap ? (
+              <>
+                <List size={15} strokeWidth={2.5} />
+                <span>{t("show_list")}</span>
+              </>
+            ) : (
+              <>
+                <MapPinned size={15} strokeWidth={2.5} />
+                <span>{t("show_map")}</span>
+              </>
+            )}
           </Button>
           <div className="flex flex-wrap gap-3">
-            <div className="flex items-center gap-2 border p-2 rounded-md bg-white">
-              <span className="text-sm">{t("display_total_before_taxes")}</span>
+            <div className="flex items-center gap-2 border p-2 rounded-md font-medium text-sm bg-white">
+              <span className="hidden sm:block">
+                {t("display_total_before_taxes")}
+              </span>
+              <span className="block sm:hidden">{t("before_taxes")}</span>
               <Switcher />
             </div>
+
             <Button
-              className="flex gap-2 items-center border rounded-md px-3 py-2 text-primary"
+              className="flex gap-2 items-center border rounded-md px-3 py-2 font-medium text-sm text-primary"
               onClick={() => setIsFilterOpen(!isFilterOpen)}
             >
-              <SlidersHorizontal
-                size={15}
-                strokeWidth={2.5}
-                className="text-primary"
-              />
-              <span className="font-medium text-sm">{t("filters")}</span>
+              <SlidersHorizontal size={15} strokeWidth={2.5} />
+              <span className="hidden sm:block">{t("filters")}</span>
             </Button>
           </div>
         </div>
