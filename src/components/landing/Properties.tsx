@@ -52,32 +52,33 @@ export default function Properties() {
   return (
     <>
       <div ref={propertiesSectionRef}>
-        <div className="px-5 xl:px-20 mt-5 flex flex-wrap gap-3 justify-end">
-          <div className="flex items-center gap-2 border p-2 rounded-md bg-white">
-            <span className="text-sm">{t("display_total_before_taxes")}</span>
-            <Switcher />
-          </div>
-          <Button
-            className="flex gap-2 items-center border rounded-md px-3 py-2 text-primary"
-            onClick={() => setIsFilterOpen(!isFilterOpen)}
-          >
-            <SlidersHorizontal
-              size={15}
-              strokeWidth={2.5}
-              className="text-primary"
-            />
-            <span className="font-medium text-sm">{t("filters")}</span>
-          </Button>
-        </div>
-        <CategoryBar />
-        <div className="flex justify-center items-center">
+        <div className="px-5 xl:px-20 mt-5 flex flex-wrap gap-3 justify-between">
           <Button
             onClick={handleToggleView}
-            className="rounded-full fixed bottom-20 z-50 font-medium w-28 py-3 text-white bg-primary"
+            className="rounded-md font-medium py-2 w-28 text-white bg-primary"
           >
             {enableMap ? t("show_list") : t("show_map")}
           </Button>
+          <div className="flex flex-wrap gap-3">
+            <div className="flex items-center gap-2 border p-2 rounded-md bg-white">
+              <span className="text-sm">{t("display_total_before_taxes")}</span>
+              <Switcher />
+            </div>
+            <Button
+              className="flex gap-2 items-center border rounded-md px-3 py-2 text-primary"
+              onClick={() => setIsFilterOpen(!isFilterOpen)}
+            >
+              <SlidersHorizontal
+                size={15}
+                strokeWidth={2.5}
+                className="text-primary"
+              />
+              <span className="font-medium text-sm">{t("filters")}</span>
+            </Button>
+          </div>
         </div>
+        <CategoryBar />
+        <div className="flex justify-center items-center"></div>
         {!enableMap && (
           <div>
             <div

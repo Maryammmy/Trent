@@ -14,7 +14,6 @@ import ConfirmAndPay from "../pages/property/ConfirmAndPay";
 import LandingPage from "../pages";
 import ChatApp from "../pages/ChatApp";
 import ProtectedRoutes from "../middleware/ProtectedRoutes";
-import TermsAndConditions from "@/pages/TermsAndConditions";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import ConfidenceBooking from "@/pages/ConfidenceBooking";
 import ContentGuidelines from "@/pages/ContentGuidelines";
@@ -79,7 +78,6 @@ export const RootRoutes = (
           </ProtectedRoutes>
         }
       />
-      <Route path="terms-and-conditions" element={<TermsAndConditions />} />
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
       <Route path="confidence-booking" element={<ConfidenceBooking />} />
       <Route path="content-guidelines" element={<ContentGuidelines />} />

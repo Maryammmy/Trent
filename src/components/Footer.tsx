@@ -28,13 +28,6 @@ function Footer() {
               <Link
                 rel="noopener noreferrer"
                 target="_blank"
-                to="/terms-and-conditions"
-              >
-                {t("terms_and_conditions")}
-              </Link>
-              <Link
-                rel="noopener noreferrer"
-                target="_blank"
                 to="/privacy-policy"
               >
                 {t("privacy_policy")}

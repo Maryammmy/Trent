@@ -6,13 +6,13 @@ function PrivacyPolicy() {
   const { data } = usePrivacyPolicyAPI();
   return (
     <div className="py-5 min-h-screen">
-      <div className="p-6 pt-0 md:pt-6">
+      <div className="p-10 pt-0 md:pt-5">
         <h1 className="text-2xl font-bold text-center text-gray-800">
           {t("privacy_policy")}
         </h1>
         <div
           className="mt-4 text-dark"
-          dangerouslySetInnerHTML={{ __html: data?.data?.data?.privacy_policy }} // عرض المحتوى المستلم من الـ API
+          dangerouslySetInnerHTML={{ __html: data?.data?.data?.privacy_policy }}
         />
       </div>
     </div>

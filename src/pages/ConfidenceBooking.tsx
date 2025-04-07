@@ -6,7 +6,7 @@ function ConfidenceBooking() {
   const { data } = useConfidenceBookingAPI();
   return (
     <div className="py-5 min-h-screen">
-      <div className="p-6 pt-0 md:pt-6">
+      <div className="p-10 pt-0 md:pt-5">
         <h1 className="text-2xl font-bold text-center text-gray-800">
           {t("confidence_booking")}
         </h1>
