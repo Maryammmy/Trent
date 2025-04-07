@@ -37,14 +37,18 @@ const Navbar = () => {
               <NavbarButtons />
               <Button
                 onClick={() => dispatch(setToggle(!toggle))}
-                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm bg-white rounded-lg lg:hidden"
+                className="inline-flex relative items-center p-2 w-10 h-10 justify-center text-sm bg-white rounded-lg lg:hidden"
               >
                 <Menu className="text-dark" />
               </Button>
             </div>
             <div
-              className={`w-full mt-4 py-2 rounded-md bg-primary ${
-                toggle ? "block" : "hidden"
+              className={`w-full mt-4 py-2 rounded-md bg-primary transition-all duration-300 ${
+                toggle
+                  ? `block absolute ${
+                      pathname === "/" && !bg ? "top-12" : "top-16"
+                    } left-0 w-full z-[3000]`
+                  : "hidden"
               }`}
             >
               <NavbarLinks />
