@@ -83,7 +83,6 @@ export const useSendDataToAPI = () => {
         toast.success(response?.data?.response_message);
         setSelectedImages([]);
         setSelectedVideo(null);
-        window.location.reload();
       }
       return true;
     } catch (error) {

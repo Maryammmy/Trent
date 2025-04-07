@@ -49,7 +49,7 @@ function SignupModal() {
   const handleTermsChange = () => {
     setAcceptedTerms(!acceptedTerms);
     if (!acceptedTerms) {
-      setTermsError(""); // مسح الخطأ لو المستخدم وافق
+      setTermsError("");
     }
   };
   const onSubmit: SubmitHandler<SignupNameInputs> = async (data) => {
@@ -208,11 +208,21 @@ function SignupModal() {
                   <Link
                     rel="noopener noreferrer"
                     target="_blank"
-                    to="/terms-and-conditions"
+                    to="/guest-terms"
                     className="text-primary underline"
                   >
-                    Terms and Conditions
+                    Guest{" "}
                   </Link>
+                  and{" "}
+                  <Link
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    to="/host-terms"
+                    className="text-primary underline"
+                  >
+                    Host{" "}
+                  </Link>
+                  Terms and Conditions
                 </label>
               </div>
               {termsError && <InputErrorMessage msg={termsError} />}

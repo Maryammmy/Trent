@@ -13,7 +13,6 @@ import Cookies from "js-cookie";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
-const ownerFees = Cookies.get("owner_fees");
 function HostingModal() {
   const { t } = useTranslation();
   const { isFinishUpModal } = useAppSelector((state) => state.becomeAHost);
@@ -23,19 +22,23 @@ function HostingModal() {
   const [storedPrice, setStoredPrice] = useState<string>("");
   const [storedTitleAr, setStoredTitleAr] = useState<string>("");
   const [storedTitleEn, setStoredTitleEn] = useState<string>("");
-  const trentFees = (Number(storedPrice) * (Number(ownerFees) / 100)).toFixed(
-    2
-  );
+  const [ownerFees, setOwnerFees] = useState<string | undefined>(undefined);
+  const trentFees = ownerFees
+    ? (Number(storedPrice) * (Number(ownerFees) / 100)).toFixed(2)
+    : "";
   useEffect(() => {
     setStoredPrice(sessionStorage.getItem("price") || "");
     setStoredTitleAr(sessionStorage.getItem("title_ar") || "");
     setStoredTitleEn(sessionStorage.getItem("title_en") || "");
+    setOwnerFees(Cookies.get("owner_fees"));
   }, []);
-
   const handleFinishUp = async () => {
     setLoading(true);
     const isSuccess = await sendDataToAPI();
-    if (isSuccess) dispatch(setIsFinishUpModal(false));
+    if (isSuccess) {
+      dispatch(setIsFinishUpModal(false));
+      window.location.reload();
+    }
     setLoading(false);
   };
   return (

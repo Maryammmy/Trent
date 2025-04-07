@@ -48,9 +48,10 @@ export const updatePropertySchema = yup.object().shape({
       "Minimum days cannot be greater than Maximum days",
       function (value) {
         const { max_days } = this.parent;
-        return value <= max_days || value === "";
+        return !max_days || Number(value) <= Number(max_days);
       }
     ),
+
   max_days: yup
     .string()
     .required("Maximum days is required")
@@ -67,7 +68,7 @@ export const updatePropertySchema = yup.object().shape({
       "Maximum days cannot be less than Minimum days",
       function (value) {
         const { min_days } = this.parent;
-        return value >= min_days || value === "";
+        return !min_days || Number(value) >= Number(min_days);
       }
     ),
   facilities: yup.array().min(1, "Facilities are required").required(),

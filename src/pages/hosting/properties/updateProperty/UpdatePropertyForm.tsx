@@ -72,7 +72,6 @@ function UpdatePropertyForm({
   const { data } = useCancellationPoliciesAPI();
   const cancellationPolicies: ICancellationPolicy[] =
     data?.data?.data?.cancellation_policies_list;
-  console.log(video);
   const {
     reset,
     control,
@@ -111,7 +110,7 @@ function UpdatePropertyForm({
   const handleDeleteImage = (image: string) => {
     setImages((prevImages) => prevImages.filter((item) => item !== image));
     setImageError(null);
-    toast.error(t("iamge_deleted_successfully"));
+    toast.error(t("image_deleted_successfully"));
   };
   const handleVideoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {

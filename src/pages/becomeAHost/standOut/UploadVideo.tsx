@@ -44,7 +44,7 @@ const UploadVideo = () => {
     setVideo("");
     setSelectedVideo(null);
     setVideoError(null);
-    toast.error(t("video_deleted_successfully"));
+    toast.success(t("video_deleted_successfully"));
   };
   return (
     <div className="py-10">

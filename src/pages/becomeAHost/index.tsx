@@ -18,7 +18,7 @@ function GetStartedToHost() {
   }, [user]);
   return (
     <div className="py-10">
-      <div className="flex flex-col lg:flex-row gap-5 items-center justify-between hosting-layout max-w-screen-lg mx-auto px-5 md:px-0 lg:px-20 xl:px-0 pb-10">
+      <div className="flex flex-col lg:flex-row gap-10 items-center lg:justify-between hosting-layout max-w-screen-lg mx-auto px-5 md:px-0 lg:px-20 xl:px-0 pb-10">
         <div>
           <h2 className="text-2xl xl:text-4xl font-bold max-w-2xl">
             {t("get_started_to_host")}

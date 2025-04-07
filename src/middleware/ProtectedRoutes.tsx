@@ -8,7 +8,6 @@ const uid = Cookies.get("user_id") || "";
 export default function ProtectedRoutes({ children }: { children: ReactNode }) {
   const dispatch = useAppDispatch();
   const location = useLocation();
-  console.log(uid);
   if (!uid) {
     dispatch(setIsloggedin(true));
     return <Navigate to="/" state={location.pathname} replace />;

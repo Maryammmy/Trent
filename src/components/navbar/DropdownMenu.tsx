@@ -10,6 +10,7 @@ function DropdownMenu() {
   const dispatch = useAppDispatch();
   const logout = () => {
     Cookies.remove("user_id");
+    Cookies.remove("owner_fees");
     setTimeout(() => {
       window.location.reload();
     }, 500);
