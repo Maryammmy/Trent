@@ -32,6 +32,7 @@ const NavbarButtons = () => {
     dispatch(setIsLangSwitcherOpen(!isLangSwitcherOpen));
     dispatch(setIsDropdownOpen(false));
     dispatch(setIsDestinationOpen(false));
+    dispatch(setToggle(false));
   };
 
   const toggleMenu = () => {

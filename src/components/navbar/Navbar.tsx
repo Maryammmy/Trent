@@ -43,7 +43,7 @@ const Navbar = () => {
               </Button>
             </div>
             <div
-              className={`w-full py-2 rounded-md bg-primary ${
+              className={`w-full mt-4 py-2 rounded-md bg-primary ${
                 toggle ? "block" : "hidden"
               }`}
             >
