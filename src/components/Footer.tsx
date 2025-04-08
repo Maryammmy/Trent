@@ -3,6 +3,8 @@ import { useContactUsAPI } from "@/services/homeService";
 import { Link } from "react-router-dom";
 import UpdateSkeleton from "./skeleton/UpdateSkeleton";
 import { useTranslation } from "react-i18next";
+import { Mail } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 function Footer() {
   const { t } = useTranslation();
@@ -110,19 +112,21 @@ function Footer() {
                 <>
                   <Link
                     to={`mailto:${contactUs?.email}`}
-                    className="hover:underline"
+                    className="hover:underline flex gap-1"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
+                    {<Mail size={25} className="text-primary" />}
                     {contactUs?.email}
                   </Link>
                   <Link
                     to={`https://wa.me/${contactUs?.mobile.replace("+", "")}`}
-                    className="hover:underline rtl:text-end"
+                    className="hover:underline rtl:text-end flex items-center gap-1"
                     target="_blank"
                     dir="ltr"
                     rel="noopener noreferrer"
                   >
+                    <FaWhatsapp size={25} className="text-primary" />
                     {contactUs?.mobile}
                   </Link>
                 </>

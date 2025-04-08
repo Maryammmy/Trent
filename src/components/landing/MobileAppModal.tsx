@@ -10,13 +10,6 @@ function MobileAppModal() {
   const [platform, setPlatform] = useState("desktop");
 
   useEffect(() => {
-    if (!sessionStorage.getItem("hasSeenMobileAppModal")) {
-      setTimeout(() => {
-        setIsOpen(true);
-        sessionStorage.setItem("hasSeenMobileAppModal", "true");
-      }, 1000);
-    }
-
     const userAgent = navigator.userAgent || navigator.vendor;
     setPlatform(
       /android/i.test(userAgent)
@@ -25,7 +18,19 @@ function MobileAppModal() {
         ? "ios"
         : "desktop"
     );
-  }, []);
+
+    if (
+      (platform === "android" || platform === "ios") &&
+      !sessionStorage.getItem("hasSeenMobileAppModal")
+    ) {
+      setTimeout(() => {
+        setIsOpen(true);
+        sessionStorage.setItem("hasSeenMobileAppModal", "true");
+      }, 1000);
+    }
+  }, [platform]);
+
+  if (platform === "desktop") return null;
 
   return (
     <Modal isOpen={isOpen} close={() => setIsOpen(false)} maxWidth="600px">
@@ -47,9 +52,7 @@ function MobileAppModal() {
         </div>
         <div className="flex flex-col md:flex-row justify-between items-center gap-3">
           {buttonData
-            .filter(
-              (btn) => btn.platform === platform || platform === "desktop"
-            )
+            .filter((btn) => btn.platform === platform)
             .map((btn, i) => (
               <Button
                 key={i}

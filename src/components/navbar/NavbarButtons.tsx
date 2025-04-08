@@ -12,7 +12,10 @@ import Button from "../ui/Button";
 import LanguageSwitcher from "./LanguageSwitcher";
 import DropdownMenu from "./DropdownMenu";
 import { setToggle } from "../../store/features/navbar/navbarSlice";
+import { CurrentLanguage } from "@/types";
 
+const currentLanguage = (localStorage.getItem("i18nextLng") ||
+  "en") as CurrentLanguage;
 const isLoggedin = Cookies.get("user_id");
 const NavbarButtons = () => {
   const dispatch = useAppDispatch();
@@ -46,14 +49,21 @@ const NavbarButtons = () => {
     <>
       {isLoggedin && (
         <div className="flex items-center gap-3 md:gap-4">
-          <div className="relative" ref={languageSwitcherRef}>
-            <Button
-              onClick={toggleLangSwitcher}
-              className="md:py-2 md:px-4 rounded-full text-white md:hover:bg-[#F7F7F7] md:hover:text-dark"
-            >
-              <Globe size={18} />
-            </Button>
-            {isLangSwitcherOpen && <LanguageSwitcher />}
+          <div className="sm:flex sm:items-center sm:gap-2">
+            <div>
+              <span className="text-white font-medium hidden sm:block">
+                {currentLanguage === "en" ? "English" : "العربيه"}
+              </span>
+            </div>
+            <div className="relative" ref={languageSwitcherRef}>
+              <Button
+                onClick={toggleLangSwitcher}
+                className="md:py-2 md:px-4 rounded-full text-white md:hover:bg-[#F7F7F7] md:hover:text-dark"
+              >
+                <Globe size={18} />
+              </Button>
+              {isLangSwitcherOpen && <LanguageSwitcher />}
+            </div>
           </div>
           <div className="relative" ref={dropdownRef}>
             <Button

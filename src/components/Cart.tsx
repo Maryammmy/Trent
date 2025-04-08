@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import Carsoul from "./ui/Carsoul";
 import Image from "./ui/Image";
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "../store/hooks";
 import Rating from "./ui/Rating";
 import { MapPin } from "lucide-react";
 import Button from "./ui/Button";
@@ -31,11 +30,7 @@ function Cart({ property }: IProps) {
     rate,
   } = property;
   const { t } = useTranslation();
-  const { enableTaxes } = useAppSelector((state) => state.taxes);
   const basePrice = Number(price);
-  const taxRate = 14 / 100;
-  const priceBeforeTaxes = basePrice;
-  const priceWithTaxes = basePrice * (1 + taxRate);
   const toggleProperty = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -107,13 +102,8 @@ function Cart({ property }: IProps) {
           <div className="flex flex-col gap-1 items-end">
             <div className="flex gap-1 font-medium">
               <span className="font-bold text-primary">
-                {enableTaxes
-                  ? `${truncateText(priceBeforeTaxes.toFixed(0), 4)}${t(
-                      "price_per_night"
-                    )}`
-                  : `${truncateText(priceWithTaxes.toFixed(0), 4)}${t(
-                      "price_per_night"
-                    )}`}
+                {truncateText(basePrice.toFixed(0), 4)}
+                {t("price_per_night")}
               </span>
               <span className="text-dark">/{truncateText(period_name, 5)}</span>
             </div>
@@ -123,9 +113,6 @@ function Cart({ property }: IProps) {
             </div>
           </div>
         </div>
-        {enableTaxes && (
-          <p className="text-sm text-dark pt-1">{t("total_before_taxes")}</p>
-        )}
         <div className="flex gap-5 mt-2">
           <Button className="flex-[2] zoom py-1 bg-primary rounded-md text-white font-medium">
             {t("book_now")}

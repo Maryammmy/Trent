@@ -6,7 +6,6 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { IProperty } from "../../interfaces/property/property";
 import { baseURL } from "../../services";
 import { togglePropertyAPI } from "../../services/propertyService";
-import { useAppSelector } from "../../store/hooks";
 import { truncateText } from "../../utils/truncateText";
 import Carsoul from "../ui/Carsoul";
 import Rating from "../ui/Rating";
@@ -29,11 +28,7 @@ function Cart({ property }: IProps) {
     rate,
   } = property;
   const { t } = useTranslation();
-  const { enableTaxes } = useAppSelector((state) => state.taxes);
   const basePrice = Number(price);
-  const taxRate = 14 / 100;
-  const priceBeforeTaxes = basePrice;
-  const priceWithTaxes = basePrice * (1 + taxRate);
   const toggleProperty = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -102,13 +97,8 @@ function Cart({ property }: IProps) {
           <div className="flex flex-col items-end gap-1">
             <div className="flex gap-1 font-medium">
               <span className="font-bold text-primary">
-                {enableTaxes
-                  ? `${truncateText(priceBeforeTaxes.toFixed(0), 4)} ${t(
-                      "price_per_night"
-                    )}`
-                  : `${truncateText(priceWithTaxes.toFixed(0), 4)} ${t(
-                      "price_per_night"
-                    )}`}
+                {truncateText(basePrice.toFixed(0), 4)}
+                {t("price_per_night")}
               </span>
               <span className="text-dark">/{truncateText(period_name, 5)}</span>
             </div>
@@ -118,11 +108,6 @@ function Cart({ property }: IProps) {
             </div>
           </div>
         </div>
-        {enableTaxes && (
-          <span className="text-sm text-dark pt-1">
-            {t("total_before_taxes")}
-          </span>
-        )}
       </div>
     </div>
   );

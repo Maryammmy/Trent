@@ -20,8 +20,6 @@
   "error_check_out": "تاريخ المغادرة يجب ان يكون بعد تاريخ الوصول",
   "error_Check_in_after_today": "تاريخ الوصول لا يمكن أن يكون قبل اليوم",
   "error_Check_out_after_today": "تاريخ المغادرة لا يمكن ان يكون قبل اليوم",
-  "display_total_before_taxes": "عرض الإجمالي قبل الضرائب",
-  "total_before_taxes": "الأجمالي قبل الضرائب",
   "filters": "عوامل التصفيه",
   "apply": "تطبيق",
   "clear": "مسح",

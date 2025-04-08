@@ -29,7 +29,7 @@ function Home() {
   return (
     <div>
       <HomeAlert />
-      <div className="bg-home h-[50vh] bg-[length:100%_100%] bg-no-repeat mb-[10vh] flex items-center justify-center">
+      <div className="bg-home h-[50vh] bg-[length:100%_100%] bg-no-repeat mb-[5vh] flex items-center justify-center">
         <div className="w-full px-5 md:max-w-xl ">
           <h1
             data-aos="fade-up"
@@ -56,7 +56,7 @@ function Home() {
             left={carouselProps.left}
           >
             {Array.from({ length: 4 }).map((_, index) => (
-              <div key={index} className="h-[40vh] w-full sm:px-4">
+              <div key={index} className="h-[45vh] w-full sm:px-4">
                 <SilderSkeleton />
               </div>
             ))}
