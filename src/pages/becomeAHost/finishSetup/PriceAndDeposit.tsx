@@ -37,7 +37,7 @@ function PriceAndDeposit() {
     const newErrors = { ...errors };
     if (isNaN(value)) {
       newErrors[type] = "Invalid number";
-    } else if (value < 50 || value > 250000) {
+    } else if ((value && value < 50) || value > 250000) {
       newErrors[type] = "Value must be between 50 and 250,000";
     } else {
       delete newErrors[type];
@@ -80,7 +80,10 @@ function PriceAndDeposit() {
           {t("price_and_deposit_desc")}
         </p>
         <div className="flex flex-col gap-2 pb-4">
-          <label className="text-lg font-medium">{t("period")}</label>
+          <label className="text-lg font-medium">
+            {t("period")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           {!periods ? (
             <SelectSkeleton />
           ) : periods?.length ? (
@@ -100,7 +103,10 @@ function PriceAndDeposit() {
           )}
         </div>
         <div className="flex flex-col gap-1 mb-5">
-          <label className="font-medium">{t("price")}</label>
+          <label className="font-medium">
+            {t("price")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             name="price"
             type="text"
@@ -112,7 +118,10 @@ function PriceAndDeposit() {
           {errors.price && <InputErrorMessage msg={errors.price} />}
         </div>
         <div className="flex flex-col gap-1 mb-5">
-          <label className="font-medium">{t("security_deposit")}</label>
+          <label className="font-medium">
+            {t("security_deposit")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             name="security_deposit"
             type="text"

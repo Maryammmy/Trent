@@ -37,7 +37,10 @@ function Title() {
           {t("title_for_property_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium">{t("title_in_english")}</label>
+          <label className="font-medium">
+            {t("title_in_english")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             type="text"
             maxLength={100}
@@ -50,7 +53,10 @@ function Title() {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label className="font-medium">{t("title_in_arabic")}</label>
+          <label className="font-medium">
+            {t("title_in_arabic")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             type="text"
             maxLength={100}

@@ -58,7 +58,10 @@ function GuestRulesAndCancellationPolicies() {
           handleChangePolicy={handleChangePolicy}
         />
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium">{t("guest_rules_in_english")}</label>
+          <label className="font-medium">
+            {t("guest_rules_in_english")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <TextArea
             maxLength={500}
             minLength={10}
@@ -71,7 +74,10 @@ function GuestRulesAndCancellationPolicies() {
           ></TextArea>
         </div>
         <div className="flex flex-col gap-1">
-          <label className="font-medium">{t("guest_rules_in_arabic")}</label>
+          <label className="font-medium">
+            {t("guest_rules_in_arabic")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <TextArea
             maxLength={500}
             minLength={10}

@@ -51,7 +51,10 @@ const City = () => {
           {t("city_for_property_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium">{t("government")}</label>
+          <label className="font-medium">
+            {t("government")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           {!governmentList ? (
             <SelectSkeleton />
           ) : governmentList?.length ? (
@@ -71,7 +74,10 @@ const City = () => {
           )}
         </div>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium mb-1">{t("city_in_english")}</label>
+          <label className="font-medium mb-1">
+            {t("city_in_english")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             name="city_en"
             type="text"
@@ -84,7 +90,10 @@ const City = () => {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label className="font-medium">{t("city_in_arabic")}</label>
+          <label className="font-medium">
+            {t("city_in_arabic")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             name="city_ar"
             type="text"

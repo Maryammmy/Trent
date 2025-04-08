@@ -27,7 +27,11 @@ function FloorPlan() {
     setFloorPlanCounters(storedCounters);
     setSqft(storedSqft);
   }, []);
-
+  useEffect(() => {
+    if (floorPlanCounters["guest_count"] === 0) {
+      sessionStorage.setItem("guest_count", JSON.stringify(0));
+    }
+  }, [floorPlanCounters]);
   const updateFloorPlanCounter = (key: string, value: number) => {
     setFloorPlanCounters((prev) => {
       const updatedValue = Math.max(0, prev[key] + value);
@@ -35,16 +39,16 @@ function FloorPlan() {
       return { ...prev, [key]: updatedValue };
     });
   };
-
   const handleSqftChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.replace(/[^0-9]/g, "");
     const numericValue = inputValue ? parseInt(inputValue, 10) : "";
     setSqft(numericValue);
     sessionStorage.setItem("sqft", JSON.stringify(numericValue));
   };
-
   const isNextDisabled =
-    Object.values(floorPlanCounters).some((value) => value === 0) || !sqft;
+    Object.entries(floorPlanCounters).some(
+      ([key, value]) => key !== "guest_count" && value === 0
+    ) || !sqft;
 
   return (
     <div className="py-10">
@@ -60,7 +64,12 @@ function FloorPlan() {
             key={index}
             className="flex border-b min-h-20 mb-2 justify-between items-center"
           >
-            <span className="font-medium text-lg">{t(item)}</span>
+            <div className="font-medium text-lg">
+              <span> {t(item)}</span>
+              {item !== "guest_count" && (
+                <span className="text-red-500 ml-1">*</span>
+              )}
+            </div>
             <Counter
               width="30px"
               height="30px"
@@ -71,7 +80,10 @@ function FloorPlan() {
           </div>
         ))}
         <div className="flex flex-col gap-2 mt-5">
-          <label className="font-medium">{t("property_sqft")}</label>
+          <label className="font-medium">
+            {t("property_sqft")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             name="sqft"
             type="text"

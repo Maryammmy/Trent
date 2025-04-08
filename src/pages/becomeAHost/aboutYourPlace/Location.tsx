@@ -34,10 +34,11 @@ function Location() {
         <p className="max-w-2xl text-dark font-medium pb-5">
           {t("location_of_place_desc")}
         </p>
-
-        {/* Google Maps URL Input */}
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium">{t("google_maps_url")}</label>
+          <label className="font-medium">
+            {t("google_maps_url")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             type="text"
             value={googleMapsUrl}

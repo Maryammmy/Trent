@@ -57,7 +57,10 @@ function AddressAndFloor() {
           {t("address_and_floor_desc")}
         </p>
         <div className="flex flex-col gap-1 mb-5">
-          <label className="font-medium">{t("address_in_english")}</label>
+          <label className="font-medium">
+            {t("address_in_english")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             type="text"
             maxLength={100}
@@ -70,7 +73,10 @@ function AddressAndFloor() {
           />
         </div>
         <div className="flex flex-col gap-1 mb-5">
-          <label className="font-medium mb-1">{t("address_in_arabic")}</label>
+          <label className="font-medium mb-1">
+            {t("address_in_arabic")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             type="text"
             maxLength={100}
@@ -83,7 +89,10 @@ function AddressAndFloor() {
           />
         </div>
         <div className="flex flex-col gap-1 mb-5">
-          <label className="font-medium">{t("floor_in_english")}</label>
+          <label className="font-medium">
+            {t("floor_in_english")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             type="text"
             min={0}
@@ -95,7 +104,10 @@ function AddressAndFloor() {
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="font-medium">{t("floor_in_arabic")}</label>
+          <label className="font-medium">
+            {t("floor_in_arabic")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             type="text"
             min={0}

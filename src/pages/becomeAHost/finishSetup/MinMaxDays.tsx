@@ -23,7 +23,7 @@ function MinMaxDays() {
       setErrors(newErrors);
       return;
     }
-    if (numValue < 1 || numValue > 1000) {
+    if ((numValue && numValue < 1) || numValue > 1000) {
       newErrors[type] = t("error_out_of_range");
       setErrors(newErrors);
       return;
@@ -80,7 +80,10 @@ function MinMaxDays() {
           {t("min_max_days_desc")}
         </p>
         <div className="flex flex-col gap-1 mb-5">
-          <label className="font-medium">{t("min_days")}</label>
+          <label className="font-medium">
+            {t("min_days")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             type="text"
             onChange={(e) => handleDaysChange(e, "min")}
@@ -92,7 +95,10 @@ function MinMaxDays() {
           {errors.min && <p className="text-red-500 text-sm">{errors.min}</p>}
         </div>
         <div className="flex flex-col gap-1">
-          <label className="font-medium">{t("max_days")}</label>
+          <label className="font-medium">
+            {t("max_days")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
           <Input
             type="text"
             onChange={(e) => handleDaysChange(e, "max")}
