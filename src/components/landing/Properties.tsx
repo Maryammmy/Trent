@@ -1,7 +1,6 @@
 import { lazy, Suspense, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Button from "../ui/Button";
-import Switcher from "../ui/Switcher";
 import { List, MapPinned, SlidersHorizontal } from "lucide-react";
 import PropertyCartSkeleton from "../skeleton/PropertyCartSkeleton";
 import CategoryBar from "../CategoryBar";
@@ -14,19 +13,28 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setEnableMap } from "../../store/features/map/mapSlice";
 
 const Cart = lazy(() => import("../Cart"));
+
 export default function Properties() {
   const ITEMS_TO_LOAD = 10;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const propertiesSectionRef = useRef<HTMLDivElement | null>(null);
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [visibleCount, setVisibleCount] = useState(8);
   const [properties, setProperties] = useState<IProperty[] | null>(null);
+  const [isFixed, setIsFixed] = useState(true);
+
   const { enableMap } = useAppSelector((state) => state.map);
   const { filterData, category } = useContext(FilterDataContext);
+
   const { data } = useHomeDataAPI({ category_id: category }, true);
   const allProperties: IProperty[] = data?.data?.data?.property_list;
+
+  useEffect(() => {
+    setProperties(filterData || allProperties);
+  }, [filterData, allProperties]);
   const handleShowMore = () => {
     setLoading(true);
     setTimeout(() => {
@@ -34,9 +42,6 @@ export default function Properties() {
       setLoading(false);
     }, 1000);
   };
-  useEffect(() => {
-    setProperties(filterData || allProperties);
-  }, [filterData, allProperties]);
   const handleToggleView = () => {
     dispatch(setEnableMap(!enableMap));
     setTimeout(() => {
@@ -48,14 +53,29 @@ export default function Properties() {
       window.scrollTo({ top: topOffset, behavior: "smooth" });
     }, 100);
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (propertiesSectionRef.current) {
+        const rect = propertiesSectionRef.current.getBoundingClientRect();
+        setIsFixed(rect.top <= 0 && rect.bottom > window.innerHeight);
+      }
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      <div ref={propertiesSectionRef}>
-        <div className="px-5 xl:px-20 mt-5 flex flex-wrap gap-3 justify-between">
+      <div ref={propertiesSectionRef} className="relative">
+        <div
+          className={`z-[100] left-1/2 transform -translate-x-1/2 ${
+            isFixed ? "fixed bottom-10" : "absolute bottom-14"
+          }`}
+        >
           <Button
             onClick={handleToggleView}
-            className="rounded-md font-medium text-sm py-2 w-[120px] text-primary border flex items-center justify-center gap-2"
+            className="rounded-full font-medium text-sm py-2 w-[125px] text-white bg-primary flex items-center justify-center gap-2"
           >
             {enableMap ? (
               <>
@@ -69,26 +89,17 @@ export default function Properties() {
               </>
             )}
           </Button>
-          <div className="flex flex-wrap gap-3">
-            <div className="flex items-center gap-2 border p-2 rounded-md font-medium text-sm bg-white">
-              <span className="hidden sm:block">
-                {t("display_total_before_taxes")}
-              </span>
-              <span className="block sm:hidden">{t("before_taxes")}</span>
-              <Switcher />
-            </div>
-
-            <Button
-              className="flex gap-2 items-center border rounded-md px-3 py-2 font-medium text-sm text-primary"
-              onClick={() => setIsFilterOpen(!isFilterOpen)}
-            >
-              <SlidersHorizontal size={15} strokeWidth={2.5} />
-              <span className="hidden sm:block">{t("filters")}</span>
-            </Button>
-          </div>
+        </div>
+        <div className="px-5 xl:px-20 mt-5 flex justify-end">
+          <Button
+            className="flex gap-2 items-center border rounded-md px-3 py-2 font-medium text-sm text-primary"
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+          >
+            <SlidersHorizontal size={15} strokeWidth={2.5} />
+            <span>{t("filters")}</span>
+          </Button>
         </div>
         <CategoryBar />
-        <div className="flex justify-center items-center"></div>
         {!enableMap && (
           <div>
             <div
@@ -117,7 +128,7 @@ export default function Properties() {
               {loading && <PropertyCartSkeleton cards={8} />}
             </div>
             {properties && visibleCount < properties.length && !loading && (
-              <div className="flex justify-center my-5">
+              <div className="flex justify-center mt-10 mb-5">
                 <Button
                   data-aos="fade-right"
                   onClick={handleShowMore}

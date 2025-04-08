@@ -96,7 +96,7 @@ function Cart({ property }: IProps) {
         </div>
       )}
       <div>
-        <div className="flex flex-col gap-1 sm:flex-row items-start justify-between pt-2">
+        <div className="flex items-end justify-between pt-2">
           <div className="flex flex-col gap-1">
             <h3 className="font-bold">{truncateText(title, 6)}</h3>
             <div className="flex">
@@ -104,7 +104,7 @@ function Cart({ property }: IProps) {
               <p>{truncateText(government_name, 4)}</p>
             </div>
           </div>
-          <div className="flex flex-col gap-1 sm:items-end">
+          <div className="flex flex-col gap-1 items-end">
             <div className="flex gap-1 font-medium">
               <span className="font-bold text-primary">
                 {enableTaxes

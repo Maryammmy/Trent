@@ -40,7 +40,7 @@ function CancellationPolicy({
             <div className="flex flex-col items-start">
               {selectedPolicy ? (
                 <>
-                  <span className="font-semibold">{selectedPolicy.title}</span>
+                  <span className="font-semibold">{selectedPolicy?.title}</span>
                 </>
               ) : (
                 t("select_cancellation_policy")
@@ -50,15 +50,15 @@ function CancellationPolicy({
           </Button>
           {isOpen && (
             <div className="absolute w-full mt-1 bg-white border border-dark rounded-md shadow-md max-h-60 overflow-y-auto z-10">
-              {cancellationPolicies.length ? (
-                cancellationPolicies.map((policy) => (
+              {cancellationPolicies?.length ? (
+                cancellationPolicies?.map((policy) => (
                   <div
                     key={policy.id}
                     className="p-3 cursor-pointer hover:bg-gray-100 flex justify-between items-center"
                     onClick={() => handleChangePolicy(policy)}
                   >
                     <div className="flex flex-col">
-                      <span className="font-semibold">{policy.title}</span>
+                      <span className="font-semibold">{policy?.title}</span>
                       <span className="text-sm text-gray-600">
                         {policy.description}
                       </span>
@@ -77,6 +77,7 @@ function CancellationPolicy({
               )}
             </div>
           )}
+          <p className="font-medium mt-1">{t("cancellation_policy_help")}</p>
         </>
       )}
     </div>
