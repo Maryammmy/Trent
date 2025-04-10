@@ -25,7 +25,6 @@ function Compound() {
       sessionStorage.setItem("compound_ar", newValue);
     }
   };
-  const isNextDisabled = compoundAr.length < 2 || compoundEn.length < 2;
 
   return (
     <div className="py-10">
@@ -37,10 +36,7 @@ function Compound() {
           {t("compound_name_for_property_desc")}
         </p>
         <div className="flex flex-col gap-1 mb-5">
-          <label className="font-medium">
-            {t("compound_in_english")}
-            <span className="text-red-500 ml-1">*</span>
-          </label>
+          <label className="font-medium">{t("compound_in_english")}</label>
           <Input
             maxLength={100}
             minLength={2}
@@ -52,10 +48,7 @@ function Compound() {
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="font-medium">
-            {t("compound_in_arabic")}
-            <span className="text-red-500 ml-1">*</span>
-          </label>
+          <label className="font-medium">{t("compound_in_arabic")}</label>
           <Input
             maxLength={100}
             minLength={2}
@@ -71,7 +64,6 @@ function Compound() {
       <BackAndNext
         back="/become-a-host/city"
         next="/become-a-host/address-and-floor"
-        isNextDisabled={isNextDisabled}
       />
     </div>
   );

@@ -134,7 +134,7 @@
   "enter_beds": "أدخل عدد الأسرّة",
   "enter_bathroom": "أدخل عدد الحمامات",
   "choose_option": "اختر خيار",
-  "property_sqft": "المساحة الإجمالية (قدم مربع)",
+  "property_sqft": "المساحة الإجمالية (متر مربع)",
   "enter_property_sqft_placeholder": "أدخل المساحة الإجمالية بالقدم المربع",
   "enter_guest_limit": "أدخل الحد الأقصى للضيوف",
   "step_1": "الخطوة 1",
@@ -302,7 +302,7 @@
   "today": "اليوم",
   "book_now": "احجز الان",
   "choose_us": "لماذا تختارنا",
-  "choose_us_desc": "يجب أن تختارنا لأننا نوفر أفضل أماكن الإقامة، وقد قمنا بفرز جميع الفنادق هنا بناءً على جودتها",
+  "choose_us_desc": "اكتشف لماذا نحن الخيار المناسب لك، لأننا نقدم أفضل أماكن الإقامة، وقد قمنا بفرز جميع الوحدات هنا بناءً على جودتها",
   "get_mobile_app": "قم بتنزيل تطبيقنا للحصول على تجربة أفضل!",
   "download_on": "تحميل على",
   "image_too_large": "حجم الصورة كبير جدًا، الحد الأقصى 2MB",
@@ -329,8 +329,7 @@
   "host_terms": "شروط خدمة المضيفين",
   "host_cancellation_policy": "سياسة الإلغاء التي يبدأها المضيف",
   "listing_guideLines": "إرشادات القوائم",
-  "error_invalid_number": "رقم غير صالح",
-  "error_out_of_range": "يجب أن يكون الرقم بين 1 و 1000",
+  "error_out_of_range_days": "يجب أن يكون الرقم بين 1 و 1000",
   "error_min_greater_than_max": "لا يمكن أن يكون الحد الأدنى أكبر من الحد الأقصى",
   "error_max_must_be_greater_than_min": "يجب أن يكون الحد الأقصى أكبر من الحد الأدنى",
   "stay_informed": "ابق على اطلاع",
@@ -343,5 +342,9 @@
   "total_reviews": "المراجعات الإجمالية",
   "membership": "العضوية",
   "before_taxes": "الإجمالي قبل الضرائب",
-  "cancellation_policy_help": ".سياسة الالغاء المرنة تساعدك على جذب عملاء اكتر"
+  "cancellation_policy_help": ".سياسة الالغاء المرنة تساعدك على جذب عملاء اكتر",
+  "price_without_egp": "السعر",
+  "error_out_of_range_price": "يجب ان يكون القيمه بين 50 و 250,000",
+  "error_out_of_range_beds_bathrooms": "يجب ان يكون القيمه بين 1 و 20",
+  "error_out_of_range_sqft": "يجب ان يكون القيمه بين 5 و 2000"
 }

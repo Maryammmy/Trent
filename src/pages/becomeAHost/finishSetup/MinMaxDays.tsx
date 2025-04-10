@@ -3,35 +3,38 @@ import { useEffect, useState } from "react";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import Input from "../../../components/ui/Input";
+import InputErrorMessage from "@/components/ui/InputErrorMessage";
 
 function MinMaxDays() {
   const { t } = useTranslation();
-  const [minDays, setMinDays] = useState<string>("");
-  const [maxDays, setMaxDays] = useState<string>("");
-  const [errors, setErrors] = useState<{ min?: string; max?: string }>({});
+  const [minDays, setMinDays] = useState<number | "">("");
+  const [maxDays, setMaxDays] = useState<number | "">("");
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
-    setMinDays(sessionStorage.getItem("min_days") || "");
-    setMaxDays(sessionStorage.getItem("max_days") || "");
+    setMinDays(
+      sessionStorage.getItem("min_days")
+        ? JSON.parse(sessionStorage.getItem("min_days") || '""')
+        : ""
+    );
+    setMaxDays(
+      sessionStorage.getItem("max_days")
+        ? JSON.parse(sessionStorage.getItem("max_days") || '""')
+        : ""
+    );
   }, []);
 
-  const validate = (type: "min" | "max", value: string) => {
-    const numValue = Number(value);
+  const validate = (type: "min" | "max", value: number) => {
     const newErrors = { ...errors };
-    if (isNaN(numValue)) {
-      newErrors[type] = t("error_invalid_number");
-      setErrors(newErrors);
-      return;
-    }
-    if ((numValue && numValue < 1) || numValue > 1000) {
-      newErrors[type] = t("error_out_of_range");
+    if ((value && value < 1) || value > 1000) {
+      newErrors[type] = t("error_out_of_range_days");
       setErrors(newErrors);
       return;
     } else {
       delete newErrors[type];
     }
     if (type === "min") {
-      if (maxDays && numValue >= Number(maxDays)) {
+      if (maxDays && value >= Number(maxDays)) {
         newErrors.min = t("error_min_greater_than_max");
         newErrors.max = t("error_max_must_be_greater_than_min");
       } else {
@@ -40,7 +43,7 @@ function MinMaxDays() {
       }
     }
     if (type === "max") {
-      if (minDays && numValue <= Number(minDays)) {
+      if (minDays && value <= Number(minDays)) {
         newErrors.max = t("error_max_must_be_greater_than_min");
         newErrors.min = t("error_min_greater_than_max");
       } else {
@@ -54,21 +57,19 @@ function MinMaxDays() {
     e: React.ChangeEvent<HTMLInputElement>,
     type: "min" | "max"
   ) => {
-    const newValue = e.target.value;
-    if (/^\d+$/.test(newValue) || newValue === "") {
-      if (type === "min") {
-        setMinDays(newValue);
-        sessionStorage.setItem("min_days", newValue);
-      } else {
-        setMaxDays(newValue);
-        sessionStorage.setItem("max_days", newValue);
-      }
-      validate(type, newValue);
+    const inputValue = e.target.value.replace(/\D/g, "");
+    const numericValue = Number(inputValue);
+    if (type === "min") {
+      setMinDays(numericValue);
+      sessionStorage.setItem("min_days", JSON.stringify(numericValue));
+    } else {
+      setMaxDays(numericValue);
+      sessionStorage.setItem("max_days", JSON.stringify(numericValue));
     }
+    validate(type, numericValue);
   };
-
   const isNextDisabled: boolean =
-    !minDays || !maxDays || !!errors.min || !!errors.max;
+    !minDays || !maxDays || Object.keys(errors).length > 0;
 
   return (
     <div className="py-10">
@@ -88,11 +89,11 @@ function MinMaxDays() {
             type="text"
             onChange={(e) => handleDaysChange(e, "min")}
             name="min_days"
-            value={minDays}
+            value={minDays || ""}
             placeholder={t("min_days_placeholder")}
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
-          {errors.min && <p className="text-red-500 text-sm">{errors.min}</p>}
+          {errors.min && <InputErrorMessage msg={errors.min} />}
         </div>
         <div className="flex flex-col gap-1">
           <label className="font-medium">
@@ -103,11 +104,11 @@ function MinMaxDays() {
             type="text"
             onChange={(e) => handleDaysChange(e, "max")}
             name="max_days"
-            value={maxDays}
+            value={maxDays || ""}
             placeholder={t("max_days_placeholder")}
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
-          {errors.max && <p className="text-red-500 text-sm">{errors.max}</p>}
+          {errors.max && <InputErrorMessage msg={errors.max} />}
         </div>
       </div>
       <ProgressBarsWrapper progressBarsData={["100%", "100%", "25%"]} />

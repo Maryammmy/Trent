@@ -13,10 +13,7 @@ function PriceAndDeposit() {
   const { t } = useTranslation();
   const [price, setPrice] = useState<number | "">("");
   const [securityDeposit, setSecurityDeposit] = useState<number | "">("");
-  const [errors, setErrors] = useState<{
-    price?: string;
-    security_deposit?: string;
-  }>({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [period, setPeriod] = useState<string>("");
   const { data } = useFiltersAPI();
   const periods: IPeriod[] = data?.data?.data?.period_list;
@@ -35,10 +32,8 @@ function PriceAndDeposit() {
   }, []);
   const validate = (type: "price" | "security_deposit", value: number) => {
     const newErrors = { ...errors };
-    if (isNaN(value)) {
-      newErrors[type] = "Invalid number";
-    } else if ((value && value < 50) || value > 250000) {
-      newErrors[type] = "Value must be between 50 and 250,000";
+    if ((value && value < 50) || value > 250000) {
+      newErrors[type] = t("error_out_of_range_price");
     } else {
       delete newErrors[type];
     }
@@ -50,17 +45,12 @@ function PriceAndDeposit() {
   ) => {
     const inputValue = event.target.value.replace(/\D/g, "");
     const numericValue = Number(inputValue);
-    if (!isNaN(numericValue)) {
-      if (type === "price") {
-        setPrice(numericValue);
-        sessionStorage.setItem("price", JSON.stringify(numericValue));
-      } else {
-        setSecurityDeposit(numericValue);
-        sessionStorage.setItem(
-          "security_deposit",
-          JSON.stringify(numericValue)
-        );
-      }
+    if (type === "price") {
+      setPrice(numericValue);
+      sessionStorage.setItem("price", JSON.stringify(numericValue));
+    } else {
+      setSecurityDeposit(numericValue);
+      sessionStorage.setItem("security_deposit", JSON.stringify(numericValue));
     }
     validate(type, numericValue);
   };
@@ -139,9 +129,7 @@ function PriceAndDeposit() {
       <BackAndNext
         back="/become-a-host/min-and-max-days"
         next="/become-a-host/guest-rules-and-cancellation-policies"
-        isNextDisabled={
-          !price || !period || !!errors.price || !!errors.security_deposit
-        }
+        isNextDisabled={!price || !period || Object.keys(errors).length > 0}
       />
     </div>
   );

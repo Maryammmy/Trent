@@ -14,15 +14,29 @@ export const updatePropertySchema = yup.object().shape({
   beds_count: yup
     .string()
     .required("Number of beds is required")
-    .matches(/^\d+$/, "Beds must be a valid number"),
+    .matches(/^\d+$/, "Beds must be a valid number")
+    .test("min", "Beds must be at least 1", (value) => Number(value) >= 1)
+    .test("max", "Beds cannot exceed 20", (value) => Number(value) <= 20),
   bathrooms_count: yup
     .string()
     .required("Number of bathrooms is required")
-    .matches(/^\d+$/, "Bathrooms must be a valid number"),
+    .matches(/^\d+$/, "Bathrooms must be a valid number")
+    .test("min", "Bathrooms must be at least 1", (value) => Number(value) >= 1)
+    .test("max", "Bathrooms cannot exceed 20", (value) => Number(value) <= 20),
   sqft: yup
     .string()
-    .required("Square footage is required")
-    .matches(/^\d+$/, "Square footage must be a valid number"),
+    .required("Totaal area is required")
+    .matches(/^\d+$/, "Totaal area must be a valid number")
+    .test(
+      "min",
+      "Totaal area must be at least 5",
+      (value) => Number(value) >= 5
+    )
+    .test(
+      "max",
+      "Totaal area cannot exceed 2000",
+      (value) => Number(value) <= 2000
+    ),
   security_deposit: yup
     .string()
     .required("Security deposit is required")
@@ -91,8 +105,8 @@ export const updatePropertySchema = yup.object().shape({
     .min(10, "Title must be at least 10 characters.")
     .max(100, "Title may not be greater than 100 characters.")
     .required("Title (Arabic) is required"),
-  compound_en: yup.string().required("Compound Name (English) is required"),
-  compound_ar: yup.string().required("Compound Name (Arabic) is required"),
+  compound_en: yup.string(),
+  compound_ar: yup.string(),
   address_en: yup.string().required("Address (English) is required"),
   address_ar: yup.string().required("Address (Arabic) is required"),
   floor_en: yup.string().required("Floor (English) is required"),

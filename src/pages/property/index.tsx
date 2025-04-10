@@ -12,6 +12,8 @@ import { CurrentLanguage } from "../../types";
 import { baseURL } from "../../services";
 import PropertySkeleton from "../../components/skeleton/PropertySkeleton";
 import Map from "../../components/ui/Map";
+import CheckDates from "@/components/property/CheckDates";
+import ReviewComponent from "@/components/property/reviews/ReviewComponent";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -113,9 +115,9 @@ function Property() {
                 />
                 <Amenities facilities={facilities} />
               </div>
-              {/* <CheckDates /> */}
+              <CheckDates />
             </div>
-            {/* <ReviewComponent /> */}
+            <ReviewComponent />
             <div className="max-w-7xl mx-auto py-5">
               <Map
                 latitdude={Number(propertyDetails?.latitude)}

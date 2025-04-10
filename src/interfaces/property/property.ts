@@ -69,7 +69,6 @@ export interface IDetailsProperty {
       ar: string;
     };
   };
-
   owner_id: string;
   IS_FAVOURITE: number;
   guest_count: string;
@@ -90,6 +89,10 @@ export interface IDetailsProperty {
   sqrft: string;
   user_id: string;
   video: string;
+}
+export interface IDeleteProperty {
+  uid: string;
+  prop_id: string;
 }
 export interface IFacilityProperty {
   id: string;

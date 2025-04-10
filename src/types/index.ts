@@ -29,8 +29,8 @@ export type PropertyNameInputs = {
   city_ar: string;
   title_en: string;
   title_ar: string;
-  compound_en: string;
-  compound_ar: string;
+  compound_en?: string;
+  compound_ar?: string;
   address_en: string;
   address_ar: string;
   floor_en: string;
@@ -56,8 +56,8 @@ export type PropertyInputs = {
   city_ar: string;
   title_en: string;
   title_ar: string;
-  compound_en: string;
-  compound_ar: string;
+  compound_en?: string;
+  compound_ar?: string;
   address_en: string;
   address_ar: string;
   floor_en: string;

@@ -2,16 +2,20 @@ import { ChevronLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import PriceDetails from "../../components/property/confirmAndPay/PriceDetails";
 import { Link } from "react-router-dom";
+import Button from "@/components/ui/Button";
 
 function ConfirmAndPay() {
   const { t } = useTranslation();
+
   return (
     <div className="py-10 px-5 xl:px-20 max-w-7xl mx-auto">
       <div className="flex gap-2 items-center">
         <Link to={`/properties/1`}>
           <ChevronLeft />
         </Link>
-        <h2 className="text-3xl font-semibold">{t("confirm_and_pay")}</h2>
+        <h2 className="text-2xl sm:text-3xl font-semibold">
+          {t("confirm_and_pay")}
+        </h2>
       </div>
       <div className="px-2 md:ps-9 flex flex-col lg:flex-row justify-between py-10">
         <div>
@@ -29,6 +33,9 @@ function ConfirmAndPay() {
           <div className="py-4">
             <h3 className="font-semibold text-2xl">{t("choose_how_to_pay")}</h3>
           </div>
+          <Button className="bg-primary text-white px-4 py-2 rounded">
+            Pay with Fawry
+          </Button>
         </div>
         <div>
           <PriceDetails />
