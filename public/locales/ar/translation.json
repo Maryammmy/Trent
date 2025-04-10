@@ -346,5 +346,8 @@
   "price_without_egp": "السعر",
   "error_out_of_range_price": "يجب ان يكون القيمه بين 50 و 250,000",
   "error_out_of_range_beds_bathrooms": "يجب ان يكون القيمه بين 1 و 20",
-  "error_out_of_range_sqft": "يجب ان يكون القيمه بين 5 و 2000"
+  "error_out_of_range_sqft": "يجب ان يكون القيمه بين 5 و 2000",
+  "delete": "حذف",
+  "delete_property": "حذف العقار",
+  "delete_property_desc": "هل أنت متأكد أنك تريد حذف هذا العقار؟"
 }
