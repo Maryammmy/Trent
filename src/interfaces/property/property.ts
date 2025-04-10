@@ -159,6 +159,7 @@ export interface IProperty {
   title: string;
   latitude: string;
   longitude: string;
+  is_deleted: boolean;
 }
 export interface IReviewInstruction {
   icon: ReactNode;

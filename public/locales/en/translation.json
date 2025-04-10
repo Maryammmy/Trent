@@ -350,7 +350,10 @@
   "error_out_of_range_price": "Value must be between 50 and 250,000",
   "error_out_of_range_beds_bathrooms": "Value must be between 1 and 20",
   "error_out_of_range_sqft": "Value must be between 5 and 2000",
-  "delete": "Delete",
-  "delete_property": "Delete Property",
-  "delete_property_desc": "Are you sure you want to delete this property?"
+  "unpublish_property": "Unpublish Property",
+  "publish_property": "Publish Property",
+  "unpublish_property_desc": "Are you sure you want to unpublish this property?",
+  "publish_property_desc": "Are you sure you want to publish this property?",
+  "unpublish": "Unpublish",
+  "publish": "Publish"
 }

@@ -20,6 +20,12 @@ export interface IWhyChooseUs {
   img: string;
   title: string;
 }
+export interface IWhyChooseUsHeader {
+  background_color: string;
+  description: string;
+  img: string;
+  title: string;
+}
 export interface IFilterButton {
   text: string;
   className: string;

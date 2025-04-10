@@ -1,6 +1,5 @@
-import { useTranslation } from "react-i18next";
 import { useGetData } from "../../hooks/useGetData";
-import { IWhyChooseUs } from "../../interfaces/landing";
+import { IWhyChooseUs, IWhyChooseUsHeader } from "../../interfaces/landing";
 import { baseURL } from "../../services";
 import { CurrentLanguage } from "../../types";
 import ChooseUsSkeleton from "../skeleton/ChooseUsSkeleton";
@@ -9,19 +8,23 @@ import Image from "../ui/Image";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 function ChooseUs() {
-  const { t } = useTranslation();
   const { data } = useGetData(
     ["whyChooseUs"],
     `user_api/u_why_choose_us.php?lang=${currentLanguage}`
   );
+  console.log(data);
   const whyChooseUsList: IWhyChooseUs[] = data?.data?.data?.why_choose_us_list;
+  const whyChooseUsHeader: IWhyChooseUsHeader =
+    data?.data?.data?.why_choose_us_header;
   return (
     <div className="px-5 2xl:px-0 max-w-screen-xl mx-auto py-10">
       <div
         className="flex justify-center items-center gap-4"
         data-aos="fade-up"
       >
-        <h2 className="text-lg md:text-4xl font-bold">{t("choose_us")}</h2>
+        <h2 className="text-lg md:text-4xl font-bold">
+          {whyChooseUsHeader?.title}
+        </h2>
         <div className="w-10 h-10">
           <Image
             imageUrl="/images/Trent-tilted.svg"
@@ -34,7 +37,7 @@ function ChooseUs() {
         className="text-dark max-w-3xl mx-auto text-center pt-5"
         data-aos="fade-left"
       >
-        {t("choose_us_desc")}
+        {whyChooseUsHeader?.description}
       </p>
       <div
         className="flex flex-wrap gap-10 justify-evenly pt-10"

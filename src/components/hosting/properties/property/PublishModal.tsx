@@ -8,12 +8,13 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 interface IProps {
+  is_deleted: boolean;
   id: string;
   deleteProperty: boolean;
   close: () => void;
 }
 const uid = Cookies.get("user_id") || "";
-function DeleteModal({ id, deleteProperty, close }: IProps) {
+function PublishModal({ is_deleted, id, deleteProperty, close }: IProps) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const handleDeleteProperty = async () => {
@@ -40,11 +41,15 @@ function DeleteModal({ id, deleteProperty, close }: IProps) {
     <Modal
       isOpen={deleteProperty}
       close={close}
-      title={t("delete_property")}
-      className="text-center font-bold text-2xl pt-6"
+      title={is_deleted ? t("publish_property") : t("unpublish_property")}
+      className="text-center font-bold text-2xl pt-5"
     >
-      <div className="p-6">
-        <h3 className="font-medium">{t("delete_property_desc")}</h3>
+      <div className="p-5">
+        <h3 className="font-medium">
+          {is_deleted
+            ? t("publish_property_desc")
+            : t("unpublish_property_desc")}
+        </h3>
         <div className="flex pt-5 justify-between space-x-3">
           <Button
             className="bg-primary font-medium hover:bg-primary/80 text-white py-2 w-24 rounded-md"
@@ -54,10 +59,14 @@ function DeleteModal({ id, deleteProperty, close }: IProps) {
             {t("cancel")}
           </Button>
           <Button
-            className="bg-red-600 font-medium hover:bg-red-600/80 text-white py-2 w-24 rounded-md"
+            className={`${
+              is_deleted
+                ? "bg-green-600 hover:bg-green-600/80"
+                : "bg-red-600 hover:bg-red-600/80"
+            } font-medium text-white py-2 w-24 rounded-md`}
             onClick={handleDeleteProperty}
           >
-            {loading ? <Loader /> : t("delete")}
+            {loading ? <Loader /> : is_deleted ? t("publish") : t("unpublish")}
           </Button>
         </div>
       </div>
@@ -65,4 +74,4 @@ function DeleteModal({ id, deleteProperty, close }: IProps) {
   );
 }
 
-export default DeleteModal;
+export default PublishModal;
