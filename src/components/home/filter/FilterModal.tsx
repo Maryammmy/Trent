@@ -120,6 +120,8 @@ function FilterModal({ isFilterOpen, close }: IProps) {
           <Range
             values={values}
             handleRangeChange={(newValues: number[]) => setValues(newValues)}
+            min={Number(priceRange?.min_price)}
+            max={Number(priceRange?.max_price)}
           />
         </div>
         <CounterFilter counters={counters} updateCounter={updateCounter} />

@@ -12,12 +12,14 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { togglePropertyAPI } from "../services/propertyService";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
+
 interface IProps {
   property: IProperty;
+  refetch: () => void;
 }
 
 const uid = Cookies.get("user_id") || "";
-function Cart({ property }: IProps) {
+function Cart({ property, refetch }: IProps) {
   const {
     IS_FAVOURITE,
     price,
@@ -45,7 +47,7 @@ function Cart({ property }: IProps) {
         response?.data?.response_code === 201 ||
         response?.data?.response_code === 200
       ) {
-        toast.success(response?.data?.response_message);
+        refetch();
       }
     } catch (error) {
       console.log(error);
@@ -67,7 +69,7 @@ function Cart({ property }: IProps) {
             infinite={image_list?.length > 1}
           >
             {image_list?.map((item, index) => (
-              <Link key={index} to={`/properties/${id}`} className="relative">
+              <div key={index} className="relative">
                 <div
                   className="absolute top-2 right-2 z-10 cursor-pointer"
                   onClick={toggleProperty}
@@ -85,7 +87,7 @@ function Cart({ property }: IProps) {
                     className="w-full h-full object-cover"
                   />
                 </div>
-              </Link>
+              </div>
             ))}
           </Carsoul>
         </div>
@@ -114,9 +116,12 @@ function Cart({ property }: IProps) {
           </div>
         </div>
         <div className="flex gap-5 mt-2">
-          <Button className="flex-[2] zoom py-1 bg-primary rounded-md text-white font-medium">
+          <Link
+            to={`/properties/${id}`}
+            className="flex-[2] text-center zoom py-1 bg-primary rounded-md text-white font-medium"
+          >
             {t("book_now")}
-          </Button>
+          </Link>
           <Button className="flex-[1] zoom py-1 bg-[#CAE0FE] rounded-md flex justify-center items-center">
             <span>
               <MapPin className="text-primary" size={22} />

@@ -23,7 +23,13 @@ const Property = ({ property }: IProps) => {
         </p>
         <p className="font-medium hidden sm:block">{category_type}</p>
         <p className="font-medium hidden sm:block">{price}EGP</p>
-        <p className="font-semibold">Action required</p>
+        <p
+          className={`font-semibold ${
+            is_deleted ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {is_deleted ? t("publish") : t("unpublish")}
+        </p>
         <div className="flex items-center sm:justify-center gap-2">
           <Link to={`/hosting/properties/${id}/update`}>
             <MdEdit size={25} className="text-primary" />

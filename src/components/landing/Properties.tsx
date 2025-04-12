@@ -19,17 +19,14 @@ export default function Properties() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const propertiesSectionRef = useRef<HTMLDivElement | null>(null);
-
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [visibleCount, setVisibleCount] = useState(8);
   const [properties, setProperties] = useState<IProperty[] | null>(null);
   const [isFixed, setIsFixed] = useState(true);
-
   const { enableMap } = useAppSelector((state) => state.map);
   const { filterData, category } = useContext(FilterDataContext);
-
-  const { data } = useHomeDataAPI({ category_id: category }, true);
+  const { data, refetch } = useHomeDataAPI({ category_id: category }, true);
   const allProperties: IProperty[] = data?.data?.data?.property_list;
 
   useEffect(() => {
@@ -67,10 +64,10 @@ export default function Properties() {
 
   return (
     <>
-      <div ref={propertiesSectionRef} className="relative">
+      <div ref={propertiesSectionRef} className="relative mb-16">
         <div
           className={`z-[100] left-1/2 transform -translate-x-1/2 ${
-            isFixed ? "fixed bottom-10" : "absolute bottom-14"
+            isFixed ? "fixed bottom-10" : "absolute bottom-[-50px]"
           }`}
         >
           <Button
@@ -103,7 +100,7 @@ export default function Properties() {
         {!enableMap && (
           <div>
             <div
-              className={`px-5 xl:px-20 pb-10 ${
+              className={`px-5 xl:px-20 pt-5 pb-10 ${
                 properties?.length || !properties
                   ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
                   : ""
@@ -117,7 +114,7 @@ export default function Properties() {
                     fallback={<PropertyCartSkeleton cards={1} />}
                     key={property.id}
                   >
-                    <Cart property={property} />
+                    <Cart property={property} refetch={refetch} />
                   </Suspense>
                 ))
               ) : (
@@ -128,7 +125,7 @@ export default function Properties() {
               {loading && <PropertyCartSkeleton cards={8} />}
             </div>
             {properties && visibleCount < properties.length && !loading && (
-              <div className="flex justify-center mt-10 mb-5">
+              <div className="flex justify-center">
                 <Button
                   data-aos="fade-right"
                   onClick={handleShowMore}

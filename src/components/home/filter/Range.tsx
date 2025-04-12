@@ -1,65 +1,51 @@
-import Slider from "rc-slider";
+import PriceSkeleton from "@/components/skeleton/PriceSkeleton";
+import { Slider } from "@/components/ui/slider";
 import { useTranslation } from "react-i18next";
-import PriceSkeleton from "../../skeleton/PriceSkeleton";
+
 interface IProps {
   values: number[];
   handleRangeChange: (newValues: number[]) => void;
+  min: number;
+  max: number;
 }
-function PriceRange({ values, handleRangeChange }: IProps) {
+function Range({ values, handleRangeChange, min, max }: IProps) {
   const { t } = useTranslation();
-  const histogramData: number[] = [5, 20, 50, 100, 80, 40, 30, 20, 10];
   return (
     <div>
-      <div className="relative h-32 flex justify-center items-end gap-1">
-        {histogramData.map((value, index) => (
-          <div
-            key={index}
-            className="bg-primary"
-            style={{
-              width: "4%",
-              height: `${value}%`,
-              borderRadius: "2px",
-            }}
-          ></div>
-        ))}
-      </div>
-      {values.length > 1 && (
-        <Slider
-          range
-          defaultValue={values}
-          min={1000}
-          max={4500000}
-          value={values}
-          onChange={(value) =>
-            handleRangeChange(Array.isArray(value) ? value : [value])
-          }
-          trackStyle={[{ backgroundColor: "#223f7f" }]}
-        />
-      )}
-
-      <div className="flex flex-col gap-2 md:gap-0 md:flex-row font-medium text-dark justify-between mt-4 text-sm">
+      {/* Slider */}
+      <Slider
+        value={values}
+        onValueChange={handleRangeChange}
+        min={min}
+        max={max}
+        step={1}
+      />
+      <div className="flex flex-col gap-2 md:gap-0 md:flex-row mt-2 font-medium text-dark justify-between text-sm">
+        {/* Minimum Price */}
         <div className="flex items-center gap-2">
-          <span>{t("minimum")}</span>:{" "}
-          {values.length ? (
-            !values[0] ? (
-              <PriceSkeleton />
-            ) : (
+          <span>{t("minimum")}:</span>
+          {values?.length ? (
+            values[0] === 0 || values[0] ? (
               <span className="text-black font-medium">{values[0]}</span>
+            ) : (
+              <PriceSkeleton />
             )
           ) : (
-            "No minprice found"
+            <span>No min price found</span>
           )}
         </div>
+
+        {/* Maximum Price */}
         <div className="flex items-center gap-2">
-          <span>{t("maximum")}</span>:
+          <span>{t("maximum")}:</span>
           {values.length ? (
-            !values[1] ? (
-              <PriceSkeleton />
-            ) : (
+            values[1] === 0 || values[1] ? (
               <span className="text-black font-medium">{values[1]}</span>
+            ) : (
+              <PriceSkeleton />
             )
           ) : (
-            "No max price found"
+            <span>No max price found</span>
           )}
         </div>
       </div>
@@ -67,4 +53,4 @@ function PriceRange({ values, handleRangeChange }: IProps) {
   );
 }
 
-export default PriceRange;
+export default Range;

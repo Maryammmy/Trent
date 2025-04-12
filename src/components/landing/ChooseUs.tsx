@@ -12,7 +12,6 @@ function ChooseUs() {
     ["whyChooseUs"],
     `user_api/u_why_choose_us.php?lang=${currentLanguage}`
   );
-  console.log(data);
   const whyChooseUsList: IWhyChooseUs[] = data?.data?.data?.why_choose_us_list;
   const whyChooseUsHeader: IWhyChooseUsHeader =
     data?.data?.data?.why_choose_us_header;
