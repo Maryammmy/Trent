@@ -14,6 +14,7 @@ import PropertySkeleton from "../../components/skeleton/PropertySkeleton";
 import Map from "../../components/ui/Map";
 import CheckDates from "@/components/property/CheckDates";
 import ReviewComponent from "@/components/property/reviews/ReviewComponent";
+import PhotoViewer from "@/components/ui/PhotoViewer";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -40,17 +41,18 @@ function Property() {
             <div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {propertyDetails?.image_list?.slice(0, 3)?.map((image, i) => (
-                  <div
-                    data-aos="fade-left"
-                    key={i}
-                    className={`w-full h-[250px] lg:h-[300px] rounded-md overflow-hidden`}
-                  >
-                    <Image
-                      className="w-full h-full object-cover"
-                      imageUrl={baseURL + image.img}
-                      alt={`Image ${i + 1}`}
-                    />
-                  </div>
+                  <PhotoViewer key={i} src={baseURL + image.img}>
+                    <div
+                      data-aos="fade-left"
+                      className={`w-full h-[250px] lg:h-[300px] rounded-md overflow-hidden`}
+                    >
+                      <Image
+                        className="w-full h-full object-cover"
+                        imageUrl={baseURL + image.img}
+                        alt={`Image ${i + 1}`}
+                      />
+                    </div>
+                  </PhotoViewer>
                 ))}
               </div>
               {/* <Link
@@ -99,10 +101,11 @@ function Property() {
                   <div className="font-semibold" data-aos="fade-right">
                     <p>
                       <span className="text-primary">
-                        {propertyDetails?.price} {t("price_per_night")}
+                        {propertyDetails?.price}
+                        {t("price_per_night")}
                       </span>{" "}
                       <span className="text-dark">
-                        / {propertyDetails?.period?.name?.[currentLanguage]}
+                        /{propertyDetails?.period?.name?.[currentLanguage]}
                       </span>
                     </p>
                   </div>
