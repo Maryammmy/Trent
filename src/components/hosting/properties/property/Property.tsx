@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { IProperty } from "../../../../interfaces/property/property";
-import { truncateText } from "../../../../utils/truncateText";
 import { MdEdit } from "react-icons/md";
 import { useState } from "react";
 import Button from "@/components/ui/Button";
@@ -16,29 +15,39 @@ const Property = ({ property }: IProps) => {
     property;
   return (
     <>
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 items-center bg-white shadow rounded-md p-4 sm:p-6 hover:bg-gray-100 transition">
-        <p className="font-medium">{title}</p>
-        <p className="font-medium hidden sm:block">
-          {truncateText(government_name, 10)}
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-5 items-center bg-white shadow rounded-md p-4 sm:p-6 hover:bg-gray-100 transition">
+        <p className="font-medium  whitespace-nowrap overflow-hidden text-ellipsis">
+          {title}
         </p>
-        <p className="font-medium hidden sm:block">{category_type}</p>
-        <p className="font-medium hidden sm:block">{price}EGP</p>
+        <p className="font-medium hidden sm:block whitespace-nowrap overflow-hidden text-ellipsis">
+          {government_name}
+        </p>
+        <p className="font-medium hidden sm:block whitespace-nowrap overflow-hidden text-ellipsis">
+          {category_type}
+        </p>
+        <p className="font-medium hidden sm:block whitespace-nowrap overflow-hidden text-ellipsis">
+          {price}EGP
+        </p>
         <p
-          className={`font-semibold ${
+          className={`font-semibold  ${
             is_deleted ? "text-green-600" : "text-red-600"
           }`}
         >
           {is_deleted ? t("publish") : t("unpublish")}
         </p>
-        <div className="flex items-center sm:justify-center gap-2">
-          <Link to={`/hosting/properties/${id}/update`}>
-            <MdEdit size={25} className="text-primary" />
+        <div className="flex flex-wrap items-center gap-2">
+          <Link
+            to={`/hosting/properties/${id}/update`}
+            className="text-white py-1 w-20 rounded-md font-medium bg-primary flex justify-center items-center gap-1"
+          >
+            <MdEdit size={20} />
+            <span>{t("edit")}</span>
           </Link>
           <Button
             onClick={() => setDeleteProperty(true)}
             className={`${
               is_deleted ? "bg-green-600" : "bg-red-600"
-            } text-white py-1 px-2 rounded-md font-medium`}
+            } text-white py-1 w-20 rounded-md font-medium`}
           >
             {is_deleted ? t("publish") : t("unpublish")}
           </Button>

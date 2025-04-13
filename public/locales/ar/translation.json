@@ -351,6 +351,7 @@
   "unpublish_property": "إلغاء نشر العقار",
   "publish_property": "نشر العقار",
   "publish_property_desc": "هل أنت متأكد أنك تريد نشر هذا العقار؟",
+  "unpublish_property_desc": "هل أنت متأكد أنك تريد إلغاء نشر هذا العقار؟",
   "unpublish": "إلغاء النشر",
   "publish": "نشر"
 }
