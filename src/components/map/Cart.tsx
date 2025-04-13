@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { IProperty } from "../../interfaces/property/property";
 import { baseURL } from "../../services";
 import { togglePropertyAPI } from "../../services/propertyService";
@@ -12,10 +12,11 @@ import Rating from "../ui/Rating";
 import Image from "../ui/Image";
 interface IProps {
   property: IProperty;
+  refetch: () => void;
 }
 
 const uid = Cookies.get("user_id") || "";
-function Cart({ property }: IProps) {
+function Cart({ property, refetch }: IProps) {
   const {
     IS_FAVOURITE,
     price,
@@ -43,14 +44,17 @@ function Cart({ property }: IProps) {
         response?.data?.response_code === 201 ||
         response?.data?.response_code === 200
       ) {
-        toast.success(response?.data?.response_message);
+        refetch();
       }
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div className="w-[250px] h-full rounded-md overflow-hidden mb-4">
+    <Link
+      to={`/properties/${id}`}
+      className="block w-[250px] h-full rounded-md overflow-hidden mb-4"
+    >
       {image_list?.length > 0 && (
         <div className="overflow-hidden rounded-md">
           <Carsoul
@@ -62,15 +66,15 @@ function Cart({ property }: IProps) {
             infinite={image_list?.length > 1}
           >
             {image_list?.map((item, index) => (
-              <Link key={index} to={`/properties/${id}`} className="relative">
+              <div key={index} className="relative">
                 <div
                   className="absolute top-2 right-2 z-10 cursor-pointer"
                   onClick={toggleProperty}
                 >
                   {IS_FAVOURITE ? (
-                    <FaHeart size={20} className="text-white" />
+                    <FaHeart size={20} className="text-red-500" />
                   ) : (
-                    <FaRegHeart size={20} className="text-white" />
+                    <FaHeart size={20} className="text-black/50" />
                   )}
                 </div>
                 <div className="rounded-md overflow-hidden h-[150px] w-full">
@@ -80,7 +84,7 @@ function Cart({ property }: IProps) {
                     className="w-full h-full object-cover"
                   />
                 </div>
-              </Link>
+              </div>
             ))}
           </Carsoul>
         </div>
@@ -109,7 +113,7 @@ function Cart({ property }: IProps) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

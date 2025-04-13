@@ -137,7 +137,7 @@ export default function Properties() {
             )}
           </div>
         )}
-        {enableMap && <Map properties={properties} />}
+        {enableMap && <Map properties={properties} refetch={refetch} />}
       </div>
       <FilterModal
         isFilterOpen={isFilterOpen}

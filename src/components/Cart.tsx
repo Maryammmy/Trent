@@ -8,7 +8,7 @@ import Button from "./ui/Button";
 import { IProperty } from "../interfaces/property/property";
 import { truncateText } from "../utils/truncateText";
 import { baseURL } from "../services";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { togglePropertyAPI } from "../services/propertyService";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
@@ -54,8 +54,9 @@ function Cart({ property, refetch }: IProps) {
     }
   };
   return (
-    <div
-      className="bg-white shadow-md rounded-md overflow-hidden p-4 zoom"
+    <Link
+      to={`/properties/${id}`}
+      className="bg-white block shadow-md rounded-md overflow-hidden p-4 zoom"
       data-aos="fade-up"
     >
       {image_list?.length > 0 && (
@@ -75,9 +76,9 @@ function Cart({ property, refetch }: IProps) {
                   onClick={toggleProperty}
                 >
                   {IS_FAVOURITE ? (
-                    <FaHeart size={20} className="text-white" />
+                    <FaHeart size={20} className="text-red-500" />
                   ) : (
-                    <FaRegHeart size={20} className="text-white" />
+                    <FaHeart size={20} className="text-black/50" />
                   )}
                 </div>
                 <div className="rounded-md overflow-hidden h-[230px] md:h-[300px] bg-gray-200">
@@ -116,12 +117,9 @@ function Cart({ property, refetch }: IProps) {
           </div>
         </div>
         <div className="flex gap-5 mt-2">
-          <Link
-            to={`/properties/${id}`}
-            className="flex-[2] text-center zoom py-1 bg-primary rounded-md text-white font-medium"
-          >
+          <Button className="flex-[2] text-center zoom py-1 bg-primary rounded-md text-white font-medium">
             {t("book_now")}
-          </Link>
+          </Button>
           <Button className="flex-[1] zoom py-1 bg-[#CAE0FE] rounded-md flex justify-center items-center">
             <span>
               <MapPin className="text-primary" size={22} />
@@ -129,7 +127,7 @@ function Cart({ property, refetch }: IProps) {
           </Button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

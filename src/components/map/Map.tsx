@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import {
   GoogleMap,
   useJsApiLoader,
@@ -13,6 +13,7 @@ import PropertyCartSkeleton from "../skeleton/PropertyCartSkeleton";
 const Cart = lazy(() => import("./Cart"));
 interface IProps {
   properties: IProperty[] | null;
+  refetch: () => void;
 }
 const ITEMS_TO_LOAD = 10;
 const containerStyle = {
@@ -25,13 +26,11 @@ const center = {
   lat: 30.0444,
   lng: 31.2357,
 };
-
 const getPixelPositionOffset = (width: number, height: number) => ({
   x: -(width / 2),
   y: -height,
 });
-
-const Map = ({ properties }: IProps) => {
+const Map = ({ properties, refetch }: IProps) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [visibleCount, setVisibleCount] = useState(8);
@@ -47,6 +46,21 @@ const Map = ({ properties }: IProps) => {
     acc[key].push(property);
     return acc;
   }, {} as Record<string, IProperty[]>);
+  useEffect(() => {
+    if (!selectedProperties || !properties) return;
+    const updatedSelected = selectedProperties
+      .map((selected) => properties.find((p) => p.id === selected.id))
+      .filter(Boolean) as IProperty[];
+    const isUpdated = updatedSelected.some((updated, index) => {
+      const original = selectedProperties[index];
+      return !updated || JSON.stringify(updated) !== JSON.stringify(original);
+    });
+    if (isUpdated) {
+      setSelectedProperties(
+        updatedSelected.length > 0 ? updatedSelected : null
+      );
+    }
+  }, [properties, selectedProperties]);
   const handleShowMore = () => {
     setLoading(true);
     setTimeout(() => {
@@ -60,7 +74,6 @@ const Map = ({ properties }: IProps) => {
         Loading Map...
       </div>
     );
-
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -129,7 +142,7 @@ const Map = ({ properties }: IProps) => {
                 }
                 key={property.id}
               >
-                <Cart property={property} />
+                <Cart property={property} refetch={refetch} />
               </Suspense>
             ))}
             {selectedProperties &&
