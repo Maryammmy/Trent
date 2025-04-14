@@ -103,7 +103,7 @@ function Footer() {
               </Link>
             </div>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col items-start gap-4">
             <h2 className="font-bold text-lg">{t("contact_us")}</h2>
             <div className="flex flex-col gap-2 text-dark font-medium">
               {!contactUs ? (
@@ -114,6 +114,7 @@ function Footer() {
                     to={`mailto:${contactUs?.email}`}
                     className="hover:underline flex gap-1"
                     target="_blank"
+                    dir="ltr"
                     rel="noopener noreferrer"
                   >
                     {<Mail size={25} className="text-primary" />}
