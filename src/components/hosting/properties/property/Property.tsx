@@ -39,7 +39,7 @@ const Property = ({ property }: IProps) => {
         <div className="flex flex-wrap items-center gap-2">
           <Link
             to={`/hosting/properties/${id}/update`}
-            className="text-white py-1 w-20 rounded-md font-medium bg-primary flex justify-center items-center gap-1"
+            className="text-white py-2 w-24 rounded-md font-medium bg-primary flex justify-center items-center gap-1"
           >
             <MdEdit size={20} />
             <span>{t("edit")}</span>
@@ -48,7 +48,7 @@ const Property = ({ property }: IProps) => {
             onClick={() => setDeleteProperty(true)}
             className={`${
               is_deleted ? "bg-green-600" : "bg-red-600"
-            } text-white py-1 w-20 rounded-md font-medium`}
+            } text-white py-2 w-24 rounded-md font-medium`}
           >
             {is_deleted ? t("publish") : t("unpublish")}
           </Button>

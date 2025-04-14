@@ -124,9 +124,12 @@ function Cart({ property, refetch }: IProps) {
           </div>
         </div>
         <div className="flex gap-5 mt-2">
-          <Button className="flex-[2] text-center zoom py-1 bg-primary rounded-md text-white font-medium">
+          <Link
+            to={`/properties/${id}/book`}
+            className="flex-[2] text-center zoom py-1 bg-primary rounded-md text-white font-medium"
+          >
             {t("book_now")}
-          </Button>
+          </Link>
           <Button className="flex-[1] zoom py-1 bg-[#CAE0FE] rounded-md flex justify-center items-center">
             <span>
               <MapPin className="text-primary" size={22} />

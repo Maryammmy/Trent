@@ -355,5 +355,7 @@
   "unpublish_property_desc": "Are you sure you want to unpublish this property?",
   "publish_property_desc": "Are you sure you want to publish this property?",
   "unpublish": "Unpublish",
-  "publish": "Publish"
+  "publish": "Publish",
+  "error_min_days_stay": "The stay must be at least {{days}} days.",
+  "error_max_days_stay": "The stay cannot exceed {{days}} days."
 }

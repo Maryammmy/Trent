@@ -12,7 +12,6 @@ import { CurrentLanguage } from "../../types";
 import { baseURL } from "../../services";
 import PropertySkeleton from "../../components/skeleton/PropertySkeleton";
 import Map from "../../components/ui/Map";
-import CheckDates from "@/components/property/CheckDates";
 import ReviewComponent from "@/components/property/reviews/ReviewComponent";
 import PhotoViewer from "@/components/ui/PhotoViewer";
 
@@ -67,8 +66,8 @@ function Property() {
                 </span>
               </Link> */}
             </div>
-            <div className="py-8 flex flex-col lg:flex-row gap-10 xl:gap-20 md:justify-between">
-              <div className="flex-[2]">
+            <div className="py-8">
+              <div>
                 <div className="flex flex-col gap-1 pb-5">
                   <div
                     className="font-medium text-black text-2xl flex gap-1"
@@ -118,7 +117,7 @@ function Property() {
                 />
                 <Amenities facilities={facilities} />
               </div>
-              <CheckDates />
+              {/* <CheckDates /> */}
             </div>
             <ReviewComponent />
             <div className="max-w-7xl mx-auto py-5">

@@ -1,27 +1,27 @@
 import Button from "./Button";
 import { Minus, Plus } from "lucide-react";
 interface Iprops {
-  width?: string;
-  height?: string;
   counter: number;
   increaseCounter: () => void;
   decreaseCounter: () => void;
+  width?: string;
+  height?: string;
+  maxNumber?: number;
 }
 function Counter({
-  width = "24px",
-  height = "24px",
   counter,
   increaseCounter,
   decreaseCounter,
+  width = "24px",
+  height = "24px",
+  maxNumber,
 }: Iprops) {
   return (
     <div className="flex items-center gap-2 text-sm">
       <Button
         disabled={counter === 0}
         onClick={decreaseCounter}
-        className={`rounded-full bg-white text-black border-2 flex justify-center items-center ${
-          counter === 0 ? "opacity-50 cursor-not-allowed" : ""
-        }`}
+        className="rounded-full bg-white text-black border-2 flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed"
         style={{ width: width, height: height }}
       >
         <span>
@@ -30,8 +30,9 @@ function Counter({
       </Button>
       <span className="font-medium text-center">{counter}</span>
       <Button
+        disabled={counter === maxNumber}
         onClick={increaseCounter}
-        className="rounded-full bg-white text-black border-2 flex justify-center items-center"
+        className="rounded-full bg-white text-black border-2 flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed"
         style={{ width: width, height: height }}
       >
         <span>

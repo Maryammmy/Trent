@@ -353,5 +353,7 @@
   "publish_property_desc": "هل أنت متأكد أنك تريد نشر هذا العقار؟",
   "unpublish_property_desc": "هل أنت متأكد أنك تريد إلغاء نشر هذا العقار؟",
   "unpublish": "إلغاء النشر",
-  "publish": "نشر"
+  "publish": "نشر",
+  "error_min_days_stay": "مدة الإقامة يجب أن تكون على الأقل {{days}} يومًا.",
+  "error_max_days_stay": "مدة الإقامة لا يمكن أن تتجاوز {{days}} يومًا."
 }

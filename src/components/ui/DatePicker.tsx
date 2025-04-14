@@ -14,22 +14,23 @@ const DatePicker = ({ dateValue, handleValueChange, className }: IProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className="remove-icon z-[1000]">
+    <div className="remove-icon z-[2000]">
       <Datepicker
         i18n={currentLanguage}
         popoverDirection="down"
-        useRange={false}
+        useRange={true}
         value={dateValue}
+        showFooter={true}
         asSingle={true}
         onChange={handleValueChange}
-        inputClassName={`outline-none rounded-lg font-medium placeholder:text-black ${className}`}
+        inputClassName={`outline-none font-medium  ${className}`}
         placeholder={t("add_date")}
       />
       <style>
         {`
-        .remove-icon div button svg{
-          display: none !important;
-        }
+          // .remove-icon div button svg{
+          //   display: none !important;
+          // }
        .remove-icon div .flex.justify-center.space-x-3 {
       gap: 8px !important; 
     }

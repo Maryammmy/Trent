@@ -22,12 +22,14 @@ import GuestTerms from "@/pages/GuestTerms";
 import HostTerms from "@/pages/HostTerms";
 import GuestCancellationPolicy from "@/pages/GuestCancellationPolicy";
 import HostCancellationPolicy from "@/pages/HostCancellationPolicy";
+import Book from "@/pages/property/Book";
 
 export const RootRoutes = (
   <>
     <Route path="/" element={<RootLayout />} errorElement={<ErrorHandler />}>
       <Route index element={<LandingPage />} />
       <Route path="properties/:id" element={<Property />} />
+      <Route path="properties/:id/book" element={<Book />} />
       <Route path="contact-us" element={<ContactUs />} />
       <Route path="about-us" element={<AboutUs />} />
       <Route
