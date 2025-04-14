@@ -1,29 +1,137 @@
+import Loader from "@/components/loader/Loader";
 import CheckDates from "@/components/property/CheckDates";
+import Button from "@/components/ui/Button";
 import Counter from "@/components/ui/Counter";
-import { usePropertyInfoAPI } from "@/services/bookingService";
+import { ApiError } from "@/interfaces";
+import {
+  usePropertyInfoAPI,
+  verifyPropertyAPI,
+} from "@/services/bookingService";
+import { CurrentLanguage } from "@/types";
+import { formatDate } from "@/utils/formatDate";
+import { validateStartDate, validateEndDate } from "@/utils/handleChangeDate";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
+import { DateValueType } from "react-tailwindcss-datepicker";
+import Cookies from "js-cookie";
+import InputErrorMessage from "@/components/ui/InputErrorMessage";
+
+const currentLanguage = (localStorage.getItem("i18nextLng") ||
+  "en") as CurrentLanguage;
+const uid = Cookies.get("user_id");
 
 function Book() {
   const [counter, setCounter] = useState(0);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const { id } = useParams();
+  const [startDateValue, setStartDateValue] = useState<DateValueType>({
+    startDate: null,
+    endDate: null,
+  });
+  const [endDateValue, setEndDateValue] = useState<DateValueType>({
+    startDate: null,
+    endDate: null,
+  });
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const { data } = usePropertyInfoAPI(id);
   const propertyBook = data?.data?.data?.property_book_details;
+  const fromDate = formatDate(startDateValue?.startDate);
+  const toDate = formatDate(endDateValue?.startDate);
+
+  const handleStartValueChange = (newValue: DateValueType) => {
+    const validatedValue = validateStartDate(newValue, endDateValue, t);
+    if (validatedValue) {
+      setStartDateValue(validatedValue);
+      setErrors((prevErrors) => ({ ...prevErrors, checkin: "" }));
+    }
+  };
+
+  const handleEndValueChange = (newValue: DateValueType) => {
+    const validatedValue = validateEndDate(
+      newValue,
+      startDateValue,
+      t,
+      Number(propertyBook?.min_days),
+      Number(propertyBook?.max_days)
+    );
+    if (validatedValue) {
+      setEndDateValue(validatedValue);
+      setErrors((prevErrors) => ({ ...prevErrors, checkout: "" }));
+    }
+  };
 
   const updateCounter = (value: number) => {
     setCounter((prevCounter) => prevCounter + value);
   };
+  const handleTermsChange = () => {
+    const newTerms = !acceptedTerms;
+    setAcceptedTerms(newTerms);
+    if (newTerms) {
+      setErrors((prevErrors) => ({ ...prevErrors, terms: "" }));
+    }
+  };
+
+  const validateInputs = () => {
+    const newErrors: { [key: string]: string } = {};
+    if (!startDateValue?.startDate) {
+      newErrors.checkin = t("please_select_checkin_date");
+    }
+    if (!endDateValue?.startDate) {
+      newErrors.checkout = t("please_select_checkout_date");
+    }
+    if (!acceptedTerms) {
+      newErrors.terms = t("please_accept_host_rules");
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleVerifyProperty = async () => {
+    try {
+      if (!validateInputs()) {
+        return;
+      }
+      setLoading(true);
+      const response = await verifyPropertyAPI({
+        prop_id: id ? id : "",
+        guest_counts: counter,
+        from_date: fromDate,
+        to_date: toDate,
+        confirm_guest_rules: acceptedTerms,
+        uid: uid ? uid : "",
+        lang: currentLanguage,
+      });
+      if (response?.data?.response_code === 200) {
+        toast.success(response?.data?.response_message);
+      }
+    } catch (error) {
+      const customError = error as ApiError;
+      const errorMessage =
+        customError?.response?.data?.response_message ||
+        t("something_went_wrong");
+      toast.error(errorMessage);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="py-10 px-5 xl:px-20 mx-auto max-w-screen-xl min-h-screen">
+    <div className="py-10 px-5 xl:px-20 mx-auto max-w-screen-xl min-h-[57vh]">
       <div className="flex flex-col gap-10">
         <CheckDates
-          minDays={Number(propertyBook?.min_days)}
-          maxDays={Number(propertyBook?.max_days)}
+          startDateValue={startDateValue}
+          endDateValue={endDateValue}
+          handleStartValueChange={handleStartValueChange}
+          handleEndValueChange={handleEndValueChange}
+          errors={{ checkin: errors.checkin, checkout: errors.checkout }}
         />
-        <div className="flex flex-col gap-2">
-          <h2 className="text-black font-bold">{t("guest_count")}</h2>
+        <div className="flex flex-col">
+          <h2 className="text-black font-bold mb-2">{t("guest_count")}</h2>
           <div className="flex items-center gap-4">
             <p className="text-dark font-medium">
               Allowed maximum number of guests {propertyBook?.guest_count}
@@ -36,22 +144,32 @@ function Book() {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-2">
-          <h3 className="font-bold">{t("host_rules")}</h3>
+
+        <div className="flex flex-col">
+          <h3 className="font-bold mb-2">{t("host_rules")}</h3>
           <p className="text-dark font-medium">{propertyBook?.guest_rules}</p>
-          <div className="flex items-center gap-2 font-medium">
+          <div className="flex items-center gap-2 font-medium pt-2">
             <input
               type="checkbox"
               id="terms"
-              //   checked={acceptedTerms}
-              //   onChange={handleTermsChange}
+              checked={acceptedTerms}
+              onChange={handleTermsChange}
               className="w-5 h-5 accent-primary cursor-pointer"
             />
             <label htmlFor="terms" className="text-sm text-dark">
               I accept host rules
             </label>
           </div>
+          {errors.terms && <InputErrorMessage msg={errors.terms} />}
         </div>
+      </div>
+      <div className="flex justify-end py-10">
+        <Button
+          onClick={handleVerifyProperty}
+          className="bg-primary text-white w-32 py-2 rounded text-xl font-medium"
+        >
+          {loading ? <Loader /> : t("countinue")}
+        </Button>
       </div>
     </div>
   );

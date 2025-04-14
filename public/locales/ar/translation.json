@@ -355,5 +355,9 @@
   "unpublish": "إلغاء النشر",
   "publish": "نشر",
   "error_min_days_stay": "مدة الإقامة يجب أن تكون على الأقل {{days}} يومًا.",
-  "error_max_days_stay": "مدة الإقامة لا يمكن أن تتجاوز {{days}} يومًا."
+  "error_max_days_stay": "مدة الإقامة لا يمكن أن تتجاوز {{days}} يومًا.",
+  "countinue": "متابعة",
+  "please_select_checkin_date": "من فضلك اختار تاريخ الوصول.",
+  "please_select_checkout_date": "من فضلك اختار تاريخ المغادرة.",
+  "please_accept_host_rules": "لازم توافق على قواعد المضيف علشان تكمل."
 }

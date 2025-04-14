@@ -40,7 +40,7 @@ function HostedBy({ id, owner, guestRules, ownerId }: IProps) {
   };
 
   return (
-    <div className="py-4">
+    <div className="py-5">
       <div className="flex items-center gap-5" data-aos="fade-left">
         <div className="w-12 h-12 rounded-full overflow-hidden">
           <Image

@@ -357,5 +357,9 @@
   "unpublish": "Unpublish",
   "publish": "Publish",
   "error_min_days_stay": "The stay must be at least {{days}} days.",
-  "error_max_days_stay": "The stay cannot exceed {{days}} days."
+  "error_max_days_stay": "The stay cannot exceed {{days}} days.",
+  "countinue": "Continue",
+  "please_select_checkin_date": "Please select a check-in date.",
+  "please_select_checkout_date": "Please select a check-out date.",
+  "please_accept_host_rules": "You must accept the host rules to proceed."
 }

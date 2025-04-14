@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { baseAPI } from ".";
+import { baseAPI, baseAPIForm } from ".";
 import { CurrentLanguage } from "@/types";
+import { IVerifyProperty } from "@/interfaces/booking";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -13,4 +14,15 @@ export const usePropertyInfoAPI = (id: string | undefined) => {
       ),
     enabled: !!id,
   });
+};
+export const verifyPropertyAPI = (payload: IVerifyProperty) => {
+  const formData = new FormData();
+  Object.entries(payload).forEach(([key, value]) => {
+    formData.append(key, String(value));
+  });
+  const response = baseAPIForm.post(
+    "user_api/booking/u_verify_property_rules.php",
+    formData
+  );
+  return response;
 };

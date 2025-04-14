@@ -29,7 +29,14 @@ export const RootRoutes = (
     <Route path="/" element={<RootLayout />} errorElement={<ErrorHandler />}>
       <Route index element={<LandingPage />} />
       <Route path="properties/:id" element={<Property />} />
-      <Route path="properties/:id/book" element={<Book />} />
+      <Route
+        path="properties/:id/book"
+        element={
+          <ProtectedRoutes>
+            <Book />
+          </ProtectedRoutes>
+        }
+      />
       <Route path="contact-us" element={<ContactUs />} />
       <Route path="about-us" element={<AboutUs />} />
       <Route

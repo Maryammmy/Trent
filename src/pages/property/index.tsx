@@ -67,57 +67,52 @@ function Property() {
               </Link> */}
             </div>
             <div className="py-8">
-              <div>
-                <div className="flex flex-col gap-1 pb-5">
-                  <div
-                    className="font-medium text-black text-2xl flex gap-1"
-                    data-aos="fade-right"
-                  >
-                    <p> {propertyDetails?.city?.[currentLanguage]}</p>,
-                    <p>
-                      {propertyDetails?.government?.name?.[currentLanguage]}
-                    </p>
+              <div className="flex flex-col gap-1">
+                <div
+                  className="font-medium text-black text-2xl flex gap-1"
+                  data-aos="fade-right"
+                >
+                  <p> {propertyDetails?.city?.[currentLanguage]}</p>,
+                  <p>{propertyDetails?.government?.name?.[currentLanguage]}</p>
+                </div>
+                <div
+                  className="font-medium flex flex-wrap gap-1"
+                  data-aos="fade-left"
+                >
+                  <div className="flex gap-1">
+                    <p>{t("guest_count")}</p>
+                    <span>{propertyDetails?.guest_count}</span>
                   </div>
-                  <div
-                    className="font-medium flex flex-wrap gap-1"
-                    data-aos="fade-left"
-                  >
-                    <div className="flex gap-1">
-                      <p>{t("guest_count")}</p>
-                      <span>{propertyDetails?.guest_count}</span>
-                    </div>
-                    <span>,</span>
-                    <div className="flex gap-1">
-                      <p>{t("beds_count")}</p>
-                      <span>{propertyDetails?.beds_count}</span>
-                    </div>
-                    <span>,</span>
-                    <div className="flex gap-1">
-                      <p>{t("bathrooms_count")}</p>
-                      <span>{propertyDetails?.bathrooms_count}</span>
-                    </div>
+                  <span>,</span>
+                  <div className="flex gap-1">
+                    <p>{t("beds_count")}</p>
+                    <span>{propertyDetails?.beds_count}</span>
                   </div>
-                  <div className="font-semibold" data-aos="fade-right">
-                    <p>
-                      <span className="text-primary">
-                        {propertyDetails?.price}
-                        {t("price_per_night")}
-                      </span>{" "}
-                      <span className="text-dark">
-                        /{propertyDetails?.period?.name?.[currentLanguage]}
-                      </span>
-                    </p>
+                  <span>,</span>
+                  <div className="flex gap-1">
+                    <p>{t("bathrooms_count")}</p>
+                    <span>{propertyDetails?.bathrooms_count}</span>
                   </div>
                 </div>
-                <HostedBy
-                  id={id}
-                  ownerId={propertyDetails?.owner_id}
-                  owner={propertyDetails?.owner}
-                  guestRules={propertyDetails?.guest_rules?.[currentLanguage]}
-                />
-                <Amenities facilities={facilities} />
+                <div className="font-semibold" data-aos="fade-right">
+                  <p>
+                    <span className="text-primary">
+                      {propertyDetails?.price}
+                      {t("price_per_night")}
+                    </span>{" "}
+                    <span className="text-dark">
+                      /{propertyDetails?.period?.name?.[currentLanguage]}
+                    </span>
+                  </p>
+                </div>
               </div>
-              {/* <CheckDates /> */}
+              <HostedBy
+                id={id}
+                ownerId={propertyDetails?.owner_id}
+                owner={propertyDetails?.owner}
+                guestRules={propertyDetails?.guest_rules?.[currentLanguage]}
+              />
+              <Amenities facilities={facilities} />
             </div>
             <ReviewComponent />
             <div className="max-w-7xl mx-auto py-5">

@@ -14,7 +14,7 @@ const DatePicker = ({ dateValue, handleValueChange, className }: IProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className="remove-icon z-[2000]">
+    <div className="remove-icon z-[1000]">
       <Datepicker
         i18n={currentLanguage}
         popoverDirection="down"
@@ -23,7 +23,7 @@ const DatePicker = ({ dateValue, handleValueChange, className }: IProps) => {
         showFooter={true}
         asSingle={true}
         onChange={handleValueChange}
-        inputClassName={`outline-none font-medium  ${className}`}
+        inputClassName={`outline-none font-medium ${className}`}
         placeholder={t("add_date")}
       />
       <style>
