@@ -361,5 +361,8 @@
   "countinue": "Continue",
   "please_select_checkin_date": "Please select a check-in date.",
   "please_select_checkout_date": "Please select a check-out date.",
-  "please_accept_host_rules": "You must accept the host rules to proceed."
+  "please_accept_host_rules": "You must accept the host rules to proceed.",
+  "i_accept_host_rules": "I accept the host rules",
+  "open_number_guests": "Open to any number of guests",
+  "suitable_guests": "Suitable for up to {{guests}} guests"
 }

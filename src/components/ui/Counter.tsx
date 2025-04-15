@@ -7,6 +7,7 @@ interface Iprops {
   width?: string;
   height?: string;
   maxNumber?: number;
+  bookGuestCount?: number;
 }
 function Counter({
   counter,
@@ -15,11 +16,12 @@ function Counter({
   width = "24px",
   height = "24px",
   maxNumber,
+  bookGuestCount,
 }: Iprops) {
   return (
     <div className="flex items-center gap-2 text-sm">
       <Button
-        disabled={counter === 0}
+        disabled={counter === 0 || bookGuestCount === counter}
         onClick={decreaseCounter}
         className="rounded-full bg-white text-black border-2 flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed"
         style={{ width: width, height: height }}

@@ -359,5 +359,8 @@
   "countinue": "متابعة",
   "please_select_checkin_date": "من فضلك اختار تاريخ الوصول.",
   "please_select_checkout_date": "من فضلك اختار تاريخ المغادرة.",
-  "please_accept_host_rules": "لازم توافق على قواعد المضيف علشان تكمل."
+  "please_accept_host_rules": "لازم توافق على قواعد المضيف علشان تكمل.",
+  "i_accept_host_rules": "اوافق على قواعد المضيف",
+  "open_number_guests": "نرحب بأي عدد من الضيوف",
+  "suitable_guests": "مناسب لما يصل إلى {{guests}} ضيوف"
 }

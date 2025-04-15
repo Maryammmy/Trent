@@ -17,14 +17,15 @@ import { useParams } from "react-router-dom";
 import { DateValueType } from "react-tailwindcss-datepicker";
 import Cookies from "js-cookie";
 import InputErrorMessage from "@/components/ui/InputErrorMessage";
+import Input from "@/components/ui/Input";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 const uid = Cookies.get("user_id");
 
 function Book() {
-  const [counter, setCounter] = useState(0);
-  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [counter, setCounter] = useState(1);
+  const [acceptedRules, setAcceptedRules] = useState(false);
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const { id } = useParams();
@@ -67,11 +68,11 @@ function Book() {
   const updateCounter = (value: number) => {
     setCounter((prevCounter) => prevCounter + value);
   };
-  const handleTermsChange = () => {
-    const newTerms = !acceptedTerms;
-    setAcceptedTerms(newTerms);
-    if (newTerms) {
-      setErrors((prevErrors) => ({ ...prevErrors, terms: "" }));
+  const handleRulesChange = () => {
+    const newRules = !acceptedRules;
+    setAcceptedRules(newRules);
+    if (newRules) {
+      setErrors((prevErrors) => ({ ...prevErrors, rules: "" }));
     }
   };
 
@@ -83,8 +84,8 @@ function Book() {
     if (!endDateValue?.startDate) {
       newErrors.checkout = t("please_select_checkout_date");
     }
-    if (!acceptedTerms) {
-      newErrors.terms = t("please_accept_host_rules");
+    if (!acceptedRules) {
+      newErrors.rules = t("please_accept_host_rules");
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -101,7 +102,7 @@ function Book() {
         guest_counts: counter,
         from_date: fromDate,
         to_date: toDate,
-        confirm_guest_rules: acceptedTerms,
+        confirm_guest_rules: acceptedRules,
         uid: uid ? uid : "",
         lang: currentLanguage,
       });
@@ -134,34 +135,40 @@ function Book() {
           <h2 className="text-black font-bold mb-2">{t("guest_count")}</h2>
           <div className="flex items-center gap-4">
             <p className="text-dark font-medium">
-              Allowed maximum number of guests {propertyBook?.guest_count}
+              {propertyBook?.guest_count
+                ? t("suitable_guests", {
+                    guests: propertyBook?.guest_count,
+                  })
+                : t("open_number_guests")}
             </p>
             <Counter
               counter={counter}
               increaseCounter={() => updateCounter(1)}
               decreaseCounter={() => updateCounter(-1)}
               maxNumber={Number(propertyBook?.guest_count)}
+              bookGuestCount={1}
             />
           </div>
         </div>
-
-        <div className="flex flex-col">
-          <h3 className="font-bold mb-2">{t("host_rules")}</h3>
-          <p className="text-dark font-medium">{propertyBook?.guest_rules}</p>
-          <div className="flex items-center gap-2 font-medium pt-2">
-            <input
-              type="checkbox"
-              id="terms"
-              checked={acceptedTerms}
-              onChange={handleTermsChange}
-              className="w-5 h-5 accent-primary cursor-pointer"
-            />
-            <label htmlFor="terms" className="text-sm text-dark">
-              I accept host rules
-            </label>
+        {propertyBook?.guest_rules && (
+          <div className="flex flex-col">
+            <h3 className="font-bold mb-2">{t("host_rules")}</h3>
+            <p className="text-dark font-medium">{propertyBook?.guest_rules}</p>
+            <div className="flex items-center gap-2 font-medium pt-2">
+              <Input
+                type="checkbox"
+                id="rules"
+                checked={acceptedRules}
+                onChange={handleRulesChange}
+                className="w-5 h-5 accent-primary cursor-pointer"
+              />
+              <label htmlFor="rules" className="text-sm text-dark">
+                {t("i_accept_host_rules")}
+              </label>
+            </div>
+            {errors.rules && <InputErrorMessage msg={errors.rules} />}
           </div>
-          {errors.terms && <InputErrorMessage msg={errors.terms} />}
-        </div>
+        )}
       </div>
       <div className="flex justify-end py-10">
         <Button
