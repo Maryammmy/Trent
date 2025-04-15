@@ -13,7 +13,7 @@ import { validateStartDate, validateEndDate } from "@/utils/handleChangeDate";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { DateValueType } from "react-tailwindcss-datepicker";
 import Cookies from "js-cookie";
 import InputErrorMessage from "@/components/ui/InputErrorMessage";
@@ -29,6 +29,7 @@ function Book() {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const { id } = useParams();
+  const navigate = useNavigate();
   const [startDateValue, setStartDateValue] = useState<DateValueType>({
     startDate: null,
     endDate: null,
@@ -108,6 +109,11 @@ function Book() {
       });
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
+        setTimeout(() => {
+          navigate(`/properties/${id}/confirm-and-pay`, {
+            state: { data: response?.data?.data?.booking_details },
+          });
+        }, 1000);
       }
     } catch (error) {
       const customError = error as ApiError;
@@ -173,9 +179,9 @@ function Book() {
       <div className="flex justify-end py-10">
         <Button
           onClick={handleVerifyProperty}
-          className="bg-primary text-white w-32 py-2 rounded text-xl font-medium"
+          className="bg-primary text-white w-40 py-3 rounded-md text-lg font-medium"
         >
-          {loading ? <Loader /> : t("countinue")}
+          {loading ? <Loader /> : t("continue")}
         </Button>
       </div>
     </div>

@@ -362,5 +362,10 @@
   "please_accept_host_rules": "لازم توافق على قواعد المضيف علشان تكمل.",
   "i_accept_host_rules": "اوافق على قواعد المضيف",
   "open_number_guests": "نرحب بأي عدد من الضيوف",
-  "suitable_guests": "مناسب لما يصل إلى {{guests}} ضيوف"
+  "suitable_guests": "مناسب لما يصل إلى {{guests}} ضيوف",
+  "duration": "المدة",
+  "deposit_fees": "رسوم الإيداع",
+  "pay": "دفع",
+  "days": "أيام",
+  "service_fees": "رسوم الخدمة"
 }

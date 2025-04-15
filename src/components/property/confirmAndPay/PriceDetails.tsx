@@ -1,61 +1,84 @@
 import Image from "../../ui/Image";
-import { FaStar } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-
-function PriceDetails() {
+import { IVerifyPropertyResponse } from "@/interfaces/booking";
+import { baseURL } from "@/services";
+interface IProps {
+  data: IVerifyPropertyResponse;
+}
+function PriceDetails({ data }: IProps) {
   const { t } = useTranslation();
-  const pricePerNight = 101.1;
-  const nights = 5;
-  const insuranceFee = 7.78;
-  const serviceFee = 95.95;
-  const total = pricePerNight * nights + insuranceFee + serviceFee;
-  const priceDetails = [
-    {
-      label: `EGP ${pricePerNight} x ${nights} ${t("nights")}`,
-      value: `EGP ${(pricePerNight * nights).toFixed(2)}`,
-    },
-    { label: t("insurance_fee"), value: `EGP ${insuranceFee}` },
-    { label: t("Trent_service_fee"), value: `EGP ${serviceFee}` },
-  ];
 
   return (
-    <div className="border p-6 w-full rounded-lg md:w-[500px]">
+    <div className="border p-5 w-full rounded-lg md:w-[500px]">
       <div className="flex flex-col md:flex-row gap-5 border-b pb-6">
         <div className="w-28 h-28 rounded-lg overflow-hidden">
           <Image
-            imageUrl="/images/property.jpg"
+            imageUrl={baseURL + data?.image_list[0]?.img}
             alt="property"
             className="w-full h-full object-cover"
           />
         </div>
         <div className="flex flex-col gap-1">
-          <h4 className="max-w-56 text-lg font-semibold">
-            Couplespod at Riverstone House Portfolio
-          </h4>
-          <p>Farm stay</p>
-          <div className="flex items-center gap-1">
-            <span>
-              <FaStar />
-            </span>
-            <span className="text-sm font-medium">4.94</span>
-          </div>
+          <h4 className="max-w-56 text-lg font-semibold">{data?.title}</h4>
         </div>
       </div>
       <div className="pt-4">
         <h4 className="text-lg lg:text-xl font-semibold">
           {t("price_details")}
         </h4>
-        <div className="my-2 pb-4 font-medium border-b">
-          {priceDetails.map((item, index) => (
-            <div key={index} className="flex justify-between mb-2">
-              <span>{item.label}</span>
-              <span>{item.value}</span>
-            </div>
-          ))}
+        <div className="my-2 py-2 font-medium border-b">
+          <div className="grid grid-cols-2 gap-5 mb-2">
+            <span>{`${t("duration")} (${data?.days}${t("days")})`}</span>
+            <span className="text-end">
+              {Math.round(data?.sub_total)}
+              {t("price_per_night")}
+            </span>
+          </div>
         </div>
-        <div className="flex justify-between font-semibold text-lg pt-4">
-          <span>{t("total")} (EGP)</span>
-          <span>EGP {total.toFixed(2)}</span>
+        <div className="my-2 py-2 font-medium border-b">
+          <div className="grid grid-cols-2 gap-5 mb-2">
+            <span>{`${t("taxes")} (${data?.tax_percent}%)`} </span>
+            <span className="text-end">
+              {Math.round(data?.taxes)}
+              {t("price_per_night")}
+            </span>
+          </div>
+        </div>
+        <div className="my-2 py-2 font-medium border-b">
+          <div className="grid grid-cols-2 gap-5 mb-2">
+            <span>{t("deposit_fees")}</span>
+            <span className="text-end">
+              {parseInt(data?.deposit_fees)}
+              {t("price_per_night")}
+            </span>
+          </div>
+        </div>
+        <div className="my-2 py-2 font-medium border-b">
+          <div className="grid grid-cols-2 gap-5 mb-2">
+            <span>{t("service_fees")}</span>
+            <span className="text-end">
+              {Math.round(data?.service_fees)}
+              {t("price_per_night")}
+            </span>
+          </div>
+        </div>
+        <div className="my-2 py-2 font-medium border-b">
+          <div className="grid grid-cols-2 gap-5 mb-2">
+            <span>{t("trent_fees")}</span>
+            <span className="text-end">
+              {Math.round(data?.trent_fees)}
+              {t("price_per_night")}
+            </span>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-5 font-semibold text-lg pt-3">
+          <span>
+            {t("total")} ({t("price_per_night")})
+          </span>
+          <span className="text-end">
+            {Math.round(data?.final_total)}
+            {t("price_per_night")}
+          </span>
         </div>
       </div>
     </div>

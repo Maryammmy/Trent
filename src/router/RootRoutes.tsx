@@ -80,7 +80,7 @@ export const RootRoutes = (
         }
       />
       <Route
-        path="confirm-and-pay"
+        path="properties/:id/confirm-and-pay"
         element={
           <ProtectedRoutes>
             <ConfirmAndPay />

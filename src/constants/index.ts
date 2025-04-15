@@ -11,3 +11,8 @@ export const allowedVideoTypes = [
   "video/mov",
   "video/mkv",
 ];
+export const merchantRefNum = (
+  Math.random().toString().slice(2) + Date.now()
+).slice(0, 10);
+export const returnUrl = window.location.href;
+export const quantity = 1;

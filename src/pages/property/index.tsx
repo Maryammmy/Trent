@@ -14,6 +14,7 @@ import PropertySkeleton from "../../components/skeleton/PropertySkeleton";
 import Map from "../../components/ui/Map";
 import ReviewComponent from "@/components/property/reviews/ReviewComponent";
 import PhotoViewer from "@/components/ui/PhotoViewer";
+import { Link } from "react-router-dom";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -24,6 +25,7 @@ function Property() {
   const { data } = usePropertyAPI(id);
   const propertyDetails: IDetailsProperty = data?.data?.data?.property_details;
   const facilities: IFacilityProperty[] = data?.data?.data?.facility_list;
+  const basePrice = parseInt(propertyDetails?.price);
   return (
     <>
       <div className="px-5 xl:px-20 py-5 lg:py-6">
@@ -67,43 +69,55 @@ function Property() {
               </Link> */}
             </div>
             <div className="py-8">
-              <div className="flex flex-col gap-1">
-                <div
-                  className="font-medium text-black text-2xl flex gap-1"
-                  data-aos="fade-right"
-                >
-                  <p> {propertyDetails?.city?.[currentLanguage]}</p>,
-                  <p>{propertyDetails?.government?.name?.[currentLanguage]}</p>
+              <div className="flex justify-between items-center">
+                <div className="flex flex-col gap-1">
+                  <div
+                    className="font-medium text-black text-2xl flex gap-1"
+                    data-aos="fade-right"
+                  >
+                    <p> {propertyDetails?.city?.[currentLanguage]}</p>,
+                    <p>
+                      {propertyDetails?.government?.name?.[currentLanguage]}
+                    </p>
+                  </div>
+                  <div
+                    className="font-medium flex flex-wrap gap-1"
+                    data-aos="fade-left"
+                  >
+                    <div className="flex gap-1">
+                      <p>{t("guest_count")}</p>
+                      <span>{propertyDetails?.guest_count}</span>
+                    </div>
+                    <span>,</span>
+                    <div className="flex gap-1">
+                      <p>{t("beds_count")}</p>
+                      <span>{propertyDetails?.beds_count}</span>
+                    </div>
+                    <span>,</span>
+                    <div className="flex gap-1">
+                      <p>{t("bathrooms_count")}</p>
+                      <span>{propertyDetails?.bathrooms_count}</span>
+                    </div>
+                  </div>
+                  <div className="font-semibold" data-aos="fade-right">
+                    <p>
+                      <span className="text-primary">
+                        {basePrice}
+                        {t("price_per_night")}
+                      </span>{" "}
+                      <span className="text-dark">
+                        /{propertyDetails?.period?.name?.[currentLanguage]}
+                      </span>
+                    </p>
+                  </div>
                 </div>
-                <div
-                  className="font-medium flex flex-wrap gap-1"
-                  data-aos="fade-left"
-                >
-                  <div className="flex gap-1">
-                    <p>{t("guest_count")}</p>
-                    <span>{propertyDetails?.guest_count}</span>
-                  </div>
-                  <span>,</span>
-                  <div className="flex gap-1">
-                    <p>{t("beds_count")}</p>
-                    <span>{propertyDetails?.beds_count}</span>
-                  </div>
-                  <span>,</span>
-                  <div className="flex gap-1">
-                    <p>{t("bathrooms_count")}</p>
-                    <span>{propertyDetails?.bathrooms_count}</span>
-                  </div>
-                </div>
-                <div className="font-semibold" data-aos="fade-right">
-                  <p>
-                    <span className="text-primary">
-                      {propertyDetails?.price}
-                      {t("price_per_night")}
-                    </span>{" "}
-                    <span className="text-dark">
-                      /{propertyDetails?.period?.name?.[currentLanguage]}
-                    </span>
-                  </p>
+                <div>
+                  <Link
+                    to={`/properties/${id}/book`}
+                    className="bg-primary text-white text-lg font-medium block text-center py-3 w-40 rounded-md"
+                  >
+                    {t("book_now")}
+                  </Link>
                 </div>
               </div>
               <HostedBy

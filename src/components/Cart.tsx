@@ -30,7 +30,7 @@ function Cart({ property, refetch }: IProps) {
     rate,
   } = property;
   const { t } = useTranslation();
-  const basePrice = Number(price);
+  const basePrice = parseInt(price);
   const toggleProperty = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
