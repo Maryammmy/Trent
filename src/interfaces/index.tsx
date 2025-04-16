@@ -22,6 +22,7 @@ export interface IPropertyType {
 export interface IFacility {
   id: string;
   title: string;
+  img: string;
 }
 export interface IGovernement {
   id: string;

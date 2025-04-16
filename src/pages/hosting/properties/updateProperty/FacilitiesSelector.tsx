@@ -1,7 +1,9 @@
 import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
+import Image from "@/components/ui/Image";
 import Input from "@/components/ui/Input";
 import InputErrorMessage from "@/components/ui/InputErrorMessage";
 import { IFacility } from "@/interfaces";
+import { baseURL } from "@/services";
 import { PropertyNameInputs } from "@/types";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -42,7 +44,14 @@ function FacilitiesSelector({ control, errors, facilities }: IProps) {
                     }}
                     className="accent-dark w-4 h-4"
                   />
-                  {facility?.title}
+                  <div className="w-6 h-6 rounded-md overflow-hidden">
+                    <Image
+                      imageUrl={baseURL + facility?.img}
+                      alt="facility"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <span>{facility?.title}</span>
                 </label>
               ))}
             </div>

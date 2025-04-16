@@ -89,6 +89,7 @@ function ConfirmAndPay() {
       </div>
       <div className="flex justify-end">
         <Button
+          disabled={loading}
           onClick={createFawryPayment}
           className="bg-primary font-medium text-lg text-white w-40 py-3 rounded-md"
         >

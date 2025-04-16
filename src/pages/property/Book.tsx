@@ -178,6 +178,7 @@ function Book() {
       </div>
       <div className="flex justify-end py-10">
         <Button
+          disabled={loading}
           onClick={handleVerifyProperty}
           className="bg-primary text-white w-40 py-3 rounded-md text-lg font-medium"
         >

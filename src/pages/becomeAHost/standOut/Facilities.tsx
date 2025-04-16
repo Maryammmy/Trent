@@ -3,10 +3,11 @@ import Button from "../../../components/ui/Button";
 import { useTranslation } from "react-i18next";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
-import { Home } from "lucide-react";
 import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkeleton";
 import { IFacility } from "../../../interfaces";
 import { useFacilitiesAPI } from "../../../services/filtersService";
+import Image from "@/components/ui/Image";
+import { baseURL } from "@/services";
 
 function Facilities() {
   const { t } = useTranslation();
@@ -42,19 +43,23 @@ function Facilities() {
             <PropertyTypeSkeleton cards={8} />
           ) : facilities?.length ? (
             facilities?.map((item, index) => {
-              const { title, id } = item;
+              const { id, title, img } = item;
               return (
                 <Button
                   key={index}
                   onClick={() => handleSelectedFacilities(Number(id))}
-                  className={`flex flex-wrap gap-2 font-medium border rounded-full px-3 py-2 ${
+                  className={`flex flex-wrap items-center gap-2 font-medium border rounded-full px-3 py-2 ${
                     selectedFacilities.includes(Number(id)) &&
                     "bg-zinc-50 border-black"
                   }`}
                 >
-                  <span>
-                    <Home />
-                  </span>
+                  <div className="w-6 h-6 rounded-md overflow-hidden">
+                    <Image
+                      imageUrl={baseURL + img}
+                      alt="facility"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <span>{title}</span>
                 </Button>
               );

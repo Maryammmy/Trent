@@ -3,10 +3,11 @@ import Button from "../../../components/ui/Button";
 import { useTranslation } from "react-i18next";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
-import { Home } from "lucide-react";
 import PropertyTypeSkeleton from "../../../components/skeleton/propertyTypeSkeleton";
 import { IPropertyType } from "../../../interfaces";
 import { usePropertyTypesAPI } from "../../../services/filtersService";
+import Image from "@/components/ui/Image";
+import { baseURL } from "@/services";
 
 function PropertyType() {
   const { t } = useTranslation();
@@ -32,18 +33,22 @@ function PropertyType() {
             <PropertyTypeSkeleton cards={8} />
           ) : propertyTypeList?.length ? (
             propertyTypeList.map((item) => {
-              const { title, id } = item;
+              const { id, title, img } = item;
               return (
                 <Button
                   key={id}
                   onClick={() => handleSelectedPropertyType(id)}
-                  className={`flex gap-2 font-medium border rounded-full px-3 py-2 ${
+                  className={`flex items-center gap-2 font-medium border rounded-full px-3 py-2 ${
                     selectedPropertyType === id ? "bg-zinc-50 border-black" : ""
                   }`}
                 >
-                  <span>
-                    <Home />
-                  </span>
+                  <div className="w-6 h-6 rounded-md overflow-hidden">
+                    <Image
+                      imageUrl={baseURL + img}
+                      alt="property type"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <span>{title}</span>
                 </Button>
               );

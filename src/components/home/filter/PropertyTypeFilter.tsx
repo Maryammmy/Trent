@@ -1,9 +1,10 @@
 import Button from "../../ui/Button";
 import { useTranslation } from "react-i18next";
-import { Home } from "lucide-react";
 import PropertyTypeSkeleton from "../../skeleton/propertyTypeSkeleton";
 import { IPropertyType } from "../../../interfaces";
 import { usePropertyTypesAPI } from "../../../services/filtersService";
+import Image from "@/components/ui/Image";
+import { baseURL } from "@/services";
 
 interface Props {
   selectedProperty: string;
@@ -24,18 +25,22 @@ function PropertyTypeFilter({
           <PropertyTypeSkeleton cards={8} />
         ) : propertyTypeList?.length ? (
           propertyTypeList?.map((item) => {
-            const { title, id } = item;
+            const { id, title, img } = item;
             return (
               <Button
                 key={id}
                 onClick={() => handleSelectedProperty(id)}
-                className={`flex gap-2 font-medium border rounded-full py-2 px-3 ${
+                className={`flex flex-wrap items-center gap-2 font-medium border rounded-full py-2 px-3 ${
                   selectedProperty === id && "bg-zinc-50 border-black"
                 }`}
               >
-                <span>
-                  <Home />
-                </span>
+                <div className="w-6 h-6 rounded-md overflow-hidden">
+                  <Image
+                    imageUrl={baseURL + img}
+                    alt="property type"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <span>{title}</span>
               </Button>
             );
