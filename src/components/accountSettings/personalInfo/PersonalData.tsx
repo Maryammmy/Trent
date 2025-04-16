@@ -60,6 +60,7 @@ function PersonalData() {
   }, [user, reset]);
   const onSubmit = async (data: IUpdateUser) => {
     setImageError(null);
+    console.log(data);
     const formData = convertPersonalDataToFormData(data);
     try {
       setLoading(true);

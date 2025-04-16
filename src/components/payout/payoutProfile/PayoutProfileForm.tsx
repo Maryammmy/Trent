@@ -52,9 +52,18 @@ function PayoutProfileForm() {
   });
   const onSubmit = async (data: IPayoutProfile) => {
     try {
+      if (
+        !data.wallet_number &&
+        (!data.bank_account_number || !data.bank_name)
+      ) {
+        toast.error(
+          "Please fill the number wallet or bank name and account number"
+        );
+        return;
+      }
       setLoading(true);
       const response = await createPayoutsProfileAPI(data);
-      if (response?.data?.response_code === 200) {
+      if (response?.data?.response_code === 201) {
         toast.success(response?.data?.response_message);
       }
     } catch (error) {
@@ -104,7 +113,9 @@ function PayoutProfileForm() {
                   />
                 )}
               />
-              {errors.name && <InputErrorMessage msg={errors.name.message} />}
+              {errors?.full_name && (
+                <InputErrorMessage msg={errors?.full_name?.message} />
+              )}
             </div>
             <div className="py-2 flex flex-col gap-2">
               <label className="font-bold">{t("payment_method")}</label>
@@ -131,7 +142,7 @@ function PayoutProfileForm() {
                 </p>
               )}
               {errors.method_id && (
-                <InputErrorMessage msg={errors.method_id?.message} />
+                <InputErrorMessage msg={errors.method_id.message} />
               )}
             </div>
             <div className="py-2 flex flex-col gap-2">
@@ -148,7 +159,9 @@ function PayoutProfileForm() {
                   />
                 )}
               />
-              {errors.name && <InputErrorMessage msg={errors.name.message} />}
+              {errors?.bank_name && (
+                <InputErrorMessage msg={errors?.bank_name?.message} />
+              )}
             </div>
             <div className="py-2 flex flex-col gap-2">
               <label className="font-bold">{t("bank_account_number")}</label>
@@ -164,7 +177,9 @@ function PayoutProfileForm() {
                   />
                 )}
               />
-              {errors.name && <InputErrorMessage msg={errors.name.message} />}
+              {errors?.bank_account_number && (
+                <InputErrorMessage msg={errors?.bank_account_number?.message} />
+              )}
             </div>
             <div className="py-2 flex flex-col gap-2">
               <label className="font-bold">{t("wallet_number")}</label>
@@ -177,10 +192,17 @@ function PayoutProfileForm() {
                     {...field}
                     placeholder="Enter your wallet number"
                     className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
+                    onChange={(e) => {
+                      let value = e.target.value;
+                      value = value.replace(/^0+/, "");
+                      field.onChange(value);
+                    }}
                   />
                 )}
               />
-              {errors.name && <InputErrorMessage msg={errors.name.message} />}
+              {errors?.wallet_number && (
+                <InputErrorMessage msg={errors?.wallet_number?.message} />
+              )}
             </div>
             <div className="flex justify-end my-5">
               <Button
