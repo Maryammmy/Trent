@@ -5,6 +5,8 @@ import Hosting from "../pages/hosting";
 import Properties from "../pages/hosting/properties";
 import ProtectedRoutes from "../middleware/ProtectedRoutes";
 import UpdateProperty from "@/pages/hosting/properties/updateProperty";
+import Payout from "@/pages/payout";
+import PayoutProfile from "@/pages/payout/PayoutProfile";
 
 export const HostingRoutes = (
   <Route
@@ -33,6 +35,22 @@ export const HostingRoutes = (
       element={
         <ProtectedRoutes>
           <UpdateProperty />
+        </ProtectedRoutes>
+      }
+    />
+    <Route
+      path="payouts"
+      element={
+        <ProtectedRoutes>
+          <Payout />
+        </ProtectedRoutes>
+      }
+    />
+    <Route
+      path="payouts/profile"
+      element={
+        <ProtectedRoutes>
+          <PayoutProfile />
         </ProtectedRoutes>
       }
     />

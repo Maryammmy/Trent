@@ -48,10 +48,10 @@ function PersonalData() {
   useEffect(() => {
     if (user) {
       reset({
-        uid: uid,
-        full_name: user.full_name,
-        email: user.email,
-        gender: user.gender,
+        uid,
+        full_name: user?.full_name,
+        email: user?.email,
+        gender: user?.gender,
         pro_img: user?.pro_img,
       });
       setPreviewImage(baseURL + user?.pro_img);

@@ -366,8 +366,15 @@
   "open_number_guests": "Open to any number of guests",
   "suitable_guests": "Suitable for up to {{guests}} guests",
   "duration": "Duration",
-  "deposit_fees": "Deposit Fees",
+  "deposit_fees": "Deposit fees",
   "pay": "Pay",
   "days": "days",
-  "service_fees": "Service Fees"
+  "service_fees": "Service fees",
+  "payouts_profile": "Payouts profile",
+  "profile_name": "Profile name",
+  "payment_method": "Payment method",
+  "bank_name": "Bank name",
+  "bank_account_number": "Bank account number",
+  "formal_full_name": "Formal full name",
+  "wallet_number": "Wallet number"
 }

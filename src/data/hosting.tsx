@@ -7,6 +7,7 @@ import {
   CreditCard,
   Image,
   Star,
+  User,
 } from "lucide-react";
 
 export const hosting: IHosting[] = [
@@ -39,6 +40,11 @@ export const hosting: IHosting[] = [
     to: "/hosting/payouts",
     icon: <CreditCard size={40} />,
     count: 0,
+  },
+  {
+    label: "payouts_profile",
+    to: "/hosting/payouts/profile",
+    icon: <User size={40} />,
   },
   {
     label: "my_extra_images",

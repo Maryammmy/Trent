@@ -8,6 +8,7 @@ import { CurrentLanguage } from "../types";
 import { baseURL } from "../services";
 import { useTranslation } from "react-i18next";
 import HomeAlert from "@/components/home/HomeAlert";
+import { ISlider } from "@/interfaces";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -24,7 +25,7 @@ function Home() {
     ["slider"],
     `user_api/u_slider_list.php?lang=${currentLanguage}`
   );
-  const sliderList = data?.data?.data?.slider_list;
+  const sliderList: ISlider[] = data?.data?.data?.slider_list;
   return (
     <div>
       <HomeAlert />
@@ -69,14 +70,14 @@ function Home() {
             left={carouselProps.left}
             infinite={sliderList?.length > 1}
           >
-            {sliderList?.map((item: string, index: number) => (
+            {sliderList?.map((item) => (
               <div
-                key={index}
+                key={item?.id}
                 className="h-[40vh] w-full sm:px-4 rounded-md overflow-hidden"
               >
                 <Image
                   alt="slider"
-                  imageUrl={baseURL + item}
+                  imageUrl={baseURL + item?.img}
                   className="w-full h-full rounded-md"
                 />
               </div>

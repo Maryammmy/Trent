@@ -50,3 +50,11 @@ export interface IFooterSection {
   title: string;
   items: ReactNode[];
 }
+export interface ISlider {
+  id: string;
+  title: string;
+  img: string;
+  category_id: string;
+  government_id: string;
+  user_list: [];
+}

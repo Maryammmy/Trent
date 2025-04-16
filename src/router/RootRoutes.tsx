@@ -23,6 +23,7 @@ import HostTerms from "@/pages/HostTerms";
 import GuestCancellationPolicy from "@/pages/GuestCancellationPolicy";
 import HostCancellationPolicy from "@/pages/HostCancellationPolicy";
 import Book from "@/pages/property/Book";
+import Payout from "@/pages/payout";
 
 export const RootRoutes = (
   <>
@@ -37,8 +38,14 @@ export const RootRoutes = (
           </ProtectedRoutes>
         }
       />
-      <Route path="contact-us" element={<ContactUs />} />
-      <Route path="about-us" element={<AboutUs />} />
+      <Route
+        path="properties/:id/confirm-and-pay"
+        element={
+          <ProtectedRoutes>
+            <ConfirmAndPay />
+          </ProtectedRoutes>
+        }
+      />
       <Route
         path="chat"
         element={
@@ -64,6 +71,14 @@ export const RootRoutes = (
         }
       />
       <Route
+        path="payout"
+        element={
+          <ProtectedRoutes>
+            <Payout />
+          </ProtectedRoutes>
+        }
+      />
+      <Route
         path="account-settings/login-and-security"
         element={
           <ProtectedRoutes>
@@ -79,14 +94,8 @@ export const RootRoutes = (
           </ProtectedRoutes>
         }
       />
-      <Route
-        path="properties/:id/confirm-and-pay"
-        element={
-          <ProtectedRoutes>
-            <ConfirmAndPay />
-          </ProtectedRoutes>
-        }
-      />
+      <Route path="contact-us" element={<ContactUs />} />
+      <Route path="about-us" element={<AboutUs />} />
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
       <Route path="confidence-booking" element={<ConfidenceBooking />} />
       <Route path="content-guidelines" element={<ContentGuidelines />} />

@@ -11,12 +11,14 @@ import { paymentMethods } from "@/data/booking";
 import { initFawryPaymentAPI } from "@/services/fawryService";
 import { generateFawryPaymentData } from "@/utils/generateFawryPaymentData";
 import toast from "react-hot-toast";
+import { useMediaQuery } from "react-responsive";
 
 function ConfirmAndPay() {
   const [loading, setLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("PayAtFawry");
   const { t } = useTranslation();
   const location = useLocation();
+  const isLargeScreen = useMediaQuery({ minWidth: 1024 });
   const { id } = useParams();
   const data: IVerifyPropertyResponse = location?.state?.data;
   const createFawryPayment = async () => {
@@ -33,7 +35,6 @@ function ConfirmAndPay() {
         const redirectUrl = response.data;
         toast.success("Redirecting you to Fawry payment plugin...");
         setTimeout(() => {
-          window.open(redirectUrl, "_blank");
           window.location.href = redirectUrl;
         }, 1000);
       }
@@ -53,41 +54,82 @@ function ConfirmAndPay() {
           {t("confirm_and_pay")}
         </h2>
       </div>
-      <div className="px-2 md:ps-9 flex flex-col lg:flex-row justify-between py-10 gap-10">
-        <div className="flex-1">
-          <h4 className="font-medium text-xl">{t("your_trip")}</h4>
-          <div className="flex flex-col gap-4 py-5">
-            <div className="flex justify-between">
-              <div>
-                <h5 className="font-medium text-lg pb-1">{t("check_in")}</h5>
-                <p className="font-medium">{data?.from_date}</p>
+      {isLargeScreen ? (
+        <div className="px-2 md:px-10 flex flex-col lg:flex-row justify-between py-10 gap-10">
+          <div className="lg:flex-1">
+            <h4 className="font-medium text-xl">{t("your_trip")}</h4>
+            <div className="flex flex-col gap-4 py-5">
+              <div className="flex justify-between">
+                <div>
+                  <h5 className="font-medium text-lg pb-1">{t("check_in")}</h5>
+                  <p className="font-medium">{data?.from_date}</p>
+                </div>
+                <div>
+                  <h5 className="font-medium text-lg pb-1">{t("check_out")}</h5>
+                  <p className="font-medium">{data?.to_date}</p>
+                </div>
               </div>
               <div>
-                <h5 className="font-medium text-lg pb-1">{t("check_out")}</h5>
-                <p className="font-medium">{data?.to_date}</p>
+                <h5 className="font-medium text-lg pb-1">{t("guests")}</h5>
+                <p className="font-medium">
+                  {data?.guest_count} {t("guests")}
+                </p>
               </div>
             </div>
-            <div>
-              <h5 className="font-medium text-lg pb-1">{t("guests")}</h5>
-              <p className="font-medium">
-                {data?.guest_count} {t("guests")}
-              </p>
+            <div className="lg:py-4">
+              <h3 className="font-semibold text-2xl pb-4">
+                {t("choose_how_to_pay")}
+              </h3>
+              <Select
+                value={paymentMethod}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+                options={paymentMethods}
+              ></Select>
             </div>
           </div>
-          <div className="py-4">
-            <h3 className="font-semibold text-2xl">{t("choose_how_to_pay")}</h3>
+          <div className="lg:flex-[2] lg:flex lg:justify-end">
+            <PriceDetails data={data} />
           </div>
-          <Select
-            value={paymentMethod}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-            options={paymentMethods}
-          ></Select>
         </div>
-        <div className="flex-[2] flex justify-end">
-          <PriceDetails data={data} />
+      ) : (
+        <div className="px-2 md:px-10 flex flex-col lg:flex-row justify-between py-10 gap-10">
+          <div className="lg:flex-1">
+            <h4 className="font-medium text-xl">{t("your_trip")}</h4>
+            <div className="flex flex-col gap-4 py-5">
+              <div className="flex justify-between">
+                <div>
+                  <h5 className="font-medium text-lg pb-1">{t("check_in")}</h5>
+                  <p className="font-medium">{data?.from_date}</p>
+                </div>
+                <div>
+                  <h5 className="font-medium text-lg pb-1">{t("check_out")}</h5>
+                  <p className="font-medium">{data?.to_date}</p>
+                </div>
+              </div>
+              <div>
+                <h5 className="font-medium text-lg pb-1">{t("guests")}</h5>
+                <p className="font-medium">
+                  {data?.guest_count} {t("guests")}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="lg:flex-[2] lg:flex lg:justify-end">
+            <PriceDetails data={data} />
+          </div>
+          <div className="py-0 lg:py-4">
+            <h3 className="font-semibold text-2xl pb-4">
+              {t("choose_how_to_pay")}
+            </h3>
+            <Select
+              value={paymentMethod}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+              options={paymentMethods}
+            ></Select>
+          </div>
         </div>
-      </div>
-      <div className="flex justify-end">
+      )}
+      <div className="px-2 md:px-10 flex justify-end">
         <Button
           disabled={loading}
           onClick={createFawryPayment}

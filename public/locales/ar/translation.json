@@ -367,5 +367,12 @@
   "deposit_fees": "رسوم الإيداع",
   "pay": "دفع",
   "days": "أيام",
-  "service_fees": "رسوم الخدمة"
+  "service_fees": "رسوم الخدمة",
+  "payouts_profile": "الملف الشخصي للتحويلات",
+  "profile_name": "اسم الملف الشخصي",
+  "payment_method": "طريقة الدفع",
+  "bank_name": "اسم البنك",
+  "bank_account_number": "رقم حساب البنك",
+  "formal_full_name": "الاسم الكامل الرسمي",
+  "wallet_number": "رقم المحفظة"
 }

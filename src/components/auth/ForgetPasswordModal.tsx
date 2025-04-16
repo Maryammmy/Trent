@@ -5,7 +5,6 @@ import Input from "../ui/Input";
 import { IForgetPassword } from "@/interfaces/auth";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { forgetPasswordSchema } from "@/validation/forgetPasswordSchema";
 import { ApiError } from "@/interfaces";
 import toast from "react-hot-toast";
 import { forgetPasswordAPI, verifyOtpAPI } from "@/services/authService";
@@ -14,6 +13,7 @@ import Loader from "../loader/Loader";
 import { useTranslation } from "react-i18next";
 import InputErrorMessage from "../ui/InputErrorMessage";
 import OtpModal from "./OtpModal";
+import { forgetPasswordSchema } from "@/validation/forgetPasswordSchema";
 interface IProps {
   close: () => void;
   isOpen: boolean;

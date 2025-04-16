@@ -98,7 +98,7 @@ function Book() {
         return;
       }
       setLoading(true);
-      const response = await verifyPropertyAPI({
+      const payload = {
         prop_id: id ? id : "",
         guest_counts: counter,
         from_date: fromDate,
@@ -106,7 +106,8 @@ function Book() {
         confirm_guest_rules: acceptedRules,
         uid: uid ? uid : "",
         lang: currentLanguage,
-      });
+      };
+      const response = await verifyPropertyAPI(payload);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
         setTimeout(() => {
@@ -129,6 +130,7 @@ function Book() {
 
   return (
     <div className="py-10 px-5 xl:px-20 mx-auto max-w-screen-xl min-h-[57vh]">
+      <h2 className="pb-5 font-bold text-2xl">{propertyBook?.title}</h2>
       <div className="flex flex-col gap-10">
         <CheckDates
           startDateValue={startDateValue}
