@@ -131,7 +131,10 @@ function Cart({ property, refetch }: IProps) {
         </div>
         <div className="flex gap-5 mt-2">
           <Button
-            onClick={() => navigate(`/properties/${id}/book`)}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(`/properties/${id}/book`);
+            }}
             className="flex-[2] text-center zoom py-1 bg-primary rounded-md text-white font-medium"
           >
             {t("book_now")}
