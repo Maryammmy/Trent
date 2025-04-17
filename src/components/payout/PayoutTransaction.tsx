@@ -1,5 +1,6 @@
 import { CreditCard } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import Button from "../ui/Button";
 interface IProps {
   onClick: () => void;
 }
@@ -7,9 +8,9 @@ function PayoutTransaction({ onClick }: IProps) {
   const { t } = useTranslation();
   const status = "Completed";
   return (
-    <div
+    <Button
       onClick={onClick}
-      className="flex items-center gap-5 sm:gap-8 font-medium border px-3 sm:px-4 py-2 rounded-2xl"
+      className="flex items-center text-start  gap-5 sm:gap-8 font-medium border px-3 sm:px-4 py-2 rounded-2xl"
     >
       <div>
         <CreditCard size={40} className="text-primary" />
@@ -37,7 +38,7 @@ function PayoutTransaction({ onClick }: IProps) {
           <span className="font-bold">500 {t("price_per_night")}</span>
         </div>
       </div>
-    </div>
+    </Button>
   );
 }
 

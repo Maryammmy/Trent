@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Carsoul from "./ui/Carsoul";
 import Image from "./ui/Image";
 import { useTranslation } from "react-i18next";
@@ -19,6 +19,7 @@ interface IProps {
 }
 const uid = Cookies.get("user_id") || "";
 function Cart({ property, refetch }: IProps) {
+  const navigate = useNavigate();
   const {
     IS_FAVOURITE,
     price,
@@ -59,7 +60,7 @@ function Cart({ property, refetch }: IProps) {
   return (
     <Link
       to={`/properties/${id}`}
-      className="bg-white block shadow-md rounded-md overflow-hidden p-4"
+      className="bg-white shadow-md rounded-md overflow-hidden p-4"
       data-aos="fade-up"
     >
       {image_list?.length > 0 && (
@@ -129,12 +130,12 @@ function Cart({ property, refetch }: IProps) {
           </div>
         </div>
         <div className="flex gap-5 mt-2">
-          <Link
-            to={`/properties/${id}/book`}
+          <Button
+            onClick={() => navigate(`/properties/${id}/book`)}
             className="flex-[2] text-center zoom py-1 bg-primary rounded-md text-white font-medium"
           >
             {t("book_now")}
-          </Link>
+          </Button>
           <Button className="flex-[1] zoom py-1 bg-[#CAE0FE] rounded-md flex justify-center items-center">
             <span>
               <MapPin className="text-primary" size={22} />
