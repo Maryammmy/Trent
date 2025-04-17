@@ -5,7 +5,7 @@ import FloorPlan from "../../pages/becomeAHost/aboutYourPlace/FloorPlan";
 import Location from "../../pages/becomeAHost/aboutYourPlace/Location";
 import ProtectedRoutes from "../../middleware/ProtectedRoutes";
 
-const AboutYourPlaceRoutes = (
+export const AboutYourPlaceRoutes = (
   <>
     <Route path="about-your-place" element={<AboutYourPlace />} />
     <Route
@@ -34,5 +34,3 @@ const AboutYourPlaceRoutes = (
     />
   </>
 );
-
-export default AboutYourPlaceRoutes;

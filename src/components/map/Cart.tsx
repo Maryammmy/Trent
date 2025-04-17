@@ -9,6 +9,7 @@ import { togglePropertyAPI } from "../../services/propertyService";
 import Carsoul from "../ui/Carsoul";
 import Rating from "../ui/Rating";
 import Image from "../ui/Image";
+import { ApiError } from "@/interfaces";
 interface IProps {
   property: IProperty;
   refetch: () => void;
@@ -46,7 +47,11 @@ function Cart({ property, refetch }: IProps) {
         refetch();
       }
     } catch (error) {
-      console.log(error);
+      const customError = error as ApiError;
+      const errorMessage =
+        customError?.response?.data?.response_message ||
+        t("something_went_wrong");
+      toast.error(errorMessage);
     }
   };
   return (

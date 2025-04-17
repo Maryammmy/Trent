@@ -69,7 +69,7 @@ function Property() {
               </Link> */}
             </div>
             <div className="py-8">
-              <div className="flex justify-between items-center">
+              <div className="flex flex-wrap gap-5 justify-between items-center">
                 <div className="flex flex-col gap-1">
                   <div
                     className="font-medium text-black text-2xl flex gap-1"

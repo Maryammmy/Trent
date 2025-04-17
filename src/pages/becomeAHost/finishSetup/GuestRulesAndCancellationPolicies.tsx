@@ -27,15 +27,20 @@ function GuestRulesAndCancellationPolicies() {
     e: React.ChangeEvent<HTMLTextAreaElement>,
     lang: "en" | "ar"
   ) => {
-    const newValue = e.target.value;
-    if (lang === "en") {
-      setRulesTextAreaEn(newValue);
-      sessionStorage.setItem("guest_rules_en", newValue);
+    const rawValue = e.target.value;
+    const trimmedValue = rawValue.trim();
+    const setter = lang === "en" ? setRulesTextAreaEn : setRulesTextAreaAr;
+    const storageKey = lang === "en" ? "guest_rules_en" : "guest_rules_ar";
+
+    setter(rawValue);
+
+    if (trimmedValue.length > 0) {
+      sessionStorage.setItem(storageKey, trimmedValue);
     } else {
-      setRulesTextAreaAr(newValue);
-      sessionStorage.setItem("guest_rules_ar", newValue);
+      sessionStorage.removeItem(storageKey);
     }
   };
+
   const handleIClick = () => setIsOpen(!isOpen);
   const handleChangePolicy = (policy: ICancellationPolicy) => {
     setSelectedPolicy(policy);
@@ -95,8 +100,8 @@ function GuestRulesAndCancellationPolicies() {
         back="/become-a-host/price-and-deposit"
         next="/hosting/properties"
         isNextDisabled={
-          rulesTextAreaEn.length < 10 ||
-          rulesTextAreaAr.length < 10 ||
+          rulesTextAreaEn.trim().length < 10 ||
+          rulesTextAreaAr.trim().length < 10 ||
           !selectedPolicy
         }
       />

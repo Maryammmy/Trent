@@ -12,6 +12,7 @@ import { initFawryPaymentAPI } from "@/services/fawryService";
 import { generateFawryPaymentData } from "@/utils/generateFawryPaymentData";
 import toast from "react-hot-toast";
 import { useMediaQuery } from "react-responsive";
+import { AxiosError } from "axios";
 
 function ConfirmAndPay() {
   const [loading, setLoading] = useState(false);
@@ -38,8 +39,10 @@ function ConfirmAndPay() {
           window.location.href = redirectUrl;
         }, 1000);
       }
-    } catch (error) {
-      console.error("Error:", error);
+    } catch (error: AxiosError | unknown) {
+      if (error instanceof AxiosError) {
+        toast.error(error?.message);
+      }
     } finally {
       setLoading(false);
     }

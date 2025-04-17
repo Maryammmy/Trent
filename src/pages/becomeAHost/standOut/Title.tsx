@@ -16,16 +16,22 @@ function Title() {
     e: React.ChangeEvent<HTMLInputElement>,
     lang: "en" | "ar"
   ) => {
-    const newValue = e.target.value;
-    if (lang === "en") {
-      setTitleEn(newValue);
-      sessionStorage.setItem("title_en", newValue);
+    const rawValue = e.target.value;
+    const trimmedValue = rawValue.trim();
+    const setter = lang === "en" ? setTitleEn : setTitleAr;
+    const storageKey = lang === "en" ? "title_en" : "title_ar";
+
+    setter(rawValue);
+
+    if (trimmedValue.length > 0) {
+      sessionStorage.setItem(storageKey, trimmedValue);
     } else {
-      setTitleAr(newValue);
-      sessionStorage.setItem("title_ar", newValue);
+      sessionStorage.removeItem(storageKey);
     }
   };
-  const isNextDisabled = titleAr.length < 10 || titleEn.length < 10;
+
+  const isNextDisabled =
+    titleAr.trim().length < 10 || titleEn.trim().length < 10;
 
   return (
     <div className="py-10">

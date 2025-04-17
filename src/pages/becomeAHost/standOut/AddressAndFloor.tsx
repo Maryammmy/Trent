@@ -21,31 +21,28 @@ function AddressAndFloor() {
     type: "address" | "floor",
     lang: "en" | "ar"
   ) => {
-    const newValue = e.target.value;
-    if (type === "address") {
-      if (lang === "en") {
-        setAddressEn(newValue);
-        sessionStorage.setItem("address_en", newValue);
-      } else {
-        setAddressAr(newValue);
-        sessionStorage.setItem("address_ar", newValue);
-      }
+    const rawValue = e.target.value;
+    const trimmedValue = rawValue.trim();
+    const key: keyof typeof setters = `${type}_${lang}` as keyof typeof setters;
+    const setters = {
+      address_en: setAddressEn,
+      address_ar: setAddressAr,
+      floor_en: setFloorEn,
+      floor_ar: setFloorAr,
+    };
+    setters[key](rawValue);
+    if (trimmedValue.length > 0) {
+      sessionStorage.setItem(key, trimmedValue);
     } else {
-      if (lang === "en") {
-        setFloorEn(newValue);
-        sessionStorage.setItem("floor_en", newValue);
-      } else {
-        setFloorAr(newValue);
-        sessionStorage.setItem("floor_ar", newValue);
-      }
+      sessionStorage.removeItem(key);
     }
   };
 
   const isNextDisabled =
-    addressAr.length < 5 ||
-    addressEn.length < 5 ||
-    floorAr.length < 1 ||
-    floorEn.length < 1;
+    addressAr.trim().length < 5 ||
+    addressEn.trim().length < 5 ||
+    floorAr.trim().length < 1 ||
+    floorEn.trim().length < 1;
 
   return (
     <div className="py-10">

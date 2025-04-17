@@ -16,13 +16,15 @@ function Compound() {
     e: React.ChangeEvent<HTMLInputElement>,
     lang: "en" | "ar"
   ) => {
-    const newValue = e.target.value;
-    if (lang === "en") {
-      setCompoundEn(newValue);
-      sessionStorage.setItem("compound_en", newValue);
+    const rawValue = e.target.value;
+    const trimmedValue = rawValue.trim();
+    const setter = lang === "en" ? setCompoundEn : setCompoundAr;
+    const storageKey = lang === "en" ? "compound_en" : "compound_ar";
+    setter(rawValue);
+    if (trimmedValue.length > 0) {
+      sessionStorage.setItem(storageKey, trimmedValue);
     } else {
-      setCompoundAr(newValue);
-      sessionStorage.setItem("compound_ar", newValue);
+      sessionStorage.removeItem(storageKey);
     }
   };
 

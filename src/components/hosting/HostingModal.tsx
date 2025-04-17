@@ -24,7 +24,7 @@ function HostingModal() {
   const [storedTitleEn, setStoredTitleEn] = useState<string>("");
   const [ownerFees, setOwnerFees] = useState<string | undefined>(undefined);
   const trentFees = ownerFees
-    ? (Number(storedPrice) * (Number(ownerFees) / 100)).toFixed(2)
+    ? Math.round(Number(storedPrice) * (Number(ownerFees) / 100))
     : "";
   useEffect(() => {
     setStoredPrice(sessionStorage.getItem("price") || "");
@@ -85,7 +85,7 @@ function HostingModal() {
               <span>💸</span>
               <h6 className="font-medium">{t("trent_fees")}:</h6>
               <span className="font-bold">
-                {ownerFees}%({trentFees}) {t("price_per_night")}
+                ({ownerFees}%) {trentFees} {t("price_per_night")}
               </span>
             </div>
           </div>

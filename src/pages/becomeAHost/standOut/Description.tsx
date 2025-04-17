@@ -16,13 +16,17 @@ function Description() {
     e: React.ChangeEvent<HTMLTextAreaElement>,
     lang: "en" | "ar"
   ) => {
-    const newValue = e.target.value;
-    if (lang === "en") {
-      setDescTextAreaEn(newValue);
-      sessionStorage.setItem("description_en", newValue);
+    const rawValue = e.target.value;
+    const trimmedValue = rawValue.trim();
+    const setter = lang === "en" ? setDescTextAreaEn : setDescTextAreaAr;
+    const storageKey = lang === "en" ? "description_en" : "description_ar";
+
+    setter(rawValue);
+
+    if (trimmedValue.length > 0) {
+      sessionStorage.setItem(storageKey, trimmedValue);
     } else {
-      setDescTextAreaAr(newValue);
-      sessionStorage.setItem("description_ar", newValue);
+      sessionStorage.removeItem(storageKey);
     }
   };
 
@@ -73,7 +77,7 @@ function Description() {
         back="/become-a-host/title"
         next="/become-a-host/city"
         isNextDisabled={
-          descTextAreaEn.length < 50 || descTextAreaAr.length < 50
+          descTextAreaEn.trim().length < 50 || descTextAreaAr.trim().length < 50
         }
       />
     </div>

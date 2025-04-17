@@ -5,7 +5,7 @@ import PriceAndDeposit from "../../pages/becomeAHost/finishSetup/PriceAndDeposit
 import ProtectedRoutes from "../../middleware/ProtectedRoutes";
 import GuestRulesAndCancellationPolicies from "@/pages/becomeAHost/finishSetup/GuestRulesAndCancellationPolicies";
 
-const FinishSetupRoutes = (
+export const FinishSetupRoutes = (
   <>
     <Route path="finish-setup" element={<FinishSetup />} />
     <Route
@@ -34,5 +34,3 @@ const FinishSetupRoutes = (
     />
   </>
 );
-
-export default FinishSetupRoutes;

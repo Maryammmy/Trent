@@ -13,6 +13,7 @@ const Property = ({ property }: IProps) => {
   const [deleteProperty, setDeleteProperty] = useState(false);
   const { id, title, government_name, category_type, price, is_deleted } =
     property;
+  const basePrice = parseInt(price);
   return (
     <>
       <div className="grid grid-cols-3 sm:grid-cols-6 gap-5 items-center bg-white shadow rounded-md p-4 sm:p-6 hover:bg-gray-100 transition">
@@ -26,7 +27,7 @@ const Property = ({ property }: IProps) => {
           {category_type}
         </p>
         <p className="font-medium hidden sm:block whitespace-nowrap overflow-hidden text-ellipsis">
-          {price} {t("price_per_night")}
+          {basePrice} {t("price_per_night")}
         </p>
         <p
           className={`font-semibold  ${

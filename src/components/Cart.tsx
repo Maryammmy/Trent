@@ -11,6 +11,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { togglePropertyAPI } from "../services/propertyService";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
+import { ApiError } from "@/interfaces";
 
 interface IProps {
   property: IProperty;
@@ -48,7 +49,11 @@ function Cart({ property, refetch }: IProps) {
         refetch();
       }
     } catch (error) {
-      console.log(error);
+      const customError = error as ApiError;
+      const errorMessage =
+        customError?.response?.data?.response_message ||
+        t("something_went_wrong");
+      toast.error(errorMessage);
     }
   };
   return (

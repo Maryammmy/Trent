@@ -24,22 +24,27 @@ const City = () => {
     e: React.ChangeEvent<HTMLInputElement>,
     lang: "en" | "ar"
   ) => {
-    const newValue = e.target.value;
-    if (lang === "en") {
-      setCityEn(newValue);
-      sessionStorage.setItem("city_en", newValue);
+    const rawValue = e.target.value;
+    const trimmedValue = rawValue.trim();
+    const setter = lang === "en" ? setCityEn : setCityAr;
+    const storageKey = lang === "en" ? "city_en" : "city_ar";
+
+    setter(rawValue);
+
+    if (trimmedValue.length > 0) {
+      sessionStorage.setItem(storageKey, trimmedValue);
     } else {
-      setCityAr(newValue);
-      sessionStorage.setItem("city_ar", newValue);
+      sessionStorage.removeItem(storageKey);
     }
   };
+
   const handleGovernmentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newGovId = e.target.value;
     setGovernmentId(newGovId);
     sessionStorage.setItem("government_id", newGovId);
   };
   const isNextDisabled =
-    cityAr.length < 2 || cityEn.length < 2 || !governmentId;
+    cityAr.trim().length < 2 || cityEn.trim().length < 2 || !governmentId;
 
   return (
     <div className="py-10">

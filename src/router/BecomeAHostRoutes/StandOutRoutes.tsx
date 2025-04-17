@@ -10,7 +10,7 @@ import Compound from "../../pages/becomeAHost/standOut/Compound";
 import AddressAndFloor from "../../pages/becomeAHost/standOut/AddressAndFloor";
 import ProtectedRoutes from "../../middleware/ProtectedRoutes";
 
-const StandOutRoutes = (
+export const StandOutRoutes = (
   <>
     <Route path="stand-out" element={<StandOut />} />
     <Route
@@ -79,5 +79,3 @@ const StandOutRoutes = (
     />
   </>
 );
-
-export default StandOutRoutes;
