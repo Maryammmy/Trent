@@ -338,7 +338,7 @@
   "my_bookings": "حجوزاتي",
   "my_enquiries": "استفساراتي",
   "my_earnings": "أرباحي",
-  "my_payouts": "مدفوعاتي",
+  "my_payouts": "الدفعات",
   "my_extra_images": "صور إضافية",
   "total_reviews": "المراجعات الإجمالية",
   "membership": "العضوية",
@@ -368,11 +368,15 @@
   "pay": "دفع",
   "days": "أيام",
   "service_fees": "رسوم الخدمة",
-  "payouts_profile": "الملف الشخصي للتحويلات",
+  "payouts_profile": "الملف الشخصي للدفعات",
   "profile_name": "اسم الملف الشخصي",
   "payment_method": "طريقة الدفع",
   "bank_name": "اسم البنك",
   "bank_account_number": "رقم حساب البنك",
   "formal_full_name": "الاسم الكامل الرسمي",
-  "wallet_number": "رقم المحفظة"
+  "wallet_number": "رقم المحفظة",
+  "payouts_history": "سجل الدفعات",
+  "your_total_earnings": "إجمالي أرباحك",
+  "payouts": "الدفعات",
+  "payout_request": "طلب دفعة"
 }

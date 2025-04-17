@@ -100,7 +100,7 @@ function Cart({ property, refetch }: IProps) {
           </div>
           <div className="flex items-center justify-end gap-1 font-medium">
             <span className="font-bold text-primary whitespace-nowrap overflow-hidden text-ellipsis">
-              {basePrice.toFixed(0)}
+              {basePrice}
               {t("price_per_night")}
             </span>
             <span className="text-dark whitespace-nowrap overflow-hidden text-ellipsis">

@@ -102,8 +102,7 @@ function Property() {
                   <div className="font-semibold" data-aos="fade-right">
                     <p>
                       <span className="text-primary">
-                        {basePrice}
-                        {t("price_per_night")}
+                        {basePrice} {t("price_per_night")}
                       </span>{" "}
                       <span className="text-dark">
                         /{propertyDetails?.period?.name?.[currentLanguage]}

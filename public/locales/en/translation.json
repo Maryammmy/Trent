@@ -376,5 +376,9 @@
   "bank_name": "Bank name",
   "bank_account_number": "Bank account number",
   "formal_full_name": "Formal full name",
-  "wallet_number": "Wallet number"
+  "wallet_number": "Wallet number",
+  "payouts_history": "Payouts history",
+  "your_total_earnings": "Your total earnings",
+  "payouts": "Payouts",
+  "payout_request": "Payout request"
 }
