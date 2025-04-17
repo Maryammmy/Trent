@@ -9,7 +9,7 @@ const currentLanguage = (localStorage.getItem("i18nextLng") ||
 const uid = Cookies.get("user_id");
 export const usePaymentMethodAPI = () => {
   return useQuery({
-    queryKey: ["paymentMethod", uid],
+    queryKey: ["paymentMethod"],
     queryFn: () =>
       baseAPI.get(
         `user_api/payout/get_method_payout.php?uid=${uid}&lang=${currentLanguage}`
@@ -27,4 +27,14 @@ export const createPayoutsProfileAPI = (payload: IPayoutProfile) => {
     formData
   );
   return response;
+};
+export const usePayoutPropertiesAPI = () => {
+  return useQuery({
+    queryKey: ["payoutProperties"],
+    queryFn: () =>
+      baseAPI.get(
+        `user_api/payout/get_ready_properties_payout.php?uid=${uid}&lang=${currentLanguage}`
+      ),
+    enabled: !!uid,
+  });
 };
