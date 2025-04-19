@@ -7,13 +7,13 @@ import { RootRoutes } from "./rootRoutes";
 import { DashboardRoutes } from "./DashboardRoutes";
 import { HostingRoutes } from "./HostingRoutes";
 import Layout from "../layouts/Layout";
-import { BecomeHostRoutes } from "./becomeAHostRoutes";
+import { BecomeAHostRoutes } from "./becomeAHostRoutes";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />}>
       {RootRoutes}
-      {BecomeHostRoutes}
+      {BecomeAHostRoutes}
       {HostingRoutes}
       {DashboardRoutes}
     </Route>
