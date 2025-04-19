@@ -47,10 +47,10 @@ const Property = ({ property }: IProps) => {
           <Button
             onClick={() => setDeleteProperty(true)}
             className={`${
-              is_deleted ? "bg-green-600" : "bg-red-600"
+              is_deleted ? "bg-red-600" : "bg-green-600"
             } text-white py-2 w-24 rounded-md font-medium`}
           >
-            {is_deleted ? t("publish") : t("unpublish")}
+            {is_deleted ? t("unpublish") : t("publish")}
           </Button>
         </div>
       </div>
