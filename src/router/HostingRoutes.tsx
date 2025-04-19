@@ -1,5 +1,4 @@
 import { Route } from "react-router-dom";
-import ErrorHandler from "../components/errors/ErrorHandler";
 import HostingLayout from "../layouts/HostingLayout";
 import Hosting from "../pages/hosting";
 import Properties from "../pages/hosting/properties";
@@ -9,11 +8,7 @@ import Payout from "@/pages/payout";
 import PayoutProfile from "@/pages/payout/PayoutProfile";
 
 export const HostingRoutes = (
-  <Route
-    path="/hosting"
-    element={<HostingLayout />}
-    errorElement={<ErrorHandler />}
-  >
+  <Route path="/hosting" element={<HostingLayout />}>
     <Route
       index
       element={

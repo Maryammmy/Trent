@@ -16,7 +16,7 @@ export const AccountSettingsRoutes = (
       }
     />
     <Route
-      path="personal-info"
+      path="account-settings/personal-info"
       element={
         <ProtectedRoutes>
           <PersonalInfo />
@@ -24,7 +24,7 @@ export const AccountSettingsRoutes = (
       }
     />
     <Route
-      path="login-and-security"
+      path="account-settings/login-and-security"
       element={
         <ProtectedRoutes>
           <LoginAndSecurity />
@@ -32,7 +32,7 @@ export const AccountSettingsRoutes = (
       }
     />
     <Route
-      path="preferences"
+      path="account-settings/preferences"
       element={
         <ProtectedRoutes>
           <Preferences />
