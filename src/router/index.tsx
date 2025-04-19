@@ -5,9 +5,9 @@ import {
 } from "react-router-dom";
 import { RootRoutes } from "./rootRoutes";
 import { DashboardRoutes } from "./DashboardRoutes";
-import { BecomeAHostRoutes } from "./becomeAHostRoutes";
 import { HostingRoutes } from "./HostingRoutes";
 import Layout from "../layouts/Layout";
+import { BecomeAHostRoutes } from "./becomeAHostRoutes";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

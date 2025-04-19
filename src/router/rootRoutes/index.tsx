@@ -20,4 +20,3 @@ export const RootRoutes = (
     <Route path="properties/:id/gallery" element={<Gallery />} />
   </>
 );
-<Route />;
