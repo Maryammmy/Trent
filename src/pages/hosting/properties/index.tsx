@@ -15,7 +15,7 @@ function Properties() {
     <>
       <div className="px-5 lg:px-20 py-10">
         <h2 className="text-3xl font-semibold mb-6">{t("your_properties")}</h2>
-        <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 font-semibold px-4 sm:px-6 py-3 sm:py-4 bg-gray-100 rounded-md mb-4">
+        <div className="grid grid-cols-3 sm:grid-cols-6 items-center gap-3 font-semibold px-4 sm:px-6 py-3 sm:py-4 bg-gray-100 rounded-md mb-4">
           <h3>{t("property")}</h3>
           <h3 className="hidden sm:block">{t("location")}</h3>
           <h3 className="hidden sm:block">{t("property_type")}</h3>

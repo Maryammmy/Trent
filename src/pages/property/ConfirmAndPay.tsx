@@ -136,7 +136,7 @@ function ConfirmAndPay() {
         <Button
           disabled={loading}
           onClick={createFawryPayment}
-          className="bg-primary font-medium text-lg text-white w-40 py-3 rounded-md"
+          className="bg-primary font-medium text-lg text-white w-32 py-2 rounded-md"
         >
           {loading ? <Loader /> : t("pay")}
         </Button>

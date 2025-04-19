@@ -69,7 +69,7 @@ function Property() {
               </Link> */}
             </div>
             <div className="py-8">
-              <div className="flex flex-wrap gap-5 justify-between items-center">
+              <div className="flex gap-5 flex-wrap justify-between items-center">
                 <div className="flex flex-col gap-1">
                   <div
                     className="font-medium text-black text-2xl flex gap-1"
@@ -113,7 +113,7 @@ function Property() {
                 <div>
                   <Link
                     to={`/properties/${id}/book`}
-                    className="bg-primary text-white text-lg font-medium block text-center py-3 w-40 rounded-md"
+                    className="bg-primary text-white font-medium block text-center py-2 px-4 rounded-md"
                   >
                     {t("book_now")}
                   </Link>

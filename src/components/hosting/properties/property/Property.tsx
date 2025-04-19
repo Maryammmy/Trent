@@ -16,7 +16,7 @@ const Property = ({ property }: IProps) => {
   const basePrice = parseInt(price);
   return (
     <>
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-5 items-center bg-white shadow rounded-md p-4 sm:p-6 hover:bg-gray-100 transition">
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 items-center text-sm md:text-base bg-white shadow rounded-md p-4 sm:p-6 hover:bg-gray-100 transition">
         <p className="font-medium  whitespace-nowrap overflow-hidden text-ellipsis">
           {title}
         </p>
@@ -36,7 +36,7 @@ const Property = ({ property }: IProps) => {
         >
           {is_deleted ? t("publish") : t("unpublish")}
         </p>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-3">
           <Link
             to={`/hosting/properties/${id}/update`}
             className="text-white py-2 w-24 rounded-md font-medium bg-primary flex justify-center items-center gap-1"

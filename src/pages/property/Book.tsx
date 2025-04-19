@@ -182,7 +182,7 @@ function Book() {
         <Button
           disabled={loading}
           onClick={handleVerifyProperty}
-          className="bg-primary text-white w-40 py-3 rounded-md text-lg font-medium"
+          className="bg-primary text-white w-32 py-2 rounded-md text-lg font-medium"
         >
           {loading ? <Loader /> : t("continue")}
         </Button>

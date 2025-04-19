@@ -30,7 +30,7 @@ export default function Modal({
             <DialogPanel
               transition
               style={{ maxWidth: maxWidth }}
-              className="w-full lg:max-h-[90vh] rounded-xl bg-white shadow-lg backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+              className="w-full lg:max-h-[90vh] rounded-xl shadow-lg bg-white backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
             >
               {title && (
                 <DialogTitle as="h3" className={className}>
