@@ -6,7 +6,7 @@ import { AboutYourPlaceRoutes } from "./AboutYourPlaceRoutes";
 import { FinishSetupRoutes } from "./FinishSetupRoutes";
 import { StandOutRoutes } from "./StandOutRoutes";
 
-export const BecomeAHostRoutes = (
+export const BecomeHostRoutes = (
   <Route
     path="/become-a-host"
     element={<BecomeAHostLayout />}
