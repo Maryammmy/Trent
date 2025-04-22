@@ -4,7 +4,13 @@ import { Link } from "react-router-dom";
 import UpdateSkeleton from "./skeleton/UpdateSkeleton";
 import { useTranslation } from "react-i18next";
 import { Mail } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaWhatsapp,
+  FaFacebookF,
+  FaTiktok,
+  FaSnapchat,
+} from "react-icons/fa";
 
 function Footer() {
   const { t } = useTranslation();
@@ -105,7 +111,7 @@ function Footer() {
           </div>
           <div className="flex flex-col items-start gap-4">
             <h2 className="font-bold text-lg">{t("contact_us")}</h2>
-            <div className="flex flex-col gap-2 text-dark font-medium">
+            <div className="flex flex-col gap-2 font-medium" dir="ltr">
               {!contactUs ? (
                 <UpdateSkeleton cards={2} />
               ) : (
@@ -114,24 +120,56 @@ function Footer() {
                     to={`mailto:${contactUs?.email}`}
                     className="hover:underline flex gap-1"
                     target="_blank"
-                    dir="ltr"
                     rel="noopener noreferrer"
                   >
-                    {<Mail size={25} className="text-primary" />}
-                    {contactUs?.email}
+                    <Mail size={25} className="text-primary" />
+                    <span className="text-dark">{contactUs?.email}</span>
                   </Link>
                   <Link
                     to={`https://wa.me/${contactUs?.mobile.replace("+", "")}`}
                     className="hover:underline rtl:text-end flex items-center gap-1"
                     target="_blank"
-                    dir="ltr"
                     rel="noopener noreferrer"
                   >
                     <FaWhatsapp size={25} className="text-primary" />
-                    {contactUs?.mobile}
+                    <span className="text-dark">{contactUs?.mobile}</span>
                   </Link>
                 </>
               )}
+              <div className="text-primary flex gap-2" dir="ltr">
+                <Link
+                  to="https://www.facebook.com/share/1A9yo4Vaty/?mibextid=wwXIfr"
+                  className="hover:underline flex gap-1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaFacebookF size={25} />
+                </Link>
+                <Link
+                  to="https://www.instagram.com/trent.com.eg?igsh=aXJhY2MwOXZxYjd0"
+                  className="hover:underline flex gap-1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaInstagram size={25} />
+                </Link>
+                <Link
+                  to="https://www.tiktok.com/@trent.com.eg?_t=ZS-8vdEjhYeOzi&_r=1"
+                  className="hover:underline flex gap-1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaTiktok size={25} />
+                </Link>
+                <Link
+                  to="https://snapchat.com/t/Rr8O4bls"
+                  className="hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaSnapchat size={25} />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
