@@ -1,5 +1,5 @@
+import { googleMapsApiKey } from "@/services";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
-import { API_KEY } from "../../services";
 
 interface IProps {
   latitdude: number;
@@ -13,7 +13,7 @@ const containerStyle = {
 
 const Map = ({ latitdude, longitude }: IProps) => {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: API_KEY,
+    googleMapsApiKey,
   });
 
   if (!isLoaded)

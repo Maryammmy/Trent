@@ -1,10 +1,10 @@
 import { merchantRefNum, quantity, returnUrl } from "@/constants";
-import { fawryMerchantCode, fawrySecureKey } from "@/services";
 import { CurrentLanguage } from "@/types";
 import { sha256 } from "js-sha256";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
+
 export const generateFawryPaymentData = (
   itemId: string,
   propPrice: string,
@@ -12,16 +12,16 @@ export const generateFawryPaymentData = (
 ) => {
   const price = parseInt(propPrice);
   const signatureString =
-    fawryMerchantCode +
+    "770000019834" +
     merchantRefNum +
     returnUrl +
     itemId +
     quantity +
     price.toFixed(2) +
-    fawrySecureKey;
+    "6c65ee7b-9a31-49fb-9630-ca5546f6037a";
   const signature = sha256(signatureString);
   const paymentData = {
-    merchantCode: fawryMerchantCode,
+    merchantCode: "6c65ee7b-9a31-49fb-9630-ca5546f6037a",
     merchantRefNum,
     language: currentLanguage === "ar" ? "ar-eg" : "en-gb",
     chargeItems: [

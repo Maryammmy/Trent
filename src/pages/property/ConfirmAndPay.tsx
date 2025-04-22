@@ -8,7 +8,10 @@ import Select from "@/components/ui/Select";
 import { useState } from "react";
 import Loader from "@/components/loader/Loader";
 import { paymentMethods } from "@/data/booking";
-import { initFawryPaymentAPI } from "@/services/fawryService";
+import {
+  initFawryPaymentAPI,
+  useFawryCredentialsAPI,
+} from "@/services/fawryService";
 import { generateFawryPaymentData } from "@/utils/generateFawryPaymentData";
 import toast from "react-hot-toast";
 import { useMediaQuery } from "react-responsive";
@@ -21,13 +24,17 @@ function ConfirmAndPay() {
   const location = useLocation();
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
   const { id } = useParams();
-  const data: IVerifyPropertyResponse = location?.state?.data;
+  const bookingData: IVerifyPropertyResponse = location?.state?.data;
+  const { data } = useFawryCredentialsAPI();
+  const fawryCredentials = data?.data?.data?.fawry_credentials;
+  console.log("Fawry Credentials:", fawryCredentials);
+
   const createFawryPayment = async () => {
     try {
       setLoading(true);
       const paymentData = generateFawryPaymentData(
-        data?.id,
-        data?.price,
+        bookingData?.id,
+        bookingData?.price,
         paymentMethod
       );
       const response = await initFawryPaymentAPI(paymentData);
@@ -65,17 +72,17 @@ function ConfirmAndPay() {
               <div className="flex justify-between">
                 <div>
                   <h5 className="font-medium text-lg pb-1">{t("check_in")}</h5>
-                  <p className="font-medium">{data?.from_date}</p>
+                  <p className="font-medium">{bookingData?.from_date}</p>
                 </div>
                 <div>
                   <h5 className="font-medium text-lg pb-1">{t("check_out")}</h5>
-                  <p className="font-medium">{data?.to_date}</p>
+                  <p className="font-medium">{bookingData?.to_date}</p>
                 </div>
               </div>
               <div>
                 <h5 className="font-medium text-lg pb-1">{t("guests")}</h5>
                 <p className="font-medium">
-                  {data?.guest_count} {t("guests")}
+                  {bookingData?.guest_count} {t("guests")}
                 </p>
               </div>
             </div>
@@ -91,7 +98,7 @@ function ConfirmAndPay() {
             </div>
           </div>
           <div className="lg:flex-[2] lg:flex lg:justify-end">
-            <PriceDetails data={data} />
+            <PriceDetails bookingData={bookingData} />
           </div>
         </div>
       ) : (
@@ -102,23 +109,23 @@ function ConfirmAndPay() {
               <div className="flex justify-between">
                 <div>
                   <h5 className="font-medium text-lg pb-1">{t("check_in")}</h5>
-                  <p className="font-medium">{data?.from_date}</p>
+                  <p className="font-medium">{bookingData?.from_date}</p>
                 </div>
                 <div>
                   <h5 className="font-medium text-lg pb-1">{t("check_out")}</h5>
-                  <p className="font-medium">{data?.to_date}</p>
+                  <p className="font-medium">{bookingData?.to_date}</p>
                 </div>
               </div>
               <div>
                 <h5 className="font-medium text-lg pb-1">{t("guests")}</h5>
                 <p className="font-medium">
-                  {data?.guest_count} {t("guests")}
+                  {bookingData?.guest_count} {t("guests")}
                 </p>
               </div>
             </div>
           </div>
           <div className="lg:flex-[2] lg:flex lg:justify-end">
-            <PriceDetails data={data} />
+            <PriceDetails bookingData={bookingData} />
           </div>
           <div className="py-0 lg:py-4">
             <h3 className="font-semibold text-2xl pb-4">

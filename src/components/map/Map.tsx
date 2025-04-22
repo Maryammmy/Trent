@@ -6,10 +6,10 @@ import {
   InfoWindowF,
 } from "@react-google-maps/api";
 import { IProperty } from "../../interfaces/property/property";
-import { API_KEY } from "../../services";
 import Button from "../ui/Button";
 import { useTranslation } from "react-i18next";
 import PropertyCartSkeleton from "../skeleton/PropertyCartSkeleton";
+import { googleMapsApiKey } from "@/services";
 const Cart = lazy(() => import("./Cart"));
 interface IProps {
   properties: IProperty[] | null;
@@ -35,7 +35,7 @@ const Map = ({ properties, refetch }: IProps) => {
   const [loading, setLoading] = useState(false);
   const [visibleCount, setVisibleCount] = useState(8);
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: API_KEY,
+    googleMapsApiKey,
   });
   const [selectedProperties, setSelectedProperties] = useState<
     IProperty[] | null

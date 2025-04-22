@@ -2,9 +2,7 @@ import axios from "axios";
 
 // import baseUrl
 export const baseURL = import.meta.env.VITE_API_BASE_URL;
-export const API_KEY = import.meta.env.VITE_API_KEY;
-export const fawryMerchantCode = import.meta.env.VITE_FAWRY_MERCHANT_CODE;
-export const fawrySecureKey = import.meta.env.VITE_FAWRY_SECURE_KEY;
+export const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 export const fawryBaseUrl = import.meta.env.VITE_FAWRY_API_URL;
 
 // create an instance of the axios server
