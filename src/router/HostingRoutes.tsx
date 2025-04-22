@@ -6,6 +6,7 @@ import ProtectedRoutes from "../middleware/ProtectedRoutes";
 import UpdateProperty from "@/pages/hosting/properties/updateProperty";
 import Payout from "@/pages/payout";
 import PayoutProfile from "@/pages/payout/PayoutProfile";
+import PayoutRequest from "@/pages/payout/PayoutRequest";
 
 export const HostingRoutes = (
   <Route path="/hosting" element={<HostingLayout />}>
@@ -46,6 +47,14 @@ export const HostingRoutes = (
       element={
         <ProtectedRoutes>
           <PayoutProfile />
+        </ProtectedRoutes>
+      }
+    />
+    <Route
+      path="payouts/request"
+      element={
+        <ProtectedRoutes>
+          <PayoutRequest />
         </ProtectedRoutes>
       }
     />

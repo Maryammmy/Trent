@@ -13,6 +13,7 @@ export const navItems: INavItem[] = [{ label: "home", to: "/" }];
 export const authItems: string[] = ["log_in", "sign_up"];
 export const menuItems: INavItem[] = [
   { label: "host_your_house", to: "/become-a-host" },
-  { label: "profile", to: "/account-settings/personal-info" },
+  { label: "renter_panel", to: "/hosting" },
+  { label: "account", to: "/account-settings" },
   { label: "log_out", to: "#" },
 ];

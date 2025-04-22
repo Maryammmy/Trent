@@ -1,17 +1,15 @@
-import PayoutTransaction from "@/components/payout/PayoutTransaction";
 import { useTranslation } from "react-i18next";
 import Image from "@/components/ui/Image";
 import { CurrentLanguage } from "@/types";
-import Button from "@/components/ui/Button";
 import { useState } from "react";
 import PayoutRequestModal from "@/components/payout/PayoutRequestModal";
 import PayoutDetailsModal from "@/components/payout/PayoutDetailsModal";
+import { Link } from "react-router-dom";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 function Payout() {
   const { t } = useTranslation();
-  const arr = Array.from({ length: 3 });
   const [isPayoutRequest, setIsPayoutRequest] = useState(false);
   const [payoutDetails, setPayoutDetails] = useState(false);
   return (
@@ -45,22 +43,21 @@ function Payout() {
         </div>
         <div className="pt-10">
           <h2 className="text-2xl font-semibold">{t("payouts_history")}</h2>
-          <div className="grid grid-cols-1 gap-5 sm:gap-8 mt-5">
+          {/* <div className="grid grid-cols-1 gap-5 sm:gap-8 mt-5">
             {arr.map((_, index) => (
               <PayoutTransaction
                 key={index}
-                onClick={() => setPayoutDetails(true)}
               />
             ))}
-          </div>
+          </div> */}
         </div>
         <div className="flex justify-end pt-10">
-          <Button
-            onClick={() => setIsPayoutRequest(true)}
-            className=" bg-primary text-white py-3 w-44 text-lg rounded-md font-medium"
+          <Link
+            to="/hosting/payouts/request"
+            className=" bg-primary text-center text-white py-3 w-44 text-lg rounded-md font-medium"
           >
             {t("payout_request")}
-          </Button>
+          </Link>
         </div>
       </div>
       <PayoutRequestModal

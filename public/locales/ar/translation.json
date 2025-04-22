@@ -378,5 +378,10 @@
   "payouts_history": "سجل الدفعات",
   "your_total_earnings": "إجمالي أرباحك",
   "payouts": "الدفعات",
-  "payout_request": "طلب دفعة"
+  "payout_request": "طلب دفعة",
+  "renter_panel": "لوحة المستأجر",
+  "ready_properties": "عقارات جاهزة",
+  "total": "إجمالي",
+  "request": "طلب",
+  "please_select_profile_and_properties": "يرجى تحديد الملف الشخصي والعقارات"
 }

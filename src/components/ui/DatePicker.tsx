@@ -28,9 +28,9 @@ const DatePicker = ({ dateValue, handleValueChange, className }: IProps) => {
       />
       <style>
         {`
-          // .remove-icon div button svg{
-          //   display: none !important;
-          // }
+          .remove-icon div button {
+     
+          }
        .remove-icon div .flex.justify-center.space-x-3 {
       gap: 8px !important; 
     }

@@ -380,5 +380,10 @@
   "payouts_history": "Payouts history",
   "your_total_earnings": "Your total earnings",
   "payouts": "Payouts",
-  "payout_request": "Payout request"
+  "payout_request": "Payout request",
+  "renter_panel": "Renter panel",
+  "ready_properties": "Ready properties",
+  "total": "Total",
+  "request": "Request",
+  "please_select_profile_and_properties": "Please select a profile and properties"
 }
