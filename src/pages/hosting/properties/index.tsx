@@ -31,7 +31,7 @@ function Properties() {
             ))
           ) : (
             <div className="flex justify-center items-center h-[50vh] text-dark font-medium w-full">
-              No properties found
+              {t("no_properties_found")}
             </div>
           )}
         </div>

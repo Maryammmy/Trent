@@ -383,5 +383,6 @@
   "ready_properties": "عقارات جاهزة",
   "total": "إجمالي",
   "request": "طلب",
-  "please_select_profile_and_properties": "يرجى تحديد الملف الشخصي والعقارات"
+  "please_select_profile_and_properties": "يرجى تحديد الملف الشخصي والعقارات",
+  "no_properties_found": "لا توجد عقارات"
 }

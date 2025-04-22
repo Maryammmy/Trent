@@ -385,5 +385,6 @@
   "ready_properties": "Ready properties",
   "total": "Total",
   "request": "Request",
-  "please_select_profile_and_properties": "Please select a profile and properties"
+  "please_select_profile_and_properties": "Please select a profile and properties",
+  "no_properties_found": "No properties found"
 }
