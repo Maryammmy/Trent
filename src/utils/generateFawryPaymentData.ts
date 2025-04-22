@@ -21,7 +21,7 @@ export const generateFawryPaymentData = (
     "6c65ee7b-9a31-49fb-9630-ca5546f6037a";
   const signature = sha256(signatureString);
   const paymentData = {
-    merchantCode: "6c65ee7b-9a31-49fb-9630-ca5546f6037a",
+    merchantCode: "770000019834",
     merchantRefNum,
     language: currentLanguage === "ar" ? "ar-eg" : "en-gb",
     chargeItems: [
