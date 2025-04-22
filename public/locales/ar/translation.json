@@ -384,5 +384,6 @@
   "total": "إجمالي",
   "request": "طلب",
   "please_select_profile_and_properties": "يرجى تحديد الملف الشخصي والعقارات",
-  "no_properties_found": "لا توجد عقارات"
+  "no_properties_found": "لا توجد عقارات",
+  "continue": "متابعة"
 }
