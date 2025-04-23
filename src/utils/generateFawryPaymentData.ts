@@ -7,10 +7,10 @@ const currentLanguage = (localStorage.getItem("i18nextLng") ||
 
 export const generateFawryPaymentData = (
   itemId: string,
-  propPrice: string,
+  propPrice: number,
   paymentMethod: string
 ) => {
-  const price = parseInt(propPrice);
+  const price = Math.round(propPrice);
   const signatureString =
     "770000019834" +
     merchantRefNum +

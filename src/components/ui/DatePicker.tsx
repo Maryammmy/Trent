@@ -14,7 +14,7 @@ const DatePicker = ({ dateValue, handleValueChange, className }: IProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className="remove-icon z-[1000]">
+    <div className="remove-icon">
       <Datepicker
         i18n={currentLanguage}
         popoverDirection="down"

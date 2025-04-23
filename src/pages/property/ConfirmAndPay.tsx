@@ -34,7 +34,7 @@ function ConfirmAndPay() {
       setLoading(true);
       const paymentData = generateFawryPaymentData(
         bookingData?.id,
-        bookingData?.price,
+        bookingData?.final_total,
         paymentMethod
       );
       const response = await initFawryPaymentAPI(paymentData);
@@ -42,9 +42,9 @@ function ConfirmAndPay() {
       if (response.status === 200) {
         const redirectUrl = response.data;
         toast.success("Redirecting you to Fawry payment plugin...");
-        setTimeout(() => {
-          window.location.href = redirectUrl;
-        }, 1000);
+        // setTimeout(() => {
+        //   window.location.href = redirectUrl;
+        // }, 1000);
       }
     } catch (error: AxiosError | unknown) {
       if (error instanceof AxiosError) {
