@@ -8,7 +8,8 @@ const currentLanguage = (localStorage.getItem("i18nextLng") ||
 export const generateFawryPaymentData = (
   itemId: string,
   propPrice: number,
-  paymentMethod: string
+  paymentMethod: string,
+  imageUrl: string
 ) => {
   const price = Math.round(propPrice);
   const signatureString =
@@ -29,10 +30,12 @@ export const generateFawryPaymentData = (
         itemId,
         price,
         quantity,
+        imageUrl,
       },
     ],
     paymentMethod,
     signature,
+    authCaptureModePayment: false,
     returnUrl,
   };
   return paymentData;

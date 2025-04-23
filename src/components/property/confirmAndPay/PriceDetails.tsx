@@ -10,7 +10,7 @@ function PriceDetails({ bookingData }: IProps) {
 
   return (
     <div className="border p-5 w-full rounded-lg md:w-[500px]">
-      <div className="flex flex-col md:flex-row gap-5 border-b pb-6">
+      <div className="flex flex-col md:flex-row md:items-center gap-5 border-b pb-6">
         <div className="w-28 h-28 rounded-lg overflow-hidden">
           <Image
             imageUrl={baseURL + bookingData?.image_list?.[0]?.img}
@@ -30,10 +30,11 @@ function PriceDetails({ bookingData }: IProps) {
         </h4>
         <div className="my-2 py-2 font-medium border-b">
           <div className="grid grid-cols-2 gap-5 mb-2">
-            <span>{`${t("duration")} (${bookingData?.days}${t("days")})`}</span>
+            <span>{`${t("duration")} (${bookingData?.days} ${t(
+              "days"
+            )})`}</span>
             <span className="text-end">
-              {Math.round(bookingData?.sub_total)}
-              {t("price_per_night")}
+              {Math.round(bookingData?.sub_total)} {t("price_per_night")}
             </span>
           </div>
         </div>
@@ -41,8 +42,7 @@ function PriceDetails({ bookingData }: IProps) {
           <div className="grid grid-cols-2 gap-5 mb-2">
             <span>{`${t("taxes")} (${bookingData?.tax_percent}%)`} </span>
             <span className="text-end">
-              {Math.round(bookingData?.taxes)}
-              {t("price_per_night")}
+              {Math.round(bookingData?.taxes)} {t("price_per_night")}
             </span>
           </div>
         </div>
@@ -50,8 +50,7 @@ function PriceDetails({ bookingData }: IProps) {
           <div className="grid grid-cols-2 gap-5 mb-2">
             <span>{t("deposit_fees")}</span>
             <span className="text-end">
-              {parseInt(bookingData?.deposit_fees)}
-              {t("price_per_night")}
+              {parseInt(bookingData?.deposit_fees)} {t("price_per_night")}
             </span>
           </div>
         </div>
@@ -59,8 +58,7 @@ function PriceDetails({ bookingData }: IProps) {
           <div className="grid grid-cols-2 gap-5 mb-2">
             <span>{t("service_fees")}</span>
             <span className="text-end">
-              {Math.round(bookingData?.service_fees)}
-              {t("price_per_night")}
+              {Math.round(bookingData?.service_fees)} {t("price_per_night")}
             </span>
           </div>
         </div>
@@ -68,8 +66,7 @@ function PriceDetails({ bookingData }: IProps) {
           <div className="grid grid-cols-2 gap-5 mb-2">
             <span>{t("trent_fees")}</span>
             <span className="text-end">
-              {Math.round(bookingData?.trent_fees)}
-              {t("price_per_night")}
+              {Math.round(bookingData?.trent_fees)} {t("price_per_night")}
             </span>
           </div>
         </div>
@@ -78,8 +75,7 @@ function PriceDetails({ bookingData }: IProps) {
             {t("total")} ({t("price_per_night")})
           </span>
           <span className="text-end">
-            {Math.round(bookingData?.final_total)}
-            {t("price_per_night")}
+            {Math.round(bookingData?.final_total)} {t("price_per_night")}
           </span>
         </div>
       </div>

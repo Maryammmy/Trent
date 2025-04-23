@@ -7,3 +7,6 @@ export const storeOwnerChat = (owner: { img: string; name: string }) => {
     })
   );
 };
+export const capitalize = (text: string) => {
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+};

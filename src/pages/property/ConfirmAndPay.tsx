@@ -8,34 +8,41 @@ import Select from "@/components/ui/Select";
 import { useState } from "react";
 import Loader from "@/components/loader/Loader";
 import { paymentMethods } from "@/data/booking";
-import {
-  initFawryPaymentAPI,
-  useFawryCredentialsAPI,
-} from "@/services/fawryService";
+import { initFawryPaymentAPI } from "@/services/fawryService";
 import { generateFawryPaymentData } from "@/utils/generateFawryPaymentData";
 import toast from "react-hot-toast";
 import { useMediaQuery } from "react-responsive";
 import { AxiosError } from "axios";
+import { useQueryParam } from "@/utils/getQueryParam";
+import PaymentStatus from "@/components/property/confirmAndPay/PaymentStatus";
 
 function ConfirmAndPay() {
   const [loading, setLoading] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("PayAtFawry");
+  const [paymentMethod, setPaymentMethod] = useState(
+    sessionStorage.getItem("paymentMethod") || "MWALLET"
+  );
   const { t } = useTranslation();
   const location = useLocation();
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
   const { id } = useParams();
-  const bookingData: IVerifyPropertyResponse = location?.state?.data;
-  const { data } = useFawryCredentialsAPI();
-  const fawryCredentials = data?.data?.data?.fawry_credentials;
-  console.log("Fawry Credentials:", fawryCredentials);
-
+  const bookingData: IVerifyPropertyResponse =
+    location?.state?.data ||
+    JSON.parse(sessionStorage.getItem("bookingData") || "null");
+  // const { data } = useFawryCredentialsAPI();
+  // const fawryCredentials = data?.data?.data?.fawry_credentials;
+  const referenceNumber = useQueryParam("referenceNumber");
+  const orderStatus = useQueryParam("orderStatus");
+  const paymentAmount = useQueryParam("paymentAmount");
+  const paymentMethodFromUrl = useQueryParam("paymentMethod");
+  console.log(orderStatus);
   const createFawryPayment = async () => {
     try {
       setLoading(true);
       const paymentData = generateFawryPaymentData(
         bookingData?.id,
         bookingData?.final_total,
-        paymentMethod
+        paymentMethod,
+        bookingData?.image_list?.[0]?.img
       );
       const response = await initFawryPaymentAPI(paymentData);
       console.log("Response:", response);
@@ -92,10 +99,21 @@ function ConfirmAndPay() {
               </h3>
               <Select
                 value={paymentMethod}
-                onChange={(e) => setPaymentMethod(e.target.value)}
+                onChange={(e) => {
+                  setPaymentMethod(e.target.value);
+                  sessionStorage.setItem("paymentMethod", e.target.value);
+                }}
                 options={paymentMethods}
               ></Select>
             </div>
+            {orderStatus && (
+              <PaymentStatus
+                referenceNumber={referenceNumber || ""}
+                orderStatus={orderStatus}
+                paymentAmount={paymentAmount || ""}
+                paymentMethodFromUrl={paymentMethodFromUrl || ""}
+              />
+            )}
           </div>
           <div className="lg:flex-[2] lg:flex lg:justify-end">
             <PriceDetails bookingData={bookingData} />
@@ -137,15 +155,31 @@ function ConfirmAndPay() {
               options={paymentMethods}
             ></Select>
           </div>
+          {orderStatus && (
+            <PaymentStatus
+              referenceNumber={referenceNumber || ""}
+              orderStatus={orderStatus}
+              paymentAmount={paymentAmount || ""}
+              paymentMethodFromUrl={paymentMethodFromUrl || ""}
+            />
+          )}
         </div>
       )}
       <div className="px-2 md:px-10 flex justify-end">
         <Button
           disabled={loading}
-          onClick={createFawryPayment}
-          className="bg-primary font-medium text-lg text-white w-32 py-2 rounded-md"
+          onClick={orderStatus === "PAID" ? () => {} : createFawryPayment}
+          className={`bg-primary font-medium text-lg text-white w-32 py-2 rounded-md ${
+            orderStatus === "PAID" && "w-40"
+          }`}
         >
-          {loading ? <Loader /> : t("pay")}
+          {loading ? (
+            <Loader />
+          ) : orderStatus === "PAID" ? (
+            t("save_booking")
+          ) : (
+            t("pay")
+          )}
         </Button>
       </div>
     </div>

@@ -388,7 +388,11 @@
   "please_select_profile_and_properties": "Please select a profile and properties",
   "no_properties_found": "No properties found",
   "continue": "Continue",
-  "pay_fawry": "Pay by Fawry",
   "wallet": "Wallet",
-  "card": "Card"
+  "card": "Card",
+  "payment_status": "Payment status",
+  "reference_number": "Reference number",
+  "order_status": "Order status",
+  "amount": "Amount",
+  "save_booking": "Save booking"
 }

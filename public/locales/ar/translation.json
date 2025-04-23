@@ -386,7 +386,11 @@
   "please_select_profile_and_properties": "يرجى تحديد الملف الشخصي والعقارات",
   "no_properties_found": "لا توجد عقارات",
   "continue": "متابعة",
-  "pay_fawry": "ادفع فوري",
   "wallet": "المحفظة",
-  "card": "البطاقة"
+  "card": "البطاقة",
+  "payment_status": "حالة الدفع",
+  "reference_number": "رقم المرجع",
+  "order_status": "حالة الطلب",
+  "amount": "المبلغ",
+  "save_booking": "حفظ الحجز"
 }

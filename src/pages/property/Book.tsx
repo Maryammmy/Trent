@@ -110,6 +110,10 @@ function Book() {
       const response = await verifyPropertyAPI(payload);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
+        sessionStorage.setItem(
+          "bookingData",
+          JSON.stringify(response?.data?.data?.booking_details)
+        );
         setTimeout(() => {
           navigate(`/properties/${id}/confirm-and-pay`, {
             state: { data: response?.data?.data?.booking_details },
