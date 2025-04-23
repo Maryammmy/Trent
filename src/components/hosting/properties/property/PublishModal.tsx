@@ -41,14 +41,14 @@ function PublishModal({ is_deleted, id, deleteProperty, close }: IProps) {
     <Modal
       isOpen={deleteProperty}
       close={close}
-      title={is_deleted ? t("unpublish_property") : t("publish_property")}
+      title={is_deleted ? t("publish_property") : t("unpublish_property")}
       className="text-center font-bold text-2xl pt-5"
     >
       <div className="p-5">
         <p className="font-medium">
           {is_deleted
-            ? t("unpublish_property_desc")
-            : t("publish_property_desc")}
+            ? t("publish_property_desc")
+            : t("unpublish_property_desc")}
         </p>
         <div className="flex pt-5 justify-between space-x-3">
           <Button
@@ -59,14 +59,15 @@ function PublishModal({ is_deleted, id, deleteProperty, close }: IProps) {
             {t("cancel")}
           </Button>
           <Button
+            disabled={loading}
             className={`${
               is_deleted
-                ? "bg-red-600 hover:bg-red-600/80"
-                : "bg-green-600 hover:bg-green-600/80"
+                ? "bg-green-600 hover:bg-green-600/80"
+                : "bg-red-600 hover:bg-red-600/80"
             } font-medium text-white py-2 w-24 rounded-md`}
             onClick={handleDeleteProperty}
           >
-            {loading ? <Loader /> : is_deleted ? t("unpublish") : t("publish")}
+            {loading ? <Loader /> : is_deleted ? t("publish") : t("unpublish")}
           </Button>
         </div>
       </div>

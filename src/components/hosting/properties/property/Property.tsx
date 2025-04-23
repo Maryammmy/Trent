@@ -11,13 +11,32 @@ interface IProps {
 const Property = ({ property }: IProps) => {
   const { t } = useTranslation();
   const [deleteProperty, setDeleteProperty] = useState(false);
-  const { id, title, government_name, category_type, price, is_deleted } =
-    property;
+  const {
+    id,
+    title,
+    government_name,
+    category_type,
+    price,
+    is_deleted,
+    is_approved,
+  } = property;
   const basePrice = parseInt(price);
+  const statusText = is_deleted
+    ? t("unpublish")
+    : is_approved
+    ? t("publish")
+    : t("pending");
+
+  const statusColor = is_deleted
+    ? "text-red-600"
+    : is_approved
+    ? "text-green-600"
+    : "text-dark";
+
   return (
     <>
       <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 items-center text-sm md:text-base bg-white shadow rounded-md p-4 sm:p-6 hover:bg-gray-100 transition">
-        <p className="font-medium  whitespace-nowrap overflow-hidden text-ellipsis">
+        <p className="font-medium whitespace-nowrap overflow-hidden text-ellipsis">
           {title}
         </p>
         <p className="font-medium hidden sm:block whitespace-nowrap overflow-hidden text-ellipsis">
@@ -29,30 +48,26 @@ const Property = ({ property }: IProps) => {
         <p className="font-medium hidden sm:block whitespace-nowrap overflow-hidden text-ellipsis">
           {basePrice} {t("price_per_night")}
         </p>
-        <p
-          className={`font-semibold  ${
-            is_deleted ? "text-green-600" : "text-red-600"
-          }`}
-        >
-          {is_deleted ? t("publish") : t("unpublish")}
-        </p>
-        <div className="flex flex-wrap items-center gap-3">
-          <Link
-            to={`/hosting/properties/${id}/update`}
-            className="text-white py-2 w-24 rounded-md font-medium bg-primary flex justify-center items-center gap-1"
-          >
-            <MdEdit size={20} />
-            <span>{t("edit")}</span>
-          </Link>
-          <Button
-            onClick={() => setDeleteProperty(true)}
-            className={`${
-              is_deleted ? "bg-red-600" : "bg-green-600"
-            } text-white py-2 w-24 rounded-md font-medium`}
-          >
-            {is_deleted ? t("unpublish") : t("publish")}
-          </Button>
-        </div>
+        <p className={`font-semibold ${statusColor}`}>{statusText}</p>
+        {(is_approved || is_deleted) && (
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              to={`/hosting/properties/${id}/update`}
+              className="text-white py-2 w-24 rounded-md font-medium bg-primary flex justify-center items-center gap-1"
+            >
+              <MdEdit size={20} />
+              <span>{t("edit")}</span>
+            </Link>
+            <Button
+              onClick={() => setDeleteProperty(true)}
+              className={`${
+                is_deleted ? "bg-green-600" : "bg-red-600"
+              } text-white py-2 w-24 rounded-md font-medium`}
+            >
+              {is_deleted ? t("publish") : t("unpublish")}
+            </Button>
+          </div>
+        )}
       </div>
       <PublishModal
         is_deleted={is_deleted}
