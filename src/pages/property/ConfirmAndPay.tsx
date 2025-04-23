@@ -42,9 +42,9 @@ function ConfirmAndPay() {
       if (response.status === 200) {
         const redirectUrl = response.data;
         toast.success("Redirecting you to Fawry payment plugin...");
-        // setTimeout(() => {
-        //   window.location.href = redirectUrl;
-        // }, 1000);
+        setTimeout(() => {
+          window.location.href = redirectUrl;
+        }, 1000);
       }
     } catch (error: AxiosError | unknown) {
       if (error instanceof AxiosError) {
