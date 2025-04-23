@@ -387,5 +387,8 @@
   "request": "Request",
   "please_select_profile_and_properties": "Please select a profile and properties",
   "no_properties_found": "No properties found",
-  "continue": "Continue"
+  "continue": "Continue",
+  "pay_fawry": "Pay by Fawry",
+  "wallet": "Wallet",
+  "card": "Card"
 }

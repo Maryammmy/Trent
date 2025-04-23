@@ -20,14 +20,7 @@ export const useHomeDataAPI = (
   };
 
   const filteredParams = Object.fromEntries(
-    Object.entries(queryParamsObject).filter(
-      ([, value]) =>
-        value !== undefined &&
-        value !== null &&
-        value !== "" &&
-        !Number.isNaN(value) &&
-        value !== 0
-    )
+    Object.entries(queryParamsObject).filter(([, value]) => !!value)
   );
   return useQuery({
     queryKey: ["home", filteredParams],

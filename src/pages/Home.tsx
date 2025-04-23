@@ -9,6 +9,8 @@ import { baseURL } from "../services";
 import { useTranslation } from "react-i18next";
 import HomeAlert from "@/components/home/HomeAlert";
 import { ISlider } from "@/interfaces";
+import { useContext } from "react";
+import { FilterDataContext } from "@/context/FilterDataContext";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -16,6 +18,8 @@ function Home() {
   const { t } = useTranslation();
   const isMobile = useMediaQuery({ maxWidth: 480 });
   const isTablet = useMediaQuery({ maxWidth: 768 });
+  const { setFilterSlider, setCategory, setFilterData } =
+    useContext(FilterDataContext);
   const carouselProps = isMobile
     ? { padding: "2px", right: "5px", left: "5px" }
     : isTablet
@@ -26,6 +30,15 @@ function Home() {
     `user_api/u_slider_list.php?lang=${currentLanguage}`
   );
   const sliderList: ISlider[] = data?.data?.data?.slider_list;
+  const handleClickSlider = (item: ISlider) => {
+    setFilterSlider({
+      governmentId: item?.government_id,
+      categoryId: item?.category_id,
+    });
+    setCategory("");
+    setFilterData(null);
+  };
+
   return (
     <div>
       <HomeAlert />
@@ -72,6 +85,7 @@ function Home() {
           >
             {sliderList?.map((item) => (
               <div
+                onClick={() => handleClickSlider(item)}
                 key={item?.id}
                 className="h-[40vh] w-full sm:px-4 rounded-md overflow-hidden"
               >

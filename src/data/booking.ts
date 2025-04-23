@@ -2,15 +2,15 @@ import { ISelectOption } from "@/interfaces";
 
 export const paymentMethods: ISelectOption[] = [
   {
-    label: "PayAtFawry",
+    label: "pay_fawry",
     value: "PayAtFawry",
   },
   {
-    label: "MWALLET",
+    label: "wallet",
     value: "MWALLET",
   },
   {
-    label: "CARD",
+    label: "card",
     value: "CARD",
   },
 ];

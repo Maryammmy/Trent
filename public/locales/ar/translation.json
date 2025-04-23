@@ -385,5 +385,8 @@
   "request": "طلب",
   "please_select_profile_and_properties": "يرجى تحديد الملف الشخصي والعقارات",
   "no_properties_found": "لا توجد عقارات",
-  "continue": "متابعة"
+  "continue": "متابعة",
+  "pay_fawry": "ادفع فوري",
+  "wallet": "المحفظة",
+  "card": "البطاقة"
 }

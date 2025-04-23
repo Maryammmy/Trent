@@ -25,8 +25,11 @@ export default function Properties() {
   const [properties, setProperties] = useState<IProperty[] | null>(null);
   const [isFixed, setIsFixed] = useState(true);
   const { enableMap } = useAppSelector((state) => state.map);
-  const { filterData, category } = useContext(FilterDataContext);
-  const { data, refetch } = useHomeDataAPI({ category_id: category }, true);
+  const { filterData, category, filterSlider } = useContext(FilterDataContext);
+  const { data, refetch } = useHomeDataAPI(
+    { category_id: category, ...filterSlider },
+    true
+  );
   const allProperties: IProperty[] = data?.data?.data?.property_list;
 
   useEffect(() => {
