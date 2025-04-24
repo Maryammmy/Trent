@@ -1,4 +1,4 @@
-import { merchantRefNum, quantity, returnUrl } from "@/constants";
+import { merchantRefNum, quantity } from "@/constants";
 import { CurrentLanguage } from "@/types";
 import { sha256 } from "js-sha256";
 
@@ -9,7 +9,8 @@ export const generateFawryPaymentData = (
   itemId: string,
   propPrice: number,
   paymentMethod: string,
-  imageUrl: string
+  imageUrl: string,
+  returnUrl: string
 ) => {
   const price = Math.round(propPrice);
   const signatureString =

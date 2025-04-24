@@ -25,6 +25,7 @@ function ConfirmAndPay() {
   const location = useLocation();
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
   const { id } = useParams();
+  const returnUrl = `${window.location.origin}/properties/${id}/confirm-and-pay`;
   const bookingData: IVerifyPropertyResponse =
     location?.state?.data ||
     JSON.parse(sessionStorage.getItem("bookingData") || "null");
@@ -34,7 +35,6 @@ function ConfirmAndPay() {
   const orderStatus = useQueryParam("orderStatus");
   const paymentAmount = useQueryParam("paymentAmount");
   const paymentMethodFromUrl = useQueryParam("paymentMethod");
-  console.log(orderStatus);
   const createFawryPayment = async () => {
     try {
       setLoading(true);
@@ -42,7 +42,8 @@ function ConfirmAndPay() {
         bookingData?.id,
         bookingData?.final_total,
         paymentMethod,
-        bookingData?.image_list?.[0]?.img
+        bookingData?.image_list?.[0]?.img,
+        returnUrl
       );
       const response = await initFawryPaymentAPI(paymentData);
       console.log("Response:", response);
