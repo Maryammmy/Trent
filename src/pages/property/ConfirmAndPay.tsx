@@ -8,7 +8,10 @@ import Select from "@/components/ui/Select";
 import { useState } from "react";
 import Loader from "@/components/loader/Loader";
 import { paymentMethods } from "@/data/booking";
-import { initFawryPaymentAPI } from "@/services/fawryService";
+import {
+  initFawryPaymentAPI,
+  useFawryCredentialsAPI,
+} from "@/services/fawryService";
 import { generateFawryPaymentData } from "@/utils/generateFawryPaymentData";
 import toast from "react-hot-toast";
 import { useMediaQuery } from "react-responsive";
@@ -18,9 +21,6 @@ import PaymentStatus from "@/components/property/confirmAndPay/PaymentStatus";
 
 function ConfirmAndPay() {
   const [loading, setLoading] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState(
-    sessionStorage.getItem("paymentMethod") || "MWALLET"
-  );
   const { t } = useTranslation();
   const location = useLocation();
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
@@ -29,16 +29,21 @@ function ConfirmAndPay() {
   const bookingData: IVerifyPropertyResponse =
     location?.state?.data ||
     JSON.parse(sessionStorage.getItem("bookingData") || "null");
-  // const { data } = useFawryCredentialsAPI();
-  // const fawryCredentials = data?.data?.data?.fawry_credentials;
+  const { data } = useFawryCredentialsAPI();
+  const fawryCredentials = data?.data?.data?.fawry_credentials;
   const referenceNumber = useQueryParam("referenceNumber");
   const orderStatus = useQueryParam("orderStatus");
   const paymentAmount = useQueryParam("paymentAmount");
   const paymentMethodFromUrl = useQueryParam("paymentMethod");
+  const [paymentMethod, setPaymentMethod] = useState(
+    paymentMethodFromUrl === "PayUsingCC" ? "CARD" : "MWALLET"
+  );
   const createFawryPayment = async () => {
     try {
       setLoading(true);
       const paymentData = generateFawryPaymentData(
+        fawryCredentials?.merchant_code,
+        fawryCredentials?.secure_key,
         bookingData?.id,
         bookingData?.final_total,
         paymentMethod,
@@ -100,10 +105,7 @@ function ConfirmAndPay() {
               </h3>
               <Select
                 value={paymentMethod}
-                onChange={(e) => {
-                  setPaymentMethod(e.target.value);
-                  sessionStorage.setItem("paymentMethod", e.target.value);
-                }}
+                onChange={(e) => setPaymentMethod(e.target.value)}
                 options={paymentMethods}
               ></Select>
             </div>

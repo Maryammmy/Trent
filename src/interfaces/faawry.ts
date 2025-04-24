@@ -4,7 +4,7 @@ interface IChargeItem {
   quantity: number;
 }
 export interface IInitFawry {
-  merchantCode: string;
+  merchantCode: string | null;
   merchantRefNum: string;
   language: string;
   chargeItems: IChargeItem[];

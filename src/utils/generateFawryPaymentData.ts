@@ -1,3 +1,5 @@
+import { fawryPrivateKey } from "./../constants/index";
+import { decryptFawryCredentials } from "./decryptFawryCredentials";
 import { merchantRefNum, quantity } from "@/constants";
 import { CurrentLanguage } from "@/types";
 import { sha256 } from "js-sha256";
@@ -6,6 +8,8 @@ const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 
 export const generateFawryPaymentData = (
+  encryptedMerchantCode: string,
+  encryptedSecureKey: string,
   itemId: string,
   propPrice: number,
   paymentMethod: string,
@@ -13,17 +17,26 @@ export const generateFawryPaymentData = (
   returnUrl: string
 ) => {
   const price = Math.round(propPrice);
+  const merchantCode = decryptFawryCredentials(
+    encryptedMerchantCode,
+    fawryPrivateKey
+  );
+  const secureKey = decryptFawryCredentials(
+    encryptedSecureKey,
+    fawryPrivateKey
+  );
+
   const signatureString =
-    "770000019834" +
+    merchantCode +
     merchantRefNum +
     returnUrl +
     itemId +
     quantity +
     price.toFixed(2) +
-    "6c65ee7b-9a31-49fb-9630-ca5546f6037a";
+    secureKey;
   const signature = sha256(signatureString);
   const paymentData = {
-    merchantCode: "770000019834",
+    merchantCode,
     merchantRefNum,
     language: currentLanguage === "ar" ? "ar-eg" : "en-gb",
     chargeItems: [
