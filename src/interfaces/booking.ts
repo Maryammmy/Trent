@@ -29,3 +29,8 @@ export interface IVerifyPropertyResponse {
   guest_count: string;
   tax_percent: string;
 }
+export interface IPaymentMethodBook {
+  label: string;
+  value: string;
+  icons: string[];
+}

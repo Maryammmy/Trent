@@ -1,13 +1,11 @@
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import PriceDetails from "../../components/property/confirmAndPay/PriceDetails";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Button from "@/components/ui/Button";
 import { IVerifyPropertyResponse } from "@/interfaces/booking";
-import Select from "@/components/ui/Select";
 import { useState } from "react";
 import Loader from "@/components/loader/Loader";
-import { paymentMethods } from "@/data/booking";
 import {
   initFawryPaymentAPI,
   useFawryCredentialsAPI,
@@ -18,7 +16,11 @@ import { useMediaQuery } from "react-responsive";
 import { AxiosError } from "axios";
 import { useQueryParam } from "@/utils/getQueryParam";
 import PaymentStatus from "@/components/property/confirmAndPay/PaymentStatus";
+import { CurrentLanguage } from "@/types";
+import PaymentMethodSelector from "@/components/property/confirmAndPay/PaymentMethodSelector";
 
+const currentLanguage = (localStorage.getItem("i18nextLng") ||
+  "en") as CurrentLanguage;
 function ConfirmAndPay() {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
@@ -67,11 +69,12 @@ function ConfirmAndPay() {
       setLoading(false);
     }
   };
+
   return (
     <div className="py-10 px-5 xl:px-20 max-w-7xl mx-auto">
       <div className="flex gap-2 items-center">
         <Link to={`/properties/${id}/book`}>
-          <ChevronLeft />
+          {currentLanguage === "ar" ? <ChevronRight /> : <ChevronLeft />}
         </Link>
         <h2 className="text-2xl sm:text-3xl font-semibold">
           {t("confirm_and_pay")}
@@ -80,7 +83,7 @@ function ConfirmAndPay() {
       {isLargeScreen ? (
         <div className="px-2 md:px-10 flex flex-col lg:flex-row justify-between py-10 gap-10">
           <div className="lg:flex-1">
-            <h4 className="font-medium text-xl">{t("your_trip")}</h4>
+            <h4 className="font-medium text-xl">{t("booking_checkout")}</h4>
             <div className="flex flex-col gap-4 py-5">
               <div className="flex justify-between">
                 <div>
@@ -103,11 +106,10 @@ function ConfirmAndPay() {
               <h3 className="font-semibold text-2xl pb-4">
                 {t("choose_how_to_pay")}
               </h3>
-              <Select
-                value={paymentMethod}
+              <PaymentMethodSelector
+                paymentMethod={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
-                options={paymentMethods}
-              ></Select>
+              />
             </div>
             {orderStatus && (
               <PaymentStatus
@@ -152,11 +154,10 @@ function ConfirmAndPay() {
             <h3 className="font-semibold text-2xl pb-4">
               {t("choose_how_to_pay")}
             </h3>
-            <Select
-              value={paymentMethod}
+            <PaymentMethodSelector
+              paymentMethod={paymentMethod}
               onChange={(e) => setPaymentMethod(e.target.value)}
-              options={paymentMethods}
-            ></Select>
+            />
           </div>
           {orderStatus && (
             <PaymentStatus

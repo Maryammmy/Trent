@@ -40,7 +40,7 @@ function PriceDetails({ bookingData }: IProps) {
         </div>
         <div className="my-2 py-2 font-medium border-b">
           <div className="grid grid-cols-2 gap-5 mb-2">
-            <span>{`${t("taxes")} (${bookingData?.tax_percent}%)`} </span>
+            <span>{t("vat")}</span>
             <span className="text-end">
               {Math.round(bookingData?.taxes)} {t("price_per_night")}
             </span>
@@ -48,7 +48,7 @@ function PriceDetails({ bookingData }: IProps) {
         </div>
         <div className="my-2 py-2 font-medium border-b">
           <div className="grid grid-cols-2 gap-5 mb-2">
-            <span>{t("deposit_fees")}</span>
+            <span>{t("security_deposit_2")}</span>
             <span className="text-end">
               {parseInt(bookingData?.deposit_fees)} {t("price_per_night")}
             </span>
@@ -56,24 +56,14 @@ function PriceDetails({ bookingData }: IProps) {
         </div>
         <div className="my-2 py-2 font-medium border-b">
           <div className="grid grid-cols-2 gap-5 mb-2">
-            <span>{t("service_fees")}</span>
+            <span>{t("digital_payment_Fees")}</span>
             <span className="text-end">
               {Math.round(bookingData?.service_fees)} {t("price_per_night")}
             </span>
           </div>
         </div>
-        <div className="my-2 py-2 font-medium border-b">
-          <div className="grid grid-cols-2 gap-5 mb-2">
-            <span>{t("trent_fees")}</span>
-            <span className="text-end">
-              {Math.round(bookingData?.trent_fees)} {t("price_per_night")}
-            </span>
-          </div>
-        </div>
         <div className="grid grid-cols-2 gap-5 font-semibold text-lg pt-3">
-          <span>
-            {t("total")} ({t("price_per_night")})
-          </span>
+          <span>{t("total")}</span>
           <span className="text-end">
             {Math.round(bookingData?.final_total)} {t("price_per_night")}
           </span>

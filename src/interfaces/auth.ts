@@ -25,4 +25,5 @@ export interface IForgetPassword {
   mobile: string;
   password: string;
   confirm_password: string;
+  ccode: string;
 }

@@ -134,8 +134,8 @@ export interface IPropertyData {
   description_en: string;
   city_ar: string;
   city_en: string;
-  compound_ar: string;
-  compound_en: string;
+  compound_ar?: string;
+  compound_en?: string;
   period: string;
   is_featured?: boolean;
   cancellation_policy_id: string;

@@ -43,6 +43,7 @@ function Book() {
   const propertyBook = data?.data?.data?.property_book_details;
   const fromDate = formatDate(startDateValue?.startDate);
   const toDate = formatDate(endDateValue?.startDate);
+  console.log(propertyBook);
 
   const handleStartValueChange = (newValue: DateValueType) => {
     const validatedValue = validateStartDate(newValue, endDateValue, t);
@@ -51,7 +52,6 @@ function Book() {
       setErrors((prevErrors) => ({ ...prevErrors, checkin: "" }));
     }
   };
-
   const handleEndValueChange = (newValue: DateValueType) => {
     const validatedValue = validateEndDate(
       newValue,
@@ -142,6 +142,7 @@ function Book() {
           handleStartValueChange={handleStartValueChange}
           handleEndValueChange={handleEndValueChange}
           errors={{ checkin: errors.checkin, checkout: errors.checkout }}
+          nextAvailableDate={propertyBook?.next_available_date}
         />
         <div className="flex flex-col">
           <h2 className="text-black font-bold mb-2">{t("guest_count")}</h2>

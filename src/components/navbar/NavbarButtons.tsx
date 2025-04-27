@@ -52,7 +52,7 @@ const NavbarButtons = () => {
           <div className="sm:flex sm:items-center sm:gap-2">
             <div>
               <span className="text-white font-medium hidden sm:block">
-                {currentLanguage === "en" ? "English" : "العربيه"}
+                {currentLanguage === "en" ? "(العربيه)" : "(English)"}
               </span>
             </div>
             <div className="relative" ref={languageSwitcherRef}>

@@ -69,7 +69,7 @@ const UploadVideo = () => {
           </label>
         </div>
         {video && (
-          <div className="relative w-full rounded-lg overflow-hidden">
+          <div className="relative w-full rounded-lg overflow-hidden bg-slate-400">
             <div className="w-full h-full">
               <Video videoUrl={video} className="w-full h-full object-cover" />
             </div>

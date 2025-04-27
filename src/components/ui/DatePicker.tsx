@@ -2,16 +2,26 @@ import { useTranslation } from "react-i18next";
 import Datepicker from "react-tailwindcss-datepicker";
 import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
 import { CurrentLanguage } from "../../types";
+import { getDisabledDatesArray } from "@/utils/disabledDatesArray";
 
 interface IProps {
   dateValue: DateValueType;
   handleValueChange: (newValue: DateValueType) => void;
   className?: string;
+  nextAvailableDate?: string;
 }
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
-const DatePicker = ({ dateValue, handleValueChange, className }: IProps) => {
+const DatePicker = ({
+  dateValue,
+  handleValueChange,
+  className,
+  nextAvailableDate,
+}: IProps) => {
   const { t } = useTranslation();
+  const disabledDatesArray = nextAvailableDate
+    ? getDisabledDatesArray(nextAvailableDate)
+    : [];
 
   return (
     <div className="remove-icon">
@@ -25,9 +35,16 @@ const DatePicker = ({ dateValue, handleValueChange, className }: IProps) => {
         onChange={handleValueChange}
         inputClassName={`outline-none font-medium ${className}`}
         placeholder={t("add_date")}
+        disabledDates={
+          disabledDatesArray.length ? disabledDatesArray : undefined
+        }
       />
       <style>
         {`
+        .remove-icon div button.line-through{
+         color: #f87171 !important;
+         cursor: not-allowed;
+        }
           .remove-icon div button {
      
           }

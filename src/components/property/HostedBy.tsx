@@ -41,25 +41,37 @@ function HostedBy({ id, owner, guestRules, ownerId }: IProps) {
 
   return (
     <div className="py-5">
-      <div className="flex items-center gap-5" data-aos="fade-left">
-        <div className="w-12 h-12 rounded-full overflow-hidden">
-          <Image
-            imageUrl={baseURL + owner?.img}
-            alt="User Image"
-            className="w-full h-full object-cover"
-          />
+      <div data-aos="fade-left">
+        <h2 className="pb-3 font-bold text-lg">{t("hosted_by")}</h2>
+        <div className="flex flex-wrap items-center gap-3 sm:gap-5">
+          <div>
+            <div className="w-12 h-12 rounded-full overflow-hidden">
+              <Image
+                imageUrl={baseURL + owner?.img}
+                alt="User Image"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+          <div>
+            <h2 className="font-bold">{owner?.name}</h2>
+          </div>
+          <Button
+            onClick={handleChatNavigator}
+            className="flex items-center gap-1 font-medium"
+          >
+            {loading ? (
+              <Loader />
+            ) : (
+              <>
+                <MessageCircleMore /> ({t("ask_the_owner")})
+              </>
+            )}
+          </Button>
         </div>
-        <div>
-          <h2 className="font-bold">
-            {t("hosted_by")} {owner?.name}
-          </h2>
-        </div>
-        <Button onClick={handleChatNavigator}>
-          {loading ? <Loader /> : <MessageCircleMore />}
-        </Button>
       </div>
-      <div className="flex flex-col gap-1 pt-4" data-aos="fade-left">
-        <h3 className="font-bold">{t("host_rules")}</h3>
+      <div className="flex flex-col gap-1 pt-4" data-aos="fade-right">
+        <h3 className="font-bold text-lg">{t("host_rules")}</h3>
         <p className="text-dark font-medium">{guestRules}</p>
       </div>
     </div>

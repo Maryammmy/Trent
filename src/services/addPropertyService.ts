@@ -27,8 +27,12 @@ const propertyData = (images: File[], video?: File | null): IPropertyData => {
     city_en: sessionStorage.getItem("city_en") || "",
     city_ar: sessionStorage.getItem("city_ar") || "",
     government_id: sessionStorage.getItem("government_id") || "",
-    compound_en: sessionStorage.getItem("compound_en") || "",
-    compound_ar: sessionStorage.getItem("compound_ar") || "",
+    ...(sessionStorage.getItem("compound_en") && {
+      compound_en: sessionStorage.getItem("compound_en") || undefined,
+    }),
+    ...(sessionStorage.getItem("compound_ar") && {
+      compound_ar: sessionStorage.getItem("compound_ar") || undefined,
+    }),
     address_en: sessionStorage.getItem("address_en") || "",
     address_ar: sessionStorage.getItem("address_ar") || "",
     floor_en: sessionStorage.getItem("floor_en") || "",

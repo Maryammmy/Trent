@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import InputErrorMessage from "../ui/InputErrorMessage";
 import OtpModal from "./OtpModal";
 import { forgetPasswordSchema } from "@/validation/forgetPasswordSchema";
+import CountrySelector from "../ui/CountrySelector";
 interface IProps {
   close: () => void;
   isOpen: boolean;
@@ -30,7 +31,12 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
     formState: { errors },
   } = useForm<IForgetPassword>({
     resolver: yupResolver(forgetPasswordSchema),
-    defaultValues: { mobile: phone, password: "", confirm_password: "" },
+    defaultValues: {
+      ccode: "+20",
+      mobile: phone,
+      password: "",
+      confirm_password: "",
+    },
   });
   const onSubmit: SubmitHandler<IForgetPassword> = async (data) => {
     setLoading(true);
@@ -98,6 +104,16 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
             </p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+              name="ccode"
+              control={control}
+              render={({ field }) => (
+                <CountrySelector
+                  selectedCountry={field.value}
+                  onChange={field.onChange}
+                />
+              )}
+            />
             <div className="flex flex-col gap-2 mb-4">
               <label htmlFor="mobile" className="text-600 font-medium text-sm">
                 {t("phone_number")}

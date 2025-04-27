@@ -1,7 +1,9 @@
 import HostingCard from "@/components/hosting/HostingCard";
+import PropertyHostingSkeleton from "@/components/skeleton/PropertyHostingSkeleton";
 import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
-import { hosting } from "@/data/hosting";
 import { IUser } from "@/interfaces/accountSettings";
+import { IDashboard } from "@/interfaces/dashboard";
+import { useUserDashboardAPI } from "@/services/dashboard";
 import { useUserAPI } from "@/services/userService";
 import { useTranslation } from "react-i18next";
 
@@ -9,6 +11,8 @@ function Hosting() {
   const { t } = useTranslation();
   const { data } = useUserAPI();
   const user: IUser = data?.data?.data?.user_data;
+  const { data: dashboard } = useUserDashboardAPI();
+  const membership: IDashboard = dashboard?.data?.data;
 
   return (
     <div className="max-w-6xl  mx-auto py-5 md:py-10 px-5 xl:px-0">
@@ -20,16 +24,20 @@ function Hosting() {
               <SelectSkeleton />
             </div>
           ) : (
-            <span className="font-bold text:lg md:text-2xl text-primary">
+            <span className="font-bold text:lg md:text-2xl text-center text-primary">
               : {user?.membership}
             </span>
           )}
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {hosting.map((item, index) => (
-          <HostingCard key={index} item={item} />
-        ))}
+        {!membership?.report_data ? (
+          <PropertyHostingSkeleton cards={6} />
+        ) : (
+          membership?.report_data?.map((item, index) => (
+            <HostingCard key={index} item={item} />
+          ))
+        )}
       </div>
     </div>
   );
