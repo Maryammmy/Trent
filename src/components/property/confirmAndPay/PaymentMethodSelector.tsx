@@ -27,9 +27,8 @@ function PaymentMethodSelector({ paymentMethod, onChange }: IProps) {
             <span className="font-medium">{t(method.label)}</span>
             <div className="flex gap-3">
               {method.icons.map((icon, index) => (
-                <div className="w-8 h-8 rounded-sm overflow-hidden">
+                <div key={index} className="w-8 h-8 rounded-sm overflow-hidden">
                   <Image
-                    key={index}
                     imageUrl={icon}
                     alt={`${method.label} icon`}
                     className="w-full h-full"

@@ -400,5 +400,9 @@
   "night": "ليلة",
   "about_this_place": "عن هذا المكان",
   "ask_the_owner": "اسأل المالك",
-  "minimum_stay": "الحد الأدنى للإقامة"
+  "minimum_stay": "الحد الأدنى للإقامة",
+  "desc_my_bookings": "إدارة ومتابعة جميع الحجوزات النشطة والمكتملة بسهولة من مكان واحد.",
+  "active": "نشط",
+  "completed": "مكتمل",
+  "no_bookings_found": "لا توجد حجوزات"
 }

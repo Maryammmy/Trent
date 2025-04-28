@@ -29,7 +29,11 @@ const PaymentStatus = ({
       </p>
       <p className="font-medium">
         <strong>{t("payment_method")}:</strong>{" "}
-        {paymentMethodFromUrl === "PayUsingCC" ? "Card" : "Wallet"}
+        {paymentMethodFromUrl === "PayUsingCC"
+          ? "Card"
+          : paymentMethodFromUrl === "PayAtFawry"
+          ? "Fawry pay"
+          : "Wallet"}
       </p>
     </div>
   );

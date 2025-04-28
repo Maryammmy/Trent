@@ -28,9 +28,21 @@ export interface IVerifyPropertyResponse {
   to_date: string;
   guest_count: string;
   tax_percent: string;
+  confirm_guest_rules: boolean;
 }
 export interface IPaymentMethodBook {
   label: string;
   value: string;
   icons: string[];
+}
+export interface IBooking {
+  book_id: string;
+  book_status: string;
+  p_method_id: string;
+  prop_id: string;
+  prop_img: string;
+  prop_price: string;
+  prop_title: string;
+  rate: string;
+  total_day: string;
 }

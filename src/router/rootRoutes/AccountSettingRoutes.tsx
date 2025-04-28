@@ -1,5 +1,6 @@
 import ProtectedRoutes from "@/middleware/ProtectedRoutes";
 import AccountSettings from "@/pages/accountSettings";
+import Bookings from "@/pages/accountSettings/Bookings";
 import LoginAndSecurity from "@/pages/accountSettings/LoginAndSecurity";
 import PersonalInfo from "@/pages/accountSettings/PersonalInfo";
 import Preferences from "@/pages/accountSettings/Preferences";
@@ -20,6 +21,14 @@ export const AccountSettingsRoutes = (
       element={
         <ProtectedRoutes>
           <PersonalInfo />
+        </ProtectedRoutes>
+      }
+    />
+    <Route
+      path="account-settings/bookings"
+      element={
+        <ProtectedRoutes>
+          <Bookings />
         </ProtectedRoutes>
       }
     />

@@ -18,7 +18,11 @@ import { useQueryParam } from "@/utils/getQueryParam";
 import PaymentStatus from "@/components/property/confirmAndPay/PaymentStatus";
 import { CurrentLanguage } from "@/types";
 import PaymentMethodSelector from "@/components/property/confirmAndPay/PaymentMethodSelector";
+import Cookies from "js-cookie";
+import { saveBookingAPI } from "@/services/bookingService";
+import { ApiError } from "@/interfaces";
 
+const uid = Cookies.get("user_id");
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 function ConfirmAndPay() {
@@ -38,7 +42,11 @@ function ConfirmAndPay() {
   const paymentAmount = useQueryParam("paymentAmount");
   const paymentMethodFromUrl = useQueryParam("paymentMethod");
   const [paymentMethod, setPaymentMethod] = useState(
-    paymentMethodFromUrl === "PayUsingCC" ? "CARD" : "MWALLET"
+    paymentMethodFromUrl === "PayUsingCC"
+      ? "CARD"
+      : paymentMethodFromUrl === "PayAtFawry"
+      ? "PayAtFawry"
+      : "MWALLET"
   );
   const createFawryPayment = async () => {
     try {
@@ -69,7 +77,33 @@ function ConfirmAndPay() {
       setLoading(false);
     }
   };
-
+  const handleSaveBooking = async () => {
+    try {
+      setLoading(true);
+      const payload = {
+        prop_id: id ? id : "",
+        guest_counts: Number(bookingData?.guest_count),
+        from_date: bookingData?.from_date,
+        to_date: bookingData?.to_date,
+        confirm_guest_rules: bookingData?.confirm_guest_rules,
+        uid: uid ? uid : "",
+        lang: currentLanguage,
+      };
+      const response = await saveBookingAPI(payload);
+      if (response?.data?.response_code === 200) {
+        toast.success(response?.data?.response_message);
+      }
+    } catch (error) {
+      const customError = error as ApiError;
+      const errorMessage =
+        customError?.response?.data?.response_message ||
+        t("something_went_wrong");
+      toast.error(errorMessage);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="py-10 px-5 xl:px-20 max-w-7xl mx-auto">
       <div className="flex gap-2 items-center">
@@ -102,7 +136,7 @@ function ConfirmAndPay() {
                 </p>
               </div>
             </div>
-            <div className="lg:py-4">
+            <div className="lg:py-5">
               <h3 className="font-semibold text-2xl pb-4">
                 {t("choose_how_to_pay")}
               </h3>
@@ -150,7 +184,7 @@ function ConfirmAndPay() {
           <div className="lg:flex-[2] lg:flex lg:justify-end">
             <PriceDetails bookingData={bookingData} />
           </div>
-          <div className="py-0 lg:py-4">
+          <div className="py-0 lg:py-5">
             <h3 className="font-semibold text-2xl pb-4">
               {t("choose_how_to_pay")}
             </h3>
@@ -172,7 +206,9 @@ function ConfirmAndPay() {
       <div className="px-2 md:px-10 flex justify-end">
         <Button
           disabled={loading}
-          onClick={orderStatus === "PAID" ? () => {} : createFawryPayment}
+          onClick={
+            orderStatus === "PAID" ? handleSaveBooking : createFawryPayment
+          }
           className={`bg-primary font-medium text-lg text-white w-32 py-2 rounded-md ${
             orderStatus === "PAID" && "w-40"
           }`}

@@ -167,7 +167,19 @@ span {
     --chart-5: 340 75% 55%;
   }
 }
-
+.activeButton {
+  position: relative;
+  padding-bottom: 10px;
+  background: linear-gradient(to right, #223f7f 0%, #223f7f 100%);
+  background-size: 0% 2px;
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s;
+}
+.activeButton.active {
+  background-size: 100% 2px;
+  color: #223f7f;
+}
 @layer base {
   * {
     @apply border-border;

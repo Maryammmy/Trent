@@ -5,7 +5,7 @@ function PrivacyPolicy() {
   const { t } = useTranslation();
   const { data } = usePrivacyPolicyAPI();
   return (
-    <div className="py-5 min-h-screen">
+    <div className="py-5">
       <div className="p-5 md:p-10 pt-0 md:pt-5">
         <h1 className="text-2xl font-bold text-center text-gray-800">
           {t("privacy_policy")}

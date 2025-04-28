@@ -402,5 +402,9 @@
   "night": "night",
   "about_this_place": "About this place",
   "ask_the_owner": "Ask the owner",
-  "minimum_stay": "Minimum stay"
+  "minimum_stay": "Minimum stay",
+  "desc_my_bookings": "View and manage all your active and completed bookings seamlessly.",
+  "active": "Active",
+  "completed": "Completed",
+  "no_bookings_found": "No bookings found"
 }

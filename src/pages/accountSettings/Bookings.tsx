@@ -1,0 +1,52 @@
+import Booking from "@/components/accountSettings/bookings/Booking";
+import DynamicTitle from "@/components/accountSettings/DynamicTitle";
+import PropertyHostingSkeleton from "@/components/skeleton/PropertyHostingSkeleton";
+import Button from "@/components/ui/Button";
+import { IBooking } from "@/interfaces/booking";
+import { useMyBookingsAPI } from "@/services/bookingService";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
+function Bookings() {
+  const { t } = useTranslation();
+  const [status, setStatus] = useState("active");
+  const { data } = useMyBookingsAPI(status);
+  const bookings: IBooking[] = data?.data?.data?.My_Booking;
+  return (
+    <div className="max-w-6xl mx-auto py-5 md:py-10 px-5 xl:px-0">
+      <DynamicTitle title="my_bookings" />
+      <div className="grid grid-cols-2 gap-10 text-xl my-6 font-semibold">
+        <Button
+          onClick={() => setStatus("active")}
+          className={`text-start text-dark activeButton w-fit ${
+            status === "active" ? "active" : ""
+          }`}
+        >
+          {t("active")}
+        </Button>
+        <Button
+          onClick={() => setStatus("completed")}
+          className={`text-start text-dark activeButton w-fit ${
+            status === "completed" ? "active" : ""
+          }`}
+        >
+          {t("completed")}
+        </Button>
+      </div>
+      <div className="grid grid-cols-1 gap-5 sm:gap-8 mt-5">
+        {!bookings ? (
+          <PropertyHostingSkeleton cards={3} />
+        ) : bookings?.length ? (
+          bookings.map((booking) => (
+            <Booking key={booking?.book_id} booking={booking} />
+          ))
+        ) : (
+          <div className="flex justify-center items-center h-[50vh] text-dark font-medium w-full">
+            {t("no_bookings_found")}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+export default Bookings;

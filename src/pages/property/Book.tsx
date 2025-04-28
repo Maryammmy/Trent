@@ -112,11 +112,19 @@ function Book() {
         toast.success(response?.data?.response_message);
         sessionStorage.setItem(
           "bookingData",
-          JSON.stringify(response?.data?.data?.booking_details)
+          JSON.stringify({
+            ...response?.data?.data?.booking_details,
+            confirm_guest_rules: acceptedRules,
+          })
         );
         setTimeout(() => {
           navigate(`/properties/${id}/confirm-and-pay`, {
-            state: { data: response?.data?.data?.booking_details },
+            state: {
+              data: {
+                ...response?.data?.data?.booking_details,
+                confirm_guest_rules: acceptedRules,
+              },
+            },
           });
         }, 1000);
       }

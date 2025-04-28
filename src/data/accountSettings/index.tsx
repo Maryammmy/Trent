@@ -8,7 +8,7 @@ import {
   Globe,
   Briefcase,
   Gift,
-  BetweenVerticalStart,
+  Tickets,
 } from "lucide-react";
 import { IAccountSettings } from "../../interfaces/accountSettings";
 
@@ -18,6 +18,12 @@ export const accountSettingsData: IAccountSettings[] = [
     icon: <User size={40} />,
     title: "personal_info",
     description: "personal_info_desc",
+  },
+  {
+    to: "/account-settings/bookings",
+    icon: <Tickets size={40} />,
+    title: "my_bookings",
+    description: "desc_my_bookings",
   },
   {
     to: "/account-settings/login-and-security",
@@ -66,11 +72,5 @@ export const accountSettingsData: IAccountSettings[] = [
     icon: <Gift size={40} />,
     title: "referral_credit_and_coupon",
     description: "referral_credit_and_coupon_desc",
-  },
-  {
-    to: "/account-settings",
-    icon: <BetweenVerticalStart size={40} />,
-    title: "professional_hosting_tools",
-    description: "professional_hosting_tools_desc",
   },
 ];
