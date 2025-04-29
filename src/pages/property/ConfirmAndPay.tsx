@@ -21,6 +21,7 @@ import PaymentMethodSelector from "@/components/property/confirmAndPay/PaymentMe
 import Cookies from "js-cookie";
 import { saveBookingAPI } from "@/services/bookingService";
 import { ApiError } from "@/interfaces";
+import SuccessBookingModal from "@/components/property/confirmAndPay/SuccessBookingModal";
 
 const uid = Cookies.get("user_id");
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
@@ -41,6 +42,8 @@ function ConfirmAndPay() {
   const orderStatus = useQueryParam("orderStatus");
   const paymentAmount = useQueryParam("paymentAmount");
   const paymentMethodFromUrl = useQueryParam("paymentMethod");
+  const [isSuccessModal, setIsSuccessModal] = useState(true);
+  const [saveBookingResponse, setSaveBookingResponse] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(
     paymentMethodFromUrl === "PayUsingCC"
       ? "CARD"
@@ -64,7 +67,7 @@ function ConfirmAndPay() {
       console.log("Response:", response);
       if (response.status === 200) {
         const redirectUrl = response.data;
-        toast.success("Redirecting you to Fawry payment plugin...");
+        toast.success(t("redirecting_fawry"));
         setTimeout(() => {
           window.location.href = redirectUrl;
         }, 1000);
@@ -91,7 +94,8 @@ function ConfirmAndPay() {
       };
       const response = await saveBookingAPI(payload);
       if (response?.data?.response_code === 200) {
-        toast.success(response?.data?.response_message);
+        setIsSuccessModal(true);
+        setSaveBookingResponse(response?.data?.data?.booking_details);
       }
     } catch (error) {
       const customError = error as ApiError;
@@ -105,38 +109,95 @@ function ConfirmAndPay() {
     }
   };
   return (
-    <div className="py-10 px-5 xl:px-20 max-w-7xl mx-auto">
-      <div className="flex gap-2 items-center">
-        <Link to={`/properties/${id}/book`}>
-          {currentLanguage === "ar" ? <ChevronRight /> : <ChevronLeft />}
-        </Link>
-        <h2 className="text-2xl sm:text-3xl font-semibold">
-          {t("confirm_and_pay")}
-        </h2>
-      </div>
-      {isLargeScreen ? (
-        <div className="px-2 md:px-10 flex flex-col lg:flex-row justify-between py-10 gap-10">
-          <div className="lg:flex-1">
-            <h4 className="font-medium text-xl">{t("booking_checkout")}</h4>
-            <div className="flex flex-col gap-4 py-5">
-              <div className="flex justify-between">
-                <div>
-                  <h5 className="font-medium text-lg pb-1">{t("check_in")}</h5>
-                  <p className="font-medium">{bookingData?.from_date}</p>
+    <>
+      <div className="py-10 px-5 xl:px-20 max-w-7xl mx-auto">
+        <div className="flex gap-2 items-center">
+          <Link to={`/properties/${id}/book`}>
+            {currentLanguage === "ar" ? <ChevronRight /> : <ChevronLeft />}
+          </Link>
+          <h2 className="text-2xl sm:text-3xl font-semibold">
+            {t("confirm_and_pay")}
+          </h2>
+        </div>
+        {isLargeScreen ? (
+          <div className="px-2 md:px-10 flex flex-col lg:flex-row justify-between py-10 gap-10">
+            <div className="lg:flex-1">
+              <h4 className="font-semibold text-xl">{t("booking_checkout")}</h4>
+              <div className="flex flex-col gap-4 py-5">
+                <div className="flex justify-between">
+                  <div>
+                    <h5 className="font-medium text-lg pb-1">
+                      {t("check_in")}
+                    </h5>
+                    <p className="font-medium">{bookingData?.from_date}</p>
+                  </div>
+                  <div>
+                    <h5 className="font-medium text-lg pb-1">
+                      {t("check_out")}
+                    </h5>
+                    <p className="font-medium">{bookingData?.to_date}</p>
+                  </div>
                 </div>
                 <div>
-                  <h5 className="font-medium text-lg pb-1">{t("check_out")}</h5>
-                  <p className="font-medium">{bookingData?.to_date}</p>
+                  <h5 className="font-medium text-lg pb-1">{t("guests")}</h5>
+                  <p className="font-medium">
+                    {bookingData?.guest_count} {t("guests")}
+                  </p>
                 </div>
               </div>
-              <div>
-                <h5 className="font-medium text-lg pb-1">{t("guests")}</h5>
-                <p className="font-medium">
-                  {bookingData?.guest_count} {t("guests")}
-                </p>
+              <div className="lg:py-5">
+                <h3 className="font-semibold text-2xl pb-4">
+                  {t("choose_how_to_pay")}
+                </h3>
+                <PaymentMethodSelector
+                  paymentMethod={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+              </div>
+              {orderStatus && (
+                <PaymentStatus
+                  referenceNumber={referenceNumber || ""}
+                  orderStatus={orderStatus}
+                  paymentAmount={paymentAmount || ""}
+                  paymentMethodFromUrl={paymentMethodFromUrl || ""}
+                />
+              )}
+            </div>
+            <div className="lg:flex-[2] lg:flex lg:justify-end">
+              <PriceDetails bookingData={bookingData} />
+            </div>
+          </div>
+        ) : (
+          <div className="px-2 md:px-10 flex flex-col lg:flex-row justify-between py-10 gap-10">
+            <div className="lg:flex-1">
+              <h4 className="font-medium text-xl">{t("your_trip")}</h4>
+              <div className="flex flex-col gap-4 py-5">
+                <div className="flex justify-between">
+                  <div>
+                    <h5 className="font-medium text-lg pb-1">
+                      {t("check_in")}
+                    </h5>
+                    <p className="font-medium">{bookingData?.from_date}</p>
+                  </div>
+                  <div>
+                    <h5 className="font-medium text-lg pb-1">
+                      {t("check_out")}
+                    </h5>
+                    <p className="font-medium">{bookingData?.to_date}</p>
+                  </div>
+                </div>
+                <div>
+                  <h5 className="font-medium text-lg pb-1">{t("guests")}</h5>
+                  <p className="font-medium">
+                    {bookingData?.guest_count} {t("guests")}
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="lg:py-5">
+            <div className="lg:flex-[2] lg:flex lg:justify-end">
+              <PriceDetails bookingData={bookingData} />
+            </div>
+            <div className="py-0 lg:py-5">
               <h3 className="font-semibold text-2xl pb-4">
                 {t("choose_how_to_pay")}
               </h3>
@@ -154,75 +215,35 @@ function ConfirmAndPay() {
               />
             )}
           </div>
-          <div className="lg:flex-[2] lg:flex lg:justify-end">
-            <PriceDetails bookingData={bookingData} />
-          </div>
+        )}
+        <div className="px-2 md:px-10 flex justify-end">
+          <Button
+            disabled={loading}
+            onClick={
+              orderStatus === "PAID" ? handleSaveBooking : createFawryPayment
+            }
+            className={`bg-primary font-medium text-lg text-white w-32 py-2 rounded-md ${
+              orderStatus === "PAID" && "w-40"
+            }`}
+          >
+            {loading ? (
+              <Loader />
+            ) : orderStatus === "PAID" ? (
+              t("save_booking")
+            ) : (
+              t("pay")
+            )}
+          </Button>
         </div>
-      ) : (
-        <div className="px-2 md:px-10 flex flex-col lg:flex-row justify-between py-10 gap-10">
-          <div className="lg:flex-1">
-            <h4 className="font-medium text-xl">{t("your_trip")}</h4>
-            <div className="flex flex-col gap-4 py-5">
-              <div className="flex justify-between">
-                <div>
-                  <h5 className="font-medium text-lg pb-1">{t("check_in")}</h5>
-                  <p className="font-medium">{bookingData?.from_date}</p>
-                </div>
-                <div>
-                  <h5 className="font-medium text-lg pb-1">{t("check_out")}</h5>
-                  <p className="font-medium">{bookingData?.to_date}</p>
-                </div>
-              </div>
-              <div>
-                <h5 className="font-medium text-lg pb-1">{t("guests")}</h5>
-                <p className="font-medium">
-                  {bookingData?.guest_count} {t("guests")}
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="lg:flex-[2] lg:flex lg:justify-end">
-            <PriceDetails bookingData={bookingData} />
-          </div>
-          <div className="py-0 lg:py-5">
-            <h3 className="font-semibold text-2xl pb-4">
-              {t("choose_how_to_pay")}
-            </h3>
-            <PaymentMethodSelector
-              paymentMethod={paymentMethod}
-              onChange={(e) => setPaymentMethod(e.target.value)}
-            />
-          </div>
-          {orderStatus && (
-            <PaymentStatus
-              referenceNumber={referenceNumber || ""}
-              orderStatus={orderStatus}
-              paymentAmount={paymentAmount || ""}
-              paymentMethodFromUrl={paymentMethodFromUrl || ""}
-            />
-          )}
-        </div>
-      )}
-      <div className="px-2 md:px-10 flex justify-end">
-        <Button
-          disabled={loading}
-          onClick={
-            orderStatus === "PAID" ? handleSaveBooking : createFawryPayment
-          }
-          className={`bg-primary font-medium text-lg text-white w-32 py-2 rounded-md ${
-            orderStatus === "PAID" && "w-40"
-          }`}
-        >
-          {loading ? (
-            <Loader />
-          ) : orderStatus === "PAID" ? (
-            t("save_booking")
-          ) : (
-            t("pay")
-          )}
-        </Button>
       </div>
-    </div>
+      {isSuccessModal && saveBookingResponse && (
+        <SuccessBookingModal
+          isSuccess={true}
+          onClose={() => setIsSuccessModal(false)}
+          bookingData={saveBookingResponse}
+        />
+      )}
+    </>
   );
 }
 

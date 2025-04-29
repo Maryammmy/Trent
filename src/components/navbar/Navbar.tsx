@@ -59,9 +59,7 @@ const Navbar = () => {
               ref={navlinksToggle}
               className={`w-full mt-4 py-2 rounded-md bg-primary transition-all duration-300 ${
                 toggle
-                  ? `block absolute ${
-                      pathname === "/" && !bg ? "top-12" : "top-16"
-                    } left-0 w-full z-[2100]`
+                  ? `block absolute top-12 left-0 w-full z-[2100]`
                   : "hidden"
               }`}
             >

@@ -14,21 +14,19 @@ const PaymentStatus = ({
 }: IProps) => {
   const { t } = useTranslation();
   return (
-    <div className="p-4 rounded-md shadow-sm border mt-5">
-      <h4 className="text-xl font-semibold mb-2 text-primary">
-        {t("payment_status")}
-      </h4>
-      <p className="font-medium">
-        <strong>{t("reference_number")}:</strong> {referenceNumber}
+    <div className="p-4 rounded-md shadow-sm border mt-5 font-semibold">
+      <h4 className="text-xl mb-2 text-primary">{t("payment_status")}</h4>
+      <p className="">
+        <span>{t("reference_number")}:</span> {referenceNumber}
       </p>
-      <p className="font-medium">
-        <strong>{t("order_status")}:</strong> {capitalize(orderStatus)}
+      <p className="">
+        <span>{t("order_status")}:</span> {capitalize(orderStatus)}
       </p>
-      <p className="font-medium">
-        <strong>{t("amount")}:</strong> {paymentAmount} {t("price_per_night")}
+      <p className="">
+        <span>{t("amount")}:</span> {paymentAmount} {t("price_per_night")}
       </p>
-      <p className="font-medium">
-        <strong>{t("payment_method")}:</strong>{" "}
+      <p className="">
+        <span>{t("payment_method")}:</span>{" "}
         {paymentMethodFromUrl === "PayUsingCC"
           ? "Card"
           : paymentMethodFromUrl === "PayAtFawry"

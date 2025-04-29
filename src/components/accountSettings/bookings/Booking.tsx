@@ -1,17 +1,20 @@
-import Button from "@/components/ui/Button";
 import Image from "@/components/ui/Image";
 import { IBooking } from "@/interfaces/booking";
 import { baseURL } from "@/services";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 interface IProps {
   booking: IBooking;
 }
 function Booking({ booking }: IProps) {
   const { t } = useTranslation();
-  const { book_status, prop_img, prop_title, prop_price } = booking;
+  const { book_status, prop_img, prop_title, prop_price, book_id } = booking;
   return (
-    <Button className="flex flex-wrap items-center gap-5 sm:gap-8 border p-4 rounded-2xl w-full text-start font-medium">
+    <Link
+      to={`/account-settings/bookings/${book_id}`}
+      className="flex flex-wrap items-center gap-5 sm:gap-8 border p-4 rounded-2xl w-full text-start font-medium"
+    >
       <div className="relative h-14 w-14 overflow-hidden rounded-md">
         <div className="absolute inset-0 bg-black/15 pointer-events-none z-[5]" />
         <div className="w-full h-full">
@@ -31,7 +34,7 @@ function Booking({ booking }: IProps) {
           <span className="text-primary">{book_status}</span>
         </div>
       </div>
-    </Button>
+    </Link>
   );
 }
 

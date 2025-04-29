@@ -24,7 +24,7 @@ export const getResponsiveSettings = (
     },
   },
 ];
-export const responsiveSettings = [
+export const responsiveSettings: ResponsiveSetting[] = [
   {
     breakpoint: 1440,
     settings: {

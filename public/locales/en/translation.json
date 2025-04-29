@@ -406,5 +406,7 @@
   "desc_my_bookings": "View and manage all your active and completed bookings seamlessly.",
   "active": "Active",
   "completed": "Completed",
-  "no_bookings_found": "No bookings found"
+  "no_bookings_found": "No bookings found",
+  "redirecting_fawry": "Redirecting you to Fawry payment plugin...",
+  "booking_successful": "Booking successful 🎉"
 }

@@ -17,9 +17,9 @@ const NavbarLinks = () => {
   const navigate = useNavigate();
   return (
     <>
-      <ul className="font-medium flex flex-col justify-center items-center lg:flex-row lg:space-x-8">
+      <ul className="font-medium flex flex-col justify-center items-center lg:flex-row lg:gap-8">
         {navItems.map((item, index) => (
-          <li key={index} className="mb-2">
+          <li key={index} className="mb-2 lg:mb-0">
             <NavLink
               to={item.to}
               className="px-4 text-lg font-semibold text-white hover:text-gray-300 transition"
@@ -30,9 +30,9 @@ const NavbarLinks = () => {
         ))}
       </ul>
       {!isLoggedin && (
-        <ul className="font-medium flex flex-col justify-center items-center lg:flex-row lg:space-x-8">
+        <ul className="font-medium flex flex-col justify-center items-center lg:flex-row lg:gap-8">
           {authItems.map((item, index) => (
-            <li key={index} className="mb-2">
+            <li key={index} className="mb-2 lg:mb-0">
               <Button
                 onClick={
                   item === "sign_up"
