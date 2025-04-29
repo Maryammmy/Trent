@@ -90,10 +90,6 @@ export interface IDetailsProperty {
   user_id: string;
   video: string;
 }
-export interface IDeleteProperty {
-  uid: string;
-  prop_id: string;
-}
 export interface IFacilityProperty {
   id: string;
   img: string;

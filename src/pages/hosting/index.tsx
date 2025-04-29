@@ -15,7 +15,7 @@ function Hosting() {
   const membership: IDashboard = dashboard?.data?.data;
 
   return (
-    <div className="max-w-6xl  mx-auto py-5 md:py-10 px-5 xl:px-0">
+    <div className="max-w-6xl mx-auto py-5 md:py-10 px-5 xl:px-0">
       <div className="flex items-center gap-2 pb-10">
         <h2 className="text-xl md:text-4xl font-semibold">{t("membership")}</h2>
         <div className="">

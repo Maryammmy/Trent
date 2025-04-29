@@ -4,9 +4,10 @@ import Hosting from "../pages/hosting";
 import Properties from "../pages/hosting/properties";
 import ProtectedRoutes from "../middleware/ProtectedRoutes";
 import UpdateProperty from "@/pages/hosting/properties/updateProperty";
-import Payout from "@/pages/payout";
-import PayoutProfile from "@/pages/payout/PayoutProfile";
-import PayoutRequest from "@/pages/payout/PayoutRequest";
+import Payout from "@/pages/payouts";
+import PayoutRequest from "@/pages/payouts/PayoutRequest";
+import PayoutProfiles from "@/pages/payouts/PayoutProfiles";
+import CreatePayoutProfile from "@/pages/payouts/CreatePayoutProfile";
 
 export const HostingRoutes = (
   <Route path="/hosting" element={<HostingLayout />}>
@@ -43,10 +44,18 @@ export const HostingRoutes = (
       }
     />
     <Route
-      path="payouts/profile"
+      path="payouts/profiles"
       element={
         <ProtectedRoutes>
-          <PayoutProfile />
+          <PayoutProfiles />
+        </ProtectedRoutes>
+      }
+    />
+    <Route
+      path="payouts/create-profile"
+      element={
+        <ProtectedRoutes>
+          <CreatePayoutProfile />
         </ProtectedRoutes>
       }
     />

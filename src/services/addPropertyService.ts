@@ -1,4 +1,4 @@
-import { IPropertyData } from "../interfaces/property/property";
+import { IPropertyData } from "../interfaces/property";
 import toast from "react-hot-toast";
 import { ApiError } from "../interfaces";
 import { addPropertyAPI } from "./propertyService";

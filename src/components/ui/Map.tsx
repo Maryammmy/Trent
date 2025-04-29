@@ -18,7 +18,7 @@ const Map = ({ latitdude, longitude }: IProps) => {
 
   if (!isLoaded)
     return (
-      <div className="flex justify-center items-center h-[50vh] text-dark font-medium w-full">
+      <div className="flex justify-center items-center text-lg h-[50vh] text-dark font-medium w-full">
         Loading Map...
       </div>
     );

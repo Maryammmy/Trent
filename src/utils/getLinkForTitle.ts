@@ -8,16 +8,16 @@ export const getLinkForTitle = (title: string) => {
       return "/hosting/payouts";
     case "my payout profiles":
     case "ملفاتي المالية":
-      return "/hosting/payouts/profile";
+      return "/hosting/payouts/profiles";
     case "my booking":
     case "حجوزاتي":
-      return "/booking";
+      return "/hosting/bookings";
     case "my gallery images":
     case "صور المعرض":
-      return "/gallery/images";
+      return "/hosting/gallery/images";
     case "my extra images":
     case "الصور الإضافية":
-      return "/gallery/extra-images";
+      return "/hosting/gallery/extra-images";
     default:
       return "/";
   }

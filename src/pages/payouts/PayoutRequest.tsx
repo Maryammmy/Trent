@@ -6,16 +6,18 @@ import Button from "@/components/ui/Button";
 import { useState } from "react";
 import {
   createPayoutsRequestAPI,
+  usePayoutProfilesAPI,
   usePayoutPropertiesAPI,
-} from "@/services/payoutService";
+} from "@/services/payoutsService";
 import Select from "@/components/ui/Select";
 import PropertyHostingSkeleton from "@/components/skeleton/PropertyHostingSkeleton";
-import { IReadyPayoutProperties } from "@/interfaces/payout";
+import { IPayoutProfile, IReadyPayoutProperties } from "@/interfaces/payouts";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { ApiError } from "@/interfaces";
 import Loader from "@/components/loader/Loader";
 import { useNavigate } from "react-router-dom";
+import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
 
 const uid = Cookies.get("user_id") || "";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
@@ -26,13 +28,12 @@ function PayoutRequest() {
   const [selectedProperties, setSelectedProperties] = useState<number[]>([]);
   const [loading, setLoading] = useState(false);
   const [profileId, setProfileId] = useState<string>("");
+  const { data: payoutProfileData } = usePayoutProfilesAPI();
+  const payoutProfiles: IPayoutProfile[] =
+    payoutProfileData?.data?.data?.payout_profiles_list;
   const { data } = usePayoutPropertiesAPI();
   const payoutProperties: IReadyPayoutProperties[] =
     data?.data?.data?.Properties_list;
-  const profiles = [
-    { label: "Profile 1", value: "26" },
-    { label: "Profile 2", value: "27" },
-  ];
   const toggleProperty = (id: number) => {
     setSelectedProperties((prev) =>
       prev.includes(id) ? prev.filter((propId) => propId !== id) : [...prev, id]
@@ -69,8 +70,8 @@ function PayoutRequest() {
     }
   };
   return (
-    <div className="py-10 px-5 xl:px-20 max-w-6xl">
-      <div className="mx-auto w-full sm:w-96 h-52 relative rounded-2xl overflow-hidden">
+    <div className="py-10 px-5 xl:px-0 max-w-6xl mx-auto">
+      <div className="w-full sm:w-96 h-52 relative rounded-2xl overflow-hidden">
         <div className="absolute h-full left-5 py-2 pointer-events-none z-[5] flex flex-col justify-between">
           <h2 className="text-white font-semibold text-xl pt-5">
             {t("payouts")}
@@ -97,11 +98,32 @@ function PayoutRequest() {
         </div>
       </div>
       <div className="pt-8 max-w-md">
-        <Select
-          options={profiles}
-          value={profileId}
-          onChange={(e) => setProfileId(e.target.value)}
-        />
+        {!payoutProfiles ? (
+          <SelectSkeleton />
+        ) : payoutProfiles?.length ? (
+          <Select
+            options={payoutProfiles?.map((profile: IPayoutProfile) => ({
+              value: profile?.id,
+              label: profile?.method_name,
+            }))}
+            value={profileId}
+            onChange={(e) => setProfileId(e.target.value)}
+          />
+        ) : (
+          <div className="flex flex-col gap-5 justify-center items-center font-medium">
+            <p className="text-lg text-dark">{t("no_payout_profiles_found")}</p>
+            <Button
+              onClick={() =>
+                navigate("/hosting/payouts/create-profile", {
+                  state: "/hosting/payouts/request",
+                })
+              }
+              className="bg-primary font-medium text-white py-2 px-4 rounded-md"
+            >
+              {t("create_payout_profile")}
+            </Button>
+          </div>
+        )}
       </div>
       <div className="pt-8">
         <h2 className="text-2xl font-semibold">{t("ready_properties")}</h2>
@@ -118,8 +140,8 @@ function PayoutRequest() {
               />
             ))
           ) : (
-            <div className="flex justify-center items-center h-[50vh] text-dark font-medium w-full">
-              {t("no_properties_found")}
+            <div className="flex justify-center items-center text-lg h-[50vh] text-dark font-medium w-full">
+              {t("no_ready_properties_found")}
             </div>
           )}
         </div>
@@ -128,9 +150,9 @@ function PayoutRequest() {
         <Button
           disabled={loading}
           onClick={sendPayoutRequest}
-          className=" bg-primary text-white py-3 w-32 text-lg rounded-md font-medium"
+          className=" bg-primary text-white py-3 w-44 text-lg rounded-md font-medium"
         >
-          {loading ? <Loader /> : t("request")}
+          {loading ? <Loader /> : t("payout_request")}
         </Button>
       </div>
     </div>

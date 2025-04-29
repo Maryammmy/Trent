@@ -5,7 +5,7 @@ import {
   OverlayView,
   InfoWindowF,
 } from "@react-google-maps/api";
-import { IProperty } from "../../interfaces/property/property";
+import { IProperty } from "../../interfaces/property";
 import Button from "../ui/Button";
 import { useTranslation } from "react-i18next";
 import PropertyCartSkeleton from "../skeleton/PropertyCartSkeleton";
@@ -70,7 +70,7 @@ const Map = ({ properties, refetch }: IProps) => {
   };
   if (!isLoaded)
     return (
-      <div className="flex justify-center items-center h-[50vh] text-dark font-medium w-full">
+      <div className="flex justify-center items-center h-[50vh] text-lg text-dark font-medium w-full">
         Loading Map...
       </div>
     );

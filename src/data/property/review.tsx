@@ -6,11 +6,7 @@ import {
   Map,
   AppWindow,
 } from "lucide-react";
-import {
-  IReview,
-  IReviewInstruction,
-  IWidth,
-} from "../../interfaces/property/property";
+import { IReview, IReviewInstruction, IWidth } from "../../interfaces/property";
 import { ISelectOption } from "../../interfaces";
 
 export const reviewInstruction: IReviewInstruction[] = [

@@ -4,10 +4,7 @@ import Image from "../../components/ui/Image";
 import Amenities from "../../components/property/Amenities";
 import { useTranslation } from "react-i18next";
 import { usePropertyAPI } from "../../services/propertyService";
-import {
-  IDetailsProperty,
-  IFacilityProperty,
-} from "../../interfaces/property/property";
+import { IDetailsProperty, IFacilityProperty } from "../../interfaces/property";
 import { CurrentLanguage } from "../../types";
 import { baseURL } from "../../services";
 import PropertySkeleton from "../../components/skeleton/PropertySkeleton";

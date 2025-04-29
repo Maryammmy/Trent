@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import HostingModal from "../../../components/hosting/HostingModal";
 import { useHomeDataAPI } from "../../../services/homeService";
-import { IProperty } from "../../../interfaces/property/property";
+import { IProperty } from "../../../interfaces/property";
 import Cookies from "js-cookie";
 import PropertyHostingSkeleton from "../../../components/skeleton/PropertyHostingSkeleton";
 import Property from "../../../components/hosting/properties/property/Property";
@@ -30,7 +30,7 @@ function Properties() {
               <Property key={property.id} property={property} />
             ))
           ) : (
-            <div className="flex justify-center items-center h-[50vh] text-dark font-medium w-full">
+            <div className="flex justify-center items-center text-lg h-[50vh] text-dark font-medium w-full">
               {t("no_properties_found")}
             </div>
           )}

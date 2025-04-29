@@ -1,4 +1,4 @@
-import { IImage } from "./property/property";
+import { IImage } from "./property";
 
 export interface ICreatePayoutProfile {
   uid: string;
@@ -7,7 +7,7 @@ export interface ICreatePayoutProfile {
   bank_name?: string;
   wallet_number?: string;
   full_name?: string;
-  name: string;
+  profile_name: string;
   lang: string;
 }
 export interface IPaymentMethod {
@@ -31,4 +31,12 @@ export interface IReadyPayoutProperties {
   check_out: string;
   total: string;
   image: IImage[];
+}
+export interface IPayoutProfile {
+  bank_account_number: string;
+  bank_name: string;
+  id: string;
+  method_name: string;
+  profile_name: string;
+  wallet_number: string;
 }

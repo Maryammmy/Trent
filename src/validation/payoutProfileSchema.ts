@@ -50,7 +50,7 @@ export const PayoutProfileSchema = yup.object().shape({
       message: "The wallet number must contain exactly 10 digits",
       excludeEmptyString: true,
     }),
-  name: yup
+  profile_name: yup
     .string()
     .trim()
     .required("Profile name is required")

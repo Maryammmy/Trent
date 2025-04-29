@@ -4,7 +4,7 @@ import TextArea from "../../../components/ui/TextArea";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import CancellationPolicy from "../../../components/becomeAHost/CancellationPolicies";
-import { ICancellationPolicy } from "@/interfaces/property/property";
+import { ICancellationPolicy } from "@/interfaces/property";
 
 function GuestRulesAndCancellationPolicies() {
   const { t } = useTranslation();

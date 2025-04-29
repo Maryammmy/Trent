@@ -5,8 +5,7 @@ import { CurrentLanguage } from "@/types";
 import {
   ICreatePayoutProfile,
   ICreatePayoutRequest,
-  IDeletePayoutProfile,
-} from "@/interfaces/payout";
+} from "@/interfaces/payouts";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -20,17 +19,6 @@ export const usePaymentMethodAPI = () => {
       ),
     enabled: !!uid,
   });
-};
-export const createPayoutsProfileAPI = (payload: ICreatePayoutProfile) => {
-  const formData = new FormData();
-  Object.entries(payload).forEach(([key, value]) => {
-    formData.append(key, String(value));
-  });
-  const response = baseAPIForm.post(
-    "user_api/payout/add_profile_payout.php",
-    formData
-  );
-  return response;
 };
 export const usePayoutPropertiesAPI = () => {
   return useQuery({
@@ -50,9 +38,28 @@ export const createPayoutsRequestAPI = (payload: ICreatePayoutRequest) => {
   const response = baseAPIForm.post("user_api/payout/add_payout.php", formData);
   return response;
 };
-export const deletePayoutProfileAPI = (payload: IDeletePayoutProfile) => {
+export const createPayoutsProfileAPI = (payload: ICreatePayoutProfile) => {
+  const formData = new FormData();
+  Object.entries(payload).forEach(([key, value]) => {
+    formData.append(key, String(value));
+  });
+  const response = baseAPIForm.post(
+    "user_api/payout/add_profile_payout.php",
+    formData
+  );
+  return response;
+};
+export const usePayoutProfilesAPI = () => {
+  return useQuery({
+    queryKey: ["payoutProfiles"],
+    queryFn: () =>
+      baseAPI.get(`user_api/payout/get_profiles_payout.php?uid=${uid}`),
+    enabled: !!uid,
+  });
+};
+export const deletePayoutProfileAPI = (profile_id: string) => {
   const response = baseAPI.delete("user_api/payout/delete_profile_payout.php", {
-    data: payload,
+    data: { uid, profile_id },
   });
   return response;
 };

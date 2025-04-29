@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import Rating from "./ui/Rating";
 import { MapPin } from "lucide-react";
 import Button from "./ui/Button";
-import { IProperty } from "../interfaces/property/property";
+import { IProperty } from "../interfaces/property";
 import { baseURL } from "../services";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { togglePropertyAPI } from "../services/propertyService";

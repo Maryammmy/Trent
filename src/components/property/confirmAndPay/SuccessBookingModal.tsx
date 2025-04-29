@@ -45,6 +45,7 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
             View Receipt
           </Link>
           <Button
+            type="button"
             onClick={onClose}
             className="w-32 py-2 bg-gray-200 text-primary rounded-md hover:bg-gray-200/80"
           >

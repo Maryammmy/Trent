@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { IProperty } from "../../interfaces/property/property";
+import { IProperty } from "../../interfaces/property";
 import { baseURL } from "../../services";
 import { togglePropertyAPI } from "../../services/propertyService";
 import Carsoul from "../ui/Carsoul";

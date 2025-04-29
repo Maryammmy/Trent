@@ -3,7 +3,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import Button from "@/components/ui/Button";
 import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
 import { useTranslation } from "react-i18next";
-import { ICancellationPolicy } from "@/interfaces/property/property";
+import { ICancellationPolicy } from "@/interfaces/property";
 
 interface IProps {
   selectedPolicy: ICancellationPolicy | "";

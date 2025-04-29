@@ -5,7 +5,7 @@ import { List, MapPinned, SlidersHorizontal } from "lucide-react";
 import PropertyCartSkeleton from "../skeleton/PropertyCartSkeleton";
 import CategoryBar from "../CategoryBar";
 import { useHomeDataAPI } from "../../services/homeService";
-import { IProperty } from "../../interfaces/property/property";
+import { IProperty } from "../../interfaces/property";
 import { FilterDataContext } from "../../context/FilterDataContext";
 import FilterModal from "../home/filter/FilterModal";
 import Map from "../map/Map";
@@ -121,7 +121,7 @@ export default function Properties() {
                   </Suspense>
                 ))
               ) : (
-                <div className="flex justify-center items-center h-[50vh] text-dark font-medium w-full">
+                <div className="flex justify-center items-center text-lg h-[50vh] text-dark font-medium w-full">
                   {t("no_properties_found")}
                 </div>
               )}

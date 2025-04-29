@@ -92,6 +92,7 @@ function HostingModal() {
         </div>
         <div className="flex items-center justify-between my-4">
           <Button
+            type="button"
             onClick={() => dispatch(setIsFinishUpModal(false))}
             className=" text-white bg-primary py-2 w-28 rounded-md font-medium"
           >

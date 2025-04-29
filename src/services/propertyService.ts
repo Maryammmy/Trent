@@ -1,9 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
-import {
-  IDeleteProperty,
-  IToggleProperty,
-} from "../interfaces/property/property";
+import { IToggleProperty } from "../interfaces/property";
 import { CurrentLanguage } from "../types";
 import Cookies from "js-cookie";
 
@@ -37,9 +34,9 @@ export const togglePropertyAPI = (payload: IToggleProperty) => {
   );
   return response;
 };
-export const deletePropertyAPI = (payload: IDeleteProperty) => {
+export const deletePropertyAPI = (prop_id: string) => {
   const response = baseAPI.delete("user_api/u_property_delete.php", {
-    data: payload,
+    data: { uid, prop_id },
   });
   return response;
 };

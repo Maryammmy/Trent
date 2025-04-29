@@ -5,7 +5,7 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-import { IProperty } from "../interfaces/property/property";
+import { IProperty } from "../interfaces/property";
 
 interface IFilterDataContext {
   filterData: null | IProperty[];

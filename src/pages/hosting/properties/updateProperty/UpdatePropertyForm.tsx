@@ -20,7 +20,7 @@ import {
   IDetailsProperty,
   IFacilityProperty,
   ICancellationPolicy,
-} from "@/interfaces/property/property";
+} from "@/interfaces/property";
 import { baseURL } from "@/services";
 import {
   usePropertyTypesAPI,

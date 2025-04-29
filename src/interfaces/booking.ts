@@ -1,4 +1,4 @@
-import { IImage } from "./property/property";
+import { IImage } from "./property";
 
 export interface IVerifyProperty {
   prop_id: string;

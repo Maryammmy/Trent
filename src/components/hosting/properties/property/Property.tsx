@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IProperty } from "../../../../interfaces/property/property";
+import { IProperty } from "../../../../interfaces/property";
 import { MdEdit } from "react-icons/md";
 import { useState } from "react";
 import Button from "@/components/ui/Button";
@@ -10,7 +10,7 @@ interface IProps {
 }
 const Property = ({ property }: IProps) => {
   const { t } = useTranslation();
-  const [deleteProperty, setDeleteProperty] = useState(false);
+  const [publishProperty, setPublishProperty] = useState(false);
   const {
     id,
     title,
@@ -59,7 +59,7 @@ const Property = ({ property }: IProps) => {
               <span>{t("edit")}</span>
             </Link>
             <Button
-              onClick={() => setDeleteProperty(true)}
+              onClick={() => setPublishProperty(true)}
               className={`${
                 is_deleted ? "bg-green-600" : "bg-red-600"
               } text-white py-2 w-24 rounded-md font-medium`}
@@ -69,12 +69,14 @@ const Property = ({ property }: IProps) => {
           </div>
         )}
       </div>
-      <PublishModal
-        is_deleted={is_deleted}
-        deleteProperty={deleteProperty}
-        close={() => setDeleteProperty(false)}
-        id={id}
-      />
+      {publishProperty && (
+        <PublishModal
+          is_deleted={is_deleted}
+          publishProperty={publishProperty}
+          close={() => setPublishProperty(false)}
+          id={id}
+        />
+      )}
     </>
   );
 };

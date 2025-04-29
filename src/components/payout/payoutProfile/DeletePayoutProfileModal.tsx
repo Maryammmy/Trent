@@ -2,23 +2,22 @@ import Loader from "@/components/loader/Loader";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import { ApiError } from "@/interfaces";
-import { deletePropertyAPI } from "@/services/propertyService";
+import { deletePayoutProfileAPI } from "@/services/payoutsService";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 interface IProps {
-  is_deleted: boolean;
   id: string;
-  publishProperty: boolean;
+  deleteProfile: boolean;
   close: () => void;
 }
-function PublishModal({ is_deleted, id, publishProperty, close }: IProps) {
+function DeletePayoutProfileModal({ id, deleteProfile, close }: IProps) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const handlePublishProperty = async () => {
+  const handleDeleteAccount = async () => {
     try {
       setLoading(true);
-      const response = await deletePropertyAPI(id);
+      const response = await deletePayoutProfileAPI(id);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
         close();
@@ -37,16 +36,14 @@ function PublishModal({ is_deleted, id, publishProperty, close }: IProps) {
   };
   return (
     <Modal
-      isOpen={publishProperty}
+      isOpen={deleteProfile}
       close={close}
-      title={is_deleted ? t("publish_property") : t("unpublish_property")}
+      title={t("delete_payout_profile_title")}
       className="text-center font-bold text-2xl pt-5"
     >
       <div className="p-5">
         <p className="font-medium text-center">
-          {is_deleted
-            ? t("publish_property_desc")
-            : t("unpublish_property_desc")}
+          {t("delete_payout_profile_desc")}
         </p>
         <div className="flex pt-5 justify-between space-x-3">
           <Button
@@ -57,15 +54,11 @@ function PublishModal({ is_deleted, id, publishProperty, close }: IProps) {
             {t("cancel")}
           </Button>
           <Button
+            className="bg-red-600 font-medium hover:bg-red-600/80 text-white py-2 w-24 rounded-md"
             disabled={loading}
-            className={`${
-              is_deleted
-                ? "bg-green-600 hover:bg-green-600/80"
-                : "bg-red-600 hover:bg-red-600/80"
-            } font-medium text-white py-2 w-24 rounded-md`}
-            onClick={handlePublishProperty}
+            onClick={handleDeleteAccount}
           >
-            {loading ? <Loader /> : is_deleted ? t("publish") : t("unpublish")}
+            {loading ? <Loader /> : t("delete")}
           </Button>
         </div>
       </div>
@@ -73,4 +66,4 @@ function PublishModal({ is_deleted, id, publishProperty, close }: IProps) {
   );
 }
 
-export default PublishModal;
+export default DeletePayoutProfileModal;

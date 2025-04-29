@@ -2,20 +2,18 @@ import { useTranslation } from "react-i18next";
 import Image from "@/components/ui/Image";
 import { CurrentLanguage } from "@/types";
 import { useState } from "react";
-import PayoutRequestModal from "@/components/payout/PayoutRequestModal";
 import PayoutDetailsModal from "@/components/payout/PayoutDetailsModal";
 import { Link } from "react-router-dom";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
-function Payout() {
+function Payouts() {
   const { t } = useTranslation();
-  const [isPayoutRequest, setIsPayoutRequest] = useState(false);
   const [payoutDetails, setPayoutDetails] = useState(false);
   return (
     <>
-      <div className="py-10 px-5 xl:px-20 max-w-6xl">
-        <div className="mx-auto w-full sm:w-96 h-52 relative rounded-2xl overflow-hidden">
+      <div className="py-10 px-5 xl:px-0 max-w-6xl mx-auto">
+        <div className=" w-full sm:w-96 h-52 relative rounded-2xl overflow-hidden">
           <div className="absolute h-full left-5 py-2 pointer-events-none z-[5] flex flex-col justify-between">
             <h2 className="text-white font-semibold text-xl pt-5">
               {t("payouts")}
@@ -60,10 +58,6 @@ function Payout() {
           </Link>
         </div>
       </div>
-      <PayoutRequestModal
-        isOpen={isPayoutRequest}
-        onClose={() => setIsPayoutRequest(false)}
-      />
       <PayoutDetailsModal
         isOpen={payoutDetails}
         onClose={() => setPayoutDetails(false)}
@@ -72,4 +66,4 @@ function Payout() {
   );
 }
 
-export default Payout;
+export default Payouts;

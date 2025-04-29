@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import Button from "../ui/Button";
-import { IReadyPayoutProperties } from "@/interfaces/payout";
+import { IReadyPayoutProperties } from "@/interfaces/payouts";
 import Image from "../ui/Image";
 import { baseURL } from "@/services";
 import Input from "../ui/Input";
@@ -13,7 +13,7 @@ function PayoutReadyProperty({ property, isSelected, onToggle }: IProps) {
   const { id, title, check_in, check_out, total, image } = property;
   const { t } = useTranslation();
   return (
-    <Button className="flex flex-wrap items-center gap-5 sm:gap-8 border p-4 rounded-2xl w-full text-start font-medium">
+    <Button className="flex flex-wrap items-center gap-5 sm:gap-8 border p-4 rounded-2xl text-start font-medium">
       <div className="relative h-14 w-14 overflow-hidden rounded-md">
         <div className="absolute inset-0 bg-black/15 pointer-events-none z-[5]" />
         <div className="w-full h-full">
