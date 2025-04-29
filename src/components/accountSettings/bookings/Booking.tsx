@@ -9,11 +9,20 @@ interface IProps {
 }
 function Booking({ booking }: IProps) {
   const { t } = useTranslation();
-  const { book_status, prop_img, prop_title, prop_price, book_id } = booking;
+  const {
+    book_status,
+    prop_img,
+    prop_title,
+    book_id,
+    total_paid,
+    check_in,
+    check_out,
+  } = booking;
+
   return (
     <Link
       to={`/account-settings/bookings/${book_id}`}
-      className="flex flex-wrap items-center gap-5 sm:gap-8 border p-4 rounded-2xl w-full text-start font-medium"
+      className="flex flex-wrap items-center gap-5 sm:gap-8 border p-4 rounded-2xl w-full text-start"
     >
       <div className="relative h-14 w-14 overflow-hidden rounded-md">
         <div className="absolute inset-0 bg-black/15 pointer-events-none z-[5]" />
@@ -25,14 +34,21 @@ function Booking({ booking }: IProps) {
           />
         </div>
       </div>
-      <div className="">
-        <div className="flex flex-col gap-1">
-          <h3>{prop_title}</h3>
-          <span>
-            {prop_price} {t("price_per_night")}
-          </span>
-          <span className="text-primary">{book_status}</span>
+      <div className="flex flex-col gap-1">
+        <h3 className="text-lg font-semibold">{prop_title}</h3>
+        <div className="flex flex-col gap-1 sm:flex-row sm:gap-5 font-medium">
+          <p>
+            <span className="font-medium"> {t("check_in")} :</span> {check_in}
+          </p>
+          <p>
+            <span className="font-medium"> {t("check_out")} :</span> {check_out}
+          </p>
         </div>
+        <p className="font-medium">
+          <span className="font-medium">{t("total")} :</span>{" "}
+          {total_paid && parseInt(total_paid)} {t("price_per_night")}
+        </p>
+        <span className="text-primary font-semibold">{book_status}</span>
       </div>
     </Link>
   );

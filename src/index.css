@@ -14,6 +14,7 @@ p {
 span {
   overflow-wrap: anywhere;
 }
+/* Button scale */
 .zoom {
   transition: transform 0.3s ease-in-out;
   &:hover {
@@ -47,7 +48,7 @@ span {
     linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
   background-blend-mode: overlay;
 }
-/* gallery page */
+/* PhotoView */
 .PhotoView__PhotoBox {
   width: 70% !important;
   height: 80vh !important;
@@ -111,7 +112,20 @@ span {
 .custom-dots li.slick-active button {
   background-color: white;
 }
-
+/* Bookings */
+.activeButton {
+  position: relative;
+  padding-bottom: 10px;
+  background: linear-gradient(to right, #223f7f 0%, #223f7f 100%);
+  background-size: 0% 2px;
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s;
+}
+.activeButton.active {
+  background-size: 100% 2px;
+  color: #223f7f;
+}
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -166,19 +180,6 @@ span {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-}
-.activeButton {
-  position: relative;
-  padding-bottom: 10px;
-  background: linear-gradient(to right, #223f7f 0%, #223f7f 100%);
-  background-size: 0% 2px;
-  background-position: bottom left;
-  background-repeat: no-repeat;
-  transition: background-size 0.5s;
-}
-.activeButton.active {
-  background-size: 100% 2px;
-  color: #223f7f;
 }
 @layer base {
   * {

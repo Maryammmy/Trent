@@ -45,4 +45,7 @@ export interface IBooking {
   prop_title: string;
   rate: string;
   total_day: string;
+  check_in: string;
+  check_out: string;
+  total_paid: string;
 }
