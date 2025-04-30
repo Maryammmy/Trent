@@ -14,13 +14,15 @@ const ChatMessages = ({ messages }: { messages: IMessage[] }) => {
         return isSender ? (
           <div key={msg?.id} className="mb-2 flex flex-col gap-2 items-end">
             <p className="text-xs text-dark text-center w-full">{date}</p>
-            <div className="w-[200px] h-[120px] rounded-md overflow-hidden">
-              <Image
-                imageUrl={baseURL + msg?.img}
-                alt="chat image"
-                className="w-full h-full object-cover"
-              />
-            </div>
+            {msg?.img && (
+              <div className="w-[200px] h-[120px] rounded-md overflow-hidden">
+                <Image
+                  imageUrl={baseURL + msg?.img}
+                  alt="chat image"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
             <p className="bg-white w-fit rounded-md rounded-tr-none p-2 shadow">
               {msg?.message}
             </p>

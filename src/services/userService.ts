@@ -12,7 +12,6 @@ export const useUserAPI = () => {
     queryKey: ["user", uid],
     queryFn: () =>
       baseAPI.get(`user_api/u_get_data.php?lang=${currentLanguage}&uid=${uid}`),
-    refetchInterval: 10000,
     enabled: !!uid,
   });
 };

@@ -8,6 +8,7 @@ export const useChatListAPI = () => {
     queryKey: ["chatList"],
     queryFn: () => baseAPI.get(`user_api/u_chat_list.php?uid=${uid}`),
     refetchInterval: 10000,
+    enabled: !!uid,
   });
 };
 
@@ -20,7 +21,7 @@ export const useMessagesAPI = (
     queryFn: () =>
       baseAPI.get(`user_api/u_chat_messages.php?chat_id=${chatId}&uid=${uid}`),
     refetchInterval: 10000,
-    enabled: !!chatId,
+    enabled: !!chatId && !!uid,
   });
 };
 export const addChatAPI = (payload: FormData) => {

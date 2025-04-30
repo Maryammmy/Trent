@@ -118,7 +118,7 @@ function Property() {
                     <div className="font-medium flex flex-wrap gap-1">
                       <p>
                         {t("minimum_stay")} : {propertyDetails?.min_days}{" "}
-                        {minDays > 1 ? t("nights") : t("night")}
+                        {minDays > 1 ? t("days") : t("day")}
                       </p>
                     </div>
                   ) : null}

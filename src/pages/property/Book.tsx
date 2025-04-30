@@ -40,7 +40,7 @@ function Book() {
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const { data } = usePropertyInfoAPI(id);
-  const propertyBook = data?.data?.data?.property_book_details;
+  const propertyBook = data?.data?.data?.property_booking_details;
   const fromDate = formatDate(startDateValue?.startDate);
   const toDate = formatDate(endDateValue?.startDate);
   console.log(propertyBook);
@@ -141,8 +141,15 @@ function Book() {
   };
 
   return (
-    <div className="py-10 px-5 xl:px-20 mx-auto max-w-screen-xl min-h-[57vh]">
-      <h2 className="pb-5 font-bold text-2xl">{propertyBook?.title}</h2>
+    <div className="py-10 px-5 xl:px-20 mx-auto max-w-screen-xl">
+      <div className="pb-5">
+        <h2 className="font-bold text-2xl">{propertyBook?.title}</h2>
+        {propertyBook?.min_days && (
+          <p className="font-medium text-dark pt-2">
+            {t("minimum_stay_desc", { days: propertyBook?.min_days })}
+          </p>
+        )}
+      </div>
       <div className="flex flex-col gap-10">
         <CheckDates
           startDateValue={startDateValue}

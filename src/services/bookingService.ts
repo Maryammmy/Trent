@@ -46,6 +46,16 @@ export const useMyBookingsAPI = (status: string) => {
       baseAPI.get(
         `user_api/booking/u_my_book.php?lang=${currentLanguage}&status=${status}&uid=${uid}`
       ),
-    enabled: !!status,
+    enabled: !!uid && !!status,
+  });
+};
+export const useBookingDetailsAPI = (book_id: string | undefined) => {
+  return useQuery({
+    queryKey: ["bookingDetails", book_id],
+    queryFn: () =>
+      baseAPI.get(
+        `user_api/booking/u_book_details.php?uid=${uid}&book_id=${book_id}&lang=${currentLanguage}`
+      ),
+    enabled: !!uid && !!book_id,
   });
 };

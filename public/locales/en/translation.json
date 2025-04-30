@@ -366,6 +366,7 @@
   "duration": "Duration",
   "pay": "Pay",
   "days": "days",
+  "day": "day",
   "payouts_profile": "Payouts profile",
   "profile_name": "Profile name",
   "payment_method": "Payment method",
@@ -397,8 +398,6 @@
   "pending": "Pending",
   "total_area": "Total area",
   "m2": "m²",
-  "nights": "nights",
-  "night": "night",
   "about_this_place": "About this place",
   "ask_the_owner": "Ask the owner",
   "minimum_stay": "Minimum stay",
@@ -416,5 +415,6 @@
   "delete": "Delete",
   "delete_payout_profile_title": "Delete Payout Profile",
   "delete_payout_profile_desc": "Are you sure you want to delete this payout profile?",
-  "no_ready_properties_found": "No ready properties found"
+  "no_ready_properties_found": "No ready properties found",
+  "minimum_stay_desc": "Please note that the minimum stay is {{days}} days"
 }

@@ -364,6 +364,7 @@
   "duration": "المدة",
   "pay": "دفع",
   "days": "أيام",
+  "day": "يوم",
   "payouts_profile": "الملف الشخصي للدفعات",
   "profile_name": "اسم الملف الشخصي",
   "payment_method": "طريقة الدفع",
@@ -395,8 +396,6 @@
   "pending": "قيد الانتظار",
   "total_area": "المساحة الكلية",
   "m2": "متر²",
-  "nights": "ليلات",
-  "night": "ليلة",
   "about_this_place": "عن هذا المكان",
   "ask_the_owner": "اسأل المالك",
   "minimum_stay": "الحد الأدنى للإقامة",
@@ -414,5 +413,6 @@
   "delete": "حذف",
   "delete_payout_profile_title": "حذف ملف الدُفعة الشخصي",
   "delete_payout_profile_desc": "هل أنت متأكد من حذف هذا الملف الشخصي للدُفعة؟",
-  "no_ready_properties_found": "لا توجد عقارات جاهزة"
+  "no_ready_properties_found": "لا توجد عقارات جاهزة",
+  "minimum_stay_desc": "يرجى ملاحظة أن الحد الأدنى للإقامة هو {{days}} أيام."
 }
