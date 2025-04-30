@@ -38,15 +38,15 @@ function Booking({ booking }: IProps) {
         <h3 className="text-lg font-semibold">{prop_title}</h3>
         <div className="flex flex-col gap-1 sm:flex-row sm:gap-5 font-medium">
           <p>
-            <span className="font-medium"> {t("check_in")} :</span> {check_in}
+            <span> {t("check_in")} :</span> {check_in}
           </p>
           <p>
-            <span className="font-medium"> {t("check_out")} :</span> {check_out}
+            <span> {t("check_out")} :</span> {check_out}
           </p>
         </div>
         <p className="font-medium">
-          <span className="font-medium">{t("total")} :</span>{" "}
-          {total_paid && parseInt(total_paid)} {t("price_per_night")}
+          <span>{t("total")} :</span> {total_paid && parseInt(total_paid)}{" "}
+          {t("price_per_night")}
         </p>
         <span className="text-primary font-semibold">{book_status}</span>
       </div>

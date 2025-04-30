@@ -416,5 +416,9 @@
   "delete_payout_profile_title": "Delete Payout Profile",
   "delete_payout_profile_desc": "Are you sure you want to delete this payout profile?",
   "no_ready_properties_found": "No ready properties found",
-  "minimum_stay_desc": "Please note that the minimum stay is {{days}} days"
+  "minimum_stay_desc": "Please note that the minimum stay is {{days}} days",
+  "booking_date": "Booking date",
+  "guests_count": "Guests",
+  "download_PDF": "📄 Download as PDF",
+  "booking_status": "Booking status"
 }

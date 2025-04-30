@@ -7,6 +7,7 @@ import { IGovernement } from "../../../interfaces";
 import Select from "../../../components/ui/Select";
 import SelectSkeleton from "../../../components/skeleton/SelectSkeleton";
 import { useGovernmentsAPI } from "../../../services/filtersService";
+import { useTranslateAPI } from "@/services/translateService";
 
 const City = () => {
   const { t } = useTranslation();
@@ -15,11 +16,20 @@ const City = () => {
   const [governmentId, setGovernmentId] = useState("");
   const { data } = useGovernmentsAPI();
   const governmentList = data?.data?.data?.government_list;
+  const { data: translatedText } = useTranslateAPI(cityAr.trim());
+  console.log(translatedText);
   useEffect(() => {
     setCityAr(sessionStorage.getItem("city_ar") || "");
     setCityEn(sessionStorage.getItem("city_en") || "");
     setGovernmentId(sessionStorage.getItem("government_id") || "");
   }, []);
+  useEffect(() => {
+    const translated = translatedText?.data?.responseData?.translatedText;
+    if (translated) {
+      setCityEn(translated);
+      sessionStorage.setItem("city_en", translated);
+    }
+  }, [translatedText]);
   const handleCityChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     lang: "en" | "ar"
@@ -28,9 +38,7 @@ const City = () => {
     const trimmedValue = rawValue.trim();
     const setter = lang === "en" ? setCityEn : setCityAr;
     const storageKey = lang === "en" ? "city_en" : "city_ar";
-
     setter(rawValue);
-
     if (trimmedValue.length > 0) {
       sessionStorage.setItem(storageKey, trimmedValue);
     } else {
