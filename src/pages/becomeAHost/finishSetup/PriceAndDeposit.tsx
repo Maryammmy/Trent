@@ -3,10 +3,6 @@ import { useTranslation } from "react-i18next";
 import Input from "../../../components/ui/Input";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
-import Select from "../../../components/ui/Select";
-import SelectSkeleton from "../../../components/skeleton/SelectSkeleton";
-import { useFiltersAPI } from "../../../services/filtersService";
-import { IPeriod } from "../../../interfaces";
 import InputErrorMessage from "@/components/ui/InputErrorMessage";
 
 function PriceAndDeposit() {
@@ -14,9 +10,7 @@ function PriceAndDeposit() {
   const [price, setPrice] = useState<number | "">("");
   const [securityDeposit, setSecurityDeposit] = useState<number | "">("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [period, setPeriod] = useState<string>("");
-  const { data } = useFiltersAPI();
-  const periods: IPeriod[] = data?.data?.data?.period_list;
+
   useEffect(() => {
     setPrice(
       sessionStorage.getItem("price")
@@ -28,7 +22,6 @@ function PriceAndDeposit() {
         ? JSON.parse(sessionStorage.getItem("security_deposit") || '""')
         : ""
     );
-    setPeriod(sessionStorage.getItem("period") || "");
   }, []);
   const validate = (type: "price" | "security_deposit", value: number) => {
     const newErrors = { ...errors };
@@ -54,11 +47,6 @@ function PriceAndDeposit() {
     }
     validate(type, numericValue);
   };
-  const handlePeriodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newPeriod = event.target.value;
-    setPeriod(newPeriod);
-    sessionStorage.setItem("period", newPeriod);
-  };
 
   return (
     <div className="py-10">
@@ -69,30 +57,7 @@ function PriceAndDeposit() {
         <p className="max-w-2xl text-dark font-medium pb-10">
           {t("price_and_deposit_desc")}
         </p>
-        <div className="flex flex-col gap-2 pb-4">
-          <label className="text-lg font-medium">
-            {t("period")}
-            <span className="text-red-500 ml-1">*</span>
-          </label>
-          {!periods ? (
-            <SelectSkeleton />
-          ) : periods?.length ? (
-            <Select
-              onChange={handlePeriodChange}
-              options={periods?.map((period) => ({
-                value: period.id,
-                label: period.name,
-              }))}
-              value={period}
-              className="bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
-            />
-          ) : (
-            <p className="border py-3 px-2 rounded-md bg-white">
-              No period found
-            </p>
-          )}
-        </div>
-        <div className="flex flex-col gap-1 mb-5">
+        <div className="flex flex-col gap-2 mb-5">
           <label className="font-medium">
             {t("price")}
             <span className="text-red-500 ml-1">*</span>
@@ -107,7 +72,7 @@ function PriceAndDeposit() {
           />
           {errors.price && <InputErrorMessage msg={errors.price} />}
         </div>
-        <div className="flex flex-col gap-1 mb-5">
+        <div className="flex flex-col gap-2 mb-5">
           <label className="font-medium">
             {t("security_deposit")}
             <span className="text-red-500 ml-1">*</span>
@@ -129,7 +94,7 @@ function PriceAndDeposit() {
       <BackAndNext
         back="/become-a-host/min-and-max-days"
         next="/become-a-host/guest-rules-and-cancellation-policies"
-        isNextDisabled={!price || !period || Object.keys(errors).length > 0}
+        isNextDisabled={!price || Object.keys(errors).length > 0}
       />
     </div>
   );

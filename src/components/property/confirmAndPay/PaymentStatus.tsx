@@ -14,7 +14,7 @@ const PaymentStatus = ({
 }: IProps) => {
   const { t } = useTranslation();
   return (
-    <div className="p-4 rounded-md shadow-sm border mt-5 font-semibold">
+    <div className="p-4 rounded-lg border mt-5 font-semibold">
       <h4 className="text-xl mb-2 text-primary">{t("payment_status")}</h4>
       <p className="">
         <span>{t("reference_number")}:</span> {referenceNumber}

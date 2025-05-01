@@ -14,6 +14,7 @@ export const allowedVideoTypes = [
 export const merchantRefNum = (
   Math.random().toString().slice(2) + Date.now()
 ).slice(0, 10);
+export const paymentExpiry = Date.now() + 10 * 60 * 1000;
 export const quantity = 1;
 export const fawryPrivateKey = `-----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCSSwxjXfzTwgkv

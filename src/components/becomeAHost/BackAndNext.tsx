@@ -24,14 +24,16 @@ function BackAndNext({
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state || next;
 
   const handleClick = async () => {
     if (next === "/hosting/properties") {
       dispatch(setIsFinishUpModal(true));
-      navigate(next);
+      navigate(from);
     } else {
       dispatch(addCompletedStep(allowNext));
-      navigate(next);
+      navigate(from);
     }
   };
 

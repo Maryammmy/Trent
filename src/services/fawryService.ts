@@ -11,9 +11,17 @@ export const useFawryCredentialsAPI = () => {
   });
 };
 export const initFawryPaymentAPI = (payload: IInitFawry) => {
-  const response = fawryBaseAPI.post(
-    "https://atfawry.fawrystaging.com/fawrypay-api/api/payments/init",
-    payload
+  const response = fawryBaseAPI.post("fawrypay-api/api/payments/init", payload);
+  return response;
+};
+export const fawryPaymentStatusAPI = (
+  merchantCode: string | null,
+  merchantRefNumber: string | null,
+  signature: string
+) => {
+  const response = fawryBaseAPI.get(
+    `https://atfawry.fawrystaging.com/ECommerceWeb/Fawry/payments/status/v2?merchantCode=${merchantCode}&merchantRefNumber=${merchantRefNumber}
+&signature=${signature}`
   );
   return response;
 };

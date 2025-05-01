@@ -51,7 +51,7 @@ function GetStartedToHost() {
       <div className="flex justify-end">
         <Link
           to="/become-a-host/about-your-place"
-          className="py-2 px-5 font-medium bg-primary text-white text-lg rounded-md mt-4 me-10"
+          className="py-2 px-5 font-medium bg-primary text-white text-lg rounded-md mt-4 me-5 xl:me-20"
         >
           <span>{t("get_started")}</span>
         </Link>

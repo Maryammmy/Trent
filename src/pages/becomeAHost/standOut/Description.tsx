@@ -3,15 +3,24 @@ import { useTranslation } from "react-i18next";
 import TextArea from "../../../components/ui/TextArea";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
+import { useTranslateAPI } from "@/services/translateService";
 
 function Description() {
   const { t } = useTranslation();
   const [descTextAreaEn, setDescTextAreaEn] = useState<string>("");
   const [descTextAreaAr, setDescTextAreaAr] = useState<string>("");
+  const { data: translatedText } = useTranslateAPI(descTextAreaAr.trim());
   useEffect(() => {
     setDescTextAreaAr(sessionStorage.getItem("description_ar") || "");
     setDescTextAreaEn(sessionStorage.getItem("description_en") || "");
   }, []);
+  useEffect(() => {
+    const translated = translatedText?.data?.responseData?.translatedText;
+    if (translated) {
+      setDescTextAreaEn(translated);
+      sessionStorage.setItem("description_en", translated);
+    }
+  }, [translatedText]);
   const handleDescriptionChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
     lang: "en" | "ar"
@@ -41,22 +50,6 @@ function Description() {
         </p>
         <div className="flex flex-col gap-2 mb-5">
           <label className="font-medium">
-            {t("desc_in_english")}
-            <span className="text-red-500 ml-1">*</span>
-          </label>
-          <TextArea
-            maxLength={500}
-            minLength={50}
-            onChange={(e) => handleDescriptionChange(e, "en")}
-            name="description_en"
-            value={descTextAreaEn}
-            placeholder={t("desc_for_property_placeholder_en")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
-            rows={5}
-          ></TextArea>
-        </div>
-        <div className="flex flex-col gap-2">
-          <label className="font-medium">
             {t("desc_in_arabic")}
             <span className="text-red-500 ml-1">*</span>
           </label>
@@ -67,6 +60,22 @@ function Description() {
             name="description_ar"
             value={descTextAreaAr}
             placeholder={t("desc_for_property_placeholder_ar")}
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
+            rows={5}
+          ></TextArea>
+        </div>
+        <div className="flex flex-col gap-2">
+          <label className="font-medium">
+            {t("desc_in_english")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
+          <TextArea
+            maxLength={500}
+            minLength={50}
+            onChange={(e) => handleDescriptionChange(e, "en")}
+            name="description_en"
+            value={descTextAreaEn}
+            placeholder={t("desc_for_property_placeholder_en")}
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
             rows={5}
           ></TextArea>

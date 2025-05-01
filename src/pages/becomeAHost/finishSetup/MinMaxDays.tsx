@@ -4,12 +4,19 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import Input from "../../../components/ui/Input";
 import InputErrorMessage from "@/components/ui/InputErrorMessage";
+import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
+import Select from "@/components/ui/Select";
+import { useFiltersAPI } from "@/services/filtersService";
+import { IPeriod } from "@/interfaces";
 
 function MinMaxDays() {
   const { t } = useTranslation();
+  const [period, setPeriod] = useState<string>("");
   const [minDays, setMinDays] = useState<number | "">("");
   const [maxDays, setMaxDays] = useState<number | "">("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const { data } = useFiltersAPI();
+  const periods: IPeriod[] = data?.data?.data?.period_list;
 
   useEffect(() => {
     setMinDays(
@@ -22,10 +29,18 @@ function MinMaxDays() {
         ? JSON.parse(sessionStorage.getItem("max_days") || '""')
         : ""
     );
+    setPeriod(sessionStorage.getItem("period") || "");
   }, []);
 
-  const validate = (type: "min" | "max", value: number) => {
+  const validate = (type: "min" | "max", value: number, period: string) => {
     const newErrors = { ...errors };
+    if (value && period === "m" && type === "min" && value < 30) {
+      newErrors.min = t("error_min_30_days_for_month");
+      setErrors(newErrors);
+      return;
+    } else {
+      delete newErrors[type];
+    }
     if ((value && value < 1) || value > 1000) {
       newErrors[type] = t("error_out_of_range_days");
       setErrors(newErrors);
@@ -43,15 +58,31 @@ function MinMaxDays() {
       }
     }
     if (type === "max") {
+      console.log(newErrors);
       if (minDays && value <= Number(minDays)) {
         newErrors.max = t("error_max_must_be_greater_than_min");
         newErrors.min = t("error_min_greater_than_max");
       } else {
-        delete newErrors.max;
-        delete newErrors.min;
+        if (newErrors.max === t("error_max_must_be_greater_than_min"))
+          delete newErrors.max;
+        if (
+          newErrors.min === t("error_min_greater_than_max") &&
+          errors.min !== t("error_min_30_days_for_month")
+        ) {
+          delete newErrors.min;
+        }
+      }
+      if (errors.min === t("error_min_30_days_for_month")) {
+        newErrors.min = t("error_min_30_days_for_month");
       }
     }
     setErrors(newErrors);
+  };
+  const handlePeriodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newPeriod = event.target.value;
+    setPeriod(newPeriod);
+    sessionStorage.setItem("period", newPeriod);
+    if (minDays) validate("min", minDays, newPeriod);
   };
   const handleDaysChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -66,7 +97,7 @@ function MinMaxDays() {
       setMaxDays(numericValue);
       sessionStorage.setItem("max_days", JSON.stringify(numericValue));
     }
-    validate(type, numericValue);
+    validate(type, numericValue, period);
   };
   const isNextDisabled: boolean =
     !minDays || !maxDays || Object.keys(errors).length > 0;
@@ -80,7 +111,30 @@ function MinMaxDays() {
         <p className="max-w-2xl text-dark font-medium pb-5">
           {t("min_max_days_desc")}
         </p>
-        <div className="flex flex-col gap-1 mb-5">
+        <div className="flex flex-col gap-2 mb-5">
+          <label className="text-lg font-medium">
+            {t("period")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
+          {!periods ? (
+            <SelectSkeleton />
+          ) : periods?.length ? (
+            <Select
+              onChange={handlePeriodChange}
+              options={periods?.map((period) => ({
+                value: period.id,
+                label: period.name,
+              }))}
+              value={period}
+              className="bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
+            />
+          ) : (
+            <p className="border py-3 px-2 rounded-md bg-white">
+              No period found
+            </p>
+          )}
+        </div>
+        <div className="flex flex-col gap-2 mb-5">
           <label className="font-medium">
             {t("min_days")}
             <span className="text-red-500 ml-1">*</span>
@@ -95,7 +149,7 @@ function MinMaxDays() {
           />
           {errors.min && <InputErrorMessage msg={errors.min} />}
         </div>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           <label className="font-medium">
             {t("max_days")}
             <span className="text-red-500 ml-1">*</span>

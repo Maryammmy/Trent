@@ -157,6 +157,7 @@ export interface IProperty {
   longitude: string;
   is_deleted: boolean;
   is_approved: boolean;
+  owner_id: string;
 }
 export interface IReviewInstruction {
   icon: ReactNode;

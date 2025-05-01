@@ -17,7 +17,6 @@ const City = () => {
   const { data } = useGovernmentsAPI();
   const governmentList = data?.data?.data?.government_list;
   const { data: translatedText } = useTranslateAPI(cityAr.trim());
-  console.log(translatedText);
   useEffect(() => {
     setCityAr(sessionStorage.getItem("city_ar") || "");
     setCityEn(sessionStorage.getItem("city_en") || "");
@@ -87,22 +86,6 @@ const City = () => {
           )}
         </div>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium mb-1">
-            {t("city_in_english")}
-            <span className="text-red-500 ml-1">*</span>
-          </label>
-          <Input
-            name="city_en"
-            type="text"
-            maxLength={100}
-            minLength={2}
-            value={cityEn}
-            onChange={(e) => handleCityChange(e, "en")}
-            placeholder={t("city_for_property_placeholder_en")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
-          />
-        </div>
-        <div className="flex flex-col gap-2">
           <label className="font-medium">
             {t("city_in_arabic")}
             <span className="text-red-500 ml-1">*</span>
@@ -115,6 +98,22 @@ const City = () => {
             value={cityAr}
             onChange={(e) => handleCityChange(e, "ar")}
             placeholder={t("city_for_property_placeholder_ar")}
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label className="font-medium mb-1">
+            {t("city_in_english")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
+          <Input
+            name="city_en"
+            type="text"
+            maxLength={100}
+            minLength={2}
+            value={cityEn}
+            onChange={(e) => handleCityChange(e, "en")}
+            placeholder={t("city_for_property_placeholder_en")}
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>

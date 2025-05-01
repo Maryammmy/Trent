@@ -30,6 +30,7 @@ function Cart({ property, refetch }: IProps) {
     government_name,
     period_name,
     rate,
+    owner_id,
   } = property;
   const { t } = useTranslation();
   const basePrice = parseInt(price);
@@ -133,6 +134,10 @@ function Cart({ property, refetch }: IProps) {
           <Button
             onClick={(e) => {
               e.preventDefault();
+              if (uid === owner_id) {
+                toast.error(t("you_can't_book_your_own_property"));
+                return;
+              }
               navigate(`/properties/${id}/book`);
             }}
             className="flex-[2] text-center zoom py-1 bg-primary rounded-md text-white font-medium"

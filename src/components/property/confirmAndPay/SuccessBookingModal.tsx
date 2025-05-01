@@ -17,29 +17,43 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
       title={t("booking_successful")}
       className="text-xl text-center pt-6 pb-3 font-semibold"
     >
-      <div className="px-6 pb-6 space-y-6 font-medium">
-        <p className="text-dark text-center">
+      <div className="px-6 pb-6 space-y-6">
+        <p className="text-dark text-center font-medium">
           Your booking has been successfully placed. A confirmation message has
           been sent to your WhatsApp.
         </p>
-        <div className="">
-          <h2>{bookingData?.title}</h2>
-          <p>
-            <span className="font-medium"> {t("check_in")} :</span>{" "}
-            {bookingData?.from_date}
-          </p>
-          <p>
-            <span className="font-medium"> {t("check_out")} :</span>{" "}
-            {bookingData?.to_date}
-          </p>
-          <p>
-            <span className="font-medium">{t("total")} :</span>{" "}
+        <div className="space-y-1">
+          <h2 className="font-semibold">{bookingData?.title}</h2>
+          <div className="flex flex-col gap-1 sm:flex-row sm:gap-5 justify-between font-medium">
+            <div>
+              <span> {t("check_in")} :</span>{" "}
+              <span>{bookingData?.from_date}</span>
+            </div>
+            <div>
+              <span> {t("check_out")} :</span>{" "}
+              <span>{bookingData?.to_date}</span>
+            </div>
+          </div>
+          <div className="flex flex-col gap-1 sm:flex-row sm:gap-5 justify-between font-medium">
+            <div>
+              <span> {t("guests")} :</span>{" "}
+              <span>{bookingData?.guest_count}</span>
+            </div>
+            <div>
+              <span> {t("booking_status")} :</span>{" "}
+              <span className="text-primary font-semibold">
+                {bookingData?.book_status}
+              </span>
+            </div>
+          </div>
+          <p className="font-semibold text-lg">
+            <span className="">{t("total")} :</span>{" "}
             {Math.round(bookingData?.final_total)} {t("price_per_night")}
           </p>
         </div>
-        <div className="flex justify-between gap-4">
+        <div className="flex justify-between gap-4 font-medium">
           <Link
-            to={`/account-settings/bookings`}
+            to={`/account-settings/bookings/${bookingData?.book_id}`}
             className="w-32 py-2 text-center bg-primary text-white rounded-md hover:bg-primary/80"
           >
             View Receipt

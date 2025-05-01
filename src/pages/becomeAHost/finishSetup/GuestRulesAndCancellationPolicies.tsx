@@ -5,6 +5,7 @@ import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import CancellationPolicy from "../../../components/becomeAHost/CancellationPolicies";
 import { ICancellationPolicy } from "@/interfaces/property";
+import { useTranslateAPI } from "@/services/translateService";
 
 function GuestRulesAndCancellationPolicies() {
   const { t } = useTranslation();
@@ -14,6 +15,7 @@ function GuestRulesAndCancellationPolicies() {
     ICancellationPolicy | ""
   >("");
   const [isOpen, setIsOpen] = useState(false);
+  const { data: translatedText } = useTranslateAPI(rulesTextAreaAr.trim());
   useEffect(() => {
     setRulesTextAreaEn(sessionStorage.getItem("guest_rules_en") || "");
     setRulesTextAreaAr(sessionStorage.getItem("guest_rules_ar") || "");
@@ -23,6 +25,13 @@ function GuestRulesAndCancellationPolicies() {
         : ""
     );
   }, []);
+  useEffect(() => {
+    const translated = translatedText?.data?.responseData?.translatedText;
+    if (translated) {
+      setRulesTextAreaEn(translated);
+      sessionStorage.setItem("guest_rules_en", translated);
+    }
+  }, [translatedText]);
   const handleRulesChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
     lang: "en" | "ar"
@@ -64,22 +73,6 @@ function GuestRulesAndCancellationPolicies() {
         />
         <div className="flex flex-col gap-2 mb-5">
           <label className="font-medium">
-            {t("guest_rules_in_english")}
-            <span className="text-red-500 ml-1">*</span>
-          </label>
-          <TextArea
-            maxLength={500}
-            minLength={10}
-            onChange={(e) => handleRulesChange(e, "en")}
-            name="guest_rules_en"
-            value={rulesTextAreaEn}
-            placeholder={t("guest_rules_placeholder_en")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
-            rows={5}
-          ></TextArea>
-        </div>
-        <div className="flex flex-col gap-1">
-          <label className="font-medium">
             {t("guest_rules_in_arabic")}
             <span className="text-red-500 ml-1">*</span>
           </label>
@@ -90,6 +83,22 @@ function GuestRulesAndCancellationPolicies() {
             name="guest_rules_ar"
             value={rulesTextAreaAr}
             placeholder={t("guest_rules_placeholder_ar")}
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
+            rows={5}
+          ></TextArea>
+        </div>
+        <div className="flex flex-col gap-2 mb-5">
+          <label className="font-medium">
+            {t("guest_rules_in_english")}
+            <span className="text-red-500 ml-1">*</span>
+          </label>
+          <TextArea
+            maxLength={500}
+            minLength={10}
+            onChange={(e) => handleRulesChange(e, "en")}
+            name="guest_rules_en"
+            value={rulesTextAreaEn}
+            placeholder={t("guest_rules_placeholder_en")}
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
             rows={5}
           ></TextArea>

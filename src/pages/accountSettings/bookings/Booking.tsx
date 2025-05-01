@@ -12,7 +12,7 @@ function Booking() {
   const { id } = useParams();
   const printRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
-  const { data, isLoading, error } = useBookingDetailsAPI(id);
+  const { data } = useBookingDetailsAPI(id);
   const booking = data?.data?.data?.Booking_details;
 
   const handlePrint = async () => {
@@ -28,10 +28,7 @@ function Booking() {
       pdf.save("booking-details.pdf");
     }
   };
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Something went wrong.</p>;
-  if (!booking) return <p>No booking data found.</p>;
+  if (!booking) return <p>Loading</p>;
 
   return (
     <div className="max-w-6xl mx-auto py-5 md:py-10 px-5 xl:px-0">
@@ -59,7 +56,7 @@ function Booking() {
             <div className="flex items-center gap-2">
               <Tickets className="text-primary" />
               <span>{t("booking_status")} :</span>
-              <span className="text-green-600 font-semibold">
+              <span className="text-primary font-semibold">
                 {" "}
                 {booking.book_status}
               </span>

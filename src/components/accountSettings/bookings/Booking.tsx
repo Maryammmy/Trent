@@ -44,7 +44,7 @@ function Booking({ booking }: IProps) {
             <span> {t("check_out")} :</span> {check_out}
           </p>
         </div>
-        <p className="font-medium">
+        <p className="text-lg font-semibold">
           <span>{t("total")} :</span> {total_paid && parseInt(total_paid)}{" "}
           {t("price_per_night")}
         </p>

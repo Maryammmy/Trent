@@ -4,13 +4,17 @@ import PriceDetails from "../../components/property/confirmAndPay/PriceDetails";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Button from "@/components/ui/Button";
 import { IVerifyPropertyResponse } from "@/interfaces/booking";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Loader from "@/components/loader/Loader";
 import {
+  fawryPaymentStatusAPI,
   initFawryPaymentAPI,
   useFawryCredentialsAPI,
 } from "@/services/fawryService";
-import { generateFawryPaymentData } from "@/utils/generateFawryPaymentData";
+import {
+  generateFawryPaymentInitData,
+  generateFawryPaymentStatusParam,
+} from "@/utils/generateFawryPaymentData";
 import toast from "react-hot-toast";
 import { useMediaQuery } from "react-responsive";
 import { AxiosError } from "axios";
@@ -22,6 +26,7 @@ import Cookies from "js-cookie";
 import { saveBookingAPI } from "@/services/bookingService";
 import { ApiError } from "@/interfaces";
 import SuccessBookingModal from "@/components/property/confirmAndPay/SuccessBookingModal";
+import CardPaymentStatus from "@/components/property/confirmAndPay/CardPaymentStatus";
 
 const uid = Cookies.get("user_id");
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
@@ -42,19 +47,24 @@ function ConfirmAndPay() {
   const orderStatus = useQueryParam("orderStatus");
   const paymentAmount = useQueryParam("paymentAmount");
   const paymentMethodFromUrl = useQueryParam("paymentMethod");
+  const statusCode = useQueryParam("statusCode");
+  const statusDescription = useQueryParam("statusDescription");
+  const merchantRefNumber = useQueryParam("merchantRefNumber") || "";
   const [isSuccessModal, setIsSuccessModal] = useState(true);
   const [saveBookingResponse, setSaveBookingResponse] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(
-    paymentMethodFromUrl === "PayUsingCC"
+    paymentMethodFromUrl === "PayUsingCC" ||
+      statusDescription?.toLowerCase().includes("card")
       ? "CARD"
       : paymentMethodFromUrl === "PayAtFawry"
       ? "PayAtFawry"
       : "MWALLET"
   );
+  console.log(merchantRefNumber);
   const createFawryPayment = async () => {
     try {
       setLoading(true);
-      const paymentData = generateFawryPaymentData(
+      const paymentData = generateFawryPaymentInitData(
         fawryCredentials?.merchant_code,
         fawryCredentials?.secure_key,
         bookingData?.id,
@@ -80,9 +90,8 @@ function ConfirmAndPay() {
       setLoading(false);
     }
   };
-  const handleSaveBooking = async () => {
+  const handleSaveBooking = useCallback(async () => {
     try {
-      setLoading(true);
       const payload = {
         prop_id: id ? id : "",
         guest_counts: Number(bookingData?.guest_count),
@@ -104,10 +113,51 @@ function ConfirmAndPay() {
         t("something_went_wrong");
       toast.error(errorMessage);
       console.log(error);
+    }
+  }, [
+    bookingData?.confirm_guest_rules,
+    bookingData?.from_date,
+    bookingData?.guest_count,
+    bookingData?.to_date,
+    id,
+    t,
+  ]);
+  const fawryPaymentStatus = async () => {
+    try {
+      setLoading(true);
+      const { merchantCode, merchantRefNum, signature } =
+        generateFawryPaymentStatusParam(
+          fawryCredentials?.merchant_code,
+          fawryCredentials?.secure_key,
+          merchantRefNumber
+        );
+
+      const response = await fawryPaymentStatusAPI(
+        merchantCode,
+        merchantRefNum,
+        signature
+      );
+      console.log("Response:", response);
+      if (response.status === 200) {
+        const redirectUrl = response.data;
+        toast.success(t("toast"));
+        setTimeout(() => {
+          window.location.href = redirectUrl;
+        }, 1000);
+      }
+    } catch (error: AxiosError | unknown) {
+      if (error instanceof AxiosError) {
+        toast.error(error?.message);
+      }
     } finally {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    if (orderStatus === "PAID" && !saveBookingResponse) {
+      handleSaveBooking();
+    }
+  }, [orderStatus, saveBookingResponse, handleSaveBooking]);
   return (
     <>
       <div className="py-10 px-5 xl:px-20 max-w-7xl mx-auto">
@@ -140,9 +190,7 @@ function ConfirmAndPay() {
                 </div>
                 <div>
                   <h5 className="font-medium text-lg pb-1">{t("guests")}</h5>
-                  <p className="font-medium">
-                    {bookingData?.guest_count} {t("guests")}
-                  </p>
+                  <p className="font-medium">{bookingData?.guest_count}</p>
                 </div>
               </div>
               <div className="lg:py-5">
@@ -160,6 +208,12 @@ function ConfirmAndPay() {
                   orderStatus={orderStatus}
                   paymentAmount={paymentAmount || ""}
                   paymentMethodFromUrl={paymentMethodFromUrl || ""}
+                />
+              )}
+              {statusCode && (
+                <CardPaymentStatus
+                  statusCode={statusCode}
+                  statusDescription={statusDescription || ""}
                 />
               )}
             </div>
@@ -214,27 +268,37 @@ function ConfirmAndPay() {
                 paymentMethodFromUrl={paymentMethodFromUrl || ""}
               />
             )}
+            {statusCode && (
+              <CardPaymentStatus
+                statusCode={statusCode}
+                statusDescription={statusDescription || ""}
+              />
+            )}
           </div>
         )}
-        <div className="px-2 md:px-10 flex justify-end">
-          <Button
-            disabled={loading}
-            onClick={
-              orderStatus === "PAID" ? handleSaveBooking : createFawryPayment
-            }
-            className={`bg-primary font-medium text-lg text-white w-32 py-2 rounded-md ${
-              orderStatus === "PAID" && "w-40"
-            }`}
-          >
-            {loading ? (
-              <Loader />
-            ) : orderStatus === "PAID" ? (
-              t("save_booking")
-            ) : (
-              t("pay")
-            )}
-          </Button>
-        </div>
+        {orderStatus !== "PAID" && (
+          <div className="px-2 md:px-10 flex justify-end">
+            <Button
+              disabled={loading}
+              onClick={
+                orderStatus === "UNPAID"
+                  ? fawryPaymentStatus
+                  : createFawryPayment
+              }
+              className={`bg-primary font-medium text-lg text-white w-32 py-2 rounded-md ${
+                orderStatus === "UNPAID" && "w-48"
+              }`}
+            >
+              {loading ? (
+                <Loader />
+              ) : orderStatus === "UNPAID" ? (
+                t("confirm_payment")
+              ) : (
+                t("pay")
+              )}
+            </Button>
+          </div>
+        )}
       </div>
       {isSuccessModal && saveBookingResponse && (
         <SuccessBookingModal

@@ -1,4 +1,4 @@
-import { fawryPrivateKey } from "./../constants/index";
+import { fawryPrivateKey, paymentExpiry } from "./../constants/index";
 import { decryptFawryCredentials } from "./decryptFawryCredentials";
 import { merchantRefNum, quantity } from "@/constants";
 import { CurrentLanguage } from "@/types";
@@ -7,7 +7,7 @@ import { sha256 } from "js-sha256";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 
-export const generateFawryPaymentData = (
+export const generateFawryPaymentInitData = (
   encryptedMerchantCode: string,
   encryptedSecureKey: string,
   itemId: string,
@@ -50,7 +50,31 @@ export const generateFawryPaymentData = (
     paymentMethod,
     signature,
     authCaptureModePayment: false,
+    paymentExpiry,
     returnUrl,
   };
   return paymentData;
+};
+export const generateFawryPaymentStatusParam = (
+  encryptedMerchantCode: string,
+  encryptedSecureKey: string,
+  merchantRefNum: string
+) => {
+  const merchantCode = decryptFawryCredentials(
+    encryptedMerchantCode,
+    fawryPrivateKey
+  );
+  const secureKey = decryptFawryCredentials(
+    encryptedSecureKey,
+    fawryPrivateKey
+  );
+
+  const signatureString = merchantCode + merchantRefNum + secureKey;
+  const signature = sha256(signatureString);
+  const param = {
+    merchantCode,
+    merchantRefNum,
+    signature,
+  };
+  return { ...param };
 };

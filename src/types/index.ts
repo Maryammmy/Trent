@@ -75,3 +75,4 @@ export type PropertyTextArea = {
 };
 export type CurrentLanguage = "en" | "ar";
 export type Person = "sender" | "receiver";
+export type ValidationMinMaxDays = "min" | "max";

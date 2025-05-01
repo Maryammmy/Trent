@@ -50,7 +50,7 @@ function MobileAppModal() {
             className="w-40 h-full"
           />
         </div>
-        <div className="flex flex-col md:flex-row justify-between items-center gap-3">
+        <div className="flex flex-col items-center gap-3">
           {buttonData
             .filter((btn) => btn.platform === platform)
             .map((btn, i) => (

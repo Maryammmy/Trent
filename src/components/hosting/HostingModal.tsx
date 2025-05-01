@@ -35,9 +35,12 @@ function HostingModal() {
   const handleFinishUp = async () => {
     setLoading(true);
     const isSuccess = await sendDataToAPI();
+    console.log(isSuccess);
     if (isSuccess) {
-      dispatch(setIsFinishUpModal(false));
-      window.location.reload();
+      setTimeout(() => {
+        dispatch(setIsFinishUpModal(false));
+        window.location.reload();
+      }, 500);
     }
     setLoading(false);
   };

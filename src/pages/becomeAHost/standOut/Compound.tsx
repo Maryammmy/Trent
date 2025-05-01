@@ -3,15 +3,24 @@ import { useEffect, useState } from "react";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import Input from "../../../components/ui/Input";
+import { useTranslateAPI } from "@/services/translateService";
 
 function Compound() {
   const { t } = useTranslation();
   const [compoundAr, setCompoundAr] = useState<string>("");
   const [compoundEn, setCompoundEn] = useState<string>("");
+  const { data: translatedText } = useTranslateAPI(compoundAr.trim());
   useEffect(() => {
     setCompoundAr(sessionStorage.getItem("compound_ar") || "");
     setCompoundEn(sessionStorage.getItem("compound_en") || "");
   }, []);
+  useEffect(() => {
+    const translated = translatedText?.data?.responseData?.translatedText;
+    if (translated) {
+      setCompoundEn(translated);
+      sessionStorage.setItem("compound_en", translated);
+    }
+  }, [translatedText]);
   const handleCompoundChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     lang: "en" | "ar"
@@ -37,19 +46,7 @@ function Compound() {
         <p className="max-w-2xl text-dark font-medium pb-5">
           {t("compound_name_for_property_desc")}
         </p>
-        <div className="flex flex-col gap-1 mb-5">
-          <label className="font-medium">{t("compound_in_english")}</label>
-          <Input
-            maxLength={100}
-            minLength={2}
-            onChange={(e) => handleCompoundChange(e, "en")}
-            name="compound_name_en"
-            value={compoundEn}
-            placeholder={t("compound_name_for_property_placeholder_en")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
-          />
-        </div>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2 mb-5">
           <label className="font-medium">{t("compound_in_arabic")}</label>
           <Input
             maxLength={100}
@@ -58,6 +55,18 @@ function Compound() {
             name="compound_name_ar"
             value={compoundAr}
             placeholder={t("compound_name_for_property_placeholder_ar")}
+            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label className="font-medium">{t("compound_in_english")}</label>
+          <Input
+            maxLength={100}
+            minLength={2}
+            onChange={(e) => handleCompoundChange(e, "en")}
+            name="compound_name_en"
+            value={compoundEn}
+            placeholder={t("compound_name_for_property_placeholder_en")}
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import HostedBy from "../../components/property/HostedBy";
 import Image from "../../components/ui/Image";
 import Amenities from "../../components/property/Amenities";
@@ -11,14 +11,18 @@ import PropertySkeleton from "../../components/skeleton/PropertySkeleton";
 import Map from "../../components/ui/Map";
 import ReviewComponent from "@/components/property/reviews/ReviewComponent";
 import PhotoViewer from "@/components/ui/PhotoViewer";
-import { Link } from "react-router-dom";
 import Video from "@/components/ui/Video";
+import Button from "@/components/ui/Button";
+import toast from "react-hot-toast";
+import Cookies from "js-cookie";
 
+const uid = Cookies.get("user_id") || "";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 
 function Property() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { id } = useParams();
   const { data } = usePropertyAPI(id);
   const propertyDetails: IDetailsProperty = data?.data?.data?.property_details;
@@ -134,12 +138,19 @@ function Property() {
                   </div>
                 </div>
                 <div data-aos="fade-left">
-                  <Link
-                    to={`/properties/${id}/book`}
+                  <Button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (uid === propertyDetails?.owner_id) {
+                        toast.error(t("you_can't_book_your_own_property"));
+                        return;
+                      }
+                      navigate(`/properties/${id}/book`);
+                    }}
                     className="bg-primary text-white font-medium block text-center py-2 px-4 rounded-md"
                   >
                     {t("book_now")}
-                  </Link>
+                  </Button>
                 </div>
               </div>
               <div className="pt-5" data-aos="fade-right">

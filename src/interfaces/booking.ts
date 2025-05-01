@@ -29,6 +29,8 @@ export interface IVerifyPropertyResponse {
   guest_count: string;
   tax_percent: string;
   confirm_guest_rules: boolean;
+  book_id: string;
+  book_status: string;
 }
 export interface IPaymentMethodBook {
   label: string;

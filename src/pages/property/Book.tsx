@@ -43,6 +43,7 @@ function Book() {
   const propertyBook = data?.data?.data?.property_booking_details;
   const fromDate = formatDate(startDateValue?.startDate);
   const toDate = formatDate(endDateValue?.startDate);
+  const minDays = Number(propertyBook?.min_days);
   console.log(propertyBook);
 
   const handleStartValueChange = (newValue: DateValueType) => {
@@ -144,11 +145,12 @@ function Book() {
     <div className="py-10 px-5 xl:px-20 mx-auto max-w-screen-xl">
       <div className="pb-5">
         <h2 className="font-bold text-2xl">{propertyBook?.title}</h2>
-        {propertyBook?.min_days && (
+        {minDays ? (
           <p className="font-medium text-dark pt-2">
-            {t("minimum_stay_desc", { days: propertyBook?.min_days })}
+            {t("minimum_stay_desc", { days: minDays })}{" "}
+            {minDays > 1 ? t("days") : t("day")}
           </p>
-        )}
+        ) : null}
       </div>
       <div className="flex flex-col gap-10">
         <CheckDates

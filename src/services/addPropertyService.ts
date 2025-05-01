@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import { HostingContext } from "../context/HostingContext";
+import { useNavigate } from "react-router-dom";
 
 const propertyData = (images: File[], video?: File | null): IPropertyData => {
   const uid = Cookies.get("user_id");
@@ -70,6 +71,7 @@ const formData = (images: File[], video?: File | null) => {
 };
 export const useSendDataToAPI = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { selectedImages, selectedVideo, setSelectedImages, setSelectedVideo } =
     useContext(HostingContext);
   const sendDataToAPI = async (): Promise<boolean> => {
@@ -78,6 +80,9 @@ export const useSendDataToAPI = () => {
       for (const [, value] of payload.entries()) {
         if (!value || value === "[]" || !selectedImages.length) {
           toast.error(t("missing_required_fields"));
+          setTimeout(() => {
+            navigate("/become-a-host/images", { state: "/hosting/properties" });
+          }, 500);
           return false;
         }
       }
