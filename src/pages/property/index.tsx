@@ -89,11 +89,17 @@ function Property() {
             <div className="py-8">
               <div className="flex gap-5 flex-wrap justify-between items-center">
                 <div className="flex flex-col gap-1" data-aos="fade-right">
-                  <div className="font-medium text-black text-2xl flex flex-wrap gap-1">
+                  <div className="font-semibold text-lg">
+                    <p> {propertyDetails?.address?.[currentLanguage]}</p>
+                  </div>
+                  <div className="font-semibold text-black text-lg flex flex-wrap gap-1">
                     <p> {propertyDetails?.city?.[currentLanguage]}</p>,
                     <p>
                       {propertyDetails?.government?.name?.[currentLanguage]}
                     </p>
+                  </div>
+                  <div className="font-semibold text-lg">
+                    <p> {propertyDetails?.category?.type?.[currentLanguage]}</p>
                   </div>
                   <div className="font-medium flex flex-wrap gap-1">
                     <div className="flex gap-1">
@@ -126,7 +132,7 @@ function Property() {
                       </p>
                     </div>
                   ) : null}
-                  <div className="font-semibold" data-aos="fade-right">
+                  <div className="font-semibold text-2xl" data-aos="fade-right">
                     <p>
                       <span className="text-primary">
                         {basePrice} {t("price_per_night")}

@@ -6,7 +6,7 @@ export const useTranslateAPI = (text: string) => {
     queryKey: ["translate", text],
     queryFn: () =>
       mymemorytranslatedBaseAPI.get(
-        `https://api.mymemory.translated.net/get?q=${text}&langpair=ar|en`
+        `https://api.mymemory.translated.net/get?q=${text}&langpair=ar|en&de=mariam@catalyst.com.eg`
       ),
     refetchInterval: 10000,
     enabled: !!text,
