@@ -140,7 +140,7 @@ function ConfirmAndPay() {
       console.log("Response:", response);
       if (response.status === 200) {
         const redirectUrl = response.data;
-        toast.success(t("toast"));
+        toast.success(t("payment_checked_successfully"));
         setTimeout(() => {
           window.location.href = redirectUrl;
         }, 1000);
@@ -224,7 +224,7 @@ function ConfirmAndPay() {
         ) : (
           <div className="px-2 md:px-10 flex flex-col lg:flex-row justify-between py-10 gap-10">
             <div className="lg:flex-1">
-              <h4 className="font-medium text-xl">{t("your_trip")}</h4>
+              <h4 className="font-medium text-xl">{t("booking_checkout")}</h4>
               <div className="flex flex-col gap-4 py-5">
                 <div className="flex justify-between">
                   <div>
@@ -241,10 +241,10 @@ function ConfirmAndPay() {
                   </div>
                 </div>
                 <div>
-                  <h5 className="font-medium text-lg pb-1">{t("guests")}</h5>
-                  <p className="font-medium">
-                    {bookingData?.guest_count} {t("guests")}
-                  </p>
+                  <h5 className="font-medium text-lg pb-1">
+                    {t("guests_count")}
+                  </h5>
+                  <p className="font-medium">{bookingData?.guest_count}</p>
                 </div>
               </div>
             </div>
@@ -292,7 +292,7 @@ function ConfirmAndPay() {
               {loading ? (
                 <Loader />
               ) : orderStatus === "UNPAID" ? (
-                t("confirm_payment")
+                t("check_payment")
               ) : (
                 t("pay")
               )}

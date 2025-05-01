@@ -1,3 +1,4 @@
+import { IGovernement } from ".";
 import { IImage } from "./property";
 
 export interface IVerifyProperty {
@@ -50,4 +51,35 @@ export interface IBooking {
   check_in: string;
   check_out: string;
   total_paid: string;
+  bathrooms_count: string;
+  beds_count: string;
+  address: string;
+  category: { id: string; type: string };
+  city: string;
+  government: IGovernement;
+}
+export interface IBookingDetails {
+  address: string;
+  bathrooms_count: string;
+  beds_count: string;
+  book_date: string;
+  book_id: string;
+  book_status: string;
+  category: { id: string; type: string };
+  check_in: string;
+  check_intime: string;
+  check_out: string;
+  check_outtime: string;
+  city: string;
+  government: IGovernement;
+  noguest: string;
+  p_method_id: string;
+  prop_id: string;
+  prop_img_list: IImage[];
+  prop_price: string;
+  prop_title: string;
+  rate: string;
+  subtotal: string;
+  total: string;
+  total_day: string;
 }

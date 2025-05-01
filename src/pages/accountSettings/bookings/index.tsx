@@ -15,7 +15,7 @@ function Bookings() {
   return (
     <div className="max-w-6xl mx-auto py-5 md:py-10 px-5 xl:px-0">
       <DynamicTitle title="my_bookings" />
-      <div className="grid grid-cols-2 gap-10 text-xl my-6 font-semibold">
+      <div className="flex gap-10 sm:gap-20 text-xl my-6 font-semibold">
         <Button
           onClick={() => setStatus("active")}
           className={`text-start text-dark activeButton w-fit ${
