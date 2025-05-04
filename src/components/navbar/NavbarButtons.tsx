@@ -48,8 +48,17 @@ const NavbarButtons = () => {
 
   return (
     <>
-      <div className="flex items-center gap-3 md:gap-4">
-        <div className="sm:flex sm:items-center sm:gap-2">
+      <div className="flex items-center gap-3 sm:gap-4">
+        <div className="relative sm:hidden" ref={languageSwitcherRef}>
+          <Button
+            onClick={toggleLangSwitcher}
+            className="md:py-2 md:px-4 flex items-center rounded-full text-white md:hover:bg-secondary"
+          >
+            <Globe size={18} />
+          </Button>
+          {isLangSwitcherOpen && <LanguageSwitcher />}
+        </div>
+        <div className="hidden sm:flex sm:items-center sm:gap-2">
           <div>
             <span className="text-white font-medium hidden sm:block">
               {currentLanguage === "en" ? "(العربيه)" : "(English)"}
@@ -70,7 +79,7 @@ const NavbarButtons = () => {
           <div className="relative" ref={dropdownRef}>
             <Button
               onClick={toggleMenu}
-              className="flex items-center border py-2 px-3 rounded-full gap-2 text-white hover:bg-[#F7F7F7] hover:text-dark"
+              className="flex items-center border py-2 px-3 rounded-full gap-2 text-white hover:bg-secondary"
             >
               <Menu size={18} />
               <UserRound />

@@ -11,7 +11,9 @@ import { setToggle } from "../../store/features/navbar/navbarSlice";
 import { useContext, useRef } from "react";
 import { AlertContext } from "@/context/AlertContext";
 import useClickOutside from "@/hooks/useClickOutside";
+import Cookies from "js-cookie";
 
+const isLoggedin = Cookies.get("user_id");
 const Navbar = () => {
   const { pathname } = useLocation();
   const isSmallScreen = useMediaQuery({ maxWidth: 1023 });
@@ -42,32 +44,40 @@ const Navbar = () => {
       <div className="max-w-[1450px] flex flex-wrap items-center justify-between mx-auto p-4">
         <NavbarLogo />
         {isSmallScreen ? (
-          <>
-            <div className="flex items-center gap-3 sm:gap-5">
-              <NavbarButtons />
-              <Button
-                ref={buttonToggleRef}
-                onClick={() => {
-                  dispatch(setToggle(!toggle));
-                }}
-                className="inline-flex relative items-center p-2 w-10 h-10 justify-center text-sm bg-white rounded-lg lg:hidden"
+          isLoggedin ? (
+            <NavbarButtons />
+          ) : (
+            <>
+              <div className="flex items-center gap-3 sm:gap-4">
+                <NavbarButtons />
+                <Button
+                  ref={buttonToggleRef}
+                  onClick={() => dispatch(setToggle(!toggle))}
+                  className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm bg-white rounded-lg lg:hidden"
+                >
+                  <Menu className="text-dark" />
+                </Button>
+              </div>
+              <div
+                ref={navlinksToggle}
+                className={`${
+                  toggle
+                    ? `block absolute left-0 right-0 w-full z-[2100] py-2 bg-primary transition-all duration-300 ${
+                        pathname === "/" && !bg
+                          ? "top-[60px] sm:top-[75px]"
+                          : "top-[72px] sm:top-[86px]"
+                      }`
+                    : "hidden"
+                }`}
               >
-                <Menu className="text-dark" />
-              </Button>
-            </div>
-            <div
-              ref={navlinksToggle}
-              className={`w-full mt-4 py-2 rounded-md bg-primary transition-all duration-300 ${
-                toggle
-                  ? `block absolute top-12 left-0 w-full z-[2100]`
-                  : "hidden"
-              }`}
-            >
-              <NavbarLinks />
-            </div>
-          </>
+                <NavbarLinks />
+              </div>
+            </>
+          )
+        ) : isLoggedin ? (
+          <NavbarButtons />
         ) : (
-          <div className="flex items-center gap-3 md:gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <NavbarButtons />
             <NavbarLinks />
           </div>
