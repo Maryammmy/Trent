@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { buttonData } from "../../data/landing";
-import Button from "../ui/Button";
 import Image from "../ui/Image";
 import { useMediaQuery } from "react-responsive";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 function MobileAppBanner() {
   const { t } = useTranslation();
@@ -43,17 +43,24 @@ function MobileAppBanner() {
                   (btn) => btn.platform === platform || platform === "desktop"
                 )
                 .map((btn, i) => (
-                  <Button
+                  <Link
+                    to={
+                      btn.platform === "android"
+                        ? "https://play.google.com/store/apps/details?id=com.catlyst.trent"
+                        : "#"
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
                     data-aos="fade-down"
                     key={i}
-                    className="bg-black text-white rounded-md w-52 p-2 flex items-center gap-2"
+                    className="bg-black text-white rounded-md w-52 p-2 flex justify-center items-center gap-2"
                   >
                     <span>{btn.icon}</span>
                     <span className="font-medium flex flex-col items-start">
                       <span>Download on the</span>
                       <span>{btn.label}</span>
                     </span>
-                  </Button>
+                  </Link>
                 ))}
             </div>
           </>
@@ -73,17 +80,24 @@ function MobileAppBanner() {
                     (btn) => btn.platform === platform || platform === "desktop"
                   )
                   .map((btn, i) => (
-                    <Button
+                    <Link
+                      to={
+                        btn.platform === "android"
+                          ? "https://play.google.com/store/apps/details?id=com.catlyst.trent"
+                          : "#"
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
                       data-aos="fade-up"
                       key={i}
-                      className="bg-black text-white rounded-md w-52 p-2 flex items-center gap-2"
+                      className="bg-black text-white rounded-md w-52 p-2 flex justify-center items-center gap-2"
                     >
                       <span>{btn.icon}</span>
                       <span className="font-medium flex flex-col items-start">
                         <span>{t("download_on")}</span>
                         <span>{btn.label}</span>
                       </span>
-                    </Button>
+                    </Link>
                   ))}
               </div>
             </div>

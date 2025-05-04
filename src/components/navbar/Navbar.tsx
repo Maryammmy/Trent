@@ -67,10 +67,10 @@ const Navbar = () => {
             </div>
           </>
         ) : (
-          <>
-            <NavbarLinks />
+          <div className="flex items-center gap-3 md:gap-4">
             <NavbarButtons />
-          </>
+            <NavbarLinks />
+          </div>
         )}
       </div>
     </nav>

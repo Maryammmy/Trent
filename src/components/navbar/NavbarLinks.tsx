@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
@@ -8,7 +8,7 @@ import {
   setIsSignup,
 } from "../../store/features/auth/authSlice";
 import { setToggle } from "../../store/features/navbar/navbarSlice";
-import { authItems, navItems } from "../../data";
+import { authItems } from "../../data";
 
 const isLoggedin = Cookies.get("user_id");
 const NavbarLinks = () => {
@@ -16,48 +16,32 @@ const NavbarLinks = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   return (
-    <>
-      <ul className="font-medium flex flex-col justify-center items-center lg:flex-row lg:gap-8">
-        {navItems.map((item, index) => (
+    !isLoggedin && (
+      <ul className="font-medium flex flex-col justify-center items-center lg:flex-row lg:gap-4">
+        {authItems.map((item, index) => (
           <li key={index} className="mb-2 lg:mb-0">
-            <NavLink
-              to={item.to}
-              className="px-4 text-lg font-semibold text-white hover:text-gray-300 transition"
+            <Button
+              onClick={
+                item === "sign_up"
+                  ? () => {
+                      dispatch(setIsSignup(true));
+                      dispatch(setToggle(false));
+                      navigate("/");
+                    }
+                  : () => {
+                      dispatch(setIsloggedin(true));
+                      dispatch(setToggle(false));
+                      navigate("/");
+                    }
+              }
+              className={`px-6 lg:h-[42px] text-white font-semibold rounded-full border hover:bg-secondary transition`}
             >
-              {t(item.label)}
-            </NavLink>
+              {t(item)}
+            </Button>
           </li>
         ))}
       </ul>
-      {!isLoggedin && (
-        <ul className="font-medium flex flex-col justify-center items-center lg:flex-row lg:gap-8">
-          {authItems.map((item, index) => (
-            <li key={index} className="mb-2 lg:mb-0">
-              <Button
-                onClick={
-                  item === "sign_up"
-                    ? () => {
-                        dispatch(setIsSignup(true));
-                        dispatch(setToggle(false));
-                        navigate("/");
-                      }
-                    : () => {
-                        dispatch(setIsloggedin(true));
-                        dispatch(setToggle(false));
-                        navigate("/");
-                      }
-                }
-                className={`px-6 lg:h-12 text-white font-semibold rounded-lg hover:bg-gray-300 transition ${
-                  item === "log_in" ? "lg:border" : "lg:bg-primary"
-                }`}
-              >
-                {t(item)}
-              </Button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </>
+    )
   );
 };
 

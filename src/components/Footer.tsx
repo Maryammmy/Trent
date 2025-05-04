@@ -176,7 +176,15 @@ function Footer() {
       </div>
       <div className="bg-primary py-2 flex justify-center items-center">
         <p className="text-white font-medium text-center">
-          © 2025 — Design and Develope by Catalyst
+          {t("catalyst_footer_text")}{" "}
+          <Link
+            to="https://catalyst.com.eg/en"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            {t("catalyst_footer_brand")}
+          </Link>
         </p>
       </div>
     </footer>

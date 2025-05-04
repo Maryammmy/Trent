@@ -4,6 +4,7 @@ import Button from "../ui/Button";
 import { X } from "lucide-react";
 import Image from "../ui/Image";
 import { buttonData } from "../../data/landing";
+import { Link } from "react-router-dom";
 
 function MobileAppModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,16 +55,23 @@ function MobileAppModal() {
           {buttonData
             .filter((btn) => btn.platform === platform)
             .map((btn, i) => (
-              <Button
+              <Link
+                to={
+                  btn.platform === "ios"
+                    ? "https://apps.apple.com/us/app/trent-eg/id6744845845"
+                    : "https://play.google.com/store/apps/details?id=com.catlyst.trent"
+                }
+                target="_blank"
+                rel="noopener noreferrer"
                 key={i}
-                className="bg-white text-primary rounded-md w-52 p-2 flex items-center gap-2"
+                className="bg-white text-primary rounded-md w-52 p-2 flex justify-center items-center gap-2"
               >
                 <span>{btn.icon}</span>
                 <span className="font-medium flex flex-col items-start">
                   <span>Download on the</span>
                   <span>{btn.label}</span>
                 </span>
-              </Button>
+              </Link>
             ))}
         </div>
       </div>

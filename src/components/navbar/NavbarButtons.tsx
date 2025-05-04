@@ -13,6 +13,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import DropdownMenu from "./DropdownMenu";
 import { setToggle } from "../../store/features/navbar/navbarSlice";
 import { CurrentLanguage } from "@/types";
+import CurrencySwitcher from "./CurrencySwitcher";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -47,24 +48,25 @@ const NavbarButtons = () => {
 
   return (
     <>
-      {isLoggedin && (
-        <div className="flex items-center gap-3 md:gap-4">
-          <div className="sm:flex sm:items-center sm:gap-2">
-            <div>
-              <span className="text-white font-medium hidden sm:block">
-                {currentLanguage === "en" ? "(العربيه)" : "(English)"}
-              </span>
-            </div>
-            <div className="relative" ref={languageSwitcherRef}>
-              <Button
-                onClick={toggleLangSwitcher}
-                className="md:py-2 md:px-4 rounded-full text-white md:hover:bg-[#F7F7F7] md:hover:text-dark"
-              >
-                <Globe size={18} />
-              </Button>
-              {isLangSwitcherOpen && <LanguageSwitcher />}
-            </div>
+      <div className="flex items-center gap-3 md:gap-4">
+        <div className="sm:flex sm:items-center sm:gap-2">
+          <div>
+            <span className="text-white font-medium hidden sm:block">
+              {currentLanguage === "en" ? "(العربيه)" : "(English)"}
+            </span>
           </div>
+          <div className="relative" ref={languageSwitcherRef}>
+            <Button
+              onClick={toggleLangSwitcher}
+              className="md:py-2 md:px-4 flex items-center rounded-full text-white md:hover:bg-secondary"
+            >
+              <Globe size={18} />
+            </Button>
+            {isLangSwitcherOpen && <LanguageSwitcher />}
+          </div>
+        </div>
+        <CurrencySwitcher />
+        {isLoggedin && (
           <div className="relative" ref={dropdownRef}>
             <Button
               onClick={toggleMenu}
@@ -75,8 +77,8 @@ const NavbarButtons = () => {
             </Button>
             {isDropdownOpen && <DropdownMenu />}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };

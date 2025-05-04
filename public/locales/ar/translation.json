@@ -20,7 +20,7 @@
   "error_check_out": "تاريخ المغادرة يجب ان يكون بعد تاريخ الوصول",
   "error_Check_in_after_today": "تاريخ الوصول لا يمكن أن يكون قبل اليوم",
   "error_Check_out_after_today": "تاريخ المغادرة لا يمكن ان يكون قبل اليوم",
-  "filters": "عوامل التصفيه",
+  "filters": "تصفية النتائج",
   "apply": "تطبيق",
   "clear": "مسح",
   "support": "الدعم",
@@ -422,5 +422,7 @@
   "error_min_30_days_for_month": "الحد الأدنى يجب أن يكون 30 يومًا على الأقل للفترة الشهرية",
   "check_payment": "تحقق من الدفع",
   "you_can't_book_your_own_property": "لا يمكنك حجز عقارك",
-  "payment_checked_successfully": "تم التحقق من الدفع بنجاح"
+  "payment_checked_successfully": "تم التحقق من الدفع بنجاح",
+  "catalyst_footer_text": "© 2025 — التصميم والتطوير بواسطة",
+  "catalyst_footer_brand": "كتاليست"
 }

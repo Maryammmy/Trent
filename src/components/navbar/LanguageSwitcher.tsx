@@ -15,7 +15,7 @@ const LanguageSwitcher = () => {
 
   return (
     <div
-      className={`z-50 absolute top-6 sm:top-8 mt-2 min-w-24 bg-white border border-gray-300 rounded-lg overflow-hidden shadow-lg ${
+      className={`font-medium absolute z-50 top-8 md:top-10 min-w-24 bg-white border border-gray-300 rounded-lg overflow-hidden shadow-lg ${
         document.documentElement.dir === "rtl" ? "left-0" : "right-0"
       }`}
     >

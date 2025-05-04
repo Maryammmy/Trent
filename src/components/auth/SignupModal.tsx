@@ -123,118 +123,120 @@ function SignupModal() {
             <X className="text-black" size={20} />
           </span>
         </Button>
-        <div className="p-5 md:py-8 md:px-10 max-h-[80vh] overflow-y-auto">
-          <div className="pb-2">
-            <h2 className="text-lg font-semibold">Welcome to Trent</h2>
-          </div>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            {signupData.map(({ name, label, type, placeholder }) => (
-              <Fragment key={name}>
-                {name === "mobile" && (
+        <div className="pb-3">
+          <div className="p-5 md:py-8 md:px-10 max-h-[80vh] overflow-y-auto">
+            <div className="pb-2">
+              <h2 className="text-lg font-semibold">Welcome to Trent</h2>
+            </div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {signupData.map(({ name, label, type, placeholder }) => (
+                <Fragment key={name}>
+                  {name === "mobile" && (
+                    <Controller
+                      name="ccode"
+                      control={control}
+                      render={({ field }) => (
+                        <CountrySelector
+                          selectedCountry={field.value}
+                          onChange={field.onChange}
+                        />
+                      )}
+                    />
+                  )}
                   <Controller
-                    name="ccode"
+                    name={name}
                     control={control}
                     render={({ field }) => (
-                      <CountrySelector
-                        selectedCountry={field.value}
-                        onChange={field.onChange}
-                      />
-                    )}
-                  />
-                )}
-                <Controller
-                  name={name}
-                  control={control}
-                  render={({ field }) => (
-                    <div className="mb-4">
-                      <label className="block text-sm font-medium mb-1">
-                        {label}
-                      </label>
-                      <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
-                        {name === "password" || name === "confirmPassword" ? (
-                          <>
+                      <div className="mb-4">
+                        <label className="block text-sm font-medium mb-1">
+                          {label}
+                        </label>
+                        <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+                          {name === "password" || name === "confirmPassword" ? (
+                            <>
+                              <Input
+                                {...field}
+                                type={showPassword ? "text" : "password"}
+                                placeholder={placeholder}
+                                className="w-full outline-none bg-transparent"
+                              />
+                              <Button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                              >
+                                {showPassword ? (
+                                  <EyeOff strokeWidth={2.5} />
+                                ) : (
+                                  <Eye strokeWidth={2.5} />
+                                )}
+                              </Button>
+                            </>
+                          ) : (
                             <Input
                               {...field}
-                              type={showPassword ? "text" : "password"}
+                              type={type}
                               placeholder={placeholder}
                               className="w-full outline-none bg-transparent"
+                              onChange={(e) => {
+                                let value = e.target.value;
+                                if (name === "mobile") {
+                                  value = value.replace(/^0+/, "");
+                                }
+                                field.onChange(value);
+                              }}
                             />
-                            <Button
-                              type="button"
-                              onClick={() => setShowPassword(!showPassword)}
-                            >
-                              {showPassword ? (
-                                <EyeOff strokeWidth={2.5} />
-                              ) : (
-                                <Eye strokeWidth={2.5} />
-                              )}
-                            </Button>
-                          </>
-                        ) : (
-                          <Input
-                            {...field}
-                            type={type}
-                            placeholder={placeholder}
-                            className="w-full outline-none bg-transparent"
-                            onChange={(e) => {
-                              let value = e.target.value;
-                              if (name === "mobile") {
-                                value = value.replace(/^0+/, "");
-                              }
-                              field.onChange(value);
-                            }}
-                          />
+                          )}
+                        </div>
+                        {errors[name] && (
+                          <InputErrorMessage msg={errors[name]?.message} />
                         )}
                       </div>
-                      {errors[name] && (
-                        <InputErrorMessage msg={errors[name]?.message} />
-                      )}
-                    </div>
-                  )}
-                />
-              </Fragment>
-            ))}
-            <div className="my-4">
-              <div className="flex items-center gap-2 font-medium">
-                <input
-                  type="checkbox"
-                  id="terms"
-                  checked={acceptedTerms}
-                  onChange={handleTermsChange}
-                  className="w-5 h-5 accent-primary cursor-pointer"
-                />
-                <label htmlFor="terms" className="text-sm text-dark">
-                  I accept the{" "}
-                  <Link
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    to="/guest-terms"
-                    className="text-primary hover:underline"
-                  >
-                    Guest{" "}
-                  </Link>
-                  and{" "}
-                  <Link
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    to="/host-terms"
-                    className="text-primary hover:underline"
-                  >
-                    Host{" "}
-                  </Link>
-                  Terms and Conditions
-                </label>
+                    )}
+                  />
+                </Fragment>
+              ))}
+              <div className="my-4">
+                <div className="flex items-center gap-2 font-medium">
+                  <input
+                    type="checkbox"
+                    id="terms"
+                    checked={acceptedTerms}
+                    onChange={handleTermsChange}
+                    className="w-5 h-5 accent-primary cursor-pointer"
+                  />
+                  <label htmlFor="terms" className="text-sm text-dark">
+                    I accept the{" "}
+                    <Link
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      to="/guest-terms"
+                      className="text-primary hover:underline"
+                    >
+                      Guest{" "}
+                    </Link>
+                    and{" "}
+                    <Link
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      to="/host-terms"
+                      className="text-primary hover:underline"
+                    >
+                      Host{" "}
+                    </Link>
+                    Terms and Conditions
+                  </label>
+                </div>
+                {termsError && <InputErrorMessage msg={termsError} />}
               </div>
-              {termsError && <InputErrorMessage msg={termsError} />}
-            </div>
-            <Button
-              disabled={loading}
-              type="submit"
-              className="w-full zoom bg-primary mt-2 text-white py-3 rounded-lg font-bold"
-            >
-              {loading ? <Loader /> : "Sign up"}
-            </Button>
-          </form>
+              <Button
+                disabled={loading}
+                type="submit"
+                className="w-full zoom bg-primary mt-2 text-white py-3 rounded-lg font-bold"
+              >
+                {loading ? <Loader /> : "Sign up"}
+              </Button>
+            </form>
+          </div>
         </div>
       </Modal>
       <OtpModal

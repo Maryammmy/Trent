@@ -17,3 +17,15 @@ export const menuItems: INavItem[] = [
   { label: "account", to: "/account-settings" },
   { label: "log_out", to: "#" },
 ];
+export const currencies: string[] = [
+  "EGP",
+  "USD",
+  "SAR",
+  "QAR",
+  "AED",
+  "EUR",
+  "IQD",
+  "JOD",
+  "KWD",
+  "OMR",
+];
