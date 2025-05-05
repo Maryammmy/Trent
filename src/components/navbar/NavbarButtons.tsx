@@ -1,4 +1,4 @@
-import { Globe, Menu, UserRound } from "lucide-react";
+import { Menu, UserRound } from "lucide-react";
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useRef } from "react";
@@ -48,17 +48,18 @@ const NavbarButtons = () => {
 
   return (
     <>
-      <div className="flex items-center gap-3 sm:gap-4">
-        <div className="relative sm:hidden" ref={languageSwitcherRef}>
+      <div className="flex items-center gap-5">
+        <div className="relative" ref={languageSwitcherRef}>
           <Button
             onClick={toggleLangSwitcher}
-            className="md:py-2 md:px-4 flex items-center rounded-full text-white md:hover:bg-secondary"
+            className="font-medium flex items-center text-white hover:text-secondary"
           >
-            <Globe size={18} />
+            {currentLanguage === "en" ? "AR" : "EN"}
+            {/* <Globe size={18} /> */}
           </Button>
           {isLangSwitcherOpen && <LanguageSwitcher />}
         </div>
-        <div className="hidden sm:flex sm:items-center sm:gap-2">
+        {/* <div className="hidden sm:flex sm:items-center sm:gap-2">
           <div>
             <span className="text-white font-medium hidden sm:block">
               {currentLanguage === "en" ? "(العربيه)" : "(English)"}
@@ -73,7 +74,7 @@ const NavbarButtons = () => {
             </Button>
             {isLangSwitcherOpen && <LanguageSwitcher />}
           </div>
-        </div>
+        </div> */}
         <CurrencySwitcher />
         {isLoggedin && (
           <div className="relative" ref={dropdownRef}>

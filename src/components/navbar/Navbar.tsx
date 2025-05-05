@@ -48,7 +48,7 @@ const Navbar = () => {
             <NavbarButtons />
           ) : (
             <>
-              <div className="flex items-center gap-3 sm:gap-4">
+              <div className="flex items-center gap-5">
                 <NavbarButtons />
                 <Button
                   ref={buttonToggleRef}
@@ -77,7 +77,7 @@ const Navbar = () => {
         ) : isLoggedin ? (
           <NavbarButtons />
         ) : (
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-5">
             <NavbarButtons />
             <NavbarLinks />
           </div>

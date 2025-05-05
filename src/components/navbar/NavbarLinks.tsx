@@ -31,7 +31,7 @@ const NavbarLinks = () => {
                     navigate("/");
                   }
             }
-            className={`px-6 lg:h-[42px] text-white font-semibold rounded-full lg:border lg:hover:bg-secondary transition`}
+            className={`px-6 lg:h-[42px] text-white font-semibold rounded-lg lg:border lg:hover:bg-secondary transition`}
           >
             {t(item)}
           </Button>

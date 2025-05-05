@@ -18,7 +18,7 @@ function CurrencySwitcher() {
     <div className="relative" ref={dropdownRef}>
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="font-medium text-white hover:bg-secondary border rounded-full px-3 py-1 text-sm flex items-center gap-2"
+        className="font-medium text-white hover:text-secondary flex items-center"
       >
         {selectedCurrency}
       </Button>

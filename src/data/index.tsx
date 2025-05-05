@@ -7,7 +7,7 @@ export const periods: ISelectOption[] = [
 ];
 export const languageOptions: ISelectOption[] = [
   { label: "English", value: "en" },
-  { label: "العربية", value: "ar" },
+  { label: "Arabic", value: "ar" },
 ];
 export const navItems: INavItem[] = [{ label: "home", to: "/" }];
 export const authItems: string[] = ["log_in", "sign_up"];

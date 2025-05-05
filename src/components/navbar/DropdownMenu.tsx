@@ -19,7 +19,7 @@ function DropdownMenu() {
   return (
     <>
       <div
-        className={`font-medium absolute z-50 top-12 min-w-48 bg-white border border-gray-300 rounded-lg shadow-lg p-2 ${
+        className={`font-medium absolute z-50 top-12 min-w-48 bg-white border border-gray-300 rounded-lg shadow-lg py-2 ${
           document.documentElement.dir === "rtl" ? "left-0" : "right-0"
         }`}
       >

@@ -82,9 +82,9 @@ function MobileAppBanner() {
                   .map((btn, i) => (
                     <Link
                       to={
-                        btn.platform === "android"
-                          ? "https://play.google.com/store/apps/details?id=com.catlyst.trent"
-                          : "#"
+                        btn.platform === "ios"
+                          ? "https://apps.apple.com/us/app/trent-eg/id6744845845"
+                          : "https://play.google.com/store/apps/details?id=com.catlyst.trent"
                       }
                       target="_blank"
                       rel="noopener noreferrer"
