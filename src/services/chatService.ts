@@ -11,7 +11,9 @@ export const useChatListAPI = () => {
     enabled: !!uid,
   });
 };
-
+export const chatListAPI = (id: string | undefined) => {
+  return baseAPI.get(`user_api/u_chat_list.php?uid=${uid}&prop_id=${id}`);
+};
 export const useMessagesAPI = (
   chatId: number | null,
   ownerId: string | null

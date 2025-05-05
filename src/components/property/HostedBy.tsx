@@ -1,16 +1,15 @@
 import Image from "../ui/Image";
 import { useTranslation } from "react-i18next";
 import { IDetailsProperty } from "../../interfaces/property";
-import { baseAPI, baseURL } from "../../services";
+import { baseURL } from "../../services";
 import { MessageCircleMore } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
 import { storeOwnerChat } from "../../utils/storeUserChat";
 import { useState } from "react";
 import Loader from "../loader/Loader";
-import Cookies from "js-cookie";
+import { chatListAPI } from "@/services/chatService";
 
-const uid = Cookies.get("user_id");
 interface IProps {
   id: string | undefined;
   owner: IDetailsProperty["owner"];
@@ -24,9 +23,7 @@ function HostedBy({ id, owner, guestRules, ownerId }: IProps) {
   const handleChatNavigator = async () => {
     setLoading(true);
     try {
-      const response = await baseAPI.get(
-        `user_api/u_chat_list.php?uid=${uid}&prop_id=${id}`
-      );
+      const response = await chatListAPI(id);
       storeOwnerChat(owner);
       const chatId: string = response?.data?.data?.chat_list?.[0]?.chat_id;
       navigate(

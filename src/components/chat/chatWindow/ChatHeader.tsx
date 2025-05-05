@@ -14,7 +14,6 @@ const ChatHeader = ({ owner }: IProps) => {
   const chattedOwner = JSON.parse(
     sessionStorage.getItem("chattedOwner") || "null"
   );
-  console.log("chattedOwner", chattedOwner.img);
   return (
     <div className="px-2 py-4 border-b bg-white flex items-center gap-3">
       <Button className="lg:hidden" onClick={() => navigate(`/chat`)}>
