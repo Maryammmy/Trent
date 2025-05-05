@@ -61,7 +61,6 @@ function ConfirmAndPay() {
       ? "PayAtFawry"
       : "MWALLET"
   );
-  console.log(merchantRefNumber);
   const createFawryPayment = async () => {
     try {
       setLoading(true);
@@ -74,7 +73,6 @@ function ConfirmAndPay() {
         returnUrl
       );
       const response = await initFawryPaymentAPI(paymentData);
-      console.log("Response:", response);
       if (response.status === 200) {
         const redirectUrl = response.data;
         toast.success(t("redirecting_fawry"));
@@ -138,11 +136,9 @@ function ConfirmAndPay() {
         merchantRefNum,
         signature
       );
-      console.log("Response:", response);
       if (response.status === 200) {
         toast.success(t("payment_checked_successfully"));
         setOrderStatus(response?.data?.orderStatus);
-        console.log(response?.data?.orderStatus);
       }
     } catch (error: AxiosError | unknown) {
       if (error instanceof AxiosError) {
