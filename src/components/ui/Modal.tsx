@@ -14,7 +14,7 @@ export default function Modal({
   title,
   children,
   className,
-  maxWidth = "448px",
+  maxWidth = "500px",
 }: IProps) {
   return (
     <>

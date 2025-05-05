@@ -17,14 +17,14 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
       title={t("booking_successful")}
       className="text-xl text-center pt-6 pb-3 font-semibold"
     >
-      <div className="px-6 pb-6 space-y-6">
+      <div className="px-5 md:px-10 pb-6 space-y-6">
         <p className="text-dark text-center font-medium">
           Your booking has been successfully placed. A confirmation message has
           been sent to your WhatsApp.
         </p>
         <div className="space-y-1">
-          <h2 className="font-semibold">{bookingData?.title}</h2>
-          <div className="flex flex-col gap-1 sm:flex-row sm:gap-5 justify-between font-medium">
+          <h2 className="font-semibold text-lg">{bookingData?.title}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:flex-row sm:gap-5 font-medium">
             <div>
               <span> {t("check_in")} :</span>{" "}
               <span>{bookingData?.from_date}</span>
@@ -34,7 +34,7 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
               <span>{bookingData?.to_date}</span>
             </div>
           </div>
-          <div className="flex flex-col gap-1 sm:flex-row sm:gap-5 justify-between font-medium">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:flex-row sm:gap-5 font-medium">
             <div>
               <span> {t("guests")} :</span>{" "}
               <span>{bookingData?.guest_count}</span>

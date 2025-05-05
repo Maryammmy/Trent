@@ -44,7 +44,7 @@ function ConfirmAndPay() {
   const { data } = useFawryCredentialsAPI();
   const fawryCredentials = data?.data?.data?.fawry_credentials;
   const referenceNumber = useQueryParam("referenceNumber");
-  const orderStatus = useQueryParam("orderStatus");
+  const orderStatusFromUrl = useQueryParam("orderStatus");
   const paymentAmount = useQueryParam("paymentAmount");
   const paymentMethodFromUrl = useQueryParam("paymentMethod");
   const statusCode = useQueryParam("statusCode");
@@ -52,6 +52,7 @@ function ConfirmAndPay() {
   const merchantRefNumber = useQueryParam("merchantRefNumber") || "";
   const [isSuccessModal, setIsSuccessModal] = useState(true);
   const [saveBookingResponse, setSaveBookingResponse] = useState(null);
+  const [orderStatus, setOrderStatus] = useState(orderStatusFromUrl);
   const [paymentMethod, setPaymentMethod] = useState(
     paymentMethodFromUrl === "PayUsingCC" ||
       statusDescription?.toLowerCase().includes("card")
@@ -72,7 +73,6 @@ function ConfirmAndPay() {
         paymentMethod,
         returnUrl
       );
-      console.log(paymentData);
       const response = await initFawryPaymentAPI(paymentData);
       console.log("Response:", response);
       if (response.status === 200) {
@@ -140,11 +140,9 @@ function ConfirmAndPay() {
       );
       console.log("Response:", response);
       if (response.status === 200) {
-        const redirectUrl = response.data;
         toast.success(t("payment_checked_successfully"));
-        setTimeout(() => {
-          window.location.href = redirectUrl;
-        }, 1000);
+        setOrderStatus(response?.data?.orderStatus);
+        console.log(response?.data?.orderStatus);
       }
     } catch (error: AxiosError | unknown) {
       if (error instanceof AxiosError) {
@@ -280,6 +278,7 @@ function ConfirmAndPay() {
         {orderStatus !== "PAID" && (
           <div className="px-2 md:px-10 flex justify-end">
             <Button
+              type="button"
               disabled={loading}
               onClick={
                 orderStatus === "UNPAID"

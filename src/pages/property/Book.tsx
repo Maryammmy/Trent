@@ -44,8 +44,6 @@ function Book() {
   const fromDate = formatDate(startDateValue?.startDate);
   const toDate = formatDate(endDateValue?.startDate);
   const minDays = Number(propertyBook?.min_days);
-  console.log(propertyBook);
-
   const handleStartValueChange = (newValue: DateValueType) => {
     const validatedValue = validateStartDate(newValue, endDateValue, t);
     if (validatedValue) {

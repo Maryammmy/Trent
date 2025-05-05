@@ -40,78 +40,80 @@ function Booking() {
 
   return (
     <div className="max-w-6xl mx-auto py-5 md:py-10 px-5 xl:px-0">
-      <div className="pb-5">
-        <h2 className="text-2xl font-bold pb-1">{booking?.prop_title}</h2>
-        <div className="flex items-center font-semibold text-lg">
-          <p>{booking?.city}</p>,<p>{booking?.government?.name}</p>
-        </div>
-      </div>
       <div ref={printRef}>
-        <div className="space-y-2 font-medium sm:text-lg">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
-            <div className="flex items-center gap-2">
-              <Calendar className="text-primary" />
-              <span>{t("check_in")} :</span>
-              <span>{booking?.check_in}</span>
+        <div className="pb-5">
+          <h2 className="text-2xl font-bold pb-1">{booking?.prop_title}</h2>
+          <div className="flex items-center font-semibold text-lg">
+            <p>{booking?.city}</p>,<p>{booking?.government?.name}</p>
+          </div>
+        </div>
+        <div>
+          <div className="space-y-2 font-medium sm:text-lg">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
+              <div className="flex items-center gap-2">
+                <Calendar className="text-primary" />
+                <span>{t("check_in")} :</span>
+                <span>{booking?.check_in}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Calendar className="text-primary" />
+                <span>{t("check_out")} :</span>
+                <span>{booking?.check_out}</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Calendar className="text-primary" />
-              <span>{t("check_out")} :</span>
-              <span>{booking?.check_out}</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
+              <div className="flex items-center gap-2">
+                <Calendar className="text-primary" />
+                <span>{t("booking_date")} :</span>
+                <span>{booking?.book_date}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Tickets className="text-primary" />
+                <span>{t("booking_status")} :</span>
+                <span className="text-primary font-semibold">
+                  {" "}
+                  {booking.book_status}
+                </span>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
+              <div className="flex items-center gap-2">
+                <UsersRound className="text-primary" />
+                <span>{t("guests_count")} :</span>
+                <span> {booking?.noguest}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="text-primary" />
+                <span> {booking?.address}</span>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
+              <div className="flex items-center gap-2">
+                <BedDouble className="text-primary" />
+                <span>{t("beds_count")} :</span>
+                <span> {booking?.beds_count}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Bath className="text-primary" />
+                <span>{t("bathrooms_count")} :</span>
+                <span> {booking?.bathrooms_count}</span>
+              </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
-            <div className="flex items-center gap-2">
-              <Calendar className="text-primary" />
-              <span>{t("booking_date")} :</span>
-              <span>{booking?.book_date}</span>
+          <div className="pt-10">
+            <div className="flex flex-wrap items-center gap-2 border-t py-4 font-medium text-lg">
+              <GiMoneyStack className="text-primary" size={30} />
+              <span>{t("price_without_egp")} :</span>
+              <span>{parseInt(booking?.prop_price)}</span>
+              {t("price_per_night")}
             </div>
-            <div className="flex items-center gap-2">
-              <Tickets className="text-primary" />
-              <span>{t("booking_status")} :</span>
-              <span className="text-primary font-semibold">
-                {" "}
-                {booking.book_status}
+            <div className="flex flex-wrap items-center gap-2 border-t py-4 text-xl font-bold">
+              <GiMoneyStack className="text-primary" size={30} />
+              <span>{t("total")} :</span>
+              <span>
+                {parseInt(booking?.total)} {t("price_per_night")}
               </span>
             </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
-            <div className="flex items-center gap-2">
-              <UsersRound className="text-primary" />
-              <span>{t("guests_count")} :</span>
-              <span> {booking?.noguest}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="text-primary" />
-              <span> {booking?.address}</span>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
-            <div className="flex items-center gap-2">
-              <BedDouble className="text-primary" />
-              <span>{t("beds_count")} :</span>
-              <span> {booking?.beds_count}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Bath className="text-primary" />
-              <span>{t("bathrooms_count")} :</span>
-              <span> {booking?.bathrooms_count}</span>
-            </div>
-          </div>
-        </div>
-        <div className="pt-10">
-          <div className="flex flex-wrap items-center gap-2 border-t py-4 font-medium text-lg">
-            <GiMoneyStack className="text-primary" size={30} />
-            <span>{t("price_without_egp")} :</span>
-            <span>{parseInt(booking?.prop_price)}</span>
-            {t("price_per_night")}
-          </div>
-          <div className="flex flex-wrap items-center gap-2 border-t py-4 text-xl font-bold">
-            <GiMoneyStack className="text-primary" size={30} />
-            <span>{t("total")} :</span>
-            <span>
-              {parseInt(booking?.total)} {t("price_per_night")}
-            </span>
           </div>
         </div>
       </div>
