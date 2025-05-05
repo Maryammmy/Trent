@@ -13,7 +13,6 @@ export const generateFawryPaymentInitData = (
   itemId: string,
   propPrice: number,
   paymentMethod: string,
-  imageUrl: string,
   returnUrl: string
 ) => {
   const price = Math.round(propPrice);
@@ -44,7 +43,6 @@ export const generateFawryPaymentInitData = (
         itemId,
         price,
         quantity,
-        imageUrl,
       },
     ],
     paymentMethod,

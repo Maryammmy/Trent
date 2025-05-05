@@ -7,7 +7,6 @@ export const useFawryCredentialsAPI = () => {
     queryKey: ["fawryCredentials"],
     queryFn: () =>
       baseAPI.get("user_api/payout/u_fawry_payout_credentials.php"),
-    refetchInterval: 10000,
   });
 };
 export const initFawryPaymentAPI = (payload: IInitFawry) => {
@@ -20,7 +19,7 @@ export const fawryPaymentStatusAPI = (
   signature: string
 ) => {
   const response = fawryBaseAPI.get(
-    `https://atfawry.fawrystaging.com/ECommerceWeb/Fawry/payments/status/v2?merchantCode=${merchantCode}&merchantRefNumber=${merchantRefNumber}
+    `ECommerceWeb/Fawry/payments/status/v2?merchantCode=${merchantCode}&merchantRefNumber=${merchantRefNumber}
 &signature=${signature}`
   );
   return response;

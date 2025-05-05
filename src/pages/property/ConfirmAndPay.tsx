@@ -70,9 +70,9 @@ function ConfirmAndPay() {
         bookingData?.id,
         bookingData?.final_total,
         paymentMethod,
-        bookingData?.image_list?.[0]?.img,
         returnUrl
       );
+      console.log(paymentData);
       const response = await initFawryPaymentAPI(paymentData);
       console.log("Response:", response);
       if (response.status === 200) {
@@ -85,6 +85,7 @@ function ConfirmAndPay() {
     } catch (error: AxiosError | unknown) {
       if (error instanceof AxiosError) {
         toast.error(error?.message);
+        console.log(error);
       }
     } finally {
       setLoading(false);

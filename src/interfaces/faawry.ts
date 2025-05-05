@@ -9,6 +9,8 @@ export interface IInitFawry {
   language: string;
   chargeItems: IChargeItem[];
   paymentMethod: string;
+  authCaptureModePayment: boolean;
+  paymentExpiry: number;
   signature: string;
   returnUrl: string;
 }
