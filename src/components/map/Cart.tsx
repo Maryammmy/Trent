@@ -17,7 +17,9 @@ interface IProps {
 
 const uid = Cookies.get("user_id") || "";
 const storedCurrency = sessionStorage.getItem("currency");
-const parsedCurrency = storedCurrency ? JSON.parse(storedCurrency) : null;
+const parsedCurrency = storedCurrency
+  ? JSON.parse(storedCurrency)
+  : { currency: "EGP", rate: 1 };
 function Cart({ property, refetch }: IProps) {
   const {
     IS_FAVOURITE,
@@ -31,9 +33,7 @@ function Cart({ property, refetch }: IProps) {
     rate,
   } = property;
   const { t } = useTranslation();
-  const basePrice = Math.round(
-    Number(price) * Number(parsedCurrency?.rate || 1)
-  );
+  const basePrice = Math.round(Number(price) * Number(parsedCurrency?.rate));
   const toggleProperty = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -107,7 +107,7 @@ function Cart({ property, refetch }: IProps) {
           <div className="flex items-center justify-end gap-1 font-medium">
             <span className="font-bold text-primary whitespace-nowrap overflow-hidden text-ellipsis">
               {basePrice}
-              {parsedCurrency?.currency || t("price_per_night")}
+              {parsedCurrency?.currency}
             </span>
             <span className="text-dark whitespace-nowrap overflow-hidden text-ellipsis">
               /{period_name}

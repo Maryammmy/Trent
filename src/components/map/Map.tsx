@@ -30,6 +30,10 @@ const getPixelPositionOffset = (width: number, height: number) => ({
   x: -(width / 2),
   y: -height,
 });
+const storedCurrency = sessionStorage.getItem("currency");
+const parsedCurrency = storedCurrency
+  ? JSON.parse(storedCurrency)
+  : { currency: "EGP", rate: 1 };
 const Map = ({ properties, refetch }: IProps) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
@@ -51,6 +55,7 @@ const Map = ({ properties, refetch }: IProps) => {
     const updatedSelected = selectedProperties
       .map((selected) => properties.find((p) => p.id === selected.id))
       .filter(Boolean) as IProperty[];
+    console.log(updatedSelected);
     const isUpdated = updatedSelected.some((updated, index) => {
       const original = selectedProperties[index];
       return !updated || JSON.stringify(updated) !== JSON.stringify(original);
@@ -85,7 +90,7 @@ const Map = ({ properties, refetch }: IProps) => {
         Object.entries(groupedProperties).map(([key, group], index) => {
           const [lat, lng] = key.split("-").map(Number);
           const isSelected = selectedProperties?.some((property) =>
-            group.some((p) => p?.id === property?.id)
+            group?.some((p) => p?.id === property?.id)
           );
           return (
             <OverlayView
@@ -113,7 +118,9 @@ const Map = ({ properties, refetch }: IProps) => {
                 <span className="whitespace-nowrap">
                   {group?.length > 1
                     ? `${group?.length} Properties`
-                    : `${group[0]?.price} EGP`}
+                    : `${Math.round(
+                        Number(group?.[0]?.price) * Number(parsedCurrency?.rate)
+                      )} ${parsedCurrency?.currency}`}
                 </span>
               </Button>
             </OverlayView>

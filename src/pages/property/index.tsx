@@ -20,7 +20,9 @@ const uid = Cookies.get("user_id") || "";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 const storedCurrency = sessionStorage.getItem("currency");
-const parsedCurrency = storedCurrency ? JSON.parse(storedCurrency) : null;
+const parsedCurrency = storedCurrency
+  ? JSON.parse(storedCurrency)
+  : { currency: "EGP", rate: 1 };
 function Property() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -29,7 +31,7 @@ function Property() {
   const propertyDetails: IDetailsProperty = data?.data?.data?.property_details;
   const facilities: IFacilityProperty[] = data?.data?.data?.facility_list;
   const basePrice = Math.round(
-    Number(propertyDetails?.price) * Number(parsedCurrency?.rate || 1)
+    Number(propertyDetails?.price) * Number(parsedCurrency?.rate)
   );
   const minDays = Number(propertyDetails?.min_days);
   return (
@@ -138,9 +140,7 @@ function Property() {
                   <div className="font-semibold text-2xl" data-aos="fade-right">
                     <p>
                       <span className="text-primary">
-                        {basePrice}{" "}
-                        {parsedCurrency?.currency || t("price_per_night")}
-                        {/* {t("price_per_night")} */}
+                        {basePrice} {parsedCurrency?.currency}
                       </span>{" "}
                       <span className="text-dark">
                         /{propertyDetails?.period?.name?.[currentLanguage]}
