@@ -39,8 +39,8 @@ function Booking() {
   if (!booking) return <p>Loading</p>;
 
   return (
-    <div className="max-w-6xl mx-auto py-5 md:py-10 px-5 xl:px-0">
-      <div ref={printRef}>
+    <div className="max-w-6xl mx-auto pb-5 md:pb-10 px-5 xl:px-0">
+      <div ref={printRef} className="py-5 md:py-10">
         <div className="pb-5">
           <h2 className="text-2xl font-bold pb-1">{booking?.prop_title}</h2>
           <div className="flex items-center font-semibold text-lg">
@@ -117,7 +117,7 @@ function Booking() {
           </div>
         </div>
       </div>
-      <div className="flex justify-end py-5">
+      <div className="flex justify-end pb-5">
         <Button
           className="bg-primary py-3 px-4 text-white font-medium rounded-md"
           onClick={handlePrint}

@@ -17,6 +17,7 @@ interface IProps {
   close: () => void;
   isOpen: boolean;
   mobile: string;
+  countryCode?:string;
   is_new_user?: boolean;
   verifyOtp: (
     e: React.FormEvent<HTMLFormElement>,
@@ -29,6 +30,7 @@ export default function OtpModal({
   close,
   isOpen,
   mobile,
+  countryCode,
   verifyOtp,
   is_new_user,
 }: IProps) {
@@ -37,6 +39,7 @@ export default function OtpModal({
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
   const [otp, setOtp] = useState("");
+  console.log(countryCode)
   const handleOTPChange = (val: string) => {
     if (/^\d*$/.test(val)) {
       setOtp(val);

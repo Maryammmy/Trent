@@ -25,6 +25,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [otp, setOtp] = useState(false);
   const [phone, setPhone] = useState("");
+  const [countryCode,setCountryCode]=useState("")
   const {
     control,
     handleSubmit,
@@ -41,6 +42,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
   const onSubmit: SubmitHandler<IForgetPassword> = async (data) => {
     setLoading(true);
     setPhone(data.mobile);
+    setCountryCode(data.ccode)
     try {
       const response = await forgetPasswordAPI(data);
       if (response?.data?.response_code === 200) {
@@ -225,6 +227,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
         close={() => setOtp(false)}
         isOpen={otp}
         mobile={phone}
+        countryCode={countryCode}
         is_new_user={false}
         verifyOtp={verifyOtp}
       />

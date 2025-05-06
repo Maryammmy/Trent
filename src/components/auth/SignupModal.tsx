@@ -24,6 +24,7 @@ import { Link } from "react-router-dom";
 function SignupModal() {
   const { t } = useTranslation();
   const [mobile, setMobile] = useState("");
+  const [countryCode, setCountryCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
@@ -59,12 +60,14 @@ function SignupModal() {
     }
     setLoading(true);
     setMobile(data.mobile);
+    setCountryCode(data.ccode)
     try {
       const response = await verifySignupAPI(data);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
         dispatch(setIsSignup(false));
         setOtp(true);
+      console.log(response)
       }
     } catch (error) {
       const customError = error as ApiError;
@@ -243,6 +246,7 @@ function SignupModal() {
         isOpen={otp}
         close={() => setOtp(false)}
         mobile={mobile}
+        countryCode={countryCode}
         verifyOtp={verifyOtp}
       />
     </>
