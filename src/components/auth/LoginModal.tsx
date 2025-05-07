@@ -82,7 +82,7 @@ function LoginModal() {
           </span>
         </Button>
         <div className="p-5 md:py-8 md:px-10">
-          <h2 className="text-lg font-semibold pb-4">Welcome to Trent</h2>
+          <h2 className="text-lg font-semibold pb-5">Welcome to Trent</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">
