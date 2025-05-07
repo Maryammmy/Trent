@@ -1,3 +1,5 @@
+import { BaseProps } from "@/interfaces";
+
 export type SignupNameInputs = {
   name: string;
   email?: string;
@@ -76,3 +78,12 @@ export type PropertyTextArea = {
 export type CurrentLanguage = "en" | "ar";
 export type Person = "sender" | "receiver";
 export type ValidationMinMaxDays = "min" | "max";
+type EditableCountrySelectorProps = {
+  onChange: (value: string) => void;
+};
+type ReadOnlyCountrySelectorProps = {
+  readOnly: true;
+};
+
+export type IPropsCountrySelector = BaseProps &
+  (ReadOnlyCountrySelectorProps | EditableCountrySelectorProps);

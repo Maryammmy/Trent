@@ -9,17 +9,16 @@ import Modal from "../ui/Modal";
 import Input from "../ui/Input";
 import InputErrorMessage from "../ui/InputErrorMessage";
 import Loader from "../loader/Loader";
-import CountrySelector from "../ui/CountrySelector";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setIsloggedin } from "../../store/features/auth/authSlice";
 import { loginSchema } from "../../validation/loginSchema";
 import { loginAPI } from "../../services/authService";
-import { loginData } from "../../data/auth";
 import { LoginNameInputs } from "../../types";
 import { useLocation, useNavigate } from "react-router-dom";
 import ForgetPasswordModal from "./ForgetPasswordModal";
 import { ApiError } from "@/interfaces";
 import { useTranslation } from "react-i18next";
+import CountrySelector from "../ui/CountrySelector";
 
 function LoginModal() {
   const { t } = useTranslation();
@@ -79,75 +78,80 @@ function LoginModal() {
           className="absolute top-5 right-4"
         >
           <span>
-            <X className="text-black" size={20} />
+            <X size={20} />
           </span>
         </Button>
         <div className="p-5 md:py-8 md:px-10">
-          <h2 className="text-lg font-semibold pb-2">Welcome to Trent</h2>
+          <h2 className="text-lg font-semibold pb-4">Welcome to Trent</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-1">
+                Phone number
+              </label>
+              <div className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+                <Controller
+                  name="ccode"
+                  control={control}
+                  render={({ field }) => (
+                    <CountrySelector
+                      selectedCountry={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+                <Controller
+                  name="mobile"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      type="text"
+                      placeholder="Enter your phone number"
+                      className="w-full outline-none"
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/^0+/, "");
+                        field.onChange(value);
+                      }}
+                    />
+                  )}
+                />
+              </div>
+              {errors.mobile && (
+                <InputErrorMessage msg={errors.mobile.message} />
+              )}
+            </div>
             <Controller
-              name="ccode"
+              name="password"
               control={control}
               render={({ field }) => (
-                <CountrySelector
-                  selectedCountry={field.value}
-                  onChange={field.onChange}
-                />
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-1">
+                    Password
+                  </label>
+                  <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+                    <Input
+                      {...field}
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Enter your password"
+                      className="w-full outline-none"
+                    />
+                    <Button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <EyeOff strokeWidth={2.5} />
+                      ) : (
+                        <Eye strokeWidth={2.5} />
+                      )}
+                    </Button>
+                  </div>
+                  {errors.password && (
+                    <InputErrorMessage msg={errors.password.message} />
+                  )}
+                </div>
               )}
             />
-            {loginData.map(({ name, label, type, placeholder }) => (
-              <Controller
-                key={name}
-                name={name}
-                control={control}
-                render={({ field }) => (
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">
-                      {label}
-                    </label>
-                    <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
-                      {name === "password" ? (
-                        <>
-                          <Input
-                            {...field}
-                            type={showPassword ? "text" : "password"}
-                            placeholder={placeholder}
-                            className="w-full outline-none bg-transparent"
-                          />
-                          <Button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                          >
-                            {showPassword ? (
-                              <EyeOff strokeWidth={2.5} />
-                            ) : (
-                              <Eye strokeWidth={2.5} />
-                            )}
-                          </Button>
-                        </>
-                      ) : (
-                        <Input
-                          {...field}
-                          type={type}
-                          placeholder={placeholder}
-                          className="w-full outline-none bg-transparent"
-                          onChange={(e) => {
-                            let value = e.target.value;
-                            if (name === "mobile") {
-                              value = value.replace(/^0+/, "");
-                            }
-                            field.onChange(value);
-                          }}
-                        />
-                      )}
-                    </div>
-                    {errors[name] && (
-                      <InputErrorMessage msg={errors[name]?.message} />
-                    )}
-                  </div>
-                )}
-              />
-            ))}
             <div className="flex justify-end mb-4">
               <Button
                 type="button"

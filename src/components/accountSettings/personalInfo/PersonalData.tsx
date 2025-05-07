@@ -20,6 +20,7 @@ import UserSkeleton from "../../skeleton/UserSkeleton";
 import { ApiError } from "../../../interfaces";
 import { baseURL } from "../../../services";
 import ChangeMobileModal from "./ChangeMobileModal";
+import CountrySelector from "@/components/ui/CountrySelector";
 
 const uid = Cookies.get("user_id");
 function PersonalData() {
@@ -27,6 +28,7 @@ function PersonalData() {
   const [changeMobile, setChangeMobile] = useState(false);
   const [loading, setLoading] = useState(false);
   const [phone, setPhone] = useState("");
+  const [countryCode, setCountryCode] = useState("");
   const [previewImage, setPreviewImage] = useState<string>("");
   const [imageError, setImageError] = useState<string | null>(null);
   const { data } = useUserAPI();
@@ -55,18 +57,20 @@ function PersonalData() {
         pro_img: user?.pro_img,
       });
       setPreviewImage(baseURL + user?.pro_img);
-      setPhone(user.phone);
+      setPhone(user?.phone);
+      setCountryCode(user?.c_code);
     }
   }, [user, reset]);
   const onSubmit = async (data: IUpdateUser) => {
     setImageError(null);
-    console.log(data);
     const formData = convertPersonalDataToFormData(data);
     try {
       setLoading(true);
       const response = await updateUserAPI(formData);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
+        // reset();
+        window.location.reload();
       }
     } catch (error) {
       const customError = error as ApiError;
@@ -158,21 +162,24 @@ function PersonalData() {
               {errors.email && <InputErrorMessage msg={errors.email.message} />}
             </div>
             <div className="py-2 flex flex-col gap-2">
-              <label className="font-bold">{t("phone_number")}</label>
-              <div className="relative">
-                <Input
-                  value={phone}
-                  placeholder="Enter your phone number"
-                  className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
-                  readOnly
-                />
-                <Button
-                  type="button"
-                  onClick={() => setChangeMobile(true)}
-                  className="absolute ltr:right-3 rtl:left-3 top-3 text-primary font-medium"
-                >
-                  {t("change")}
-                </Button>
+              <label className="font-bold">Phone number</label>
+              <div className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+                <CountrySelector selectedCountry={user?.c_code} readOnly />
+                <div className="flex gap-2 justify-between w-full">
+                  <Input
+                    value={phone}
+                    placeholder="Enter your phone number"
+                    className="outline-none w-full"
+                    readOnly
+                  />
+                  <Button
+                    type="button"
+                    onClick={() => setChangeMobile(true)}
+                    className="text-primary font-medium"
+                  >
+                    {t("change")}
+                  </Button>
+                </div>
               </div>
             </div>
             <div className="py-2 flex flex-col gap-2">
@@ -204,6 +211,7 @@ function PersonalData() {
       </div>
       <ChangeMobileModal
         phone={phone}
+        countryCode={countryCode}
         isOpen={changeMobile}
         close={() => setChangeMobile(false)}
       />

@@ -189,6 +189,7 @@ function UpdatePropertyForm({
       const response = await editPropertyAPI(formData);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
+        reset();
         setTimeout(() => {
           navigate("/hosting/properties");
         }, 1000);
@@ -247,7 +248,7 @@ function UpdatePropertyForm({
         />
       </div>
 
-      <div className="flex justify-end items-center">
+      <div className="flex justify-end items-center pt-6">
         <Button
           disabled={loading}
           type="submit"

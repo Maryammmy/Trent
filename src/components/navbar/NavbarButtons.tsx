@@ -55,26 +55,9 @@ const NavbarButtons = () => {
             className="font-medium flex items-center text-white hover:text-secondary"
           >
             {currentLanguage === "en" ? "AR" : "EN"}
-            {/* <Globe size={18} /> */}
           </Button>
           {isLangSwitcherOpen && <LanguageSwitcher />}
         </div>
-        {/* <div className="hidden sm:flex sm:items-center sm:gap-2">
-          <div>
-            <span className="text-white font-medium hidden sm:block">
-              {currentLanguage === "en" ? "(العربيه)" : "(English)"}
-            </span>
-          </div>
-          <div className="relative" ref={languageSwitcherRef}>
-            <Button
-              onClick={toggleLangSwitcher}
-              className="md:py-2 md:px-4 flex items-center rounded-full text-white md:hover:bg-secondary"
-            >
-              <Globe size={18} />
-            </Button>
-            {isLangSwitcherOpen && <LanguageSwitcher />}
-          </div>
-        </div> */}
         <CurrencySwitcher />
         {isLoggedin && (
           <div className="relative" ref={dropdownRef}>

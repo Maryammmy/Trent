@@ -17,11 +17,11 @@ interface IProps {
   close: () => void;
   isOpen: boolean;
   mobile: string;
-  countryCode?:string;
+  countryCode: string;
   is_new_user?: boolean;
   verifyOtp: (
     e: React.FormEvent<HTMLFormElement>,
-    { otp, mobile }: { otp: string; mobile: string },
+    { otp, mobile, ccode }: { otp: string; mobile: string; ccode: string },
     close: () => void
   ) => Promise<void>;
 }
@@ -39,7 +39,6 @@ export default function OtpModal({
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
   const [otp, setOtp] = useState("");
-  console.log(countryCode)
   const handleOTPChange = (val: string) => {
     if (/^\d*$/.test(val)) {
       setOtp(val);
@@ -58,14 +57,18 @@ export default function OtpModal({
   }, [timeLeft]);
   const verifyOTP = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
-    await verifyOtp(e, { otp, mobile }, close);
+    await verifyOtp(e, { otp, mobile, ccode: countryCode }, close);
     setLoading(false);
   };
   const reSendOtp = async () => {
     if (timeLeft > 0) return;
     setResendLoading(true);
     try {
-      const response = await sendOtpAPI({ mobile, is_new_user });
+      const response = await sendOtpAPI({
+        mobile,
+        ccode: countryCode,
+        is_new_user,
+      });
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
         setTimeLeft(60);

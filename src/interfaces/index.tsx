@@ -58,3 +58,11 @@ export interface ISlider {
   government_id: string;
   user_list: [];
 }
+export interface ICountry {
+  code: string;
+  name: string;
+  dial_code: string;
+}
+export interface BaseProps {
+  selectedCountry: string;
+}

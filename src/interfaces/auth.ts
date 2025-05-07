@@ -15,11 +15,13 @@ export interface ISignupInputs {
 export interface IVerifyOtp {
   otp: string;
   mobile: string;
+  ccode: string;
   is_change_password: null | boolean;
 }
 export interface ISendOtp {
   is_new_user?: boolean;
   mobile: string;
+  ccode: string;
 }
 export interface IForgetPassword {
   mobile: string;

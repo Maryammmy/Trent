@@ -25,7 +25,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [otp, setOtp] = useState(false);
   const [phone, setPhone] = useState("");
-  const [countryCode,setCountryCode]=useState("")
+  const [countryCode, setCountryCode] = useState("");
   const {
     control,
     handleSubmit,
@@ -42,7 +42,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
   const onSubmit: SubmitHandler<IForgetPassword> = async (data) => {
     setLoading(true);
     setPhone(data.mobile);
-    setCountryCode(data.ccode)
+    setCountryCode(data.ccode);
     try {
       const response = await forgetPasswordAPI(data);
       if (response?.data?.response_code === 200) {
@@ -62,19 +62,23 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
   };
   const verifyOtp = async (
     e: React.FormEvent<HTMLFormElement>,
-    { otp, mobile }: { otp: string; mobile: string },
+    { otp, mobile, ccode }: { otp: string; mobile: string; ccode: string },
     close: () => void
   ) => {
     e.preventDefault();
     try {
       const response = await verifyOtpAPI({
         mobile,
+        ccode,
         otp,
         is_change_password: true,
       });
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
-        close();
+        setTimeout(() => {
+          close();
+          window.location.reload();
+        }, 500);
       }
     } catch (error) {
       const customError = error as ApiError;
@@ -95,7 +99,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
       >
         <Button onClick={close} className="absolute top-5 right-4">
           <span>
-            <X className="text-black" size={20} />
+            <X size={20} />
           </span>
         </Button>
         <div className="p-5 md:py-8 md:px-10">
@@ -106,47 +110,42 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
             </p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Controller
-              name="ccode"
-              control={control}
-              render={({ field }) => (
-                <CountrySelector
-                  selectedCountry={field.value}
-                  onChange={field.onChange}
+            <div className="flex flex-col gap-1 mb-4">
+              <label className="text-sm font-medium">Phone number</label>
+              <div className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+                <Controller
+                  name="ccode"
+                  control={control}
+                  render={({ field }) => (
+                    <CountrySelector
+                      selectedCountry={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
                 />
+                <Controller
+                  name="mobile"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      type="text"
+                      placeholder="Enter your phone number"
+                      className="w-full outline-none"
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/^0+/, "");
+                        field.onChange(value);
+                      }}
+                    />
+                  )}
+                />
+              </div>
+              {errors.mobile && (
+                <InputErrorMessage msg={errors.mobile.message} />
               )}
-            />
-            <div className="flex flex-col gap-2 mb-4">
-              <label htmlFor="mobile" className="text-600 font-medium text-sm">
-                {t("phone_number")}
-              </label>
-              <Controller
-                name="mobile"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    type="text"
-                    placeholder="Enter your phone number"
-                    className="cursor-pointer p-3 rounded-lg border border-gray-300 hover:border-black focus:border-primary outline-none"
-                    id="mobile"
-                    onChange={(e) => {
-                      let value = e.target.value;
-                      value = value.replace(/^0+/, "");
-                      field.onChange(value);
-                    }}
-                  />
-                )}
-              />
             </div>
-            {errors["mobile"] && (
-              <InputErrorMessage msg={errors["mobile"]?.message} />
-            )}
-            <div className="flex flex-col gap-2 mb-4">
-              <label
-                htmlFor="password"
-                className="text-600 font-medium text-sm"
-              >
+            <div className="flex flex-col gap-1 mb-4">
+              <label htmlFor="password" className="font-medium text-sm">
                 {t("new_password")}
               </label>
               <Controller
@@ -174,15 +173,12 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
                   </div>
                 )}
               />
+              {errors["password"] && (
+                <InputErrorMessage msg={errors["password"]?.message} />
+              )}
             </div>
-            {errors["password"] && (
-              <InputErrorMessage msg={errors["password"]?.message} />
-            )}
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="confirm_password"
-                className="text-600 font-medium text-sm"
-              >
+            <div className="flex flex-col gap-1">
+              <label htmlFor="confirm_password" className="font-medium text-sm">
                 {t("confirm_new_password")}
               </label>
               <Controller
@@ -223,14 +219,16 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
           </form>
         </div>
       </Modal>
-      <OtpModal
-        close={() => setOtp(false)}
-        isOpen={otp}
-        mobile={phone}
-        countryCode={countryCode}
-        is_new_user={false}
-        verifyOtp={verifyOtp}
-      />
+      {otp && (
+        <OtpModal
+          close={() => setOtp(false)}
+          isOpen={otp}
+          mobile={phone}
+          countryCode={countryCode}
+          is_new_user={false}
+          verifyOtp={verifyOtp}
+        />
+      )}
     </>
   );
 }

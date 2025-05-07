@@ -60,14 +60,13 @@ function SignupModal() {
     }
     setLoading(true);
     setMobile(data.mobile);
-    setCountryCode(data.ccode)
+    setCountryCode(data.ccode);
     try {
       const response = await verifySignupAPI(data);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
         dispatch(setIsSignup(false));
         setOtp(true);
-      console.log(response)
       }
     } catch (error) {
       const customError = error as ApiError;
@@ -81,13 +80,14 @@ function SignupModal() {
   };
   const verifyOtp = async (
     e: React.FormEvent<HTMLFormElement>,
-    { otp, mobile }: { otp: string; mobile: string },
+    { otp, mobile, ccode }: { otp: string; mobile: string; ccode: string },
     close: () => void
   ) => {
     e.preventDefault();
     try {
       const response = await verifyOtpAPI({
         mobile,
+        ccode,
         otp,
         is_change_password: null,
       });
@@ -123,7 +123,7 @@ function SignupModal() {
           className="absolute top-5 right-4 text-gray-500"
         >
           <span>
-            <X className="text-black" size={20} />
+            <X size={20} />
           </span>
         </Button>
         <div className="pb-3">
@@ -134,70 +134,92 @@ function SignupModal() {
             <form onSubmit={handleSubmit(onSubmit)}>
               {signupData.map(({ name, label, type, placeholder }) => (
                 <Fragment key={name}>
-                  {name === "mobile" && (
-                    <Controller
-                      name="ccode"
-                      control={control}
-                      render={({ field }) => (
-                        <CountrySelector
-                          selectedCountry={field.value}
-                          onChange={field.onChange}
+                  {name === "mobile" ? (
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium mb-1">
+                        {label}
+                      </label>
+                      <div className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+                        <Controller
+                          name="ccode"
+                          control={control}
+                          render={({ field }) => (
+                            <CountrySelector
+                              selectedCountry={field.value}
+                              onChange={field.onChange}
+                            />
+                          )}
                         />
-                      )}
-                    />
-                  )}
-                  <Controller
-                    name={name}
-                    control={control}
-                    render={({ field }) => (
-                      <div className="mb-4">
-                        <label className="block text-sm font-medium mb-1">
-                          {label}
-                        </label>
-                        <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
-                          {name === "password" || name === "confirmPassword" ? (
-                            <>
-                              <Input
-                                {...field}
-                                type={showPassword ? "text" : "password"}
-                                placeholder={placeholder}
-                                className="w-full outline-none bg-transparent"
-                              />
-                              <Button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                              >
-                                {showPassword ? (
-                                  <EyeOff strokeWidth={2.5} />
-                                ) : (
-                                  <Eye strokeWidth={2.5} />
-                                )}
-                              </Button>
-                            </>
-                          ) : (
+                        <Controller
+                          name={name}
+                          control={control}
+                          render={({ field }) => (
                             <Input
                               {...field}
-                              type={type}
-                              placeholder={placeholder}
-                              className="w-full outline-none bg-transparent"
+                              type="text"
+                              placeholder="Enter your phone number"
+                              className="w-full outline-none"
                               onChange={(e) => {
-                                let value = e.target.value;
-                                if (name === "mobile") {
-                                  value = value.replace(/^0+/, "");
-                                }
+                                const value = e.target.value.replace(/^0+/, "");
                                 field.onChange(value);
                               }}
                             />
                           )}
-                        </div>
-                        {errors[name] && (
-                          <InputErrorMessage msg={errors[name]?.message} />
-                        )}
+                        />
                       </div>
-                    )}
-                  />
+                      {errors.name && (
+                        <InputErrorMessage msg={errors.name.message} />
+                      )}
+                    </div>
+                  ) : (
+                    <Controller
+                      name={name}
+                      control={control}
+                      render={({ field }) => (
+                        <div className="mb-4">
+                          <label className="block text-sm font-medium mb-1">
+                            {label}
+                          </label>
+                          <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+                            {name === "password" ||
+                            name === "confirmPassword" ? (
+                              <>
+                                <Input
+                                  {...field}
+                                  type={showPassword ? "text" : "password"}
+                                  placeholder={placeholder}
+                                  className="w-full outline-none"
+                                />
+                                <Button
+                                  type="button"
+                                  onClick={() => setShowPassword(!showPassword)}
+                                >
+                                  {showPassword ? (
+                                    <EyeOff strokeWidth={2.5} />
+                                  ) : (
+                                    <Eye strokeWidth={2.5} />
+                                  )}
+                                </Button>
+                              </>
+                            ) : (
+                              <Input
+                                {...field}
+                                type={type}
+                                placeholder={placeholder}
+                                className="w-full outline-none"
+                              />
+                            )}
+                          </div>
+                          {errors[name] && (
+                            <InputErrorMessage msg={errors[name]?.message} />
+                          )}
+                        </div>
+                      )}
+                    />
+                  )}
                 </Fragment>
               ))}
+
               <div className="my-4">
                 <div className="flex items-center gap-2 font-medium">
                   <input
@@ -242,13 +264,15 @@ function SignupModal() {
           </div>
         </div>
       </Modal>
-      <OtpModal
-        isOpen={otp}
-        close={() => setOtp(false)}
-        mobile={mobile}
-        countryCode={countryCode}
-        verifyOtp={verifyOtp}
-      />
+      {otp && (
+        <OtpModal
+          isOpen={otp}
+          close={() => setOtp(false)}
+          mobile={mobile}
+          countryCode={countryCode}
+          verifyOtp={verifyOtp}
+        />
+      )}
     </>
   );
 }

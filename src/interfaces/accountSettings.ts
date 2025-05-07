@@ -34,8 +34,15 @@ export interface IUser {
   user_fees_percent: string;
   owner_fees_percent: string;
   membership: string;
+  c_code: string;
+}
+export interface IChangeMobileInputs {
+  new_mobile: string;
+  new_ccode: string;
 }
 export interface IChangeMobile {
   new_mobile: string;
+  new_ccode: string;
   old_mobile: string;
+  old_ccode: string;
 }

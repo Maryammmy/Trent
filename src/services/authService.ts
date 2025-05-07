@@ -14,10 +14,11 @@ export const loginAPI = (payload: LoginNameInputs) => {
   const response = baseAPI.post("user_api/u_login_user.php", payload);
   return response;
 };
-export const sendOtpAPI = ({ is_new_user = true, mobile }: ISendOtp) => {
+export const sendOtpAPI = ({ is_new_user = true, mobile, ccode }: ISendOtp) => {
   const response = baseAPI.post("user_api/send_otp.php", {
     is_new_user,
     mobile,
+    ccode,
   });
   return response;
 };
