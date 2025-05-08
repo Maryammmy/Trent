@@ -11,7 +11,6 @@
   "guest": "ضيف",
   "guests": "ضيوف",
   "search": "ابحث",
-  "placeholder_search": "ابدأ البحث",
   "sign_up": "إنشاء حساب",
   "log_in": "تسجيل الدخول",
   "host_your_house": "استضف منزلك",
@@ -424,5 +423,6 @@
   "you_can't_book_your_own_property": "لا يمكنك حجز عقارك",
   "payment_checked_successfully": "تم التحقق من الدفع بنجاح",
   "catalyst_footer_text": "© 2025 — التصميم والتطوير بواسطة",
-  "catalyst_footer_brand": "كتاليست"
+  "catalyst_footer_brand": "كتاليست",
+  "where_are_you_going": "أين تريد أن تذهب؟"
 }

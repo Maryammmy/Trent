@@ -11,6 +11,7 @@ import HomeAlert from "@/components/home/HomeAlert";
 import { ISlider } from "@/interfaces";
 import { useContext } from "react";
 import { FilterDataContext } from "@/context/FilterDataContext";
+import HomeSearch from "@/components/home/HomeSearch";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -51,6 +52,9 @@ function Home() {
             {t("home_title")}{" "}
             <span className="text-secondary">{t("today")}</span>
           </h1>
+        </div>
+        <div className="absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <HomeSearch />
         </div>
       </div>
       <div className="sm:px-4" data-aos="fade-down">

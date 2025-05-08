@@ -41,13 +41,13 @@ const DatePicker = ({
       />
       <style>
         {`
+      :dir(rtl) .remove-icon div button.absolute {
+  right: 80% !important;
+}
         .remove-icon div button.line-through{
          color: #f87171 !important;
-         cursor: not-allowed;
+         cursor: not-allowed !important;
         }
-          .remove-icon div button {
-     
-          }
        .remove-icon div .flex.justify-center.space-x-3 {
       gap: 8px !important; 
     }

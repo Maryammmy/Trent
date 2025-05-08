@@ -11,7 +11,6 @@
   "guest": "guest",
   "guests": "guests",
   "search": "Search",
-  "placeholder_search": "Start your search",
   "sign_up": "Sign up",
   "log_in": "Log in",
   "host_your_house": "Host your house",
@@ -426,5 +425,6 @@
   "you_can't_book_your_own_property": "You can't book your own property",
   "payment_checked_successfully": "Payment checked successfully",
   "catalyst_footer_text": "© 2025 — Designed and Developed by",
-  "catalyst_footer_brand": "Catalyst"
+  "catalyst_footer_brand": "Catalyst",
+  "where_are_you_going": "Where are you going?"
 }

@@ -190,7 +190,7 @@ function Book() {
                 onChange={handleRulesChange}
                 className="w-5 h-5 accent-primary cursor-pointer"
               />
-              <label htmlFor="rules" className="text-sm text-dark">
+              <label htmlFor="rules" className="text-dark">
                 {t("i_accept_host_rules")}
               </label>
             </div>
