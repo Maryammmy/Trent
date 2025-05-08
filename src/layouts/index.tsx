@@ -16,7 +16,7 @@ const RootLayout = () => {
       <Navbar />
       <div
         className={`min-h-[57vh] ${
-          pathname === "/" ? "" : "mt-[73.6px] md:mt-[87px]"
+          pathname === "/" ? "" : "mt-[73.6px] sm:mt-[87px]"
         }`}
       >
         <Outlet />

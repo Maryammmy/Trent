@@ -178,7 +178,7 @@ function Property() {
               />
               <Amenities facilities={facilities} />
             </div>
-            <ReviewComponent />
+            <ReviewComponent id={id} />
             <div className="max-w-7xl mx-auto py-5">
               <Map
                 latitdude={Number(propertyDetails?.latitude)}

@@ -70,92 +70,104 @@ function PayoutRequest() {
     }
   };
   return (
-    <div className="py-10 px-5 xl:px-0 max-w-6xl mx-auto">
-      <div className="w-full sm:w-96 h-52 relative rounded-2xl overflow-hidden">
-        <div className="absolute h-full left-5 py-2 pointer-events-none z-[5] flex flex-col justify-between">
-          <h2 className="text-white font-semibold text-xl pt-5">
-            {t("payouts")}
-          </h2>
-          <div className="flex flex-col gap-1">
-            <span className="text-white font-semibold text-2xl">
-              1200 {t("price_per_night")}
-            </span>
-            <span className="text-white font-semibold text-lg">
-              {t("your_total_earnings")}
-            </span>
+    <>
+      {!payoutProperties ? (
+        <div className="py-10 px-5 xl:px-0 max-w-6xl mx-auto space-y-8">
+          <PropertyHostingSkeleton cards={5} />
+        </div>
+      ) : (
+        <div className="py-10 px-5 xl:px-0 max-w-6xl mx-auto">
+          <div className="w-full sm:w-96 h-52 relative rounded-2xl overflow-hidden">
+            <div className="absolute h-full left-5 py-2 pointer-events-none z-[5] flex flex-col justify-between">
+              <h2 className="text-white font-semibold text-xl pt-5">
+                {t("payouts")}
+              </h2>
+              <div className="flex flex-col gap-1">
+                <span className="text-white font-semibold text-2xl">
+                  1200 {t("price_per_night")}
+                </span>
+                <span className="text-white font-semibold text-lg">
+                  {t("your_total_earnings")}
+                </span>
+              </div>
+            </div>
+            <div className="w-full h-full">
+              <Image
+                imageUrl={
+                  currentLanguage === "ar"
+                    ? "/images/walletIMageAr.png"
+                    : "/images/walletIMage.png"
+                }
+                alt="card"
+                className="w-full h-full"
+              />
+            </div>
           </div>
-        </div>
-        <div className="w-full h-full">
-          <Image
-            imageUrl={
-              currentLanguage === "ar"
-                ? "/images/walletIMageAr.png"
-                : "/images/walletIMage.png"
-            }
-            alt="card"
-            className="w-full h-full"
-          />
-        </div>
-      </div>
-      <div className="pt-8 max-w-md">
-        {!payoutProfiles ? (
-          <SelectSkeleton />
-        ) : payoutProfiles?.length ? (
-          <Select
-            options={payoutProfiles?.map((profile: IPayoutProfile) => ({
-              value: profile?.id,
-              label: profile?.method_name,
-            }))}
-            value={profileId}
-            onChange={(e) => setProfileId(e.target.value)}
-          />
-        ) : (
-          <div className="flex flex-col gap-5 justify-center items-center font-medium">
-            <p className="text-lg text-dark">{t("no_payout_profiles_found")}</p>
+          <div className="pt-8 max-w-md">
+            {!payoutProfiles ? (
+              <SelectSkeleton />
+            ) : payoutProfiles?.length ? (
+              <Select
+                options={payoutProfiles?.map((profile: IPayoutProfile) => ({
+                  value: profile?.id,
+                  label: profile?.method_name,
+                }))}
+                value={profileId}
+                onChange={(e) => setProfileId(e.target.value)}
+              />
+            ) : (
+              <div className="flex flex-col gap-5 justify-center items-center font-medium">
+                <p className="text-lg text-dark">
+                  {t("no_payout_profiles_found")}
+                </p>
+                <Button
+                  onClick={() =>
+                    navigate("/hosting/payouts/create-profile", {
+                      state: "/hosting/payouts/request",
+                    })
+                  }
+                  className="bg-primary font-medium text-white py-2 px-4 rounded-md"
+                >
+                  {t("create_payout_profile")}
+                </Button>
+              </div>
+            )}
+          </div>
+          <div className="pt-8">
+            <h2 className="text-2xl font-semibold">{t("ready_properties")}</h2>
+            <div className="grid grid-cols-1 gap-5 sm:gap-8 mt-5">
+              {!payoutProperties ? (
+                <PropertyHostingSkeleton cards={3} />
+              ) : payoutProperties?.length ? (
+                payoutProperties?.map((property) => (
+                  <PayoutReadyProperty
+                    key={property?.id}
+                    property={property}
+                    isSelected={selectedProperties.includes(
+                      Number(property?.id)
+                    )}
+                    onToggle={toggleProperty}
+                  />
+                ))
+              ) : (
+                <div className="flex justify-center items-center text-lg h-[50vh] text-dark font-medium w-full">
+                  {t("no_ready_properties_found")}
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="flex justify-end pt-10">
             <Button
-              onClick={() =>
-                navigate("/hosting/payouts/create-profile", {
-                  state: "/hosting/payouts/request",
-                })
-              }
-              className="bg-primary font-medium text-white py-2 px-4 rounded-md"
+              disabled={loading}
+              onClick={sendPayoutRequest}
+              className=" bg-primary text-white py-3 w-44 text-lg rounded-md font-medium"
             >
-              {t("create_payout_profile")}
+              {loading ? <Loader /> : t("payout_request")}
             </Button>
           </div>
-        )}
-      </div>
-      <div className="pt-8">
-        <h2 className="text-2xl font-semibold">{t("ready_properties")}</h2>
-        <div className="grid grid-cols-1 gap-5 sm:gap-8 mt-5">
-          {!payoutProperties ? (
-            <PropertyHostingSkeleton cards={3} />
-          ) : payoutProperties?.length ? (
-            payoutProperties?.map((property) => (
-              <PayoutReadyProperty
-                key={property?.id}
-                property={property}
-                isSelected={selectedProperties.includes(Number(property?.id))}
-                onToggle={toggleProperty}
-              />
-            ))
-          ) : (
-            <div className="flex justify-center items-center text-lg h-[50vh] text-dark font-medium w-full">
-              {t("no_ready_properties_found")}
-            </div>
-          )}
         </div>
-      </div>
-      <div className="flex justify-end pt-10">
-        <Button
-          disabled={loading}
-          onClick={sendPayoutRequest}
-          className=" bg-primary text-white py-3 w-44 text-lg rounded-md font-medium"
-        >
-          {loading ? <Loader /> : t("payout_request")}
-        </Button>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

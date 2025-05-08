@@ -5,11 +5,16 @@ import PrograssBar from "../../ui/PrograssBar";
 import ReviewCard from "./ReviewCard";
 import ReviewModal from "./ReviewModal";
 import { useTranslation } from "react-i18next";
-
-function ReviewComponent() {
+import { useRatingAPI } from "@/services/ratingService";
+interface IProps {
+  id: string | undefined;
+}
+function ReviewComponent({ id }: IProps) {
   const { t } = useTranslation();
   const [isReviewed, setIsReviewed] = useState<boolean>(false);
   const reviewCardItems = Array.from({ length: 8 });
+  const { data } = useRatingAPI(id);
+  console.log(data?.data?.data?.Ratings);
   return (
     <>
       <div className="max-w-7xl mx-auto pb-10">

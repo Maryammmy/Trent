@@ -18,6 +18,7 @@ import { DateValueType } from "react-tailwindcss-datepicker";
 import Cookies from "js-cookie";
 import InputErrorMessage from "@/components/ui/InputErrorMessage";
 import Input from "@/components/ui/Input";
+import BookingSkeleton from "@/components/skeleton/BookingSkeleton";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -140,74 +141,82 @@ function Book() {
   };
 
   return (
-    <div className="py-10 px-5 xl:px-20 mx-auto max-w-screen-xl">
-      <div className="pb-5">
-        <h2 className="font-bold text-2xl">{propertyBook?.title}</h2>
-        {minDays ? (
-          <p className="font-medium text-dark pt-2">
-            {t("minimum_stay_desc", { days: minDays })}{" "}
-            {minDays > 1 ? t("days") : t("day")}
-          </p>
-        ) : null}
-      </div>
-      <div className="flex flex-col gap-10">
-        <CheckDates
-          startDateValue={startDateValue}
-          endDateValue={endDateValue}
-          handleStartValueChange={handleStartValueChange}
-          handleEndValueChange={handleEndValueChange}
-          errors={{ checkin: errors.checkin, checkout: errors.checkout }}
-          nextAvailableDate={propertyBook?.next_available_date}
-        />
-        <div className="flex flex-col">
-          <h2 className="text-black font-bold mb-2">{t("guest_count")}</h2>
-          <div className="flex items-center gap-4">
-            <p className="text-dark font-medium">
-              {propertyBook?.guest_count
-                ? t("suitable_guests", {
-                    guests: propertyBook?.guest_count,
-                  })
-                : t("open_number_guests")}
-            </p>
-            <Counter
-              counter={counter}
-              increaseCounter={() => updateCounter(1)}
-              decreaseCounter={() => updateCounter(-1)}
-              maxNumber={Number(propertyBook?.guest_count)}
-              bookGuestCount={1}
+    <>
+      {!propertyBook ? (
+        <BookingSkeleton cards={2} />
+      ) : (
+        <div className="py-10 px-5 xl:px-20 mx-auto max-w-screen-xl">
+          <div className="pb-5">
+            <h2 className="font-bold text-2xl">{propertyBook?.title}</h2>
+            {minDays ? (
+              <p className="font-medium text-dark pt-2">
+                {t("minimum_stay_desc", { days: minDays })}{" "}
+                {minDays > 1 ? t("days") : t("day")}
+              </p>
+            ) : null}
+          </div>
+          <div className="flex flex-col gap-10">
+            <CheckDates
+              startDateValue={startDateValue}
+              endDateValue={endDateValue}
+              handleStartValueChange={handleStartValueChange}
+              handleEndValueChange={handleEndValueChange}
+              errors={{ checkin: errors.checkin, checkout: errors.checkout }}
+              nextAvailableDate={propertyBook?.next_available_date}
             />
+            <div className="flex flex-col">
+              <h2 className="text-black font-bold mb-2">{t("guest_count")}</h2>
+              <div className="flex items-center gap-4">
+                <p className="text-dark font-medium">
+                  {propertyBook?.guest_count
+                    ? t("suitable_guests", {
+                        guests: propertyBook?.guest_count,
+                      })
+                    : t("open_number_guests")}
+                </p>
+                <Counter
+                  counter={counter}
+                  increaseCounter={() => updateCounter(1)}
+                  decreaseCounter={() => updateCounter(-1)}
+                  maxNumber={Number(propertyBook?.guest_count)}
+                  bookGuestCount={1}
+                />
+              </div>
+            </div>
+            {propertyBook?.guest_rules && (
+              <div className="flex flex-col">
+                <h3 className="font-bold mb-2">{t("host_rules")}</h3>
+                <p className="text-dark font-medium">
+                  {propertyBook?.guest_rules}
+                </p>
+                <div className="flex items-center gap-2 font-medium pt-2">
+                  <Input
+                    type="checkbox"
+                    id="rules"
+                    checked={acceptedRules}
+                    onChange={handleRulesChange}
+                    className="w-5 h-5 accent-primary cursor-pointer"
+                  />
+                  <label htmlFor="rules" className="text-dark">
+                    {t("i_accept_host_rules")}
+                  </label>
+                </div>
+                {errors.rules && <InputErrorMessage msg={errors.rules} />}
+              </div>
+            )}
+          </div>
+          <div className="flex justify-end py-10">
+            <Button
+              disabled={loading}
+              onClick={handleVerifyProperty}
+              className="bg-primary text-white w-32 py-2 rounded-md text-lg font-medium"
+            >
+              {loading ? <Loader /> : t("continue")}
+            </Button>
           </div>
         </div>
-        {propertyBook?.guest_rules && (
-          <div className="flex flex-col">
-            <h3 className="font-bold mb-2">{t("host_rules")}</h3>
-            <p className="text-dark font-medium">{propertyBook?.guest_rules}</p>
-            <div className="flex items-center gap-2 font-medium pt-2">
-              <Input
-                type="checkbox"
-                id="rules"
-                checked={acceptedRules}
-                onChange={handleRulesChange}
-                className="w-5 h-5 accent-primary cursor-pointer"
-              />
-              <label htmlFor="rules" className="text-dark">
-                {t("i_accept_host_rules")}
-              </label>
-            </div>
-            {errors.rules && <InputErrorMessage msg={errors.rules} />}
-          </div>
-        )}
-      </div>
-      <div className="flex justify-end py-10">
-        <Button
-          disabled={loading}
-          onClick={handleVerifyProperty}
-          className="bg-primary text-white w-32 py-2 rounded-md text-lg font-medium"
-        >
-          {loading ? <Loader /> : t("continue")}
-        </Button>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 
