@@ -1,7 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { baseAPI } from ".";
+import { baseAPI, baseAPIForm } from ".";
 import { IAddAndUpdateRating, IDeleteRating } from "@/interfaces/rating";
+import Cookies from "js-cookie";
+import { CurrentLanguage } from "@/types";
 
+const currentLanguage = (localStorage.getItem("i18nextLng") ||
+  "en") as CurrentLanguage;
+const uid = Cookies.get("user_id");
 export const useRatingAPI = (id: string | undefined) => {
   return useQuery({
     queryKey: ["rating", id],
@@ -12,10 +17,15 @@ export const useRatingAPI = (id: string | undefined) => {
 };
 export const addAndUpdateRatingAPI = (payload: IAddAndUpdateRating) => {
   const formData = new FormData();
-  Object.entries(payload).forEach(([key, value]) => {
-    formData.append(key, String(value));
-  });
-  const response = baseAPI.post("user_api/booking/u_rate_update.php", formData);
+  Object.entries({ ...payload, uid, lang: currentLanguage }).forEach(
+    ([key, value]) => {
+      formData.append(key, String(value));
+    }
+  );
+  const response = baseAPIForm.post(
+    "user_api/booking/u_rate_update.php",
+    formData
+  );
   return response;
 };
 export const deleteRatingAPI = (payload: IDeleteRating) => {

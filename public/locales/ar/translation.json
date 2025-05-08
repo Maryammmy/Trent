@@ -424,5 +424,7 @@
   "payment_checked_successfully": "تم التحقق من الدفع بنجاح",
   "catalyst_footer_text": "© 2025 — التصميم والتطوير بواسطة",
   "catalyst_footer_brand": "كتاليست",
-  "where_are_you_going": "أين تريد أن تذهب؟"
+  "where_are_you_going": "أين تريد أن تذهب؟",
+  "rate_your_stay": "قيم إقامتك",
+  "submit_review": "إرسال التقييم"
 }

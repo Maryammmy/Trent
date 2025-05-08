@@ -4,20 +4,24 @@ import PropertyHostingSkeleton from "@/components/skeleton/PropertyHostingSkelet
 import Button from "@/components/ui/Button";
 import { IBooking } from "@/interfaces/booking";
 import { useMyBookingsAPI } from "@/services/bookingService";
-import { useState } from "react";
+import { useQueryParam } from "@/utils/getQueryParam";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 function Bookings() {
   const { t } = useTranslation();
-  const [status, setStatus] = useState("active");
+  const statusFromUrl = useQueryParam("status");
+  const status = statusFromUrl || "active";
   const { data } = useMyBookingsAPI(status);
   const bookings: IBooking[] = data?.data?.data?.My_Booking;
+  const navigate = useNavigate();
+
   return (
     <div className="max-w-6xl mx-auto py-5 md:py-10 px-5 xl:px-0">
       <DynamicTitle title="my_bookings" />
-      <div className="flex gap-10 sm:gap-20 text-xl my-6 font-semibold">
+      <div className="flex gap-10 sm:gap-20 text-xl my-8 font-semibold">
         <Button
-          onClick={() => setStatus("active")}
+          onClick={() => navigate("/account-settings/bookings?status=active")}
           className={`text-start text-dark activeButton w-fit ${
             status === "active" ? "active" : ""
           }`}
@@ -25,7 +29,9 @@ function Bookings() {
           {t("active")}
         </Button>
         <Button
-          onClick={() => setStatus("completed")}
+          onClick={() =>
+            navigate("/account-settings/bookings?status=completed")
+          }
           className={`text-start text-dark activeButton w-fit ${
             status === "completed" ? "active" : ""
           }`}
