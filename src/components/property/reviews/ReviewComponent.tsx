@@ -56,11 +56,13 @@ function ReviewComponent({ id }: IProps) {
             );
           })}
         </div>
-        <div className="border-t py-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
-          {ratings?.map((rating) => (
-            <ReviewCard key={rating?.id} rating={rating} />
-          ))}
-        </div>
+        {ratings?.length > 0 && (
+          <div className="border-t py-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
+            {ratings?.map((rating) => (
+              <ReviewCard key={rating?.id} rating={rating} />
+            ))}
+          </div>
+        )}
         <Button
           onClick={() => setIsReviewed(true)}
           className="font-semibold text-lg border border-black rounded-md px-6 py-2 hover:bg-gray-100"
