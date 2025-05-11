@@ -426,5 +426,8 @@
   "catalyst_footer_brand": "كتاليست",
   "where_are_you_going": "أين تريد أن تذهب؟",
   "rate_your_stay": "قيم إقامتك",
-  "submit_review": "إرسال التقييم"
+  "submit_review": "إرسال التقييم",
+  "comment_error_rating": "يجب أن يحتوي التعليق على أحرف، لا يمكن أن يكون أرقامًا فقط.",
+  "delete_review": "حذف التقييم",
+  "delete_review_desc": "هل أنت متأكد من حذف هذا التقييم؟"
 }

@@ -14,8 +14,10 @@ function CurrencySwitcher() {
   const handleSelect = async (currency: string) => {
     if (currency === "EGP") {
       sessionStorage.setItem("currency", JSON.stringify({ currency, rate: 1 }));
-      setIsOpen(false);
-      window.location.reload();
+      setTimeout(() => {
+        setIsOpen(false);
+        window.location.reload();
+      }, 500);
       return;
     }
     try {

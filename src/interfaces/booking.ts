@@ -38,6 +38,12 @@ export interface IPaymentMethodBook {
   value: string;
   icons: string[];
 }
+export interface IIndividualRate {
+  rate: string;
+  comment: string;
+  created_at: string;
+  id: string;
+}
 export interface IBooking {
   book_id: string;
   book_status: string;
@@ -57,7 +63,9 @@ export interface IBooking {
   category: { id: string; type: string };
   city: string;
   government: IGovernement;
+  individual_rate: IIndividualRate;
 }
+
 export interface IBookingDetails {
   address: string;
   bathrooms_count: string;

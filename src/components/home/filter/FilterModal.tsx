@@ -105,15 +105,15 @@ function FilterModal({ isFilterOpen, close }: IProps) {
           handlePeriodChange={handlePeriodChange}
           periods={periodList}
         />
-        <CompoundFilter
-          compound={compound}
-          handleCompoundChange={handleCompoundChange}
-          compounds={compoundList}
-        />
         <GovernmentFilter
           government={government}
           handleGovernmentChange={handleGovernmentChange}
           governments={governmentList}
+        />
+        <CompoundFilter
+          compound={compound}
+          handleCompoundChange={handleCompoundChange}
+          compounds={compoundList}
         />
         <div className="border-b py-4">
           <h2 className="text-lg font-bold pb-2">{t("price_range")}</h2>

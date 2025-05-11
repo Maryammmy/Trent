@@ -168,14 +168,6 @@ export interface IWidth {
   num: number;
   width: string;
 }
-export interface IReview {
-  image: string;
-  name: string;
-  rating: number;
-  duration: string;
-  when: string;
-  text: string;
-}
 export interface IToggleProperty {
   uid: string;
   prop_id: string;

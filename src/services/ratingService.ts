@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
-import { IAddAndUpdateRating, IDeleteRating } from "@/interfaces/rating";
+import { IAddAndUpdateRating } from "@/interfaces/rating";
 import Cookies from "js-cookie";
 import { CurrentLanguage } from "@/types";
 
@@ -28,9 +28,9 @@ export const addAndUpdateRatingAPI = (payload: IAddAndUpdateRating) => {
   );
   return response;
 };
-export const deleteRatingAPI = (payload: IDeleteRating) => {
+export const deleteRatingAPI = (id: string) => {
   const response = baseAPI.delete("user_api/booking/u_delete_rating.php", {
-    data: payload,
+    data: { uid, lang: currentLanguage, rating_id: id },
   });
   return response;
 };

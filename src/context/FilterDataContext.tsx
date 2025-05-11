@@ -6,6 +6,7 @@ import {
   SetStateAction,
 } from "react";
 import { IProperty } from "../interfaces/property";
+import { IFilterSlider } from "@/interfaces/filterSlider";
 
 interface IFilterDataContext {
   filterData: null | IProperty[];
@@ -15,9 +16,14 @@ interface IFilterDataContext {
   filterSlider: {
     governmentId: string;
     categoryId: string;
+    usersList?: string[];
   };
   setFilterSlider: Dispatch<
-    SetStateAction<{ governmentId: string; categoryId: string }>
+    SetStateAction<{
+      governmentId: string;
+      categoryId: string;
+      usersList?: string[];
+    }>
   >;
 }
 
@@ -26,9 +32,10 @@ export const FilterDataContext = createContext({} as IFilterDataContext);
 const FilterDataContextProvider = ({ children }: { children: ReactNode }) => {
   const [filterData, setFilterData] = useState<null | IProperty[]>(null);
   const [category, setCategory] = useState("");
-  const [filterSlider, setFilterSlider] = useState({
+  const [filterSlider, setFilterSlider] = useState<IFilterSlider>({
     governmentId: "",
     categoryId: "",
+    usersList: [],
   });
   return (
     <FilterDataContext.Provider

@@ -35,6 +35,7 @@ function Home() {
     setFilterSlider({
       governmentId: item?.government_id,
       categoryId: item?.category_id,
+      usersList: item?.user_list.length ? item?.user_list : undefined,
     });
     setCategory("");
     setFilterData(null);

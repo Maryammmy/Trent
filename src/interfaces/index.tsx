@@ -56,7 +56,7 @@ export interface ISlider {
   img: string;
   category_id: string;
   government_id: string;
-  user_list: [];
+  user_list: string[];
 }
 export interface ICountry {
   code: string;

@@ -40,7 +40,7 @@ function FilterActions({
   const { setFilterData, setCategory } = useContext(FilterDataContext);
   const filters = {
     period: period,
-    facilities: selectedFacilities.length > 0 ? selectedFacilities : undefined,
+    facilities: selectedFacilities.length ? selectedFacilities : undefined,
     category_id: selectedPropertyType,
     min_price: minPrice,
     max_price: maxPrice,

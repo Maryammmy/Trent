@@ -69,8 +69,10 @@ function PersonalData() {
       const response = await updateUserAPI(formData);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
-        // reset();
-        window.location.reload();
+        reset();
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       }
     } catch (error) {
       const customError = error as ApiError;

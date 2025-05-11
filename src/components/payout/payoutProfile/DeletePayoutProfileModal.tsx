@@ -20,8 +20,10 @@ function DeletePayoutProfileModal({ id, deleteProfile, close }: IProps) {
       const response = await deletePayoutProfileAPI(id);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
-        close();
-        window.location.reload();
+        setTimeout(() => {
+          close();
+          window.location.reload();
+        }, 500);
       }
     } catch (error) {
       const customError = error as ApiError;
@@ -41,7 +43,7 @@ function DeletePayoutProfileModal({ id, deleteProfile, close }: IProps) {
       title={t("delete_payout_profile_title")}
       className="text-center font-bold text-2xl pt-5"
     >
-      <div className="p-5">
+      <div className="p-6">
         <p className="font-medium text-center">
           {t("delete_payout_profile_desc")}
         </p>

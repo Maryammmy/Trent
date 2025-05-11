@@ -3,8 +3,14 @@ export interface IAddAndUpdateRating {
   rating: number;
   comment?: string;
 }
-export interface IDeleteRating {
-  uid: string;
-  rating_id: string;
-  lang: string;
+export interface IRating {
+  booking_id: string;
+  comment: string;
+  id: string;
+  prop_id: string;
+  rating: number;
+  created_at: string;
+  user_name: string;
+  user_img: string;
+  user_reg_date: string;
 }

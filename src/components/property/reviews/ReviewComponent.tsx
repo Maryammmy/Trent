@@ -6,15 +6,15 @@ import ReviewCard from "./ReviewCard";
 import ReviewModal from "./ReviewModal";
 import { useTranslation } from "react-i18next";
 import { useRatingAPI } from "@/services/ratingService";
+import { IRating } from "@/interfaces/rating";
 interface IProps {
   id: string | undefined;
 }
 function ReviewComponent({ id }: IProps) {
   const { t } = useTranslation();
   const [isReviewed, setIsReviewed] = useState<boolean>(false);
-  const reviewCardItems = Array.from({ length: 8 });
   const { data } = useRatingAPI(id);
-  console.log(data?.data?.data?.Ratings);
+  const ratings: IRating[] = data?.data?.data?.Ratings;
   return (
     <>
       <div className="max-w-7xl mx-auto pb-10">
@@ -57,8 +57,8 @@ function ReviewComponent({ id }: IProps) {
           })}
         </div>
         <div className="border-t py-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
-          {reviewCardItems.map((_, index) => (
-            <ReviewCard key={index} />
+          {ratings?.map((rating) => (
+            <ReviewCard key={rating?.id} rating={rating} />
           ))}
         </div>
         <Button

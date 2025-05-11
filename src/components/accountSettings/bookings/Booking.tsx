@@ -4,7 +4,6 @@ import Image from "@/components/ui/Image";
 import Rating from "@/components/ui/Rating";
 import { IBooking } from "@/interfaces/booking";
 import { baseURL } from "@/services";
-
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -20,11 +19,10 @@ function Booking({ booking }: IProps) {
     prop_img,
     prop_title,
     book_id,
-    prop_id,
     total_paid,
     check_in,
     check_out,
-    rate,
+    individual_rate,
   } = booking;
   return (
     <>
@@ -58,7 +56,7 @@ function Booking({ booking }: IProps) {
           </p>
           <span className="text-primary font-semibold">{book_status}</span>
           {book_status === "Completed" && (
-            <div>
+            <div className="flex items-center gap-5">
               <Button
                 onClick={(e) => {
                   e.preventDefault();
@@ -66,23 +64,21 @@ function Booking({ booking }: IProps) {
                 }}
                 className="flex items-center gap-2"
               >
-                <Rating rating={Number(rate)} />
+                <Rating rating={Number(individual_rate?.rate) || 0} />
                 <span className="text-sm font-semibold text-dark">
-                  ({rate})
+                  ({individual_rate?.rate || 0})
                 </span>
               </Button>
             </div>
           )}
         </div>
       </Link>
-      {isRatingModalOpen && (
-        <RatingModal
-          booking_id={book_id}
-          prop_id={prop_id}
-          isOpen={isRatingModalOpen}
-          onClose={() => setIsRatingModalOpen(false)}
-        />
-      )}
+      <RatingModal
+        booking_id={book_id}
+        individual_rate={individual_rate}
+        isOpen={isRatingModalOpen}
+        onClose={() => setIsRatingModalOpen(false)}
+      />
     </>
   );
 }

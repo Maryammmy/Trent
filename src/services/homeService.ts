@@ -13,7 +13,7 @@ export const useHomeDataAPI = (
 ) => {
   const queryParamsObject: Record<
     string,
-    string | number[] | number | boolean
+    string | number[] | string[] | number | boolean
   > = {
     lang: currentLanguage,
     ...params,
