@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { languageOptions } from "../../data";
-import Button from "../ui/Button";
-import { useAppDispatch } from "../../store/hooks";
-import { setIsLangSwitcherOpen } from "../../store/features/homeSearch/homeSearchSlice";
+import Button from "./ui/Button";
+import { languageOptions } from "@/data";
+import { setIsLangSwitcherOpen } from "@/store/features/homeSearch/homeSearchSlice";
+import { useAppDispatch } from "@/store/hooks";
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();

@@ -99,56 +99,61 @@ function FilterModal({ isFilterOpen, close }: IProps) {
       >
         <X className="text-black" size={20} />
       </Button>
-      <div className="p-6 max-h-[80vh] overflow-y-auto">
-        <PeriodFilter
-          period={period}
-          handlePeriodChange={handlePeriodChange}
-          periods={periodList}
-        />
-        <GovernmentFilter
-          government={government}
-          handleGovernmentChange={handleGovernmentChange}
-          governments={governmentList}
-        />
-        <CompoundFilter
-          compound={compound}
-          handleCompoundChange={handleCompoundChange}
-          compounds={compoundList}
-        />
-        <div className="border-b py-4">
-          <h2 className="text-lg font-bold pb-2">{t("price_range")}</h2>
-          <Range
-            values={values}
-            handleRangeChange={(newValues: number[]) => setValues(newValues)}
-            min={Number(priceRange?.min_price)}
-            max={Number(priceRange?.max_price)}
+      <div className="pb-3">
+        <div className="p-5 md:py-8 md:px-10 max-h-[80vh] overflow-y-auto">
+          <PeriodFilter
+            period={period}
+            handlePeriodChange={handlePeriodChange}
+            periods={periodList}
+          />
+          <GovernmentFilter
+            government={government}
+            handleGovernmentChange={handleGovernmentChange}
+            governments={governmentList}
+          />
+          <CompoundFilter
+            compound={compound}
+            handleCompoundChange={handleCompoundChange}
+            compounds={compoundList}
+          />
+          <div className="border-b py-4">
+            <h2 className="text-lg font-bold pb-2">{t("price_range")}</h2>
+            <Range
+              values={values}
+              handleRangeChange={(newValues: number[]) => setValues(newValues)}
+              min={Number(priceRange?.min_price)}
+              max={Number(priceRange?.max_price)}
+            />
+          </div>
+          <CounterFilter counters={counters} updateCounter={updateCounter} />
+          <FacilitiesFilter
+            selectedFacilities={selectedFacilities}
+            handleSelectedFacilities={handleSelectedFacilities}
+          />
+          <PropertyTypeFilter
+            selectedProperty={selectedPropertyType}
+            handleSelectedProperty={(id: string) => setSelectedPropertyType(id)}
+          />
+          <RatingFilter
+            rating={rating}
+            handleRatingChange={handleRatingChange}
+          />
+          <FilterActions
+            close={close}
+            handleClear={handleClear}
+            selectedFacilities={selectedFacilities}
+            selectedPropertyType={selectedPropertyType}
+            rate={rating}
+            period={period}
+            compound={compound}
+            minPrice={values[0]?.toString()}
+            maxPrice={values[1]?.toString()}
+            government={government}
+            bedsCount={counters["beds_count"]}
+            bathroomsCount={counters["bathrooms_count"]}
+            guestCount={counters["guest_count"]}
           />
         </div>
-        <CounterFilter counters={counters} updateCounter={updateCounter} />
-        <FacilitiesFilter
-          selectedFacilities={selectedFacilities}
-          handleSelectedFacilities={handleSelectedFacilities}
-        />
-        <PropertyTypeFilter
-          selectedProperty={selectedPropertyType}
-          handleSelectedProperty={(id: string) => setSelectedPropertyType(id)}
-        />
-        <RatingFilter rating={rating} handleRatingChange={handleRatingChange} />
-        <FilterActions
-          close={close}
-          handleClear={handleClear}
-          selectedFacilities={selectedFacilities}
-          selectedPropertyType={selectedPropertyType}
-          rate={rating}
-          period={period}
-          compound={compound}
-          minPrice={values[0]?.toString()}
-          maxPrice={values[1]?.toString()}
-          government={government}
-          bedsCount={counters["beds_count"]}
-          bathroomsCount={counters["bathrooms_count"]}
-          guestCount={counters["guest_count"]}
-        />
       </div>
     </Modal>
   );

@@ -1,10 +1,9 @@
-import { menuItems } from "../../data";
-import Cookies from "js-cookie";
-import { useAppDispatch } from "../../store/hooks";
 import { useTranslation } from "react-i18next";
-import { setIsDropdownOpen } from "../../store/features/homeSearch/homeSearchSlice";
 import { Link } from "react-router-dom";
-
+import Cookies from "js-cookie";
+import { menuItems } from "@/data";
+import { setIsDropdownOpen } from "@/store/features/homeSearch/homeSearchSlice";
+import { useAppDispatch } from "@/store/hooks";
 function DropdownMenu() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();

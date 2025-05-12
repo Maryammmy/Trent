@@ -127,7 +127,7 @@ function SignupModal() {
           </span>
         </Button>
         <div className="pb-3">
-          <div className="p-5 md:py-8 md:px-10 max-h-[80vh] overflow-y-auto">
+          <div className="p-5 md:py-8 md:px-10 md:max-h-[80vh] md:overflow-y-auto">
             <h2 className="text-lg font-semibold pb-5">Welcome to Trent</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
               {signupData.map(({ name, label, type, placeholder }) => (
