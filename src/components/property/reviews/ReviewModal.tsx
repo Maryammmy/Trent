@@ -8,7 +8,6 @@ import {
   widths,
 } from "../../../data/property/review";
 import Input from "../../ui/Input";
-import ReviewCard from "./ReviewCard";
 import Button from "../../ui/Button";
 import Select from "../../ui/Select";
 import { useTranslation } from "react-i18next";
@@ -18,7 +17,7 @@ interface IProps {
 }
 function ReviewModal({ isReviewed, close }: IProps) {
   const { t } = useTranslation();
-  const reviewCards = Array.from({ length: 20 });
+  // const reviewCards = Array.from({ length: 20 });
   return (
     <Modal isOpen={isReviewed} close={close} maxWidth="1024px">
       <div className="p-5">
@@ -90,10 +89,10 @@ function ReviewModal({ isReviewed, close }: IProps) {
                 className="outline-none w-full"
               />
             </div>
-            <div className=" flex flex-col gap-4">
-              {reviewCards.map((_, index) => (
-                <ReviewCard key={index} />
-              ))}
+            <div className="flex flex-col gap-4">
+              {/* {reviewCards.map((_, index) => (
+                <ReviewCard key={index} rating={4.88} />
+              ))} */}
             </div>
           </div>
         </div>

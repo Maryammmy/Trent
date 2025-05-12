@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { reviewInstruction, widths } from "../../../data/property/review";
-import Button from "../../ui/Button";
+// import Button from "../../ui/Button";
 import PrograssBar from "../../ui/PrograssBar";
 import ReviewCard from "./ReviewCard";
 import ReviewModal from "./ReviewModal";
@@ -63,12 +63,12 @@ function ReviewComponent({ id }: IProps) {
             ))}
           </div>
         )}
-        <Button
+        {/* <Button
           onClick={() => setIsReviewed(true)}
           className="font-semibold text-lg border border-black rounded-md px-6 py-2 hover:bg-gray-100"
         >
           <span>{t("show_all_reviews")}</span>
-        </Button>
+        </Button> */}
       </div>
       <ReviewModal isReviewed={isReviewed} close={() => setIsReviewed(false)} />
     </>
