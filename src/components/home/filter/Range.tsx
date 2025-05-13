@@ -20,32 +20,23 @@ function Range({ values, handleRangeChange, min, max }: IProps) {
         max={max}
         step={1}
       />
-      <div className="flex flex-col gap-2 md:gap-0 md:flex-row mt-2 font-medium text-dark justify-between text-sm">
+      <div className="flex flex-wrap gap-2 mt-4 font-medium text-dark justify-between text-sm">
         {/* Minimum Price */}
         <div className="flex items-center gap-2">
           <span>{t("minimum")}:</span>
-          {values?.length ? (
-            values[0] === 0 || values[0] ? (
-              <span className="text-black font-medium">{values[0]}</span>
-            ) : (
-              <PriceSkeleton />
-            )
+          {!min ? (
+            <PriceSkeleton />
           ) : (
-            <span>No min price found</span>
+            <span className="text-black font-medium">{values[0]}</span>
           )}
         </div>
-
         {/* Maximum Price */}
         <div className="flex items-center gap-2">
           <span>{t("maximum")}:</span>
-          {values.length ? (
-            values[1] === 0 || values[1] ? (
-              <span className="text-black font-medium">{values[1]}</span>
-            ) : (
-              <PriceSkeleton />
-            )
+          {!max ? (
+            <PriceSkeleton />
           ) : (
-            <span>No max price found</span>
+            <span className="text-black font-medium">{values[1]}</span>
           )}
         </div>
       </div>
