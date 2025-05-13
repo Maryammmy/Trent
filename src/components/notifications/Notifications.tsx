@@ -1,17 +1,21 @@
 import { useRef, useState } from "react";
 import { Bell, X } from "lucide-react";
 import Button from "../ui/Button";
-import { useNotificationsAPI } from "@/services/Notifications";
+import {
+  useNotificationsAPI,
+  useUnreadNotificationsCountAPI,
+} from "@/services/Notifications";
 import { INotification } from "@/interfaces/notifications";
 import Notification from "./Notification";
 import useClickOutside from "@/hooks/useClickOutside";
 
 export default function Notifications() {
   const [open, setOpen] = useState(false);
-  const unreadCount = 3;
   const notificationsRef = useRef<HTMLDivElement>(null);
   const { data } = useNotificationsAPI();
   const notifications: INotification[] = data?.data?.data?.notification_list;
+  const { data: unreadCountData } = useUnreadNotificationsCountAPI();
+  const unreadCount = unreadCountData?.data?.data?.count;
   useClickOutside(notificationsRef, () => setOpen(false));
   return (
     <div className="relative" ref={notificationsRef}>
@@ -32,15 +36,21 @@ export default function Notifications() {
       {open && (
         <>
           {/* Small screens: Full screen */}
-          <div className="fixed overflow-y-auto inset-0 bg-white z-50 p-4 sm:hidden">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Notifications</h2>
-              <Button onClick={() => setOpen(false)}>
-                <X />
-              </Button>
+          <div className="fixed overflow-y-auto inset-0 bg-white z-50 sm:hidden">
+            <div className="p-4">
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="text-xl font-semibold">Notifications</h2>
+                <Button onClick={() => setOpen(false)}>
+                  <X />
+                </Button>
+              </div>
+              <div className="flex justify-between items-center font-medium">
+                <span className="text-neutral-400">{unreadCount} unread</span>
+                <Button className="text-secondary">Make all as read</Button>
+              </div>
             </div>
-            <div className="flex flex-col gap-4">
-              {notifications.slice(2).map((notification) => (
+            <div className="flex flex-col">
+              {notifications?.map((notification) => (
                 <Notification
                   key={notification?.id}
                   notification={notification}
@@ -49,20 +59,26 @@ export default function Notifications() {
             </div>
           </div>
           {/* Medium+ screens: Small dropdown */}
-          <div className="py-1 px-[1px] hidden sm:block absolute right-0 top-10 min-w-96 bg-white shadow-lg rounded-lg z-50">
-            <div className="max-h-[600px] overflow-y-auto">
-              <div className="p-4">
-                <h2 className="text-lg font-semibold mb-2">Notifications</h2>
-                {/* <p>You have {unreadCount} new notifications.</p> */}
-                <div className="flex flex-col gap-4">
-                  {notifications.slice(2).map((notification) => (
-                    <Notification
-                      key={notification?.id}
-                      notification={notification}
-                    />
-                  ))}
-                </div>
+          <div className="overflow-x-hidden max-h-[600px] overflow-y-auto hidden sm:block absolute right-0 top-10 min-w-96 bg-white shadow-lg rounded-lg z-50">
+            <div className="p-4">
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="text-xl font-semibold">Notifications</h2>
+                <Button onClick={() => setOpen(false)}>
+                  <X />
+                </Button>
               </div>
+              <div className="flex justify-between items-center font-medium">
+                <span className="text-neutral-400">{unreadCount} unread</span>
+                <Button className="text-secondary">Make all as read</Button>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              {notifications?.map((notification) => (
+                <Notification
+                  key={notification?.id}
+                  notification={notification}
+                />
+              ))}
             </div>
           </div>
         </>
