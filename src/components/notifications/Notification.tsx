@@ -36,7 +36,7 @@ function Notification({ notification }: IProps) {
   return (
     <div
       onClick={updateNotification}
-      className={`flex items-center gap-4 p-2 pb-3 cursor-pointer ${
+      className={`flex items-center gap-4 p-3 cursor-pointer ${
         !is_seen && "bg-gray-100"
       }`}
     >
