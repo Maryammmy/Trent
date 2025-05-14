@@ -82,47 +82,51 @@ export default function Notifications() {
             )}
           </div>
           {/* Medium+ screens: Small dropdown */}
-          <div className="overflow-x-hidden max-h-[600px] overflow-y-auto hidden sm:block absolute right-0 top-10 min-w-96 bg-white shadow-lg rounded-lg z-50">
-            {!notifications ? (
-              <NotificationSkeleton cards={4} />
-            ) : notifications?.length ? (
-              <>
-                <div className="p-4">
+          <div className="overflow-x-hidden hidden sm:block absolute right-0 top-10 min-w-96 bg-white shadow-lg rounded-lg z-50">
+            <div className="max-h-[600px] overflow-y-auto">
+              {!notifications ? (
+                <NotificationSkeleton cards={4} />
+              ) : notifications?.length ? (
+                <>
+                  <div className="p-4">
+                    <div className="flex justify-between items-center mb-2">
+                      <h2 className="text-xl font-semibold">Notifications</h2>
+                      <Button onClick={() => setOpen(false)}>
+                        <X />
+                      </Button>
+                    </div>
+                    <div className="flex justify-between items-center font-medium">
+                      <span className="text-neutral-400">
+                        {unreadCount} unread
+                      </span>
+                      <Button className="text-secondary">
+                        Make all as read
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="flex flex-col">
+                    {notifications.map((notification) => (
+                      <Notification
+                        key={notification?.id}
+                        notification={notification}
+                      />
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <div className="py-6 px-4">
                   <div className="flex justify-between items-center mb-2">
                     <h2 className="text-xl font-semibold">Notifications</h2>
                     <Button onClick={() => setOpen(false)}>
                       <X />
                     </Button>
                   </div>
-                  <div className="flex justify-between items-center font-medium">
-                    <span className="text-neutral-400">
-                      {unreadCount} unread
-                    </span>
-                    <Button className="text-secondary">Make all as read</Button>
-                  </div>
+                  <p className="text-dark font-medium text-lg flex flex-col gap-5 justify-center items-center h-[50vh] w-full">
+                    {t("no_notifications_found")}
+                  </p>
                 </div>
-                <div className="flex flex-col">
-                  {notifications.map((notification) => (
-                    <Notification
-                      key={notification?.id}
-                      notification={notification}
-                    />
-                  ))}
-                </div>
-              </>
-            ) : (
-              <div className="py-6 px-4">
-                <div className="flex justify-between items-center mb-2">
-                  <h2 className="text-xl font-semibold">Notifications</h2>
-                  <Button onClick={() => setOpen(false)}>
-                    <X />
-                  </Button>
-                </div>
-                <p className="text-dark font-medium text-lg flex flex-col gap-5 justify-center items-center h-[50vh] w-full">
-                  {t("no_notifications_found")}
-                </p>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </>
       )}

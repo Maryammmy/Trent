@@ -48,28 +48,27 @@ function Property() {
               </h2>
             </div>
             <div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {propertyDetails?.image_list?.slice(0, 3)?.map((image, i) => (
-                  <PhotoViewer key={i} src={baseURL + image.img}>
-                    <div
-                      data-aos="fade-left"
-                      className="relative w-full h-[250px] lg:h-[300px] rounded-md overflow-hidden"
-                    >
-                      <div className="absolute inset-0 bg-black/15 pointer-events-none z-[5]"></div>
-                      <div className="w-full h-full">
-                        <Image
-                          className="w-full h-full object-cover"
-                          imageUrl={baseURL + image.img}
-                          alt={`Image ${i + 1}`}
-                        />
+              <div className="rounded-md overflow-x-hidden">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 h-[250px] lg:h-[300px] overflow-y-auto">
+                  {propertyDetails?.image_list?.map((image, i) => (
+                    <PhotoViewer key={i} src={baseURL + image?.img}>
+                      <div className="relative w-full h-[250px] lg:h-[300px] rounded-md overflow-hidden">
+                        <div className="absolute inset-0 bg-black/15 pointer-events-none z-[5]"></div>
+                        <div className="w-full h-full">
+                          <Image
+                            className="w-full h-full object-cover"
+                            imageUrl={baseURL + image.img}
+                            alt={`Image ${i + 1}`}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </PhotoViewer>
-                ))}
+                    </PhotoViewer>
+                  ))}
+                </div>
               </div>
               {propertyDetails?.video && (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
-                  <div className=" w-full h-[250px] lg:h-[300px] rounded-md overflow-hidden">
+                  <div className="w-full h-[250px] lg:h-[300px] rounded-md overflow-hidden">
                     <div className="w-full h-full">
                       <Video
                         videoUrl={baseURL + propertyDetails?.video}

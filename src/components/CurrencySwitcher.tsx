@@ -42,7 +42,7 @@ function CurrencySwitcher() {
         {currency}
       </Button>
       {isOpen && (
-        <div className="py-1 px-[1px] font-medium absolute z-50 top-10 bg-white border rounded-lg shadow-lg min-w-24">
+        <div className="overflow-x-hidden font-medium absolute z-50 top-10 bg-white border rounded-lg shadow-lg min-w-24">
           <div className="max-h-56 overflow-y-auto">
             {currencies.map((currency) => (
               <Button
