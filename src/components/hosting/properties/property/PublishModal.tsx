@@ -7,12 +7,12 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 interface IProps {
-  is_deleted: boolean;
+  is_published: boolean;
   id: string;
   publishProperty: boolean;
   close: () => void;
 }
-function PublishModal({ is_deleted, id, publishProperty, close }: IProps) {
+function PublishModal({ is_published, id, publishProperty, close }: IProps) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const handlePublishProperty = async () => {
@@ -41,14 +41,14 @@ function PublishModal({ is_deleted, id, publishProperty, close }: IProps) {
     <Modal
       isOpen={publishProperty}
       close={close}
-      title={is_deleted ? t("publish_property") : t("unpublish_property")}
+      title={is_published ? t("unpublish_property") : t("publish_property")}
       className="text-center font-bold text-2xl pt-5"
     >
       <div className="p-5">
         <p className="font-medium text-center">
-          {is_deleted
-            ? t("publish_property_desc")
-            : t("unpublish_property_desc")}
+          {is_published
+            ? t("unpublish_property_desc")
+            : t("publish_property_desc")}
         </p>
         <div className="flex pt-5 justify-between space-x-3">
           <Button
@@ -61,13 +61,19 @@ function PublishModal({ is_deleted, id, publishProperty, close }: IProps) {
           <Button
             disabled={loading}
             className={`${
-              is_deleted
-                ? "bg-green-600 hover:bg-green-600/80"
-                : "bg-red-600 hover:bg-red-600/80"
+              is_published
+                ? "bg-red-600 hover:bg-red-600/80"
+                : "bg-green-600 hover:bg-green-600/80"
             } font-medium text-white py-2 w-24 rounded-md`}
             onClick={handlePublishProperty}
           >
-            {loading ? <Loader /> : is_deleted ? t("publish") : t("unpublish")}
+            {loading ? (
+              <Loader />
+            ) : is_published ? (
+              t("unpublish")
+            ) : (
+              t("publish")
+            )}
           </Button>
         </div>
       </div>

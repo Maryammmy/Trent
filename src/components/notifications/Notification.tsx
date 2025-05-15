@@ -18,12 +18,8 @@ function Notification({ notification }: IProps) {
     try {
       const response = await updateNotificationAPI(id);
       if (response?.data?.response_code === 200) {
-        await updateNotificationAPI(id);
         queryClient.refetchQueries({ queryKey: ["notifications"] });
         queryClient.refetchQueries({ queryKey: ["unreadNotificationsCount"] });
-        // setTimeout(() => {
-        //   navigate(from);
-        // }, 1000);
       }
     } catch (error) {
       const customError = error as ApiError;

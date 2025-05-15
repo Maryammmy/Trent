@@ -35,7 +35,7 @@ export const togglePropertyAPI = (payload: IToggleProperty) => {
   return response;
 };
 export const deletePropertyAPI = (prop_id: string) => {
-  const response = baseAPI.delete("user_api/u_property_delete.php", {
+  const response = baseAPI.delete("user_api/u_property_toggle_publishing.php", {
     data: { uid, prop_id },
   });
   return response;

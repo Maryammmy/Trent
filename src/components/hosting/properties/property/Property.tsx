@@ -41,18 +41,18 @@ const Property = ({ property }: IProps) => {
   } else if (!is_approved && !is_need_review) {
     // Case: Pending Review (under review)
     statusText = t("pending");
-    statusColor = "text-yellow-600";
+    statusColor = "text-yellow-500";
     showEdit = false;
   } else if (is_approved && is_published) {
     // Case: Published
-    statusText = t("published");
+    statusText = t("publish");
     statusColor = "text-green-600";
     showEdit = true;
     showPublishBtn = true;
   } else if (is_approved && !is_published) {
     // Case: Unpublished
-    statusText = t("unpublished");
-    statusColor = "text-yellow-600";
+    statusText = t("unpublish");
+    statusColor = "text-neutral-400";
     showEdit = true;
     showPublishBtn = true;
   }
@@ -100,7 +100,7 @@ const Property = ({ property }: IProps) => {
 
       {publishProperty && (
         <PublishModal
-          is_deleted={!is_published}
+          is_published={is_published}
           publishProperty={publishProperty}
           close={() => setPublishProperty(false)}
           id={id}
