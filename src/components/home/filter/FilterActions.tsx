@@ -12,6 +12,7 @@ interface IProps {
   selectedPropertyType: string;
   period: string;
   compound: string;
+  city: string;
   minPrice: string;
   maxPrice: string;
   government: string;
@@ -34,6 +35,7 @@ function FilterActions({
   rate,
   compound,
   close,
+  city,
 }: IProps) {
   const { t } = useTranslation();
   const [enabled, setEnabled] = useState(false);
@@ -50,6 +52,7 @@ function FilterActions({
     guest_count: guestCount,
     rate: rate,
     compound_name: compound,
+    city_name: city,
   };
   const { data } = useHomeDataAPI(filters, enabled);
   const filteredProperties = data?.data?.data?.property_list;

@@ -1,30 +1,26 @@
 import Button from "../../ui/Button";
 import { useTranslation } from "react-i18next";
-import PropertyTypeSkeleton from "../../skeleton/propertyTypeSkeleton";
 import { IPropertyType } from "../../../interfaces";
-import { usePropertyTypesAPI } from "../../../services/filtersService";
 import Image from "@/components/ui/Image";
 import { baseURL } from "@/services";
 
 interface Props {
   selectedProperty: string;
   handleSelectedProperty: (property: string) => void;
+  propertyTypes: IPropertyType[];
 }
 function PropertyTypeFilter({
   selectedProperty,
   handleSelectedProperty,
+  propertyTypes,
 }: Props) {
   const { t } = useTranslation();
-  const { data } = usePropertyTypesAPI();
-  const propertyTypeList: IPropertyType[] = data?.data?.data?.category_list;
   return (
     <div className="py-4">
       <h2 className="text-lg font-bold pb-2">{t("property_type")}</h2>
       <div className="flex flex-wrap gap-2">
-        {!propertyTypeList ? (
-          <PropertyTypeSkeleton cards={8} />
-        ) : propertyTypeList?.length ? (
-          propertyTypeList?.map((item) => {
+        {propertyTypes?.length ? (
+          propertyTypes?.map((item) => {
             const { id, title, img } = item;
             return (
               <Button

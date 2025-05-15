@@ -43,7 +43,7 @@ export default function Notifications() {
     <div className="relative" ref={notificationsRef}>
       <Button
         onClick={() => setOpen(!open)}
-        className="text-white flex justify-center items-center relative"
+        className="text-white hover:text-secondary flex justify-center items-center relative"
       >
         <Bell />
 
@@ -54,7 +54,6 @@ export default function Notifications() {
           </span>
         )}
       </Button>
-
       {open && (
         <>
           {/* Small screens: Full screen */}

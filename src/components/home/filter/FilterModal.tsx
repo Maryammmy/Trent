@@ -8,7 +8,7 @@ import PropertyTypeFilter from "./PropertyTypeFilter";
 import FilterActions from "./FilterActions";
 import FacilitiesFilter from "./FacilitiesFilter";
 import {
-  useFiltersAPI,
+  useCascadeFiltersAPI,
   useGovernmentsAPI,
 } from "../../../services/filtersService";
 import PeriodFilter from "./PeriodFilter";
@@ -17,6 +17,8 @@ import GovernmentFilter from "./GovernmentFilter";
 import CounterFilter from "./CounterFilter";
 import { floorPlan } from "../../../data/becomeAHost";
 import RatingFilter from "./RatingFilter";
+import CityFilter from "./CityFilter";
+import UpdateSkeleton from "@/components/skeleton/UpdateSkeleton";
 
 interface IProps {
   isFilterOpen: boolean;
@@ -31,20 +33,24 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   const [period, setPeriod] = useState<string>("");
   const [compound, setCompound] = useState<string>("");
   const [government, setGovernment] = useState<string>("");
+  const [city, setCity] = useState<string>("");
   const [selectedFacilities, setSelectedFacilities] = useState<number[]>([]);
   const [selectedPropertyType, setSelectedPropertyType] = useState<string>("");
   const [values, setValues] = useState<number[]>([]);
   const [rating, setRating] = useState(0);
-  const { data } = useFiltersAPI();
   const { data: governments } = useGovernmentsAPI();
+  const { data } = useCascadeFiltersAPI(government);
+  console.log(data);
+  const governmentList = governments?.data?.data?.government_list;
+  const cityList = data?.data?.data?.city_list;
+  const compoundList = data?.data?.data?.compound_list;
   const priceRange = data?.data?.data?.price_range;
   const periodList = data?.data?.data?.period_list;
-  const compoundList = data?.data?.data?.compound_list;
-  const governmentList = governments?.data?.data?.government_list;
+  const propertyTypes = data?.data?.data?.category_list;
   useEffect(() => {
-    if (priceRange?.min_price && priceRange?.max_price) {
-      const min = Number(priceRange.min_price);
-      const max = Number(priceRange.max_price);
+    const min = Number(priceRange?.min_price);
+    const max = Number(priceRange?.max_price);
+    if (min && max) {
       setValues([min, max]);
     }
   }, [priceRange]);
@@ -69,6 +75,10 @@ function FilterModal({ isFilterOpen, close }: IProps) {
     const newGovernement = event.target.value;
     setGovernment(newGovernement);
   };
+  const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newCity = event.target.value;
+    setCity(newCity);
+  };
   const handleRatingChange = (newRating: number) => {
     setRating(newRating);
   };
@@ -83,6 +93,7 @@ function FilterModal({ isFilterOpen, close }: IProps) {
     setPeriod("");
     setCompound("");
     setGovernment("");
+    setCity("");
     setRating(0);
   };
   return (
@@ -101,58 +112,78 @@ function FilterModal({ isFilterOpen, close }: IProps) {
       </Button>
       <div className="pb-3">
         <div className="p-5 md:py-8 md:px-10 max-h-[80vh] overflow-y-auto">
-          <PeriodFilter
-            period={period}
-            handlePeriodChange={handlePeriodChange}
-            periods={periodList}
-          />
-          <GovernmentFilter
-            government={government}
-            handleGovernmentChange={handleGovernmentChange}
-            governments={governmentList}
-          />
-          <CompoundFilter
-            compound={compound}
-            handleCompoundChange={handleCompoundChange}
-            compounds={compoundList}
-          />
-          <div className="border-b py-4">
-            <h2 className="text-lg font-bold pb-2">{t("price_range")}</h2>
-            <Range
-              values={values}
-              handleRangeChange={(newValues: number[]) => setValues(newValues)}
-              min={Number(priceRange?.min_price)}
-              max={Number(priceRange?.max_price)}
-            />
-          </div>
-          <CounterFilter counters={counters} updateCounter={updateCounter} />
-          <FacilitiesFilter
-            selectedFacilities={selectedFacilities}
-            handleSelectedFacilities={handleSelectedFacilities}
-          />
-          <PropertyTypeFilter
-            selectedProperty={selectedPropertyType}
-            handleSelectedProperty={(id: string) => setSelectedPropertyType(id)}
-          />
-          <RatingFilter
-            rating={rating}
-            handleRatingChange={handleRatingChange}
-          />
-          <FilterActions
-            close={close}
-            handleClear={handleClear}
-            selectedFacilities={selectedFacilities}
-            selectedPropertyType={selectedPropertyType}
-            rate={rating}
-            period={period}
-            compound={compound}
-            minPrice={values[0]?.toString()}
-            maxPrice={values[1]?.toString()}
-            government={government}
-            bedsCount={counters["beds_count"]}
-            bathroomsCount={counters["bathrooms_count"]}
-            guestCount={counters["guest_count"]}
-          />
+          {!governmentList ? (
+            <UpdateSkeleton cards={6} />
+          ) : (
+            <>
+              <GovernmentFilter
+                government={government}
+                handleGovernmentChange={handleGovernmentChange}
+                governments={governmentList}
+              />
+              <CityFilter
+                city={city}
+                handleCityChange={handleCityChange}
+                cities={cityList}
+              />
+              <CompoundFilter
+                compound={compound}
+                handleCompoundChange={handleCompoundChange}
+                compounds={compoundList}
+              />
+              <PeriodFilter
+                period={period}
+                handlePeriodChange={handlePeriodChange}
+                periods={periodList}
+              />
+              <div className="border-b py-4">
+                <h2 className="text-lg font-bold pb-2">{t("price_range")}</h2>
+                <Range
+                  values={values}
+                  handleRangeChange={(newValues: number[]) =>
+                    setValues(newValues)
+                  }
+                  min={Number(priceRange?.min_price)}
+                  max={Number(priceRange?.max_price)}
+                />
+              </div>
+              <CounterFilter
+                counters={counters}
+                updateCounter={updateCounter}
+              />
+              <FacilitiesFilter
+                selectedFacilities={selectedFacilities}
+                handleSelectedFacilities={handleSelectedFacilities}
+              />
+              <PropertyTypeFilter
+                propertyTypes={propertyTypes}
+                selectedProperty={selectedPropertyType}
+                handleSelectedProperty={(id: string) =>
+                  setSelectedPropertyType(id)
+                }
+              />
+              <RatingFilter
+                rating={rating}
+                handleRatingChange={handleRatingChange}
+              />
+              <FilterActions
+                close={close}
+                handleClear={handleClear}
+                selectedFacilities={selectedFacilities}
+                selectedPropertyType={selectedPropertyType}
+                rate={rating}
+                period={period}
+                compound={compound}
+                city={city}
+                minPrice={values[0]?.toString()}
+                maxPrice={values[1]?.toString()}
+                government={government}
+                bedsCount={counters["beds_count"]}
+                bathroomsCount={counters["bathrooms_count"]}
+                guestCount={counters["guest_count"]}
+              />
+            </>
+          )}
         </div>
       </div>
     </Modal>

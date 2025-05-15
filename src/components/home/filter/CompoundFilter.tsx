@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { ICompound } from "../../../interfaces";
-import SelectSkeleton from "../../skeleton/SelectSkeleton";
 import Select from "../../ui/Select";
 interface IProps {
   handleCompoundChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -12,9 +11,7 @@ function CompoundFilter({ handleCompoundChange, compounds, compound }: IProps) {
   return (
     <div className="flex flex-col gap-2 pb-4">
       <label className="text-lg font-bold">{t("compound")}</label>
-      {!compounds ? (
-        <SelectSkeleton />
-      ) : compounds?.length ? (
+      {compounds?.length ? (
         <Select
           value={compound}
           onChange={handleCompoundChange}

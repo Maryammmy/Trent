@@ -14,7 +14,7 @@ function GovernmentFilter({
 }: IProps) {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 pb-4">
       <label className="text-lg font-bold">{t("government")}</label>
       {!governments ? (
         <SelectSkeleton />

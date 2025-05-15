@@ -12,6 +12,7 @@ export interface IHomeDataParams {
   guest_count?: number;
   rate?: number;
   compound_name?: string;
+  city_name?: string;
   users_list?: string[];
   owner_mode?: boolean;
 }

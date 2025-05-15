@@ -11,6 +11,25 @@ export const useFiltersAPI = () => {
       baseAPI.get(`user_api/u_get_filters_api.php?lang=${currentLanguage}`),
   });
 };
+export const useCascadeFiltersAPI = (
+  governmentId: string,
+  compoundName?: string,
+  cityName?: string
+) => {
+  return useQuery({
+    queryKey: ["cascadeFilters", governmentId, compoundName, cityName],
+    queryFn: () =>
+      baseAPI.get(
+        `user_api/u_cascade_filters_api.php?government_id=${governmentId}${
+          cityName ? `&city_name=${cityName}` : ""
+        }${
+          compoundName ? `&compound_name=${compoundName}` : ""
+        }&lang=${currentLanguage}`
+      ),
+    enabled: !!governmentId,
+  });
+};
+
 export const useGovernmentsAPI = () => {
   return useQuery({
     queryKey: ["governments"],

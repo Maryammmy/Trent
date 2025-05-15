@@ -1,4 +1,3 @@
-import PriceSkeleton from "@/components/skeleton/PriceSkeleton";
 import { Slider } from "@/components/ui/slider";
 import { useTranslation } from "react-i18next";
 
@@ -11,21 +10,25 @@ interface IProps {
 function Range({ values, handleRangeChange, min, max }: IProps) {
   const { t } = useTranslation();
   return (
-    <div>
+    <div className="space-y-2">
       {/* Slider */}
-      <Slider
-        value={values}
-        onValueChange={handleRangeChange}
-        min={min}
-        max={max}
-        step={1}
-      />
-      <div className="flex flex-wrap gap-2 mt-4 font-medium text-dark justify-between text-sm">
+      {values.length > 0 && (
+        <Slider
+          value={values}
+          onValueChange={handleRangeChange}
+          min={min}
+          max={max}
+          step={1}
+        />
+      )}
+      <div className="flex flex-wrap gap-2 font-medium text-dark justify-between text-sm">
         {/* Minimum Price */}
         <div className="flex items-center gap-2">
           <span>{t("minimum")}:</span>
           {!min ? (
-            <PriceSkeleton />
+            <span className="text-black font-medium">
+              No minimum price found
+            </span>
           ) : (
             <span className="text-black font-medium">{values[0]}</span>
           )}
@@ -34,7 +37,9 @@ function Range({ values, handleRangeChange, min, max }: IProps) {
         <div className="flex items-center gap-2">
           <span>{t("maximum")}:</span>
           {!max ? (
-            <PriceSkeleton />
+            <span className="text-black font-medium">
+              No maximum price found
+            </span>
           ) : (
             <span className="text-black font-medium">{values[1]}</span>
           )}
