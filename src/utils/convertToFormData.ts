@@ -11,6 +11,8 @@ export const convertToFormData = (data: PropertyNameInputs) => {
       formData.append(key, value);
     } else if (key === "facilities" && Array.isArray(value)) {
       formData.append(key, JSON.stringify(value));
+    } else if (key === "existing_images" && Array.isArray(value)) {
+      formData.append(key, JSON.stringify(value));
     } else if (value) {
       formData.append(key, String(value));
     }

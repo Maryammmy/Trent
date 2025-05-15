@@ -5,6 +5,7 @@ export const defaultPropertyValues: PropertyNameInputs = {
   prop_id: "",
   video: "",
   images: [],
+  existing_images: [],
   price: "",
   facilities: [],
   beds_count: "",

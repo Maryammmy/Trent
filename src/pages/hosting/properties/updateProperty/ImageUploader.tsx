@@ -2,6 +2,7 @@ import Button from "@/components/ui/Button";
 import Image from "@/components/ui/Image";
 import Input from "@/components/ui/Input";
 import InputErrorMessage from "@/components/ui/InputErrorMessage";
+import { ISelectedImage } from "@/interfaces/property/updateProperty";
 import { baseURL } from "@/services";
 import { PropertyNameInputs } from "@/types";
 import { Upload, X } from "lucide-react";
@@ -9,14 +10,16 @@ import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 interface IProps {
-  images: string[];
+  selectedImages: ISelectedImage[];
+  existingImages: string[];
   handleImageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleDeleteImage: (image: string) => void;
   imageError: string | null;
   errors: FieldErrors<PropertyNameInputs>;
 }
 const ImageUploader = ({
-  images,
+  selectedImages,
+  existingImages,
   handleImageChange,
   handleDeleteImage,
   imageError,
@@ -39,35 +42,38 @@ const ImageUploader = ({
           />
         </label>
       </div>
-      {images?.length ? (
+      {[...selectedImages.map((img) => img.url), ...existingImages]?.length >
+        0 && (
         <div className="mt-4">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {images?.map((image, index) => {
-              const isFromBackend = image.startsWith(baseURL);
-              return (
-                <div className="relative" key={index}>
-                  <div className="rounded-lg overflow-hidden w-full h-28">
-                    <Image
-                      imageUrl={image}
-                      alt={`Uploaded photo ${index}`}
-                      className="w-full h-full object-cover"
-                    />
+            {[...selectedImages.map((img) => img.url), ...existingImages]?.map(
+              (image, index) => {
+                const isFromBackend = existingImages.includes(image);
+                const finalUrl = isFromBackend ? `${baseURL}/${image}` : image;
+                return (
+                  <div className="relative" key={index}>
+                    <div className="rounded-lg overflow-hidden w-full h-28">
+                      <Image
+                        imageUrl={finalUrl}
+                        alt={`Uploaded photo ${index}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    {
+                      <Button
+                        type="button"
+                        onClick={() => handleDeleteImage(image)}
+                        className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                      >
+                        <X size={15} />
+                      </Button>
+                    }
                   </div>
-                  {!isFromBackend && (
-                    <Button
-                      onClick={() => handleDeleteImage(image)}
-                      className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
-                    >
-                      <X size={15} />
-                    </Button>
-                  )}
-                </div>
-              );
-            })}
+                );
+              }
+            )}
           </div>
         </div>
-      ) : (
-        ""
       )}
       {imageError && <InputErrorMessage msg={imageError} />}
       {errors["images"] && (

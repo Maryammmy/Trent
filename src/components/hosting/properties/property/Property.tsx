@@ -5,33 +5,57 @@ import { useState } from "react";
 import Button from "@/components/ui/Button";
 import { useTranslation } from "react-i18next";
 import PublishModal from "./PublishModal";
+
 interface IProps {
   property: IProperty;
 }
+
 const Property = ({ property }: IProps) => {
   const { t } = useTranslation();
   const [publishProperty, setPublishProperty] = useState(false);
+
   const {
     id,
     title,
     government_name,
     category_type,
     price,
-    is_deleted,
+    is_need_review,
+    is_published,
     is_approved,
   } = property;
-  const basePrice = parseInt(price);
-  const statusText = is_deleted
-    ? t("unpublish")
-    : is_approved
-    ? t("publish")
-    : t("pending");
 
-  const statusColor = is_deleted
-    ? "text-red-600"
-    : is_approved
-    ? "text-green-600"
-    : "text-dark";
+  const basePrice = parseInt(price);
+
+  // Determine status text
+  let statusText = "";
+  let statusColor = "";
+  let showEdit = false;
+  let showPublishBtn = false;
+
+  if (!is_approved && is_need_review) {
+    // Case: Rejected
+    statusText = t("rejected");
+    statusColor = "text-red-600";
+    showEdit = true;
+  } else if (!is_approved && !is_need_review) {
+    // Case: Pending Review (under review)
+    statusText = t("pending");
+    statusColor = "text-yellow-600";
+    showEdit = false;
+  } else if (is_approved && is_published) {
+    // Case: Published
+    statusText = t("published");
+    statusColor = "text-green-600";
+    showEdit = true;
+    showPublishBtn = true;
+  } else if (is_approved && !is_published) {
+    // Case: Unpublished
+    statusText = t("unpublished");
+    statusColor = "text-yellow-600";
+    showEdit = true;
+    showPublishBtn = true;
+  }
 
   return (
     <>
@@ -49,8 +73,9 @@ const Property = ({ property }: IProps) => {
           {basePrice} {t("price_per_night")}
         </p>
         <p className={`font-semibold ${statusColor}`}>{statusText}</p>
-        {(is_approved || is_deleted) && (
-          <div className="flex flex-wrap items-center gap-3">
+
+        <div className="flex flex-wrap items-center gap-3">
+          {showEdit && (
             <Link
               to={`/hosting/properties/${id}/update`}
               className="text-white py-2 w-24 rounded-md font-medium bg-primary flex justify-center items-center gap-1"
@@ -58,20 +83,24 @@ const Property = ({ property }: IProps) => {
               <MdEdit size={20} />
               <span>{t("edit")}</span>
             </Link>
+          )}
+
+          {showPublishBtn && (
             <Button
               onClick={() => setPublishProperty(true)}
               className={`${
-                is_deleted ? "bg-green-600" : "bg-red-600"
+                is_published ? "bg-red-600" : "bg-green-600"
               } text-white py-2 w-24 rounded-md font-medium`}
             >
-              {is_deleted ? t("publish") : t("unpublish")}
+              {is_published ? t("unpublish") : t("publish")}
             </Button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
+
       {publishProperty && (
         <PublishModal
-          is_deleted={is_deleted}
+          is_deleted={!is_published}
           publishProperty={publishProperty}
           close={() => setPublishProperty(false)}
           id={id}

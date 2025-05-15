@@ -11,3 +11,7 @@ export interface IPropertyTextArea {
   label: string;
   placeholder: string;
 }
+export interface ISelectedImage {
+  file: File;
+  url: string;
+}

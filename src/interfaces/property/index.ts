@@ -155,8 +155,9 @@ export interface IProperty {
   title: string;
   latitude: string;
   longitude: string;
-  is_deleted: boolean;
   is_approved: boolean;
+  is_need_review: boolean;
+  is_published: boolean;
   owner_id: string;
 }
 export interface IReviewInstruction {

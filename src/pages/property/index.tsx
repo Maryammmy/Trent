@@ -15,6 +15,7 @@ import Video from "@/components/ui/Video";
 import Button from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
+import { Share2 } from "lucide-react";
 
 const uid = Cookies.get("user_id") || "";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
@@ -36,16 +37,19 @@ function Property() {
   const minDays = Number(propertyDetails?.min_days);
   return (
     <>
-      <div className="px-5 xl:px-20 py-5 lg:py-6">
+      <div className="px-5 xl:px-20 py-5 lg:py-10">
         {data ? (
           <>
-            <div className="pb-6">
+            <div className="flex justify-between items-center pb-10">
               <h2
                 className="font-bold text-2xl text-stone-800"
                 data-aos="fade-up"
               >
                 {propertyDetails?.title?.[currentLanguage]}
               </h2>
+              <Button>
+                <Share2 className="text-primary" />
+              </Button>
             </div>
             <div>
               <div className="rounded-md overflow-x-hidden">

@@ -36,6 +36,7 @@ import { updatePropertySchema } from "@/validation/updatePropertySchema";
 import toast from "react-hot-toast";
 import Loader from "@/components/loader/Loader";
 import Button from "@/components/ui/Button";
+import { ISelectedImage } from "@/interfaces/property/updateProperty";
 
 interface UpdatePropertyFormProps {
   propertyData: ISingleProperty;
@@ -49,8 +50,8 @@ function UpdatePropertyForm({
   userId,
 }: UpdatePropertyFormProps) {
   const navigate = useNavigate();
-  const [images, setImages] = useState<string[]>([]);
-  const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  const [selectedImages, setSelectedImages] = useState<ISelectedImage[]>([]);
+  const [existingImages, setExistingImages] = useState<string[]>([]);
   const [video, setVideo] = useState<string>("");
   const [imageError, setImageError] = useState<string | null>(null);
   const [videoError, setVideoError] = useState<string | null>(null);
@@ -78,6 +79,7 @@ function UpdatePropertyForm({
     handleSubmit,
     formState: { errors },
     setValue,
+    trigger,
   } = useForm<PropertyNameInputs>({
     resolver: yupResolver(updatePropertySchema),
     defaultValues: defaultPropertyValues,
@@ -99,16 +101,42 @@ function UpdatePropertyForm({
         return true;
       });
       if (validFiles.length === 0) return;
-      const fileUrls = validFiles.map((file) => URL.createObjectURL(file));
-      setImages((prev) => [...prev, ...fileUrls]);
-      setSelectedImages((prev) => [...prev, ...validFiles]);
-      setValue("images", [...images, ...selectedImages, ...validFiles]);
+      // Create objects: { file, url }
+      const fileObjects = validFiles.map((file) => ({
+        file,
+        url: URL.createObjectURL(file),
+      }));
+      const newSelectedImages = [...selectedImages, ...fileObjects];
+      setSelectedImages(newSelectedImages);
+      // Set only the files to the form value
+      setValue(
+        "images",
+        newSelectedImages.map((f) => f.file),
+        { shouldValidate: true }
+      );
+      trigger("images");
       toast.success(t("image_uploaded_successfully"));
       setImageError(null);
     }
   };
   const handleDeleteImage = (image: string) => {
-    setImages((prevImages) => prevImages.filter((item) => item !== image));
+    const updatedSelectedImages = selectedImages.filter(
+      (img) => img.url !== image
+    );
+    setSelectedImages(updatedSelectedImages);
+    setValue(
+      "images",
+      updatedSelectedImages.map((img) => img.file),
+      { shouldValidate: true }
+    );
+    const updatedExistingImages = existingImages.filter((img) => img !== image);
+    setExistingImages(updatedExistingImages);
+    setValue("existing_images", updatedExistingImages, {
+      shouldValidate: true,
+    });
+    // Trigger validation
+    trigger("images");
+    // Reset error + Toast
     setImageError(null);
     toast.error(t("image_deleted_successfully"));
   };
@@ -128,13 +156,14 @@ function UpdatePropertyForm({
         return;
       }
       setVideo(URL.createObjectURL(file));
-      setValue("video", file);
+      setValue("video", file, { shouldValidate: true });
       toast.success(t("video_uploaded_successfully"));
       setVideoError(null);
     }
   };
   const handleDeleteVideo = () => {
     setVideo("");
+    setValue("video", "", { shouldValidate: true });
     setVideoError(null);
     toast.error(t("video_deleted_successfully"));
   };
@@ -142,14 +171,16 @@ function UpdatePropertyForm({
   useEffect(() => {
     if (propertyDetails && facilityListProperty) {
       setVideo(propertyDetails?.video ? baseURL + propertyDetails?.video : "");
-      setImages(
-        propertyDetails?.image_list?.map((image) => baseURL + image.img)
+      setExistingImages(
+        propertyDetails?.image_list?.map((image) => image?.img)
       );
       reset({
         uid: userId,
         prop_id: propertyId,
         video: propertyDetails?.video,
-        images: propertyDetails?.image_list?.map((image) => image?.img),
+        existing_images: propertyDetails?.image_list?.map(
+          (image) => image?.img
+        ),
         price: propertyDetails?.price,
         facilities: facilityListProperty?.map((facility) => facility?.id),
         beds_count: propertyDetails?.beds_count,
@@ -184,6 +215,7 @@ function UpdatePropertyForm({
 
   const onSubmit = async (data: PropertyNameInputs) => {
     const formData = convertToFormData(data);
+    console.log(data);
     try {
       setLoading(true);
       const response = await editPropertyAPI(formData);
@@ -192,7 +224,7 @@ function UpdatePropertyForm({
         reset();
         setTimeout(() => {
           navigate("/hosting/properties");
-        }, 1000);
+        }, 500);
       }
     } catch (error) {
       const customError = error as ApiError;
@@ -233,7 +265,8 @@ function UpdatePropertyForm({
         <PropertyInputs control={control} errors={errors} />
         <PropertyTextArea control={control} errors={errors} />
         <ImageUploader
-          images={images}
+          existingImages={existingImages}
+          selectedImages={selectedImages}
           handleImageChange={handleImageChange}
           handleDeleteImage={handleDeleteImage}
           errors={errors}
@@ -247,7 +280,6 @@ function UpdatePropertyForm({
           videoError={videoError}
         />
       </div>
-
       <div className="flex justify-end items-center pt-6">
         <Button
           disabled={loading}

@@ -17,7 +17,8 @@ export type PropertyNameInputs = {
   uid: string;
   prop_id: string;
   video?: string | File;
-  images: (File | string)[];
+  images?: File[];
+  existing_images?: string[];
   price: string;
   facilities: string[];
   beds_count: string;
