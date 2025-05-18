@@ -19,7 +19,11 @@ function PropertyTypeFilter({
     <div className="py-4">
       <h2 className="text-lg font-bold pb-2">{t("property_type")}</h2>
       <div className="flex flex-wrap gap-2">
-        {propertyTypes?.length ? (
+        {!propertyTypes ? (
+          <div className="flex justify-center items-center text-dark font-medium w-full">
+            Choose government to continue
+          </div>
+        ) : propertyTypes?.length ? (
           propertyTypes?.map((item) => {
             const { id, title, img } = item;
             return (

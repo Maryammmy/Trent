@@ -11,7 +11,11 @@ function CityFilter({ handleCityChange, cities, city }: IProps) {
   return (
     <div className="flex flex-col gap-2 pb-4">
       <label className="text-lg font-bold">{t("city")}</label>
-      {cities?.length ? (
+      {!cities ? (
+        <p className="border py-3 px-2 rounded-md bg-white">
+          Choose government to continue
+        </p>
+      ) : cities?.length ? (
         <Select
           value={city}
           onChange={handleCityChange}

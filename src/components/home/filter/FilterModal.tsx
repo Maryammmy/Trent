@@ -47,13 +47,19 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   const priceRange = data?.data?.data?.price_range;
   const periodList = data?.data?.data?.period_list;
   const propertyTypes = data?.data?.data?.category_list;
+  const minPrice =
+    priceRange?.min_price !== undefined
+      ? Number(priceRange?.min_price)
+      : undefined;
+  const maxPrice =
+    priceRange?.max_price !== undefined
+      ? Number(priceRange?.max_price)
+      : undefined;
   useEffect(() => {
-    const min = Number(priceRange?.min_price);
-    const max = Number(priceRange?.max_price);
-    if (min && max) {
-      setValues([min, max]);
+    if (minPrice && maxPrice) {
+      setValues([minPrice, maxPrice]);
     }
-  }, [priceRange]);
+  }, [minPrice, maxPrice]);
   const handleSelectedFacilities = (id: number) => {
     setSelectedFacilities((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
@@ -143,8 +149,8 @@ function FilterModal({ isFilterOpen, close }: IProps) {
                   handleRangeChange={(newValues: number[]) =>
                     setValues(newValues)
                   }
-                  min={Number(priceRange?.min_price)}
-                  max={Number(priceRange?.max_price)}
+                  min={minPrice}
+                  max={maxPrice}
                 />
               </div>
               <CounterFilter

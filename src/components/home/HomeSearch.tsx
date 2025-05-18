@@ -10,7 +10,7 @@ function HomeSearch() {
       <Input
         type="search"
         placeholder={t("where_are_you_going")}
-        className="outline-none w-full"
+        className="outline-none w-full bg-white"
       />
       <Search className="text-primary" />
     </div>
