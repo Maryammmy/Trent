@@ -17,6 +17,13 @@ export const usePropertyInfoAPI = (id: string | undefined) => {
     enabled: !!id,
   });
 };
+export const usePropertyDatesAPI = (id: string | undefined) => {
+  return useQuery({
+    queryKey: ["propertyDates", id],
+    queryFn: () => baseAPI.get(`user_api/booking/u_calendar.php?prop_id=${id}`),
+    enabled: !!id,
+  });
+};
 export const verifyPropertyAPI = (payload: IVerifyProperty) => {
   const formData = new FormData();
   Object.entries(payload).forEach(([key, value]) => {

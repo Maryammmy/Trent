@@ -20,7 +20,7 @@ export const accountSettingsData: IAccountSettings[] = [
     description: "personal_info_desc",
   },
   {
-    to: "/account-settings/bookings",
+    to: "/account-settings/bookings?status=active",
     icon: <Tickets size={40} />,
     title: "my_bookings",
     description: "desc_my_bookings",

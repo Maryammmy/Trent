@@ -8,7 +8,7 @@ interface IProps {
   handleStartValueChange: (newValue: DateValueType) => void;
   handleEndValueChange: (newValue: DateValueType) => void;
   errors: { [key: string]: string };
-  nextAvailableDate?: string;
+  reservedDates?: string[];
 }
 
 function CheckDates({
@@ -17,7 +17,7 @@ function CheckDates({
   handleStartValueChange,
   handleEndValueChange,
   errors,
-  nextAvailableDate,
+  reservedDates,
 }: IProps) {
   const { t } = useTranslation();
   return (
@@ -28,7 +28,7 @@ function CheckDates({
           dateValue={startDateValue}
           handleValueChange={handleStartValueChange}
           className="bg-gray-100 py-2 px-2 rounded-md text-dark placeholder:text-dark"
-          nextAvailableDate={nextAvailableDate}
+          reservedDates={reservedDates}
         />
         {errors.checkin && <InputErrorMessage msg={errors.checkin} />}
       </div>
@@ -38,7 +38,7 @@ function CheckDates({
           dateValue={endDateValue}
           handleValueChange={handleEndValueChange}
           className="bg-gray-100 py-2 px-2 rounded-md text-dark placeholder:text-dark"
-          nextAvailableDate={nextAvailableDate}
+          reservedDates={reservedDates}
         />
         {errors.checkout && <InputErrorMessage msg={errors.checkout} />}
       </div>

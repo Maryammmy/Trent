@@ -9,7 +9,8 @@ import { MessageCircleMore } from "lucide-react";
 function ChatWindow() {
   const ownerId = useQueryParam("user");
   const chatId = useQueryParam("chat");
-  const { data } = useMessagesAPI(Number(chatId), ownerId);
+  const propId = useQueryParam("prop");
+  const { data } = useMessagesAPI(chatId);
   const owner = data?.data?.data;
   const messages: IMessage[] = data?.data?.data?.chat_messages;
   return ownerId ? (
@@ -22,7 +23,7 @@ function ChatWindow() {
     >
       <ChatHeader owner={owner} />
       <ChatMessages messages={messages} />
-      <ChatInput ownerId={ownerId} />
+      <ChatInput ownerId={ownerId} propId={propId} chatId={chatId} />
     </div>
   ) : (
     <div className="hidden lg:flex lg:flex-col lg:flex-1 lg:gap-5 lg:justify-center lg:items-center">

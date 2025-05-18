@@ -4,6 +4,7 @@ import { baseURL } from "@/services";
 import { formatDateTime, formatTime12Hour } from "@/utils/formatDateAndTime";
 
 const ChatMessages = ({ messages }: { messages: IMessage[] }) => {
+  console.log(messages);
   return (
     <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
       {messages?.map((msg) => {
@@ -23,18 +24,35 @@ const ChatMessages = ({ messages }: { messages: IMessage[] }) => {
                 />
               </div>
             )}
-            <p className="bg-white w-fit rounded-md rounded-tr-none p-2 shadow">
-              {msg?.message}
-            </p>
-            <p className="text-xs font-medium text-dark">{formattedTime}</p>
+            {msg?.message && (
+              <>
+                <p className="bg-white w-fit rounded-md rounded-tr-none p-2 shadow">
+                  {msg?.message}
+                </p>
+                <p className="text-xs font-medium text-dark">{formattedTime}</p>
+              </>
+            )}
           </div>
         ) : (
           <div key={msg?.id} className="mb-2 flex flex-col gap-1">
             <p className="text-xs text-gray-400 text-center">{date}</p>
-            <p className="bg-white w-fit rounded-md rounded-tl-none p-2 shadow">
-              {msg?.message}
-            </p>
-            <p className="text-xs font-medium text-dark">{formattedTime}</p>
+            {msg?.img && (
+              <div className="w-[200px] h-[120px] rounded-md overflow-hidden">
+                <Image
+                  imageUrl={baseURL + msg?.img}
+                  alt="chat image"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
+            {msg?.message && (
+              <>
+                <p className="bg-white w-fit rounded-md rounded-tl-none p-2 shadow">
+                  {msg?.message}
+                </p>
+                <p className="text-xs font-medium text-dark">{formattedTime}</p>
+              </>
+            )}
           </div>
         );
       })}

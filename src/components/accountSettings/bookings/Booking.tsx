@@ -4,6 +4,7 @@ import Image from "@/components/ui/Image";
 import Rating from "@/components/ui/Rating";
 import { IBooking } from "@/interfaces/booking";
 import { baseURL } from "@/services";
+import { useQueryParam } from "@/utils/getQueryParam";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -24,10 +25,11 @@ function Booking({ booking }: IProps) {
     check_out,
     individual_rate,
   } = booking;
+  const status = useQueryParam("status");
   return (
     <>
       <Link
-        to={`/account-settings/bookings/${book_id}`}
+        to={`/account-settings/bookings/${book_id}?status=${status}`}
         className="flex flex-wrap items-center gap-5 sm:gap-8 border p-4 rounded-2xl"
       >
         <div className="relative h-14 w-14 overflow-hidden rounded-md">

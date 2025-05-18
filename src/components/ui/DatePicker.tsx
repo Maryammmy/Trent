@@ -1,14 +1,16 @@
 import { useTranslation } from "react-i18next";
 import Datepicker from "react-tailwindcss-datepicker";
-import { DateValueType } from "react-tailwindcss-datepicker/dist/types";
+import {
+  DateRangeType,
+  DateValueType,
+} from "react-tailwindcss-datepicker/dist/types";
 import { CurrentLanguage } from "../../types";
-import { getDisabledDatesArray } from "@/utils/disabledDatesArray";
 
 interface IProps {
   dateValue: DateValueType;
   handleValueChange: (newValue: DateValueType) => void;
   className?: string;
-  nextAvailableDate?: string;
+  reservedDates?: string[];
 }
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -16,12 +18,15 @@ const DatePicker = ({
   dateValue,
   handleValueChange,
   className,
-  nextAvailableDate,
+  reservedDates,
 }: IProps) => {
   const { t } = useTranslation();
-  const disabledDatesArray = nextAvailableDate
-    ? getDisabledDatesArray(nextAvailableDate)
-    : [];
+  const disabledDates: DateRangeType[] | undefined = reservedDates?.length
+    ? reservedDates.map((d) => {
+        const dateObj = typeof d === "string" ? new Date(d) : d;
+        return { startDate: dateObj, endDate: dateObj };
+      })
+    : undefined;
 
   return (
     <div className="remove-icon">
@@ -35,9 +40,7 @@ const DatePicker = ({
         onChange={handleValueChange}
         inputClassName={`outline-none font-medium ${className}`}
         placeholder={t("add_date")}
-        disabledDates={
-          disabledDatesArray.length ? disabledDatesArray : undefined
-        }
+        disabledDates={disabledDates}
       />
       <style>
         {`

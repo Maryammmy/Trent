@@ -1,15 +1,27 @@
 import Input from "@/components/ui/Input";
 import { addChatAPI } from "@/services/chatService";
-import { useQueryParam } from "@/utils/getQueryParam";
 import { ImageUp, Send } from "lucide-react";
 import { useRef, useState } from "react";
 import Cookies from "js-cookie";
+import { useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
+import { ApiError } from "@/interfaces";
+import { useNavigate } from "react-router-dom";
 
 const uid = Cookies.get("user_id");
-const ChatInput = ({ ownerId }: { ownerId: string }) => {
+interface IProps {
+  ownerId: string;
+  propId: string | null;
+  chatId: string | null;
+}
+const ChatInput = ({ ownerId, propId, chatId }: IProps) => {
+  const { t } = useTranslation();
   const [newMessage, setNewMessage] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const propId = useQueryParam("prop");
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  console.log(chatId, ownerId);
   const handleSendMessage = async () => {
     if (!newMessage.trim()) return;
     const data = {
@@ -22,13 +34,26 @@ const ChatInput = ({ ownerId }: { ownerId: string }) => {
     Object.entries(data).forEach(([key, value]) => {
       if (value) formData.append(key, value);
     });
-
     try {
       const response = await addChatAPI(formData);
-      console.log("📤 تم إرسال الرسالة:", response);
-      setNewMessage("");
+      if (response.data.response_code === 201) {
+        if (!chatId) {
+          navigate(
+            `/chat?prop=${propId}&user=${ownerId}&chat=${response?.data?.data?.chat_id}`
+          );
+        }
+        queryClient.refetchQueries({
+          queryKey: ["messages"],
+        });
+        setNewMessage("");
+      }
     } catch (error) {
-      console.error("🚨 خطأ أثناء إرسال الرسالة:", error);
+      const customError = error as ApiError;
+      const errorMessage =
+        customError?.response?.data?.response_message ||
+        t("something_went_wrong");
+      toast.error(errorMessage);
+      console.log(error);
     }
   };
 

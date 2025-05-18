@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button";
 import Counter from "@/components/ui/Counter";
 import { ApiError } from "@/interfaces";
 import {
+  usePropertyDatesAPI,
   usePropertyInfoAPI,
   verifyPropertyAPI,
 } from "@/services/bookingService";
@@ -45,6 +46,8 @@ function Book() {
   const fromDate = formatDate(startDateValue?.startDate);
   const toDate = formatDate(endDateValue?.startDate);
   const minDays = Number(propertyBook?.min_days);
+  const { data: datesData } = usePropertyDatesAPI(id);
+  const dates = datesData?.data?.data?.date_list;
   const handleStartValueChange = (newValue: DateValueType) => {
     const validatedValue = validateStartDate(newValue, endDateValue, t);
     if (validatedValue) {
@@ -162,7 +165,7 @@ function Book() {
               handleStartValueChange={handleStartValueChange}
               handleEndValueChange={handleEndValueChange}
               errors={{ checkin: errors.checkin, checkout: errors.checkout }}
-              nextAvailableDate={propertyBook?.next_available_date}
+              reservedDates={dates}
             />
             <div className="flex flex-col">
               <h2 className="text-black font-bold mb-2">{t("guest_count")}</h2>
