@@ -25,7 +25,7 @@ function ShareModal({ url, open, onClose }: IProps) {
   const handleCopy = async () => {
     await navigator.clipboard.writeText(url);
     setCopied(true);
-    setTimeout(() => setCopied(false), 1000);
+    setTimeout(() => setCopied(false), 500);
   };
 
   return (
@@ -40,9 +40,10 @@ function ShareModal({ url, open, onClose }: IProps) {
           <X size={20} />
         </span>
       </Button>
-      <div className="p-8 pt-0">
+      <div className="p-5 sm:p-8 pt-0">
         <div className="flex items-center gap-2 mb-6">
           <Input
+            dir="ltr"
             type="text"
             value={url}
             readOnly
@@ -50,13 +51,15 @@ function ShareModal({ url, open, onClose }: IProps) {
           />
           <Button
             onClick={handleCopy}
-            className="p-2 rounded-md bg-gray-200 hover:bg-primary/10 text-primary transition"
+            className={`p-2 rounded-md bg-gray-200 hover:bg-primary/10 text-primary transition ${
+              copied && "hidden"
+            }`}
             title={t("copy_link")}
           >
             <FaRegCopy size={20} />
           </Button>
           {copied && (
-            <span className="text-green-600 text-xs ml-2 font-medium">
+            <span className="text-green-600 text-xs font-medium mt-1 min-w-[50px] text-center">
               {t("copied")}
             </span>
           )}
