@@ -433,5 +433,8 @@
   "no_notifications_found": "لا توجد إشعارات",
   "booking_success_desc": "تهانينا! تم تأكيد حجزك بنجاح",
   "view_receipt": "عرض الفاتورة",
-  "close": "اغلاق"
+  "close": "اغلاق",
+  "share_this_place": "شارك هذا المكان",
+  "copy_link": "نسخ الرابط",
+  "copied": "تم النسخ"
 }

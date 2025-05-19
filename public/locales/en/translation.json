@@ -435,5 +435,8 @@
   "no_notifications_found": "NO notifications found",
   "booking_success_desc": "Congratulations! Your booking is confirmed",
   "view_receipt": "View receipt",
-  "close": "Close"
+  "close": "Close",
+  "share_this_place": "Share this place",
+  "copy_link": "Copy link",
+  "copied": "Copied!"
 }

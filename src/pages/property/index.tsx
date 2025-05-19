@@ -15,13 +15,10 @@ import Video from "@/components/ui/Video";
 import Button from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-  TelegramShareButton,
-} from "react-share";
 import { Helmet } from "react-helmet-async";
+import ShareModal from "./ShareModal";
+import { useState } from "react";
+import { Share2 } from "lucide-react";
 
 const uid = Cookies.get("user_id") || "";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
@@ -34,6 +31,7 @@ function Property() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { id } = useParams();
+  const [showShareModal, setShowShareModal] = useState(false);
   const { data } = usePropertyAPI(id);
   const propertyDetails: IDetailsProperty = data?.data?.data?.property_details;
   const facilities: IFacilityProperty[] = data?.data?.data?.facility_list;
@@ -71,23 +69,12 @@ function Property() {
               >
                 {propertyDetails?.title?.[currentLanguage]}
               </h2>
-              <div className="flex gap-2">
-                <FacebookShareButton url={url}>
-                  <button>📘 Facebook</button>
-                </FacebookShareButton>
-
-                <WhatsappShareButton url={url}>
-                  <button>🟢 WhatsApp</button>
-                </WhatsappShareButton>
-
-                <TwitterShareButton url={url}>
-                  <button>🐦 Twitter</button>
-                </TwitterShareButton>
-
-                <TelegramShareButton url={url}>
-                  <button>✈️ Telegram</button>
-                </TelegramShareButton>
-              </div>
+              <Button
+                onClick={() => setShowShareModal(true)}
+                className="text-primary"
+              >
+                <Share2 />
+              </Button>
             </div>
             <div>
               <div className="rounded-md overflow-x-hidden">
@@ -231,6 +218,11 @@ function Property() {
           <PropertySkeleton />
         )}
       </div>
+      <ShareModal
+        url={url}
+        open={showShareModal}
+        onClose={() => setShowShareModal(false)}
+      />
     </>
   );
 }
