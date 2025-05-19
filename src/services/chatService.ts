@@ -21,7 +21,7 @@ export const useMessagesAPI = (chatId: string | null) => {
       baseAPI.get(
         `user_api/u_chat_messages.php?chat_id=${chatId}&uid=${uid}&order_by_last_message=false`
       ),
-    // refetchInterval: 10000,
+    refetchInterval: 10000,
     enabled: !!chatId && !!uid,
   });
 };

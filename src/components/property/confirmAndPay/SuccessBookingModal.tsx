@@ -19,7 +19,7 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
     >
       <div className="px-5 md:px-10 pb-6">
         <p className="text-dark text-center font-medium pb-3">
-          Your booking has been successfully placed
+          {t("booking_success_desc")}
         </p>
         <div className="space-y-1 pb-4">
           <h2 className="font-semibold text-lg">{bookingData?.title}</h2>
@@ -55,14 +55,14 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
             to={`/account-settings/bookings/${bookingData?.book_id}?status=active`}
             className="w-32 py-2 text-center bg-primary text-white rounded-md hover:bg-primary/80"
           >
-            View Receipt
+            {t("view_receipt")}
           </Link>
           <Button
             type="button"
             onClick={onClose}
             className="w-32 py-2 bg-gray-200 text-primary rounded-md hover:bg-gray-200/80"
           >
-            Close
+            {t("close")}
           </Button>
         </div>
       </div>

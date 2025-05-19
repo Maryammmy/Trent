@@ -15,7 +15,13 @@ import Video from "@/components/ui/Video";
 import Button from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
-import { Share2 } from "lucide-react";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  TelegramShareButton,
+} from "react-share";
+import { Helmet } from "react-helmet-async";
 
 const uid = Cookies.get("user_id") || "";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
@@ -35,8 +41,26 @@ function Property() {
     Number(propertyDetails?.price) * Number(parsedCurrency?.rate)
   );
   const minDays = Number(propertyDetails?.min_days);
+  const url = `https://www.trent.com.eg/properties/${id}`;
   return (
     <>
+      <Helmet>
+        <title>{propertyDetails?.title?.[currentLanguage]}</title>
+        <meta
+          property="og:title"
+          content={propertyDetails?.title?.[currentLanguage]}
+        />
+        <meta
+          property="og:description"
+          content={propertyDetails?.description?.[currentLanguage]}
+        />
+        <meta
+          property="og:image"
+          content={baseURL + propertyDetails?.image_list?.[0]?.img}
+        />
+        <meta property="og:url" content={url} />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <div className="px-5 xl:px-20 py-5 lg:py-10">
         {data ? (
           <>
@@ -47,9 +71,23 @@ function Property() {
               >
                 {propertyDetails?.title?.[currentLanguage]}
               </h2>
-              <Button>
-                <Share2 className="text-primary" />
-              </Button>
+              <div className="flex gap-2">
+                <FacebookShareButton url={url}>
+                  <button>📘 Facebook</button>
+                </FacebookShareButton>
+
+                <WhatsappShareButton url={url}>
+                  <button>🟢 WhatsApp</button>
+                </WhatsappShareButton>
+
+                <TwitterShareButton url={url}>
+                  <button>🐦 Twitter</button>
+                </TwitterShareButton>
+
+                <TelegramShareButton url={url}>
+                  <button>✈️ Telegram</button>
+                </TelegramShareButton>
+              </div>
             </div>
             <div>
               <div className="rounded-md overflow-x-hidden">
@@ -61,7 +99,7 @@ function Property() {
                         <div className="w-full h-full">
                           <Image
                             className="w-full h-full object-cover"
-                            imageUrl={baseURL + image.img}
+                            imageUrl={baseURL + image?.img}
                             alt={`Image ${i + 1}`}
                           />
                         </div>
