@@ -11,6 +11,7 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useTranslation } from "react-i18next";
+import { X } from "lucide-react";
 
 interface IProps {
   url: string;
@@ -34,6 +35,11 @@ function ShareModal({ url, open, onClose }: IProps) {
       title={t("share_this_place")}
       className="py-6 text-center text-xl font-semibold text-primary"
     >
+      <Button onClick={onClose} className="absolute top-5 right-4">
+        <span>
+          <X size={20} />
+        </span>
+      </Button>
       <div className="p-8 pt-0">
         <div className="flex items-center gap-2 mb-6">
           <Input
