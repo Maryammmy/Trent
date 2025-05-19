@@ -12,7 +12,11 @@ function PeriodFilter({ handlePeriodChange, periods, period }: IProps) {
   return (
     <div className="flex flex-col gap-2">
       <label className="text-lg font-bold">{t("period")}</label>
-      {periods?.length ? (
+      {!periods ? (
+        <p className="border py-3 px-2 rounded-md bg-white">
+          Choose government to continue
+        </p>
+      ) : periods?.length ? (
         <Select
           value={period}
           onChange={handlePeriodChange}

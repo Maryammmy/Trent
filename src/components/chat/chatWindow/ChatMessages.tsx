@@ -4,7 +4,6 @@ import { baseURL } from "@/services";
 import { formatDateTime, formatTime12Hour } from "@/utils/formatDateAndTime";
 
 const ChatMessages = ({ messages }: { messages: IMessage[] }) => {
-  console.log(messages);
   return (
     <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
       {messages?.map((msg) => {

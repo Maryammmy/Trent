@@ -21,7 +21,6 @@ const ChatInput = ({ ownerId, propId, chatId }: IProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  console.log(chatId, ownerId);
   const handleSendMessage = async () => {
     if (!newMessage.trim()) return;
     const data = {
@@ -37,14 +36,14 @@ const ChatInput = ({ ownerId, propId, chatId }: IProps) => {
     try {
       const response = await addChatAPI(formData);
       if (response.data.response_code === 201) {
+        const newChatId = response?.data?.data?.chat_id;
         if (!chatId) {
-          navigate(
-            `/chat?prop=${propId}&user=${ownerId}&chat=${response?.data?.data?.chat_id}`
-          );
+          navigate(`/chat?prop=${propId}&user=${ownerId}&chat=${newChatId}`);
+        } else {
+          queryClient.refetchQueries({
+            queryKey: ["messages", chatId],
+          });
         }
-        queryClient.refetchQueries({
-          queryKey: ["messages"],
-        });
         setNewMessage("");
       }
     } catch (error) {
@@ -72,12 +71,26 @@ const ChatInput = ({ ownerId, propId, chatId }: IProps) => {
     Object.entries(data).forEach(([key, value]) => {
       if (value) formData.append(key, value);
     });
-
     try {
       const response = await addChatAPI(formData);
-      console.log("📤 تم إرسال الصورة بنجاح:", response);
+      if (response.data.response_code === 201) {
+        const newChatId = response?.data?.data?.chat_id;
+        if (!chatId) {
+          navigate(`/chat?prop=${propId}&user=${ownerId}&chat=${newChatId}`);
+        } else {
+          queryClient.refetchQueries({
+            queryKey: ["messages", chatId],
+          });
+        }
+        setNewMessage("");
+      }
     } catch (error) {
-      console.error("🚨 خطأ أثناء رفع الصورة:", error);
+      const customError = error as ApiError;
+      const errorMessage =
+        customError?.response?.data?.response_message ||
+        t("something_went_wrong");
+      toast.error(errorMessage);
+      console.log(error);
     }
   };
 
