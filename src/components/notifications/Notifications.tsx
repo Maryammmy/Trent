@@ -107,7 +107,7 @@ export default function Notifications() {
             )}
           </div>
           {/* Medium+ screens: Small dropdown */}
-          <div className="overflow-x-hidden hidden sm:block absolute right-0 top-10 min-w-96 bg-white shadow-lg rounded-lg z-50">
+          <div className="overflow-x-hidden hidden sm:block absolute ltr:right-0 rtl:left-0 top-10 min-w-96 bg-white shadow-lg rounded-lg z-50">
             <div className="max-h-[600px] overflow-y-auto">
               {!notifications ? (
                 <NotificationSkeleton cards={4} />

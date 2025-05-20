@@ -1,5 +1,4 @@
 import Image from "./ui/Image";
-import { useContactUsAPI } from "@/services/homeService";
 import { Link } from "react-router-dom";
 import UpdateSkeleton from "./skeleton/UpdateSkeleton";
 import { useTranslation } from "react-i18next";
@@ -11,10 +10,11 @@ import {
   FaTiktok,
   FaSnapchat,
 } from "react-icons/fa";
+import { useGetData } from "@/hooks/useGetData";
 
 function Footer() {
   const { t } = useTranslation();
-  const { data } = useContactUsAPI();
+  const { data } = useGetData(["contact"], "user_api/u_contact_us.php");
   const contactUs = data?.data?.data?.contact_us;
   return (
     <footer className="pt-5 bg-[#FAFAFA]">

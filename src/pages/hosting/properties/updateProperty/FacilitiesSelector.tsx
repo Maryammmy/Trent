@@ -42,7 +42,7 @@ function FacilitiesSelector({ control, errors, facilities }: IProps) {
                       }
                       field.onChange(Array.from(selectedValues));
                     }}
-                    className="accent-dark w-4 h-4"
+                    className="accent-primary w-4 h-4"
                   />
                   <div className="w-6 h-6 rounded-md overflow-hidden">
                     <Image

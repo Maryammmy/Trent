@@ -2,14 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface homeSearchState {
   isDestinationOpen: boolean;
-  isLangSwitcherOpen: boolean;
   isDropdownOpen: boolean;
   isSearchOpen: boolean;
 }
 
 const initialState: homeSearchState = {
   isDestinationOpen: false,
-  isLangSwitcherOpen: false,
   isDropdownOpen: false,
   isSearchOpen: false,
 };
@@ -21,9 +19,6 @@ const homeSearchSlice = createSlice({
     setIsDestinationOpen(state, action: PayloadAction<boolean>) {
       state.isDestinationOpen = action.payload;
     },
-    setIsLangSwitcherOpen(state, action: PayloadAction<boolean>) {
-      state.isLangSwitcherOpen = action.payload;
-    },
     setIsDropdownOpen(state, action: PayloadAction<boolean>) {
       state.isDropdownOpen = action.payload;
     },
@@ -33,11 +28,7 @@ const homeSearchSlice = createSlice({
   },
 });
 
-export const {
-  setIsDestinationOpen,
-  setIsLangSwitcherOpen,
-  setIsDropdownOpen,
-  setIsSearchOpen,
-} = homeSearchSlice.actions;
+export const { setIsDestinationOpen, setIsDropdownOpen, setIsSearchOpen } =
+  homeSearchSlice.actions;
 
 export default homeSearchSlice.reducer;

@@ -46,3 +46,8 @@ export interface IFilterProps {
   beds?: number;
   bathrooms?: number;
 }
+export interface IFaq {
+  answer: string;
+  id: string;
+  question: string;
+}

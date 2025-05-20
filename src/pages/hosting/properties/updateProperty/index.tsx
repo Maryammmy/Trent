@@ -20,7 +20,7 @@ function UpdateProperty() {
     <>
       <AuthorizationCheck owner={owner} userId={userId} />
       <div className="bg-stone-100 bg-fixed bg-cover bg-no-repeat min-h-screen">
-        <div className=" max-w-screen-2xl mx-auto py-5 md:py-10 px-5 2xl:px-20">
+        <div className=" max-w-screen-2xl mx-auto py-5 md:py-10 px-5 xl:px-20">
           <div className="flex gap-3 items-center pb-5">
             <Link to="/hosting/properties">
               {currentLanguage === "en" ? (

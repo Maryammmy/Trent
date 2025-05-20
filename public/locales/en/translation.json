@@ -438,5 +438,8 @@
   "close": "Close",
   "share_this_place": "Share this place",
   "copy_link": "Copy link",
-  "copied": "Copied!"
+  "copied": "Copied!",
+  "have_question_check_out": "Have a question? Check out",
+  "the_faq": "the FAQ",
+  "no_faq_found": "No FAQ found"
 }

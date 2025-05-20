@@ -7,7 +7,7 @@ import CategoryBar from "../CategoryBar";
 import { useHomeDataAPI } from "../../services/homeService";
 import { IProperty } from "../../interfaces/property";
 import { FilterDataContext } from "../../context/FilterDataContext";
-import FilterModal from "../home/filter/FilterModal";
+import FilterModal from "./filter/FilterModal";
 import Map from "../map/Map";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setEnableMap } from "../../store/features/map/mapSlice";

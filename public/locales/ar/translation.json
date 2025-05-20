@@ -436,5 +436,8 @@
   "close": "اغلاق",
   "share_this_place": "شارك هذا المكان",
   "copy_link": "نسخ الرابط",
-  "copied": "تم النسخ"
+  "copied": "تم النسخ",
+  "have_question_check_out": "هل لديك سؤال؟ اطلع على",
+  "the_faq": "الأسئلة الشائعة",
+  "no_faq_found": "لا توجد أسئلة شائعة"
 }

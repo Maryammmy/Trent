@@ -25,8 +25,10 @@ function CurrencySwitcher() {
       const rate = response?.data?.data?.currency_rate;
       if (rate) {
         sessionStorage.setItem("currency", JSON.stringify({ currency, rate }));
-        setIsOpen(false);
-        window.location.reload();
+        setTimeout(() => {
+          setIsOpen(false);
+          window.location.reload();
+        }, 500);
       }
     } catch (error) {
       console.log(error);

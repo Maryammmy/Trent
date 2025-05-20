@@ -16,7 +16,7 @@ function ChooseUs() {
   const whyChooseUsHeader: IWhyChooseUsHeader =
     data?.data?.data?.why_choose_us_header;
   return (
-    <div className="px-5 2xl:px-0 max-w-screen-xl mx-auto py-10">
+    <div className="px-5 xl:px-20 2xl:px-0 max-w-screen-xl mx-auto py-10">
       <div
         className="flex justify-center items-center gap-4"
         data-aos="fade-up"
