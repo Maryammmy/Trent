@@ -439,5 +439,11 @@
   "copied": "تم النسخ",
   "have_question_check_out": "هل لديك سؤال؟ اطلع على",
   "the_faq": "الأسئلة الشائعة",
-  "no_faq_found": "لا توجد أسئلة شائعة"
+  "no_faq_found": "لا توجد أسئلة شائعة",
+  "welcome_to_Trent": "مرحباً بك في ترينت",
+  "forget_password": "نسيت كلمة المرور؟",
+  "phone_number_required": "رقم الهاتف مطلوب",
+  "phone_number_digits": "يجب أن يحتوي رقم الهاتف على أرقام فقط",
+  "country_code_required": "مفتاح الدولة مطلوب",
+  "password_required": "كلمة المرور مطلوبة"
 }

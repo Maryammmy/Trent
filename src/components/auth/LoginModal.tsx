@@ -69,7 +69,7 @@ function LoginModal() {
       <Modal
         maxWidth="600px"
         className="text-2xl text-center p-4 border-b font-semibold"
-        title="Log in"
+        title={t("log_in")}
         close={() => dispatch(setIsloggedin(false))}
         isOpen={isLoggedin}
       >
@@ -82,13 +82,18 @@ function LoginModal() {
           </span>
         </Button>
         <div className="p-5 md:py-8 md:px-10">
-          <h2 className="text-lg font-semibold pb-5">Welcome to Trent</h2>
+          <h2 className="text-lg font-semibold pb-5">
+            {t("welcome_to_Trent")}
+          </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">
-                Phone number
+                {t("phone_number")}
               </label>
-              <div className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+              <div
+                dir="ltr"
+                className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary"
+              >
                 <Controller
                   name="ccode"
                   control={control}
@@ -126,9 +131,12 @@ function LoginModal() {
               render={({ field }) => (
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-1">
-                    Password
+                    {t("password")}
                   </label>
-                  <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+                  <div
+                    dir="ltr"
+                    className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary"
+                  >
                     <Input
                       {...field}
                       type={showPassword ? "text" : "password"}
@@ -161,7 +169,7 @@ function LoginModal() {
                 }}
                 className="font-medium"
               >
-                <span> Forget password?</span>
+                <span>{t("forget_password")}</span>
               </Button>
             </div>
             <Button

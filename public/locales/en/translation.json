@@ -441,5 +441,11 @@
   "copied": "Copied!",
   "have_question_check_out": "Have a question? Check out",
   "the_faq": "the FAQ",
-  "no_faq_found": "No FAQ found"
+  "no_faq_found": "No FAQ found",
+  "welcome_to_Trent": "Welcome to Trent",
+  "forget_password": "Forget password?",
+  "phone_number_required": "Phone number is required",
+  "phone_number_digits": "The phone number must contain only digits",
+  "country_code_required": "Country code is required",
+  "password_required": "Password is required"
 }
