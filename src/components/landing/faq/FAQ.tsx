@@ -21,7 +21,7 @@ function FAQ() {
           <FAQSkeleton cards={2} />
         ) : faqs?.length ? (
           <>
-            <div className="">
+            <div data-aos="fade-left">
               <h2 className="text-lg md:text-3xl font-bold text-primary">
                 {t("have_question_check_out")}
                 <br />

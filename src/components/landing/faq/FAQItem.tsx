@@ -16,7 +16,10 @@ function FAQItem({ faq }: IProps) {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+    <div
+      data-aos="fade-up"
+      className="bg-white p-4 rounded-lg shadow-sm border border-gray-200"
+    >
       <Button
         className="flex justify-between items-center w-full"
         onClick={toggleOpen}
