@@ -101,7 +101,7 @@ function MobileAppBanner() {
                   ))}
               </div>
             </div>
-            <div className="w-40 h-full">
+            <div data-aos="fade-right" className="w-40 h-full">
               <Image
                 imageUrl="/images/mobileIsolated.png"
                 alt="bannerMobile"
