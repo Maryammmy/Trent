@@ -111,7 +111,7 @@ function LoginModal() {
                     <Input
                       {...field}
                       type="text"
-                      placeholder="Enter your phone number"
+                      placeholder={t("enter_phone_number")}
                       className="w-full outline-none"
                       onChange={(e) => {
                         const value = e.target.value.replace(/^0+/, "");
@@ -133,14 +133,11 @@ function LoginModal() {
                   <label className="block text-sm font-medium mb-1">
                     {t("password")}
                   </label>
-                  <div
-                    dir="ltr"
-                    className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary"
-                  >
+                  <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
                     <Input
                       {...field}
                       type={showPassword ? "text" : "password"}
-                      placeholder="Enter your password"
+                      placeholder={t("enter_password")}
                       className="w-full outline-none"
                     />
                     <Button

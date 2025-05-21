@@ -16,7 +16,7 @@ import Loader from "../loader/Loader";
 import CountrySelector from "../ui/CountrySelector";
 import { SignupNameInputs } from "../../types";
 import OtpModal from "./OtpModal";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { ApiError } from "@/interfaces";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
@@ -55,7 +55,7 @@ function SignupModal() {
   };
   const onSubmit: SubmitHandler<SignupNameInputs> = async (data) => {
     if (!acceptedTerms) {
-      setTermsError("You must accept the Terms and Conditions to proceed.");
+      setTermsError(t("terms_required"));
       return;
     }
     setLoading(true);
@@ -128,16 +128,21 @@ function SignupModal() {
         </Button>
         <div className="pb-3">
           <div className="p-5 md:py-8 md:px-10 md:max-h-[80vh] md:overflow-y-auto">
-            <h2 className="text-lg font-semibold pb-5">Welcome to Trent</h2>
+            <h2 className="text-lg font-semibold pb-5">
+              {t("welcome_to_Trent")}
+            </h2>
             <form onSubmit={handleSubmit(onSubmit)}>
               {signupData.map(({ name, label, type, placeholder }) => (
                 <Fragment key={name}>
                   {name === "mobile" ? (
                     <div className="mb-4">
                       <label className="block text-sm font-medium mb-1">
-                        {label}
+                        {t(label)}
                       </label>
-                      <div className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+                      <div
+                        dir="ltr"
+                        className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary"
+                      >
                         <Controller
                           name="ccode"
                           control={control}
@@ -155,7 +160,7 @@ function SignupModal() {
                             <Input
                               {...field}
                               type="text"
-                              placeholder="Enter your phone number"
+                              placeholder={t("enter_phone_number")}
                               className="w-full outline-none"
                               onChange={(e) => {
                                 const value = e.target.value.replace(/^0+/, "");
@@ -165,8 +170,8 @@ function SignupModal() {
                           )}
                         />
                       </div>
-                      {errors.name && (
-                        <InputErrorMessage msg={errors.name.message} />
+                      {errors.mobile && (
+                        <InputErrorMessage msg={errors.mobile.message} />
                       )}
                     </div>
                   ) : (
@@ -176,7 +181,7 @@ function SignupModal() {
                       render={({ field }) => (
                         <div className="mb-4">
                           <label className="block text-sm font-medium mb-1">
-                            {label}
+                            {t(label)}
                           </label>
                           <div className="flex w-full border border-gray-300 rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
                             {name === "password" ||
@@ -185,7 +190,7 @@ function SignupModal() {
                                 <Input
                                   {...field}
                                   type={showPassword ? "text" : "password"}
-                                  placeholder={placeholder}
+                                  placeholder={t(placeholder)}
                                   className="w-full outline-none"
                                 />
                                 <Button
@@ -203,7 +208,7 @@ function SignupModal() {
                               <Input
                                 {...field}
                                 type={type}
-                                placeholder={placeholder}
+                                placeholder={t(placeholder)}
                                 className="w-full outline-none"
                               />
                             )}
@@ -228,25 +233,27 @@ function SignupModal() {
                     className="w-5 h-5 accent-primary cursor-pointer"
                   />
                   <label htmlFor="terms" className="text-sm text-dark">
-                    I accept the{" "}
-                    <Link
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      to="/guest-terms"
-                      className="text-primary hover:underline"
-                    >
-                      Guest{" "}
-                    </Link>
-                    and{" "}
-                    <Link
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      to="/host-terms"
-                      className="text-primary hover:underline"
-                    >
-                      Host{" "}
-                    </Link>
-                    Terms and Conditions
+                    <Trans
+                      i18nKey="terms_label"
+                      components={{
+                        guest: (
+                          <Link
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            to="/guest-terms"
+                            className="text-primary hover:underline"
+                          />
+                        ),
+                        host: (
+                          <Link
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            to="/host-terms"
+                            className="text-primary hover:underline"
+                          />
+                        ),
+                      }}
+                    />
                   </label>
                 </div>
                 {termsError && <InputErrorMessage msg={termsError} />}
@@ -256,7 +263,7 @@ function SignupModal() {
                 type="submit"
                 className="w-full zoom bg-primary mt-2 text-white py-3 rounded-lg font-bold"
               >
-                {loading ? <Loader /> : "Sign up"}
+                {loading ? <Loader /> : t("sign_up")}
               </Button>
             </form>
           </div>

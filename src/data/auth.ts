@@ -1,48 +1,34 @@
-import { ILoginInputs, ISignupInputs } from "../interfaces/auth";
+import { ISignupInputs } from "../interfaces/auth";
 
-export const loginData: ILoginInputs[] = [
-  {
-    name: "mobile",
-    label: "Phone number",
-    placeholder: "Enter your phone number",
-    type: "text",
-  },
-  {
-    name: "password",
-    label: "Password",
-    placeholder: "Enter your password",
-    type: "password",
-  },
-];
 export const signupData: ISignupInputs[] = [
   {
     name: "name",
-    label: "Name",
-    placeholder: "Enter your name",
+    label: "name",
+    placeholder: "enter_name",
     type: "text",
   },
   {
     name: "email",
-    label: "Email",
-    placeholder: "Enter your email",
+    label: "email",
+    placeholder: "enter_email",
     type: "text",
   },
   {
     name: "mobile",
-    label: "Phone number",
-    placeholder: "Enter your phone number",
+    label: "phone_number",
+    placeholder: "enter_phone_number",
     type: "text",
   },
   {
     name: "password",
-    label: "Password",
-    placeholder: "Enter your password",
+    label: "password",
+    placeholder: "enter_password",
     type: "password",
   },
   {
     name: "confirmPassword",
-    label: "Confirm password",
-    placeholder: "Confirm your password",
+    label: "confirm_password",
+    placeholder: "confirm_your_password",
     type: "password",
   },
 ];

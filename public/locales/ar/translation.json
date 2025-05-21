@@ -449,5 +449,21 @@
   "choose_government_to_continue": "اختر المحافظة للمتابعة",
   "no_minimum_price_found": "لا يوجد سعر أدنى",
   "no_maximum_price_found": "لا يوجد سعر أقصى",
-  "cancellation_policies": "Cancellation policies"
+  "name": "الاسم",
+  "confirm_password": "تأكيد كلمة المرور",
+  "terms_label": "أوافق على الشروط والأحكام الخاصة <guest>بالضيف</guest> و <host>المضيف</host>",
+  "terms_required": "يجب الموافقة على الشروط والأحكام للمتابعة",
+  "name_required": "الاسم مطلوب",
+  "name_letters_only": "يجب أن يحتوي الاسم على أحرف فقط",
+  "name_min_length_sign_up": "يجب أن يكون الاسم 3 أحرف على الأقل",
+  "name_max_length_sign_up": "يجب ألا يتجاوز الاسم 50 حرفًا",
+  "invalid_email": "عنوان البريد الإلكتروني غير صالح",
+  "password_requirements": "يجب أن تكون كلمة المرور 6 أحرف على الأقل وتتضمن رقمًا",
+  "confirm_password_required": "تأكيد كلمة المرور مطلوب",
+  "passwords_must_match": "يجب أن تتطابق كلمة المرور وتأكيد كلمة المرور",
+  "enter_phone_number": "أدخل رقم هاتفك",
+  "enter_password": "أدخل كلمة المرور",
+  "enter_name": "أدخل اسمك",
+  "enter_email": "أدخل بريدك الإلكتروني",
+  "confirm_your_password": "تأكيد كلمة المرور"
 }
