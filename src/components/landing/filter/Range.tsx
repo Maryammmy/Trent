@@ -27,13 +27,13 @@ function Range({ values, handleRangeChange, min, max }: IProps) {
           <span>{t("minimum")}:</span>
           {min === undefined ? (
             <span className="text-black font-medium">
-              Choose government to continue
+              {t("choose_government_to_continue")}
             </span>
           ) : values?.length > 0 && values[0] ? (
             <span className="text-black font-medium">{values[0]}</span>
           ) : (
             <span className="text-black font-medium">
-              No minimum price found
+              {t("no_minimum_price_found")}
             </span>
           )}
         </div>
@@ -42,13 +42,13 @@ function Range({ values, handleRangeChange, min, max }: IProps) {
           <span>{t("maximum")}:</span>
           {max === undefined ? (
             <span className="text-black font-medium">
-              Choose government to continue
+              {t("choose_government_to_continue")}
             </span>
           ) : values?.length > 0 && values[1] ? (
             <span className="text-black font-medium">{values[1]}</span>
           ) : (
             <span className="text-black font-medium">
-              No maximum price found
+              {t("no_maximum_price_found")}
             </span>
           )}
         </div>

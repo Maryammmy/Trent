@@ -11,6 +11,8 @@ interface IProps {
   handleValueChange: (newValue: DateValueType) => void;
   className?: string;
   reservedDates?: string[];
+  useRange?: boolean;
+  width?: string;
 }
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
@@ -19,6 +21,8 @@ const DatePicker = ({
   handleValueChange,
   className,
   reservedDates,
+  useRange = false,
+  width,
 }: IProps) => {
   const { t } = useTranslation();
   const disabledDates: DateRangeType[] | undefined = reservedDates?.length
@@ -29,16 +33,21 @@ const DatePicker = ({
     : undefined;
 
   return (
-    <div className="remove-icon">
+    <div
+      className={`remove-icon`}
+      style={{
+        ...(width && { width }),
+      }}
+    >
       <Datepicker
         i18n={currentLanguage}
         popoverDirection="down"
-        useRange={true}
+        useRange={useRange}
         value={dateValue}
         showFooter={true}
         asSingle={true}
         onChange={handleValueChange}
-        inputClassName={`outline-none font-medium ${className}`}
+        inputClassName={`outline-none font-medium w-full ${className}`}
         placeholder={t("add_date")}
         disabledDates={disabledDates}
       />

@@ -30,8 +30,8 @@ export const validateEndDate = (
   newValue: DateValueType,
   startDateValue: DateValueType,
   t: TFunction,
-  minDays: number,
-  maxDays: number
+  minDays?: number,
+  maxDays?: number
 ): DateValueType | null => {
   const { startDate: endDate } = newValue || {};
   const { startDate: startDate } = startDateValue || {};
@@ -56,12 +56,12 @@ export const validateEndDate = (
   const diffInTime = end.getTime() - start.getTime();
   const diffInDays = diffInTime / (1000 * 3600 * 24);
 
-  if (minDays > 0 && diffInDays < minDays) {
+  if (typeof minDays === "number" && minDays > 0 && diffInDays < minDays) {
     toast.error(t("error_min_days_stay", { days: minDays }));
     return null;
   }
 
-  if (maxDays > 0 && diffInDays > maxDays) {
+  if (typeof maxDays === "number" && maxDays > 0 && diffInDays > maxDays) {
     toast.error(t("error_max_days_stay", { days: maxDays }));
     return null;
   }

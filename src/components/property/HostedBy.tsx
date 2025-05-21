@@ -13,10 +13,9 @@ import { chatListAPI } from "@/services/chatService";
 interface IProps {
   id: string | undefined;
   owner: IDetailsProperty["owner"];
-  guestRules: string;
   ownerId: string;
 }
-function HostedBy({ id, owner, guestRules, ownerId }: IProps) {
+function HostedBy({ id, owner, ownerId }: IProps) {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -37,7 +36,7 @@ function HostedBy({ id, owner, guestRules, ownerId }: IProps) {
   };
 
   return (
-    <div className="py-5">
+    <div className="pt-5">
       <div data-aos="fade-left">
         <h2 className="pb-3 font-bold text-lg">{t("hosted_by")}</h2>
         <div className="flex flex-wrap items-center gap-3 sm:gap-5">
@@ -66,10 +65,6 @@ function HostedBy({ id, owner, guestRules, ownerId }: IProps) {
             )}
           </Button>
         </div>
-      </div>
-      <div className="flex flex-col gap-1 pt-4" data-aos="fade-right">
-        <h3 className="font-bold text-lg">{t("host_rules")}</h3>
-        <p className="text-dark font-medium">{guestRules}</p>
       </div>
     </div>
   );

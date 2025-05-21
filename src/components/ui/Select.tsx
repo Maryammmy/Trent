@@ -20,12 +20,12 @@ const Select = forwardRef<HTMLSelectElement, IProps>(
     return (
       <select
         ref={ref}
-        className={`w-full outline-none ${className}`}
+        className={`w-full outline-none font-medium ${className}`}
         {...rest}
       >
         <option value="">{t("choose_option")}</option>
         {options.map((option, index) => (
-          <option key={index} value={option.value}>
+          <option key={index} value={option.value} className="font-medium">
             {t(option.label)}
           </option>
         ))}

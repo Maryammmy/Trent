@@ -254,8 +254,8 @@
   "filter_room": "Room",
   "entire_home": "Entire home",
   "price_range": "Price range",
-  "maximum": "Maximum",
-  "minimum": "Minimum",
+  "maximum": "Max",
+  "minimum": "Min",
   "facilities": "Facilities",
   "property_type": "Property type",
   "beds_and_bathrooms_and_guests_limit": "Beds and bathrooms and guests limit",
@@ -447,5 +447,8 @@
   "phone_number_required": "Phone number is required",
   "phone_number_digits": "The phone number must contain only digits",
   "country_code_required": "Country code is required",
-  "password_required": "Password is required"
+  "password_required": "Password is required",
+  "choose_government_to_continue": "Choose government to continue",
+  "no_minimum_price_found": "No minimum price found",
+  "no_maximum_price_found": "No maximum price found"
 }

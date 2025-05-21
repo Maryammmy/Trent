@@ -68,7 +68,6 @@ function Book() {
       setErrors((prevErrors) => ({ ...prevErrors, checkout: "" }));
     }
   };
-
   const updateCounter = (value: number) => {
     setCounter((prevCounter) => prevCounter + value);
   };
@@ -129,7 +128,7 @@ function Book() {
               },
             },
           });
-        }, 1000);
+        }, 500);
       }
     } catch (error) {
       const customError = error as ApiError;

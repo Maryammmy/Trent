@@ -21,7 +21,7 @@ function PropertyTypeFilter({
       <div className="flex flex-wrap gap-2">
         {!propertyTypes ? (
           <div className="flex justify-center items-center text-dark font-medium w-full">
-            Choose government to continue
+            {t("choose_government_to_continue")}
           </div>
         ) : propertyTypes?.length ? (
           propertyTypes?.map((item) => {

@@ -12,10 +12,10 @@ function Amenities({ facilities }: IProps) {
   const { t } = useTranslation();
   return (
     <div>
-      <h2 className="text-2xl font-semibold pb-5" data-aos="fade-up">
+      <h2 className="text-2xl font-semibold pb-3" data-aos="fade-up">
         {t("what_this_place_offers")}
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 max-w-lg">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 max-w-lg">
         {facilities?.map((item, index) => {
           const { title, img } = item;
           return (

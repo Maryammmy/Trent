@@ -53,66 +53,84 @@ function Booking() {
             <div>
               <div className="space-y-2 font-medium md:text-lg">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-10">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="text-primary" />
-                    <span>{t("check_in")} :</span>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="text-primary shrink-0" />
+                      <span>{t("check_in")} :</span>
+                    </div>
                     <span>{booking?.check_in}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="text-primary" />
-                    <span>{t("check_out")} :</span>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="text-primary shrink-0" />
+                      <span>{t("check_out")} :</span>
+                    </div>
                     <span>{booking?.check_out}</span>
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="text-primary" />
-                    <span>{t("booking_date")} :</span>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="text-primary shrink-0" />
+                      <span>{t("booking_date")} :</span>
+                    </div>
                     <span>{booking?.book_date}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Tickets className="text-primary" />
-                    <span>{t("booking_status")} :</span>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <Tickets className="text-primary shrink-0" />
+                      <span>{t("booking_status")} :</span>
+                    </div>
                     <span className="text-primary font-semibold">
                       {" "}
-                      {booking.book_status}
+                      {booking?.book_status}
                     </span>
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
-                  <div className="flex items-center gap-2">
-                    <UsersRound className="text-primary" />
-                    <span>{t("guests_count")} :</span>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <UsersRound className="text-primary shrink-0" />
+                      <span>{t("guests_count")} :</span>
+                    </div>
                     <span> {booking?.noguest}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <MapPin className="text-primary" />
+                    <MapPin className="text-primary shrink-0" />
                     <span> {booking?.address}</span>
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
-                  <div className="flex items-center gap-2">
-                    <BedDouble className="text-primary" />
-                    <span>{t("beds_count")} :</span>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <BedDouble className="text-primary shrink-0" />
+                      <span>{t("beds_count")} :</span>
+                    </div>
                     <span> {booking?.beds_count}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Bath className="text-primary" />
-                    <span>{t("bathrooms_count")} :</span>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <Bath className="text-primary shrink-0" />
+                      <span>{t("bathrooms_count")} :</span>
+                    </div>
                     <span> {booking?.bathrooms_count}</span>
                   </div>
                 </div>
               </div>
               <div className="pt-10">
-                <div className="flex flex-wrap items-center gap-2 border-t py-4 font-medium text-lg">
-                  <GiMoneyStack className="text-primary" size={30} />
-                  <span>{t("price_without_egp")} :</span>
+                <div className="flex items-center gap-2 flex-wrap border-t py-4 font-medium text-lg">
+                  <div className="flex items-center gap-2">
+                    <GiMoneyStack className="text-primary shrink-0" size={30} />
+                    <span>{t("price_without_egp")} :</span>
+                  </div>
                   <span>{parseInt(booking?.prop_price)}</span>
                   {t("price_per_night")}
                 </div>
-                <div className="flex flex-wrap items-center gap-2 border-t py-4 text-xl font-bold">
-                  <GiMoneyStack className="text-primary" size={30} />
-                  <span>{t("total")} :</span>
+                <div className="flex items-center gap-2 flex-wrap border-t py-4 text-xl font-bold">
+                  <div className="flex items-center gap-2">
+                    <GiMoneyStack className="text-primary shrink-0" size={30} />
+                    <span>{t("total")} :</span>
+                  </div>
                   <span>
                     {parseInt(booking?.total)} {t("price_per_night")}
                   </span>

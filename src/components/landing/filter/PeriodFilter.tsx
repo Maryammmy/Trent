@@ -10,11 +10,11 @@ interface IProps {
 function PeriodFilter({ handlePeriodChange, periods, period }: IProps) {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 pb-4">
       <label className="text-lg font-bold">{t("period")}</label>
       {!periods ? (
         <p className="border py-3 px-2 rounded-md bg-white">
-          Choose government to continue
+          {t("choose_government_to_continue")}
         </p>
       ) : periods?.length ? (
         <Select
@@ -24,7 +24,7 @@ function PeriodFilter({ handlePeriodChange, periods, period }: IProps) {
             value: period?.id,
             label: period?.name,
           }))}
-          className="border py-3 px-2 disabled:bg-red-500 bg-white rounded-md outline-none focus:border-2 focus:border-primary"
+          className="border py-3 px-2 bg-white rounded-md outline-none focus:border-2 focus:border-primary"
         />
       ) : (
         <p className="border py-3 px-2 rounded-md bg-white">No period found</p>

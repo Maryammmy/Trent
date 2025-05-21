@@ -252,8 +252,8 @@
   "filter_room": "غرفة",
   "entire_home": "مسكن",
   "price_range": "نطاق السعر",
-  "maximum": "الحد الاقصى",
-  "minimum": "الحد الادنى",
+  "maximum": "الحد الأقصى",
+  "minimum": "الحد الأدنى",
   "facilities": "المرافق",
   "property_type": "نوع العقار",
   "beds_and_bathrooms_and_guests_limit": "عدد الأسرّة والحمّامات والحد الأقصى للضيوف",
@@ -445,5 +445,9 @@
   "phone_number_required": "رقم الهاتف مطلوب",
   "phone_number_digits": "يجب أن يحتوي رقم الهاتف على أرقام فقط",
   "country_code_required": "مفتاح الدولة مطلوب",
-  "password_required": "كلمة المرور مطلوبة"
+  "password_required": "كلمة المرور مطلوبة",
+  "choose_government_to_continue": "اختر المحافظة للمتابعة",
+  "no_minimum_price_found": "لا يوجد سعر أدنى",
+  "no_maximum_price_found": "لا يوجد سعر أقصى",
+  "cancellation_policies": "Cancellation policies"
 }

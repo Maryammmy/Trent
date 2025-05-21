@@ -18,7 +18,15 @@ import Cookies from "js-cookie";
 import { Helmet } from "react-helmet-async";
 import ShareModal from "./ShareModal";
 import { useState } from "react";
-import { Share2 } from "lucide-react";
+import {
+  Bath,
+  BedDouble,
+  Expand,
+  Locate,
+  MapPin,
+  Share2,
+  UsersRound,
+} from "lucide-react";
 
 const uid = Cookies.get("user_id") || "";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
@@ -107,64 +115,71 @@ function Property() {
                   </div>
                 </div>
               )}
-              {/* <Link
-                to={`/properties/1/gallery`}
-                className="absolute bottom-2 right-8 flex items-center gap-1 bg-white py-1 px-2 border border-black rounded-md"
-              >
-                <span>
-                  <Grip size={15} />
-                </span>
-                <span className="font-medium text-sm ">
-                  {t("show_all_photos")}
-                </span>
-              </Link> */}
             </div>
-            <div className="py-8">
+            <div className="py-5">
               <div className="flex gap-5 flex-wrap justify-between items-center">
-                <div className="flex flex-col gap-1" data-aos="fade-right">
-                  <div className="font-semibold text-lg">
-                    <p> {propertyDetails?.address?.[currentLanguage]}</p>
+                <div className="flex flex-col gap-2">
+                  <div
+                    data-aos="fade-right"
+                    className="font-semibold text-lg text-primary"
+                  >
+                    <p> {propertyDetails?.category?.type?.[currentLanguage]}</p>
                   </div>
-                  <div className="font-semibold text-black text-lg flex flex-wrap gap-1">
+                  <div
+                    data-aos="fade-right"
+                    className="font-semibold text-lg flex items-center gap-1"
+                  >
+                    <MapPin className="text-primary shrink-0" />
+                    <p>{propertyDetails?.address?.[currentLanguage]}</p>
+                  </div>
+                  <div
+                    data-aos="fade-right"
+                    className="font-semibold text-lg flex items-center gap-1"
+                  >
+                    <Locate className="text-primary shrink-0" />
                     <p> {propertyDetails?.city?.[currentLanguage]}</p>,
                     <p>
                       {propertyDetails?.government?.name?.[currentLanguage]}
                     </p>
                   </div>
-                  <div className="font-semibold text-lg">
-                    <p> {propertyDetails?.category?.type?.[currentLanguage]}</p>
-                  </div>
-                  <div className="font-medium flex flex-wrap gap-1">
-                    <div className="flex gap-1">
-                      <p>{t("guest_count")}</p>
+                  <div
+                    data-aos="fade-right"
+                    className="font-medium flex flex-wrap gap-2"
+                  >
+                    <div className="flex items-center gap-1 flex-wrap">
+                      <div className="flex items-center gap-1">
+                        <UsersRound className="text-primary shrink-0" />
+                        <span>{t("guest_count")}</span>
+                      </div>
                       <span>{propertyDetails?.guest_count}</span>
                     </div>
                     <span>,</span>
-                    <div className="flex gap-1">
-                      <p>{t("beds_count")}</p>
+                    <div className="flex items-center gap-1 flex-wrap">
+                      <div className="flex items-center gap-1">
+                        <BedDouble className="text-primary shrink-0" />
+                        <span>{t("beds_count")}</span>
+                      </div>
                       <span>{propertyDetails?.beds_count}</span>
                     </div>
                     <span>,</span>
-                    <div className="flex gap-1">
-                      <p>{t("bathrooms_count")}</p>
+                    <div className="flex items-center gap-1 flex-wrap">
+                      <div className="flex items-center gap-1">
+                        <Bath className="text-primary shrink-0" />
+                        <span>{t("bathrooms_count")}</span>
+                      </div>
                       <span>{propertyDetails?.bathrooms_count}</span>
                     </div>
                     <span>,</span>
-                    <div className="flex gap-1">
-                      <p>{t("total_area")}</p>
+                    <div className="flex items-center gap-1 flex-wrap">
+                      <div className="flex items-center gap-1">
+                        <Expand className="text-primary shrink-0" />
+                        <span>{t("total_area")}</span>
+                      </div>
                       <span>
                         {propertyDetails?.sqrft} {t("m2")}
                       </span>
                     </div>
                   </div>
-                  {minDays ? (
-                    <div className="font-medium flex flex-wrap gap-1">
-                      <p>
-                        {t("minimum_stay")} : {propertyDetails?.min_days}{" "}
-                        {minDays > 1 ? t("days") : t("day")}
-                      </p>
-                    </div>
-                  ) : null}
                   <div className="font-semibold text-2xl" data-aos="fade-right">
                     <p>
                       <span className="text-primary">
@@ -192,18 +207,55 @@ function Property() {
                   </Button>
                 </div>
               </div>
-              <div className="pt-5" data-aos="fade-right">
-                <h4 className="text-lg font-bold">{t("about_this_place")}</h4>
-                <p className="pt-1 font-medium">
-                  {propertyDetails?.description?.[currentLanguage]}
-                </p>
-              </div>
               <HostedBy
                 id={id}
                 ownerId={propertyDetails?.owner_id}
                 owner={propertyDetails?.owner}
-                guestRules={propertyDetails?.guest_rules?.[currentLanguage]}
               />
+              <div className="flex flex-col gap-3 pt-3 pb-5">
+                <div className="" data-aos="fade-right">
+                  <h4 className="text-lg font-bold">{t("about_this_place")}</h4>
+                  <p className="pt-1 font-medium text-dark">
+                    {propertyDetails?.description?.[currentLanguage]}
+                  </p>
+                </div>
+                {minDays ? (
+                  <div className="flex flex-col gap-1" data-aos="fade-right">
+                    <h3 className="font-bold text-lg"> {t("minimum_stay")}</h3>
+                    <p className="text-dark font-medium">
+                      {propertyDetails?.min_days}{" "}
+                      {minDays > 1 ? t("days") : t("day")}
+                    </p>
+                  </div>
+                ) : null}
+                <div className="flex flex-col gap-1" data-aos="fade-right">
+                  <h3 className="font-bold text-lg">
+                    {t("cancellation_policy")}{" "}
+                    <span>
+                      (
+                      {
+                        propertyDetails?.cancellation_policy?.title?.[
+                          currentLanguage
+                        ]
+                      }
+                      )
+                    </span>
+                  </h3>
+                  <p className="text-dark font-medium">
+                    {
+                      propertyDetails?.cancellation_policy?.description?.[
+                        currentLanguage
+                      ]
+                    }
+                  </p>
+                </div>
+                <div className="flex flex-col gap-1" data-aos="fade-right">
+                  <h3 className="font-bold text-lg">{t("host_rules")}</h3>
+                  <p className="text-dark font-medium">
+                    {propertyDetails?.guest_rules?.[currentLanguage]}
+                  </p>
+                </div>
+              </div>
               <Amenities facilities={facilities} />
             </div>
             <ReviewComponent id={id} />

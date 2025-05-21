@@ -13,7 +13,7 @@ function CityFilter({ handleCityChange, cities, city }: IProps) {
       <label className="text-lg font-bold">{t("city")}</label>
       {!cities ? (
         <p className="border py-3 px-2 rounded-md bg-white">
-          Choose government to continue
+          {t("choose_government_to_continue")}
         </p>
       ) : cities?.length ? (
         <Select

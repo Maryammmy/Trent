@@ -1,13 +1,12 @@
 import { lazy, Suspense, useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Button from "../ui/Button";
-import { List, MapPinned, SlidersHorizontal } from "lucide-react";
+import { List, MapPinned } from "lucide-react";
 import PropertyCartSkeleton from "../skeleton/PropertyCartSkeleton";
 import CategoryBar from "../CategoryBar";
 import { useHomeDataAPI } from "../../services/homeService";
 import { IProperty } from "../../interfaces/property";
 import { FilterDataContext } from "../../context/FilterDataContext";
-import FilterModal from "./filter/FilterModal";
 import Map from "../map/Map";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setEnableMap } from "../../store/features/map/mapSlice";
@@ -19,7 +18,6 @@ export default function Properties() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const propertiesSectionRef = useRef<HTMLDivElement | null>(null);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [visibleCount, setVisibleCount] = useState(8);
   const [properties, setProperties] = useState<IProperty[] | null>(null);
@@ -90,15 +88,6 @@ export default function Properties() {
             )}
           </Button>
         </div>
-        <div className="px-5 xl:px-20 mt-5 flex justify-end">
-          <Button
-            className="flex gap-2 items-center border rounded-md px-3 py-2 font-medium text-sm text-primary"
-            onClick={() => setIsFilterOpen(!isFilterOpen)}
-          >
-            <SlidersHorizontal size={15} strokeWidth={2.5} />
-            <span>{t("filters")}</span>
-          </Button>
-        </div>
         <CategoryBar />
         {!enableMap && (
           <div>
@@ -142,10 +131,6 @@ export default function Properties() {
         )}
         {enableMap && <Map properties={properties} refetch={refetch} />}
       </div>
-      <FilterModal
-        isFilterOpen={isFilterOpen}
-        close={() => setIsFilterOpen(false)}
-      />
     </>
   );
 }
