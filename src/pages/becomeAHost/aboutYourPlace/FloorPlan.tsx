@@ -92,7 +92,7 @@ function FloorPlan() {
               <div className="font-medium text-lg">
                 <span> {t(item)}</span>
                 {item !== "guest_count" && (
-                  <span className="text-red-500 ml-1">*</span>
+                  <span className="text-red-500 ms-1">*</span>
                 )}
               </div>
               <Counter
@@ -107,9 +107,9 @@ function FloorPlan() {
           </Fragment>
         ))}
         <div className="flex flex-col gap-2 mt-5">
-          <label className="font-medium">
+          <label className="font-medium flex items-center">
             {t("property_sqft")}
-            <span className="text-red-500 ml-1">*</span>
+            <span className="text-red-500 ms-1">*</span>
           </label>
           <Input
             name="sqft"

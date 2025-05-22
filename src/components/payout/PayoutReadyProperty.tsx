@@ -38,7 +38,7 @@ function PayoutReadyProperty({ property, isSelected, onToggle }: IProps) {
           <div className="flex flex-wrap gap-1">
             <h5>{t("total")}:</h5>
             <span>
-              {parseInt(total)} {t("price_per_night")}
+              {parseInt(total)} {t("EGP")}
             </span>
           </div>
         </div>

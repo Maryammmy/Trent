@@ -20,7 +20,7 @@ function Payouts() {
             </h2>
             <div className="flex flex-col gap-1">
               <span className="text-white font-semibold text-2xl">
-                1200 {t("price_per_night")}
+                1200 {t("EGP")}
               </span>
               <span className="text-white font-semibold text-lg">
                 {t("your_total_earnings")}

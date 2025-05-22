@@ -2,9 +2,8 @@ import ProtectedRoutes from "@/middleware/ProtectedRoutes";
 import AccountSettings from "@/pages/accountSettings";
 import Bookings from "@/pages/accountSettings/bookings";
 import Booking from "@/pages/accountSettings/bookings/Booking";
-import LoginAndSecurity from "@/pages/accountSettings/LoginAndSecurity";
+import Credits from "@/pages/accountSettings/Credits";
 import PersonalInfo from "@/pages/accountSettings/PersonalInfo";
-import Preferences from "@/pages/accountSettings/Preferences";
 import { Route } from "react-router-dom";
 
 export const AccountSettingsRoutes = (
@@ -42,18 +41,10 @@ export const AccountSettingsRoutes = (
       }
     />
     <Route
-      path="account-settings/login-and-security"
+      path="account-settings/credits"
       element={
         <ProtectedRoutes>
-          <LoginAndSecurity />
-        </ProtectedRoutes>
-      }
-    />
-    <Route
-      path="account-settings/preferences"
-      element={
-        <ProtectedRoutes>
-          <Preferences />
+          <Credits />
         </ProtectedRoutes>
       }
     />

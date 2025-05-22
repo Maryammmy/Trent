@@ -23,7 +23,7 @@ const PaymentStatus = ({
         <span>{t("order_status")}:</span> {capitalize(orderStatus)}
       </p>
       <p className="">
-        <span>{t("amount")}:</span> {paymentAmount} {t("price_per_night")}
+        <span>{t("amount")}:</span> {paymentAmount} {t("EGP")}
       </p>
       <p className="">
         <span>{t("payment_method")}:</span>{" "}

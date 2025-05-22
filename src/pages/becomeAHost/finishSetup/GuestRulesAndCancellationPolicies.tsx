@@ -9,7 +9,6 @@ import { useTranslateAPI } from "@/services/translateService";
 
 function GuestRulesAndCancellationPolicies() {
   const { t } = useTranslation();
-  const [rulesTextAreaEn, setRulesTextAreaEn] = useState<string>("");
   const [rulesTextAreaAr, setRulesTextAreaAr] = useState<string>("");
   const [selectedPolicy, setSelectedPolicy] = useState<
     ICancellationPolicy | ""
@@ -17,7 +16,6 @@ function GuestRulesAndCancellationPolicies() {
   const [isOpen, setIsOpen] = useState(false);
   const { data: translatedText } = useTranslateAPI(rulesTextAreaAr.trim());
   useEffect(() => {
-    setRulesTextAreaEn(sessionStorage.getItem("guest_rules_en") || "");
     setRulesTextAreaAr(sessionStorage.getItem("guest_rules_ar") || "");
     setSelectedPolicy(
       sessionStorage.getItem("cancellation_policy")
@@ -28,25 +26,17 @@ function GuestRulesAndCancellationPolicies() {
   useEffect(() => {
     const translated = translatedText?.data?.responseData?.translatedText;
     if (translated) {
-      setRulesTextAreaEn(translated);
       sessionStorage.setItem("guest_rules_en", translated);
     }
   }, [translatedText]);
-  const handleRulesChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>,
-    lang: "en" | "ar"
-  ) => {
+  const handleRulesChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const rawValue = e.target.value;
     const trimmedValue = rawValue.trim();
-    const setter = lang === "en" ? setRulesTextAreaEn : setRulesTextAreaAr;
-    const storageKey = lang === "en" ? "guest_rules_en" : "guest_rules_ar";
-
-    setter(rawValue);
-
+    setRulesTextAreaAr(rawValue);
     if (trimmedValue.length > 0) {
-      sessionStorage.setItem(storageKey, trimmedValue);
+      sessionStorage.setItem("guest_rules_ar", trimmedValue);
     } else {
-      sessionStorage.removeItem(storageKey);
+      sessionStorage.removeItem("guest_rules_ar");
     }
   };
 
@@ -72,33 +62,17 @@ function GuestRulesAndCancellationPolicies() {
           handleChangePolicy={handleChangePolicy}
         />
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium">
+          <label className="font-medium flex items-center">
             {t("guest_rules_in_arabic")}
-            <span className="text-red-500 ml-1">*</span>
+            <span className="text-red-500 ms-1">*</span>
           </label>
           <TextArea
             maxLength={500}
             minLength={10}
-            onChange={(e) => handleRulesChange(e, "ar")}
+            onChange={handleRulesChange}
             name="guest_rules_ar"
             value={rulesTextAreaAr}
             placeholder={t("guest_rules_placeholder_ar")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
-            rows={5}
-          ></TextArea>
-        </div>
-        <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium">
-            {t("guest_rules_in_english")}
-            <span className="text-red-500 ml-1">*</span>
-          </label>
-          <TextArea
-            maxLength={500}
-            minLength={10}
-            onChange={(e) => handleRulesChange(e, "en")}
-            name="guest_rules_en"
-            value={rulesTextAreaEn}
-            placeholder={t("guest_rules_placeholder_en")}
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
             rows={5}
           ></TextArea>
@@ -108,11 +82,7 @@ function GuestRulesAndCancellationPolicies() {
       <BackAndNext
         back="/become-a-host/price-and-deposit"
         next="/hosting/properties"
-        isNextDisabled={
-          rulesTextAreaEn.trim().length < 10 ||
-          rulesTextAreaAr.trim().length < 10 ||
-          !selectedPolicy
-        }
+        isNextDisabled={rulesTextAreaAr.trim().length < 10 || !selectedPolicy}
       />
     </div>
   );

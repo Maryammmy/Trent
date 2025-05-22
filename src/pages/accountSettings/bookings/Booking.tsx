@@ -124,7 +124,7 @@ function Booking() {
                     <span>{t("price_without_egp")} :</span>
                   </div>
                   <span>{parseInt(booking?.prop_price)}</span>
-                  {t("price_per_night")}
+                  {t("EGP")}
                 </div>
                 <div className="flex items-center gap-2 flex-wrap border-t py-4 text-xl font-bold">
                   <div className="flex items-center gap-2">
@@ -132,7 +132,7 @@ function Booking() {
                     <span>{t("total")} :</span>
                   </div>
                   <span>
-                    {parseInt(booking?.total)} {t("price_per_night")}
+                    {parseInt(booking?.total)} {t("EGP")}
                   </span>
                 </div>
               </div>

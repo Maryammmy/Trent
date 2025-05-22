@@ -11,7 +11,7 @@ function AccountSettings() {
   const { data } = useUserAPI();
   const user: IUser = data?.data?.data?.user_data;
   return (
-    <div className="max-w-6xl  mx-auto py-5 md:py-10 px-5 xl:px-0">
+    <div className="max-w-6xl mx-auto py-5 md:py-10 px-5 xl:px-0">
       <div>
         <h2 className="text-4xl font-semibold">Account</h2>
         <div className="flex flex-col md:flex-row gap-2 md:items-center pt-4 pb-10">

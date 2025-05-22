@@ -35,11 +35,12 @@ function Location() {
           {t("location_of_place_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium">
+          <label className="font-medium flex items-center">
             {t("google_maps_url")}
-            <span className="text-red-500 ml-1">*</span>
+            <span className="text-red-500 ms-1">*</span>
           </label>
           <Input
+            dir="ltr"
             type="text"
             value={googleMapsUrl}
             onChange={handleUrlChange}

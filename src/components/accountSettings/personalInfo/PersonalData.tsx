@@ -139,7 +139,7 @@ function PersonalData() {
                 render={({ field }) => (
                   <Input
                     {...field}
-                    placeholder="Enter your name"
+                    placeholder={t("enter_name")}
                     className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
                   />
                 )}
@@ -156,7 +156,7 @@ function PersonalData() {
                 render={({ field }) => (
                   <Input
                     {...field}
-                    placeholder="Enter your email"
+                    placeholder={t("enter_email")}
                     className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
                   />
                 )}
@@ -164,8 +164,11 @@ function PersonalData() {
               {errors.email && <InputErrorMessage msg={errors.email.message} />}
             </div>
             <div className="py-2 flex flex-col gap-2">
-              <label className="font-bold">Phone number</label>
-              <div className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+              <label className="font-bold">{t("phone_number")}</label>
+              <div
+                dir="ltr"
+                className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary"
+              >
                 <CountrySelector selectedCountry={user?.c_code} readOnly />
                 <div className="flex gap-2 justify-between w-full">
                   <Input

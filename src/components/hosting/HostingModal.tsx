@@ -81,14 +81,14 @@ function HostingModal() {
               <span>🏡</span>
               <h6 className="font-medium">{t("rent_price")}:</h6>
               <span className="font-bold">
-                {storedPrice} {t("price_per_night")}
+                {storedPrice} {t("EGP")}
               </span>
             </div>
             <div className="flex items-center gap-1">
               <span>💸</span>
               <h6 className="font-medium">{t("trent_fees")}:</h6>
               <span className="font-bold">
-                ({ownerFees}%) {trentFees} {t("price_per_night")}
+                ({ownerFees}%) {trentFees} {t("EGP")}
               </span>
             </div>
           </div>

@@ -112,7 +112,7 @@ function Cart({ property, refetch }: IProps) {
           <div className="flex items-center justify-end gap-1 font-medium">
             <span className="font-bold text-primary whitespace-nowrap overflow-hidden text-ellipsis">
               {basePrice}
-              {parsedCurrency?.currency}
+              {t(parsedCurrency?.currency)}
             </span>
             <span className="text-dark whitespace-nowrap overflow-hidden text-ellipsis">
               /{period_name}

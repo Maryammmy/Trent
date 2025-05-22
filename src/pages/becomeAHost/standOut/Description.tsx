@@ -7,35 +7,28 @@ import { useTranslateAPI } from "@/services/translateService";
 
 function Description() {
   const { t } = useTranslation();
-  const [descTextAreaEn, setDescTextAreaEn] = useState<string>("");
   const [descTextAreaAr, setDescTextAreaAr] = useState<string>("");
   const { data: translatedText } = useTranslateAPI(descTextAreaAr.trim());
   useEffect(() => {
     setDescTextAreaAr(sessionStorage.getItem("description_ar") || "");
-    setDescTextAreaEn(sessionStorage.getItem("description_en") || "");
   }, []);
   useEffect(() => {
     const translated = translatedText?.data?.responseData?.translatedText;
     if (translated) {
-      setDescTextAreaEn(translated);
       sessionStorage.setItem("description_en", translated);
     }
   }, [translatedText]);
   const handleDescriptionChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>,
-    lang: "en" | "ar"
+    e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const rawValue = e.target.value;
     const trimmedValue = rawValue.trim();
-    const setter = lang === "en" ? setDescTextAreaEn : setDescTextAreaAr;
-    const storageKey = lang === "en" ? "description_en" : "description_ar";
-
-    setter(rawValue);
+    setDescTextAreaAr(rawValue);
 
     if (trimmedValue.length > 0) {
-      sessionStorage.setItem(storageKey, trimmedValue);
+      sessionStorage.setItem("description_ar", trimmedValue);
     } else {
-      sessionStorage.removeItem(storageKey);
+      sessionStorage.removeItem("description_ar");
     }
   };
 
@@ -49,33 +42,17 @@ function Description() {
           {t("desc_for_property_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium">
+          <label className="font-medium flex items-center">
             {t("desc_in_arabic")}
-            <span className="text-red-500 ml-1">*</span>
+            <span className="text-red-500 ms-1">*</span>
           </label>
           <TextArea
             maxLength={500}
             minLength={50}
-            onChange={(e) => handleDescriptionChange(e, "ar")}
+            onChange={handleDescriptionChange}
             name="description_ar"
             value={descTextAreaAr}
             placeholder={t("desc_for_property_placeholder_ar")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
-            rows={5}
-          ></TextArea>
-        </div>
-        <div className="flex flex-col gap-2">
-          <label className="font-medium">
-            {t("desc_in_english")}
-            <span className="text-red-500 ml-1">*</span>
-          </label>
-          <TextArea
-            maxLength={500}
-            minLength={50}
-            onChange={(e) => handleDescriptionChange(e, "en")}
-            name="description_en"
-            value={descTextAreaEn}
-            placeholder={t("desc_for_property_placeholder_en")}
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
             rows={5}
           ></TextArea>
@@ -85,9 +62,7 @@ function Description() {
       <BackAndNext
         back="/become-a-host/title"
         next="/become-a-host/city"
-        isNextDisabled={
-          descTextAreaEn.trim().length < 50 || descTextAreaAr.trim().length < 50
-        }
+        isNextDisabled={descTextAreaAr.trim().length < 50}
       />
     </div>
   );

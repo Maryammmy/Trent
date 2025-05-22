@@ -70,7 +70,7 @@ const Property = ({ property }: IProps) => {
           {category_type}
         </p>
         <p className="font-medium hidden sm:block whitespace-nowrap overflow-hidden text-ellipsis">
-          {basePrice} {t("price_per_night")}
+          {basePrice} {t("EGP")}
         </p>
         <p className={`font-semibold ${statusColor}`}>{statusText}</p>
 

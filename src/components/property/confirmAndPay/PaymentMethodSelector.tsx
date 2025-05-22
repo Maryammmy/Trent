@@ -24,7 +24,12 @@ function PaymentMethodSelector({ paymentMethod, onChange }: IProps) {
             className="accent-primary w-5 h-5"
           />
           <div className="flex items-center justify-between gap-3 w-full">
-            <span className="font-medium">{t(method.label)}</span>
+            <div className="font-medium">
+              <span>{t(method.label)}</span>{" "}
+              {method.label === "trent_credits" && (
+                <span>{`(100 ${t("EGP")})`}</span>
+              )}
+            </div>
             <div className="flex gap-3">
               {method.icons.map((icon, index) => (
                 <div key={index} className="w-8 h-8 rounded-sm overflow-hidden">

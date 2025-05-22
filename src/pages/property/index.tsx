@@ -183,7 +183,7 @@ function Property() {
                   <div className="font-semibold text-2xl" data-aos="fade-right">
                     <p>
                       <span className="text-primary">
-                        {basePrice} {parsedCurrency?.currency}
+                        {basePrice} {t(parsedCurrency?.currency)}
                       </span>{" "}
                       <span className="text-dark">
                         /{propertyDetails?.period?.name?.[currentLanguage]}

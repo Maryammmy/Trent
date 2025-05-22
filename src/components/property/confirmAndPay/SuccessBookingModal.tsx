@@ -47,7 +47,7 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
           </div>
           <p className="font-semibold text-lg">
             <span className="">{t("total")} :</span>{" "}
-            {Math.round(bookingData?.final_total)} {t("price_per_night")}
+            {Math.round(bookingData?.final_total)} {t("EGP")}
           </p>
         </div>
         <div className="flex justify-between gap-4 font-medium">

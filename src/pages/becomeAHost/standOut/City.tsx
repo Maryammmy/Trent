@@ -12,36 +12,28 @@ import { useTranslateAPI } from "@/services/translateService";
 const City = () => {
   const { t } = useTranslation();
   const [cityAr, setCityAr] = useState("");
-  const [cityEn, setCityEn] = useState("");
   const [governmentId, setGovernmentId] = useState("");
   const { data } = useGovernmentsAPI();
   const governmentList = data?.data?.data?.government_list;
   const { data: translatedText } = useTranslateAPI(cityAr.trim());
   useEffect(() => {
     setCityAr(sessionStorage.getItem("city_ar") || "");
-    setCityEn(sessionStorage.getItem("city_en") || "");
     setGovernmentId(sessionStorage.getItem("government_id") || "");
   }, []);
   useEffect(() => {
     const translated = translatedText?.data?.responseData?.translatedText;
     if (translated) {
-      setCityEn(translated);
       sessionStorage.setItem("city_en", translated);
     }
   }, [translatedText]);
-  const handleCityChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    lang: "en" | "ar"
-  ) => {
+  const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value;
     const trimmedValue = rawValue.trim();
-    const setter = lang === "en" ? setCityEn : setCityAr;
-    const storageKey = lang === "en" ? "city_en" : "city_ar";
-    setter(rawValue);
+    setCityAr(rawValue);
     if (trimmedValue.length > 0) {
-      sessionStorage.setItem(storageKey, trimmedValue);
+      sessionStorage.setItem("city_ar", trimmedValue);
     } else {
-      sessionStorage.removeItem(storageKey);
+      sessionStorage.removeItem("city_ar");
     }
   };
 
@@ -50,8 +42,7 @@ const City = () => {
     setGovernmentId(newGovId);
     sessionStorage.setItem("government_id", newGovId);
   };
-  const isNextDisabled =
-    cityAr.trim().length < 2 || cityEn.trim().length < 2 || !governmentId;
+  const isNextDisabled = cityAr.trim().length < 2 || !governmentId;
 
   return (
     <div className="py-10">
@@ -63,9 +54,9 @@ const City = () => {
           {t("city_for_property_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium">
+          <label className="font-medium flex items-center">
             {t("government")}
-            <span className="text-red-500 ml-1">*</span>
+            <span className="text-red-500 ms-1">*</span>
           </label>
           {!governmentList ? (
             <SelectSkeleton />
@@ -86,9 +77,9 @@ const City = () => {
           )}
         </div>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium">
+          <label className="font-medium flex items-center">
             {t("city_in_arabic")}
-            <span className="text-red-500 ml-1">*</span>
+            <span className="text-red-500 ms-1">*</span>
           </label>
           <Input
             name="city_ar"
@@ -96,24 +87,8 @@ const City = () => {
             maxLength={100}
             minLength={2}
             value={cityAr}
-            onChange={(e) => handleCityChange(e, "ar")}
+            onChange={handleCityChange}
             placeholder={t("city_for_property_placeholder_ar")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label className="font-medium mb-1">
-            {t("city_in_english")}
-            <span className="text-red-500 ml-1">*</span>
-          </label>
-          <Input
-            name="city_en"
-            type="text"
-            maxLength={100}
-            minLength={2}
-            value={cityEn}
-            onChange={(e) => handleCityChange(e, "en")}
-            placeholder={t("city_for_property_placeholder_en")}
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>

@@ -21,4 +21,9 @@ export const paymentMethods: IPaymentMethodBook[] = [
     value: "PayAtFawry",
     icons: ["/images/fawryPay.png"],
   },
+  {
+    label: "trent_credits",
+    value: "trentCredits",
+    icons: ["/images/Trent-logo-pdf.png"],
+  },
 ];

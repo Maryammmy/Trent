@@ -8,59 +8,47 @@ import { useTranslateAPI } from "@/services/translateService";
 function AddressAndFloor() {
   const { t } = useTranslation();
   const [addressAr, setAddressAr] = useState<string>("");
-  const [addressEn, setAddressEn] = useState<string>("");
   const [floorAr, setFloorAr] = useState<string>("");
-  const [floorEn, setFloorEn] = useState<string>("");
   const { data: translatedText } = useTranslateAPI(addressAr.trim());
   const { data: translatedFloor } = useTranslateAPI(floorAr.trim());
 
   useEffect(() => {
     setAddressAr(sessionStorage.getItem("address_ar") || "");
-    setAddressEn(sessionStorage.getItem("address_en") || "");
     setFloorAr(sessionStorage.getItem("floor_ar") || "");
-    setFloorEn(sessionStorage.getItem("floor_en") || "");
   }, []);
+
   useEffect(() => {
     const translated = translatedText?.data?.responseData?.translatedText;
     if (translated) {
-      setAddressEn(translated);
       sessionStorage.setItem("address_en", translated);
     }
   }, [translatedText]);
   useEffect(() => {
     const translated = translatedFloor?.data?.responseData?.translatedText;
     if (translated) {
-      setFloorEn(translated);
       sessionStorage.setItem("floor_en", translated);
     }
   }, [translatedFloor]);
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    type: "address" | "floor",
-    lang: "en" | "ar"
+    inputType: "address" | "floor"
   ) => {
     const rawValue = e.target.value;
     const trimmedValue = rawValue.trim();
-    const key: keyof typeof setters = `${type}_${lang}` as keyof typeof setters;
-    const setters = {
-      address_en: setAddressEn,
-      address_ar: setAddressAr,
-      floor_en: setFloorEn,
-      floor_ar: setFloorAr,
-    };
-    setters[key](rawValue);
+    const key = `${inputType}_ar`;
+
+    if (inputType === "address") {
+      setAddressAr(rawValue);
+    } else {
+      setFloorAr(rawValue);
+    }
+
     if (trimmedValue.length > 0) {
       sessionStorage.setItem(key, trimmedValue);
     } else {
       sessionStorage.removeItem(key);
     }
   };
-
-  const isNextDisabled =
-    addressAr.trim().length < 5 ||
-    addressEn.trim().length < 5 ||
-    floorAr.trim().length < 1 ||
-    floorEn.trim().length < 1;
 
   return (
     <div className="py-10">
@@ -72,15 +60,15 @@ function AddressAndFloor() {
           {t("address_and_floor_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium mb-1">
+          <label className="font-medium flex items-center">
             {t("address_in_arabic")}
-            <span className="text-red-500 ml-1">*</span>
+            <span className="text-red-500 ms-1">*</span>
           </label>
           <Input
             type="text"
             maxLength={100}
             minLength={5}
-            onChange={(e) => handleInputChange(e, "address", "ar")}
+            onChange={(e) => handleInputChange(e, "address")}
             name="address_ar"
             value={addressAr}
             placeholder={t("address_placeholder_ar")}
@@ -88,48 +76,17 @@ function AddressAndFloor() {
           />
         </div>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium">
-            {t("address_in_english")}
-            <span className="text-red-500 ml-1">*</span>
-          </label>
-          <Input
-            type="text"
-            maxLength={100}
-            minLength={5}
-            onChange={(e) => handleInputChange(e, "address", "en")}
-            name="address_en"
-            value={addressEn}
-            placeholder={t("address_placeholder_en")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
-          />
-        </div>
-        <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium">
+          <label className="font-medium flex items-center">
             {t("floor_in_arabic")}
-            <span className="text-red-500 ml-1">*</span>
+            <span className="text-red-500 ms-1">*</span>
           </label>
           <Input
             type="text"
             min={0}
-            onChange={(e) => handleInputChange(e, "floor", "ar")}
+            onChange={(e) => handleInputChange(e, "floor")}
             name="floor_ar"
             value={floorAr}
             placeholder={t("floor_placeholder_ar")}
-            className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label className="font-medium">
-            {t("floor_in_english")}
-            <span className="text-red-500 ml-1">*</span>
-          </label>
-          <Input
-            type="text"
-            min={0}
-            onChange={(e) => handleInputChange(e, "floor", "en")}
-            name="floor_en"
-            value={floorEn}
-            placeholder={t("floor_placeholder_en")}
             className="outline-none bg-zinc-50 border border-dark py-3 px-2 rounded-md focus:border-2 focus:border-primary"
           />
         </div>
@@ -138,7 +95,7 @@ function AddressAndFloor() {
       <BackAndNext
         back="/become-a-host/compound"
         next="/become-a-host/finish-setup"
-        isNextDisabled={isNextDisabled}
+        isNextDisabled={addressAr.trim().length < 5 || !floorAr}
       />
     </div>
   );

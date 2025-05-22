@@ -5,10 +5,10 @@ export const personalDataSchema = yup.object().shape({
   full_name: yup
     .string()
     .trim()
-    .min(3, "The name must be at least 3 characters.")
-    .max(50, "The name may not be greater than 50 characters.")
-    .required("Full Name is required"),
-  email: yup.string().trim().email("Invalid email address"),
-  gender: yup.string().trim().required("Gender is required"),
+    .min(3, "name_min_length")
+    .max(50, "name_max_length")
+    .required("name_required"),
+  email: yup.string().trim().email("invalid_email"),
+  gender: yup.string().trim().required("gender_required"),
   pro_img: yup.mixed<File | string>(),
 });

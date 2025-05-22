@@ -112,9 +112,9 @@ function MinMaxDays() {
           {t("min_max_days_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="text-lg font-medium">
+          <label className="text-lg font-medium flex items-center">
             {t("period")}
-            <span className="text-red-500 ml-1">*</span>
+            <span className="text-red-500 ms-1">*</span>
           </label>
           {!periods ? (
             <SelectSkeleton />
@@ -135,9 +135,9 @@ function MinMaxDays() {
           )}
         </div>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium">
+          <label className="font-medium flex items-center">
             {t("min_days")}
-            <span className="text-red-500 ml-1">*</span>
+            <span className="text-red-500 ms-1">*</span>
           </label>
           <Input
             type="text"
@@ -150,9 +150,9 @@ function MinMaxDays() {
           {errors.min && <InputErrorMessage msg={errors.min} />}
         </div>
         <div className="flex flex-col gap-2">
-          <label className="font-medium">
+          <label className="font-medium flex items-center">
             {t("max_days")}
-            <span className="text-red-500 ml-1">*</span>
+            <span className="text-red-500 ms-1">*</span>
           </label>
           <Input
             type="text"
