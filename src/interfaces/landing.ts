@@ -15,6 +15,8 @@ export interface IHomeDataParams {
   city_name?: string;
   users_list?: string[];
   owner_mode?: boolean;
+  page?: number;
+  items_per_page?: number;
 }
 export interface IWhyChooseUs {
   background_color: string;
