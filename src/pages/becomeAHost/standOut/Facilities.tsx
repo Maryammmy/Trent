@@ -37,6 +37,7 @@ function Facilities() {
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
         <h3 className="text-2xl md:text-3xl font-semibold pb-5 md:pb-10">
           {t("tell_us_about_amenities")}
+          <span className="text-red-500 ms-1">*</span>
         </h3>
         <div className="flex flex-col md:flex-row flex-wrap gap-4">
           {!facilities ? (

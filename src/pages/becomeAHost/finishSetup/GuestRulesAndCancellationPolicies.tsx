@@ -26,9 +26,9 @@ function GuestRulesAndCancellationPolicies() {
   useEffect(() => {
     const translated = translatedText?.data?.responseData?.translatedText;
     if (translated) {
-      sessionStorage.setItem("guest_rules_en", translated);
+      sessionStorage.setItem("guest_rules_en", translated || rulesTextAreaAr);
     }
-  }, [translatedText]);
+  }, [translatedText, rulesTextAreaAr]);
   const handleRulesChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const rawValue = e.target.value;
     const trimmedValue = rawValue.trim();
@@ -62,7 +62,7 @@ function GuestRulesAndCancellationPolicies() {
           handleChangePolicy={handleChangePolicy}
         />
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium flex items-center">
+          <label className="font-medium">
             {t("guest_rules_in_arabic")}
             <span className="text-red-500 ms-1">*</span>
           </label>

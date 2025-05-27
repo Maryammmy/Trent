@@ -30,13 +30,10 @@ export interface IVerifyPropertyResponse {
   guest_count: string;
   tax_percent: string;
   confirm_guest_rules: boolean;
+  item_id: number;
+  wallet_balance: string;
   book_id: string;
   book_status: string;
-}
-export interface IPaymentMethodBook {
-  label: string;
-  value: string;
-  icons: string[];
 }
 export interface IIndividualRate {
   rate: string;
@@ -65,7 +62,6 @@ export interface IBooking {
   government: IGovernement;
   individual_rate: IIndividualRate;
 }
-
 export interface IBookingDetails {
   address: string;
   bathrooms_count: string;

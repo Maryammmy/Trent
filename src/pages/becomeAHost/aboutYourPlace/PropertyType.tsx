@@ -26,9 +26,10 @@ function PropertyType() {
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
         <h3 className="text-2xl md:text-3xl font-semibold text-center pb-5 md:pb-10">
-          {t("property_type")}
+          {t("select_property_type")}
+          <span className="text-red-500 ms-1">*</span>
         </h3>
-        <div className="flex flex-col md:flex-row flex-wrap gap-4">
+        <div className="flex items-center md:items-stretch md:justify-center flex-col md:flex-row flex-wrap gap-4">
           {!propertyTypeList ? (
             <PropertyTypeSkeleton cards={8} />
           ) : propertyTypeList?.length ? (

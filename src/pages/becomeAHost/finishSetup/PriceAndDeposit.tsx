@@ -58,7 +58,7 @@ function PriceAndDeposit() {
           {t("price_and_deposit_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium flex items-center">
+          <label className="font-medium">
             {t("price")}
             <span className="text-red-500 ms-1">*</span>
           </label>
@@ -73,7 +73,7 @@ function PriceAndDeposit() {
           {errors.price && <InputErrorMessage msg={errors.price} />}
         </div>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium flex items-center">
+          <label className="font-medium">
             {t("security_deposit")}
             <span className="text-red-500 ms-1">*</span>
           </label>

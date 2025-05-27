@@ -8,6 +8,7 @@ import { useQueryParam } from "@/utils/getQueryParam";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import CancelBookingModal from "./CancelBookingModal";
 
 interface IProps {
   booking: IBooking;
@@ -15,6 +16,7 @@ interface IProps {
 function Booking({ booking }: IProps) {
   const { t } = useTranslation();
   const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
+  const [isCancelBookingOpen, setIsCancelBookingOpen] = useState(false);
   const {
     book_status,
     prop_img,
@@ -73,14 +75,35 @@ function Booking({ booking }: IProps) {
               </Button>
             </div>
           )}
+          {status === "active" && (
+            <div className="">
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsCancelBookingOpen(true);
+                }}
+                className="px-4 py-2 bg-red-600 font-medium text-white rounded hover:bg-red-600"
+              >
+                Cancel Booking
+              </Button>
+            </div>
+          )}
         </div>
       </Link>
-      <RatingModal
-        booking_id={book_id}
-        individual_rate={individual_rate}
-        isOpen={isRatingModalOpen}
-        onClose={() => setIsRatingModalOpen(false)}
-      />
+      {book_status === "Completed" && (
+        <RatingModal
+          booking_id={book_id}
+          individual_rate={individual_rate}
+          isOpen={isRatingModalOpen}
+          onClose={() => setIsRatingModalOpen(false)}
+        />
+      )}
+      {status === "active" && (
+        <CancelBookingModal
+          isOpen={isCancelBookingOpen}
+          close={() => setIsCancelBookingOpen(false)}
+        />
+      )}
     </>
   );
 }

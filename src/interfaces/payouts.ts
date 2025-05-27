@@ -1,5 +1,9 @@
 import { IImage } from "./property";
 
+export interface ICashMethod {
+  name: string;
+  key: string;
+}
 export interface ICreatePayoutProfile {
   uid: string;
   method_id: string;

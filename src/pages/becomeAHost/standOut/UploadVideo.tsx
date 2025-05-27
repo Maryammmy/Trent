@@ -49,9 +49,8 @@ const UploadVideo = () => {
   return (
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
-        <h2 className="text-2xl md:text-3xl font-semibold pb-3 flex items-center">
+        <h2 className="text-2xl md:text-3xl font-semibold pb-3">
           {t("video_for_property")}
-          <span className="text-sm ms-2 text-dark">{t("optional")}</span>
         </h2>
         <p className="max-w-2xl text-dark font-medium">
           {t("video_for_property_desc")}

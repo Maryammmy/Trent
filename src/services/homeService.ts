@@ -22,11 +22,9 @@ export const useHomeDataAPI = (
   };
 
   const filteredParams = Object.fromEntries(
-    Object.entries(queryParamsObject).filter(
-      ([, value]) => value != null && value !== ""
-    )
+    Object.entries(queryParamsObject).filter(([, value]) => !!value)
   );
-
+  console.log(filteredParams);
   return useInfiniteQuery({
     queryKey: ["properties", filteredParams],
     queryFn: ({ pageParam = 1 }) =>
@@ -46,6 +44,6 @@ export const useHomeDataAPI = (
 
     initialPageParam: 1,
     // enabled,
-    staleTime: 5 * 60 * 1000,
+    // staleTime: 5 * 60 * 1000,
   });
 };

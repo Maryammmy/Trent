@@ -23,9 +23,9 @@ const City = () => {
   useEffect(() => {
     const translated = translatedText?.data?.responseData?.translatedText;
     if (translated) {
-      sessionStorage.setItem("city_en", translated);
+      sessionStorage.setItem("city_en", translated || cityAr);
     }
-  }, [translatedText]);
+  }, [translatedText, cityAr]);
   const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value;
     const trimmedValue = rawValue.trim();
@@ -54,7 +54,7 @@ const City = () => {
           {t("city_for_property_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium flex items-center">
+          <label className="font-medium">
             {t("government")}
             <span className="text-red-500 ms-1">*</span>
           </label>
@@ -77,7 +77,7 @@ const City = () => {
           )}
         </div>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium flex items-center">
+          <label className="font-medium">
             {t("city_in_arabic")}
             <span className="text-red-500 ms-1">*</span>
           </label>

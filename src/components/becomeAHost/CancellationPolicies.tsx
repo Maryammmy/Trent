@@ -25,10 +25,7 @@ function CancellationPolicy({
 
   return (
     <div className="relative mb-5">
-      <label
-        htmlFor="cancellation-policy"
-        className="font-medium mb-1 flex items-center"
-      >
+      <label htmlFor="cancellation-policy" className="font-medium mb-1">
         {t("cancellation_policy")}
         <span className="text-red-500 ms-1">*</span>
       </label>

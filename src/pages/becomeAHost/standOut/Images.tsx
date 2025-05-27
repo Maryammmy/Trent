@@ -67,6 +67,7 @@ const Images = () => {
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
         <h2 className="text-2xl md:text-3xl font-semibold pb-3">
           {t("photos_for_property")}
+          <span className="text-red-500 ms-1">*</span>
         </h2>
         <p className="max-w-2xl text-dark font-medium">
           {t("photos_for_property_desc")}

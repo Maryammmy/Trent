@@ -470,5 +470,6 @@
   "total_credits": "Total credits",
   "optional": "Optional",
   "gender_required": "Gender is required",
-  "loading_map": "Loading map"
+  "loading_map": "Loading map",
+  "select_property_type": "Select the property type that best describes your place"
 }

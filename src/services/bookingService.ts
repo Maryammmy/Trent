@@ -66,3 +66,13 @@ export const useBookingDetailsAPI = (book_id: string | undefined) => {
     enabled: !!uid && !!book_id,
   });
 };
+export const useCancelBookingAPI = () => {
+  return useQuery({
+    queryKey: ["cancelBooking"],
+    queryFn: () =>
+      baseAPI.get(
+        `user_api/booking/user_book_cancel_reason.php?uid=${uid}&lang=${currentLanguage}`
+      ),
+    enabled: !!uid,
+  });
+};

@@ -15,9 +15,9 @@ function Compound() {
   useEffect(() => {
     const translated = translatedText?.data?.responseData?.translatedText;
     if (translated) {
-      sessionStorage.setItem("compound_en", translated);
+      sessionStorage.setItem("compound_en", translated || compoundAr);
     }
-  }, [translatedText]);
+  }, [translatedText, compoundAr]);
   const handleCompoundChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value;
     const trimmedValue = rawValue.trim();
@@ -39,10 +39,7 @@ function Compound() {
           {t("compound_name_for_property_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium flex items-center">
-            {t("compound_in_arabic")}{" "}
-            <span className="text-sm ms-1 text-dark">{t("optional")}</span>
-          </label>
+          <label className="font-medium">{t("compound_in_arabic")} </label>
           <Input
             maxLength={100}
             minLength={2}

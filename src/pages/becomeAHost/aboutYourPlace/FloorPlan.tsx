@@ -107,7 +107,7 @@ function FloorPlan() {
           </Fragment>
         ))}
         <div className="flex flex-col gap-2 mt-5">
-          <label className="font-medium flex items-center">
+          <label className="font-medium">
             {t("property_sqft")}
             <span className="text-red-500 ms-1">*</span>
           </label>

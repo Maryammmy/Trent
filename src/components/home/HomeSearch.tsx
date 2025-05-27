@@ -17,7 +17,7 @@ function HomeSearch({ showIcon = true }: HomeSearchProps) {
       <Button
         onClick={() => setIsFilterOpen(!isFilterOpen)}
         className={`flex items-center justify-between gap-2 ${
-          !showIcon ? "w-[280px]" : "w-[250px] md:w-[500px]"
+          !showIcon ? "w-[280px]" : "w-[250px] sm:w-[500px]"
         } h-[49.6px] rounded-full p-3 border bg-white shadow transition-shadow hover:shadow-lg cursor-pointer`}
       >
         <span className="text-gray-500">{t("where_are_you_going")}</span>

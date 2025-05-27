@@ -35,7 +35,7 @@ function Location() {
           {t("location_of_place_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium flex items-center">
+          <label className="font-medium">
             {t("google_maps_url")}
             <span className="text-red-500 ms-1">*</span>
           </label>

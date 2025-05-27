@@ -63,3 +63,13 @@ export const deletePayoutProfileAPI = (profile_id: string) => {
   });
   return response;
 };
+export const useCashMethodsAPI = () => {
+  return useQuery({
+    queryKey: ["cashMethods"],
+    queryFn: () =>
+      baseAPI.get(
+        `user_api/payout/get_cash_in_method.php?uid=${uid}&lang=${currentLanguage}`
+      ),
+    enabled: !!uid,
+  });
+};

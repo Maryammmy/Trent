@@ -112,6 +112,7 @@ function Book() {
       const response = await verifyPropertyAPI(payload);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
+        console.log(response?.data?.data?.booking_details);
         sessionStorage.setItem(
           "bookingData",
           JSON.stringify({

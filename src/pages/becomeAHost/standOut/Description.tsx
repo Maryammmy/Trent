@@ -15,9 +15,9 @@ function Description() {
   useEffect(() => {
     const translated = translatedText?.data?.responseData?.translatedText;
     if (translated) {
-      sessionStorage.setItem("description_en", translated);
+      sessionStorage.setItem("description_en", translated || descTextAreaAr);
     }
-  }, [translatedText]);
+  }, [translatedText, descTextAreaAr]);
   const handleDescriptionChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
@@ -42,7 +42,7 @@ function Description() {
           {t("desc_for_property_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium flex items-center">
+          <label className="font-medium">
             {t("desc_in_arabic")}
             <span className="text-red-500 ms-1">*</span>
           </label>

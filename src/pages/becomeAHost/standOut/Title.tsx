@@ -15,9 +15,9 @@ function Title() {
   useEffect(() => {
     const translated = translatedText?.data?.responseData?.translatedText;
     if (translated) {
-      sessionStorage.setItem("title_en", translated);
+      sessionStorage.setItem("title_en", translated || titleAr);
     }
-  }, [translatedText]);
+  }, [translatedText, titleAr]);
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value;
     const trimmedValue = rawValue.trim();
@@ -41,7 +41,7 @@ function Title() {
           {t("title_for_property_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium flex items-center">
+          <label className="font-medium">
             {t("title_in_arabic")}
             <span className="text-red-500 ms-1">*</span>
           </label>

@@ -6,7 +6,7 @@ export default function PropertyTypeSkeleton({ cards }: { cards: number }) {
         .map((_, index) => (
           <div
             key={index}
-            className="h-10 w-28 rounded-full bg-stone-200 animate-pulse"
+            className="h-10 w-full md:w-28 rounded-full bg-stone-200 animate-pulse"
           ></div>
         ))}
     </>

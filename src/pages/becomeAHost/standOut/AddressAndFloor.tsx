@@ -20,15 +20,15 @@ function AddressAndFloor() {
   useEffect(() => {
     const translated = translatedText?.data?.responseData?.translatedText;
     if (translated) {
-      sessionStorage.setItem("address_en", translated);
+      sessionStorage.setItem("address_en", translated || addressAr);
     }
-  }, [translatedText]);
+  }, [translatedText, addressAr]);
   useEffect(() => {
     const translated = translatedFloor?.data?.responseData?.translatedText;
     if (translated) {
-      sessionStorage.setItem("floor_en", translated);
+      sessionStorage.setItem("floor_en", translated || floorAr);
     }
-  }, [translatedFloor]);
+  }, [translatedFloor, floorAr]);
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     inputType: "address" | "floor"
@@ -60,7 +60,7 @@ function AddressAndFloor() {
           {t("address_and_floor_desc")}
         </p>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium flex items-center">
+          <label className="font-medium">
             {t("address_in_arabic")}
             <span className="text-red-500 ms-1">*</span>
           </label>
@@ -76,7 +76,7 @@ function AddressAndFloor() {
           />
         </div>
         <div className="flex flex-col gap-2 mb-5">
-          <label className="font-medium flex items-center">
+          <label className="font-medium">
             {t("floor_in_arabic")}
             <span className="text-red-500 ms-1">*</span>
           </label>

@@ -67,7 +67,7 @@ function ConfirmAndPay() {
       const paymentData = generateFawryPaymentInitData(
         fawryCredentials?.merchant_code,
         fawryCredentials?.secure_key,
-        bookingData?.id,
+        bookingData?.item_id ? bookingData.item_id.toString() : "",
         bookingData?.final_total,
         paymentMethod,
         returnUrl
@@ -195,6 +195,7 @@ function ConfirmAndPay() {
                 <PaymentMethodSelector
                   paymentMethod={paymentMethod}
                   onChange={(e) => setPaymentMethod(e.target.value)}
+                  TrentCredits={bookingData?.wallet_balance}
                 />
               </div>
               {orderStatus && (
@@ -253,6 +254,7 @@ function ConfirmAndPay() {
               <PaymentMethodSelector
                 paymentMethod={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
+                TrentCredits={bookingData?.wallet_balance}
               />
             </div>
             {orderStatus && (

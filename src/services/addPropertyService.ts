@@ -74,9 +74,12 @@ export const useSendDataToAPI = () => {
   const navigate = useNavigate();
   const { selectedImages, selectedVideo, setSelectedImages, setSelectedVideo } =
     useContext(HostingContext);
+  console.log(selectedImages);
   const sendDataToAPI = async (): Promise<boolean> => {
     try {
       const payload = formData(selectedImages, selectedVideo);
+      console.log(payload);
+      console.log(selectedImages);
       for (const [, value] of payload.entries()) {
         if (!value || value === "[]" || !selectedImages.length) {
           toast.error(t("missing_required_fields"));
