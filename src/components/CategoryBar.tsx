@@ -10,7 +10,7 @@ import { useContext } from "react";
 import { FilterDataContext } from "../context/FilterDataContext";
 
 function CategoryBar() {
-  const { category, setCategory, setFilterData } =
+  const { category, setCategory, setFilterData, setFilters, setFilterSlider } =
     useContext(FilterDataContext);
   const { data } = usePropertyTypesAPI();
   const propertyTypeList: IPropertyType[] = data?.data?.data?.category_list;
@@ -18,6 +18,8 @@ function CategoryBar() {
   const handleSelectedPropertyType = (id: string) => {
     setCategory(id);
     setFilterData(null);
+    setFilterSlider(null);
+    setFilters(null);
   };
   return (
     <>

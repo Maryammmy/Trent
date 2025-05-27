@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { filterButtons } from "../../../data/landing";
-import { useHomeDataAPI } from "../../../services/homeService";
 import Button from "../../ui/Button";
 import { useTranslation } from "react-i18next";
 import { FilterDataContext } from "../../../context/FilterDataContext";
@@ -38,9 +37,10 @@ function FilterActions({
   city,
 }: IProps) {
   const { t } = useTranslation();
-  const [enabled, setEnabled] = useState(false);
-  const { setFilterData, setCategory } = useContext(FilterDataContext);
-  const filters = {
+  // const [enabled, setEnabled] = useState(false);
+  const { setFilterData, setCategory, setFilters, setFilterSlider } =
+    useContext(FilterDataContext);
+  const filterData = {
     period: period,
     facilities: selectedFacilities.length ? selectedFacilities : undefined,
     category_id: selectedPropertyType,
@@ -54,25 +54,31 @@ function FilterActions({
     compound_name: compound,
     city_name: city,
   };
-  const { data } = useHomeDataAPI(filters, enabled);
-  const filteredProperties = data?.data?.data?.property_list;
+  // const { data } = useHomeDataAPI(filters, enabled);
+  // const filteredProperties = data?.data?.data?.property_list;
   const handleClearFilters = () => {
     setCategory("");
-    setEnabled(false);
     setFilterData(null);
+    setFilterSlider(null);
+    setFilters(null);
+    // setEnabled(false);
     handleClear();
     close();
   };
   const handleApply = () => {
     setCategory("");
-    setEnabled(true);
+    setFilterData(null);
+    setFilterSlider(null);
+    setFilters(filterData);
+    close();
+    // setEnabled(true);
   };
-  useEffect(() => {
-    if (filteredProperties && enabled) {
-      setFilterData(filteredProperties);
-      close();
-    }
-  }, [filteredProperties, setFilterData, close, enabled]);
+  // useEffect(() => {
+  //   if (filteredProperties && enabled) {
+  //     setFilterData(filteredProperties);
+  //     close();
+  //   }
+  // }, [filteredProperties, setFilterData, close, enabled]);
   return (
     <div className="flex justify-between py-2">
       {filterButtons.map((button, index) => (

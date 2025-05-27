@@ -469,5 +469,6 @@
   "trent_credits_desc": "View and manage your Trent credit and rewards",
   "total_credits": "Total credits",
   "optional": "Optional",
-  "gender_required": "Gender is required"
+  "gender_required": "Gender is required",
+  "loading_map": "Loading map"
 }

@@ -2,15 +2,18 @@ import { useTranslation } from "react-i18next";
 import HostingModal from "../../../components/hosting/HostingModal";
 import { useHomeDataAPI } from "../../../services/homeService";
 import { IProperty } from "../../../interfaces/property";
-import Cookies from "js-cookie";
 import PropertyHostingSkeleton from "../../../components/skeleton/PropertyHostingSkeleton";
 import Property from "../../../components/hosting/properties/property/Property";
+import Button from "@/components/ui/Button";
 
-const uid = Cookies.get("user_id");
 function Properties() {
   const { t } = useTranslation();
-  const { data } = useHomeDataAPI({ uid, owner_mode: true }, true);
-  const properties: IProperty[] = data?.data?.data?.property_list;
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useHomeDataAPI({ owner_mode: true });
+  const properties: IProperty[] | undefined = data?.pages?.flatMap(
+    (page) => page?.data?.data?.property_list
+  );
+  console.log(properties);
   return (
     <>
       <div className="px-5 lg:px-20 py-10">
@@ -26,9 +29,22 @@ function Properties() {
           {!properties ? (
             <PropertyHostingSkeleton cards={5} />
           ) : properties?.length ? (
-            properties?.map((property) => (
-              <Property key={property.id} property={property} />
-            ))
+            <>
+              {properties.map((property) => (
+                <Property key={property?.id} property={property} />
+              ))}
+              {hasNextPage && !isFetchingNextPage && (
+                <div className="flex justify-center mt-4">
+                  <Button
+                    data-aos="fade-right"
+                    onClick={() => fetchNextPage()}
+                    className="bg-white zoom text-primary border-2 border-primary font-medium py-2 px-4 rounded-lg text-center"
+                  >
+                    <span>{t("show_more")}</span>
+                  </Button>
+                </div>
+              )}
+            </>
           ) : (
             <div className="flex justify-center items-center text-lg h-[50vh] text-dark font-medium w-full">
               {t("no_properties_found")}

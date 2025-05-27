@@ -19,7 +19,7 @@ function Home() {
   const { t } = useTranslation();
   const isMobile = useMediaQuery({ maxWidth: 480 });
   const isTablet = useMediaQuery({ maxWidth: 768 });
-  const { setFilterSlider, setCategory, setFilterData } =
+  const { setFilterSlider, setCategory, setFilterData, setFilters } =
     useContext(FilterDataContext);
   const carouselProps = isMobile
     ? { padding: "2px", right: "5px", left: "5px" }
@@ -39,6 +39,7 @@ function Home() {
     });
     setCategory("");
     setFilterData(null);
+    setFilters(null);
   };
 
   return (

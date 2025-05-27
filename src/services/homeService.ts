@@ -1,15 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { baseAPI } from ".";
 import { IHomeDataParams } from "../interfaces/landing";
 import { CurrentLanguage } from "../types";
 import Cookies from "js-cookie";
+import { ITEMS_PER_PAGE } from "@/constants";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 const uid = Cookies.get("user_id");
+
 export const useHomeDataAPI = (
-  params?: IHomeDataParams,
-  enabled: boolean = false
+  params?: IHomeDataParams
+  // enabled: boolean = false
 ) => {
   const queryParamsObject: Record<
     string,
@@ -20,19 +22,30 @@ export const useHomeDataAPI = (
   };
 
   const filteredParams = Object.fromEntries(
-    Object.entries(queryParamsObject).filter(([, value]) => !!value)
+    Object.entries(queryParamsObject).filter(
+      ([, value]) => value != null && value !== ""
+    )
   );
-  return useQuery({
-    queryKey: ["home", filteredParams],
-    queryFn: () =>
+
+  return useInfiniteQuery({
+    queryKey: ["properties", filteredParams],
+    queryFn: ({ pageParam = 1 }) =>
       baseAPI.get("user_api/u_home_data.php", {
         params: {
           ...filteredParams,
+          page: pageParam,
           facilities: JSON.stringify(filteredParams.facilities),
           uid,
+          items_per_page: ITEMS_PER_PAGE,
         },
       }),
-    refetchInterval: 10000,
-    enabled,
+    getNextPageParam: (lastPage, allPages) => {
+      const size = lastPage?.data?.data?.property_list?.length || 0;
+      return size === ITEMS_PER_PAGE ? allPages.length + 1 : undefined;
+    },
+
+    initialPageParam: 1,
+    // enabled,
+    staleTime: 5 * 60 * 1000,
   });
 };

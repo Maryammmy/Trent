@@ -1,5 +1,6 @@
 import { googleMapsApiKey } from "@/services";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   latitdude: number;
@@ -15,11 +16,12 @@ const Map = ({ latitdude, longitude }: IProps) => {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey,
   });
+  const { t } = useTranslation();
 
   if (!isLoaded)
     return (
       <div className="flex justify-center items-center text-lg h-[50vh] text-dark font-medium w-full">
-        Loading Map...
+        {t("loading_map")}
       </div>
     );
 

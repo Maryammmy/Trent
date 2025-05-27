@@ -10,12 +10,12 @@ import Button from "../ui/Button";
 import { useTranslation } from "react-i18next";
 import PropertyCartSkeleton from "../skeleton/PropertyCartSkeleton";
 import { googleMapsApiKey } from "@/services";
+import { ITEMS_PER_PAGE } from "@/constants";
 const Cart = lazy(() => import("./Cart"));
 interface IProps {
-  properties: IProperty[] | null;
+  properties: IProperty[] | undefined;
   refetch: () => void;
 }
-const ITEMS_TO_LOAD = 10;
 const containerStyle = {
   width: "100%",
   height: "100vh",
@@ -38,6 +38,7 @@ const Map = ({ properties, refetch }: IProps) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [visibleCount, setVisibleCount] = useState(8);
+  console.log(properties);
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey,
   });
@@ -69,14 +70,14 @@ const Map = ({ properties, refetch }: IProps) => {
   const handleShowMore = () => {
     setLoading(true);
     setTimeout(() => {
-      setVisibleCount((prev) => prev + ITEMS_TO_LOAD);
+      setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
       setLoading(false);
     }, 1000);
   };
   if (!isLoaded)
     return (
       <div className="flex justify-center items-center h-[50vh] text-lg text-dark font-medium w-full">
-        Loading Map...
+        {t("loading_map")}
       </div>
     );
   return (

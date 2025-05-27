@@ -457,5 +457,6 @@
   "trent_credits_desc": "عرض وإدارة رصيدك ومكافآتك في ترينت",
   "total_credits": "إجمالي الرصيد",
   "optional": "اختياري",
-  "gender_required": "يُرجى تحديد الجنس"
+  "gender_required": "يُرجى تحديد الجنس",
+  "loading_map": "جاري تحميل الخريطة"
 }
