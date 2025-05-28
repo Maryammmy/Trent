@@ -87,7 +87,7 @@ const RatingForm = ({
           </div>
           <div>
             <TextArea
-              placeholder="Write your review..."
+              placeholder={t("write_review")}
               value={comment}
               onChange={handleCommentChange}
               maxLength={500}

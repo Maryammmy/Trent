@@ -35,7 +35,7 @@ function PaymentMethodSelector({
             value={method?.key}
             checked={paymentMethod === method?.key}
             onChange={onChange}
-            className="accent-primary w-5 h-5"
+            className="accent-primary w-5 h-5 shrink-0"
           />
           <div className="flex items-center justify-between gap-3 w-full">
             <div className="font-medium">

@@ -93,19 +93,19 @@ function HostingModal() {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-between my-4">
+        <div className="flex items-center justify-between gap-4 my-4">
+          <Button
+            onClick={handleFinishUp}
+            className="text-white bg-primary py-2 w-28 rounded-md font-medium"
+          >
+            {loading ? <Loader borderColor="#223f7f" /> : t("finish_up")}
+          </Button>
           <Button
             type="button"
             onClick={() => dispatch(setIsFinishUpModal(false))}
-            className=" text-white bg-primary py-2 w-28 rounded-md font-medium"
-          >
-            {t("cancel")}
-          </Button>
-          <Button
-            onClick={handleFinishUp}
             className="bg-gray-100 text-primary py-2 w-28 rounded-md font-medium"
           >
-            {loading ? <Loader borderColor="#223f7f" /> : t("finish_up")}
+            {t("cancel")}
           </Button>
         </div>
       </div>

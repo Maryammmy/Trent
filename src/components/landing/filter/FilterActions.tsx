@@ -81,7 +81,7 @@ function FilterActions({
   //   }
   // }, [filteredProperties, setFilterData, close, enabled]);
   return (
-    <div className="flex justify-between py-2">
+    <div className="flex justify-between pt-4">
       {filterButtons.map((button, index) => (
         <Button
           key={index}

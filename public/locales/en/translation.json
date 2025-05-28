@@ -471,5 +471,14 @@
   "optional": "Optional",
   "gender_required": "Gender is required",
   "loading_map": "Loading map",
-  "select_property_type": "Select the property type that best describes your place"
+  "select_property_type": "Select the property type that best describes your place",
+  "cancel_booking": "Cancel Booking",
+  "write_review": "Write your review...",
+  "select_cancellation_reason": "Please select a reason for cancellation",
+  "confirm": "Confirm",
+  "select_payment_method": "Please select a payment method",
+  "insufficient_balance": "Insufficient balance to complete the booking",
+  "check_in_now": "Check in now",
+  "confirm_booking": "Confirm booking",
+  "are_you_sure_confirm_booking": "Are you sure you want to confirm this booking?"
 }

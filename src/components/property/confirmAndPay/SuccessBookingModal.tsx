@@ -1,12 +1,13 @@
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
-import { IVerifyPropertyResponse } from "@/interfaces/booking";
+import { ISaveBookingResponse } from "@/interfaces/booking";
+import { X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 interface IProps {
   isSuccess: boolean;
   onClose: () => void;
-  bookingData: IVerifyPropertyResponse;
+  bookingData: ISaveBookingResponse;
 }
 function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
   const { t } = useTranslation();
@@ -17,6 +18,9 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
       title={t("booking_successful")}
       className="text-xl text-center pt-6 pb-2 font-semibold"
     >
+      <Button onClick={close} className="absolute top-5 right-4">
+        <X size={20} />
+      </Button>
       <div className="px-5 md:px-10 pb-6">
         <p className="text-dark text-center font-medium pb-3">
           {t("booking_success_desc")}
@@ -51,12 +55,6 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
           </p>
         </div>
         <div className="flex justify-between gap-4 font-medium">
-          <Link
-            to={`/account-settings/bookings/${bookingData?.book_id}?status=active`}
-            className="w-32 py-2 text-center bg-primary text-white rounded-md hover:bg-primary/80"
-          >
-            {t("view_receipt")}
-          </Link>
           <Button
             type="button"
             onClick={onClose}
@@ -64,6 +62,12 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
           >
             {t("close")}
           </Button>
+          <Link
+            to={`/account-settings/bookings/${bookingData?.book_id}?status=active`}
+            className="w-32 py-2 text-center bg-primary text-white rounded-md hover:bg-primary/80"
+          >
+            {t("view_receipt")}
+          </Link>
         </div>
       </div>
     </Modal>

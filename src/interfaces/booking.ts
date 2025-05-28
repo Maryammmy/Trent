@@ -10,7 +10,44 @@ export interface IVerifyProperty {
   uid: string;
   lang: string;
 }
+export interface ISaveBooking {
+  prop_id: string;
+  from_date: string;
+  to_date: string;
+  confirm_guest_rules: boolean;
+  guest_counts: string;
+  uid: string;
+  lang: string;
+  method_key: string;
+  item_id: string;
+  merchant_ref_number?: string;
+}
 export interface IVerifyPropertyResponse {
+  IS_FAVOURITE: number;
+  deposit_fees: string;
+  final_total: number;
+  id: string;
+  image_list: IImage[];
+  period_type: string;
+  price: string;
+  rate: number;
+  service_fees: number;
+  sub_total: number;
+  taxes: number;
+  title: string;
+  trent_fees: number;
+  days: number;
+  from_date: string;
+  to_date: string;
+  guest_count: string;
+  tax_percent: string;
+  confirm_guest_rules: boolean;
+  item_id: number;
+  wallet_balance: string;
+  book_id: string;
+  book_status: string;
+}
+export interface ISaveBookingResponse {
   IS_FAVOURITE: number;
   deposit_fees: string;
   final_total: number;
@@ -86,4 +123,20 @@ export interface IBookingDetails {
   subtotal: string;
   total: string;
   total_day: string;
+}
+export interface ICancelBooking {
+  lang: string;
+  booking_id: string;
+  uid: string;
+  cancel_id: string;
+}
+export interface ICancelReason {
+  id: string;
+  reason: string;
+}
+export interface IConfirmBooking {
+  lang: string;
+  booking_id: string;
+  deny_id?: string;
+  is_confirmed: boolean;
 }

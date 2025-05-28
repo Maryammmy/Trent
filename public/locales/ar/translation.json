@@ -459,5 +459,14 @@
   "optional": "اختياري",
   "gender_required": "يُرجى تحديد الجنس",
   "loading_map": "جاري تحميل الخريطة",
-  "select_property_type": "اختر نوع العقار الذي يصف مكانك بأفضل شكل"
+  "select_property_type": "اختر نوع العقار الذي يصف مكانك بأفضل شكل",
+  "cancel_booking": "إلغاء الحجز",
+  "write_review": "اكتب تقييمك...",
+  "select_cancellation_reason": "الرجاء اختيار سبب الإلغاء",
+  "confirm": "تأكيد",
+  "select_payment_method": "الرجاء اختيار طريقة الدفع",
+  "insufficient_balance": "رصيد غير كافي لإتمام الحجز",
+  "check_in_now": "تسجيل الوصول الآن",
+  "confirm_booking": "تأكيد الحجز",
+  "are_you_sure_confirm_booking": "هل أنت متأكد من تأكيد هذا الحجز؟"
 }

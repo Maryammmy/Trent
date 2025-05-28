@@ -7,14 +7,10 @@ import { IVerifyPropertyResponse } from "@/interfaces/booking";
 import { useCallback, useEffect, useState } from "react";
 import Loader from "@/components/loader/Loader";
 import {
-  fawryPaymentStatusAPI,
   initFawryPaymentAPI,
   useFawryCredentialsAPI,
 } from "@/services/fawryService";
-import {
-  generateFawryPaymentInitData,
-  generateFawryPaymentStatusParam,
-} from "@/utils/generateFawryPaymentData";
+import { generateFawryPaymentInitData } from "@/utils/generateFawryPaymentData";
 import toast from "react-hot-toast";
 import { useMediaQuery } from "react-responsive";
 import { AxiosError } from "axios";
@@ -23,10 +19,11 @@ import PaymentStatus from "@/components/property/confirmAndPay/PaymentStatus";
 import { CurrentLanguage } from "@/types";
 import PaymentMethodSelector from "@/components/property/confirmAndPay/PaymentMethodSelector";
 import Cookies from "js-cookie";
-import { saveBookingAPI } from "@/services/bookingService";
+import { paymentStatusAPI, saveBookingAPI } from "@/services/bookingService";
 import { ApiError } from "@/interfaces";
 import SuccessBookingModal from "@/components/property/confirmAndPay/SuccessBookingModal";
 import CardPaymentStatus from "@/components/property/confirmAndPay/CardPaymentStatus";
+import { updateQueryParamInURL } from "@/utils/updateQueryParamInURL";
 
 const uid = Cookies.get("user_id");
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
@@ -61,13 +58,18 @@ function ConfirmAndPay() {
       ? "PayAtFawry"
       : "MWALLET"
   );
+  const itemId = bookingData?.item_id ? bookingData.item_id.toString() : "";
   const createFawryPayment = async () => {
     try {
+      if (!paymentMethod) {
+        toast.error(t("select_payment_method"));
+        return;
+      }
       setLoading(true);
       const paymentData = generateFawryPaymentInitData(
         fawryCredentials?.merchant_code,
         fawryCredentials?.secure_key,
-        bookingData?.item_id ? bookingData.item_id.toString() : "",
+        itemId,
         bookingData?.final_total,
         paymentMethod,
         returnUrl
@@ -91,14 +93,27 @@ function ConfirmAndPay() {
   };
   const handleSaveBooking = useCallback(async () => {
     try {
+      if (
+        paymentMethod === "TRENT_BALANCE" &&
+        Number(bookingData?.wallet_balance) < bookingData.final_total
+      ) {
+        toast.error(t("insufficient_balance"));
+        return;
+      }
+      if (paymentMethod === "TRENT_BALANCE") {
+        setLoading(true);
+      }
       const payload = {
         prop_id: id ? id : "",
-        guest_counts: Number(bookingData?.guest_count),
+        guest_counts: bookingData?.guest_count,
         from_date: bookingData?.from_date,
         to_date: bookingData?.to_date,
         confirm_guest_rules: bookingData?.confirm_guest_rules,
         uid: uid ? uid : "",
         lang: currentLanguage,
+        method_key: paymentMethod,
+        item_id: itemId,
+        merchant_ref_number: merchantRefNumber,
       };
       const response = await saveBookingAPI(payload);
       if (response?.data?.response_code === 200) {
@@ -112,33 +127,24 @@ function ConfirmAndPay() {
         t("something_went_wrong");
       toast.error(errorMessage);
       console.log(error);
+    } finally {
+      setLoading(false);
     }
-  }, [
-    bookingData?.confirm_guest_rules,
-    bookingData?.from_date,
-    bookingData?.guest_count,
-    bookingData?.to_date,
-    id,
-    t,
-  ]);
+  }, [paymentMethod, bookingData, merchantRefNumber, itemId, id, t]);
   const fawryPaymentStatus = async () => {
     try {
       setLoading(true);
-      const { merchantCode, merchantRefNum, signature } =
-        generateFawryPaymentStatusParam(
-          fawryCredentials?.merchant_code,
-          fawryCredentials?.secure_key,
-          merchantRefNumber
-        );
 
-      const response = await fawryPaymentStatusAPI(
-        merchantCode,
-        merchantRefNum,
-        signature
+      const response = await paymentStatusAPI(
+        merchantRefNumber,
+        itemId,
+        bookingData.final_total ? bookingData?.final_total.toFixed(0) : ""
       );
       if (response.status === 200) {
         toast.success(t("payment_checked_successfully"));
-        setOrderStatus(response?.data?.orderStatus);
+        const status = response?.data?.data?.status ? "PAID" : "UNPAID";
+        updateQueryParamInURL("orderStatus", status);
+        setOrderStatus(status);
       }
     } catch (error: AxiosError | unknown) {
       if (error instanceof AxiosError) {
@@ -206,10 +212,10 @@ function ConfirmAndPay() {
                   paymentMethodFromUrl={paymentMethodFromUrl || ""}
                 />
               )}
-              {statusCode && (
+              {statusCode && statusDescription && (
                 <CardPaymentStatus
                   statusCode={statusCode}
-                  statusDescription={statusDescription || ""}
+                  statusDescription={statusDescription}
                 />
               )}
             </div>
@@ -281,6 +287,8 @@ function ConfirmAndPay() {
               onClick={
                 orderStatus === "UNPAID"
                   ? fawryPaymentStatus
+                  : paymentMethod === "TRENT_BALANCE"
+                  ? handleSaveBooking
                   : createFawryPayment
               }
               className={`bg-primary font-medium text-lg text-white w-32 py-2 rounded-md ${

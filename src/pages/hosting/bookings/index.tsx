@@ -1,4 +1,4 @@
-import Booking from "@/components/accountSettings/bookings/Booking";
+import Booking from "@/components/hosting/bookings/Booking";
 import DynamicTitle from "@/components/accountSettings/DynamicTitle";
 import PropertyHostingSkeleton from "@/components/skeleton/PropertyHostingSkeleton";
 import Button from "@/components/ui/Button";
@@ -12,7 +12,7 @@ function Bookings() {
   const { t } = useTranslation();
   const statusFromUrl = useQueryParam("status");
   const status = statusFromUrl || "active";
-  const { data } = useMyBookingsAPI(status);
+  const { data } = useMyBookingsAPI(status, true);
   const bookings: IBooking[] = data?.data?.data?.My_Booking;
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ function Bookings() {
       <DynamicTitle title="my_bookings" />
       <div className="flex gap-10 sm:gap-20 text-xl my-8 font-semibold">
         <Button
-          onClick={() => navigate("/account-settings/bookings?status=active")}
+          onClick={() => navigate("/hosting/bookings?status=active")}
           className={`text-start text-dark activeButton w-fit ${
             status === "active" ? "active" : ""
           }`}
@@ -29,9 +29,7 @@ function Bookings() {
           {t("active")}
         </Button>
         <Button
-          onClick={() =>
-            navigate("/account-settings/bookings?status=completed")
-          }
+          onClick={() => navigate("/hosting/bookings?status=completed")}
           className={`text-start text-dark activeButton w-fit ${
             status === "completed" ? "active" : ""
           }`}

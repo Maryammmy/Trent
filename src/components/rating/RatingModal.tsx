@@ -36,13 +36,19 @@ const RatingModal = ({
   const handleRatingChange = (rating: number) => {
     setRating(rating);
   };
+  const close = () => {
+    setComment("");
+    setErrorComment("");
+    setRating(0);
+    onClose();
+  };
   return (
     <>
       <Modal
         title={t("rate_your_stay")}
         className="text-2xl text-center pt-6 font-semibold"
         isOpen={isOpen}
-        close={onClose}
+        close={close}
       >
         <RatingForm
           rating={rating}
@@ -52,7 +58,7 @@ const RatingModal = ({
           individual_rate={individual_rate}
           handleRatingChange={handleRatingChange}
           handleCommentChange={handleCommentChange}
-          close={onClose}
+          close={close}
           openDeleteRatingModal={() => setIsDeleteRatingModalOpen(true)}
         />
       </Modal>

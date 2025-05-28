@@ -11,7 +11,7 @@ export const getLinkForTitle = (title: string) => {
       return "/hosting/payouts/profiles";
     case "my booking":
     case "حجوزاتي":
-      return "/hosting/bookings";
+      return "/hosting/bookings?status=active";
     case "my gallery images":
     case "صور المعرض":
       return "/hosting/gallery/images";

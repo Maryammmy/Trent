@@ -31,7 +31,7 @@ const PaymentStatus = ({
           ? "Card"
           : paymentMethodFromUrl === "PayAtFawry"
           ? "Fawry pay"
-          : "Wallet"}
+          : "E-Wallet"}
       </p>
     </div>
   );

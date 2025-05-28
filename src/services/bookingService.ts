@@ -1,7 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
 import { CurrentLanguage } from "@/types";
-import { IVerifyProperty } from "@/interfaces/booking";
+import {
+  ICancelBooking,
+  IConfirmBooking,
+  ISaveBooking,
+  IVerifyProperty,
+} from "@/interfaces/booking";
 import Cookies from "js-cookie";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
@@ -35,7 +40,7 @@ export const verifyPropertyAPI = (payload: IVerifyProperty) => {
   );
   return response;
 };
-export const saveBookingAPI = (payload: IVerifyProperty) => {
+export const saveBookingAPI = (payload: ISaveBooking) => {
   const formData = new FormData();
   Object.entries(payload).forEach(([key, value]) => {
     formData.append(key, String(value));
@@ -46,12 +51,14 @@ export const saveBookingAPI = (payload: IVerifyProperty) => {
   );
   return response;
 };
-export const useMyBookingsAPI = (status: string) => {
+export const useMyBookingsAPI = (status: string, isOwner?: boolean) => {
   return useQuery({
-    queryKey: ["myBookings", status],
+    queryKey: ["myBookings", status, isOwner],
     queryFn: () =>
       baseAPI.get(
-        `user_api/booking/u_my_book.php?lang=${currentLanguage}&status=${status}&uid=${uid}`
+        `user_api/booking/u_my_book.php?lang=${currentLanguage}&status=${status}&uid=${uid}${
+          isOwner ? `&is_owner=${isOwner}` : ""
+        }`
       ),
     enabled: !!uid && !!status,
   });
@@ -75,4 +82,46 @@ export const useCancelBookingAPI = () => {
       ),
     enabled: !!uid,
   });
+};
+export const useOwnerCancelBookingAPI = () => {
+  return useQuery({
+    queryKey: ["ownerCancelBooking"],
+    queryFn: () =>
+      baseAPI.get(
+        `user_api/booking/u_book_cancel_reason.php?uid=${uid}&lang=${currentLanguage}`
+      ),
+    enabled: !!uid,
+  });
+};
+export const cancelBookingAPI = (payload: ICancelBooking) => {
+  const formData = new FormData();
+  Object.entries(payload).forEach(([key, value]) => {
+    formData.append(key, String(value));
+  });
+  const response = baseAPIForm.post(
+    "user_api/booking/u_book_cancle.php",
+    formData
+  );
+  return response;
+};
+export const paymentStatusAPI = (
+  merchantRefNumber: string | null,
+  itemId: string,
+  finalTotal: string
+) => {
+  const response = baseAPI.get(
+    `user_api/booking/get_payment_status.php?merchant_ref_number=${merchantRefNumber}&item_id=${itemId}&final_total=${finalTotal}`
+  );
+  return response;
+};
+export const confirmBookingAPI = (payload: IConfirmBooking) => {
+  const formData = new FormData();
+  Object.entries(payload).forEach(([key, value]) => {
+    formData.append(key, String(value));
+  });
+  const response = baseAPIForm.post(
+    "user_api/booking/u_confirm_booking.php",
+    formData
+  );
+  return response;
 };

@@ -8,6 +8,8 @@ import Payout from "@/pages/payouts";
 import PayoutRequest from "@/pages/payouts/PayoutRequest";
 import PayoutProfiles from "@/pages/payouts/PayoutProfiles";
 import CreatePayoutProfile from "@/pages/payouts/CreatePayoutProfile";
+import Bookings from "@/pages/hosting/bookings";
+import Booking from "@/pages/hosting/bookings/Booking";
 
 export const HostingRoutes = (
   <Route path="/hosting" element={<HostingLayout />}>
@@ -32,6 +34,22 @@ export const HostingRoutes = (
       element={
         <ProtectedRoutes>
           <UpdateProperty />
+        </ProtectedRoutes>
+      }
+    />
+    <Route
+      path="bookings"
+      element={
+        <ProtectedRoutes>
+          <Bookings />
+        </ProtectedRoutes>
+      }
+    />
+    <Route
+      path="bookings/:id"
+      element={
+        <ProtectedRoutes>
+          <Booking />
         </ProtectedRoutes>
       }
     />

@@ -2,8 +2,8 @@ import { useState } from "react";
 import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 import {
-  cancelBookingAPI,
-  useCancelBookingAPI,
+  confirmBookingAPI,
+  useOwnerCancelBookingAPI,
 } from "@/services/bookingService";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -32,24 +32,24 @@ export default function CancelBookingModal({
 }: IProps) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const { data } = useCancelBookingAPI();
+  const { data } = useOwnerCancelBookingAPI();
   const reasons: ICancelReason[] = data?.data?.data?.cancel_reason_list;
-  const [selectedReason, setSelectedReason] = useState<string>("");
-  console.log(reasons);
+  const [selectedReasonId, setSelectedReasonId] = useState<string>("");
   const handleClose = () => {
-    setSelectedReason("");
+    setSelectedReasonId("");
     close();
   };
-  const cancelBooking = async () => {
+  const handleCancel = async () => {
     try {
       setLoading(true);
       const payload = {
-        uid: uid ? uid : "",
+        uid: uid || "",
         lang: currentLanguage,
         booking_id: bookingId,
-        cancel_id: selectedReason,
+        is_confirmed: false,
+        deny_id: selectedReasonId,
       };
-      const response = await cancelBookingAPI(payload);
+      const response = await confirmBookingAPI(payload); // Use your actual API here
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
         setTimeout(() => {
@@ -63,7 +63,6 @@ export default function CancelBookingModal({
         customError?.response?.data?.response_message ||
         t("something_went_wrong");
       toast.error(errorMessage);
-      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -95,8 +94,8 @@ export default function CancelBookingModal({
                       type="radio"
                       name="cancelReason"
                       value={r?.id}
-                      checked={selectedReason === r?.id}
-                      onChange={() => setSelectedReason(r?.id)}
+                      checked={selectedReasonId === r?.id}
+                      onChange={() => setSelectedReasonId(r?.id)}
                       className="accent-primary w-4 h-4 shrink-0"
                     />
                     <span className="font-medium">{r?.reason}</span>
@@ -112,8 +111,8 @@ export default function CancelBookingModal({
                   {t("cancel")}
                 </Button>
                 <Button
-                  disabled={!selectedReason}
-                  onClick={cancelBooking}
+                  disabled={!selectedReasonId}
+                  onClick={handleCancel}
                   className="w-32 py-2 text-center bg-primary text-white rounded-md hover:bg-primary/80"
                 >
                   {loading ? <Loader /> : t("confirm")}

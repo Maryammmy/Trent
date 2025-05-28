@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import CancelBookingModal from "./CancelBookingModal";
+import ConfirmBookingModal from "./ConfirmBookingModal";
 
 interface IProps {
   booking: IBooking;
@@ -17,6 +18,7 @@ function Booking({ booking }: IProps) {
   const { t } = useTranslation();
   const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
   const [isCancelBookingOpen, setIsCancelBookingOpen] = useState(false);
+  const [isConfirmBookingOpen, setIsConfirmBookingOpen] = useState(false);
   const {
     book_status,
     prop_img,
@@ -28,17 +30,13 @@ function Booking({ booking }: IProps) {
     individual_rate,
   } = booking;
   const status = useQueryParam("status");
-  const today = new Date();
-  const inDate = new Date(check_in);
-  const outDate = new Date(check_out);
-  const isDuringStay = today >= inDate && today <= outDate;
   return (
     <>
       <Link
-        to={`/account-settings/bookings/${book_id}?status=${status}`}
-        className="flex flex-wrap items-center gap-5 sm:gap-8 border p-4 rounded-2xl"
+        to={`/hosting/bookings/${book_id}?status=${status}`}
+        className="flex flex-col md:flex-row md:items-center gap-5 sm:gap-8 border p-4 rounded-2xl"
       >
-        <div className="relative h-14 w-14 overflow-hidden rounded-md">
+        <div className="relative h-14 w-14 overflow-hidden rounded-md shrink-0">
           <div className="absolute inset-0 bg-black/15 pointer-events-none z-[5]" />
           <div className="w-full h-full">
             <Image
@@ -80,30 +78,27 @@ function Booking({ booking }: IProps) {
             </div>
           )}
           <div className="flex gap-5">
-            {isDuringStay && status === "active" && (
-              <div>
-                <Button
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
-                  className="py-2 w-40 bg-green-600 font-medium text-white rounded"
-                >
-                  {t("check_in_now")}
-                </Button>
-              </div>
+            {status === "active" && book_status === "Booked" && (
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsConfirmBookingOpen(true);
+                }}
+                className="py-2 w-40 bg-primary font-medium text-white rounded"
+              >
+                {t("confirm_booking")}
+              </Button>
             )}
-            {status === "active" && (
-              <div className="">
-                <Button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsCancelBookingOpen(true);
-                  }}
-                  className="py-2 w-40 bg-primary font-medium text-white rounded"
-                >
-                  {t("cancel_booking")}
-                </Button>
-              </div>
+            {status === "active" && book_status === "Booked" && (
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsCancelBookingOpen(true);
+                }}
+                className="py-2 w-40 bg-primary font-medium text-white rounded"
+              >
+                {t("cancel_booking")}
+              </Button>
             )}
           </div>
         </div>
@@ -116,13 +111,24 @@ function Booking({ booking }: IProps) {
           onClose={() => setIsRatingModalOpen(false)}
         />
       )}
-      {status === "active" && (
-        <CancelBookingModal
-          bookingId={book_id}
-          isOpen={isCancelBookingOpen}
-          close={() => setIsCancelBookingOpen(false)}
-        />
-      )}
+      {isCancelBookingOpen &&
+        status === "active" &&
+        book_status === "Booked" && (
+          <CancelBookingModal
+            bookingId={book_id}
+            isOpen={isCancelBookingOpen}
+            close={() => setIsCancelBookingOpen(false)}
+          />
+        )}
+      {isConfirmBookingOpen &&
+        status === "active" &&
+        book_status === "Booked" && (
+          <ConfirmBookingModal
+            bookingId={book_id}
+            isOpen={isConfirmBookingOpen}
+            close={() => setIsConfirmBookingOpen(false)}
+          />
+        )}
     </>
   );
 }
