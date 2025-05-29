@@ -113,7 +113,7 @@ function ConfirmAndPay() {
         lang: currentLanguage,
         method_key: paymentMethod,
         item_id: itemId,
-        ...(merchantRefNumber && { merchantRefNumber }),
+        ...(merchantRefNumber && { merchant_ref_number: merchantRefNumber }),
       };
       const response = await saveBookingAPI(payload);
       if (response?.data?.response_code === 200) {
