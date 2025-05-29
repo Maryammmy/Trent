@@ -35,7 +35,6 @@ export default function CancelBookingModal({
   const { data } = useCancelBookingAPI();
   const reasons: ICancelReason[] = data?.data?.data?.cancel_reason_list;
   const [selectedReason, setSelectedReason] = useState<string>("");
-  console.log(reasons);
   const handleClose = () => {
     setSelectedReason("");
     close();
@@ -63,7 +62,6 @@ export default function CancelBookingModal({
         customError?.response?.data?.response_message ||
         t("something_went_wrong");
       toast.error(errorMessage);
-      console.log(error);
     } finally {
       setLoading(false);
     }

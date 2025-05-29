@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import CancelBookingModal from "./CancelBookingModal";
+import CheckInModal from "./CheckInModal";
 
 interface IProps {
   booking: IBooking;
@@ -17,6 +18,7 @@ function Booking({ booking }: IProps) {
   const { t } = useTranslation();
   const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
   const [isCancelBookingOpen, setIsCancelBookingOpen] = useState(false);
+  const [isCheckInOpen, setIsCheckInOpen] = useState(false);
   const {
     book_status,
     prop_img,
@@ -85,10 +87,11 @@ function Booking({ booking }: IProps) {
                 <Button
                   onClick={(e) => {
                     e.preventDefault();
+                    setIsCheckInOpen(true);
                   }}
-                  className="py-2 w-40 bg-green-600 font-medium text-white rounded"
+                  className="py-2 w-40 bg-primary font-medium text-white rounded"
                 >
-                  {t("check_in_now")}
+                  {t("check_in_btn")}
                 </Button>
               </div>
             )}
@@ -116,7 +119,14 @@ function Booking({ booking }: IProps) {
           onClose={() => setIsRatingModalOpen(false)}
         />
       )}
-      {status === "active" && (
+      {status === "active" && isCheckInOpen && (
+        <CheckInModal
+          bookingId={book_id}
+          isOpen={isCheckInOpen}
+          close={() => setIsCheckInOpen(false)}
+        />
+      )}
+      {status === "active" && isCancelBookingOpen && (
         <CancelBookingModal
           bookingId={book_id}
           isOpen={isCancelBookingOpen}

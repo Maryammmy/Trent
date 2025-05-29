@@ -140,3 +140,9 @@ export interface IConfirmBooking {
   deny_id?: string;
   is_confirmed: boolean;
 }
+export interface ICheckInOut {
+  lang: string;
+  uid: string;
+  booking_id: string;
+  is_check_in: boolean;
+}

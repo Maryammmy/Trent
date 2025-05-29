@@ -3,6 +3,7 @@ import { baseAPI, baseAPIForm } from ".";
 import { CurrentLanguage } from "@/types";
 import {
   ICancelBooking,
+  ICheckInOut,
   IConfirmBooking,
   ISaveBooking,
   IVerifyProperty,
@@ -121,6 +122,17 @@ export const confirmBookingAPI = (payload: IConfirmBooking) => {
   });
   const response = baseAPIForm.post(
     "user_api/booking/u_confirm_booking.php",
+    formData
+  );
+  return response;
+};
+export const checkInOutAPI = (payload: ICheckInOut) => {
+  const formData = new FormData();
+  Object.entries(payload).forEach(([key, value]) => {
+    formData.append(key, String(value));
+  });
+  const response = baseAPIForm.post(
+    `user_api/booking/u_check_in_out.php`,
     formData
   );
   return response;

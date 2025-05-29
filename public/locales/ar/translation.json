@@ -466,7 +466,9 @@
   "confirm": "تأكيد",
   "select_payment_method": "الرجاء اختيار طريقة الدفع",
   "insufficient_balance": "رصيد غير كافي لإتمام الحجز",
-  "check_in_now": "تسجيل الوصول الآن",
   "confirm_booking": "تأكيد الحجز",
-  "are_you_sure_confirm_booking": "هل أنت متأكد من تأكيد هذا الحجز؟"
+  "are_you_sure_confirm_booking": "هل أنت متأكد من تأكيد هذا الحجز؟",
+  "check_in_btn": "تسجيل الوصول",
+  "are_you_sure_you_want_to_check_in": "هل أنت متأكد أنك تريد تسجيل الوصول؟",
+  "confirm_check_in": "تأكيد تسجيل الوصول"
 }
