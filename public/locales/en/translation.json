@@ -482,5 +482,8 @@
   "are_you_sure_confirm_booking": "Are you sure you want to confirm this booking?",
   "check_in_btn": "Check In",
   "are_you_sure_you_want_to_check_in": "Are you sure you want to check in?",
-  "confirm_check_in": "Confirm Your Check-In"
+  "confirm_check_in": "Confirm Your Check-In",
+  "check_out_btn": "Check Out",
+  "are_you_sure_you_want_to_check_out": "Are you sure you want to check out?",
+  "confirm_check_out": "Confirm Your Check-Out"
 }

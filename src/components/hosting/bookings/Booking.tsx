@@ -1,7 +1,5 @@
-import RatingModal from "@/components/rating/RatingModal";
 import Button from "@/components/ui/Button";
 import Image from "@/components/ui/Image";
-import Rating from "@/components/ui/Rating";
 import { IBooking } from "@/interfaces/booking";
 import { baseURL } from "@/services";
 import { useQueryParam } from "@/utils/getQueryParam";
@@ -16,7 +14,6 @@ interface IProps {
 }
 function Booking({ booking }: IProps) {
   const { t } = useTranslation();
-  const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
   const [isCancelBookingOpen, setIsCancelBookingOpen] = useState(false);
   const [isConfirmBookingOpen, setIsConfirmBookingOpen] = useState(false);
   const {
@@ -27,7 +24,6 @@ function Booking({ booking }: IProps) {
     total_paid,
     check_in,
     check_out,
-    individual_rate,
   } = booking;
   const status = useQueryParam("status");
   return (
@@ -61,22 +57,6 @@ function Booking({ booking }: IProps) {
             {t("EGP")}
           </p>
           <span className="text-primary font-semibold">{book_status}</span>
-          {book_status === "Completed" && (
-            <div className="flex items-center gap-5">
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsRatingModalOpen(true);
-                }}
-                className="flex items-center gap-2"
-              >
-                <Rating rating={Number(individual_rate?.rate) || 0} />
-                <span className="text-sm font-semibold text-dark">
-                  ({individual_rate?.rate || 0})
-                </span>
-              </Button>
-            </div>
-          )}
           <div className="flex gap-5">
             {status === "active" && book_status === "Booked" && (
               <Button
@@ -103,14 +83,6 @@ function Booking({ booking }: IProps) {
           </div>
         </div>
       </Link>
-      {book_status === "Completed" && (
-        <RatingModal
-          booking_id={book_id}
-          individual_rate={individual_rate}
-          isOpen={isRatingModalOpen}
-          onClose={() => setIsRatingModalOpen(false)}
-        />
-      )}
       {isCancelBookingOpen &&
         status === "active" &&
         book_status === "Booked" && (

@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import CancelBookingModal from "./CancelBookingModal";
 import CheckInModal from "./CheckInModal";
+import CheckOutModal from "./CheckOutModal";
 
 interface IProps {
   booking: IBooking;
@@ -19,6 +20,7 @@ function Booking({ booking }: IProps) {
   const [isRatingModalOpen, setIsRatingModalOpen] = useState(false);
   const [isCancelBookingOpen, setIsCancelBookingOpen] = useState(false);
   const [isCheckInOpen, setIsCheckInOpen] = useState(false);
+  const [isCheckOutOpen, setIsCheckOutOpen] = useState(false);
   const {
     book_status,
     prop_img,
@@ -65,7 +67,7 @@ function Booking({ booking }: IProps) {
             {t("EGP")}
           </p>
           <span className="text-primary font-semibold">{book_status}</span>
-          {book_status === "Completed" && (
+          {(book_status === "Check_in" || book_status === "Completed") && (
             <div className="flex items-center gap-5">
               <Button
                 onClick={(e) => {
@@ -81,9 +83,9 @@ function Booking({ booking }: IProps) {
               </Button>
             </div>
           )}
-          <div className="flex gap-5">
-            {isDuringStay && status === "active" && (
-              <div>
+          {status === "active" && (
+            <div className="flex items-center gap-10">
+              {isDuringStay && book_status === "Confirmed" && (
                 <Button
                   onClick={(e) => {
                     e.preventDefault();
@@ -93,10 +95,19 @@ function Booking({ booking }: IProps) {
                 >
                   {t("check_in_btn")}
                 </Button>
-              </div>
-            )}
-            {status === "active" && (
-              <div className="">
+              )}
+              {book_status === "Check_in" && (
+                <Button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsCheckOutOpen(true);
+                  }}
+                  className="py-2 w-40 bg-primary font-medium text-white rounded"
+                >
+                  {t("check_out_btn")}
+                </Button>
+              )}
+              {(book_status === "Booked" || book_status === "Confirmed") && (
                 <Button
                   onClick={(e) => {
                     e.preventDefault();
@@ -106,12 +117,12 @@ function Booking({ booking }: IProps) {
                 >
                   {t("cancel_booking")}
                 </Button>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
         </div>
       </Link>
-      {book_status === "Completed" && (
+      {(book_status === "Check_in" || book_status === "Completed") && (
         <RatingModal
           booking_id={book_id}
           individual_rate={individual_rate}
@@ -119,20 +130,29 @@ function Booking({ booking }: IProps) {
           onClose={() => setIsRatingModalOpen(false)}
         />
       )}
-      {status === "active" && isCheckInOpen && (
+      {status === "active" && book_status === "Confirmed" && isCheckInOpen && (
         <CheckInModal
           bookingId={book_id}
           isOpen={isCheckInOpen}
           close={() => setIsCheckInOpen(false)}
         />
       )}
-      {status === "active" && isCancelBookingOpen && (
-        <CancelBookingModal
+      {status === "active" && book_status === "Check_in" && isCheckOutOpen && (
+        <CheckOutModal
           bookingId={book_id}
-          isOpen={isCancelBookingOpen}
-          close={() => setIsCancelBookingOpen(false)}
+          isOpen={isCheckOutOpen}
+          close={() => setIsCheckOutOpen(false)}
         />
       )}
+      {status === "active" &&
+        isCancelBookingOpen &&
+        (book_status === "Confirmed" || book_status === "Booked") && (
+          <CancelBookingModal
+            bookingId={book_id}
+            isOpen={isCancelBookingOpen}
+            close={() => setIsCancelBookingOpen(false)}
+          />
+        )}
     </>
   );
 }

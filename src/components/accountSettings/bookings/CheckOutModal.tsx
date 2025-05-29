@@ -18,8 +18,7 @@ interface IProps {
   close: () => void;
   bookingId: string;
 }
-
-function CheckInModal({ isOpen, close, bookingId }: IProps) {
+function CheckOutModal({ isOpen, close, bookingId }: IProps) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
@@ -30,7 +29,7 @@ function CheckInModal({ isOpen, close, bookingId }: IProps) {
         uid: uid || "",
         lang: currentLanguage,
         booking_id: bookingId,
-        is_check_in: true,
+        is_check_in: false,
       };
       const response = await checkInOutAPI(payload); // Use your actual API here
       if (response?.data?.response_code === 200) {
@@ -55,7 +54,7 @@ function CheckInModal({ isOpen, close, bookingId }: IProps) {
     <Modal
       isOpen={isOpen}
       close={close}
-      title={t("confirm_check_in")}
+      title={t("confirm_check_out")}
       className="text-lg md:text-2xl font-semibold text-center p-4 pb-0"
     >
       <Button onClick={close} className="absolute top-5 right-4">
@@ -63,7 +62,7 @@ function CheckInModal({ isOpen, close, bookingId }: IProps) {
       </Button>
       <div className="p-5 md:py-8 md:px-10 space-y-6">
         <p className="text-dark text-center font-medium">
-          {t("are_you_sure_you_want_to_check_in")}
+          {t("are_you_sure_you_want_to_check_out")}
         </p>
         <div className="flex justify-between gap-4 font-medium">
           <Button
@@ -78,7 +77,7 @@ function CheckInModal({ isOpen, close, bookingId }: IProps) {
             onClick={handleCheckIn}
             className="w-32 py-2 text-center bg-primary text-white rounded-md hover:bg-primary/80"
           >
-            {loading ? <Loader /> : t("check_in_btn")}
+            {loading ? <Loader /> : t("check_out_btn")}
           </Button>
         </div>
       </div>
@@ -86,4 +85,4 @@ function CheckInModal({ isOpen, close, bookingId }: IProps) {
   );
 }
 
-export default CheckInModal;
+export default CheckOutModal;

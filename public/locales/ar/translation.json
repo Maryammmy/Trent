@@ -470,5 +470,8 @@
   "are_you_sure_confirm_booking": "هل أنت متأكد من تأكيد هذا الحجز؟",
   "check_in_btn": "تسجيل الوصول",
   "are_you_sure_you_want_to_check_in": "هل أنت متأكد أنك تريد تسجيل الوصول؟",
-  "confirm_check_in": "تأكيد تسجيل الوصول"
+  "confirm_check_in": "تأكيد تسجيل الوصول",
+  "check_out_btn": "تسجيل المغادرة",
+  "are_you_sure_you_want_to_check_out": "هل أنت متأكد أنك تريد تسجيل المغادرة؟",
+  "confirm_check_out": "تأكيد تسجيل المغادرة"
 }
