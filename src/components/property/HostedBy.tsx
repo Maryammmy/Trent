@@ -14,8 +14,11 @@ interface IProps {
   id: string | undefined;
   owner: IDetailsProperty["owner"];
   ownerId: string;
+  propImage: string;
+  title: string;
 }
-function HostedBy({ id, owner, ownerId }: IProps) {
+
+function HostedBy({ id, owner, ownerId, propImage, title }: IProps) {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -23,7 +26,7 @@ function HostedBy({ id, owner, ownerId }: IProps) {
     setLoading(true);
     try {
       const response = await chatListAPI(id);
-      storeOwnerChat(owner);
+      storeOwnerChat({ ...owner, prop_image: propImage, prop_id: id, title });
       const chatId: string = response?.data?.data?.chat_list?.[0]?.chat_id;
       navigate(
         `/chat?prop=${id}&user=${ownerId}${chatId ? `&chat=${chatId}` : ""}`

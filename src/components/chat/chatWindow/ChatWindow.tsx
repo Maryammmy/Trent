@@ -5,6 +5,7 @@ import { useQueryParam } from "@/utils/getQueryParam";
 import { IMessage } from "@/interfaces/chat";
 import { useMessagesAPI } from "@/services/chatService";
 import { MessageCircleMore } from "lucide-react";
+import ChatProperty from "./ChatProperty";
 
 function ChatWindow() {
   const ownerId = useQueryParam("user");
@@ -22,6 +23,7 @@ function ChatWindow() {
       }`}
     >
       <ChatHeader owner={owner} />
+      <ChatProperty />
       <ChatMessages messages={messages} />
       <ChatInput ownerId={ownerId} propId={propId} chatId={chatId} />
     </div>

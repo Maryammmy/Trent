@@ -217,6 +217,8 @@ function Property() {
                 id={id}
                 ownerId={propertyDetails?.owner_id}
                 owner={propertyDetails?.owner}
+                propImage={propertyDetails?.image_list?.[0]?.img}
+                title={propertyDetails?.title?.[currentLanguage]}
               />
               <div className="flex flex-col gap-3 pt-3 pb-5">
                 <div className="" data-aos="fade-right">

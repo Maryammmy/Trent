@@ -18,4 +18,6 @@ export interface IMessage {
 export interface IOwner {
   receiver_image: string;
   receiver_name: string;
+  prop_id: number;
+  prop_title: string;
 }
