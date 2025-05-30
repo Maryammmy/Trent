@@ -67,7 +67,7 @@ function Booking({ booking }: IProps) {
             {t("EGP")}
           </p>
           <span className="text-primary font-semibold">{book_status}</span>
-          {(book_status === "Check_in" || book_status === "Completed") && (
+          {book_status === "Completed" && (
             <div className="flex items-center gap-5">
               <Button
                 onClick={(e) => {
@@ -122,7 +122,7 @@ function Booking({ booking }: IProps) {
           )}
         </div>
       </Link>
-      {(book_status === "Check_in" || book_status === "Completed") && (
+      {book_status === "Completed" && (
         <RatingModal
           booking_id={book_id}
           individual_rate={individual_rate}
