@@ -9,7 +9,10 @@ import { storeOwnerChat } from "../../utils/storeUserChat";
 import { useState } from "react";
 import Loader from "../loader/Loader";
 import { chatListAPI } from "@/services/chatService";
+import toast from "react-hot-toast";
+import Cookies from "js-cookie";
 
+const uid = Cookies.get("user_id");
 interface IProps {
   id: string | undefined;
   owner: IDetailsProperty["owner"];
@@ -56,7 +59,14 @@ function HostedBy({ id, owner, ownerId, propImage, title }: IProps) {
             <h2 className="font-bold">{owner?.name}</h2>
           </div>
           <Button
-            onClick={handleChatNavigator}
+            onClick={(e) => {
+              e.preventDefault();
+              if (uid === ownerId) {
+                toast.error(t("you_can't_chat_yourself"));
+                return;
+              }
+              handleChatNavigator();
+            }}
             className="flex items-center gap-1 font-medium"
           >
             {loading ? (
