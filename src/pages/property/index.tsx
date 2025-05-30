@@ -263,8 +263,8 @@ function Property() {
                 </div>
               </div>
               <Amenities facilities={facilities} />
+              <ReviewComponent id={id} />
             </div>
-            <ReviewComponent id={id} />
             <div className="max-w-7xl mx-auto py-5">
               <Map
                 latitdude={Number(propertyDetails?.latitude)}

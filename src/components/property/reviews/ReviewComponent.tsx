@@ -8,34 +8,33 @@ interface IProps {
   id: string | undefined;
 }
 function ReviewComponent({ id }: IProps) {
-  const { t } = useTranslation();
   const [isReviewed, setIsReviewed] = useState<boolean>(false);
   const { data } = useRatingAPI(id);
+  const { t } = useTranslation();
   const ratings: IRating[] = data?.data?.data?.Ratings;
   return (
     <>
-      <div className="max-w-7xl mx-auto pb-10">
-        <div className="flex flex-col items-center gap-1 pb-10">
-          <h2 className="text-[80px] font-bold">4.95</h2>
-          <h4 className="text-2xl font-medium">{t("guest_favorite")}</h4>
-          <p className="max-w-xs text-center text-dark font-medium">
-            {t("guest_favorite_desc")}
-          </p>
-        </div>
-        {ratings?.length > 0 && (
-          <div className="border-t py-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
+      {ratings?.length > 0 && (
+        <div className="py-5">
+          <h2 className="text-2xl font-semibold pb-3" data-aos="fade-left">
+            {t("reviews")}
+          </h2>
+          <div
+            data-aos="fade-right"
+            className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20"
+          >
             {ratings?.map((rating) => (
               <ReviewCard key={rating?.id} rating={rating} />
             ))}
           </div>
-        )}
-        {/* <Button
+        </div>
+      )}
+      {/* <Button
           onClick={() => setIsReviewed(true)}
           className="font-semibold text-lg border border-black rounded-md px-6 py-2 hover:bg-gray-100"
         >
           <span>{t("show_all_reviews")}</span>
         </Button> */}
-      </div>
       {isReviewed && (
         <ReviewModal
           isReviewed={isReviewed}
