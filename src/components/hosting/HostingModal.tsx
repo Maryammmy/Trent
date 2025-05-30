@@ -98,7 +98,7 @@ function HostingModal() {
             onClick={handleFinishUp}
             className="text-white bg-primary py-2 w-28 rounded-md font-medium"
           >
-            {loading ? <Loader borderColor="#223f7f" /> : t("finish_up")}
+            {loading ? <Loader /> : t("finish_up")}
           </Button>
           <Button
             type="button"

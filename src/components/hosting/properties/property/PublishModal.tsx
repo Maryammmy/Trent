@@ -42,7 +42,7 @@ function PublishModal({ is_published, id, publishProperty, close }: IProps) {
       isOpen={publishProperty}
       close={close}
       title={is_published ? t("unpublish_property") : t("publish_property")}
-      className="text-center font-bold text-2xl pt-5"
+      className="text-center font-bold text-2xl p-5 pb-0"
     >
       <div className="p-5">
         <p className="font-medium text-center">
