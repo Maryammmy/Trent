@@ -19,7 +19,7 @@ const uid = Cookies.get("user_id") || "";
 const storedCurrency = sessionStorage.getItem("currency");
 const parsedCurrency = storedCurrency
   ? JSON.parse(storedCurrency)
-  : { currency: "EGP", rate: 1 };
+  : { currency: "EGP", rate: "1" };
 function Cart({ property, refetch }: IProps) {
   const {
     IS_FAVOURITE,

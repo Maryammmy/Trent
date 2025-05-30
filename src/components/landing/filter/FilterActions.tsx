@@ -54,7 +54,6 @@ function FilterActions({
     compound_name: compound,
     city_name: city,
   };
-  console.log(filterData);
   // const { data } = useHomeDataAPI(filters, enabled);
   // const filteredProperties = data?.data?.data?.property_list;
   const handleClearFilters = () => {

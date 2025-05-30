@@ -19,9 +19,6 @@ import { floorPlan } from "../../../data/becomeAHost";
 import RatingFilter from "./RatingFilter";
 import CityFilter from "./CityFilter";
 import UpdateSkeleton from "@/components/skeleton/UpdateSkeleton";
-import { DateValueType } from "react-tailwindcss-datepicker";
-import { validateEndDate, validateStartDate } from "@/utils/handleChangeDate";
-import DateRange from "./DateRange";
 
 interface IProps {
   isFilterOpen: boolean;
@@ -41,14 +38,6 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   const [selectedPropertyType, setSelectedPropertyType] = useState<string>("");
   const [values, setValues] = useState<number[]>([]);
   const [rating, setRating] = useState(0);
-  const [startDateValue, setStartDateValue] = useState<DateValueType>({
-    startDate: null,
-    endDate: null,
-  });
-  const [endDateValue, setEndDateValue] = useState<DateValueType>({
-    startDate: null,
-    endDate: null,
-  });
   const { data: governments } = useGovernmentsAPI();
   const { data } = useCascadeFiltersAPI(government);
   const governmentList = governments?.data?.data?.government_list;
@@ -101,18 +90,6 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   const updateCounter = (key: string, value: number) => {
     setCounters((prev) => ({ ...prev, [key]: Math.max(0, prev[key] + value) }));
   };
-  const handleStartValueChange = (newValue: DateValueType) => {
-    const validatedValue = validateStartDate(newValue, endDateValue, t);
-    if (validatedValue) {
-      setStartDateValue(validatedValue);
-    }
-  };
-  const handleEndValueChange = (newValue: DateValueType) => {
-    const validatedValue = validateEndDate(newValue, startDateValue, t);
-    if (validatedValue) {
-      setEndDateValue(validatedValue);
-    }
-  };
   const handleClear = () => {
     setValues([priceRange?.min_price, priceRange?.max_price]);
     setCounters(initialCounters);
@@ -163,12 +140,6 @@ function FilterModal({ isFilterOpen, close }: IProps) {
                 period={period}
                 handlePeriodChange={handlePeriodChange}
                 periods={periodList}
-              />
-              <DateRange
-                startDateValue={startDateValue}
-                endDateValue={endDateValue}
-                handleStartValueChange={handleStartValueChange}
-                handleEndValueChange={handleEndValueChange}
               />
               <div className="border-b py-4">
                 <h2 className="text-lg font-bold pb-2">{t("price_range")}</h2>

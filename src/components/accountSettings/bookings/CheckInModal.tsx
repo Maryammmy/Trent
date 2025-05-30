@@ -32,13 +32,13 @@ function CheckInModal({ isOpen, close, bookingId }: IProps) {
         booking_id: bookingId,
         is_check_in: true,
       };
-      const response = await checkInOutAPI(payload); // Use your actual API here
+      const response = await checkInOutAPI(payload);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
-        // setTimeout(() => {
-        //   close();
-        //   window.location.reload();
-        // }, 500);
+        setTimeout(() => {
+          close();
+          window.location.reload();
+        }, 500);
       }
     } catch (error) {
       const customError = error as ApiError;

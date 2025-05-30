@@ -13,7 +13,6 @@ function Properties() {
   const properties: IProperty[] | undefined = data?.pages?.flatMap(
     (page) => page?.data?.data?.property_list
   );
-  console.log(properties);
   return (
     <>
       <div className="px-5 lg:px-20 py-10">

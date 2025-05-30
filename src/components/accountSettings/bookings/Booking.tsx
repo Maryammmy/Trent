@@ -40,7 +40,7 @@ function Booking({ booking }: IProps) {
     <>
       <Link
         to={`/account-settings/bookings/${book_id}?status=${status}`}
-        className="flex flex-wrap items-center gap-5 sm:gap-8 border p-4 rounded-2xl"
+        className="flex flex-col md:flex-row md:items-center gap-5 sm:gap-8 border p-4 rounded-2xl"
       >
         <div className="relative h-14 w-14 overflow-hidden rounded-md">
           <div className="absolute inset-0 bg-black/15 pointer-events-none z-[5]" />

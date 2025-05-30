@@ -34,7 +34,6 @@ export default function Properties() {
       ...(filterSlider && filterSlider),
       ...(filters && filters),
     });
-  console.log(filters);
   // Flatten all pages of property lists
   const properties: IProperty[] | undefined = data?.pages?.flatMap(
     (page) => page?.data?.data?.property_list

@@ -1,7 +1,4 @@
 import { useState } from "react";
-import { reviewInstruction, widths } from "../../../data/property/review";
-// import Button from "../../ui/Button";
-import PrograssBar from "../../ui/PrograssBar";
 import ReviewCard from "./ReviewCard";
 import ReviewModal from "./ReviewModal";
 import { useTranslation } from "react-i18next";
@@ -25,37 +22,6 @@ function ReviewComponent({ id }: IProps) {
             {t("guest_favorite_desc")}
           </p>
         </div>
-        <div className="pb-8 grid gap-4 justify-center grid-cols-2 md:grid-cols-4 xl:grid-cols-7">
-          <div className="">
-            <h2 className="font-medium">{t("overall_rating")}</h2>
-            {widths.map((item, index) => (
-              <div key={index} className="max-w-32 flex items-center gap-2">
-                <span className="font-medium text-xs">{item.num}</span>
-                <PrograssBar
-                  height="4px"
-                  width={item.width}
-                  backgroundColor="black"
-                />
-              </div>
-            ))}
-          </div>
-          {reviewInstruction.map((item, index) => {
-            const { icon, title, rate } = item;
-            const translatedTitle = t(title);
-            return (
-              <div
-                key={index}
-                className={` flex flex-col justify-between xl:ps-6 xl:border-l`}
-              >
-                <div>
-                  <h2 className="font-medium">{translatedTitle}</h2>
-                  <div className="font-medium">{rate}</div>
-                </div>
-                <span>{icon}</span>
-              </div>
-            );
-          })}
-        </div>
         {ratings?.length > 0 && (
           <div className="border-t py-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
             {ratings?.map((rating) => (
@@ -70,7 +36,12 @@ function ReviewComponent({ id }: IProps) {
           <span>{t("show_all_reviews")}</span>
         </Button> */}
       </div>
-      <ReviewModal isReviewed={isReviewed} close={() => setIsReviewed(false)} />
+      {isReviewed && (
+        <ReviewModal
+          isReviewed={isReviewed}
+          close={() => setIsReviewed(false)}
+        />
+      )}
     </>
   );
 }

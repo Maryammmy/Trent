@@ -24,7 +24,6 @@ export const useHomeDataAPI = (
   const filteredParams = Object.fromEntries(
     Object.entries(queryParamsObject).filter(([, value]) => !!value)
   );
-  console.log(filteredParams);
   return useInfiniteQuery({
     queryKey: ["properties", filteredParams],
     queryFn: ({ pageParam = 1 }) =>

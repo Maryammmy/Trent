@@ -11,11 +11,10 @@ export const generateFawryPaymentInitData = (
   encryptedMerchantCode: string,
   encryptedSecureKey: string,
   itemId: string,
-  propPrice: number,
+  price: number,
   paymentMethod: string,
   returnUrl: string
 ) => {
-  const price = Math.round(propPrice);
   const merchantCode = decryptFawryCredentials(
     encryptedMerchantCode,
     fawryPrivateKey
@@ -24,7 +23,7 @@ export const generateFawryPaymentInitData = (
     encryptedSecureKey,
     fawryPrivateKey
   );
-
+  sessionStorage.setItem("mer", merchantRefNum);
   const signatureString =
     merchantCode +
     merchantRefNum +

@@ -33,7 +33,7 @@ const getPixelPositionOffset = (width: number, height: number) => ({
 const storedCurrency = sessionStorage.getItem("currency");
 const parsedCurrency = storedCurrency
   ? JSON.parse(storedCurrency)
-  : { currency: "EGP", rate: 1 };
+  : { currency: "EGP", rate: "1" };
 const Map = ({ properties, refetch }: IProps) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);

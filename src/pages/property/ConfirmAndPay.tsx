@@ -4,7 +4,7 @@ import PriceDetails from "../../components/property/confirmAndPay/PriceDetails";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Button from "@/components/ui/Button";
 import { IVerifyPropertyResponse } from "@/interfaces/booking";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Loader from "@/components/loader/Loader";
 import {
   initFawryPaymentAPI,
@@ -47,7 +47,7 @@ function ConfirmAndPay() {
   const statusCode = useQueryParam("statusCode");
   const statusDescription = useQueryParam("statusDescription");
   const merchantRefNumber = useQueryParam("merchantRefNumber") || "";
-  const [isSuccessModal, setIsSuccessModal] = useState(true);
+  const [isSuccessModal, setIsSuccessModal] = useState(false);
   const [saveBookingResponse, setSaveBookingResponse] = useState(null);
   const [orderStatus, setOrderStatus] = useState(orderStatusFromUrl);
   const [paymentMethod, setPaymentMethod] = useState(
@@ -58,7 +58,11 @@ function ConfirmAndPay() {
       ? "PayAtFawry"
       : "MWALLET"
   );
+  const finalTotal = Number(bookingData?.final_total);
+  const walletBalance = Number(bookingData?.wallet_balance);
   const itemId = bookingData?.item_id ? bookingData.item_id.toString() : "";
+  const hasSavedRef = useRef(false);
+  console.log(statusCode);
   const createFawryPayment = async () => {
     try {
       if (!paymentMethod) {
@@ -70,7 +74,7 @@ function ConfirmAndPay() {
         fawryCredentials?.merchant_code,
         fawryCredentials?.secure_key,
         itemId,
-        bookingData?.final_total,
+        finalTotal,
         paymentMethod,
         returnUrl
       );
@@ -80,27 +84,25 @@ function ConfirmAndPay() {
         toast.success(t("redirecting_fawry"));
         setTimeout(() => {
           window.location.href = redirectUrl;
-        }, 1000);
+        }, 500);
       }
     } catch (error: AxiosError | unknown) {
       if (error instanceof AxiosError) {
         toast.error(error?.message);
-        console.log(error);
       }
     } finally {
       setLoading(false);
     }
   };
   const handleSaveBooking = useCallback(async () => {
+    if (hasSavedRef.current) return;
+    hasSavedRef.current = true;
     try {
-      if (
-        paymentMethod === "TRENT_BALANCE" &&
-        Number(bookingData?.wallet_balance) < bookingData.final_total
-      ) {
+      if (paymentMethod === "TRENT_BALANCE" && walletBalance < finalTotal) {
         toast.error(t("insufficient_balance"));
         return;
       }
-      if (paymentMethod === "TRENT_BALANCE") {
+      if (paymentMethod === "TRENT_BALANCE" && walletBalance >= finalTotal) {
         setLoading(true);
       }
       const payload = {
@@ -126,11 +128,19 @@ function ConfirmAndPay() {
         customError?.response?.data?.response_message ||
         t("something_went_wrong");
       toast.error(errorMessage);
-      console.log(error);
     } finally {
       setLoading(false);
     }
-  }, [paymentMethod, bookingData, merchantRefNumber, itemId, id, t]);
+  }, [
+    bookingData,
+    paymentMethod,
+    walletBalance,
+    finalTotal,
+    merchantRefNumber,
+    itemId,
+    id,
+    t,
+  ]);
   const fawryPaymentStatus = async () => {
     try {
       setLoading(true);
@@ -138,10 +148,10 @@ function ConfirmAndPay() {
       const response = await paymentStatusAPI(
         merchantRefNumber,
         itemId,
-        bookingData.final_total ? bookingData?.final_total.toFixed(0) : ""
+        bookingData?.final_total
       );
-      if (response.status === 200) {
-        toast.success(t("payment_checked_successfully"));
+      if (response?.data?.response_code === 200) {
+        toast.success(response?.data?.response_message);
         const status = response?.data?.data?.status ? "PAID" : "UNPAID";
         updateQueryParamInURL("orderStatus", status);
         setOrderStatus(status);
@@ -155,10 +165,10 @@ function ConfirmAndPay() {
     }
   };
   useEffect(() => {
-    if (orderStatus === "PAID" && !saveBookingResponse) {
+    if (orderStatus === "PAID" && !hasSavedRef.current) {
       handleSaveBooking();
     }
-  }, [orderStatus, saveBookingResponse, handleSaveBooking]);
+  }, [orderStatus, handleSaveBooking]);
   return (
     <>
       <div className="py-10 px-5 xl:px-20 max-w-7xl mx-auto">
@@ -216,6 +226,7 @@ function ConfirmAndPay() {
                 <CardPaymentStatus
                   statusCode={statusCode}
                   statusDescription={statusDescription}
+                  orderStatus={orderStatus}
                 />
               )}
             </div>
@@ -275,6 +286,7 @@ function ConfirmAndPay() {
               <CardPaymentStatus
                 statusCode={statusCode}
                 statusDescription={statusDescription || ""}
+                orderStatus={orderStatus}
               />
             )}
           </div>
@@ -308,7 +320,7 @@ function ConfirmAndPay() {
       </div>
       {isSuccessModal && saveBookingResponse && (
         <SuccessBookingModal
-          isSuccess={true}
+          isSuccess={isSuccessModal}
           onClose={() => setIsSuccessModal(false)}
           bookingData={saveBookingResponse}
         />

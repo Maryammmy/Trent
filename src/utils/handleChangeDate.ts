@@ -9,12 +9,10 @@ export const validateStartDate = (
 ): DateValueType | null => {
   const { startDate } = newValue || {};
   const today = new Date().setHours(0, 0, 0, 0);
-
   if (startDate && new Date(startDate).getTime() < today) {
     toast.error(t("error_Check_in_after_today"));
     return null;
   }
-
   if (
     startDate &&
     endDateValue?.startDate &&
@@ -23,7 +21,6 @@ export const validateStartDate = (
     toast.error(t("error_check_in"));
     return null;
   }
-
   return newValue;
 };
 export const validateEndDate = (
@@ -52,15 +49,14 @@ export const validateEndDate = (
     toast.error(t("error_check_out"));
     return null;
   }
-
-  const diffInTime = end.getTime() - start.getTime();
-  const diffInDays = diffInTime / (1000 * 3600 * 24);
-
+  start.setHours(0, 0, 0, 0);
+  end.setHours(0, 0, 0, 0);
+  const diffInDays =
+    Math.round((end.getTime() - start.getTime()) / (1000 * 3600 * 24)) + 1;
   if (typeof minDays === "number" && minDays > 0 && diffInDays < minDays) {
     toast.error(t("error_min_days_stay", { days: minDays }));
     return null;
   }
-
   if (typeof maxDays === "number" && maxDays > 0 && diffInDays > maxDays) {
     toast.error(t("error_max_days_stay", { days: maxDays }));
     return null;

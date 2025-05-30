@@ -34,7 +34,7 @@ const currentLanguage = (localStorage.getItem("i18nextLng") ||
 const storedCurrency = sessionStorage.getItem("currency");
 const parsedCurrency = storedCurrency
   ? JSON.parse(storedCurrency)
-  : { currency: "EGP", rate: 1 };
+  : { currency: "EGP", rate: "1" };
 function Property() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -46,6 +46,7 @@ function Property() {
   const basePrice = Math.round(
     Number(propertyDetails?.price) * Number(parsedCurrency?.rate)
   );
+  const guestCount = Number(propertyDetails?.guest_count);
   const minDays = Number(propertyDetails?.min_days);
   const url = `https://www.trent.com.eg/properties/${id}`;
   return (
@@ -146,14 +147,19 @@ function Property() {
                     data-aos="fade-right"
                     className="font-medium flex flex-wrap gap-2"
                   >
-                    <div className="flex items-center gap-1 flex-wrap">
-                      <div className="flex items-center gap-1">
-                        <UsersRound className="text-primary shrink-0" />
-                        <span>{t("guest_count")}</span>
-                      </div>
-                      <span>{propertyDetails?.guest_count}</span>
-                    </div>
-                    <span>,</span>
+                    {guestCount ? (
+                      <>
+                        {" "}
+                        <div className="flex items-center gap-1 flex-wrap">
+                          <div className="flex items-center gap-1">
+                            <UsersRound className="text-primary shrink-0" />
+                            <span>{t("guest_count")}</span>
+                          </div>
+                          <span>{propertyDetails?.guest_count}</span>
+                        </div>
+                        <span>,</span>
+                      </>
+                    ) : null}
                     <div className="flex items-center gap-1 flex-wrap">
                       <div className="flex items-center gap-1">
                         <BedDouble className="text-primary shrink-0" />

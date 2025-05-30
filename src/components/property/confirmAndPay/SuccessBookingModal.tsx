@@ -18,7 +18,7 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
       title={t("booking_successful")}
       className="text-xl text-center pt-6 pb-2 font-semibold"
     >
-      <Button onClick={close} className="absolute top-5 right-4">
+      <Button onClick={onClose} className="absolute top-5 right-4">
         <X size={20} />
       </Button>
       <div className="px-5 md:px-10 pb-6">
@@ -50,8 +50,8 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
             </div>
           </div>
           <p className="font-semibold text-lg">
-            <span className="">{t("total")} :</span>{" "}
-            {Math.round(bookingData?.final_total)} {t("EGP")}
+            <span className="">{t("total")} :</span> {bookingData?.final_total}{" "}
+            {t("EGP")}
           </p>
         </div>
         <div className="flex justify-between gap-4 font-medium">

@@ -25,17 +25,17 @@ export interface ISaveBooking {
 export interface IVerifyPropertyResponse {
   IS_FAVOURITE: number;
   deposit_fees: string;
-  final_total: number;
+  final_total: string;
   id: string;
   image_list: IImage[];
   period_type: string;
   price: string;
-  rate: number;
-  service_fees: number;
-  sub_total: number;
-  taxes: number;
+  rate: string;
+  service_fees: string;
+  sub_total: string;
+  taxes: string;
   title: string;
-  trent_fees: number;
+  trent_fees: string;
   days: number;
   from_date: string;
   to_date: string;

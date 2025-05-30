@@ -48,6 +48,7 @@ function Book() {
   const minDays = Number(propertyBook?.min_days);
   const { data: datesData } = usePropertyDatesAPI(id);
   const dates = datesData?.data?.data?.date_list;
+  const guestCount = Number(propertyBook?.guest_count);
   const handleStartValueChange = (newValue: DateValueType) => {
     const validatedValue = validateStartDate(newValue, endDateValue, t);
     if (validatedValue) {
@@ -112,7 +113,6 @@ function Book() {
       const response = await verifyPropertyAPI(payload);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
-        console.log(response?.data?.data?.booking_details);
         sessionStorage.setItem(
           "bookingData",
           JSON.stringify({
@@ -137,7 +137,6 @@ function Book() {
         customError?.response?.data?.response_message ||
         t("something_went_wrong");
       toast.error(errorMessage);
-      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -171,7 +170,7 @@ function Book() {
               <h2 className="text-black font-bold mb-2">{t("guest_count")}</h2>
               <div className="flex items-center gap-4">
                 <p className="text-dark font-medium">
-                  {propertyBook?.guest_count
+                  {guestCount
                     ? t("suitable_guests", {
                         guests: propertyBook?.guest_count,
                       })
