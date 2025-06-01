@@ -5,7 +5,7 @@ import Properties from "../pages/hosting/properties";
 import ProtectedRoutes from "../middleware/ProtectedRoutes";
 import UpdateProperty from "@/pages/hosting/properties/updateProperty";
 import Payout from "@/pages/payouts";
-import PayoutRequest from "@/pages/payouts/PayoutRequest";
+import PayoutsRequest from "@/pages/payouts/PayoutsRequest";
 import PayoutProfiles from "@/pages/payouts/PayoutProfiles";
 import CreatePayoutProfile from "@/pages/payouts/CreatePayoutProfile";
 import Bookings from "@/pages/hosting/bookings";
@@ -81,7 +81,7 @@ export const HostingRoutes = (
       path="payouts/request"
       element={
         <ProtectedRoutes>
-          <PayoutRequest />
+          <PayoutsRequest />
         </ProtectedRoutes>
       }
     />

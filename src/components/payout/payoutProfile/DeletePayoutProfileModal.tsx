@@ -2,7 +2,7 @@ import Loader from "@/components/loader/Loader";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import { ApiError } from "@/interfaces";
-import { deletePayoutProfileAPI } from "@/services/payoutsService";
+import { deletePayoutsProfileAPI } from "@/services/payoutsService";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -17,7 +17,7 @@ function DeletePayoutProfileModal({ id, deleteProfile, close }: IProps) {
   const handleDeleteAccount = async () => {
     try {
       setLoading(true);
-      const response = await deletePayoutProfileAPI(id);
+      const response = await deletePayoutsProfileAPI(id);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
         setTimeout(() => {

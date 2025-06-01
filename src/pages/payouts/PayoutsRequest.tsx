@@ -1,6 +1,5 @@
 import PayoutReadyProperty from "@/components/payout/PayoutReadyProperty";
 import { useTranslation } from "react-i18next";
-import Image from "@/components/ui/Image";
 import { CurrentLanguage } from "@/types";
 import Button from "@/components/ui/Button";
 import { useState } from "react";
@@ -22,7 +21,7 @@ import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
 const uid = Cookies.get("user_id") || "";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
-function PayoutRequest() {
+function PayoutsRequest() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [selectedProperties, setSelectedProperties] = useState<number[]>([]);
@@ -41,7 +40,7 @@ function PayoutRequest() {
   };
   const sendPayoutRequest = async () => {
     try {
-      if (!profileId && !selectedProperties?.length) {
+      if (!profileId || !selectedProperties?.length) {
         toast.error(t("please_select_profile_and_properties"));
         return;
       }
@@ -77,33 +76,7 @@ function PayoutRequest() {
         </div>
       ) : (
         <div className="py-10 px-5 xl:px-0 max-w-6xl mx-auto">
-          <div className="w-full sm:w-96 h-52 relative rounded-2xl overflow-hidden">
-            <div className="absolute h-full left-5 py-2 pointer-events-none z-[5] flex flex-col justify-between">
-              <h2 className="text-white font-semibold text-xl pt-5">
-                {t("payouts")}
-              </h2>
-              <div className="flex flex-col gap-1">
-                <span className="text-white font-semibold text-2xl">
-                  1200 {t("EGP")}
-                </span>
-                <span className="text-white font-semibold text-lg">
-                  {t("your_total_earnings")}
-                </span>
-              </div>
-            </div>
-            <div className="w-full h-full">
-              <Image
-                imageUrl={
-                  currentLanguage === "ar"
-                    ? "/images/walletIMageAr.png"
-                    : "/images/walletIMage.png"
-                }
-                alt="card"
-                className="w-full h-full"
-              />
-            </div>
-          </div>
-          <div className="pt-8 max-w-md">
+          <div className="pt-5 max-w-md">
             {!payoutProfiles ? (
               <SelectSkeleton />
             ) : payoutProfiles?.length ? (
@@ -171,4 +144,4 @@ function PayoutRequest() {
   );
 }
 
-export default PayoutRequest;
+export default PayoutsRequest;

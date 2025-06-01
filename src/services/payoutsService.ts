@@ -3,8 +3,8 @@ import { baseAPI, baseAPIForm } from ".";
 import Cookies from "js-cookie";
 import { CurrentLanguage } from "@/types";
 import {
-  ICreatePayoutProfile,
-  ICreatePayoutRequest,
+  ICreatePayoutsProfile,
+  ICreatePayoutsRequest,
 } from "@/interfaces/payouts";
 
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
@@ -30,7 +30,7 @@ export const usePayoutPropertiesAPI = () => {
     enabled: !!uid,
   });
 };
-export const createPayoutsRequestAPI = (payload: ICreatePayoutRequest) => {
+export const createPayoutsRequestAPI = (payload: ICreatePayoutsRequest) => {
   const formData = new FormData();
   Object.entries(payload).forEach(([key, value]) => {
     formData.append(key, String(value));
@@ -38,7 +38,7 @@ export const createPayoutsRequestAPI = (payload: ICreatePayoutRequest) => {
   const response = baseAPIForm.post("user_api/payout/add_payout.php", formData);
   return response;
 };
-export const createPayoutsProfileAPI = (payload: ICreatePayoutProfile) => {
+export const createPayoutsProfileAPI = (payload: ICreatePayoutsProfile) => {
   const formData = new FormData();
   Object.entries(payload).forEach(([key, value]) => {
     formData.append(key, String(value));
@@ -57,7 +57,7 @@ export const usePayoutProfilesAPI = () => {
     enabled: !!uid,
   });
 };
-export const deletePayoutProfileAPI = (profile_id: string) => {
+export const deletePayoutsProfileAPI = (profile_id: string) => {
   const response = baseAPI.delete("user_api/payout/delete_profile_payout.php", {
     data: { uid, profile_id },
   });
@@ -69,6 +69,17 @@ export const useCashMethodsAPI = () => {
     queryFn: () =>
       baseAPI.get(
         `user_api/payout/get_cash_in_method.php?uid=${uid}&lang=${currentLanguage}`
+      ),
+    enabled: !!uid,
+  });
+};
+
+export const usePayoutsHistoryAPI = () => {
+  return useQuery({
+    queryKey: ["payoutsHistory"],
+    queryFn: () =>
+      baseAPI.get(
+        `user_api/payout/get_payouts.php?uid=${uid}&lang=${currentLanguage}`
       ),
     enabled: !!uid,
   });

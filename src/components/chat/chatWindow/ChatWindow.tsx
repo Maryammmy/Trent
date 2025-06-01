@@ -18,8 +18,8 @@ function ChatWindow() {
     <div
       className={`${
         ownerId
-          ? "flex flex-col flex-1"
-          : "hidden lg:flex lg:flex-col lg:flex-1"
+          ? "flex flex-col flex-1 min-w-0"
+          : "hidden lg:flex lg:flex-col lg:flex-1 lg:min-w-0"
       }`}
     >
       <ChatHeader owner={owner} />

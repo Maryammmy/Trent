@@ -15,7 +15,7 @@ function Booking({ profile }: IProps) {
     profile;
   return (
     <>
-      <div className="flex flex-wrap items-center justify-between gap-2 border px-6 py-4 rounded-2xl">
+      <div className="flex justify-between items-center gap-2 border px-6 py-4 rounded-2xl">
         <div className="w-full sm:w-fit">
           <h3 className="hidden sm:block text-lg font-semibold">
             {bank_name && bank_name
@@ -49,12 +49,14 @@ function Booking({ profile }: IProps) {
             </p>
           </div>
         </div>
-        <Button
-          onClick={() => setIsDeletedModal(true)}
-          className="hidden sm:flex items-center gap-1 font-medium text-red-600 p-2 rounded-full"
-        >
-          <Trash />
-        </Button>
+        <div>
+          <Button
+            onClick={() => setIsDeletedModal(true)}
+            className="hidden bg-rose-50 sm:flex items-center gap-1 font-medium text-red-600 p-2 rounded-full"
+          >
+            <Trash />
+          </Button>
+        </div>
       </div>
       {isDeletedModal && (
         <DeletePayoutProfileModal

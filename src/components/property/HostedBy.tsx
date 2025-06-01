@@ -26,8 +26,8 @@ function HostedBy({ id, owner, ownerId, propImage, title }: IProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const handleChatNavigator = async () => {
-    setLoading(true);
     try {
+      setLoading(true);
       const response = await chatListAPI(id);
       storeOwnerChat({ ...owner, prop_image: propImage, prop_id: id, title });
       const chatId: string = response?.data?.data?.chat_list?.[0]?.chat_id;

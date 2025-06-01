@@ -475,5 +475,13 @@
   "check_out_btn": "تسجيل المغادرة",
   "are_you_sure_you_want_to_check_out": "هل أنت متأكد أنك تريد تسجيل المغادرة؟",
   "confirm_check_out": "تأكيد تسجيل المغادرة",
-  "you_can't_chat_yourself": "لا يمكنك بدء محادثة مع نفسك"
+  "you_can't_chat_yourself": "لا يمكنك بدء محادثة مع نفسك",
+  "no_payouts_history_found": "لم يتم العثور على سجل دفعات",
+  "total_completed_earnings": "إجمالي الأرباح المكتملة",
+  "total_pending_earnings": "إجمالي الأرباح المعلقة",
+  "cancel_reason": "سبب الإلغاء",
+  "coupon": "قسيمة خصم",
+  "enter_coupon_code": "أدخل رمز القسيمة",
+  "remove": "إزالة",
+  "select_chat_to_start": "اختر محادثة لبدء المراسلة"
 }

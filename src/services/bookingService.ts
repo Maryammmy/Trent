@@ -137,3 +137,8 @@ export const checkInOutAPI = (payload: ICheckInOut) => {
   );
   return response;
 };
+export const checkCouponAPI = (couponCode: string, total: string) => {
+  return baseAPI.get(
+    `user_api/booking/u_check_coupon.php?coupon_code=${couponCode}&uid=${uid}&total=${total}`
+  );
+};

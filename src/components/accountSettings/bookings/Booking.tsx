@@ -40,9 +40,9 @@ function Booking({ booking }: IProps) {
     <>
       <Link
         to={`/account-settings/bookings/${book_id}?status=${status}`}
-        className="flex flex-col md:flex-row md:items-center gap-5 sm:gap-8 border p-4 rounded-2xl"
+        className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 border p-4 rounded-2xl font-semibold"
       >
-        <div className="relative h-14 w-14 overflow-hidden rounded-md">
+        <div className="relative h-14 w-14 overflow-hidden rounded-md shrink-0">
           <div className="absolute inset-0 bg-black/15 pointer-events-none z-[5]" />
           <div className="w-full h-full">
             <Image
@@ -53,8 +53,8 @@ function Booking({ booking }: IProps) {
           </div>
         </div>
         <div className="flex flex-col gap-1">
-          <h3 className="text-lg font-semibold">{prop_title}</h3>
-          <div className="flex flex-col gap-1 sm:flex-row sm:gap-5 font-medium">
+          <h3 className="text-lg">{prop_title}</h3>
+          <div className="flex flex-col gap-1 sm:flex-row sm:gap-5">
             <p>
               <span> {t("check_in")} :</span> {check_in}
             </p>
@@ -62,26 +62,23 @@ function Booking({ booking }: IProps) {
               <span> {t("check_out")} :</span> {check_out}
             </p>
           </div>
-          <p className="text-lg font-semibold">
-            <span>{t("total")} :</span> {total_paid && parseInt(total_paid)}{" "}
-            {t("EGP")}
+          <span className="text-primary">{book_status}</span>
+          <p className="text-lg">
+            <span>{t("total")} :</span> {total_paid && total_paid} {t("EGP")}
           </p>
-          <span className="text-primary font-semibold">{book_status}</span>
           {book_status === "Completed" && (
-            <div className="flex items-center gap-5">
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsRatingModalOpen(true);
-                }}
-                className="flex items-center gap-2"
-              >
-                <Rating rating={Number(individual_rate?.rate) || 0} />
-                <span className="text-sm font-semibold text-dark">
-                  ({individual_rate?.rate || 0})
-                </span>
-              </Button>
-            </div>
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                setIsRatingModalOpen(true);
+              }}
+              className="flex items-center gap-2"
+            >
+              <Rating rating={Number(individual_rate?.rate) || 0} />
+              <span className="text-sm text-dark">
+                ({individual_rate?.rate || 0})
+              </span>
+            </Button>
           )}
           {status === "active" && (
             <div className="flex items-center gap-10">
@@ -91,7 +88,7 @@ function Booking({ booking }: IProps) {
                     e.preventDefault();
                     setIsCheckInOpen(true);
                   }}
-                  className="py-2 w-40 bg-primary font-medium text-white rounded"
+                  className="py-2 w-40 bg-primary text-white rounded"
                 >
                   {t("check_in_btn")}
                 </Button>
@@ -102,7 +99,7 @@ function Booking({ booking }: IProps) {
                     e.preventDefault();
                     setIsCheckOutOpen(true);
                   }}
-                  className="py-2 w-40 bg-primary font-medium text-white rounded"
+                  className="py-2 w-40 bg-primary text-white rounded"
                 >
                   {t("check_out_btn")}
                 </Button>
@@ -113,7 +110,7 @@ function Booking({ booking }: IProps) {
                     e.preventDefault();
                     setIsCancelBookingOpen(true);
                   }}
-                  className="py-2 w-40 bg-primary font-medium text-white rounded"
+                  className="py-2 w-40 bg-primary text-white rounded"
                 >
                   {t("cancel_booking")}
                 </Button>

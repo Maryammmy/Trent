@@ -487,5 +487,13 @@
   "check_out_btn": "Check Out",
   "are_you_sure_you_want_to_check_out": "Are you sure you want to check out?",
   "confirm_check_out": "Confirm Your Check-Out",
-  "you_can't_chat_yourself": "You can't chat with yourself"
+  "you_can't_chat_yourself": "You can't chat with yourself",
+  "no_payouts_history_found": "No payouts history found",
+  "total_completed_earnings": "Total Completed Earnings",
+  "total_pending_earnings": "Total Pending Earnings",
+  "cancel_reason": "Cancel reason",
+  "coupon": "Coupon",
+  "enter_coupon_code": "Enter coupon code",
+  "remove": "Remove",
+  "select_chat_to_start": "Select a chat to start messaging"
 }

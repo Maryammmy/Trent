@@ -17,7 +17,7 @@ function PayoutProfiles() {
         {!payoutProfiles ? (
           <PropertyHostingSkeleton cards={3} />
         ) : payoutProfiles?.length ? (
-          payoutProfiles.map((profile) => (
+          payoutProfiles?.map((profile) => (
             <PayoutProfile key={profile?.id} profile={profile} />
           ))
         ) : (
