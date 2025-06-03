@@ -10,7 +10,7 @@ import InputErrorMessage from "../../ui/InputErrorMessage";
 import Loader from "../../loader/Loader";
 import { ApiError } from "../../../interfaces";
 import { PayoutProfileSchema } from "@/validation/payoutProfileSchema";
-import { IPaymentMethod, ICreatePayoutProfile } from "@/interfaces/payouts";
+import { IPaymentMethod, ICreatePayoutsProfile } from "@/interfaces/payouts";
 import {
   createPayoutsProfileAPI,
   usePaymentMethodAPI,
@@ -36,7 +36,7 @@ function PayoutProfileForm() {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<ICreatePayoutProfile>({
+  } = useForm<ICreatePayoutsProfile>({
     resolver: yupResolver(PayoutProfileSchema),
     defaultValues: {
       uid,
@@ -49,7 +49,7 @@ function PayoutProfileForm() {
       lang: currentLanguage,
     },
   });
-  const onSubmit = async (data: ICreatePayoutProfile) => {
+  const onSubmit = async (data: ICreatePayoutsProfile) => {
     try {
       if (
         !data.wallet_number &&
