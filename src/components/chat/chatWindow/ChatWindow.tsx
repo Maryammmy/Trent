@@ -6,6 +6,7 @@ import { IMessage } from "@/interfaces/chat";
 import { useMessagesAPI } from "@/services/chatService";
 import { MessageCircleMore } from "lucide-react";
 import ChatProperty from "./ChatProperty";
+import { t } from "i18next";
 
 function ChatWindow() {
   const ownerId = useQueryParam("user");
@@ -31,7 +32,7 @@ function ChatWindow() {
     <div className="hidden lg:flex lg:flex-col lg:flex-1 lg:gap-5 lg:justify-center lg:items-center">
       <MessageCircleMore className="text-dark" size={100} />
       <p className="text-dark text-lg text-center font-medium">
-        Select a chat to start messaging
+        {t("select_chat_to_start")}
       </p>
     </div>
   );

@@ -7,4 +7,9 @@ export interface INotification {
   image_list: IImage[];
   is_seen: boolean;
   title: string;
+  key: string;
+  value: string;
+}
+export interface INotificationRouteMap {
+  [key: string]: string;
 }

@@ -495,5 +495,7 @@
   "coupon": "Coupon",
   "enter_coupon_code": "Enter coupon code",
   "remove": "Remove",
-  "select_chat_to_start": "Select a chat to start messaging"
+  "select_chat_to_start": "Select a chat to start messaging",
+  "coupon_discount": "Coupon Discount",
+  "total_before_discount": "Total before discount"
 }

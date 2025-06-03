@@ -483,5 +483,7 @@
   "coupon": "قسيمة خصم",
   "enter_coupon_code": "أدخل رمز القسيمة",
   "remove": "إزالة",
-  "select_chat_to_start": "اختر محادثة لبدء المراسلة"
+  "select_chat_to_start": "اختر محادثة لبدء المراسلة",
+  "coupon_discount": "خصم الكوبون",
+  "total_before_discount": "الإجمالي قبل الخصم"
 }

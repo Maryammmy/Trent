@@ -1,4 +1,7 @@
-import { INotification } from "@/interfaces/notifications";
+import {
+  INotification,
+  INotificationRouteMap,
+} from "@/interfaces/notifications";
 import Image from "../ui/Image";
 import { baseURL } from "@/services";
 import toast from "react-hot-toast";
@@ -6,20 +9,34 @@ import { ApiError } from "@/interfaces";
 import { useTranslation } from "react-i18next";
 import { updateNotificationAPI } from "@/services/Notifications";
 import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 interface IProps {
   notification: INotification;
+  close: () => void;
 }
-function Notification({ notification }: IProps) {
-  const { title, body, image_list, is_seen, id } = notification;
+function Notification({ notification, close }: IProps) {
+  const { title, body, image_list, is_seen, id, key, value } = notification;
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const routeMap: INotificationRouteMap = {
+    booking_id: `/account-settings/bookings/${value}?status=active`,
+    property_id: `/hosting/properties`,
+  };
+
   const updateNotification = async () => {
     try {
       const response = await updateNotificationAPI(id);
       if (response?.data?.response_code === 200) {
         queryClient.refetchQueries({ queryKey: ["notifications"] });
         queryClient.refetchQueries({ queryKey: ["unreadNotificationsCount"] });
+        setTimeout(() => {
+          if (routeMap[key]) {
+            navigate(routeMap[key]);
+          }
+          close();
+        }, 500);
       }
     } catch (error) {
       const customError = error as ApiError;

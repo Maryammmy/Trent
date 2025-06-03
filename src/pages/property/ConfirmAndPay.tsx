@@ -58,11 +58,16 @@ function ConfirmAndPay() {
       ? "PayAtFawry"
       : "MWALLET"
   );
-  const finalTotal = Number(bookingData?.final_total);
+  const [couponValue, setCouponValue] = useState(0);
   const walletBalance = Number(bookingData?.wallet_balance);
-  const itemId = bookingData?.item_id ? bookingData.item_id.toString() : "";
+  const itemId = bookingData.item_id.toString();
   const hasSavedRef = useRef(false);
+  const finalTotalAfterDiscount =
+    couponValue && couponValue > 0
+      ? Number(bookingData?.final_total) - couponValue
+      : Number(bookingData?.final_total);
   console.log(statusCode);
+
   const createFawryPayment = async () => {
     try {
       if (!paymentMethod) {
@@ -74,7 +79,7 @@ function ConfirmAndPay() {
         fawryCredentials?.merchant_code,
         fawryCredentials?.secure_key,
         itemId,
-        finalTotal,
+        finalTotalAfterDiscount,
         paymentMethod,
         returnUrl
       );
@@ -98,11 +103,17 @@ function ConfirmAndPay() {
     if (hasSavedRef.current) return;
     hasSavedRef.current = true;
     try {
-      if (paymentMethod === "TRENT_BALANCE" && walletBalance < finalTotal) {
+      if (
+        paymentMethod === "TRENT_BALANCE" &&
+        walletBalance < finalTotalAfterDiscount
+      ) {
         toast.error(t("insufficient_balance"));
         return;
       }
-      if (paymentMethod === "TRENT_BALANCE" && walletBalance >= finalTotal) {
+      if (
+        paymentMethod === "TRENT_BALANCE" &&
+        walletBalance >= finalTotalAfterDiscount
+      ) {
         setLoading(true);
       }
       const payload = {
@@ -135,7 +146,7 @@ function ConfirmAndPay() {
     bookingData,
     paymentMethod,
     walletBalance,
-    finalTotal,
+    finalTotalAfterDiscount,
     merchantRefNumber,
     itemId,
     id,
@@ -231,7 +242,12 @@ function ConfirmAndPay() {
               )}
             </div>
             <div className="lg:flex-[2] lg:flex lg:justify-end">
-              <PriceDetails bookingData={bookingData} />
+              <PriceDetails
+                bookingData={bookingData}
+                couponValue={couponValue}
+                handleChangeCouponValue={(val) => setCouponValue(val)}
+                finalTotalAfterDiscount={finalTotalAfterDiscount}
+              />
             </div>
           </div>
         ) : (
@@ -262,7 +278,12 @@ function ConfirmAndPay() {
               </div>
             </div>
             <div className="lg:flex-[2] lg:flex lg:justify-end">
-              <PriceDetails bookingData={bookingData} />
+              <PriceDetails
+                bookingData={bookingData}
+                couponValue={couponValue}
+                handleChangeCouponValue={(val) => setCouponValue(val)}
+                finalTotalAfterDiscount={finalTotalAfterDiscount}
+              />
             </div>
             <div className="py-0 lg:py-5">
               <h3 className="font-semibold text-2xl pb-4">

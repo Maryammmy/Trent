@@ -23,7 +23,9 @@ export default function Notifications() {
   const { data: unreadCountData, refetch: refetchUnreadCount } =
     useUnreadNotificationsCountAPI();
   const unreadCount = unreadCountData?.data?.data?.count;
-  useClickOutside(notificationsRef, () => setOpen(false));
+  const onClose = () => {
+    setOpen(false);
+  };
   const updateNotifications = async () => {
     try {
       const response = await updateNotificationAPI("*");
@@ -39,6 +41,7 @@ export default function Notifications() {
       toast.error(errorMessage);
     }
   };
+  useClickOutside(notificationsRef, onClose);
   return (
     <div className="relative" ref={notificationsRef}>
       <Button
@@ -88,6 +91,7 @@ export default function Notifications() {
                     <Notification
                       key={notification?.id}
                       notification={notification}
+                      close={onClose}
                     />
                   ))}
                 </div>
@@ -139,6 +143,7 @@ export default function Notifications() {
                       <Notification
                         key={notification?.id}
                         notification={notification}
+                        close={onClose}
                       />
                     ))}
                   </div>
@@ -147,7 +152,7 @@ export default function Notifications() {
                 <div className="py-6 px-4">
                   <div className="flex justify-between items-center mb-2">
                     <h2 className="text-xl font-semibold">Notifications</h2>
-                    <Button onClick={() => setOpen(false)}>
+                    <Button onClick={onClose}>
                       <X />
                     </Button>
                   </div>

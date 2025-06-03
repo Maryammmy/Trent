@@ -5,6 +5,8 @@ export interface IChatList {
   receiver_image: string;
   receiver_name: string;
   receiver_id: string;
+  prop_title: string;
+  prop_img: string;
 }
 export interface IMessage {
   created_at: string;

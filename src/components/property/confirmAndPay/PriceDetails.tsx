@@ -11,8 +11,16 @@ import toast from "react-hot-toast";
 import { ApiError } from "@/interfaces";
 interface IProps {
   bookingData: IVerifyPropertyResponse;
+  couponValue: number;
+  handleChangeCouponValue: (val: number) => void;
+  finalTotalAfterDiscount: number;
 }
-function PriceDetails({ bookingData }: IProps) {
+function PriceDetails({
+  bookingData,
+  couponValue,
+  handleChangeCouponValue,
+  finalTotalAfterDiscount,
+}: IProps) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [coupon, setCoupon] = useState("");
@@ -20,9 +28,9 @@ function PriceDetails({ bookingData }: IProps) {
     try {
       setLoading(true);
       const response = await checkCouponAPI(coupon, bookingData?.sub_total);
-      console.log(response);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
+        handleChangeCouponValue(Number(response?.data?.data?.value));
       }
     } catch (error) {
       const customError = error as ApiError;
@@ -34,10 +42,14 @@ function PriceDetails({ bookingData }: IProps) {
       setLoading(false);
     }
   };
+  const handleRemoveCoupon = () => {
+    setCoupon("");
+    handleChangeCouponValue(0);
+  };
   return (
     <div>
       <div className="border p-5 w-full rounded-lg md:w-[500px]">
-        <div className="flex flex-col md:flex-row md:items-center gap-5 border-b pb-6">
+        <div className="flex flex-col md:flex-row md:items-center gap-5">
           <div className="relative w-28 h-28 rounded-lg overflow-hidden">
             <div className="absolute inset-0 bg-black/15 pointer-events-none z-[5]"></div>
             <div className="w-full h-full">
@@ -60,6 +72,7 @@ function PriceDetails({ bookingData }: IProps) {
           </h4>
           <div className="p-3 border rounded-lg flex gap-2 justify-between focus-within:border-primary">
             <Input
+              value={coupon}
               placeholder={t("enter_coupon_code")}
               className="flex-1 min-w-0 outline-none"
               onChange={(e) => setCoupon(e.target.value)}
@@ -67,9 +80,15 @@ function PriceDetails({ bookingData }: IProps) {
             <Button
               disabled={loading || !coupon}
               className="font-semibold text-primary"
-              onClick={handleApplyCoupon}
+              onClick={couponValue ? handleRemoveCoupon : handleApplyCoupon}
             >
-              {loading ? <Loader /> : t("apply")}
+              {loading ? (
+                <Loader borderColor="#223f7f" />
+              ) : couponValue ? (
+                t("remove")
+              ) : (
+                t("apply")
+              )}
             </Button>
           </div>
         </div>
@@ -113,10 +132,30 @@ function PriceDetails({ bookingData }: IProps) {
               </span>
             </div>
           </div>
+          {couponValue > 0 && (
+            <div className="my-2 py-2 font-medium border-b">
+              <div className="grid grid-cols-2 gap-5 mb-2">
+                <span>{t("total_before_discount")}</span>
+                <span className="text-end">
+                  {bookingData?.final_total} {t("EGP")}
+                </span>
+              </div>
+            </div>
+          )}
+          {couponValue > 0 && (
+            <div className="my-2 py-2 font-medium border-b">
+              <div className="grid grid-cols-2 gap-5 mb-2">
+                <span>{t("coupon_discount")}</span>
+                <span className="text-end">
+                  - {couponValue?.toFixed(2)} {t("EGP")}
+                </span>
+              </div>
+            </div>
+          )}
           <div className="grid grid-cols-2 gap-5 font-semibold text-lg pt-3">
             <span>{t("total")}</span>
             <span className="text-end">
-              {bookingData?.final_total} {t("EGP")}
+              {finalTotalAfterDiscount?.toFixed(2)} {t("EGP")}
             </span>
           </div>
         </div>
