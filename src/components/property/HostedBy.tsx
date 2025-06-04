@@ -11,6 +11,7 @@ import Loader from "../loader/Loader";
 import { chatListAPI } from "@/services/chatService";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
+import { IOwner } from "@/interfaces/chat";
 
 const uid = Cookies.get("user_id");
 interface IProps {
@@ -29,7 +30,14 @@ function HostedBy({ id, owner, ownerId, propImage, title }: IProps) {
     try {
       setLoading(true);
       const response = await chatListAPI(id);
-      storeOwnerChat({ ...owner, prop_image: propImage, prop_id: id, title });
+      const ownerData: IOwner = {
+        receiver_image: owner?.img,
+        receiver_name: owner?.name,
+        prop_img: propImage,
+        prop_id: Number(id),
+        prop_title: title,
+      };
+      storeOwnerChat(ownerData);
       const chatId: string = response?.data?.data?.chat_list?.[0]?.chat_id;
       navigate(
         `/chat?prop=${id}&user=${ownerId}${chatId ? `&chat=${chatId}` : ""}`

@@ -13,8 +13,15 @@ function ChatWindow() {
   const chatId = useQueryParam("chat");
   const propId = useQueryParam("prop");
   const { data } = useMessagesAPI(chatId);
-  const owner = data?.data?.data;
-  const messages: IMessage[] = data?.data?.data?.chat_messages;
+  const chatData = data?.data?.data;
+  const owner = {
+    receiver_image: chatData?.receiver_image,
+    receiver_name: chatData?.receiver_name,
+    prop_id: chatData?.prop_id,
+    prop_title: chatData?.prop_title,
+    prop_img: chatData?.prop_img,
+  };
+  const messages: IMessage[] = chatData?.chat_messages;
   return ownerId ? (
     <div
       className={`${
@@ -23,8 +30,8 @@ function ChatWindow() {
           : "hidden lg:flex lg:flex-col lg:flex-1 lg:min-w-0"
       }`}
     >
-      <ChatHeader owner={owner} />
-      <ChatProperty />
+      <ChatHeader owner={owner} chatId={chatId} />
+      <ChatProperty owner={owner} chatId={chatId} />
       <ChatMessages messages={messages} />
       <ChatInput ownerId={ownerId} propId={propId} chatId={chatId} />
     </div>

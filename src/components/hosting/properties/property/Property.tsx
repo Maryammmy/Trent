@@ -25,8 +25,6 @@ const Property = ({ property }: IProps) => {
     is_approved,
   } = property;
 
-  const basePrice = parseInt(price);
-
   // Determine status text
   let statusText = "";
   let statusColor = "";
@@ -70,7 +68,7 @@ const Property = ({ property }: IProps) => {
           {category_type}
         </p>
         <p className="font-medium hidden sm:block whitespace-nowrap overflow-hidden text-ellipsis">
-          {basePrice} {t("EGP")}
+          {price} {t("EGP")}
         </p>
         <p className={`font-semibold ${statusColor}`}>{statusText}</p>
 

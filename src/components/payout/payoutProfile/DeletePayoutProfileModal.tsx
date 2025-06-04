@@ -41,9 +41,9 @@ function DeletePayoutProfileModal({ id, deleteProfile, close }: IProps) {
       isOpen={deleteProfile}
       close={close}
       title={t("delete_payout_profile_title")}
-      className="text-center font-bold text-2xl pt-5"
+      className="text-center font-bold text-2xl p-6 pb-0"
     >
-      <div className="p-6">
+      <div className="p-5 md:pb-8 pt-5 md:px-10">
         <p className="font-medium text-center">
           {t("delete_payout_profile_desc")}
         </p>

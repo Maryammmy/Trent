@@ -1,4 +1,4 @@
-import { Eye, EyeOff, X } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import Button from "../ui/Button";
 import Modal from "../ui/Modal";
 import Input from "../ui/Input";
@@ -118,14 +118,6 @@ function SignupModal() {
         close={() => dispatch(setIsSignup(false))}
         isOpen={isSignup}
       >
-        <Button
-          onClick={() => dispatch(setIsSignup(false))}
-          className="absolute top-5 right-4 text-gray-500"
-        >
-          <span>
-            <X size={20} />
-          </span>
-        </Button>
         <div className="pb-3">
           <div className="p-5 md:py-8 md:px-10 max-h-[80vh] overflow-y-auto">
             <h2 className="text-lg font-semibold pb-5">

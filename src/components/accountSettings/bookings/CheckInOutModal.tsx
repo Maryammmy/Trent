@@ -1,7 +1,6 @@
 import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 import { useTranslation } from "react-i18next";
-import { X } from "lucide-react";
 import { useState } from "react";
 import { checkInOutAPI } from "@/services/bookingService";
 import toast from "react-hot-toast";
@@ -13,31 +12,34 @@ import Loader from "@/components/loader/Loader";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 const uid = Cookies.get("user_id");
+
 interface IProps {
   isOpen: boolean;
   close: () => void;
   bookingId: string;
+  isCheckIn: boolean;
 }
-function CheckOutModal({ isOpen, close, bookingId }: IProps) {
+
+function CheckInOutModal({ isOpen, close, bookingId, isCheckIn }: IProps) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
-  const handleCheckIn = async () => {
+  const handleCheck = async () => {
     try {
       setLoading(true);
       const payload = {
         uid: uid || "",
         lang: currentLanguage,
         booking_id: bookingId,
-        is_check_in: false,
+        is_check_in: isCheckIn,
       };
-      const response = await checkInOutAPI(payload); // Use your actual API here
+      const response = await checkInOutAPI(payload);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
-        // setTimeout(() => {
-        //   close();
-        //   window.location.reload();
-        // }, 500);
+        setTimeout(() => {
+          close();
+          window.location.reload();
+        }, 500);
       }
     } catch (error) {
       const customError = error as ApiError;
@@ -54,15 +56,16 @@ function CheckOutModal({ isOpen, close, bookingId }: IProps) {
     <Modal
       isOpen={isOpen}
       close={close}
-      title={t("confirm_check_out")}
-      className="text-lg md:text-2xl font-semibold text-center p-5 pb-0"
+      title={t(isCheckIn ? "confirm_check_in" : "confirm_check_out")}
+      className="text-2xl font-semibold text-center p-5 pb-0"
     >
-      <Button onClick={close} className="absolute top-5 right-4">
-        <X size={20} />
-      </Button>
-      <div className="p-5 space-y-5">
+      <div className="p-5 md:pb-8 pt-5 md:px-10 space-y-5">
         <p className="text-dark text-center font-medium">
-          {t("are_you_sure_you_want_to_check_out")}
+          {t(
+            isCheckIn
+              ? "are_you_sure_you_want_to_check_in"
+              : "are_you_sure_you_want_to_check_out"
+          )}
         </p>
         <div className="flex justify-between gap-4 font-medium">
           <Button
@@ -74,10 +77,14 @@ function CheckOutModal({ isOpen, close, bookingId }: IProps) {
           </Button>
           <Button
             disabled={loading}
-            onClick={handleCheckIn}
+            onClick={handleCheck}
             className="w-32 py-2 text-center bg-primary text-white rounded-md hover:bg-primary/80"
           >
-            {loading ? <Loader /> : t("check_out_btn")}
+            {loading ? (
+              <Loader />
+            ) : (
+              t(isCheckIn ? "check_in_btn" : "check_out_btn")
+            )}
           </Button>
         </div>
       </div>
@@ -85,4 +92,4 @@ function CheckOutModal({ isOpen, close, bookingId }: IProps) {
   );
 }
 
-export default CheckOutModal;
+export default CheckInOutModal;

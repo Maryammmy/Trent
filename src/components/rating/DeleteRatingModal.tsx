@@ -42,9 +42,9 @@ function DeleteRatingModal({ isOpen, close, id }: IProps) {
       isOpen={isOpen}
       close={close}
       title={t("delete_review")}
-      className="text-center font-bold text-2xl pt-5"
+      className="text-center font-bold text-2xl p-5 pb-0"
     >
-      <div className="p-6">
+      <div className="p-5 md:pb-8 pt-5 md:px-10">
         <p className="font-medium text-center">{t("delete_review_desc")}</p>
         <div className="flex pt-5 justify-between space-x-3">
           <Button

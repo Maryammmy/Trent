@@ -9,7 +9,6 @@ export interface INotification {
   title: string;
   key: string;
   value: string;
-}
-export interface INotificationRouteMap {
-  [key: string]: string;
+  book_status: string;
+  is_owner: boolean;
 }

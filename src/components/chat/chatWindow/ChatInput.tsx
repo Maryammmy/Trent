@@ -52,7 +52,6 @@ const ChatInput = ({ ownerId, propId, chatId }: IProps) => {
         customError?.response?.data?.response_message ||
         t("something_went_wrong");
       toast.error(errorMessage);
-      console.log(error);
     }
   };
 

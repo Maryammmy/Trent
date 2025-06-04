@@ -54,8 +54,7 @@ function Booking({ booking }: IProps) {
           </div>
           <span className="text-primary">{book_status}</span>
           <p className="text-lg">
-            <span>{t("total")} :</span> {total_paid && parseInt(total_paid)}{" "}
-            {t("EGP")}
+            <span>{t("total")} :</span> {total_paid} {t("EGP")}
           </p>
           {status === "active" && book_status === "Booked" && (
             <div className="flex gap-10">

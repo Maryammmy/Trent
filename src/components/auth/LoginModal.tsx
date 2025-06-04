@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Eye, EyeOff, X } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
@@ -73,14 +73,6 @@ function LoginModal() {
         close={() => dispatch(setIsloggedin(false))}
         isOpen={isLoggedin}
       >
-        <Button
-          onClick={() => dispatch(setIsloggedin(false))}
-          className="absolute top-5 right-4"
-        >
-          <span>
-            <X size={20} />
-          </span>
-        </Button>
         <div className="p-5 md:py-8 md:px-10">
           <h2 className="text-lg font-semibold pb-5">
             {t("welcome_to_Trent")}

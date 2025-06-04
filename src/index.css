@@ -42,6 +42,13 @@ span {
 .hosting-layout {
   min-height: calc(100vh - 234px);
 }
+/* chat page */
+.mobile-chat-layout {
+  height: calc(100vh - 73.6px);
+}
+.sm-chat-layout {
+  height: calc(100vh - 87px);
+}
 /* update property bg */
 .bg-update-property {
   background-image: url("/images/bgHome.png"),

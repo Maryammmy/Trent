@@ -3,7 +3,7 @@ import ChatWindow from "../components/chat/chatWindow/ChatWindow";
 
 export default function ChatApp() {
   return (
-    <div className="flex h-[90vh]">
+    <div className="flex mobile-chat-layout sm:sm-chat-layout">
       <ChatList />
       <ChatWindow />
     </div>

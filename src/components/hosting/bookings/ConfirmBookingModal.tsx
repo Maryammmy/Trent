@@ -3,7 +3,6 @@ import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { X } from "lucide-react";
 import { ApiError } from "@/interfaces";
 import Cookies from "js-cookie";
 import { CurrentLanguage } from "@/types";
@@ -60,12 +59,9 @@ export default function ConfirmBookingModal({
       isOpen={isOpen}
       close={close}
       title={t("confirm_booking")}
-      className="text-lg md:text-2xl font-semibold text-center p-4 pb-0"
+      className="text-2xl font-semibold text-center p-4 pb-0"
     >
-      <Button onClick={close} className="absolute top-5 right-4">
-        <X size={20} />
-      </Button>
-      <div className="p-5 md:py-8 md:px-10 space-y-6">
+      <div className="p-5 md:pb-8 pt-5 md:px-10 space-y-6">
         <p className="text-dark text-center font-medium">
           {t("are_you_sure_confirm_booking")}
         </p>

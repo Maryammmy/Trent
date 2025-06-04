@@ -22,4 +22,5 @@ export interface IOwner {
   receiver_name: string;
   prop_id: number;
   prop_title: string;
+  prop_img: string;
 }

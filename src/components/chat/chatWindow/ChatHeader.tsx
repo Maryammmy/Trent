@@ -2,15 +2,14 @@ import Button from "@/components/ui/Button";
 import Image from "@/components/ui/Image";
 import { IOwner } from "@/interfaces/chat";
 import { baseURL } from "@/services";
-import { useQueryParam } from "@/utils/getQueryParam";
 import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 interface IProps {
   owner: IOwner;
+  chatId: string | null;
 }
-const ChatHeader = ({ owner }: IProps) => {
+const ChatHeader = ({ owner, chatId }: IProps) => {
   const navigate = useNavigate();
-  const chatId = useQueryParam("chat");
   const chattedOwner = JSON.parse(
     sessionStorage.getItem("chattedOwner") || "null"
   );
@@ -22,14 +21,15 @@ const ChatHeader = ({ owner }: IProps) => {
       <div className="w-10 h-10 rounded-full overflow-hidden">
         <Image
           imageUrl={
-            baseURL + (chatId ? owner?.receiver_image : chattedOwner?.img)
+            baseURL +
+            (chatId ? owner?.receiver_image : chattedOwner?.receiver_image)
           }
           alt="profile"
           className="w-full h-full object-cover"
         />
       </div>
       <h2 className="text-lg font-semibold">
-        {chatId ? owner?.receiver_name : chattedOwner?.name}
+        {chatId ? owner?.receiver_name : chattedOwner?.receiver_name}
       </h2>
     </div>
   );

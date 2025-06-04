@@ -46,7 +46,7 @@ const RatingModal = ({
     <>
       <Modal
         title={t("rate_your_stay")}
-        className="text-2xl text-center pt-6 font-semibold"
+        className="text-2xl text-center p-6 pb-0 font-semibold"
         isOpen={isOpen}
         close={close}
       >

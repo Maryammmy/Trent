@@ -9,8 +9,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import CancelBookingModal from "./CancelBookingModal";
-import CheckInModal from "./CheckInModal";
-import CheckOutModal from "./CheckOutModal";
+import CheckInOutModal from "./CheckInOutModal";
 
 interface IProps {
   booking: IBooking;
@@ -128,17 +127,19 @@ function Booking({ booking }: IProps) {
         />
       )}
       {status === "active" && book_status === "Confirmed" && isCheckInOpen && (
-        <CheckInModal
-          bookingId={book_id}
+        <CheckInOutModal
           isOpen={isCheckInOpen}
           close={() => setIsCheckInOpen(false)}
+          bookingId={book_id}
+          isCheckIn={true}
         />
       )}
       {status === "active" && book_status === "Check_in" && isCheckOutOpen && (
-        <CheckOutModal
-          bookingId={book_id}
+        <CheckInOutModal
           isOpen={isCheckOutOpen}
           close={() => setIsCheckOutOpen(false)}
+          bookingId={book_id}
+          isCheckIn={false}
         />
       )}
       {status === "active" &&

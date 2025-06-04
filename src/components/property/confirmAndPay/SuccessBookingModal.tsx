@@ -1,7 +1,6 @@
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import { ISaveBookingResponse } from "@/interfaces/booking";
-import { X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 interface IProps {
@@ -18,9 +17,6 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
       title={t("booking_successful")}
       className="text-xl text-center pt-6 pb-2 font-semibold"
     >
-      <Button onClick={onClose} className="absolute top-5 right-4">
-        <X size={20} />
-      </Button>
       <div className="px-5 md:px-10 pb-6">
         <p className="text-dark text-center font-medium pb-3">
           {t("booking_success_desc")}

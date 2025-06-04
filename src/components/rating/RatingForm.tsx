@@ -1,4 +1,4 @@
-import { Star, X } from "lucide-react";
+import { Star } from "lucide-react";
 import Button from "../ui/Button";
 import TextArea from "../ui/TextArea";
 import { useTranslation } from "react-i18next";
@@ -61,11 +61,6 @@ const RatingForm = ({
   return (
     <>
       <div className="p-5 md:px-10">
-        <Button onClick={close} className="absolute top-5 right-4">
-          <span>
-            <X size={20} />
-          </span>
-        </Button>
         <div className="space-y-6">
           <div className="flex items-center justify-center space-x-2">
             {[1, 2, 3, 4, 5].map((star) => (

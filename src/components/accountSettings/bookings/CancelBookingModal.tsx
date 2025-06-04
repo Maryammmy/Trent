@@ -7,7 +7,6 @@ import {
 } from "@/services/bookingService";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { X } from "lucide-react";
 import { ApiError } from "@/interfaces";
 import Cookies from "js-cookie";
 import { CurrentLanguage } from "@/types";
@@ -35,10 +34,6 @@ export default function CancelBookingModal({
   const { data } = useCancelBookingAPI();
   const reasons: ICancelReason[] = data?.data?.data?.cancel_reason_list;
   const [selectedReason, setSelectedReason] = useState<string>("");
-  const handleClose = () => {
-    setSelectedReason("");
-    close();
-  };
   const cancelBooking = async () => {
     try {
       setLoading(true);
@@ -52,7 +47,7 @@ export default function CancelBookingModal({
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
         setTimeout(() => {
-          handleClose();
+          close();
           window.location.reload();
         }, 500);
       }
@@ -69,16 +64,12 @@ export default function CancelBookingModal({
   return (
     <Modal
       isOpen={isOpen}
-      close={handleClose}
+      close={close}
       title={t("select_cancellation_reason")}
       className="text-lg md:text-2xl max-w-60 md:max-w-sm mx-auto font-semibold p-4 pb-0 text-center"
-      //   maxWidth="600px"
     >
-      <Button onClick={close} className="absolute top-5 right-4">
-        <X size={20} />
-      </Button>
       <div className="pb-3">
-        <div className="p-5 md:py-8 md:px-10 max-h-[80vh] overflow-y-auto">
+        <div className="p-5 md:pb-8 pt-5 md:px-10 max-h-[80vh] overflow-y-auto">
           {!reasons ? (
             <UpdateSkeleton cards={4} />
           ) : reasons?.length ? (
@@ -104,7 +95,7 @@ export default function CancelBookingModal({
               <div className="flex justify-between gap-4 pt-6 font-medium">
                 <Button
                   type="button"
-                  onClick={handleClose}
+                  onClick={close}
                   className="w-32 py-2 bg-gray-200 text-primary rounded-md hover:bg-gray-200/80"
                 >
                   {t("cancel")}

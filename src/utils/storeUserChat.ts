@@ -1,18 +1,14 @@
-export const storeOwnerChat = (owner: {
-  img: string;
-  name: string;
-  prop_id: string | undefined;
-  title: string;
-  prop_image: string;
-}) => {
+import { IOwner } from "@/interfaces/chat";
+
+export const storeOwnerChat = (owner: IOwner) => {
   return sessionStorage.setItem(
     "chattedOwner",
     JSON.stringify({
-      img: owner?.img,
-      name: owner?.name,
+      receiver_image: owner?.receiver_image,
+      receiver_name: owner?.receiver_name,
       prop_id: owner?.prop_id,
-      title: owner?.title,
-      prop_image: owner?.prop_image,
+      prop_title: owner?.prop_title,
+      prop_img: owner?.prop_img,
     })
   );
 };

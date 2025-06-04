@@ -6,7 +6,6 @@ import Modal from "@/components/ui/Modal";
 import { ApiError } from "@/interfaces";
 import { verifyOtpAPI } from "@/services/authService";
 import { changeMobileAPI } from "@/services/userService";
-import { X } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -105,11 +104,6 @@ function ChangeMobileModal({ isOpen, close, phone, countryCode }: IProps) {
         }}
         isOpen={isOpen}
       >
-        <Button onClick={close} className="absolute top-5 right-4">
-          <span>
-            <X size={20} />
-          </span>
-        </Button>
         <div className="p-5 md:py-8 md:px-10">
           <div className="pb-6">
             <p className="text-dark font-medium px-1 text-center md:px-0 break-words">

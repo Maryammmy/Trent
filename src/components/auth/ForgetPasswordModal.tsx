@@ -1,4 +1,4 @@
-import { Eye, EyeOff, X } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import Button from "../ui/Button";
 import Modal from "../ui/Modal";
 import Input from "../ui/Input";
@@ -97,11 +97,6 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
         close={close}
         isOpen={isOpen}
       >
-        <Button onClick={close} className="absolute top-5 right-4">
-          <span>
-            <X size={20} />
-          </span>
-        </Button>
         <div className="p-5 md:py-8 md:px-10">
           <div className="pb-6">
             <p className="text-[#757575] font-medium px-1 text-center md:px-0 break-words">

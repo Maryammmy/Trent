@@ -123,7 +123,7 @@ function Booking() {
                     <GiMoneyStack className="text-primary shrink-0" size={30} />
                     <span>{t("price_without_egp")} :</span>
                   </div>
-                  <span>{parseInt(booking?.prop_price)}</span>
+                  <span>{booking?.prop_price}</span>
                   {t("EGP")}
                 </div>
                 <div className="flex items-center gap-2 flex-wrap border-t py-4 text-xl font-bold">
@@ -132,7 +132,7 @@ function Booking() {
                     <span>{t("total")} :</span>
                   </div>
                   <span>
-                    {parseInt(booking?.total)} {t("EGP")}
+                    {booking?.total} {t("EGP")}
                   </span>
                 </div>
               </div>
