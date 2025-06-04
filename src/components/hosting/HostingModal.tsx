@@ -5,14 +5,11 @@ import Modal from "../ui/Modal";
 import Button from "../ui/Button";
 import { useTranslation } from "react-i18next";
 import Image from "../ui/Image";
-import { CurrentLanguage } from "../../types";
 import { useSendDataToAPI } from "../../services/addPropertyService";
 import { useEffect, useState } from "react";
 import Loader from "../loader/Loader";
-import Cookies from "js-cookie";
+import { currentLanguage, ownerFees } from "@/constants";
 
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
 function HostingModal() {
   const { t } = useTranslation();
   const { isFinishUpModal } = useAppSelector((state) => state.becomeAHost);
@@ -22,7 +19,6 @@ function HostingModal() {
   const [storedPrice, setStoredPrice] = useState<string>("");
   const [storedTitleAr, setStoredTitleAr] = useState<string>("");
   const [storedTitleEn, setStoredTitleEn] = useState<string>("");
-  const [ownerFees, setOwnerFees] = useState<string | undefined>(undefined);
   const trentFees = ownerFees
     ? Math.round(Number(storedPrice) * (Number(ownerFees) / 100))
     : "";
@@ -30,7 +26,6 @@ function HostingModal() {
     setStoredPrice(sessionStorage.getItem("price") || "");
     setStoredTitleAr(sessionStorage.getItem("title_ar") || "");
     setStoredTitleEn(sessionStorage.getItem("title_en") || "");
-    setOwnerFees(Cookies.get("owner_fees"));
   }, []);
   const handleFinishUp = async () => {
     setLoading(true);

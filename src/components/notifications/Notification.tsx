@@ -4,7 +4,7 @@ import { baseURL } from "@/services";
 import toast from "react-hot-toast";
 import { ApiError } from "@/interfaces";
 import { useTranslation } from "react-i18next";
-import { updateNotificationAPI } from "@/services/Notifications";
+import { updateNotificationAPI } from "@/services/NotificationsService";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { getNotificationRoute } from "@/utils/getNotificationRoute";
@@ -14,17 +14,8 @@ interface IProps {
   close: () => void;
 }
 function Notification({ notification, close }: IProps) {
-  const {
-    title,
-    body,
-    image_list,
-    is_seen,
-    id,
-    key,
-    value,
-    book_status,
-    is_owner,
-  } = notification;
+  const { title, body, image_list, is_seen, id, key, book_status, is_owner } =
+    notification;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -36,7 +27,7 @@ function Notification({ notification, close }: IProps) {
         queryClient.refetchQueries({ queryKey: ["notifications"] });
         queryClient.refetchQueries({ queryKey: ["unreadNotificationsCount"] });
         setTimeout(() => {
-          const route = getNotificationRoute(key, value, book_status, is_owner);
+          const route = getNotificationRoute(key, book_status, is_owner);
           if (route) {
             navigate(route);
           }

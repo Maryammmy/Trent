@@ -1,11 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
-import Cookies from "js-cookie";
-import { CurrentLanguage } from "@/types";
-
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const uid = Cookies.get("user_id");
+import { currentLanguage, uid } from "@/constants";
 export const useNotificationsAPI = () => {
   return useQuery({
     queryKey: ["notifications"],

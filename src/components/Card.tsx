@@ -1,26 +1,26 @@
-import { Link } from "react-router-dom";
-import Cookies from "js-cookie";
-import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import Carsoul from "./ui/Carsoul";
+import Image from "./ui/Image";
 import { useTranslation } from "react-i18next";
+import Rating from "./ui/Rating";
+import { MapPin } from "lucide-react";
+import Button from "./ui/Button";
+import { IProperty } from "../interfaces/property";
+import { baseURL } from "../services";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { IProperty } from "../../interfaces/property";
-import { baseURL } from "../../services";
-import { togglePropertyAPI } from "../../services/propertyService";
-import Carsoul from "../ui/Carsoul";
-import Rating from "../ui/Rating";
-import Image from "../ui/Image";
-import { ApiError } from "@/interfaces";
+import { useToggleProperty } from "@/hooks/useToggleProperty";
+import { handleBookingNavigation } from "@/utils/handleBookingNavigation";
+
 interface IProps {
   property: IProperty;
-  refetch: () => void;
 }
-
-const uid = Cookies.get("user_id") || "";
 const storedCurrency = sessionStorage.getItem("currency");
 const parsedCurrency = storedCurrency
   ? JSON.parse(storedCurrency)
   : { currency: "EGP", rate: "1" };
-function Cart({ property, refetch }: IProps) {
+
+function Card({ property }: IProps) {
+  const navigate = useNavigate();
   const {
     IS_FAVOURITE,
     price,
@@ -31,40 +31,19 @@ function Cart({ property, refetch }: IProps) {
     government_name,
     period_name,
     rate,
+    owner_id,
   } = property;
   const { t } = useTranslation();
   const basePrice = Math.round(Number(price) * Number(parsedCurrency?.rate));
-  const toggleProperty = async (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    if (!uid) {
-      toast.error(t("fav_error"));
-      return;
-    }
-    try {
-      const response = await togglePropertyAPI({ uid, prop_id: id });
-      if (
-        response?.data?.response_code === 201 ||
-        response?.data?.response_code === 200
-      ) {
-        refetch();
-      }
-    } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
-    }
-  };
+  const { toggleFav } = useToggleProperty();
   return (
     <Link
       to={`/properties/${id}`}
-      className="block w-[250px] h-full rounded-md overflow-hidden mb-4"
+      className="bg-white shadow-md rounded-md overflow-hidden p-4"
+      data-aos="fade-up"
     >
       {image_list?.length > 0 && (
-        <div className="overflow-hidden rounded-md h-[150px]">
+        <div className="overflow-hidden rounded-md h-[230px] md:h-[300px]">
           <Carsoul
             showDot={true}
             showArrow={false}
@@ -74,7 +53,7 @@ function Cart({ property, refetch }: IProps) {
               <div key={index} className="relative overflow-hidden rounded-md">
                 <div
                   className="absolute top-2 right-2 z-10 cursor-pointer"
-                  onClick={toggleProperty}
+                  onClick={(e) => toggleFav(e, id)}
                 >
                   {IS_FAVOURITE ? (
                     <FaHeart size={20} className="text-red-500" />
@@ -82,7 +61,7 @@ function Cart({ property, refetch }: IProps) {
                     <FaRegHeart size={20} className="text-white" />
                   )}
                 </div>
-                <div className="relative h-[150px]">
+                <div className="relative h-[230px] md:h-[300px]">
                   <div className="absolute inset-0 bg-black/15 pointer-events-none z-[5]"></div>
                   <div className="w-full h-full">
                     <Image
@@ -129,9 +108,24 @@ function Cart({ property, refetch }: IProps) {
             <span className="text-sm text-dark">({Number(rate)})</span>
           </div>
         </div>
+        <div className="flex gap-5 mt-2">
+          <Button
+            onClick={(e) => {
+              handleBookingNavigation({ e, owner_id, id, t, navigate });
+            }}
+            className="flex-[2] text-center zoom py-1 bg-primary rounded-md text-white font-medium"
+          >
+            {t("book_now")}
+          </Button>
+          <Button className="flex-[1] zoom py-1 bg-[#CAE0FE] rounded-md flex justify-center items-center">
+            <span>
+              <MapPin className="text-primary" size={22} />
+            </span>
+          </Button>
+        </div>
       </div>
     </Link>
   );
 }
 
-export default Cart;
+export default Card;

@@ -97,7 +97,7 @@ function ChangeMobileModal({ isOpen, close, phone, countryCode }: IProps) {
       <Modal
         maxWidth="550px"
         className="text-2xl text-center p-4 border-b font-semibold"
-        title="Change phone number"
+        title={t("change_phone_number")}
         close={() => {
           close();
           reset();
@@ -107,26 +107,36 @@ function ChangeMobileModal({ isOpen, close, phone, countryCode }: IProps) {
         <div className="p-5 md:py-8 md:px-10">
           <div className="pb-6">
             <p className="text-dark font-medium px-1 text-center md:px-0 break-words">
-              Enter your new phone number
+              {t("enter_new_phone_number")}
             </p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-2 mb-4">
-              <label className="text-sm font-medium">Old phone number</label>
-              <div className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+              <label className="text-sm font-medium">
+                {t("old_phone_number")}
+              </label>
+              <div
+                dir="ltr"
+                className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary"
+              >
                 <CountrySelector selectedCountry={countryCode} readOnly />
                 <Input
                   value={phone}
                   type="text"
-                  placeholder="Enter your phone number"
+                  placeholder={t("enter_your_phone_number")}
                   className="w-full outline-none"
                   readOnly
                 />
               </div>
             </div>
             <div className="flex flex-col gap-2 mb-4">
-              <label className="text-sm font-medium">New phone number</label>
-              <div className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+              <label className="text-sm font-medium">
+                {t("new_phone_number")}
+              </label>
+              <div
+                dir="ltr"
+                className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary"
+              >
                 <Controller
                   name="new_ccode"
                   control={control}
@@ -144,7 +154,7 @@ function ChangeMobileModal({ isOpen, close, phone, countryCode }: IProps) {
                     <Input
                       {...field}
                       type="text"
-                      placeholder="Enter your phone number"
+                      placeholder={t("enter_your_phone_number")}
                       className="w-full outline-none"
                       onChange={(e) => {
                         const value = e.target.value.replace(/^0+/, "");
@@ -162,7 +172,7 @@ function ChangeMobileModal({ isOpen, close, phone, countryCode }: IProps) {
               type="submit"
               className="bg-primary zoom w-full mt-6 py-3 px-3 rounded-lg text-white font-semibold text-sm text-center"
             >
-              {loading ? <Loader /> : "Send OTP"}
+              {loading ? <Loader /> : t("send_otp")}
             </Button>
           </form>
         </div>

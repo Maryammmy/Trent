@@ -1,23 +1,17 @@
 import * as Yup from "yup";
 
 export const forgetPasswordSchema = Yup.object({
-  ccode: Yup.string().trim().required("Country code is required."),
+  ccode: Yup.string().trim().required("country_code_required"),
   mobile: Yup.string()
     .trim()
-    .required("Phone number is required.")
-    .matches(/^\d+$/, "The phone number must contain only digits."),
+    .required("phone_required")
+    .matches(/^\d+$/, "phone_digits_only"),
   password: Yup.string()
     .trim()
-    .required("Password is required.")
-    .matches(
-      /^(?=.*\d).{6,}$/,
-      "The password must be at least 6 characters and include a number."
-    ),
+    .required("password_required")
+    .matches(/^(?=.*\d).{6,}$/, "password_invalid"),
   confirm_password: Yup.string()
     .trim()
-    .required("Confirm password is required.")
-    .oneOf(
-      [Yup.ref("password")],
-      "The confirmPassword and password fields must match."
-    ),
+    .required("confirm_password_required")
+    .oneOf([Yup.ref("password")], "confirm_password_must_match"),
 });

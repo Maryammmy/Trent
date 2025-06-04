@@ -1,12 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
-import Cookies from "js-cookie";
-import { CurrentLanguage } from "../types";
 import { IChangeMobile } from "@/interfaces/accountSettings";
+import { uid, currentLanguage } from "@/constants";
 
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const uid = Cookies.get("user_id");
 export const useUserAPI = () => {
   return useQuery({
     queryKey: ["user", uid],

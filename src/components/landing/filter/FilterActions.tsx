@@ -54,8 +54,6 @@ function FilterActions({
     compound_name: compound,
     city_name: city,
   };
-  // const { data } = useHomeDataAPI(filters, enabled);
-  // const filteredProperties = data?.data?.data?.property_list;
   const handleClearFilters = () => {
     setCategory("");
     setFilterData(null);
@@ -71,21 +69,14 @@ function FilterActions({
     setFilterSlider(null);
     setFilters(filterData);
     close();
-    // setEnabled(true);
   };
-  // useEffect(() => {
-  //   if (filteredProperties && enabled) {
-  //     setFilterData(filteredProperties);
-  //     close();
-  //   }
-  // }, [filteredProperties, setFilterData, close, enabled]);
   return (
     <div className="flex justify-between pt-4">
       {filterButtons.map((button, index) => (
         <Button
           key={index}
           onClick={button.text === "clear" ? handleClearFilters : handleApply}
-          className={`text-lg font-medium py-2 px-6 rounded-md ${button.className}`}
+          className={`text-lg font-medium py-2 w-24 rounded-md ${button.className}`}
         >
           {t(button.text)}
         </Button>

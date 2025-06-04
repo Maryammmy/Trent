@@ -1,16 +1,12 @@
 import { Link, useParams } from "react-router-dom";
-import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import AuthorizationCheck from "./AuthorizationCheck";
 import UpdatePropertyForm from "./UpdatePropertyForm";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { CurrentLanguage } from "@/types";
 import UpdateSkeleton from "@/components/skeleton/UpdateSkeleton";
 import { usePropertyAPI } from "@/services/propertyService";
+import { currentLanguage, uid } from "@/constants";
 
-const userId = Cookies.get("user_id");
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
 function UpdateProperty() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -18,7 +14,7 @@ function UpdateProperty() {
   const owner: string = data?.data?.data?.property_details?.owner_id;
   return (
     <>
-      <AuthorizationCheck owner={owner} userId={userId} />
+      <AuthorizationCheck owner={owner} userId={uid} />
       <div className="bg-stone-100 bg-fixed bg-cover bg-no-repeat min-h-screen">
         <div className=" max-w-screen-2xl mx-auto py-5 md:py-10 px-5 xl:px-20">
           <div className="flex gap-3 items-center pb-5">
@@ -36,7 +32,7 @@ function UpdateProperty() {
           {data ? (
             <UpdatePropertyForm
               propertyData={data?.data?.data}
-              userId={userId}
+              userId={uid}
               propertyId={id}
             />
           ) : (

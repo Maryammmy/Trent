@@ -152,7 +152,7 @@ function SignupModal() {
                             <Input
                               {...field}
                               type="text"
-                              placeholder={t("enter_phone_number")}
+                              placeholder={t("enter_your_phone_number")}
                               className="w-full outline-none"
                               onChange={(e) => {
                                 const value = e.target.value.replace(/^0+/, "");

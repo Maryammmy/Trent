@@ -11,36 +11,25 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setEnableMap } from "../../store/features/map/mapSlice";
 import { IProperty } from "@/interfaces/property";
 
-const Cart = lazy(() => import("../Cart"));
+const Card = lazy(() => import("../Card"));
 
 export default function Properties() {
-  /**
-   * Items per page that we request from the backend.
-   * This replaces the old front‑end slicing logic so that pagination
-   * is handled **only** by the API.
-   */
-
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const propertiesSectionRef = useRef<HTMLDivElement | null>(null);
-
   const [isFixed, setIsFixed] = useState(true);
   const { enableMap } = useAppSelector((state) => state.map);
   const { category, filterSlider, filters } = useContext(FilterDataContext);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useHomeDataAPI({
       category_id: category,
       ...(filterSlider && filterSlider),
       ...(filters && filters),
     });
-  // Flatten all pages of property lists
   const properties: IProperty[] | undefined = data?.pages?.flatMap(
     (page) => page?.data?.data?.property_list
   );
-  /**
-   * Toggle list / map view and scroll back to the properties section.
-   */
   const handleToggleView = () => {
     dispatch(setEnableMap(!enableMap));
     setTimeout(() => {
@@ -69,7 +58,6 @@ export default function Properties() {
   return (
     <>
       <div ref={propertiesSectionRef} className="relative mb-16">
-        {/* Floating list ↔︎ map toggle */}
         <div
           className={`z-[100] left-1/2 transform -translate-x-1/2 ${
             isFixed ? "fixed bottom-10" : "absolute bottom-[-50px]"
@@ -92,11 +80,7 @@ export default function Properties() {
             )}
           </Button>
         </div>
-
-        {/* Category filters */}
         <CategoryBar />
-
-        {/* LIST VIEW */}
         {!enableMap && (
           <div>
             <div
@@ -106,17 +90,13 @@ export default function Properties() {
                   : ""
               }`}
             >
-              {/* Loading state */}
               {!properties && <PropertyCartSkeleton cards={8} />}
 
-              {/* Empty state */}
               {properties && !properties?.length && (
                 <div className="flex justify-center items-center text-lg h-[50vh] text-dark font-medium w-full">
                   {t("no_properties_found")}
                 </div>
               )}
-
-              {/* Property list */}
               {properties && properties?.length > 0 && (
                 <>
                   {properties?.map((property) => (
@@ -124,16 +104,13 @@ export default function Properties() {
                       fallback={<PropertyCartSkeleton cards={1} />}
                       key={property?.id}
                     >
-                      <Cart property={property} refetch={refetch} />
+                      <Card property={property} />
                     </Suspense>
                   ))}
-                  {/* Loading more skeleton */}
                   {isFetchingNextPage && <PropertyCartSkeleton cards={8} />}
                 </>
               )}
             </div>
-
-            {/* Show more button */}
             {hasNextPage && !isFetchingNextPage && (
               <div className="flex justify-center mt-4">
                 <Button
@@ -147,9 +124,7 @@ export default function Properties() {
             )}
           </div>
         )}
-
-        {/* MAP VIEW */}
-        {enableMap && <Map properties={properties} refetch={refetch} />}
+        {enableMap && <Map properties={properties} />}
       </div>
     </>
   );

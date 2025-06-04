@@ -2,12 +2,19 @@ import { useTranslation } from "react-i18next";
 import Button from "../ui/Button";
 import { IPayoutHistory } from "@/interfaces/payouts";
 import Image from "../ui/Image";
+import { baseURL } from "@/services";
 interface IProps {
   payoutHistory: IPayoutHistory;
 }
 function PayoutHistory({ payoutHistory }: IProps) {
-  const { prop_title, total, requested_at, payout_status, cancel_reason } =
-    payoutHistory;
+  const {
+    prop_title,
+    prop_img,
+    total,
+    requested_at,
+    payout_status,
+    cancel_reason,
+  } = payoutHistory;
   const { t } = useTranslation();
   return (
     <Button className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 border p-4 rounded-2xl text-start font-semibold">
@@ -15,7 +22,7 @@ function PayoutHistory({ payoutHistory }: IProps) {
         <div className="absolute inset-0 bg-black/15 pointer-events-none z-[5]" />
         <div className="w-full h-full">
           <Image
-            imageUrl=""
+            imageUrl={baseURL + prop_img}
             alt="property"
             className="w-full h-full object-cover"
           />

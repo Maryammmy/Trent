@@ -13,7 +13,7 @@ function GetStartedToHost() {
   const user: IUser = data?.data?.data?.user_data;
   useEffect(() => {
     if (user) {
-      Cookies.set("owner_fees", user.owner_fees_percent);
+      Cookies.set("owner_fees", user?.owner_fees_percent);
     }
   }, [user]);
   return (

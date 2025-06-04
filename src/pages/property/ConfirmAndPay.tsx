@@ -16,18 +16,14 @@ import { useMediaQuery } from "react-responsive";
 import { AxiosError } from "axios";
 import { useQueryParam } from "@/utils/getQueryParam";
 import PaymentStatus from "@/components/property/confirmAndPay/PaymentStatus";
-import { CurrentLanguage } from "@/types";
 import PaymentMethodSelector from "@/components/property/confirmAndPay/PaymentMethodSelector";
-import Cookies from "js-cookie";
 import { paymentStatusAPI, saveBookingAPI } from "@/services/bookingService";
 import { ApiError } from "@/interfaces";
 import SuccessBookingModal from "@/components/property/confirmAndPay/SuccessBookingModal";
 import CardPaymentStatus from "@/components/property/confirmAndPay/CardPaymentStatus";
 import { updateQueryParamInURL } from "@/utils/updateQueryParamInURL";
+import { currentLanguage, uid } from "@/constants";
 
-const uid = Cookies.get("user_id");
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
 function ConfirmAndPay() {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
@@ -122,7 +118,7 @@ function ConfirmAndPay() {
         from_date: bookingData?.from_date,
         to_date: bookingData?.to_date,
         confirm_guest_rules: bookingData?.confirm_guest_rules,
-        uid: uid ? uid : "",
+        uid: uid,
         lang: currentLanguage,
         method_key: paymentMethod,
         item_id: itemId,

@@ -1,8 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
-import Cookies from "js-cookie";
-
-const uid = Cookies.get("user_id");
+import { uid } from "@/constants";
 export const useChatListAPI = () => {
   return useQuery({
     queryKey: ["chatList"],

@@ -1,10 +1,11 @@
+import { CurrentLanguage } from "@/types";
+import Cookies from "js-cookie";
 export const allowedImageTypes = [
   "image/jpeg",
   "image/png",
   "image/gif",
   "image/jpg",
 ];
-
 export const allowedVideoTypes = [
   "video/mp4",
   "video/avi",
@@ -46,3 +47,9 @@ jzDFH18sj1q1ggmu6J4J03A=
 -----END PRIVATE KEY-----`;
 
 export const ITEMS_PER_PAGE = 10;
+export const uid = Cookies.get("user_id") || "";
+export const ownerFees = Cookies.get("owner_fees") || "";
+export const currentLanguage = (localStorage.getItem("i18nextLng") ||
+  "en") as CurrentLanguage;
+export const websiteUrl = "https://www.trent.com.eg/";
+export const DEFAULT_CURRENCY = { currency: "EGP", rate: "1" };

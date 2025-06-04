@@ -1,15 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
-import Cookies from "js-cookie";
-import { CurrentLanguage } from "@/types";
 import {
   ICreatePayoutsProfile,
   ICreatePayoutsRequest,
 } from "@/interfaces/payouts";
+import { uid, currentLanguage } from "@/constants";
 
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const uid = Cookies.get("user_id");
 export const usePaymentMethodAPI = () => {
   return useQuery({
     queryKey: ["paymentMethod"],

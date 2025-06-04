@@ -1,6 +1,5 @@
 import PayoutReadyProperty from "@/components/payout/PayoutReadyProperty";
 import { useTranslation } from "react-i18next";
-import { CurrentLanguage } from "@/types";
 import Button from "@/components/ui/Button";
 import { useState } from "react";
 import {
@@ -11,16 +10,13 @@ import {
 import Select from "@/components/ui/Select";
 import PropertyHostingSkeleton from "@/components/skeleton/PropertyHostingSkeleton";
 import { IPayoutProfile, IReadyPayoutProperties } from "@/interfaces/payouts";
-import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { ApiError } from "@/interfaces";
 import Loader from "@/components/loader/Loader";
 import { useNavigate } from "react-router-dom";
 import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
+import { currentLanguage, uid } from "@/constants";
 
-const uid = Cookies.get("user_id") || "";
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
 function PayoutsRequest() {
   const { t } = useTranslation();
   const navigate = useNavigate();

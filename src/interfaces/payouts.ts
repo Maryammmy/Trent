@@ -51,6 +51,7 @@ export interface IPayoutHistory {
   cancel_reason: string;
   total: string;
   prop_title: string;
+  prop_img: string;
 }
 export interface IPayoutEarning {
   total_pending: string;

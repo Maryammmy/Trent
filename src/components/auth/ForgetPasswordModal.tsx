@@ -15,12 +15,15 @@ import InputErrorMessage from "../ui/InputErrorMessage";
 import OtpModal from "./OtpModal";
 import { forgetPasswordSchema } from "@/validation/forgetPasswordSchema";
 import CountrySelector from "../ui/CountrySelector";
+import { useAppDispatch } from "@/store/hooks";
+import { setIsloggedin } from "@/store/features/auth/authSlice";
 interface IProps {
   close: () => void;
   isOpen: boolean;
 }
 function ForgetPasswordModal({ isOpen, close }: IProps) {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [otp, setOtp] = useState(false);
@@ -77,7 +80,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
         toast.success(response?.data?.response_message);
         setTimeout(() => {
           close();
-          window.location.reload();
+          dispatch(setIsloggedin(true));
         }, 500);
       }
     } catch (error) {
@@ -93,20 +96,20 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
       <Modal
         maxWidth="550px"
         className="text-2xl text-center p-4 border-b font-semibold"
-        title="Forget password"
+        title={t("forget_password_title")}
         close={close}
         isOpen={isOpen}
       >
         <div className="p-5 md:py-8 md:px-10">
           <div className="pb-6">
             <p className="text-[#757575] font-medium px-1 text-center md:px-0 break-words">
-              Just enter your phone number and we will send you the
-              <span className="text-center"> verification code</span>
+              {t("enter_phone_send_otp")}
+              <span className="text-center"> {t("verification_code")}</span>
             </p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-1 mb-4">
-              <label className="text-sm font-medium">Phone number</label>
+              <label className="text-sm font-medium">{t("phone_number")}</label>
               <div className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
                 <Controller
                   name="ccode"
@@ -125,7 +128,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
                     <Input
                       {...field}
                       type="text"
-                      placeholder="Enter your phone number"
+                      placeholder={t("enter_your_phone_number")}
                       className="w-full outline-none"
                       onChange={(e) => {
                         const value = e.target.value.replace(/^0+/, "");
@@ -151,7 +154,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
                     <Input
                       {...field}
                       type={showPassword ? "text" : "password"}
-                      placeholder="Enter your new password"
+                      placeholder={t("enter_your_new_password")}
                       className="w-full outline-none"
                       id="password"
                     />
@@ -184,7 +187,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
                     <Input
                       {...field}
                       type={showPassword ? "text" : "password"}
-                      placeholder="Confirm your new password"
+                      placeholder={t("confirm_your_new_password")}
                       className="w-full outline-none"
                       id="confirm_password"
                     />
@@ -209,7 +212,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
               type="submit"
               className="bg-primary zoom w-full mt-6 py-3 px-3 rounded-lg text-white font-semibold text-sm text-center"
             >
-              {loading ? <Loader /> : "Send OTP"}
+              {loading ? <Loader /> : t("send_otp")}
             </Button>
           </form>
         </div>

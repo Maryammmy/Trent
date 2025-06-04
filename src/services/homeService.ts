@@ -1,13 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { baseAPI } from ".";
 import { IHomeDataParams } from "../interfaces/landing";
-import { CurrentLanguage } from "../types";
-import Cookies from "js-cookie";
-import { ITEMS_PER_PAGE } from "@/constants";
-
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const uid = Cookies.get("user_id");
+import { currentLanguage, ITEMS_PER_PAGE, uid } from "@/constants";
 
 export const useHomeDataAPI = (
   params?: IHomeDataParams

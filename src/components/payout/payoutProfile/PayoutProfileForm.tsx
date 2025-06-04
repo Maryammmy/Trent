@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import Button from "../../ui/Button";
 import toast from "react-hot-toast";
 import Input from "../../ui/Input";
-import Cookies from "js-cookie";
 import InputErrorMessage from "../../ui/InputErrorMessage";
 import Loader from "../../loader/Loader";
 import { ApiError } from "../../../interfaces";
@@ -17,12 +16,9 @@ import {
 } from "@/services/payoutsService";
 import Select from "@/components/ui/Select";
 import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
-import { CurrentLanguage } from "@/types";
 import { useLocation, useNavigate } from "react-router-dom";
+import { currentLanguage, uid } from "@/constants";
 
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const uid = Cookies.get("user_id");
 function PayoutProfileForm() {
   const navigate = useNavigate();
   const { t } = useTranslation();

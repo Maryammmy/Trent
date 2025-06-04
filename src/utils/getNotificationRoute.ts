@@ -1,6 +1,5 @@
 export const getNotificationRoute = (
   key: string,
-  value: string | number,
   book_status: string,
   is_owner: boolean
 ): string | null => {
@@ -14,15 +13,15 @@ export const getNotificationRoute = (
 
     if (is_owner) {
       if (activeStatuses.includes(book_status)) {
-        return `/hosting/bookings/${value}?status=active`;
+        return `/hosting/bookings?status=active`;
       } else if (completedStatuses.includes(book_status)) {
-        return `/hosting/bookings/${value}?status=completed`;
+        return `/hosting/bookings?status=completed`;
       }
     } else {
       if (activeStatuses.includes(book_status)) {
-        return `/account-settings/bookings/${value}?status=active`;
+        return `/account-settings/bookings?status=active`;
       } else if (completedStatuses.includes(book_status)) {
-        return `/account-settings/bookings/${value}?status=completed`;
+        return `/account-settings/bookings?status=completed`;
       }
     }
   }

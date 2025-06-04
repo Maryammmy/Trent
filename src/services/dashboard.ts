@@ -1,11 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI } from ".";
+import { currentLanguage, uid } from "@/constants";
 
-import Cookies from "js-cookie";
-import { CurrentLanguage } from "@/types";
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const uid = Cookies.get("user_id");
 export const useUserDashboardAPI = () => {
   return useQuery({
     queryKey: ["userDashboard"],

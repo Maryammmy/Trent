@@ -10,10 +10,8 @@ import { useState } from "react";
 import Loader from "../loader/Loader";
 import { chatListAPI } from "@/services/chatService";
 import toast from "react-hot-toast";
-import Cookies from "js-cookie";
 import { IOwner } from "@/interfaces/chat";
-
-const uid = Cookies.get("user_id");
+import { uid } from "@/constants";
 interface IProps {
   id: string | undefined;
   owner: IDetailsProperty["owner"];

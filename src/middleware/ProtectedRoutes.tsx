@@ -1,10 +1,9 @@
 import { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import Cookies from "js-cookie";
 import { useAppDispatch } from "../store/hooks";
 import { setIsloggedin } from "../store/features/auth/authSlice";
+import { uid } from "@/constants";
 
-const uid = Cookies.get("user_id") || "";
 export default function ProtectedRoutes({ children }: { children: ReactNode }) {
   const dispatch = useAppDispatch();
   const location = useLocation();

@@ -5,7 +5,6 @@ import Amenities from "../../components/property/Amenities";
 import { useTranslation } from "react-i18next";
 import { usePropertyAPI } from "../../services/propertyService";
 import { IDetailsProperty, IFacilityProperty } from "../../interfaces/property";
-import { CurrentLanguage } from "../../types";
 import { baseURL } from "../../services";
 import PropertySkeleton from "../../components/skeleton/PropertySkeleton";
 import Map from "../../components/ui/Map";
@@ -13,8 +12,6 @@ import ReviewComponent from "@/components/property/reviews/ReviewComponent";
 import PhotoViewer from "@/components/ui/PhotoViewer";
 import Video from "@/components/ui/Video";
 import Button from "@/components/ui/Button";
-import toast from "react-hot-toast";
-import Cookies from "js-cookie";
 import { Helmet } from "react-helmet-async";
 import ShareModal from "./ShareModal";
 import { useState } from "react";
@@ -27,14 +24,11 @@ import {
   Share2,
   UsersRound,
 } from "lucide-react";
+import { currentLanguage, websiteUrl } from "@/constants";
+import { getStoredCurrency } from "@/utils/getStoredCurrency";
+import { handleBookingNavigation } from "@/utils/handleBookingNavigation";
 
-const uid = Cookies.get("user_id") || "";
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const storedCurrency = sessionStorage.getItem("currency");
-const parsedCurrency = storedCurrency
-  ? JSON.parse(storedCurrency)
-  : { currency: "EGP", rate: "1" };
+const parsedCurrency = getStoredCurrency();
 function Property() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -48,7 +42,7 @@ function Property() {
   );
   const guestCount = Number(propertyDetails?.guest_count);
   const minDays = Number(propertyDetails?.min_days);
-  const url = `https://www.trent.com.eg/properties/${id}`;
+  const url = `${websiteUrl}properties/${id}`;
   return (
     <>
       <Helmet>
@@ -200,12 +194,13 @@ function Property() {
                 <div data-aos="fade-left">
                   <Button
                     onClick={(e) => {
-                      e.preventDefault();
-                      if (uid === propertyDetails?.owner_id) {
-                        toast.error(t("you_can't_book_your_own_property"));
-                        return;
-                      }
-                      navigate(`/properties/${id}/book`);
+                      handleBookingNavigation({
+                        e,
+                        owner_id: propertyDetails?.owner_id,
+                        id,
+                        t,
+                        navigate,
+                      });
                     }}
                     className="bg-primary text-white font-medium block text-center py-2 px-4 rounded-md"
                   >

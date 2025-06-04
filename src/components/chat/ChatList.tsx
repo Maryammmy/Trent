@@ -4,10 +4,12 @@ import { useChatListAPI } from "../../services/chatService";
 import { IChatList } from "../../interfaces/chat";
 import { useNavigate } from "react-router-dom";
 import { useQueryParam } from "../../utils/getQueryParam";
+import { useTranslation } from "react-i18next";
 
 function ChatList() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const ownerId = useQueryParam("user");
   const { data } = useChatListAPI();
   const chatList: IChatList[] = data?.data?.data?.chat_list;
@@ -22,10 +24,10 @@ function ChatList() {
         ownerId ? "hidden lg:flex lg:flex-col" : "flex flex-col w-full"
       }`}
     >
-      <h2 className="text-xl font-semibold mb-4">Chats</h2>
+      <h2 className="text-xl font-semibold mb-4">{t("chats")}</h2>
       <Input
         type="search"
-        placeholder="Search..."
+        placeholder={t("search_placeholder")}
         className="w-full p-3 mb-4 border rounded-full outline-none focus:border-2 focus:border-primary"
         value={search}
         onChange={(e) => setSearch(e.target.value)}

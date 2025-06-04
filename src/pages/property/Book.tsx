@@ -8,7 +8,6 @@ import {
   usePropertyInfoAPI,
   verifyPropertyAPI,
 } from "@/services/bookingService";
-import { CurrentLanguage } from "@/types";
 import { formatDate } from "@/utils/formatDate";
 import { validateStartDate, validateEndDate } from "@/utils/handleChangeDate";
 import { useState } from "react";
@@ -16,14 +15,10 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { DateValueType } from "react-tailwindcss-datepicker";
-import Cookies from "js-cookie";
 import InputErrorMessage from "@/components/ui/InputErrorMessage";
 import Input from "@/components/ui/Input";
 import BookingSkeleton from "@/components/skeleton/BookingSkeleton";
-
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const uid = Cookies.get("user_id");
+import { uid, currentLanguage } from "@/constants";
 
 function Book() {
   const [counter, setCounter] = useState(1);
@@ -107,7 +102,7 @@ function Book() {
         from_date: fromDate,
         to_date: toDate,
         confirm_guest_rules: acceptedRules,
-        uid: uid ? uid : "",
+        uid: uid,
         lang: currentLanguage,
       };
       const response = await verifyPropertyAPI(payload);

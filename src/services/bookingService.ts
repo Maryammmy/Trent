@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
-import { CurrentLanguage } from "@/types";
 import {
   ICancelBooking,
   ICheckInOut,
@@ -8,11 +7,7 @@ import {
   ISaveBooking,
   IVerifyProperty,
 } from "@/interfaces/booking";
-import Cookies from "js-cookie";
-
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const uid = Cookies.get("user_id");
+import { currentLanguage, uid } from "@/constants";
 export const usePropertyInfoAPI = (id: string | undefined) => {
   return useQuery({
     queryKey: ["propertyInfo", id],

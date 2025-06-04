@@ -12,8 +12,7 @@ import toast from "react-hot-toast";
 import { personalDataSchema } from "../../../validation/personalDataSchema";
 import Input from "../../ui/Input";
 import { convertPersonalDataToFormData } from "../../../utils/convertPersonalDataToFormData";
-import Cookies from "js-cookie";
-import { allowedImageTypes } from "../../../constants";
+import { allowedImageTypes, uid } from "../../../constants";
 import InputErrorMessage from "../../ui/InputErrorMessage";
 import Loader from "../../loader/Loader";
 import UserSkeleton from "../../skeleton/UserSkeleton";
@@ -22,7 +21,6 @@ import { baseURL } from "../../../services";
 import ChangeMobileModal from "./ChangeMobileModal";
 import CountrySelector from "@/components/ui/CountrySelector";
 
-const uid = Cookies.get("user_id");
 function PersonalData() {
   const { t } = useTranslation();
   const [changeMobile, setChangeMobile] = useState(false);

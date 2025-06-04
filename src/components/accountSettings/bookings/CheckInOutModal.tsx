@@ -5,13 +5,8 @@ import { useState } from "react";
 import { checkInOutAPI } from "@/services/bookingService";
 import toast from "react-hot-toast";
 import { ApiError } from "@/interfaces";
-import { CurrentLanguage } from "@/types";
-import Cookies from "js-cookie";
 import Loader from "@/components/loader/Loader";
-
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const uid = Cookies.get("user_id");
+import { currentLanguage, uid } from "@/constants";
 
 interface IProps {
   isOpen: boolean;
@@ -28,7 +23,7 @@ function CheckInOutModal({ isOpen, close, bookingId, isCheckIn }: IProps) {
     try {
       setLoading(true);
       const payload = {
-        uid: uid || "",
+        uid: uid,
         lang: currentLanguage,
         booking_id: bookingId,
         is_check_in: isCheckIn,

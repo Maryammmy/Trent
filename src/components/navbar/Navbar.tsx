@@ -11,9 +11,7 @@ import { setToggle } from "../../store/features/navbar/navbarSlice";
 import { useContext, useRef } from "react";
 import { AlertContext } from "@/context/AlertContext";
 import useClickOutside from "@/hooks/useClickOutside";
-import Cookies from "js-cookie";
-
-const isLoggedin = Cookies.get("user_id");
+import { uid } from "@/constants";
 const Navbar = () => {
   const { pathname } = useLocation();
   const isSmallScreen = useMediaQuery({ maxWidth: 1023 });
@@ -44,7 +42,7 @@ const Navbar = () => {
       <div className="max-w-[1450px] flex flex-wrap items-center justify-between mx-auto p-4">
         <NavbarLogo />
         {isSmallScreen ? (
-          isLoggedin ? (
+          uid ? (
             <NavbarButtons />
           ) : (
             <>
@@ -74,7 +72,7 @@ const Navbar = () => {
               </div>
             </>
           )
-        ) : isLoggedin ? (
+        ) : uid ? (
           <NavbarButtons />
         ) : (
           <div className="flex items-center gap-5">

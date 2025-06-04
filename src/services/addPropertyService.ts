@@ -2,17 +2,16 @@ import { IPropertyData } from "../interfaces/property";
 import toast from "react-hot-toast";
 import { ApiError } from "../interfaces";
 import { addPropertyAPI } from "./propertyService";
-import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import { HostingContext } from "../context/HostingContext";
 import { useNavigate } from "react-router-dom";
+import { uid } from "@/constants";
 
 const propertyData = (images: File[], video?: File | null): IPropertyData => {
-  const uid = Cookies.get("user_id");
   const cancellationPolicy = sessionStorage.getItem("cancellation_policy");
   return {
-    uid: uid || "",
+    uid: uid,
     category_id: sessionStorage.getItem("category_id") || "",
     guest_count: Number(sessionStorage.getItem("guest_count")),
     beds_count: Number(sessionStorage.getItem("beds_count")),

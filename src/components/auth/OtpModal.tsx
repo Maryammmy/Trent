@@ -88,7 +88,7 @@ export default function OtpModal({
     <Modal
       maxWidth="500px"
       className="text-2xl text-center p-4 border-b font-semibold"
-      title="Verify Your OTP"
+      title={t("verify_your_otp")}
       isOpen={isOpen}
       close={() => {
         close();
@@ -103,11 +103,11 @@ export default function OtpModal({
       <div className="p-5 md:py-8 md:px-10">
         <div className="pb-6">
           <p className="text-dark font-medium px-1 text-center md:px-0">
-            Please enter the 6-digit code sent to your phone
+            {t("enter_otp_code")}
           </p>
         </div>
         <form onSubmit={verifyOTP}>
-          <div className="pb-6">
+          <div className="pb-6" dir="ltr">
             <InputOTP value={otp} onChange={handleOTPChange} maxLength={6}>
               <InputOTPGroup className="flex justify-between items-center gap-2 w-full">
                 {Array.from({ length: 6 }).map((_, index) => (
@@ -122,17 +122,17 @@ export default function OtpModal({
           </div>
           <p className="text-sm text-dark font-semibold text-center mb-4">
             {timeLeft > 0
-              ? `Resend OTP in ${Math.floor(timeLeft / 60)}:${String(
+              ? `${t("resend_otp_in")} ${Math.floor(timeLeft / 60)}:${String(
                   timeLeft % 60
                 ).padStart(2, "0")}`
-              : "Didn't receive the code?"}
+              : t("didnt_receive_code")}
           </p>
           <Button
             disabled={loading || otp.length < 6}
             type="submit"
             className="w-full bg-primary text-white py-3 rounded-lg font-bold"
           >
-            {loading ? <Loader /> : "Confirm"}
+            {loading ? <Loader /> : t("confirm")}
           </Button>
           {timeLeft === 0 && (
             <Button
@@ -140,7 +140,11 @@ export default function OtpModal({
               className="w-full mt-4 text-primary font-bold"
               onClick={reSendOtp}
             >
-              {resendLoading ? <Loader borderColor="#223f7f" /> : "Resend OTP"}
+              {resendLoading ? (
+                <Loader borderColor="#223f7f" />
+              ) : (
+                t("resend_otp")
+              )}
             </Button>
           )}
         </form>

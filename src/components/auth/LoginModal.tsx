@@ -103,7 +103,7 @@ function LoginModal() {
                     <Input
                       {...field}
                       type="text"
-                      placeholder={t("enter_phone_number")}
+                      placeholder={t("enter_your_phone_number")}
                       className="w-full outline-none"
                       onChange={(e) => {
                         const value = e.target.value.replace(/^0+/, "");
@@ -166,7 +166,7 @@ function LoginModal() {
               type="submit"
               className="w-full zoom bg-primary text-white py-3 rounded-lg font-bold"
             >
-              {loading ? <Loader /> : "Log in"}
+              {loading ? <Loader /> : t("log_in")}
             </Button>
           </form>
         </div>

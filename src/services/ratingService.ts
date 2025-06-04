@@ -1,12 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
 import { IAddAndUpdateRating } from "@/interfaces/rating";
-import Cookies from "js-cookie";
-import { CurrentLanguage } from "@/types";
-
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const uid = Cookies.get("user_id");
+import { uid, currentLanguage } from "@/constants";
 export const useRatingAPI = (id: string | undefined) => {
   return useQuery({
     queryKey: ["rating", id],

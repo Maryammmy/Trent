@@ -5,7 +5,7 @@ import {
   updateNotificationAPI,
   useNotificationsAPI,
   useUnreadNotificationsCountAPI,
-} from "@/services/Notifications";
+} from "@/services/NotificationsService";
 import { INotification } from "@/interfaces/notifications";
 import Notification from "./Notification";
 import useClickOutside from "@/hooks/useClickOutside";

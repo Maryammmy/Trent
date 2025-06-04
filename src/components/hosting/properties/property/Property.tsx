@@ -13,7 +13,6 @@ interface IProps {
 const Property = ({ property }: IProps) => {
   const { t } = useTranslation();
   const [publishProperty, setPublishProperty] = useState(false);
-
   const {
     id,
     title,
@@ -30,7 +29,6 @@ const Property = ({ property }: IProps) => {
   let statusColor = "";
   let showEdit = false;
   let showPublishBtn = false;
-
   if (!is_approved && is_need_review) {
     // Case: Rejected
     statusText = t("rejected");

@@ -11,10 +11,9 @@ import { useTranslation } from "react-i18next";
 import PropertyCartSkeleton from "../skeleton/PropertyCartSkeleton";
 import { googleMapsApiKey } from "@/services";
 import { ITEMS_PER_PAGE } from "@/constants";
-const Cart = lazy(() => import("./Cart"));
+const Card = lazy(() => import("./Card"));
 interface IProps {
   properties: IProperty[] | undefined;
-  refetch: () => void;
 }
 const containerStyle = {
   width: "100%",
@@ -34,7 +33,7 @@ const storedCurrency = sessionStorage.getItem("currency");
 const parsedCurrency = storedCurrency
   ? JSON.parse(storedCurrency)
   : { currency: "EGP", rate: "1" };
-const Map = ({ properties, refetch }: IProps) => {
+const Map = ({ properties }: IProps) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [visibleCount, setVisibleCount] = useState(8);
@@ -150,7 +149,7 @@ const Map = ({ properties, refetch }: IProps) => {
                 }
                 key={property.id}
               >
-                <Cart property={property} refetch={refetch} />
+                <Card property={property} />
               </Suspense>
             ))}
             {selectedProperties &&

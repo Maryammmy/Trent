@@ -1,5 +1,4 @@
 import { Menu, UserRound } from "lucide-react";
-import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useRef } from "react";
 import useClickOutside from "../../hooks/useClickOutside";
@@ -14,8 +13,8 @@ import Notifications from "../notifications/Notifications";
 import { useMediaQuery } from "react-responsive";
 import DropdownMenu from "../DropdownMenu";
 import LanguageSwitcher from "../LanguageSwitcher";
+import { uid } from "@/constants";
 
-const isLoggedin = Cookies.get("user_id");
 const NavbarButtons = () => {
   const dispatch = useAppDispatch();
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -36,7 +35,7 @@ const NavbarButtons = () => {
       <div className={`flex items-center ${isSmallScreen ? "gap-3" : "gap-5"}`}>
         <LanguageSwitcher />
         <CurrencySwitcher />
-        {isLoggedin && (
+        {uid && (
           <>
             <Notifications />
             <div className="relative" ref={dropdownRef}>

@@ -3,183 +3,144 @@ import * as yup from "yup";
 export const updatePropertySchema = yup
   .object()
   .shape({
-    uid: yup.string().trim().required("user id is required"),
-    prop_id: yup.string().trim().required("property id is required"),
+    uid: yup.string().trim().required("User id is required"),
+    prop_id: yup.string().trim().required("Property id is required"),
     price: yup
       .string()
       .trim()
-      .required("Price is required")
-      .matches(/^\d+$/, "Price must be a valid number")
-      .test("price-range", "Price must be between 50 and 250,000", (value) => {
+      .required("price_required")
+      .matches(/^\d+$/, "price_valid")
+      .test("price-range", "price_range_validation", (value) => {
         const numValue = Number(value);
         return numValue >= 50 && numValue <= 250000;
       }),
     beds_count: yup
       .string()
       .trim()
-      .required("Number of beds is required")
-      .matches(/^\d+$/, "Beds must be a valid number")
-      .test("min", "Beds must be at least 1", (value) => Number(value) >= 1)
-      .test("max", "Beds cannot exceed 20", (value) => Number(value) <= 20),
+      .required("beds_required")
+      .matches(/^\d+$/, "beds_valid")
+      .test("min", "beds_min", (value) => Number(value) >= 1)
+      .test("max", "beds_max", (value) => Number(value) <= 20),
     bathrooms_count: yup
       .string()
       .trim()
-      .required("Number of bathrooms is required")
-      .matches(/^\d+$/, "Bathrooms must be a valid number")
-      .test(
-        "min",
-        "Bathrooms must be at least 1",
-        (value) => Number(value) >= 1
-      )
-      .test(
-        "max",
-        "Bathrooms cannot exceed 20",
-        (value) => Number(value) <= 20
-      ),
+      .required("bathrooms_required")
+      .matches(/^\d+$/, "bathrooms_valid")
+      .test("min", "bathrooms_min", (value) => Number(value) >= 1)
+      .test("max", "bathrooms_max", (value) => Number(value) <= 20),
     sqft: yup
       .string()
       .trim()
-      .required("Totaal area is required")
-      .matches(/^\d+$/, "Totaal area must be a valid number")
-      .test(
-        "min",
-        "Totaal area must be at least 5",
-        (value) => Number(value) >= 5
-      )
-      .test(
-        "max",
-        "Totaal area cannot exceed 2000",
-        (value) => Number(value) <= 2000
-      ),
+      .required("sqft_required")
+      .matches(/^\d+$/, "sqft_valid")
+      .test("min", "sqft_min", (value) => Number(value) >= 5)
+      .test("max", "sqft_max", (value) => Number(value) <= 2000),
     security_deposit: yup
       .string()
       .trim()
-      .required("Security deposit is required")
-      .matches(/^\d+$/, "Security deposit must be a valid number")
-      .test(
-        "security-deposit-range",
-        "Security deposit must be between 50 and 250,000",
-        (value) => {
-          const numValue = Number(value);
-          return numValue >= 50 && numValue <= 250000;
-        }
-      ),
+      .required("security_deposit_required")
+      .matches(/^\d+$/, "security_deposit_valid")
+      .test("security-deposit-range", "security_deposit_range", (value) => {
+        const numValue = Number(value);
+        return numValue >= 50 && numValue <= 250000;
+      }),
     guest_count: yup
       .string()
       .trim()
-      .required("People limit is required")
-      .matches(/^\d+$/, "People limit must be a valid number"),
+      .required("guest_count_required")
+      .matches(/^\d+$/, "guest_count_valid"),
     min_days: yup
       .string()
       .trim()
-      .required("Minimum days is required")
-      .matches(/^\d+$/, "Minimum days must be a valid number")
-      .test(
-        "min-less-than-max",
-        "Minimum days cannot be greater than Maximum days",
-        function (value) {
-          const { max_days } = this.parent;
-          return !max_days || Number(value) <= Number(max_days);
-        }
-      ),
-
+      .required("min_days_required")
+      .matches(/^\d+$/, "min_days_valid")
+      .test("min-less-than-max", "min_days_lte_max_days", function (value) {
+        const { max_days } = this.parent;
+        return !max_days || Number(value) <= Number(max_days);
+      }),
     max_days: yup
       .string()
       .trim()
-      .required("Maximum days is required")
-      .matches(/^\d+$/, "Maximum days must be a valid number")
-      .test(
-        "max-days-range",
-        "Maximum days must be between 1 and 1000",
-        (value) => {
-          return Number(value) >= 1 && Number(value) <= 1000;
-        }
-      )
-      .test(
-        "max-greater-than-min",
-        "Maximum days cannot be less than Minimum days",
-        function (value) {
-          const { min_days } = this.parent;
-          return !min_days || Number(value) >= Number(min_days);
-        }
-      ),
-    facilities: yup.array().min(1, "Facilities are required").required(),
-    category_id: yup.string().required("Property type is required"),
+      .required("max_days_required")
+      .matches(/^\d+$/, "max_days_valid")
+      .test("max-days-range", "max_days_range", (value) => {
+        return Number(value) >= 1 && Number(value) <= 1000;
+      })
+      .test("max-greater-than-min", "max_days_gte_min_days", function (value) {
+        const { min_days } = this.parent;
+        return !min_days || Number(value) >= Number(min_days);
+      }),
+    facilities: yup.array().min(1, "facilities_required").required(),
+    category_id: yup.string().required("category_id_required"),
     maps_url: yup
       .string()
       .trim()
-      .url("Invalid Google Maps URL")
-      .required("Google Maps URL is required"),
-    government_id: yup.string().required("Government is required"),
-    period: yup.string().trim().required("Period is required"),
-    city_en: yup.string().trim().required("City (English) is required"),
-    city_ar: yup.string().trim().required("City (Arabic) is required"),
+      .url("maps_url_invalid")
+      .required("maps_url_required"),
+    government_id: yup.string().required("government_id_required"),
+    period: yup.string().trim().required("period_required"),
+    city_en: yup.string().trim().required("city_en_required"),
+    city_ar: yup.string().trim().required("city_ar_required"),
     title_en: yup
       .string()
       .trim()
-      .min(10, "Title must be at least 10 characters.")
-      .max(100, "Title may not be greater than 100 characters.")
-      .required("Title (English) is required"),
+      .min(10, "title_en_min")
+      .max(100, "title_en_max")
+      .required("title_en_required"),
     title_ar: yup
       .string()
       .trim()
-      .min(10, "Title must be at least 10 characters.")
-      .max(100, "Title may not be greater than 100 characters.")
-      .required("Title (Arabic) is required"),
+      .min(10, "title_ar_min")
+      .max(100, "title_ar_max")
+      .required("title_ar_required"),
     compound_en: yup.string().trim(),
     compound_ar: yup.string().trim(),
-    address_en: yup.string().trim().required("Address (English) is required"),
-    address_ar: yup.string().trim().required("Address (Arabic) is required"),
-    floor_en: yup.string().trim().required("Floor (English) is required"),
-    floor_ar: yup.string().trim().required("Floor (Arabic) is required"),
+    address_en: yup.string().trim().required("address_en_required"),
+    address_ar: yup.string().trim().required("address_ar_required"),
+    floor_en: yup.string().trim().required("floor_en_required"),
+    floor_ar: yup.string().trim().required("floor_ar_required"),
     description_en: yup
       .string()
       .trim()
-      .min(50, "Description must be at least 50 characters")
-      .max(500, "Description must be less than 500 characters")
-      .required("Description (English) is required"),
+      .min(50, "description_en_min")
+      .max(500, "description_en_max")
+      .required("description_en_required"),
     description_ar: yup
       .string()
       .trim()
-      .min(50, "Description must be at least 50 characters")
-      .max(500, "Description must be less than 500 characters")
-      .required("Description (Arabic) is required"),
+      .min(50, "description_ar_min")
+      .max(500, "description_ar_max")
+      .required("description_ar_required"),
     guest_rules_en: yup
       .string()
       .trim()
-      .min(10, "Guest rules must be at least 10 characters")
-      .max(500, "Guest rules must be less than 500 characters")
-      .required("Guest rules (English) are required"),
+      .min(10, "guest_rules_en_min")
+      .max(500, "guest_rules_en_max")
+      .required("guest_rules_en_required"),
     guest_rules_ar: yup
       .string()
       .trim()
-      .min(10, "Guest rules must be at least 10 characters")
-      .max(500, "Guest rules must be less than 500 characters")
-      .required("Guest rules (Arabic) are required"),
+      .min(10, "guest_rules_ar_min")
+      .max(500, "guest_rules_ar_max")
+      .required("guest_rules_ar_required"),
     cancellation_policy_id: yup
       .string()
-      .required("Cancellation policy is required"),
-    // images: yup.array().of(yup.mixed<File>()),
-    // existing_images: yup.array().of(yup.string()),
-    video: yup.mixed<File | string>(),
+      .required("cancellation_policy_required"),
+    video: yup.mixed(),
     images: yup.array(),
     existing_images: yup.array(),
   })
-  .test(
-    "min-total-images",
-    "You must provide at least 3 images (existing or new).",
-    function (values) {
-      const images = Array.isArray(values.images) ? values.images : [];
-      const existingImages = Array.isArray(values.existing_images)
-        ? values.existing_images
-        : [];
-      const totalImages = images.length + existingImages.length;
-      if (totalImages < 3) {
-        return this.createError({
-          path: "images",
-          message: "You must provide at least 3 images (existing or new).",
-        });
-      }
-      return true;
+  .test("min-total-images", "min_total_images_error", function (values) {
+    const images = Array.isArray(values.images) ? values.images : [];
+    const existingImages = Array.isArray(values.existing_images)
+      ? values.existing_images
+      : [];
+    const totalImages = images.length + existingImages.length;
+    if (totalImages < 3) {
+      return this.createError({
+        path: "images",
+        message: "min_total_images_error",
+      });
     }
-  );
+    return true;
+  });

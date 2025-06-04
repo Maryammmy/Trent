@@ -1,12 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
 import { IToggleProperty } from "../interfaces/property";
-import { CurrentLanguage } from "../types";
-import Cookies from "js-cookie";
-
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const uid = Cookies.get("user_id");
+import { uid, currentLanguage } from "@/constants";
 export const usePropertyAPI = (id: string | undefined) => {
   return useQuery({
     queryKey: ["property", id, uid],

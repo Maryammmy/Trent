@@ -83,7 +83,7 @@ export interface IBooking {
   book_status: string;
   p_method_id: string;
   prop_id: string;
-  prop_img: string;
+  image_list: IImage[];
   prop_price: string;
   prop_title: string;
   rate: string;

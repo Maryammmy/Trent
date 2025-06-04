@@ -4,14 +4,9 @@ import Button from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { ApiError } from "@/interfaces";
-import Cookies from "js-cookie";
-import { CurrentLanguage } from "@/types";
 import { confirmBookingAPI } from "@/services/bookingService"; // افترضنا إنه عندك API اسمه confirmBookingAPI
 import Loader from "@/components/loader/Loader";
-
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const uid = Cookies.get("user_id");
+import { uid, currentLanguage } from "@/constants";
 
 interface IProps {
   isOpen: boolean;
@@ -30,7 +25,7 @@ export default function ConfirmBookingModal({
     try {
       setLoading(true);
       const payload = {
-        uid: uid || "",
+        uid: uid,
         lang: currentLanguage,
         booking_id: bookingId,
         is_confirmed: true,

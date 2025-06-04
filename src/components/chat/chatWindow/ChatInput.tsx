@@ -2,14 +2,13 @@ import Input from "@/components/ui/Input";
 import { addChatAPI } from "@/services/chatService";
 import { ImageUp, Send } from "lucide-react";
 import { useRef, useState } from "react";
-import Cookies from "js-cookie";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { ApiError } from "@/interfaces";
 import { useNavigate } from "react-router-dom";
+import { uid } from "@/constants";
 
-const uid = Cookies.get("user_id");
 interface IProps {
   ownerId: string;
   propId: string | null;

@@ -8,15 +8,10 @@ import {
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { ApiError } from "@/interfaces";
-import Cookies from "js-cookie";
-import { CurrentLanguage } from "@/types";
 import Loader from "@/components/loader/Loader";
 import UpdateSkeleton from "@/components/skeleton/UpdateSkeleton";
 import { ICancelReason } from "@/interfaces/booking";
-
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-const uid = Cookies.get("user_id");
+import { currentLanguage, uid } from "@/constants";
 
 interface IProps {
   isOpen: boolean;
@@ -38,7 +33,7 @@ export default function CancelBookingModal({
     try {
       setLoading(true);
       const payload = {
-        uid: uid ? uid : "",
+        uid: uid,
         lang: currentLanguage,
         booking_id: bookingId,
         cancel_id: selectedReason,
