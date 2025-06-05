@@ -8,7 +8,7 @@ import { useState } from "react";
 import { checkCouponAPI } from "@/services/bookingService";
 import Loader from "@/components/loader/Loader";
 import toast from "react-hot-toast";
-import { ApiError } from "@/interfaces";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 interface IProps {
   bookingData: IVerifyPropertyResponse;
   couponValue: number;
@@ -33,11 +33,7 @@ function PriceDetails({
         handleChangeCouponValue(Number(response?.data?.data?.value));
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }

@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useCancellationPoliciesAPI } from "@/services/conditionService";
 import CancellationPolicy from "./CancellationPolicy";
 import { allowedImageTypes, allowedVideoTypes } from "@/constants";
-import { IPropertyType, IFacility, IGovernement, ApiError } from "@/interfaces";
+import { IPropertyType, IFacility, IGovernement } from "@/interfaces";
 import {
   ISingleProperty,
   IDetailsProperty,
@@ -37,6 +37,7 @@ import toast from "react-hot-toast";
 import Loader from "@/components/loader/Loader";
 import Button from "@/components/ui/Button";
 import { ISelectedImage } from "@/interfaces/property/updateProperty";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 interface UpdatePropertyFormProps {
   propertyData: ISingleProperty;
@@ -215,7 +216,6 @@ function UpdatePropertyForm({
 
   const onSubmit = async (data: PropertyNameInputs) => {
     const formData = convertToFormData(data);
-    console.log(data);
     try {
       setLoading(true);
       const response = await editPropertyAPI(formData);
@@ -227,11 +227,7 @@ function UpdatePropertyForm({
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }

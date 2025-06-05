@@ -12,6 +12,3 @@ export const storeOwnerChat = (owner: IOwner) => {
     })
   );
 };
-export const capitalize = (text: string) => {
-  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-};

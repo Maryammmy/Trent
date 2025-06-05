@@ -27,7 +27,9 @@ function PeriodFilter({ handlePeriodChange, periods, period }: IProps) {
           className="border py-3 px-2 bg-white rounded-md outline-none focus:border-2 focus:border-primary"
         />
       ) : (
-        <p className="border py-3 px-2 rounded-md bg-white">No period found</p>
+        <p className="border py-3 px-2 rounded-md bg-white">
+          {t("no_period_found")}
+        </p>
       )}
     </div>
   );

@@ -17,9 +17,9 @@ import CountrySelector from "../ui/CountrySelector";
 import { SignupNameInputs } from "../../types";
 import OtpModal from "./OtpModal";
 import { Trans, useTranslation } from "react-i18next";
-import { ApiError } from "@/interfaces";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 function SignupModal() {
   const { t } = useTranslation();
@@ -69,11 +69,7 @@ function SignupModal() {
         setOtp(true);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }
@@ -102,11 +98,7 @@ function SignupModal() {
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     }
   };
   return (

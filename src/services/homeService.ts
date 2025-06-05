@@ -3,10 +3,7 @@ import { baseAPI } from ".";
 import { IHomeDataParams } from "../interfaces/landing";
 import { currentLanguage, ITEMS_PER_PAGE, uid } from "@/constants";
 
-export const useHomeDataAPI = (
-  params?: IHomeDataParams
-  // enabled: boolean = false
-) => {
+export const useHomeDataAPI = (params?: IHomeDataParams) => {
   const queryParamsObject: Record<
     string,
     string | number[] | string[] | number | boolean
@@ -36,7 +33,5 @@ export const useHomeDataAPI = (
     },
 
     initialPageParam: 1,
-    // enabled,
-    // staleTime: 5 * 60 * 1000,
   });
 };

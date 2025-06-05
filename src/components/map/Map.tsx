@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import PropertyCartSkeleton from "../skeleton/PropertyCartSkeleton";
 import { googleMapsApiKey } from "@/services";
 import { ITEMS_PER_PAGE } from "@/constants";
+import { getStoredCurrency } from "@/utils/getStoredCurrency";
 const Card = lazy(() => import("./Card"));
 interface IProps {
   properties: IProperty[] | undefined;
@@ -29,15 +30,11 @@ const getPixelPositionOffset = (width: number, height: number) => ({
   x: -(width / 2),
   y: -height,
 });
-const storedCurrency = sessionStorage.getItem("currency");
-const parsedCurrency = storedCurrency
-  ? JSON.parse(storedCurrency)
-  : { currency: "EGP", rate: "1" };
+const parsedCurrency = getStoredCurrency();
 const Map = ({ properties }: IProps) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [visibleCount, setVisibleCount] = useState(8);
-  console.log(properties);
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey,
   });
@@ -55,7 +52,6 @@ const Map = ({ properties }: IProps) => {
     const updatedSelected = selectedProperties
       .map((selected) => properties.find((p) => p.id === selected.id))
       .filter(Boolean) as IProperty[];
-    console.log(updatedSelected);
     const isUpdated = updatedSelected.some((updated, index) => {
       const original = selectedProperties[index];
       return !updated || JSON.stringify(updated) !== JSON.stringify(original);
@@ -120,7 +116,7 @@ const Map = ({ properties }: IProps) => {
                     ? `${group?.length} Properties`
                     : `${Math.round(
                         Number(group?.[0]?.price) * Number(parsedCurrency?.rate)
-                      )} ${parsedCurrency?.currency}`}
+                      )} ${t(parsedCurrency?.currency)}`}
                 </span>
               </Button>
             </OverlayView>

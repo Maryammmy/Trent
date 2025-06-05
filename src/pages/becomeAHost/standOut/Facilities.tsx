@@ -66,8 +66,8 @@ function Facilities() {
               );
             })
           ) : (
-            <div className="col-span-full flex justify-center items-center text-dark font-medium w-full">
-              No facilities found
+            <div className="col-span-full flex justify-center items-center text-dark text-lg font-medium w-full">
+              {t("no_facilities_found")}
             </div>
           )}
         </div>

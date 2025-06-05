@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useGetData } from "../../hooks/useGetData";
 import { IWhyChooseUs, IWhyChooseUsHeader } from "../../interfaces/landing";
 import { baseURL } from "../../services";
@@ -8,6 +9,7 @@ import Image from "../ui/Image";
 const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 function ChooseUs() {
+  const { t } = useTranslation();
   const { data } = useGetData(
     ["whyChooseUs"],
     `user_api/u_why_choose_us.php?lang=${currentLanguage}`
@@ -70,7 +72,7 @@ function ChooseUs() {
           })
         ) : (
           <div className="flex justify-center items-center text-lg h-[50vh] text-dark font-medium w-full">
-            No why choose us found
+            {t("no_why_choose_us_found")}
           </div>
         )}
       </div>

@@ -10,8 +10,8 @@ import React, { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { sendOtpAPI } from "@/services/authService";
 import { useTranslation } from "react-i18next";
-import { ApiError } from "@/interfaces";
 import toast from "react-hot-toast";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 interface IProps {
   close: () => void;
@@ -74,11 +74,7 @@ export default function OtpModal({
         setTimeLeft(60);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setResendLoading(false);
     }

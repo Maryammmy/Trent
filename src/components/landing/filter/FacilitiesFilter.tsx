@@ -47,8 +47,8 @@ function FacilitiesFilter({
             );
           })
         ) : (
-          <div className="flex justify-center items-center text-dark font-medium w-full">
-            No facilities found
+          <div className="flex justify-center items-center text-lg text-dark font-medium w-full">
+            {t("no_facilities_found")}
           </div>
         )}
       </div>

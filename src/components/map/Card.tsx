@@ -7,13 +7,12 @@ import Carsoul from "../ui/Carsoul";
 import Rating from "../ui/Rating";
 import Image from "../ui/Image";
 import { useToggleProperty } from "@/hooks/useToggleProperty";
+import { getStoredCurrency } from "@/utils/getStoredCurrency";
 interface IProps {
   property: IProperty;
 }
-const storedCurrency = sessionStorage.getItem("currency");
-const parsedCurrency = storedCurrency
-  ? JSON.parse(storedCurrency)
-  : { currency: "EGP", rate: "1" };
+const parsedCurrency = getStoredCurrency();
+
 function Card({ property }: IProps) {
   const {
     IS_FAVOURITE,

@@ -198,7 +198,6 @@ function Property() {
                         e,
                         owner_id: propertyDetails?.owner_id,
                         id,
-                        t,
                         navigate,
                       });
                     }}

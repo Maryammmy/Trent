@@ -1,9 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseAPI } from ".";
-import { CurrentLanguage } from "../types";
+import { currentLanguage } from "@/constants";
 
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
 export const useFiltersAPI = () => {
   return useQuery({
     queryKey: ["filters"],

@@ -72,7 +72,7 @@ const City = () => {
             />
           ) : (
             <p className="border bg-white py-3 px-2 rounded-md">
-              No government found
+              {t("no_government_found")}
             </p>
           )}
         </div>

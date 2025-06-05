@@ -5,7 +5,7 @@ function HostingLayout() {
   return (
     <>
       <Navbar />
-      <div className="mt-[73.6px] md:mt-[87px]">
+      <div className="mt-[73.6px] sm:mt-[87px]">
         <Outlet />
       </div>
     </>

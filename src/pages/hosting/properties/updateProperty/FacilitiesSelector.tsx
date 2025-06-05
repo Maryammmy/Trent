@@ -59,7 +59,7 @@ function FacilitiesSelector({ control, errors, facilities }: IProps) {
         />
       ) : (
         <p className="border bg-white py-3 px-2 rounded-md">
-          No facilities found
+          {t("no_facilities_found")}
         </p>
       )}
       {errors["facilities"] && (

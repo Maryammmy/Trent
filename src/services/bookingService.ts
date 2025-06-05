@@ -25,23 +25,23 @@ export const usePropertyDatesAPI = (id: string | undefined) => {
     enabled: !!id,
   });
 };
-export const verifyPropertyAPI = (payload: IVerifyProperty) => {
+export const verifyPropertyAPI = async (payload: IVerifyProperty) => {
   const formData = new FormData();
   Object.entries(payload).forEach(([key, value]) => {
     formData.append(key, String(value));
   });
-  const response = baseAPIForm.post(
+  const response = await baseAPIForm.post(
     "user_api/booking/u_verify_property_rules.php",
     formData
   );
   return response;
 };
-export const saveBookingAPI = (payload: ISaveBooking) => {
+export const saveBookingAPI = async (payload: ISaveBooking) => {
   const formData = new FormData();
   Object.entries(payload).forEach(([key, value]) => {
     formData.append(key, String(value));
   });
-  const response = baseAPIForm.post(
+  const response = await baseAPIForm.post(
     "user_api/booking/u_save_booking.php",
     formData
   );
@@ -89,12 +89,12 @@ export const useOwnerCancelBookingAPI = () => {
     enabled: !!uid,
   });
 };
-export const cancelBookingAPI = (payload: ICancelBooking) => {
+export const cancelBookingAPI = async (payload: ICancelBooking) => {
   const formData = new FormData();
   Object.entries(payload).forEach(([key, value]) => {
     formData.append(key, String(value));
   });
-  const response = baseAPIForm.post(
+  const response = await baseAPIForm.post(
     "user_api/booking/u_book_cancle.php",
     formData
   );
@@ -110,30 +110,31 @@ export const paymentStatusAPI = (
   );
   return response;
 };
-export const confirmBookingAPI = (payload: IConfirmBooking) => {
+export const confirmBookingAPI = async (payload: IConfirmBooking) => {
   const formData = new FormData();
   Object.entries(payload).forEach(([key, value]) => {
     formData.append(key, String(value));
   });
-  const response = baseAPIForm.post(
+  const response = await baseAPIForm.post(
     "user_api/booking/u_confirm_booking.php",
     formData
   );
   return response;
 };
-export const checkInOutAPI = (payload: ICheckInOut) => {
+export const checkInOutAPI = async (payload: ICheckInOut) => {
   const formData = new FormData();
   Object.entries(payload).forEach(([key, value]) => {
     formData.append(key, String(value));
   });
-  const response = baseAPIForm.post(
+  const response = await baseAPIForm.post(
     `user_api/booking/u_check_in_out.php`,
     formData
   );
   return response;
 };
-export const checkCouponAPI = (couponCode: string, total: string) => {
-  return baseAPI.get(
+export const checkCouponAPI = async (couponCode: string, total: string) => {
+  const response = await baseAPI.get(
     `user_api/booking/u_check_coupon.php?coupon_code=${couponCode}&uid=${uid}&total=${total}`
   );
+  return response;
 };

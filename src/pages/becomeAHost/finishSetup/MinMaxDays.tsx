@@ -58,7 +58,6 @@ function MinMaxDays() {
       }
     }
     if (type === "max") {
-      console.log(newErrors);
       if (minDays && value <= Number(minDays)) {
         newErrors.max = t("error_max_must_be_greater_than_min");
         newErrors.min = t("error_min_greater_than_max");
@@ -130,7 +129,7 @@ function MinMaxDays() {
             />
           ) : (
             <p className="border py-3 px-2 rounded-md bg-white">
-              No period found
+              {t("no_period_found")}
             </p>
           )}
         </div>

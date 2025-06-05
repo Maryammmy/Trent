@@ -1,61 +1,56 @@
 import * as yup from "yup";
 
 const noOnlyNumbers = /^[^0-9]*$/;
+
 const optionalStringWithLength = (
   min: number,
   max: number,
-  minMsg: string,
-  maxMsg: string
+  minKey: string,
+  maxKey: string
 ) =>
   yup
     .string()
     .trim()
-    .matches(noOnlyNumbers, "This field cannot contain numbers")
-    .test("length-check", minMsg, (val) => {
+    .matches(noOnlyNumbers, "field_no_numbers")
+    .test("length-check", minKey, (val) => {
       if (!val) return true;
       return val.length >= min;
     })
-    .test("length-check-max", maxMsg, (val) => {
+    .test("length-check-max", maxKey, (val) => {
       if (!val) return true;
       return val.length <= max;
     });
 
 export const PayoutProfileSchema = yup.object().shape({
   uid: yup.string().required("User id is required"),
-  method_id: yup.string().required("Payment method is required"),
+  method_id: yup.string().required("method_id_required"),
   bank_account_number: yup
     .string()
     .trim()
     .matches(/^\d{10,50}$/, {
-      message:
-        "The bank account number must contain between 10 and 50 digits only",
+      message: "bank_account_number_validation",
       excludeEmptyString: true,
     }),
-  bank_name: optionalStringWithLength(
-    3,
-    200,
-    "The bank name must be at least 3 characters",
-    "The bank name may not be greater than 200 characters"
-  ),
+  bank_name: optionalStringWithLength(3, 200, "bank_name_min", "bank_name_max"),
   full_name: optionalStringWithLength(
     10,
     100,
-    "The full name must be at least 10 characters",
-    "The full name may not be greater than 100 characters"
+    "full_name_min",
+    "full_name_max"
   ),
   wallet_number: yup
     .string()
     .trim()
     .matches(/^\d{10}$/, {
-      message: "The wallet number must contain exactly 10 digits",
+      message: "wallet_number_validation",
       excludeEmptyString: true,
     }),
   profile_name: yup
     .string()
     .trim()
-    .required("Profile name is required")
-    .min(3, "The profile name must be at least 3 characters")
-    .max(50, "The profile name may not be greater than 50 characters")
-    .matches(noOnlyNumbers, "This field cannot contain numbers"),
+    .required("profile_name_required")
+    .min(3, "profile_name_min")
+    .max(50, "profile_name_max")
+    .matches(noOnlyNumbers, "profile_name_no_numbers"),
   lang: yup.string().required("Language is required"),
 });

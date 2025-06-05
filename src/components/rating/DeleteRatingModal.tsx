@@ -5,7 +5,7 @@ import Button from "../ui/Button";
 import Loader from "../loader/Loader";
 import { deleteRatingAPI } from "@/services/ratingService";
 import toast from "react-hot-toast";
-import { ApiError } from "@/interfaces";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 interface IProps {
   isOpen: boolean;
@@ -27,12 +27,7 @@ function DeleteRatingModal({ isOpen, close, id }: IProps) {
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
-      console.log(error);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }

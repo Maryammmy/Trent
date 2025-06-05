@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { checkInOutAPI } from "@/services/bookingService";
 import toast from "react-hot-toast";
-import { ApiError } from "@/interfaces";
 import Loader from "@/components/loader/Loader";
 import { currentLanguage, uid } from "@/constants";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 interface IProps {
   isOpen: boolean;
@@ -37,11 +37,7 @@ function CheckInOutModal({ isOpen, close, bookingId, isCheckIn }: IProps) {
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }

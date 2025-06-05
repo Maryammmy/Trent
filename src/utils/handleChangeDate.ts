@@ -1,11 +1,10 @@
 import { DateValueType } from "react-tailwindcss-datepicker";
 import toast from "react-hot-toast";
-import { TFunction } from "i18next";
+import { t } from "i18next";
 
 export const validateStartDate = (
   newValue: DateValueType,
-  endDateValue: DateValueType,
-  t: TFunction
+  endDateValue: DateValueType
 ): DateValueType | null => {
   const { startDate } = newValue || {};
   const today = new Date().setHours(0, 0, 0, 0);
@@ -26,7 +25,6 @@ export const validateStartDate = (
 export const validateEndDate = (
   newValue: DateValueType,
   startDateValue: DateValueType,
-  t: TFunction,
   minDays?: number,
   maxDays?: number
 ): DateValueType | null => {

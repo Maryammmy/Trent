@@ -47,7 +47,7 @@ function PropertyTypeFilter({
           })
         ) : (
           <div className="flex justify-center items-center text-dark font-medium w-full">
-            No property type found
+            {t("no_property_type_found")}
           </div>
         )}
       </div>

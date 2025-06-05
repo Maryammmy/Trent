@@ -15,23 +15,33 @@ export const usePropertyAPI = (id: string | undefined) => {
     enabled: !!id,
   });
 };
-export const addPropertyAPI = (payload: FormData) => {
-  return baseAPIForm.post("user_api/u_property_add.php", payload);
-};
-export const editPropertyAPI = (payload: FormData) => {
-  const response = baseAPIForm.post("user_api/u_property_edit.php", payload);
+export const addPropertyAPI = async (payload: FormData) => {
+  const response = await baseAPIForm.post(
+    "user_api/u_property_add.php",
+    payload
+  );
   return response;
 };
-export const togglePropertyAPI = (payload: IToggleProperty) => {
-  const response = baseAPI.post(
+export const editPropertyAPI = async (payload: FormData) => {
+  const response = await baseAPIForm.post(
+    "user_api/u_property_edit.php",
+    payload
+  );
+  return response;
+};
+export const togglePropertyAPI = async (payload: IToggleProperty) => {
+  const response = await baseAPI.post(
     "user_api/u_property_toggle_favorite.php",
     payload
   );
   return response;
 };
-export const deletePropertyAPI = (prop_id: string) => {
-  const response = baseAPI.delete("user_api/u_property_toggle_publishing.php", {
-    data: { uid, prop_id },
-  });
+export const publishPropertyAPI = async (prop_id: string) => {
+  const response = await baseAPI.delete(
+    "user_api/u_property_toggle_publishing.php",
+    {
+      data: { uid, prop_id },
+    }
+  );
   return response;
 };

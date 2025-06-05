@@ -16,9 +16,9 @@ import { loginAPI } from "../../services/authService";
 import { LoginNameInputs } from "../../types";
 import { useLocation, useNavigate } from "react-router-dom";
 import ForgetPasswordModal from "./ForgetPasswordModal";
-import { ApiError } from "@/interfaces";
 import { useTranslation } from "react-i18next";
 import CountrySelector from "../ui/CountrySelector";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 function LoginModal() {
   const { t } = useTranslation();
@@ -54,11 +54,7 @@ function LoginModal() {
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }

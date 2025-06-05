@@ -11,9 +11,14 @@ export const useUserAPI = () => {
     enabled: !!uid,
   });
 };
-export const updateUserAPI = (payload: FormData) => {
-  return baseAPIForm.post("user_api/u_profile_edit.php", payload);
+export const updateUserAPI = async (payload: FormData) => {
+  const response = await baseAPIForm.post(
+    "user_api/u_profile_edit.php",
+    payload
+  );
+  return response;
 };
-export const changeMobileAPI = (payload: IChangeMobile) => {
-  return baseAPI.post("user_api/u-change-mobile.php", payload);
+export const changeMobileAPI = async (payload: IChangeMobile) => {
+  const response = await baseAPI.post("user_api/u-change-mobile.php", payload);
+  return response;
 };

@@ -26,7 +26,9 @@ function CityFilter({ handleCityChange, cities, city }: IProps) {
           className="border py-3 px-2 bg-white rounded-md outline-none focus:border-2 focus:border-primary"
         />
       ) : (
-        <p className="border py-3 px-2 rounded-md bg-white">No city found</p>
+        <p className="border py-3 px-2 rounded-md bg-white">
+          {t("no_city_found")}
+        </p>
       )}
     </div>
   );

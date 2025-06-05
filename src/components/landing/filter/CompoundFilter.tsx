@@ -27,7 +27,7 @@ function CompoundFilter({ handleCompoundChange, compounds, compound }: IProps) {
         />
       ) : (
         <p className="border py-3 px-2 rounded-md bg-white">
-          No compound found
+          {t("no_compound_found")}
         </p>
       )}
     </div>

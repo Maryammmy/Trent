@@ -26,20 +26,27 @@ export const usePayoutPropertiesAPI = () => {
     enabled: !!uid,
   });
 };
-export const createPayoutsRequestAPI = (payload: ICreatePayoutsRequest) => {
+export const createPayoutsRequestAPI = async (
+  payload: ICreatePayoutsRequest
+) => {
   const formData = new FormData();
   Object.entries(payload).forEach(([key, value]) => {
     formData.append(key, String(value));
   });
-  const response = baseAPIForm.post("user_api/payout/add_payout.php", formData);
+  const response = await baseAPIForm.post(
+    "user_api/payout/add_payout.php",
+    formData
+  );
   return response;
 };
-export const createPayoutsProfileAPI = (payload: ICreatePayoutsProfile) => {
+export const createPayoutsProfileAPI = async (
+  payload: ICreatePayoutsProfile
+) => {
   const formData = new FormData();
   Object.entries(payload).forEach(([key, value]) => {
     formData.append(key, String(value));
   });
-  const response = baseAPIForm.post(
+  const response = await baseAPIForm.post(
     "user_api/payout/add_profile_payout.php",
     formData
   );
@@ -53,10 +60,13 @@ export const usePayoutProfilesAPI = () => {
     enabled: !!uid,
   });
 };
-export const deletePayoutsProfileAPI = (profile_id: string) => {
-  const response = baseAPI.delete("user_api/payout/delete_profile_payout.php", {
-    data: { uid, profile_id },
-  });
+export const deletePayoutsProfileAPI = async (profile_id: string) => {
+  const response = await baseAPI.delete(
+    "user_api/payout/delete_profile_payout.php",
+    {
+      data: { uid, profile_id },
+    }
+  );
   return response;
 };
 export const useCashMethodsAPI = () => {

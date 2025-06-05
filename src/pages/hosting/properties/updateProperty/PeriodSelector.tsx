@@ -33,7 +33,9 @@ function PeriodSelector({ control, errors, periods }: IProps) {
           )}
         />
       ) : (
-        <p className="border bg-white py-3 px-2 rounded-md">No period found</p>
+        <p className="border bg-white py-3 px-2 rounded-md">
+          {t("no_period_found")}
+        </p>
       )}
       {errors["period"] && (
         <InputErrorMessage msg={errors["period"]?.message} />

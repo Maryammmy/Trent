@@ -10,14 +10,12 @@ import { baseURL } from "../services";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useToggleProperty } from "@/hooks/useToggleProperty";
 import { handleBookingNavigation } from "@/utils/handleBookingNavigation";
+import { getStoredCurrency } from "@/utils/getStoredCurrency";
 
 interface IProps {
   property: IProperty;
 }
-const storedCurrency = sessionStorage.getItem("currency");
-const parsedCurrency = storedCurrency
-  ? JSON.parse(storedCurrency)
-  : { currency: "EGP", rate: "1" };
+const parsedCurrency = getStoredCurrency();
 
 function Card({ property }: IProps) {
   const navigate = useNavigate();
@@ -111,7 +109,7 @@ function Card({ property }: IProps) {
         <div className="flex gap-5 mt-2">
           <Button
             onClick={(e) => {
-              handleBookingNavigation({ e, owner_id, id, t, navigate });
+              handleBookingNavigation({ e, owner_id, id, navigate });
             }}
             className="flex-[2] text-center zoom py-1 bg-primary rounded-md text-white font-medium"
           >

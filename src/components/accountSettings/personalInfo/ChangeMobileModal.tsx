@@ -3,7 +3,6 @@ import Loader from "@/components/loader/Loader";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Modal from "@/components/ui/Modal";
-import { ApiError } from "@/interfaces";
 import { verifyOtpAPI } from "@/services/authService";
 import { changeMobileAPI } from "@/services/userService";
 import { useState } from "react";
@@ -15,6 +14,7 @@ import InputErrorMessage from "@/components/ui/InputErrorMessage";
 import CountrySelector from "@/components/ui/CountrySelector";
 import { IChangeMobileInputs } from "@/interfaces/accountSettings";
 import { changeMobileSchema } from "@/validation/changeMobileSchema";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 interface IProps {
   isOpen: boolean;
@@ -54,11 +54,7 @@ function ChangeMobileModal({ isOpen, close, phone, countryCode }: IProps) {
         setOtp(true);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }
@@ -84,11 +80,7 @@ function ChangeMobileModal({ isOpen, close, phone, countryCode }: IProps) {
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     }
   };
 
@@ -169,6 +161,7 @@ function ChangeMobileModal({ isOpen, close, phone, countryCode }: IProps) {
               )}
             </div>
             <Button
+              disabled={loading}
               type="submit"
               className="bg-primary zoom w-full mt-6 py-3 px-3 rounded-lg text-white font-semibold text-sm text-center"
             >

@@ -7,11 +7,11 @@ import {
 } from "@/services/bookingService";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { ApiError } from "@/interfaces";
 import Loader from "@/components/loader/Loader";
 import UpdateSkeleton from "@/components/skeleton/UpdateSkeleton";
 import { ICancelReason } from "@/interfaces/booking";
 import { currentLanguage, uid } from "@/constants";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 interface IProps {
   isOpen: boolean;
@@ -47,11 +47,7 @@ export default function CancelBookingModal({
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }
@@ -96,7 +92,7 @@ export default function CancelBookingModal({
                   {t("cancel")}
                 </Button>
                 <Button
-                  disabled={!selectedReason}
+                  disabled={!selectedReason || loading}
                   onClick={cancelBooking}
                   className="w-32 py-2 text-center bg-primary text-white rounded-md hover:bg-primary/80"
                 >

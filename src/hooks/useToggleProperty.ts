@@ -1,6 +1,6 @@
 import { uid } from "@/constants";
-import { ApiError } from "@/interfaces";
 import { togglePropertyAPI } from "@/services/propertyService";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -32,11 +32,7 @@ export function useToggleProperty() {
         });
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     }
   };
 

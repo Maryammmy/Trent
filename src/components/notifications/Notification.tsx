@@ -1,13 +1,11 @@
 import { INotification } from "@/interfaces/notifications";
 import Image from "../ui/Image";
 import { baseURL } from "@/services";
-import toast from "react-hot-toast";
-import { ApiError } from "@/interfaces";
-import { useTranslation } from "react-i18next";
 import { updateNotificationAPI } from "@/services/NotificationsService";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { getNotificationRoute } from "@/utils/getNotificationRoute";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 interface IProps {
   notification: INotification;
@@ -16,7 +14,6 @@ interface IProps {
 function Notification({ notification, close }: IProps) {
   const { title, body, image_list, is_seen, id, key, book_status, is_owner } =
     notification;
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -35,11 +32,7 @@ function Notification({ notification, close }: IProps) {
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     }
   };
   return (

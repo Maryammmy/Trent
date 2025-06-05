@@ -3,11 +3,9 @@ import { addChatAPI } from "@/services/chatService";
 import { ImageUp, Send } from "lucide-react";
 import { useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-import { useTranslation } from "react-i18next";
-import { ApiError } from "@/interfaces";
 import { useNavigate } from "react-router-dom";
 import { uid } from "@/constants";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 interface IProps {
   ownerId: string;
@@ -15,7 +13,6 @@ interface IProps {
   chatId: string | null;
 }
 const ChatInput = ({ ownerId, propId, chatId }: IProps) => {
-  const { t } = useTranslation();
   const [newMessage, setNewMessage] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const queryClient = useQueryClient();
@@ -46,11 +43,7 @@ const ChatInput = ({ ownerId, propId, chatId }: IProps) => {
         setNewMessage("");
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     }
   };
 
@@ -83,12 +76,7 @@ const ChatInput = ({ ownerId, propId, chatId }: IProps) => {
         setNewMessage("");
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
-      console.log(error);
+      handleErrorMessage(error);
     }
   };
 

@@ -30,7 +30,6 @@ function HostingModal() {
   const handleFinishUp = async () => {
     setLoading(true);
     const isSuccess = await sendDataToAPI();
-    console.log(isSuccess);
     if (isSuccess) {
       setTimeout(() => {
         dispatch(setIsFinishUpModal(false));

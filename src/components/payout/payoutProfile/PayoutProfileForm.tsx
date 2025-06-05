@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 import Input from "../../ui/Input";
 import InputErrorMessage from "../../ui/InputErrorMessage";
 import Loader from "../../loader/Loader";
-import { ApiError } from "../../../interfaces";
 import { PayoutProfileSchema } from "@/validation/payoutProfileSchema";
 import { IPaymentMethod, ICreatePayoutsProfile } from "@/interfaces/payouts";
 import {
@@ -18,6 +17,7 @@ import Select from "@/components/ui/Select";
 import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
 import { useLocation, useNavigate } from "react-router-dom";
 import { currentLanguage, uid } from "@/constants";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 function PayoutProfileForm() {
   const navigate = useNavigate();
@@ -51,9 +51,7 @@ function PayoutProfileForm() {
         !data.wallet_number &&
         (!data.bank_account_number || !data.bank_name)
       ) {
-        toast.error(
-          "Please fill the number wallet or bank name and account number"
-        );
+        toast.error(t("wallet_or_bank_required"));
         return;
       }
       setLoading(true);
@@ -62,14 +60,10 @@ function PayoutProfileForm() {
         toast.success(response?.data?.response_message);
         setTimeout(() => {
           navigate(from);
-        }, 1000);
+        }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }
@@ -87,7 +81,7 @@ function PayoutProfileForm() {
                 <Input
                   type="text"
                   {...field}
-                  placeholder="Enter your profile name"
+                  placeholder={t("profile_name_placeholder")}
                   className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
                 />
               )}
@@ -105,7 +99,7 @@ function PayoutProfileForm() {
                 <Input
                   type="text"
                   {...field}
-                  placeholder="Enter your formal full name"
+                  placeholder={t("full_name_placeholder")}
                   className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
                 />
               )}
@@ -135,7 +129,7 @@ function PayoutProfileForm() {
               />
             ) : (
               <p className="border bg-white py-3 px-2 rounded-md">
-                No payment method found
+                {t("no_payment_method_found")}
               </p>
             )}
             {errors.method_id && (
@@ -151,7 +145,7 @@ function PayoutProfileForm() {
                 <Input
                   type="text"
                   {...field}
-                  placeholder="Enter your bank name"
+                  placeholder={t("bank_name_placeholder")}
                   className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
                 />
               )}
@@ -169,7 +163,7 @@ function PayoutProfileForm() {
                 <Input
                   type="text"
                   {...field}
-                  placeholder="Enter your bank account number"
+                  placeholder={t("bank_account_number_placeholder")}
                   className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
                 />
               )}
@@ -187,7 +181,7 @@ function PayoutProfileForm() {
                 <Input
                   type="text"
                   {...field}
-                  placeholder="Enter your wallet number"
+                  placeholder={t("wallet_number_placeholder")}
                   className="w-full p-3 border rounded-md outline-none focus:border-2 focus:border-primary"
                   onChange={(e) => {
                     let value = e.target.value;

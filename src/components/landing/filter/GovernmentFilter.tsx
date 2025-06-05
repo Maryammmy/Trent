@@ -30,7 +30,7 @@ function GovernmentFilter({
         />
       ) : (
         <p className="border py-3 px-2 rounded-md bg-white">
-          No compound found
+          t("no_government_found")
         </p>
       )}
     </div>

@@ -1,12 +1,12 @@
 import { IPropertyData } from "../interfaces/property";
 import toast from "react-hot-toast";
-import { ApiError } from "../interfaces";
 import { addPropertyAPI } from "./propertyService";
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import { HostingContext } from "../context/HostingContext";
 import { useNavigate } from "react-router-dom";
 import { uid } from "@/constants";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 const propertyData = (images: File[], video?: File | null): IPropertyData => {
   const cancellationPolicy = sessionStorage.getItem("cancellation_policy");
@@ -53,7 +53,6 @@ const propertyData = (images: File[], video?: File | null): IPropertyData => {
 
 const formData = (images: File[], video?: File | null) => {
   const property = propertyData(images, video);
-  console.log(property);
   const formData = new FormData();
   for (const [key, value] of Object.entries(property)) {
     if (key === "images" && Array.isArray(value)) {
@@ -73,7 +72,6 @@ export const useSendDataToAPI = () => {
   const navigate = useNavigate();
   const { selectedImages, selectedVideo, setSelectedImages, setSelectedVideo } =
     useContext(HostingContext);
-  console.log(selectedImages);
   const sendDataToAPI = async (): Promise<boolean> => {
     try {
       const payload = formData(selectedImages, selectedVideo);
@@ -87,7 +85,6 @@ export const useSendDataToAPI = () => {
         }
       }
       const response = await addPropertyAPI(payload);
-      console.log(response);
       if (response?.data?.response_code === 201) {
         toast.success(response?.data?.response_message);
         setSelectedImages([]);
@@ -95,12 +92,7 @@ export const useSendDataToAPI = () => {
       }
       return true;
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
-      console.log(error);
+      handleErrorMessage(error);
       return false;
     }
   };

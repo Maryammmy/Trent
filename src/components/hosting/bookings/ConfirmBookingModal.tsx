@@ -3,10 +3,10 @@ import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { ApiError } from "@/interfaces";
 import { confirmBookingAPI } from "@/services/bookingService"; // افترضنا إنه عندك API اسمه confirmBookingAPI
 import Loader from "@/components/loader/Loader";
 import { uid, currentLanguage } from "@/constants";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 interface IProps {
   isOpen: boolean;
@@ -39,11 +39,7 @@ export default function ConfirmBookingModal({
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }

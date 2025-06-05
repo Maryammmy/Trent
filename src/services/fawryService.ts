@@ -9,18 +9,10 @@ export const useFawryCredentialsAPI = () => {
       baseAPI.get("user_api/payout/u_fawry_payout_credentials.php"),
   });
 };
-export const initFawryPaymentAPI = (payload: IInitFawry) => {
-  const response = fawryBaseAPI.post("fawrypay-api/api/payments/init", payload);
-  return response;
-};
-export const fawryPaymentStatusAPI = (
-  merchantCode: string | null,
-  merchantRefNumber: string | null,
-  signature: string
-) => {
-  const response = fawryBaseAPI.get(
-    `ECommerceWeb/Fawry/payments/status/v2?merchantCode=${merchantCode}&merchantRefNumber=${merchantRefNumber}
-&signature=${signature}`
+export const initFawryPaymentAPI = async (payload: IInitFawry) => {
+  const response = await fawryBaseAPI.post(
+    "fawrypay-api/api/payments/init",
+    payload
   );
   return response;
 };

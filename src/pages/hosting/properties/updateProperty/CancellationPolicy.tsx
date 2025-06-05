@@ -82,8 +82,8 @@ function CancellationPolicy({
                       </div>
                     ))
                   ) : (
-                    <p className="p-3 text-gray-500">
-                      No cancellation policy found
+                    <p className="p-3 text-dark">
+                      {t("no_cancellation_policy_found")}
                     </p>
                   )}
                 </div>

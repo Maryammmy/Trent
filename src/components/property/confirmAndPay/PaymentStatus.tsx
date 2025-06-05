@@ -1,4 +1,4 @@
-import { capitalize } from "@/utils/storeUserChat";
+import { capitalize } from "@/utils/capitalize";
 import { useTranslation } from "react-i18next";
 interface IProps {
   referenceNumber: string;
@@ -19,13 +19,13 @@ const PaymentStatus = ({
       <p className="">
         <span>{t("reference_number")}:</span> {referenceNumber}
       </p>
-      <p className="">
+      <p>
         <span>{t("order_status")}:</span> {capitalize(orderStatus)}
       </p>
-      <p className="">
+      <p>
         <span>{t("amount")}:</span> {paymentAmount} {t("EGP")}
       </p>
-      <p className="">
+      <p>
         <span>{t("payment_method")}:</span>{" "}
         {paymentMethodFromUrl === "PayUsingCC"
           ? "Card"

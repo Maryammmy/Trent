@@ -5,7 +5,6 @@ import Input from "../ui/Input";
 import { IForgetPassword } from "@/interfaces/auth";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ApiError } from "@/interfaces";
 import toast from "react-hot-toast";
 import { forgetPasswordAPI, verifyOtpAPI } from "@/services/authService";
 import { useState } from "react";
@@ -17,6 +16,7 @@ import { forgetPasswordSchema } from "@/validation/forgetPasswordSchema";
 import CountrySelector from "../ui/CountrySelector";
 import { useAppDispatch } from "@/store/hooks";
 import { setIsloggedin } from "@/store/features/auth/authSlice";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 interface IProps {
   close: () => void;
   isOpen: boolean;
@@ -54,11 +54,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
         setOtp(true);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }
@@ -84,11 +80,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     }
   };
   return (
@@ -209,6 +201,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
               <InputErrorMessage msg={errors["confirm_password"]?.message} />
             )}
             <Button
+              disabled={loading}
               type="submit"
               className="bg-primary zoom w-full mt-6 py-3 px-3 rounded-lg text-white font-semibold text-sm text-center"
             >

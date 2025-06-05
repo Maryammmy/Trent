@@ -53,7 +53,7 @@ function BookingCard({
         </div>
         <span className="text-primary">{bookStatus}</span>
         <p className="text-lg">
-          <span>{t("total")}:</span> {totalPaid} EGP
+          <span>{t("total")}:</span> {totalPaid} {t("EGP")}
         </p>
         {children && children}
       </div>

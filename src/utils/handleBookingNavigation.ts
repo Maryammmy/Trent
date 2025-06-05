@@ -1,5 +1,5 @@
 import { NavigateFunction } from "react-router-dom";
-import { TFunction } from "i18next";
+import { t } from "i18next";
 import { uid } from "@/constants";
 import toast from "react-hot-toast";
 
@@ -7,7 +7,6 @@ interface HandleBookingNavigationParams {
   e: React.MouseEvent<HTMLButtonElement>;
   owner_id: string;
   id: string | undefined;
-  t: TFunction;
   navigate: NavigateFunction;
 }
 
@@ -15,7 +14,6 @@ export function handleBookingNavigation({
   e,
   owner_id,
   id,
-  t,
   navigate,
 }: HandleBookingNavigationParams): void {
   e.preventDefault();

@@ -11,8 +11,7 @@ import Notification from "./Notification";
 import useClickOutside from "@/hooks/useClickOutside";
 import NotificationSkeleton from "../skeleton/NotificationSkeleton";
 import { useTranslation } from "react-i18next";
-import toast from "react-hot-toast";
-import { ApiError } from "@/interfaces";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 export default function Notifications() {
   const { t } = useTranslation();
@@ -34,11 +33,7 @@ export default function Notifications() {
         refetchUnreadCount();
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     }
   };
   useClickOutside(notificationsRef, onClose);

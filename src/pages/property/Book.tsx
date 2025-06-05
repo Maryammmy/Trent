@@ -2,7 +2,6 @@ import Loader from "@/components/loader/Loader";
 import CheckDates from "@/components/property/CheckDates";
 import Button from "@/components/ui/Button";
 import Counter from "@/components/ui/Counter";
-import { ApiError } from "@/interfaces";
 import {
   usePropertyDatesAPI,
   usePropertyInfoAPI,
@@ -19,6 +18,7 @@ import InputErrorMessage from "@/components/ui/InputErrorMessage";
 import Input from "@/components/ui/Input";
 import BookingSkeleton from "@/components/skeleton/BookingSkeleton";
 import { uid, currentLanguage } from "@/constants";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 function Book() {
   const [counter, setCounter] = useState(1);
@@ -45,7 +45,7 @@ function Book() {
   const dates = datesData?.data?.data?.date_list;
   const guestCount = Number(propertyBook?.guest_count);
   const handleStartValueChange = (newValue: DateValueType) => {
-    const validatedValue = validateStartDate(newValue, endDateValue, t);
+    const validatedValue = validateStartDate(newValue, endDateValue);
     if (validatedValue) {
       setStartDateValue(validatedValue);
       setErrors((prevErrors) => ({ ...prevErrors, checkin: "" }));
@@ -55,7 +55,6 @@ function Book() {
     const validatedValue = validateEndDate(
       newValue,
       startDateValue,
-      t,
       Number(propertyBook?.min_days),
       Number(propertyBook?.max_days)
     );
@@ -127,11 +126,7 @@ function Book() {
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }

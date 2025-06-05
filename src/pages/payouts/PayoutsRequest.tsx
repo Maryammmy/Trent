@@ -11,11 +11,11 @@ import Select from "@/components/ui/Select";
 import PropertyHostingSkeleton from "@/components/skeleton/PropertyHostingSkeleton";
 import { IPayoutProfile, IReadyPayoutProperties } from "@/interfaces/payouts";
 import toast from "react-hot-toast";
-import { ApiError } from "@/interfaces";
 import Loader from "@/components/loader/Loader";
 import { useNavigate } from "react-router-dom";
 import SelectSkeleton from "@/components/skeleton/SelectSkeleton";
 import { currentLanguage, uid } from "@/constants";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 function PayoutsRequest() {
   const { t } = useTranslation();
@@ -55,11 +55,7 @@ function PayoutsRequest() {
         }, 1000);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }

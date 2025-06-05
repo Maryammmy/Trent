@@ -9,8 +9,11 @@ export const useChatListAPI = () => {
     enabled: !!uid,
   });
 };
-export const chatListAPI = (id: string | undefined) => {
-  return baseAPI.get(`user_api/u_chat_list.php?uid=${uid}&prop_id=${id}`);
+export const chatListAPI = async (id: string | undefined) => {
+  const response = await baseAPI.get(
+    `user_api/u_chat_list.php?uid=${uid}&prop_id=${id}`
+  );
+  return response;
 };
 export const useMessagesAPI = (chatId: string | null) => {
   return useQuery({
@@ -23,6 +26,7 @@ export const useMessagesAPI = (chatId: string | null) => {
     enabled: !!chatId && !!uid,
   });
 };
-export const addChatAPI = (payload: FormData) => {
-  return baseAPIForm.post("user_api/u_add_chat.php", payload);
+export const addChatAPI = async (payload: FormData) => {
+  const response = await baseAPIForm.post("user_api/u_add_chat.php", payload);
+  return response;
 };

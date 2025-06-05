@@ -3,12 +3,12 @@ import Button from "../ui/Button";
 import TextArea from "../ui/TextArea";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { ApiError } from "@/interfaces";
 import toast from "react-hot-toast";
 import { addAndUpdateRatingAPI } from "@/services/ratingService";
 import Loader from "../loader/Loader";
 import InputErrorMessage from "../ui/InputErrorMessage";
 import { IIndividualRate } from "@/interfaces/booking";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 interface IProps {
   rating: number;
   comment: string;
@@ -49,11 +49,7 @@ const RatingForm = ({
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }
@@ -96,7 +92,7 @@ const RatingForm = ({
               <Button
                 onClick={handleSubmit}
                 className="w-full zoom bg-primary text-white py-3 rounded-lg font-bold"
-                disabled={rating === 0 || Boolean(errorComment)}
+                disabled={rating === 0 || Boolean(errorComment) || loading}
               >
                 {loading ? <Loader /> : t("submit_review")}
               </Button>

@@ -16,10 +16,10 @@ import { allowedImageTypes, uid } from "../../../constants";
 import InputErrorMessage from "../../ui/InputErrorMessage";
 import Loader from "../../loader/Loader";
 import UserSkeleton from "../../skeleton/UserSkeleton";
-import { ApiError } from "../../../interfaces";
 import { baseURL } from "../../../services";
 import ChangeMobileModal from "./ChangeMobileModal";
 import CountrySelector from "@/components/ui/CountrySelector";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 function PersonalData() {
   const { t } = useTranslation();
@@ -73,11 +73,7 @@ function PersonalData() {
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }

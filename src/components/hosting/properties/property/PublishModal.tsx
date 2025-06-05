@@ -1,8 +1,8 @@
 import Loader from "@/components/loader/Loader";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
-import { ApiError } from "@/interfaces";
-import { deletePropertyAPI } from "@/services/propertyService";
+import { publishPropertyAPI } from "@/services/propertyService";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -18,7 +18,7 @@ function PublishModal({ is_published, id, publishProperty, close }: IProps) {
   const handlePublishProperty = async () => {
     try {
       setLoading(true);
-      const response = await deletePropertyAPI(id);
+      const response = await publishPropertyAPI(id);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
         setTimeout(() => {
@@ -27,12 +27,7 @@ function PublishModal({ is_published, id, publishProperty, close }: IProps) {
         }, 500);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
-      console.log(error);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }

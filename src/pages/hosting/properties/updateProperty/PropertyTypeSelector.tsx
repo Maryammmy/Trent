@@ -6,7 +6,6 @@ import { PropertyNameInputs } from "@/types";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-
 interface IProps {
   control: Control<PropertyNameInputs>;
   errors: FieldErrors<PropertyNameInputs>;
@@ -36,7 +35,7 @@ const PropertyTypeSelector = ({ control, errors, propertyTypes }: IProps) => {
         />
       ) : (
         <p className="border py-3 px-2 rounded-md bg-white">
-          No property type found
+          {t("no_property_type_found")}
         </p>
       )}
       {errors["category_id"] && (

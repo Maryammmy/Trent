@@ -23,12 +23,12 @@ export const useUnreadNotificationsCountAPI = () => {
     refetchInterval: 10000,
   });
 };
-export const updateNotificationAPI = (id: string) => {
+export const updateNotificationAPI = async (id: string) => {
   const formData = new FormData();
   Object.entries({ uid, lang: currentLanguage, id }).forEach(([key, value]) => {
     formData.append(key, String(value));
   });
-  const response = baseAPIForm.post(
+  const response = await baseAPIForm.post(
     "user_api/notifications/u_update_notification.php",
     formData
   );

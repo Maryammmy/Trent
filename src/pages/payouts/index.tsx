@@ -18,7 +18,6 @@ function Payouts() {
   const payoutsHistory: IPayoutHistory[] =
     data?.data?.data?.payout_request_list;
   const totalEarnings: IPayoutEarning = data?.data?.data?.earning;
-  console.log(totalEarnings);
   return (
     <>
       <div className="py-10 px-5 xl:px-0 max-w-6xl mx-auto">

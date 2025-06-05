@@ -18,11 +18,11 @@ import { useQueryParam } from "@/utils/getQueryParam";
 import PaymentStatus from "@/components/property/confirmAndPay/PaymentStatus";
 import PaymentMethodSelector from "@/components/property/confirmAndPay/PaymentMethodSelector";
 import { paymentStatusAPI, saveBookingAPI } from "@/services/bookingService";
-import { ApiError } from "@/interfaces";
 import SuccessBookingModal from "@/components/property/confirmAndPay/SuccessBookingModal";
 import CardPaymentStatus from "@/components/property/confirmAndPay/CardPaymentStatus";
 import { updateQueryParamInURL } from "@/utils/updateQueryParamInURL";
 import { currentLanguage, uid } from "@/constants";
+import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 function ConfirmAndPay() {
   const [loading, setLoading] = useState(false);
@@ -62,8 +62,6 @@ function ConfirmAndPay() {
     couponValue && couponValue > 0
       ? Number(bookingData?.final_total) - couponValue
       : Number(bookingData?.final_total);
-  console.log(statusCode);
-
   const createFawryPayment = async () => {
     try {
       if (!paymentMethod) {
@@ -130,11 +128,7 @@ function ConfirmAndPay() {
         setSaveBookingResponse(response?.data?.data?.booking_details);
       }
     } catch (error) {
-      const customError = error as ApiError;
-      const errorMessage =
-        customError?.response?.data?.response_message ||
-        t("something_went_wrong");
-      toast.error(errorMessage);
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }
