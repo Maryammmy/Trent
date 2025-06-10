@@ -129,24 +129,24 @@ function PriceDetails({
             </div>
           </div>
           {couponValue > 0 && (
-            <div className="my-2 py-2 font-medium border-b">
-              <div className="grid grid-cols-2 gap-5 mb-2">
-                <span>{t("total_before_discount")}</span>
-                <span className="text-end">
-                  {bookingData?.final_total} {t("EGP")}
-                </span>
+            <>
+              <div className="my-2 py-2 font-medium border-b">
+                <div className="grid grid-cols-2 gap-5 mb-2">
+                  <span>{t("total_before_discount")}</span>
+                  <span className="text-end">
+                    {bookingData?.final_total} {t("EGP")}
+                  </span>
+                </div>
               </div>
-            </div>
-          )}
-          {couponValue > 0 && (
-            <div className="my-2 py-2 font-medium border-b">
-              <div className="grid grid-cols-2 gap-5 mb-2">
-                <span>{t("coupon_discount")}</span>
-                <span className="text-end">
-                  - {couponValue?.toFixed(2)} {t("EGP")}
-                </span>
+              <div className="my-2 py-2 font-medium border-b">
+                <div className="grid grid-cols-2 gap-5 mb-2">
+                  <span>{t("coupon_discount")}</span>
+                  <span className="text-end">
+                    - {couponValue?.toFixed(2)} {t("EGP")}
+                  </span>
+                </div>
               </div>
-            </div>
+            </>
           )}
           <div className="grid grid-cols-2 gap-5 font-semibold text-lg pt-3">
             <span>{t("total")}</span>

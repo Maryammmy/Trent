@@ -140,12 +140,13 @@ function Book() {
         <div className="py-10 px-5 xl:px-20 mx-auto max-w-screen-xl">
           <div className="pb-5">
             <h2 className="font-bold text-2xl">{propertyBook?.title}</h2>
-            {minDays ? (
+            {minDays > 0 && (
               <p className="font-medium text-dark pt-2">
                 {t("minimum_stay_desc", { days: minDays })}{" "}
                 {minDays > 1 ? t("days") : t("day")}
               </p>
-            ) : null}
+            )}
+            <p className="font-medium text-dark pt-2">{t("note_book_ex")}</p>
           </div>
           <div className="flex flex-col gap-10">
             <CheckDates

@@ -314,7 +314,7 @@
   "select_cancellation_policy": "Select a cancellation policy",
   "cancellation_policy": "Cancellation Policy",
   "rent_price": "Rent Price",
-  "trent_fees": "Trent Fees",
+  "trent_fees": "Trent fees",
   "Location": "Location",
   "status": "Status",
   "trent_footer_desc": "Your trusted booking service for seamless reservations and unforgettable experiences.",
@@ -604,5 +604,6 @@
   "full_name_placeholder": "Enter your formal full name",
   "bank_name_placeholder": "Enter your bank name",
   "bank_account_number_placeholder": "Enter your bank account number",
-  "wallet_number_placeholder": "Enter your wallet number"
+  "wallet_number_placeholder": "Enter your wallet number",
+  "note_book_ex": "The booking period starts daily at 12:00 PM and ends at 12:00 PM on the departure day. For example, if you book from June 3 to June 4, it will be for 1 day, starting at 12:00 PM on June 3 and ending at 12:00 PM on June 4."
 }
