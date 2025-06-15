@@ -94,9 +94,9 @@ function PriceDetails({
           </h4>
           <div className="my-2 py-2 font-medium border-b">
             <div className="grid grid-cols-2 gap-5 mb-2">
-              <span>{`${t("duration")} (${bookingData?.days} ${t(
-                "days"
-              )})`}</span>
+              <span>{`${t("duration")} (${bookingData?.days} ${
+                bookingData?.days > 1 ? t("nights") : t("night")
+              })`}</span>
               <span className="text-end">
                 {bookingData?.sub_total} {t("EGP")}
               </span>

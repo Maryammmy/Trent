@@ -55,7 +55,7 @@ const Property = ({ property }: IProps) => {
 
   return (
     <>
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 items-center text-sm md:text-base bg-white shadow rounded-md p-4 sm:p-6 hover:bg-gray-100 transition">
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 items-center text-sm md:text-base min-h-20 sm:min-h-24 bg-white shadow rounded-md p-4 sm:p-6 hover:bg-gray-100 transition">
         <p className="font-medium whitespace-nowrap overflow-hidden text-ellipsis">
           {title}
         </p>

@@ -16,6 +16,7 @@ function SuccessBookingModal({ isSuccess, onClose, bookingData }: IProps) {
       close={onClose}
       title={t("booking_successful")}
       className="text-xl text-center pt-6 pb-2 font-semibold"
+      maxWidth="550px"
     >
       <div className="px-5 md:px-10 pb-6">
         <p className="text-dark text-center font-medium pb-3">

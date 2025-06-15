@@ -46,7 +46,7 @@ LbpJXW+DAQhXH17Uc487JOJpM2A3FSsmmAQB+D82Qpg6wdpws2bT5NT50RpFqUnB
 jzDFH18sj1q1ggmu6J4J03A=
 -----END PRIVATE KEY-----`;
 
-export const ITEMS_PER_PAGE = 10;
+export const ITEMS_PER_PAGE = 12;
 export const uid = Cookies.get("user_id") || "";
 export const ownerFees = Cookies.get("owner_fees") || "";
 export const currentLanguage = (localStorage.getItem("i18nextLng") ||
