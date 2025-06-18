@@ -1,4 +1,4 @@
-import { IInitFawry } from "@/interfaces/faawry";
+import { IInitFawry } from "@/interfaces/fawry";
 import { baseAPI, fawryBaseAPI } from ".";
 import { useQuery } from "@tanstack/react-query";
 

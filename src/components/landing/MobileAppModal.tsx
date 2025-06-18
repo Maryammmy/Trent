@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import Modal from "../ui/Modal";
-import Button from "../ui/Button";
-import { X } from "lucide-react";
 import Image from "../ui/Image";
 import { buttonData } from "../../data/landing";
 import { Link } from "react-router-dom";
@@ -34,13 +32,13 @@ function MobileAppModal() {
   if (platform === "desktop") return null;
 
   return (
-    <Modal isOpen={isOpen} close={() => setIsOpen(false)} maxWidth="600px">
+    <Modal
+      isOpen={isOpen}
+      close={() => setIsOpen(false)}
+      maxWidth="600px"
+      btnColor="white"
+    >
       <div className="p-6 rounded-lg bg-primary" data-aos="fade-up">
-        <div className="flex justify-end">
-          <Button onClick={() => setIsOpen(false)}>
-            <X className="text-white" />
-          </Button>
-        </div>
         <h2 className="text-white text-center font-semibold text-3xl pt-2">
           Get our Mobile App for a better experience!
         </h2>

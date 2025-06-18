@@ -9,6 +9,7 @@ interface IProps {
   children: ReactNode;
   className?: string;
   maxWidth?: string;
+  btnColor?: string;
 }
 export default function Modal({
   isOpen,
@@ -17,6 +18,7 @@ export default function Modal({
   children,
   className,
   maxWidth = "500px",
+  btnColor = "black",
 }: IProps) {
   return (
     <>
@@ -35,7 +37,7 @@ export default function Modal({
               className="w-full lg:max-h-[90vh] rounded-xl shadow-lg bg-white backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
             >
               <Button onClick={close} className="absolute top-5 right-4 z-10">
-                <X size={20} />
+                <X size={20} color={btnColor} />
               </Button>
               {title && (
                 <DialogTitle as="h3" className={className}>
