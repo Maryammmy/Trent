@@ -13,7 +13,7 @@ import PhotoViewer from "@/components/ui/PhotoViewer";
 import Video from "@/components/ui/Video";
 import Button from "@/components/ui/Button";
 import { Helmet } from "react-helmet-async";
-import ShareModal from "./ShareModal";
+import ShareModal from "../../components/property/ShareModal";
 import { useState } from "react";
 import {
   Bath,
@@ -42,7 +42,7 @@ function Property() {
   );
   const guestCount = Number(propertyDetails?.guest_count);
   const minDays = Number(propertyDetails?.min_days);
-  const url = `${websiteUrl}properties/${id}`;
+  const url = `${websiteUrl}/properties/${id}`;
   return (
     <>
       <Helmet>

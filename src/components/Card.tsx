@@ -59,11 +59,11 @@ function Card({ property }: IProps) {
                     <FaRegHeart size={20} className="text-white" />
                   )}
                 </div>
-                <div className="relative h-[230px] md:h-[300px]">
+                <div className="h-[230px] md:h-[300px]">
                   <div className="absolute inset-0 bg-black/15 pointer-events-none z-[5]"></div>
                   <div className="w-full h-full">
                     <Image
-                      imageUrl={baseURL + item.img}
+                      imageUrl={baseURL + item?.img}
                       alt={`Slide ${index}`}
                       className="w-full h-full object-cover"
                     />
