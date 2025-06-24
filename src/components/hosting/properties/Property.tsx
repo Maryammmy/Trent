@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IProperty } from "../../../../interfaces/property";
+import { IProperty } from "../../../interfaces/property";
 import { MdEdit } from "react-icons/md";
 import { useState } from "react";
 import Button from "@/components/ui/Button";

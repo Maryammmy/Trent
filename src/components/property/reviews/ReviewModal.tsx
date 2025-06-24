@@ -1,4 +1,4 @@
-import { Search, X } from "lucide-react";
+import { Search } from "lucide-react";
 import Modal from "../../ui/Modal";
 import { FaStar } from "react-icons/fa6";
 import PrograssBar from "../../ui/PrograssBar";
@@ -8,7 +8,6 @@ import {
   widths,
 } from "../../../data/property/review";
 import Input from "../../ui/Input";
-import Button from "../../ui/Button";
 import Select from "../../ui/Select";
 import { useTranslation } from "react-i18next";
 interface IProps {
@@ -21,11 +20,6 @@ function ReviewModal({ isReviewed, close }: IProps) {
   return (
     <Modal isOpen={isReviewed} close={close} maxWidth="1024px">
       <div className="p-5">
-        <Button onClick={close}>
-          <span>
-            <X />
-          </span>
-        </Button>
         <div className="flex flex-col lg:flex-row justify-between gap-10 p-6 ">
           <div className="flex-1">
             <div className="flex items-center gap-2">

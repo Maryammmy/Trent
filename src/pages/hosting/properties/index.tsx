@@ -3,7 +3,7 @@ import HostingModal from "../../../components/hosting/HostingModal";
 import { useHomeDataAPI } from "../../../services/homeService";
 import { IProperty } from "../../../interfaces/property";
 import PropertyHostingSkeleton from "../../../components/skeleton/PropertyHostingSkeleton";
-import Property from "../../../components/hosting/properties/property/Property";
+import Property from "../../../components/hosting/properties/Property";
 import Button from "@/components/ui/Button";
 
 function Properties() {

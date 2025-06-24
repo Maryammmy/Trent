@@ -90,9 +90,9 @@ function PriceAndDeposit() {
           )}
         </div>
       </div>
-      <ProgressBarsWrapper progressBarsData={["100%", "100%", "50%"]} />
+      <ProgressBarsWrapper progressBarsData={["100%", "100%", "56.25%"]} />
       <BackAndNext
-        back="/become-a-host/min-and-max-days"
+        back="/become-a-host/excluding-dates"
         next="/become-a-host/guest-rules-and-cancellation-policies"
         isNextDisabled={!price || Object.keys(errors).length > 0}
       />

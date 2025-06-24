@@ -4,6 +4,7 @@ import MinMaxDays from "../../pages/becomeAHost/finishSetup/MinMaxDays";
 import PriceAndDeposit from "../../pages/becomeAHost/finishSetup/PriceAndDeposit";
 import ProtectedRoutes from "../../middleware/ProtectedRoutes";
 import GuestRulesAndCancellationPolicies from "@/pages/becomeAHost/finishSetup/GuestRulesAndCancellationPolicies";
+import ExcludingDateRanges from "@/pages/becomeAHost/finishSetup/ExcludingDateRanges";
 
 export const FinishSetupRoutes = (
   <>
@@ -13,6 +14,14 @@ export const FinishSetupRoutes = (
       element={
         <ProtectedRoutes>
           <MinMaxDays />
+        </ProtectedRoutes>
+      }
+    />
+    <Route
+      path="excluding-dates"
+      element={
+        <ProtectedRoutes>
+          <ExcludingDateRanges />
         </ProtectedRoutes>
       }
     />

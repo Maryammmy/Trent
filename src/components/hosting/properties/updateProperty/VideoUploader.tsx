@@ -27,15 +27,15 @@ const VideoUploader: React.FC<VideoUploaderProps> = ({
   const isFromBackend = video.startsWith(baseURL);
   return (
     <div>
+      <h4 className="font-medium text-dark mb-1">{t("video")}</h4>
       <div>
         <label className="border-dashed border-2 border-gray-300 bg-white rounded-lg p-4 flex flex-col items-center cursor-pointer hover:bg-gray-100">
           <Upload size={32} className="text-dark mb-3" />
           <span className="text-dark">{t("upload_video")}</span>
           <Input
-            name="videos"
+            name="video"
             type="file"
             accept="video/*"
-            multiple
             className="hidden"
             onChange={handleVideoChange}
           />

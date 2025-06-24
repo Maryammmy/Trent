@@ -38,13 +38,13 @@ import Loader from "@/components/loader/Loader";
 import Button from "@/components/ui/Button";
 import { ISelectedImage } from "@/interfaces/property/updateProperty";
 import { handleErrorMessage } from "@/utils/handleErrorMsg";
+import ExcludingDateRanges from "./ExcludingDateRanges";
 
 interface UpdatePropertyFormProps {
   propertyData: ISingleProperty;
   propertyId: string | undefined;
   userId: string | undefined;
 }
-
 function UpdatePropertyForm({
   propertyData,
   propertyId,
@@ -258,6 +258,7 @@ function UpdatePropertyForm({
           errors={errors}
           facilities={facilities}
         />
+        <ExcludingDateRanges id={propertyId} setValue={setValue} />
         <PropertyInputs control={control} errors={errors} />
         <PropertyTextArea control={control} errors={errors} />
         <ImageUploader

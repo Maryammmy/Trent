@@ -56,7 +56,6 @@ export default function ConfirmBookingModal({
         <p className="text-dark text-center font-medium">
           {t("are_you_sure_confirm_booking")}
         </p>
-
         <div className="flex justify-between gap-4 font-medium">
           <Button
             onClick={close}

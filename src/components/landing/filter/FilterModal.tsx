@@ -1,6 +1,4 @@
-import { X } from "lucide-react";
 import Modal from "../../ui/Modal";
-import Button from "../../ui/Button";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Range from "./Range";
@@ -109,12 +107,6 @@ function FilterModal({ isFilterOpen, close }: IProps) {
       close={close}
       isOpen={isFilterOpen}
     >
-      <Button
-        onClick={close}
-        className="absolute top-5 right-4 text-gray-500 hover:text-black"
-      >
-        <X className="text-black" size={20} />
-      </Button>
       <div className="pb-3">
         <div className="p-5 md:py-8 md:px-10 max-h-[80vh] overflow-y-auto">
           {!governmentList ? (

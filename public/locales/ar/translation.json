@@ -599,5 +599,11 @@
   "no_transaction_history": "لا يوجد سجل معاملات",
   "withdrawal": "سحب",
   "deposit": "إيداع",
-  "transaction_history": "سجل المعاملات"
+  "transaction_history": "سجل المعاملات",
+  "excluding_date_ranges": "فترات الحجز غير المتاحة",
+  "add_range": "إضافة فترة",
+  "start_date": "تاريخ البداية",
+  "end_date": "تاريخ الانتهاء",
+  "images": "الصور",
+  "video": "الفيديو"
 }

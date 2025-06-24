@@ -1,4 +1,3 @@
-import { X } from "lucide-react";
 import { setIsFinishUpModal } from "../../store/features/becomeAHost/becomeAHostSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import Modal from "../ui/Modal";
@@ -30,6 +29,7 @@ function HostingModal() {
   const handleFinishUp = async () => {
     setLoading(true);
     const isSuccess = await sendDataToAPI();
+    console.log(isSuccess);
     if (isSuccess) {
       setTimeout(() => {
         dispatch(setIsFinishUpModal(false));
@@ -45,15 +45,7 @@ function HostingModal() {
       maxWidth="500px"
     >
       <div className="p-6">
-        <div className="flex items-center justify-end">
-          <Button
-            onClick={() => dispatch(setIsFinishUpModal(false))}
-            className="w-8 h-8 hover:bg-gray-100 rounded-full flex items-center justify-center"
-          >
-            <X strokeWidth={2.5} />
-          </Button>
-        </div>
-        <h3 className="font-bold text-2xl text-center py-2">
+        <h3 className="font-bold text-2xl text-center pt-6 pb-4">
           {t("become_a_host_finish_up")}
         </h3>
         <p className="text-center mx-auto text-dark font-medium pb-5 max-w-sm">

@@ -7,7 +7,6 @@ import Modal from "../ui/Modal";
 import Button from "../ui/Button";
 import Loader from "../loader/Loader";
 import React, { useEffect, useState } from "react";
-import { X } from "lucide-react";
 import { sendOtpAPI } from "@/services/authService";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
@@ -91,11 +90,6 @@ export default function OtpModal({
         setOtp("");
       }}
     >
-      <Button onClick={close} className="absolute top-5 right-4">
-        <span>
-          <X className="text-black" size={20} />
-        </span>
-      </Button>
       <div className="p-5 md:py-8 md:px-10">
         <div className="pb-6">
           <p className="text-dark font-medium px-1 text-center md:px-0">

@@ -10,6 +10,10 @@ import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 const propertyData = (images: File[], video?: File | null): IPropertyData => {
   const cancellationPolicy = sessionStorage.getItem("cancellation_policy");
+  const dateRanges = sessionStorage.getItem("date_ranges");
+  const parseDateRanges = dateRanges
+    ? JSON.parse(sessionStorage.getItem("date_ranges") || "[]")
+    : [];
   return {
     uid: uid,
     category_id: sessionStorage.getItem("category_id") || "",
@@ -48,11 +52,13 @@ const propertyData = (images: File[], video?: File | null): IPropertyData => {
       ? JSON.parse(cancellationPolicy)?.id
       : "",
     ...(video && { video }),
+    ...(parseDateRanges.length > 0 && { date_ranges: dateRanges }),
   };
 };
 
 const formData = (images: File[], video?: File | null) => {
   const property = propertyData(images, video);
+  console.log(property);
   const formData = new FormData();
   for (const [key, value] of Object.entries(property)) {
     if (key === "images" && Array.isArray(value)) {

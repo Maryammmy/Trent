@@ -611,5 +611,11 @@
   "no_transaction_history": "No transaction history found",
   "withdrawal": "Withdrawal",
   "Deposit": "Deposit",
-  "transaction_history": "Transaction history"
+  "transaction_history": "Transaction history",
+  "excluding_date_ranges": "Excluding date ranges",
+  "add_range": "Add range",
+  "start_date": "Start date",
+  "end_date": "End date",
+  "images": "Images",
+  "video": "Video"
 }
