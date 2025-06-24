@@ -46,6 +46,8 @@ export interface IVerifyPropertyResponse {
   wallet_balance: string;
   book_id: string;
   book_status: string;
+  reminder_value: string;
+  partial_value: string;
 }
 export interface ISaveBookingResponse {
   IS_FAVOURITE: number;

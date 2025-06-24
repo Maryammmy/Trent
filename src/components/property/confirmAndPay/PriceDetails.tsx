@@ -27,7 +27,7 @@ function PriceDetails({
   const handleApplyCoupon = async () => {
     try {
       setLoading(true);
-      const response = await checkCouponAPI(coupon, bookingData?.sub_total);
+      const response = await checkCouponAPI(coupon, bookingData?.final_total);
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
         handleChangeCouponValue(Number(response?.data?.data?.value));
@@ -153,6 +153,14 @@ function PriceDetails({
             <span className="text-end">
               {finalTotalAfterDiscount?.toFixed(2)} {t("EGP")}
             </span>
+          </div>
+          <div>
+            <p className="font-medium pt-1">
+              {t("payment_info", {
+                partial_value: bookingData?.partial_value,
+                reminder_value: bookingData?.reminder_value,
+              })}
+            </p>
           </div>
         </div>
       </div>

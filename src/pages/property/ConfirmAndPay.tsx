@@ -62,6 +62,7 @@ function ConfirmAndPay() {
     couponValue && couponValue > 0
       ? Number(bookingData?.final_total) - couponValue
       : Number(bookingData?.final_total);
+  const partialValue = Number(bookingData?.partial_value);
   const createFawryPayment = async () => {
     try {
       if (!paymentMethod) {
@@ -73,7 +74,7 @@ function ConfirmAndPay() {
         fawryCredentials?.merchant_code,
         fawryCredentials?.secure_key,
         itemId,
-        finalTotalAfterDiscount,
+        partialValue,
         paymentMethod,
         returnUrl
       );
@@ -97,17 +98,11 @@ function ConfirmAndPay() {
     if (hasSavedRef.current) return;
     hasSavedRef.current = true;
     try {
-      if (
-        paymentMethod === "TRENT_BALANCE" &&
-        walletBalance < finalTotalAfterDiscount
-      ) {
+      if (paymentMethod === "TRENT_BALANCE" && walletBalance < partialValue) {
         toast.error(t("insufficient_balance"));
         return;
       }
-      if (
-        paymentMethod === "TRENT_BALANCE" &&
-        walletBalance >= finalTotalAfterDiscount
-      ) {
+      if (paymentMethod === "TRENT_BALANCE" && walletBalance >= partialValue) {
         setLoading(true);
       }
       const payload = {
@@ -136,7 +131,7 @@ function ConfirmAndPay() {
     bookingData,
     paymentMethod,
     walletBalance,
-    finalTotalAfterDiscount,
+    partialValue,
     merchantRefNumber,
     itemId,
     id,
@@ -149,7 +144,7 @@ function ConfirmAndPay() {
       const response = await paymentStatusAPI(
         merchantRefNumber,
         itemId,
-        bookingData?.final_total
+        bookingData?.partial_value
       );
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);

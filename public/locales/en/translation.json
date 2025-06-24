@@ -617,5 +617,6 @@
   "start_date": "Start date",
   "end_date": "End date",
   "images": "Images",
-  "video": "Video"
+  "video": "Video",
+  "payment_info": "{{partial_value}} EGP will be paid now, and the remaining amount of {{reminder_value}} EGP will be paid after confirmation by the host."
 }
