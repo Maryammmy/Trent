@@ -1,9 +1,8 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import PriceDetails from "../../components/property/confirmAndPay/PriceDetails";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Button from "@/components/ui/Button";
-import { ICoupon, IVerifyPropertyResponse } from "@/interfaces/booking";
+import { IBooking } from "@/interfaces/booking";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Loader from "@/components/loader/Loader";
 import {
@@ -17,24 +16,27 @@ import { AxiosError } from "axios";
 import { useQueryParam } from "@/utils/getQueryParam";
 import PaymentStatus from "@/components/property/confirmAndPay/PaymentStatus";
 import PaymentMethodSelector from "@/components/property/confirmAndPay/PaymentMethodSelector";
-import { paymentStatusAPI, saveBookingAPI } from "@/services/bookingService";
+import {
+  completePaymentAPI,
+  paymentStatusAPI,
+} from "@/services/bookingService";
 import SuccessBookingModal from "@/components/property/confirmAndPay/SuccessBookingModal";
 import CardPaymentStatus from "@/components/property/confirmAndPay/CardPaymentStatus";
 import { updateQueryParamInURL } from "@/utils/updateQueryParamInURL";
 import { currentLanguage, uid } from "@/constants";
+import PriceDetails from "@/components/accountSettings/bookings/PriceDetails";
 import { handleErrorMessage } from "@/utils/handleErrorMsg";
-import { defaultCouponResponse } from "@/utils/defaultValues";
 
-function ConfirmAndPay() {
+function Payment() {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const location = useLocation();
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
   const { id } = useParams();
-  const returnUrl = `${window.location.origin}/properties/${id}/confirm-and-pay`;
-  const bookingData: IVerifyPropertyResponse =
+  const returnUrl = `${window.location.origin}/account-settings/bookings/payment/${id}`;
+  const bookingData: IBooking =
     location?.state?.data ||
-    JSON.parse(sessionStorage.getItem("bookingData") || "null");
+    JSON.parse(sessionStorage.getItem("booking") || "null");
   const { data } = useFawryCredentialsAPI();
   const fawryCredentials = data?.data?.data?.fawry_credentials;
   const referenceNumber = useQueryParam("referenceNumber");
@@ -55,15 +57,10 @@ function ConfirmAndPay() {
       ? "PayAtFawry"
       : "MWALLET"
   );
-  const [couponResponse, setCouponResponse] = useState<ICoupon>(
-    defaultCouponResponse
-  );
   const walletBalance = Number(bookingData?.wallet_balance);
   const itemId = bookingData.item_id.toString();
   const hasSavedRef = useRef(false);
-  const partialValue = couponResponse?.partial_value
-    ? Number(couponResponse?.partial_value)
-    : Number(bookingData?.partial_value);
+  const remainingValue = Number(bookingData?.reminder_value);
   const createFawryPayment = async () => {
     try {
       if (!paymentMethod) {
@@ -75,7 +72,7 @@ function ConfirmAndPay() {
         fawryCredentials?.merchant_code,
         fawryCredentials?.secure_key,
         itemId,
-        partialValue,
+        remainingValue,
         paymentMethod,
         returnUrl
       );
@@ -95,53 +92,6 @@ function ConfirmAndPay() {
       setLoading(false);
     }
   };
-  const handleSaveBooking = useCallback(async () => {
-    if (hasSavedRef.current) return;
-    hasSavedRef.current = true;
-    try {
-      if (paymentMethod === "TRENT_BALANCE" && walletBalance < partialValue) {
-        toast.error(t("insufficient_balance"));
-        return;
-      }
-      if (paymentMethod === "TRENT_BALANCE" && walletBalance >= partialValue) {
-        setLoading(true);
-      }
-      const payload = {
-        prop_id: id ? id : "",
-        guest_counts: bookingData?.guest_count,
-        from_date: bookingData?.from_date,
-        to_date: bookingData?.to_date,
-        confirm_guest_rules: bookingData?.confirm_guest_rules,
-        uid: uid,
-        lang: currentLanguage,
-        method_key: paymentMethod,
-        item_id: itemId,
-        ...(merchantRefNumber && { merchant_ref_number: merchantRefNumber }),
-        ...(couponResponse?.coupon && {
-          coupon_code: couponResponse?.coupon,
-        }),
-      };
-      const response = await saveBookingAPI(payload);
-      if (response?.data?.response_code === 200) {
-        setIsSuccessModal(true);
-        setSaveBookingResponse(response?.data?.data?.booking_details);
-      }
-    } catch (error) {
-      handleErrorMessage(error);
-    } finally {
-      setLoading(false);
-    }
-  }, [
-    couponResponse,
-    bookingData,
-    paymentMethod,
-    walletBalance,
-    partialValue,
-    merchantRefNumber,
-    itemId,
-    id,
-    t,
-  ]);
   const fawryPaymentStatus = async () => {
     try {
       setLoading(true);
@@ -149,7 +99,7 @@ function ConfirmAndPay() {
       const response = await paymentStatusAPI(
         merchantRefNumber,
         itemId,
-        bookingData?.partial_value
+        bookingData?.reminder_value
       );
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
@@ -165,23 +115,56 @@ function ConfirmAndPay() {
       setLoading(false);
     }
   };
+  const handleCompletePayment = useCallback(async () => {
+    if (hasSavedRef.current) return;
+    hasSavedRef.current = true;
+    try {
+      if (paymentMethod === "TRENT_BALANCE" && walletBalance < remainingValue) {
+        toast.error(t("insufficient_balance"));
+        return;
+      }
+      if (
+        paymentMethod === "TRENT_BALANCE" &&
+        walletBalance >= remainingValue
+      ) {
+        setLoading(true);
+      }
+      const payload = {
+        uid: uid,
+        lang: currentLanguage,
+        booking_id: bookingData?.book_id,
+        method_key: paymentMethod,
+        ...(merchantRefNumber && { merchant_ref_number: merchantRefNumber }),
+      };
+      const response = await completePaymentAPI(payload);
+      if (response?.data?.response_code === 200) {
+        console.log(response);
+        setIsSuccessModal(true);
+        setSaveBookingResponse(response?.data?.data?.booking_details);
+      }
+    } catch (error) {
+      handleErrorMessage(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [
+    bookingData?.book_id,
+    merchantRefNumber,
+    paymentMethod,
+    remainingValue,
+    t,
+    walletBalance,
+  ]);
   useEffect(() => {
     if (orderStatus === "PAID" && !hasSavedRef.current) {
-      handleSaveBooking();
+      handleCompletePayment();
     }
-  }, [orderStatus, handleSaveBooking]);
-  useEffect(() => {
-    setCouponResponse(
-      sessionStorage.getItem("couponResponse")
-        ? JSON.parse(sessionStorage.getItem("couponResponse") || '""')
-        : defaultCouponResponse
-    );
-  }, []);
+  }, [orderStatus, handleCompletePayment]);
   return (
     <>
       <div className="py-10 px-5 xl:px-20 max-w-7xl mx-auto">
         <div className="flex gap-2 items-center">
-          <Link to={`/properties/${id}/book`}>
+          <Link to={`/account-settings/bookings?status=active`}>
             {currentLanguage === "ar" ? <ChevronRight /> : <ChevronLeft />}
           </Link>
           <h2 className="text-2xl sm:text-3xl font-semibold">
@@ -198,13 +181,13 @@ function ConfirmAndPay() {
                     <h5 className="font-medium text-lg pb-1">
                       {t("check_in")}
                     </h5>
-                    <p className="font-medium">{bookingData?.from_date}</p>
+                    <p className="font-medium">{bookingData?.check_in}</p>
                   </div>
                   <div>
                     <h5 className="font-medium text-lg pb-1">
                       {t("check_out")}
                     </h5>
-                    <p className="font-medium">{bookingData?.to_date}</p>
+                    <p className="font-medium">{bookingData?.check_out}</p>
                   </div>
                 </div>
                 <div>
@@ -239,11 +222,7 @@ function ConfirmAndPay() {
               )}
             </div>
             <div className="lg:flex-[2] lg:flex lg:justify-end">
-              <PriceDetails
-                bookingData={bookingData}
-                couponResponse={couponResponse}
-                handleChangeCouponResponse={(data) => setCouponResponse(data)}
-              />
+              <PriceDetails bookingData={bookingData} />
             </div>
           </div>
         ) : (
@@ -256,13 +235,13 @@ function ConfirmAndPay() {
                     <h5 className="font-medium text-lg pb-1">
                       {t("check_in")}
                     </h5>
-                    <p className="font-medium">{bookingData?.from_date}</p>
+                    <p className="font-medium">{bookingData?.check_in}</p>
                   </div>
                   <div>
                     <h5 className="font-medium text-lg pb-1">
                       {t("check_out")}
                     </h5>
-                    <p className="font-medium">{bookingData?.to_date}</p>
+                    <p className="font-medium">{bookingData?.check_out}</p>
                   </div>
                 </div>
                 <div>
@@ -274,11 +253,7 @@ function ConfirmAndPay() {
               </div>
             </div>
             <div className="lg:flex-[2] lg:flex lg:justify-end">
-              <PriceDetails
-                bookingData={bookingData}
-                couponResponse={couponResponse}
-                handleChangeCouponResponse={(data) => setCouponResponse(data)}
-              />
+              <PriceDetails bookingData={bookingData} />
             </div>
             <div className="py-0 lg:py-5">
               <h3 className="font-semibold text-2xl pb-4">
@@ -316,7 +291,7 @@ function ConfirmAndPay() {
                 orderStatus === "UNPAID"
                   ? fawryPaymentStatus
                   : paymentMethod === "TRENT_BALANCE"
-                  ? handleSaveBooking
+                  ? handleCompletePayment
                   : createFawryPayment
               }
               className={`bg-primary font-medium text-lg text-white w-32 py-2 rounded-md ${
@@ -345,4 +320,4 @@ function ConfirmAndPay() {
   );
 }
 
-export default ConfirmAndPay;
+export default Payment;

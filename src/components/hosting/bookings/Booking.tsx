@@ -22,6 +22,7 @@ function Booking({ booking }: IProps) {
     total_paid,
     check_in,
     check_out,
+    is_full_paid,
   } = booking;
   const status = useQueryParam("status");
   return (
@@ -33,6 +34,7 @@ function Booking({ booking }: IProps) {
         checkOut={check_out}
         bookStatus={book_status}
         totalPaid={total_paid}
+        isFullPaid={is_full_paid}
         path={`/hosting/bookings/${book_id}?status=${status}`}
       >
         {status === "active" && book_status === "Booked" && (

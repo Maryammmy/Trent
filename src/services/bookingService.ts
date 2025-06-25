@@ -3,6 +3,7 @@ import { baseAPI, baseAPIForm } from ".";
 import {
   ICancelBooking,
   ICheckInOut,
+  ICompletePayment,
   IConfirmBooking,
   ISaveBooking,
   IVerifyProperty,
@@ -132,9 +133,24 @@ export const checkInOutAPI = async (payload: ICheckInOut) => {
   );
   return response;
 };
-export const checkCouponAPI = async (couponCode: string, total: string) => {
+export const checkCouponAPI = async (
+  couponCode: string,
+  itemId: string,
+  total: string
+) => {
   const response = await baseAPI.get(
-    `user_api/booking/u_check_coupon.php?coupon_code=${couponCode}&uid=${uid}&total=${total}`
+    `user_api/booking/u_check_coupon.php?coupon_code=${couponCode}&uid=${uid}&item_id=${itemId}&total=${total}`
+  );
+  return response;
+};
+export const completePaymentAPI = async (payload: ICompletePayment) => {
+  const formData = new FormData();
+  Object.entries(payload).forEach(([key, value]) => {
+    formData.append(key, String(value));
+  });
+  const response = await baseAPIForm.post(
+    "user_api/booking/u_complete_paying.php",
+    formData
   );
   return response;
 };

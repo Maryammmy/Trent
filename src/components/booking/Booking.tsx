@@ -6,18 +6,22 @@ import html2canvas from "html2canvas";
 import Button from "@/components/ui/Button";
 import { useTranslation } from "react-i18next";
 import {
+  Banknote,
   Bath,
   BedDouble,
   Calendar,
+  CalendarDays,
   MapPin,
   Tickets,
   UsersRound,
+  WalletCards,
 } from "lucide-react";
 import { GiMoneyStack } from "react-icons/gi";
 import { IBookingDetails } from "@/interfaces/booking";
 import BookingSkeleton from "@/components/skeleton/BookingSkeleton";
 import Image from "../ui/Image";
 import { baseURL } from "@/services";
+import { formatDate } from "@/utils/formatDate";
 
 function Booking() {
   const { id } = useParams();
@@ -88,25 +92,6 @@ function Booking() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
                   <div className="flex items-center gap-2 flex-wrap">
                     <div className="flex items-center gap-2">
-                      <Calendar className="text-primary shrink-0" />
-                      <span>{t("booking_date")} :</span>
-                    </div>
-                    <span>{booking?.book_date}</span>
-                  </div>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <div className="flex items-center gap-2">
-                      <Tickets className="text-primary shrink-0" />
-                      <span>{t("booking_status")} :</span>
-                    </div>
-                    <span className="text-primary font-semibold">
-                      {" "}
-                      {booking?.book_status}
-                    </span>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <div className="flex items-center gap-2">
                       <UsersRound className="text-primary shrink-0" />
                       <span>{t("guests_count")} :</span>
                     </div>
@@ -133,6 +118,57 @@ function Booking() {
                     <span> {booking?.bathrooms_count}</span>
                   </div>
                 </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="text-primary shrink-0" />
+                      <span>{t("booking_date")} :</span>
+                    </div>
+                    <span>{formatDate(booking?.book_date)}</span>
+                  </div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <Tickets className="text-primary shrink-0" />
+                      <span>{t("booking_status")} :</span>
+                    </div>
+                    <span className="text-primary font-semibold">
+                      {" "}
+                      {booking?.book_status}
+                    </span>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-10">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <WalletCards className="text-primary shrink-0" />
+                      <span>{t("payment_method")} :</span>
+                    </div>
+                    <span>{booking?.pay_method}</span>
+                  </div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <Banknote className="text-primary shrink-0" />
+                      <span>{t("payment")} :</span>
+                    </div>
+                    <span
+                      className={` font-semibold ${
+                        booking?.is_full_paid
+                          ? "text-green-600"
+                          : "text-primary"
+                      }`}
+                    >
+                      {" "}
+                      {booking?.is_full_paid ? t("paid") : t("partially_paid")}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <div className="flex items-center gap-2">
+                    <CalendarDays className="text-primary shrink-0" />
+                    <span>{t("nights")} :</span>
+                  </div>
+                  <span>{booking?.total_day}</span>
+                </div>
               </div>
               <div className="pt-10">
                 <div className="flex items-center gap-2 flex-wrap border-t py-4 font-medium text-lg">
@@ -143,7 +179,13 @@ function Booking() {
                   <span>{booking?.prop_price}</span>
                   {t("EGP")}
                 </div>
-                <div className="flex items-center gap-2 flex-wrap border-t py-4 text-xl font-bold">
+                <div
+                  className={`flex items-center gap-2 flex-wrap border-t py-4 ${
+                    booking?.is_full_paid
+                      ? "text-xl font-bold"
+                      : "text-lg font-medium"
+                  }`}
+                >
                   <div className="flex items-center gap-2">
                     <GiMoneyStack className="text-primary shrink-0" size={30} />
                     <span>{t("total")} :</span>
@@ -152,6 +194,34 @@ function Booking() {
                     {booking?.total} {t("EGP")}
                   </span>
                 </div>
+                {!booking?.is_full_paid && (
+                  <div className="flex items-center gap-2 flex-wrap border-t py-4 text-lg font-medium">
+                    <div className="flex items-center gap-2">
+                      <GiMoneyStack
+                        className="text-primary shrink-0"
+                        size={30}
+                      />
+                      <span>{t("paid")} :</span>
+                    </div>
+                    <span>
+                      {booking?.partial_value} {t("EGP")}
+                    </span>
+                  </div>
+                )}
+                {!booking?.is_full_paid && (
+                  <div className="flex items-center gap-2 flex-wrap border-t py-4 text-xl font-bold">
+                    <div className="flex items-center gap-2">
+                      <GiMoneyStack
+                        className="text-primary shrink-0"
+                        size={30}
+                      />
+                      <span>{t("remaining")} :</span>
+                    </div>
+                    <span>
+                      {booking?.reminder_value} {t("EGP")}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>

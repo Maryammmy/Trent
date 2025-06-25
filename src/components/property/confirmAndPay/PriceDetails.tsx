@@ -1,36 +1,47 @@
 import Image from "../../ui/Image";
 import { useTranslation } from "react-i18next";
-import { IVerifyPropertyResponse } from "@/interfaces/booking";
+import { ICoupon, IVerifyPropertyResponse } from "@/interfaces/booking";
 import { baseURL } from "@/services";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { checkCouponAPI } from "@/services/bookingService";
 import Loader from "@/components/loader/Loader";
 import toast from "react-hot-toast";
 import { handleErrorMessage } from "@/utils/handleErrorMsg";
+import { defaultCouponResponse } from "@/utils/defaultValues";
+import { Check } from "lucide-react";
 interface IProps {
   bookingData: IVerifyPropertyResponse;
-  couponValue: number;
-  handleChangeCouponValue: (val: number) => void;
-  finalTotalAfterDiscount: number;
+  couponResponse: ICoupon;
+  handleChangeCouponResponse: (data: ICoupon) => void;
 }
 function PriceDetails({
   bookingData,
-  couponValue,
-  handleChangeCouponValue,
-  finalTotalAfterDiscount,
+  couponResponse,
+  handleChangeCouponResponse,
 }: IProps) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [coupon, setCoupon] = useState("");
+  useEffect(() => {
+    setCoupon(couponResponse?.coupon);
+  }, [couponResponse?.coupon]);
   const handleApplyCoupon = async () => {
     try {
       setLoading(true);
-      const response = await checkCouponAPI(coupon, bookingData?.final_total);
+      const response = await checkCouponAPI(
+        coupon,
+        bookingData?.item_id.toString(),
+        bookingData?.sub_total
+      );
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
-        handleChangeCouponValue(Number(response?.data?.data?.value));
+        sessionStorage.setItem(
+          "couponResponse",
+          JSON.stringify({ ...response?.data?.data, coupon: coupon })
+        );
+        handleChangeCouponResponse({ ...response?.data?.data, coupon: coupon });
       }
     } catch (error) {
       handleErrorMessage(error);
@@ -40,7 +51,8 @@ function PriceDetails({
   };
   const handleRemoveCoupon = () => {
     setCoupon("");
-    handleChangeCouponValue(0);
+    handleChangeCouponResponse(defaultCouponResponse);
+    sessionStorage.removeItem("couponResponse");
   };
   return (
     <div>
@@ -66,21 +78,33 @@ function PriceDetails({
           <h4 className="text-lg lg:text-xl font-semibold pb-4">
             {t("coupon")}
           </h4>
-          <div className="p-3 border rounded-lg flex gap-2 justify-between focus-within:border-primary">
+          <div className="p-3 border rounded-lg flex gap-2 justify-between items-center relative focus-within:border-primary">
             <Input
+              readOnly={!!couponResponse?.coupon_value}
               value={coupon}
               placeholder={t("enter_coupon_code")}
-              className="flex-1 min-w-0 outline-none"
+              className="outline-none flex-1 min-w-0 disabled:bg-transparent"
               onChange={(e) => setCoupon(e.target.value)}
             />
+            {couponResponse?.coupon_value && (
+              <span className="flex justify-center items-center rounded-full w-5 h-5 bg-green-600 absolute left-28">
+                <Check className="text-white" />
+              </span>
+            )}
             <Button
               disabled={loading || !coupon}
-              className="font-semibold text-primary"
-              onClick={couponValue ? handleRemoveCoupon : handleApplyCoupon}
+              className={`font-semibold ${
+                couponResponse?.coupon_value ? "text-red-600" : "text-primary"
+              }`}
+              onClick={
+                couponResponse?.coupon_value
+                  ? handleRemoveCoupon
+                  : handleApplyCoupon
+              }
             >
               {loading ? (
                 <Loader borderColor="#223f7f" />
-              ) : couponValue ? (
+              ) : couponResponse.coupon_value ? (
                 t("remove")
               ) : (
                 t("apply")
@@ -94,7 +118,7 @@ function PriceDetails({
           </h4>
           <div className="my-2 py-2 font-medium border-b">
             <div className="grid grid-cols-2 gap-5 mb-2">
-              <span>{`${t("duration")} (${bookingData?.days} ${
+              <span>{`${t("duration")} (${
                 bookingData?.days > 1 ? t("nights") : t("night")
               })`}</span>
               <span className="text-end">
@@ -128,7 +152,7 @@ function PriceDetails({
               </span>
             </div>
           </div>
-          {couponValue > 0 && (
+          {couponResponse?.coupon_value && (
             <>
               <div className="my-2 py-2 font-medium border-b">
                 <div className="grid grid-cols-2 gap-5 mb-2">
@@ -141,8 +165,8 @@ function PriceDetails({
               <div className="my-2 py-2 font-medium border-b">
                 <div className="grid grid-cols-2 gap-5 mb-2">
                   <span>{t("coupon_discount")}</span>
-                  <span className="text-end">
-                    - {couponValue?.toFixed(2)} {t("EGP")}
+                  <span className="text-end text-green-600">
+                    - {couponResponse?.coupon_value} {t("EGP")}
                   </span>
                 </div>
               </div>
@@ -151,14 +175,21 @@ function PriceDetails({
           <div className="grid grid-cols-2 gap-5 font-semibold text-lg pt-3">
             <span>{t("total")}</span>
             <span className="text-end">
-              {finalTotalAfterDiscount?.toFixed(2)} {t("EGP")}
+              {couponResponse?.final_total
+                ? couponResponse?.final_total
+                : bookingData?.final_total}
+              {t("EGP")}
             </span>
           </div>
           <div>
             <p className="font-medium pt-1">
               {t("payment_info", {
-                partial_value: bookingData?.partial_value,
-                reminder_value: bookingData?.reminder_value,
+                partial_value: couponResponse?.partial_value
+                  ? couponResponse?.partial_value
+                  : bookingData?.partial_value,
+                reminder_value: couponResponse?.reminder_value
+                  ? couponResponse?.reminder_value
+                  : bookingData?.reminder_value,
               })}
             </p>
           </div>

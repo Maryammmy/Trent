@@ -21,6 +21,7 @@ export interface ISaveBooking {
   method_key: string;
   item_id: string;
   merchant_ref_number?: string;
+  coupon_code?: string;
 }
 export interface IVerifyPropertyResponse {
   IS_FAVOURITE: number;
@@ -50,27 +51,11 @@ export interface IVerifyPropertyResponse {
   partial_value: string;
 }
 export interface ISaveBookingResponse {
-  IS_FAVOURITE: number;
-  deposit_fees: string;
   final_total: number;
-  id: string;
-  image_list: IImage[];
-  period_type: string;
-  price: string;
-  rate: number;
-  service_fees: number;
-  sub_total: number;
-  taxes: number;
   title: string;
-  trent_fees: number;
-  days: number;
   from_date: string;
   to_date: string;
   guest_count: string;
-  tax_percent: string;
-  confirm_guest_rules: boolean;
-  item_id: number;
-  wallet_balance: string;
   book_id: string;
   book_status: string;
 }
@@ -83,11 +68,13 @@ export interface IIndividualRate {
 export interface IBooking {
   book_id: string;
   book_status: string;
-  p_method_id: string;
   prop_id: string;
   image_list: IImage[];
   prop_price: string;
   prop_title: string;
+  guest_count: string;
+  wallet_balance: string;
+  partial_value: string;
   rate: string;
   total_day: string;
   check_in: string;
@@ -100,6 +87,10 @@ export interface IBooking {
   city: string;
   government: IGovernement;
   individual_rate: IIndividualRate;
+  is_full_paid: boolean;
+  pay_method: string;
+  reminder_value: string;
+  item_id: string;
 }
 export interface IBookingDetails {
   address: string;
@@ -116,7 +107,8 @@ export interface IBookingDetails {
   city: string;
   government: IGovernement;
   noguest: string;
-  p_method_id: string;
+  pay_method: string;
+  is_full_paid: boolean;
   prop_id: string;
   prop_img_list: IImage[];
   prop_price: string;
@@ -124,6 +116,8 @@ export interface IBookingDetails {
   rate: string;
   subtotal: string;
   total: string;
+  reminder_value: string;
+  partial_value: string;
   total_day: string;
 }
 export interface ICancelBooking {
@@ -147,4 +141,18 @@ export interface ICheckInOut {
   uid: string;
   booking_id: string;
   is_check_in: boolean;
+}
+export interface ICoupon {
+  coupon: string;
+  coupon_value: string;
+  reminder_value: string;
+  partial_value: string;
+  final_total: string;
+}
+export interface ICompletePayment {
+  uid: string;
+  booking_id: string;
+  method_key: string;
+  lang: string;
+  merchant_ref_number?: string;
 }

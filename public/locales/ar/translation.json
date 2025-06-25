@@ -606,5 +606,10 @@
   "end_date": "تاريخ الانتهاء",
   "images": "الصور",
   "video": "الفيديو",
-  "payment_info": "سوف يتم دفع {{partial_value}} ج.م الآن، والمبلغ المتبقي {{reminder_value}} ج.م سيتم دفعه بعد التأكيد من قبل المستأجر."
+  "payment_info": "سوف يتم دفع {{partial_value}} ج.م الآن، والمبلغ المتبقي {{reminder_value}} ج.م سيتم دفعه بعد التأكيد من قبل المستأجر.",
+  "partially_paid": "مدفوع جزئياً",
+  "paid": "مدفوع",
+  "payment": "الدفع",
+  "remaining": "المتبقي",
+  "payment_confirmation": "لقد قمت بدفع {{partial_value}} ج.م، والمتبقي {{reminder_value}} ج.م لإكمال الحجز."
 }

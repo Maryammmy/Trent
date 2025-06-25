@@ -9,6 +9,7 @@ import CancelBookingModal from "./CancelBookingModal";
 import CheckInOutModal from "./CheckInOutModal";
 import BookingCard from "@/components/booking/BookingCard";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 interface IProps {
   booking: IBooking;
@@ -28,12 +29,25 @@ function Booking({ booking }: IProps) {
     check_in,
     check_out,
     individual_rate,
+    is_full_paid,
   } = booking;
+  const navigate = useNavigate();
   const status = useQueryParam("status");
   const today = new Date();
   const inDate = new Date(check_in);
   const outDate = new Date(check_out);
   const isDuringStay = today >= inDate && today <= outDate;
+  const handlePay = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    sessionStorage.setItem("booking", JSON.stringify(booking));
+    setTimeout(() => {
+      navigate(`/account-settings/bookings/payment/${book_id}`, {
+        state: {
+          data: booking,
+        },
+      });
+    }, 500);
+  };
   return (
     <>
       <BookingCard
@@ -43,6 +57,7 @@ function Booking({ booking }: IProps) {
         checkOut={check_out}
         bookStatus={book_status}
         totalPaid={total_paid}
+        isFullPaid={is_full_paid}
         path={`/account-settings/bookings/${book_id}?status=${status}`}
       >
         {book_status === "Completed" && (
@@ -61,6 +76,14 @@ function Booking({ booking }: IProps) {
         )}
         {status === "active" && (
           <div className="flex flex-col sm:items-center sm:flex-row gap-2 sm:gap-5 md:gap-10">
+            {book_status === "Confirmed" && !is_full_paid && (
+              <Button
+                onClick={handlePay}
+                className="py-2 w-40 bg-primary text-white rounded text-center"
+              >
+                {t("pay")}
+              </Button>
+            )}
             {isDuringStay && book_status === "Confirmed" && (
               <Button
                 onClick={(e) => {

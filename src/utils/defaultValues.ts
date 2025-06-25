@@ -35,3 +35,10 @@ export const defaultPropertyValues: PropertyNameInputs = {
   guest_rules_ar: "",
   cancellation_policy_id: "",
 };
+export const defaultCouponResponse = {
+  coupon: "",
+  coupon_value: "",
+  reminder_value: "",
+  partial_value: "",
+  final_total: "",
+};

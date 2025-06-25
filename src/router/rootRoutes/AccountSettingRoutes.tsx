@@ -2,6 +2,7 @@ import ProtectedRoutes from "@/middleware/ProtectedRoutes";
 import AccountSettings from "@/pages/accountSettings";
 import Bookings from "@/pages/accountSettings/bookings";
 import Booking from "@/pages/accountSettings/bookings/Booking";
+import Payment from "@/pages/accountSettings/bookings/Payment";
 import Credits from "@/pages/accountSettings/Credits";
 import PersonalInfo from "@/pages/accountSettings/PersonalInfo";
 import { Route } from "react-router-dom";
@@ -37,6 +38,14 @@ export const AccountSettingsRoutes = (
       element={
         <ProtectedRoutes>
           <Booking />
+        </ProtectedRoutes>
+      }
+    />
+    <Route
+      path="account-settings/bookings/payment/:id"
+      element={
+        <ProtectedRoutes>
+          <Payment />
         </ProtectedRoutes>
       }
     />
