@@ -50,10 +50,10 @@ const Map = ({ properties }: IProps) => {
   useEffect(() => {
     if (!selectedProperties || !properties) return;
     const updatedSelected = selectedProperties
-      .map((selected) => properties.find((p) => p.id === selected.id))
+      .map((selected) => properties.find((p) => p?.id === selected?.id))
       .filter(Boolean) as IProperty[];
-    const isUpdated = updatedSelected.some((updated, index) => {
-      const original = selectedProperties[index];
+    const isUpdated = updatedSelected?.some((updated, index) => {
+      const original = selectedProperties?.[index];
       return !updated || JSON.stringify(updated) !== JSON.stringify(original);
     });
     if (isUpdated) {
@@ -125,8 +125,8 @@ const Map = ({ properties }: IProps) => {
       {selectedProperties && (
         <InfoWindowF
           position={{
-            lat: Number(selectedProperties[0]?.latitude),
-            lng: Number(selectedProperties[0]?.longitude),
+            lat: Number(selectedProperties?.[0]?.latitude),
+            lng: Number(selectedProperties?.[0]?.longitude),
           }}
           onCloseClick={() => setSelectedProperties(null)}
           options={{
@@ -143,7 +143,7 @@ const Map = ({ properties }: IProps) => {
                     height="150px"
                   />
                 }
-                key={property.id}
+                key={property?.id}
               >
                 <Card property={property} />
               </Suspense>

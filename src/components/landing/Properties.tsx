@@ -91,7 +91,6 @@ export default function Properties() {
               }`}
             >
               {!properties && <PropertyCartSkeleton cards={8} />}
-
               {properties && !properties?.length && (
                 <div className="flex justify-center items-center text-lg h-[50vh] text-dark font-medium w-full">
                   {t("no_properties_found")}
