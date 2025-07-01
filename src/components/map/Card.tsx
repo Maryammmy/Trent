@@ -40,7 +40,7 @@ function Card({ property }: IProps) {
             showArrow={false}
             infinite={image_list?.length > 1}
           >
-            {image_list?.map((item, index) => (
+            {image_list?.slice(0, 5)?.map((item, index) => (
               <div key={index} className="relative overflow-hidden rounded-md">
                 <div
                   className="absolute top-2 right-2 z-10 cursor-pointer"
