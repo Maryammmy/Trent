@@ -623,5 +623,8 @@
   "paid": "Paid",
   "payment": "Payment",
   "remaining": "Remaining",
-  "payment_confirmation": "You have paid {{partial_value}} EGP. The remaining amount is {{reminder_value}} EGP to complete your booking."
+  "payment_confirmation": "You have paid {{partial_value}} EGP. The remaining amount is {{reminder_value}} EGP to complete your booking.",
+  "raise_price_ranges": "Set higher prices for specific dates",
+  "raise_amount": "Extra charge",
+  "enter_raise_charge": "Enter raise charge"
 }

@@ -78,7 +78,7 @@ function GuestRulesAndCancellationPolicies() {
           ></TextArea>
         </div>
       </div>
-      <ProgressBarsWrapper progressBarsData={["100%", "100%", "75%"]} />
+      <ProgressBarsWrapper progressBarsData={["100%", "100%", "83%"]} />
       <BackAndNext
         back="/become-a-host/price-and-deposit"
         next="/hosting/properties"

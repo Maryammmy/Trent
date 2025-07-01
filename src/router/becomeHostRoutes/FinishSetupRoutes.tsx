@@ -5,6 +5,7 @@ import PriceAndDeposit from "../../pages/becomeAHost/finishSetup/PriceAndDeposit
 import ProtectedRoutes from "../../middleware/ProtectedRoutes";
 import GuestRulesAndCancellationPolicies from "@/pages/becomeAHost/finishSetup/GuestRulesAndCancellationPolicies";
 import ExcludingDateRanges from "@/pages/becomeAHost/finishSetup/ExcludingDateRanges";
+import RaisePriceRanges from "@/pages/becomeAHost/finishSetup/RaisePriceRanges";
 
 export const FinishSetupRoutes = (
   <>
@@ -22,6 +23,14 @@ export const FinishSetupRoutes = (
       element={
         <ProtectedRoutes>
           <ExcludingDateRanges />
+        </ProtectedRoutes>
+      }
+    />
+    <Route
+      path="raise-price"
+      element={
+        <ProtectedRoutes>
+          <RaisePriceRanges />
         </ProtectedRoutes>
       }
     />

@@ -39,6 +39,7 @@ import Button from "@/components/ui/Button";
 import { ISelectedImage } from "@/interfaces/property/updateProperty";
 import { handleErrorMessage } from "@/utils/handleErrorMsg";
 import ExcludingDateRanges from "./ExcludingDateRanges";
+import RaisePriceRanges from "./RaisePriceRanges";
 
 interface UpdatePropertyFormProps {
   propertyData: ISingleProperty;
@@ -253,12 +254,13 @@ function UpdatePropertyForm({
           control={control}
           errors={errors}
         />
+        <RaisePriceRanges setValue={setValue} />
+        <ExcludingDateRanges id={propertyId} setValue={setValue} />
         <FacilitiesSelector
           control={control}
           errors={errors}
           facilities={facilities}
         />
-        <ExcludingDateRanges id={propertyId} setValue={setValue} />
         <PropertyInputs control={control} errors={errors} />
         <PropertyTextArea control={control} errors={errors} />
         <ImageUploader

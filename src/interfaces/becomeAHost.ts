@@ -23,3 +23,8 @@ export interface IPriceBreakdown {
   label: string;
   value: number;
 }
+export interface IRaiseRange {
+  start: string;
+  end: string;
+  amount: number;
+}

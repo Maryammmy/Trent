@@ -615,5 +615,8 @@
   "paid": "مدفوع",
   "payment": "الدفع",
   "remaining": "المتبقي",
-  "payment_confirmation": "لقد قمت بدفع {{partial_value}} ج.م، والمتبقي {{reminder_value}} ج.م لإكمال الحجز."
+  "payment_confirmation": "لقد قمت بدفع {{partial_value}} ج.م، والمتبقي {{reminder_value}} ج.م لإكمال الحجز.",
+  "raise_price_ranges": "تحديد أسعار أعلى لتواريخ محددة",
+  "raise_amount": "قيمة الزيادة",
+  "enter_raise_charge": "أدخل قيمة الزيادة"
 }

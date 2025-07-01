@@ -164,7 +164,7 @@ function MinMaxDays() {
           {errors.max && <InputErrorMessage msg={errors.max} />}
         </div>
       </div>
-      <ProgressBarsWrapper progressBarsData={["100%", "100%", "18.75%"]} />
+      <ProgressBarsWrapper progressBarsData={["100%", "100%", "16.6%"]} />
       <BackAndNext
         back="/become-a-host/finish-setup"
         next="/become-a-host/excluding-dates"
