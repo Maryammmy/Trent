@@ -29,15 +29,13 @@ export default function RaisePriceRanges({ setValue }: IProps) {
   const handleAmountChange = (value: string) => {
     const numericValue = parseInt(value.replace(/\D/g, ""), 10);
     const newErrors = { ...errors };
-
     if (!value || isNaN(numericValue)) {
       newErrors.amount = t("error_invalid_number");
-    } else if (numericValue < 50 || numericValue > 250000) {
-      newErrors.amount = t("error_out_of_range_price");
+    } else if (numericValue < 50 || numericValue > 10000) {
+      newErrors.amount = t("error_out_of_range_raise_price");
     } else {
       delete newErrors.amount;
     }
-
     setErrors(newErrors);
     setAmount(value);
   };
@@ -48,21 +46,19 @@ export default function RaisePriceRanges({ setValue }: IProps) {
       endDate?.startDate &&
       !errors.amount &&
       numericAmount >= 50 &&
-      numericAmount <= 250000
+      numericAmount <= 10000
     ) {
       const start = new Date(startDate.startDate).toISOString().split("T")[0];
       const end = new Date(endDate.startDate).toISOString().split("T")[0];
-
       const newRange: IRaiseRange = { start, end, amount: numericAmount };
       const updatedRanges = [...ranges, newRange];
       setRanges(updatedRanges);
-      setValue("raise_price_ranges", updatedRanges); // update form field
+      setValue("raise_price_ranges", updatedRanges);
       setStartDate({ startDate: null, endDate: null });
       setEndDate({ startDate: null, endDate: null });
       setAmount("");
     }
   };
-
   const handleDelete = (index: number) => {
     const updatedRanges = ranges.filter((_, i) => i !== index);
     setRanges(updatedRanges);
@@ -72,7 +68,6 @@ export default function RaisePriceRanges({ setValue }: IProps) {
   return (
     <div>
       <h4 className="text-dark font-medium mb-1">{t("raise_price_ranges")}</h4>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-10">
         {/* Start Date */}
         <div className="flex flex-col gap-1">

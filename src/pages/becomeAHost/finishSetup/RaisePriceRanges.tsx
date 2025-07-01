@@ -26,28 +26,24 @@ export default function RaisePriceRanges() {
   const handleAmountChange = (value: string) => {
     const newErrors = { ...errors };
     const numericValue = parseInt(value.replace(/\D/g, ""), 10);
-
     if (!value || isNaN(numericValue)) {
       newErrors.raise_amount = t("error_invalid_number");
-    } else if (numericValue < 50 || numericValue > 250000) {
-      newErrors.raise_amount = t("error_out_of_range_price");
+    } else if (numericValue < 50 || numericValue > 10000) {
+      newErrors.raise_amount = t("error_out_of_range_raise_price");
     } else {
       delete newErrors.raise_amount;
     }
-
     setErrors(newErrors);
     setAmount(value);
   };
-
   const handleAddRange = () => {
     const numericAmount = parseInt(amount, 10);
-
     if (
       startDate?.startDate &&
       endDate?.startDate &&
       !errors.raise_amount &&
       numericAmount >= 50 &&
-      numericAmount <= 250000
+      numericAmount <= 10000
     ) {
       const start = new Date(startDate.startDate).toISOString().split("T")[0];
       const end = new Date(endDate.startDate).toISOString().split("T")[0];
@@ -62,20 +58,16 @@ export default function RaisePriceRanges() {
         "raise_price_ranges",
         JSON.stringify(updatedRanges)
       );
-
-      // reset
       setStartDate({ startDate: null, endDate: null });
       setEndDate({ startDate: null, endDate: null });
       setAmount("");
     }
   };
-
   const handleDelete = (index: number) => {
     const updatedRanges = ranges.filter((_, i) => i !== index);
     setRanges(updatedRanges);
     sessionStorage.setItem("raise_price_ranges", JSON.stringify(updatedRanges));
   };
-
   useEffect(() => {
     const stored = sessionStorage.getItem("raise_price_ranges");
     if (stored) {
