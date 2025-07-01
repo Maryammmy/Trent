@@ -35,11 +35,11 @@ function Facilities() {
   return (
     <div className="py-10">
       <div className="hosting-layout flex flex-col justify-center max-w-screen-sm mx-auto px-5 md:px-0 pb-10">
-        <h3 className="text-2xl md:text-3xl font-semibold pb-5 md:pb-10">
+        <h3 className="text-2xl md:text-3xl font-semibold pb-5 md:pb-10 text-center">
           {t("tell_us_about_amenities")}
           <span className="text-red-500 ms-1">*</span>
         </h3>
-        <div className="flex flex-col md:flex-row flex-wrap gap-4">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center">
           {!facilities ? (
             <PropertyTypeSkeleton cards={8} />
           ) : facilities?.length ? (
@@ -49,7 +49,7 @@ function Facilities() {
                 <Button
                   key={index}
                   onClick={() => handleSelectedFacilities(Number(id))}
-                  className={`flex flex-wrap items-center gap-2 font-medium border rounded-full px-3 py-2 ${
+                  className={`w-full sm:w-auto flex flex-wrap items-center gap-2 font-medium border rounded-full px-3 py-2 ${
                     selectedFacilities.includes(Number(id)) &&
                     "bg-zinc-50 border-black"
                   }`}
