@@ -84,7 +84,7 @@ function Booking({ booking }: IProps) {
                 {t("pay")}
               </Button>
             )}
-            {isDuringStay && book_status === "Confirmed" && (
+            {isDuringStay && is_full_paid && book_status === "Confirmed" && (
               <Button
                 onClick={(e) => {
                   e.preventDefault();
