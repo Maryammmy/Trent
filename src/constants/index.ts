@@ -48,8 +48,10 @@ jzDFH18sj1q1ggmu6J4J03A=
 
 export const ITEMS_PER_PAGE = 12;
 export const uid = Cookies.get("user_id") || "";
-export const ownerFees = Cookies.get("owner_fees") || "";
 export const currentLanguage = (localStorage.getItem("i18nextLng") ||
   "en") as CurrentLanguage;
 export const websiteUrl = "https://trent.com.eg";
 export const DEFAULT_CURRENCY = { currency: "EGP", rate: "1" };
+export const getOwnerFees = (): string => {
+  return Cookies.get("owner_fees") || "";
+};

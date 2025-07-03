@@ -10,11 +10,11 @@ import { handleErrorMessage } from "@/utils/handleErrorMsg";
 
 const propertyData = (images: File[], video?: File | null): IPropertyData => {
   const cancellationPolicy = sessionStorage.getItem("cancellation_policy");
-  const dateRanges = sessionStorage.getItem("date_ranges");
-  const parseDateRanges = dateRanges ? JSON.parse(dateRanges || "[]") : [];
-  const increaseDateRanges = sessionStorage.getItem("inc_value_ranges");
+  const dateRanges = sessionStorage.getItem("date_ranges") || "[]";
+  const parseDateRanges = dateRanges ? JSON.parse(dateRanges) : [];
+  const increaseDateRanges = sessionStorage.getItem("inc_value_ranges") || "[]";
   const parseIncreaseDateRanges = increaseDateRanges
-    ? JSON.parse(increaseDateRanges || "[]")
+    ? JSON.parse(increaseDateRanges)
     : [];
   return {
     uid: uid,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DateValueType } from "react-tailwindcss-datepicker";
 import { validateEndDate, validateStartDate } from "@/utils/handleChangeDate";
 import { useTranslation } from "react-i18next";
@@ -6,13 +6,14 @@ import DatePicker from "@/components/ui/DatePicker";
 import Button from "@/components/ui/Button";
 import { UseFormSetValue } from "react-hook-form";
 import { PropertyNameInputs, RaiseRangeTuple } from "@/types";
+import { IRaisePriceRange } from "@/interfaces/property";
 
 interface IProps {
   setValue: UseFormSetValue<PropertyNameInputs>;
+  raiseRange: IRaisePriceRange[];
 }
-export default function RaisePriceRanges({ setValue }: IProps) {
+export default function RaisePriceRanges({ setValue, raiseRange }: IProps) {
   const { t } = useTranslation();
-
   const [startDate, setStartDate] = useState<DateValueType>({
     startDate: null,
     endDate: null,
@@ -63,6 +64,16 @@ export default function RaisePriceRanges({ setValue }: IProps) {
     setRanges(updatedRanges);
     setValue("inc_value_ranges", updatedRanges);
   };
+  useEffect(() => {
+    if (raiseRange?.length) {
+      const mappedRanges: RaiseRangeTuple[] = raiseRange.map((item) => [
+        item.form_date,
+        item.to_date,
+        Number(item.value),
+      ]);
+      setRanges(mappedRanges);
+    }
+  }, [raiseRange]);
 
   return (
     <div>
@@ -121,12 +132,13 @@ export default function RaisePriceRanges({ setValue }: IProps) {
         {ranges.map(([start, end, amount], index) => (
           <li
             key={index}
-            className="flex justify-between gap-2 items-center bg-gray-100 px-4 py-3 rounded-md"
+            className="flex justify-between gap-2 items-center bg-white px-4 py-3 rounded-md"
           >
             <span className="font-medium">
               {start} → {end} (+{amount} EGP)
             </span>
             <Button
+              type="button"
               onClick={() => handleDelete(index)}
               className="text-red-600 hover:underline font-medium"
             >

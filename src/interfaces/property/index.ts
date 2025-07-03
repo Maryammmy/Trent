@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 export interface ISingleProperty {
   property_details: IDetailsProperty;
   facility_list: IFacilityProperty[];
+  inc_value_ranges: IRaisePriceRange[];
 }
 export interface IDetailsProperty {
   cancellation_policy: {
@@ -90,6 +91,11 @@ export interface IDetailsProperty {
   user_id: string;
   video: string;
 }
+export interface IRaisePriceRange {
+  form_date: string;
+  to_date: string;
+  value: string;
+}
 export interface IFacilityProperty {
   id: string;
   img: string;
@@ -135,6 +141,8 @@ export interface IPropertyData {
   period: string;
   is_featured?: boolean;
   cancellation_policy_id: string;
+  date_ranges?: string;
+  inc_value_ranges?: string;
 }
 export interface IProperty {
   IS_FAVOURITE: number;

@@ -20,6 +20,7 @@ import {
   IDetailsProperty,
   IFacilityProperty,
   ICancellationPolicy,
+  IRaisePriceRange,
 } from "@/interfaces/property";
 import { baseURL } from "@/services";
 import {
@@ -59,6 +60,7 @@ function UpdatePropertyForm({
   const [videoError, setVideoError] = useState<string | null>(null);
   const propertyDetails: IDetailsProperty = propertyData?.property_details;
   const facilityListProperty: IFacilityProperty[] = propertyData?.facility_list;
+  const raisePriceRange: IRaisePriceRange[] = propertyData?.inc_value_ranges;
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -214,7 +216,6 @@ function UpdatePropertyForm({
       });
     }
   }, [propertyDetails, facilityListProperty, reset, propertyId, userId]);
-
   const onSubmit = async (data: PropertyNameInputs) => {
     const formData = convertToFormData(data);
     try {
@@ -254,7 +255,7 @@ function UpdatePropertyForm({
           control={control}
           errors={errors}
         />
-        <RaisePriceRanges setValue={setValue} />
+        <RaisePriceRanges raiseRange={raisePriceRange} setValue={setValue} />
         <ExcludingDateRanges id={propertyId} setValue={setValue} />
         <FacilitiesSelector
           control={control}

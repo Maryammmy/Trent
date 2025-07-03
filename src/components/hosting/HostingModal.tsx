@@ -7,7 +7,7 @@ import Image from "../ui/Image";
 import { useSendDataToAPI } from "../../services/addPropertyService";
 import { useEffect, useState } from "react";
 import Loader from "../loader/Loader";
-import { currentLanguage, ownerFees } from "@/constants";
+import { currentLanguage, getOwnerFees } from "@/constants";
 
 function HostingModal() {
   const { t } = useTranslation();
@@ -15,6 +15,7 @@ function HostingModal() {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
   const { sendDataToAPI } = useSendDataToAPI();
+  const ownerFees = getOwnerFees();
   const [storedPrice, setStoredPrice] = useState<string>("");
   const [storedTitleAr, setStoredTitleAr] = useState<string>("");
   const [storedTitleEn, setStoredTitleEn] = useState<string>("");
@@ -29,7 +30,6 @@ function HostingModal() {
   const handleFinishUp = async () => {
     setLoading(true);
     const isSuccess = await sendDataToAPI();
-    console.log(isSuccess);
     if (isSuccess) {
       setTimeout(() => {
         dispatch(setIsFinishUpModal(false));

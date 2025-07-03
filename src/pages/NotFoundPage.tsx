@@ -12,7 +12,7 @@ const NotFoundPage = () => {
               <span>Page not found</span>
             </p>
             <p className="mb-8 text-center md:text-lg">
-              The page you’re looking for doesn’t exist.
+              The page you’re looking for doesn’t exist
             </p>
             <Link
               to={"/"}
