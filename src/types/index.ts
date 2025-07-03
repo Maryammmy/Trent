@@ -1,5 +1,4 @@
 import { BaseProps } from "@/interfaces";
-import { IRaiseRange } from "@/interfaces/becomeAHost";
 
 export type SignupNameInputs = {
   name: string;
@@ -49,7 +48,7 @@ export type PropertyNameInputs = {
   guest_rules_ar: string;
   cancellation_policy_id: string;
   date_ranges?: [string, string][];
-  raise_price_ranges?: IRaiseRange[];
+  inc_value_ranges?: RaiseRangeTuple[];
 };
 export type PropertyInputs = {
   price: string;
@@ -91,3 +90,5 @@ type ReadOnlyCountrySelectorProps = {
 
 export type IPropsCountrySelector = BaseProps &
   (ReadOnlyCountrySelectorProps | EditableCountrySelectorProps);
+
+export type RaiseRangeTuple = [string, string, number];

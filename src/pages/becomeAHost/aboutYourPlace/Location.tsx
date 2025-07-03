@@ -40,7 +40,6 @@ function Location() {
             <span className="text-red-500 ms-1">*</span>
           </label>
           <Input
-            dir="ltr"
             type="text"
             value={googleMapsUrl}
             onChange={handleUrlChange}

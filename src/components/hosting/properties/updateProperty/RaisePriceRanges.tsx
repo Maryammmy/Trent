@@ -5,8 +5,7 @@ import { useTranslation } from "react-i18next";
 import DatePicker from "@/components/ui/DatePicker";
 import Button from "@/components/ui/Button";
 import { UseFormSetValue } from "react-hook-form";
-import { PropertyNameInputs } from "@/types";
-import { IRaiseRange } from "@/interfaces/becomeAHost";
+import { PropertyNameInputs, RaiseRangeTuple } from "@/types";
 
 interface IProps {
   setValue: UseFormSetValue<PropertyNameInputs>;
@@ -24,7 +23,7 @@ export default function RaisePriceRanges({ setValue }: IProps) {
   });
   const [amount, setAmount] = useState<string>("");
   const [errors, setErrors] = useState<{ amount?: string }>({});
-  const [ranges, setRanges] = useState<IRaiseRange[]>([]);
+  const [ranges, setRanges] = useState<RaiseRangeTuple[]>([]);
 
   const handleAmountChange = (value: string) => {
     const numericValue = parseInt(value.replace(/\D/g, ""), 10);
@@ -50,10 +49,10 @@ export default function RaisePriceRanges({ setValue }: IProps) {
     ) {
       const start = new Date(startDate.startDate).toISOString().split("T")[0];
       const end = new Date(endDate.startDate).toISOString().split("T")[0];
-      const newRange: IRaiseRange = { start, end, amount: numericAmount };
+      const newRange: RaiseRangeTuple = [start, end, numericAmount];
       const updatedRanges = [...ranges, newRange];
       setRanges(updatedRanges);
-      setValue("raise_price_ranges", updatedRanges);
+      setValue("inc_value_ranges", updatedRanges);
       setStartDate({ startDate: null, endDate: null });
       setEndDate({ startDate: null, endDate: null });
       setAmount("");
@@ -62,7 +61,7 @@ export default function RaisePriceRanges({ setValue }: IProps) {
   const handleDelete = (index: number) => {
     const updatedRanges = ranges.filter((_, i) => i !== index);
     setRanges(updatedRanges);
-    setValue("raise_price_ranges", updatedRanges);
+    setValue("inc_value_ranges", updatedRanges);
   };
 
   return (
@@ -118,18 +117,16 @@ export default function RaisePriceRanges({ setValue }: IProps) {
       >
         {t("add_range")}
       </Button>
-
       <ul className="space-y-3 mt-4">
-        {ranges.map((range, index) => (
+        {ranges.map(([start, end, amount], index) => (
           <li
             key={index}
-            className="flex justify-between gap-2 items-center bg-white px-4 py-3 rounded-md"
+            className="flex justify-between gap-2 items-center bg-gray-100 px-4 py-3 rounded-md"
           >
             <span className="font-medium">
-              {range.start} → {range.end} (+{range.amount} EGP)
+              {start} → {end} (+{amount} EGP)
             </span>
             <Button
-              type="button"
               onClick={() => handleDelete(index)}
               className="text-red-600 hover:underline font-medium"
             >

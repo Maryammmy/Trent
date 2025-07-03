@@ -5,11 +5,10 @@ import { useTranslation } from "react-i18next";
 import BackAndNext from "../../../components/becomeAHost/BackAndNext";
 import ProgressBarsWrapper from "../../../components/becomeAHost/ProgressBarsWrapper";
 import Button from "../../../components/ui/Button";
-import { IRaiseRange } from "@/interfaces/becomeAHost";
+import { RaiseRangeTuple } from "@/types";
 
 export default function RaisePriceRanges() {
   const { t } = useTranslation();
-
   const [startDate, setStartDate] = useState<DateValueType>({
     startDate: null,
     endDate: null,
@@ -19,9 +18,9 @@ export default function RaisePriceRanges() {
     endDate: null,
   });
 
-  const [amount, setAmount] = useState<string>(""); // store as string for validation
+  const [amount, setAmount] = useState<string>("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [ranges, setRanges] = useState<IRaiseRange[]>([]);
+  const [ranges, setRanges] = useState<RaiseRangeTuple[]>([]);
 
   const handleAmountChange = (value: string) => {
     const newErrors = { ...errors };
@@ -47,17 +46,10 @@ export default function RaisePriceRanges() {
     ) {
       const start = new Date(startDate.startDate).toISOString().split("T")[0];
       const end = new Date(endDate.startDate).toISOString().split("T")[0];
-      const newRange: IRaiseRange = {
-        start,
-        end,
-        amount: numericAmount,
-      };
+      const newRange: RaiseRangeTuple = [start, end, numericAmount];
       const updatedRanges = [...ranges, newRange];
       setRanges(updatedRanges);
-      sessionStorage.setItem(
-        "raise_price_ranges",
-        JSON.stringify(updatedRanges)
-      );
+      sessionStorage.setItem("inc_value_ranges", JSON.stringify(updatedRanges));
       setStartDate({ startDate: null, endDate: null });
       setEndDate({ startDate: null, endDate: null });
       setAmount("");
@@ -66,10 +58,10 @@ export default function RaisePriceRanges() {
   const handleDelete = (index: number) => {
     const updatedRanges = ranges.filter((_, i) => i !== index);
     setRanges(updatedRanges);
-    sessionStorage.setItem("raise_price_ranges", JSON.stringify(updatedRanges));
+    sessionStorage.setItem("inc_value_ranges", JSON.stringify(updatedRanges));
   };
   useEffect(() => {
-    const stored = sessionStorage.getItem("raise_price_ranges");
+    const stored = sessionStorage.getItem("inc_value_ranges");
     if (stored) {
       setRanges(JSON.parse(stored));
     }
@@ -123,15 +115,14 @@ export default function RaisePriceRanges() {
           >
             {t("add_range")}
           </Button>
-
           <ul className="space-y-3">
-            {ranges.map((range, index) => (
+            {ranges.map(([start, end, amount], index) => (
               <li
                 key={index}
                 className="flex justify-between gap-2 items-center bg-gray-100 px-4 py-3 rounded-md"
               >
                 <span className="font-medium">
-                  {range.start} → {range.end} (+{range.amount} EGP)
+                  {start} → {end} (+{amount} EGP)
                 </span>
                 <Button
                   onClick={() => handleDelete(index)}
