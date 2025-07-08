@@ -627,5 +627,6 @@
   "raise_price_ranges": "Set higher prices for specific dates",
   "raise_amount": "Extra charge",
   "enter_raise_charge": "Enter raise charge",
-  "error_out_of_range_raise_price": "Value must be between 50 and 10,000"
+  "error_out_of_range_raise_price": "Value must be between 50 and 10,000",
+  "views_count": "Views count"
 }

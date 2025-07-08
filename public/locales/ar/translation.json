@@ -619,5 +619,6 @@
   "raise_price_ranges": "تحديد أسعار أعلى لتواريخ محددة",
   "raise_amount": "قيمة الزيادة",
   "enter_raise_charge": "أدخل قيمة الزيادة",
-  "error_out_of_range_raise_price": "يجب أن تكون القيمة بين 50 و10,000"
+  "error_out_of_range_raise_price": "يجب أن تكون القيمة بين 50 و10,000",
+  "views_count": "عدد المشاهدات"
 }

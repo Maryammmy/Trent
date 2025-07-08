@@ -146,6 +146,7 @@ export interface IPropertyData {
 }
 export interface IProperty {
   IS_FAVOURITE: number;
+  view_count: string;
   bathrooms_count: string;
   beds_count: string;
   category_type: string;
