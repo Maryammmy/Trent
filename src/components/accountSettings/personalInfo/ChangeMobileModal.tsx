@@ -98,7 +98,7 @@ function ChangeMobileModal({ isOpen, close, phone, countryCode }: IProps) {
       >
         <div className="p-5 md:py-8 md:px-10">
           <div className="pb-6">
-            <p className="text-dark font-medium px-1 text-center md:px-0 break-words">
+            <p className="text-dark font-medium px-1 text-center md:px-0">
               {t("enter_new_phone_number")}
             </p>
           </div>

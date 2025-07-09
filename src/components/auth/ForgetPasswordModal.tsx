@@ -94,7 +94,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
       >
         <div className="p-5 md:py-8 md:px-10">
           <div className="pb-6">
-            <p className="text-[#757575] font-medium px-1 text-center md:px-0 break-words">
+            <p className="text-[#757575] font-medium px-1 text-center md:px-0">
               {t("enter_phone_send_otp")}
               <span className="text-center"> {t("verification_code")}</span>
             </p>
