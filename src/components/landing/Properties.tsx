@@ -23,7 +23,7 @@ export default function Properties() {
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useHomeDataAPI({
-      category_id: category,
+      ...(category && { category_id: category }),
       ...(filterSlider && filterSlider),
       ...(filters && filters),
     });

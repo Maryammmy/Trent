@@ -37,7 +37,6 @@ function FilterActions({
   city,
 }: IProps) {
   const { t } = useTranslation();
-  // const [enabled, setEnabled] = useState(false);
   const { setFilterData, setCategory, setFilters, setFilterSlider } =
     useContext(FilterDataContext);
   const filterData = {
@@ -59,7 +58,6 @@ function FilterActions({
     setFilterData(null);
     setFilterSlider(null);
     setFilters(null);
-    // setEnabled(false);
     handleClear();
     close();
   };

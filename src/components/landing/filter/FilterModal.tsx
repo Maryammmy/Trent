@@ -37,7 +37,11 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   const [values, setValues] = useState<number[]>([]);
   const [rating, setRating] = useState(0);
   const { data: governments } = useGovernmentsAPI();
-  const { data } = useCascadeFiltersAPI(government);
+  const { data } = useCascadeFiltersAPI(
+    government,
+    city && city,
+    compound && compound
+  );
   const governmentList = governments?.data?.data?.government_list;
   const cityList = data?.data?.data?.city_list;
   const compoundList = data?.data?.data?.compound_list;

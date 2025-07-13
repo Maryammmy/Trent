@@ -11,11 +11,11 @@ export const useFiltersAPI = () => {
 };
 export const useCascadeFiltersAPI = (
   governmentId: string,
-  compoundName?: string,
-  cityName?: string
+  cityName?: string,
+  compoundName?: string
 ) => {
   return useQuery({
-    queryKey: ["cascadeFilters", governmentId, compoundName, cityName],
+    queryKey: ["cascadeFilters", governmentId, cityName, compoundName],
     queryFn: () =>
       baseAPI.get(
         `user_api/u_cascade_filters_api.php?government_id=${governmentId}${
