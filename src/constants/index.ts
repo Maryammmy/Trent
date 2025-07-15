@@ -45,7 +45,9 @@ oraJBXFOZTJljA3fgxClhuTJjxZm/6Oq7VyhPAAQnbf/vitJR8NzRzqqE6kziQ95
 LbpJXW+DAQhXH17Uc487JOJpM2A3FSsmmAQB+D82Qpg6wdpws2bT5NT50RpFqUnB
 jzDFH18sj1q1ggmu6J4J03A=
 -----END PRIVATE KEY-----`;
-
+export const paymentExpiry = new Date(
+  Date.now() + 12 * 60 * 60 * 1000
+).getTime();
 export const ITEMS_PER_PAGE = 12;
 export const uid = Cookies.get("user_id") || "";
 export const currentLanguage = (localStorage.getItem("i18nextLng") ||

@@ -1,4 +1,4 @@
-import { fawryPrivateKey } from "./../constants/index";
+import { fawryPrivateKey, paymentExpiry } from "./../constants/index";
 import { decryptFawryCredentials } from "./decryptFawryCredentials";
 import { merchantRefNum, quantity } from "@/constants";
 import { CurrentLanguage } from "@/types";
@@ -47,6 +47,7 @@ export const generateFawryPaymentInitData = (
     paymentMethod,
     signature,
     authCaptureModePayment: false,
+    paymentExpiry,
     returnUrl,
   };
   return paymentData;
