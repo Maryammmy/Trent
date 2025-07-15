@@ -34,6 +34,8 @@ function Home() {
   const handleClickSlider = (item: ISlider) => {
     setFilterSlider({
       governmentId: item?.government_id,
+      city_name: item?.city_name,
+      compound_name: item?.compound_name,
       categoryId: item?.category_id,
       usersList: item?.user_list.length ? item?.user_list : undefined,
     });
