@@ -15,7 +15,6 @@ function Credits() {
   const { data: transactionHistoryData } = useTransactionHistoryAPI();
   const transactions: ITransaction[] =
     transactionHistoryData?.data?.data?.Wallet_history;
-  console.log(transactions);
   return (
     <div className="max-w-6xl mx-auto py-5 md:py-10 px-5 xl:px-0">
       <DynamicTitle title="trent_credits" />

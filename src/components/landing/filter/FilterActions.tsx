@@ -56,7 +56,7 @@ function FilterActions({
   const handleClearFilters = () => {
     setCategory("");
     setFilterData(null);
-    setFilterSlider(null);
+    setFilterSlider("");
     setFilters(null);
     handleClear();
     close();
@@ -64,7 +64,7 @@ function FilterActions({
   const handleApply = () => {
     setCategory("");
     setFilterData(null);
-    setFilterSlider(null);
+    setFilterSlider("");
     setFilters(filterData);
     close();
   };

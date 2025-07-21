@@ -18,7 +18,7 @@ function CategoryBar() {
   const handleSelectedPropertyType = (id: string) => {
     setCategory(id);
     setFilterData(null);
-    setFilterSlider(null);
+    setFilterSlider("");
     setFilters(null);
   };
   return (

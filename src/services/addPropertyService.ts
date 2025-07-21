@@ -63,7 +63,6 @@ const propertyData = (images: File[], video?: File | null): IPropertyData => {
 
 const formData = (images: File[], video?: File | null) => {
   const property = propertyData(images, video);
-  console.log(property);
   const formData = new FormData();
   for (const [key, value] of Object.entries(property)) {
     if (key === "images" && Array.isArray(value)) {

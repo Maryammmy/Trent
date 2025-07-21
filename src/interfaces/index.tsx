@@ -60,6 +60,7 @@ export interface ISlider {
   city_name: string;
   compound_name: string;
   user_list: string[];
+  is_clickable: boolean;
 }
 export interface ICountry {
   code: string;

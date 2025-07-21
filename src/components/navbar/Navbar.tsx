@@ -28,7 +28,6 @@ const Navbar = () => {
     },
     buttonToggleRef
   );
-
   return (
     <nav
       className={`left-0 w-full z-[2000] fixed ${

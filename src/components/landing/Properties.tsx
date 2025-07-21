@@ -24,7 +24,7 @@ export default function Properties() {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useHomeDataAPI({
       ...(category && { category_id: category }),
-      ...(filterSlider && filterSlider),
+      ...(filterSlider && { slider_id: filterSlider }),
       ...(filters && filters),
     });
   const properties: IProperty[] | undefined = data?.pages?.flatMap(

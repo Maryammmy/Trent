@@ -6,7 +6,6 @@ import {
   SetStateAction,
 } from "react";
 import { IProperty } from "../interfaces/property";
-import { IFilterSlider } from "@/interfaces/filterSlider";
 import { IHomeDataParams } from "@/interfaces/landing";
 
 interface IFilterDataContext {
@@ -16,16 +15,17 @@ interface IFilterDataContext {
   setFilterData: Dispatch<SetStateAction<null | IProperty[]>>;
   category: string;
   setCategory: Dispatch<SetStateAction<string>>;
-  filterSlider: IFilterSlider | null;
-  setFilterSlider: Dispatch<SetStateAction<IFilterSlider | null>>;
+  filterSlider: string;
+  setFilterSlider: Dispatch<SetStateAction<string>>;
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const FilterDataContext = createContext({} as IFilterDataContext);
+
 const FilterDataContextProvider = ({ children }: { children: ReactNode }) => {
   const [filterData, setFilterData] = useState<null | IProperty[]>(null);
   const [category, setCategory] = useState("");
-  const [filterSlider, setFilterSlider] = useState<IFilterSlider | null>(null);
+  const [filterSlider, setFilterSlider] = useState("");
   const [filters, setFilters] = useState<IHomeDataParams | null>(null);
   return (
     <FilterDataContext.Provider

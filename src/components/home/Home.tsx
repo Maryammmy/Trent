@@ -30,26 +30,21 @@ function Home() {
     ["slider"],
     `user_api/u_slider_list.php?lang=${currentLanguage}`
   );
-  console.log(data);
   const sliderList: ISlider[] = data?.data?.data?.slider_list;
   const handleClickSlider = (item: ISlider) => {
-    setFilterSlider({
-      governmentId: item?.government_id,
-      city_name: item?.city_name,
-      compound_name: item?.compound_name,
-      categoryId: item?.category_id,
-      usersList: item?.user_list.length ? item?.user_list : undefined,
-    });
-    setCategory("");
-    setFilterData(null);
-    setFilters(null);
+    if (item?.is_clickable) {
+      setFilterSlider(item?.id);
+      setCategory("");
+      setFilterData(null);
+      setFilters(null);
+    }
   };
 
   return (
     <div>
       <HomeAlert />
       <div className="bg-home h-[50vh] bg-[length:100%_100%] bg-no-repeat mb-[5vh] flex items-center justify-center">
-        <div className="w-full px-5 md:max-w-xl ">
+        <div className="w-full px-5 md:max-w-xl">
           <h1
             data-aos="fade-up"
             className="text-3xl md:!leading-[60px] lg:!leading-[70px] md:text-5xl lg:text-6xl font-bold text-white text-center"
@@ -96,7 +91,7 @@ function Home() {
               <div
                 onClick={() => handleClickSlider(item)}
                 key={item?.id}
-                className="h-[40vh] w-full sm:px-4 rounded-md overflow-hidden"
+                className="h-[45vh] w-full outline-none sm:px-4 rounded-md overflow-hidden"
               >
                 <Image
                   alt="slider"
@@ -106,9 +101,7 @@ function Home() {
               </div>
             ))}
           </Carsoul>
-        ) : (
-          ""
-        )}
+        ) : null}
       </div>
     </div>
   );

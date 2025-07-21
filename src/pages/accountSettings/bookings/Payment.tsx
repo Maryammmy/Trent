@@ -139,7 +139,6 @@ function Payment() {
       };
       const response = await completePaymentAPI(payload);
       if (response?.data?.response_code === 200) {
-        console.log(response);
         setIsSuccessModal(true);
         setSaveBookingResponse(response?.data?.data?.booking_details);
       }

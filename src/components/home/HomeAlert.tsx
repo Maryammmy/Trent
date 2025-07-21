@@ -13,7 +13,7 @@ function HomeAlert() {
     ["alert"],
     `user_api/u_alert.php?lang=${currentLanguage}`
   );
-  const alert = data?.data?.data?.alert_text;
+  const alert = data?.data?.data?.alert_text?.trim();
   useEffect(() => {
     setIsAlert(alert);
   }, [alert, data, setIsAlert]);
