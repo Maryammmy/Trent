@@ -155,4 +155,5 @@ export interface ICompletePayment {
   method_key: string;
   lang: string;
   merchant_ref_number?: string;
+  item_id: string;
 }

@@ -131,6 +131,7 @@ function Payment() {
       }
       const payload = {
         uid: uid,
+        item_id: itemId,
         lang: currentLanguage,
         booking_id: bookingData?.book_id,
         method_key: paymentMethod,

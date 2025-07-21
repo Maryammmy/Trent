@@ -30,6 +30,7 @@ function Home() {
     ["slider"],
     `user_api/u_slider_list.php?lang=${currentLanguage}`
   );
+  console.log(data);
   const sliderList: ISlider[] = data?.data?.data?.slider_list;
   const handleClickSlider = (item: ISlider) => {
     setFilterSlider({

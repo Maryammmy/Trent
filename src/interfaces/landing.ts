@@ -1,5 +1,6 @@
 export interface IHomeDataParams {
   category_id?: string;
+  slider_id?: string;
   uid?: string;
   only_featured?: boolean;
   period?: string;
