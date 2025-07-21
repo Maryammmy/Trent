@@ -13,8 +13,7 @@ function HomeSearch() {
       <Button
         type="button"
         onClick={() => setIsFilterOpen(!isFilterOpen)}
-        className={`flex items-center justify-between gap-2 w-[300px] sm:w-[500px]
-        } h-[49.6px] rounded-full p-3 border bg-white shadow transition-shadow hover:shadow-lg cursor-pointer`}
+        className="flex items-center justify-between gap-2 w-[300px] sm:w-[500px] rounded-full p-2 sm:p-3 border bg-white shadow transition-shadow hover:shadow-lg"
       >
         <span className="text-gray-500">{t("where_are_you_going")}</span>
         <Search className="text-primary shrink-0" />
