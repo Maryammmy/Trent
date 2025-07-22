@@ -81,8 +81,8 @@ export default function OtpModal({
 
   return (
     <Modal
-      maxWidth="500px"
       className="text-2xl text-center p-4 border-b font-semibold"
+      dialogPanelClassName="max-w-[500px]"
       title={t("verify_your_otp")}
       isOpen={isOpen}
       close={() => {

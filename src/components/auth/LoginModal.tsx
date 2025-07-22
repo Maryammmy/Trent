@@ -63,8 +63,8 @@ function LoginModal() {
   return (
     <>
       <Modal
-        maxWidth="600px"
         className="text-2xl text-center p-4 border-b font-semibold"
+        dialogPanelClassName="max-w-[600px]"
         title={t("log_in")}
         close={() => dispatch(setIsloggedin(false))}
         isOpen={isLoggedin}

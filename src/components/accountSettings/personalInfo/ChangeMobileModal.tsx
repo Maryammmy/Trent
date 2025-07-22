@@ -87,8 +87,8 @@ function ChangeMobileModal({ isOpen, close, phone, countryCode }: IProps) {
   return (
     <>
       <Modal
-        maxWidth="550px"
         className="text-2xl text-center p-4 border-b font-semibold"
+        dialogPanelClassName="max-w-[550px]"
         title={t("change_phone_number")}
         close={() => {
           close();

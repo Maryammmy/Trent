@@ -18,7 +18,11 @@ function ReviewModal({ isReviewed, close }: IProps) {
   const { t } = useTranslation();
   // const reviewCards = Array.from({ length: 20 });
   return (
-    <Modal isOpen={isReviewed} close={close} maxWidth="1024px">
+    <Modal
+      isOpen={isReviewed}
+      close={close}
+      dialogPanelClassName="max-w-[1024px]"
+    >
       <div className="p-5">
         <div className="flex flex-col lg:flex-row justify-between gap-10 p-6 ">
           <div className="flex-1">
@@ -58,7 +62,7 @@ function ReviewModal({ isReviewed, close }: IProps) {
               );
             })}
           </div>
-          <div className="flex-[2] pe-4 lg:max-h-[80vh]  lg:overflow-y-auto">
+          <div className="flex-[2] pe-4 lg:max-h-[80vh] lg:overflow-y-auto">
             <div className="flex flex-col lg:flex-row gap-3 lg:gap-0 lg:items-center lg:justify-between">
               <div>
                 <h2 className="font-medium text-2xl">57 {t("reviews")}</h2>

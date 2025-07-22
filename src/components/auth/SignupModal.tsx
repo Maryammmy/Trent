@@ -104,14 +104,14 @@ function SignupModal() {
   return (
     <>
       <Modal
-        maxWidth="600px"
         className="text-2xl text-center p-4 border-b font-semibold"
+        dialogPanelClassName="max-w-[600px]"
         title="Sign up"
         close={() => dispatch(setIsSignup(false))}
         isOpen={isSignup}
       >
         <div className="pb-3">
-          <div className="p-5 md:py-8 md:px-10 max-h-[80vh] overflow-y-auto">
+          <div className="p-5 md:py-8 md:px-10 sm:max-h-[80vh] sm:overflow-y-auto">
             <h2 className="text-lg font-semibold pb-5">
               {t("welcome_to_Trent")}
             </h2>

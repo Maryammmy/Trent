@@ -105,14 +105,14 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   };
   return (
     <Modal
-      maxWidth="600px"
       className="text-lg text-center p-4 border-b font-semibold"
+      dialogPanelClassName="max-w-[600px]"
       title={t("filters")}
       close={close}
       isOpen={isFilterOpen}
     >
       <div className="pb-3">
-        <div className="p-5 md:py-8 md:px-10 max-h-[80vh] overflow-y-auto">
+        <div className="p-5 md:py-8 md:px-10 sm:max-h-[80vh] sm:overflow-y-auto">
           {!governmentList ? (
             <UpdateSkeleton cards={6} />
           ) : (

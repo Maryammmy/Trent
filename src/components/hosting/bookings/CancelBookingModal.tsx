@@ -61,7 +61,7 @@ export default function CancelBookingModal({
       className="text-lg md:text-2xl max-w-60 md:max-w-sm mx-auto font-semibold p-4 pb-0 text-center"
     >
       <div className="pb-3">
-        <div className="p-5 md:pb-8 pt-5 md:px-10 max-h-[80vh] overflow-y-auto">
+        <div className="p-5 md:pb-8 pt-5 md:px-10 sm:max-h-[80vh] sm:overflow-y-auto">
           {!reasons ? (
             <UpdateSkeleton cards={4} />
           ) : reasons?.length ? (

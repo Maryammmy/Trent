@@ -42,7 +42,7 @@ function HostingModal() {
     <Modal
       isOpen={isFinishUpModal}
       close={() => dispatch(setIsFinishUpModal(false))}
-      maxWidth="500px"
+      dialogPanelClassName="max-w-[500px]"
     >
       <div className="p-6">
         <h3 className="font-bold text-2xl text-center pt-6 pb-4">

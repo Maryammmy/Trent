@@ -86,8 +86,8 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
   return (
     <>
       <Modal
-        maxWidth="550px"
         className="text-2xl text-center p-4 border-b font-semibold"
+        dialogPanelClassName="max-w-[550px]"
         title={t("forget_password_title")}
         close={close}
         isOpen={isOpen}

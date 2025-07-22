@@ -2,13 +2,14 @@ import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { ReactNode } from "react";
 import Button from "./Button";
 import { X } from "lucide-react";
+import { cn } from "@/lib/utils";
 interface IProps {
   isOpen: boolean;
   close: () => void;
   title?: string;
   children: ReactNode;
   className?: string;
-  maxWidth?: string;
+  dialogPanelClassName?: string;
   btnColor?: string;
 }
 export default function Modal({
@@ -17,7 +18,7 @@ export default function Modal({
   title,
   children,
   className,
-  maxWidth = "500px",
+  dialogPanelClassName,
   btnColor = "black",
 }: IProps) {
   return (
@@ -33,8 +34,10 @@ export default function Modal({
           <div className="flex min-h-full items-center justify-center md:p-4">
             <DialogPanel
               transition
-              style={{ maxWidth: maxWidth }}
-              className="w-full lg:max-h-[90vh] rounded-xl shadow-lg bg-white backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+              className={cn(
+                "w-full max-w-[500px] rounded-xl shadow-lg bg-white backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0",
+                dialogPanelClassName && dialogPanelClassName
+              )}
             >
               <Button onClick={close} className="absolute top-5 right-4 z-10">
                 <X size={20} color={btnColor} />

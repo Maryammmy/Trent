@@ -35,7 +35,7 @@ function MobileAppModal() {
     <Modal
       isOpen={isOpen}
       close={() => setIsOpen(false)}
-      maxWidth="600px"
+      dialogPanelClassName="max-w-[600px]"
       btnColor="white"
     >
       <div className="p-6 rounded-lg bg-primary" data-aos="fade-up">
