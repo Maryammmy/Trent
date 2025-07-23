@@ -1,20 +1,24 @@
-import { fawryPrivateKey, paymentExpiry } from "./../constants/index";
+import { FawryPaymentArgs } from "@/interfaces/fawry";
+import {
+  currentLanguage,
+  fawryPrivateKey,
+  paymentExpiry,
+} from "./../constants/index";
 import { decryptFawryCredentials } from "./decryptFawryCredentials";
 import { merchantRefNum, quantity } from "@/constants";
-import { CurrentLanguage } from "@/types";
 import { sha256 } from "js-sha256";
 
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-
-export const generateFawryPaymentInitData = (
-  encryptedMerchantCode: string,
-  encryptedSecureKey: string,
-  itemId: string,
-  price: number,
-  paymentMethod: string,
-  returnUrl: string
-) => {
+export const generateFawryPaymentInitData = ({
+  encryptedMerchantCode,
+  encryptedSecureKey,
+  itemId,
+  price,
+  paymentMethod,
+  returnUrl,
+  customerMobile,
+  customerEmail,
+  customerName,
+}: FawryPaymentArgs) => {
   const merchantCode = decryptFawryCredentials(
     encryptedMerchantCode,
     fawryPrivateKey
@@ -44,6 +48,9 @@ export const generateFawryPaymentInitData = (
         quantity,
       },
     ],
+    customerMobile,
+    customerEmail,
+    customerName,
     paymentMethod,
     signature,
     authCaptureModePayment: false,

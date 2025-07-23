@@ -4,7 +4,6 @@ import Carsoul from "../ui/Carsoul";
 import { getResponsiveSettings, responsiveSettings } from "../../data/landing";
 import { useGetData } from "../../hooks/useGetData";
 import SilderSkeleton from "../skeleton/SilderSkeleton";
-import { CurrentLanguage } from "../../types";
 import { baseURL } from "../../services";
 import { useTranslation } from "react-i18next";
 import HomeAlert from "@/components/home/HomeAlert";
@@ -12,10 +11,12 @@ import { ISlider } from "@/interfaces";
 import { useContext } from "react";
 import { FilterDataContext } from "@/context/FilterDataContext";
 import HomeSearch from "@/components/home/HomeSearch";
+import { currentLanguage } from "@/constants";
 
-const currentLanguage = (localStorage.getItem("i18nextLng") ||
-  "en") as CurrentLanguage;
-function Home() {
+interface IProps {
+  onSliderClick: () => void;
+}
+function Home({ onSliderClick }: IProps) {
   const { t } = useTranslation();
   const isMobile = useMediaQuery({ maxWidth: 480 });
   const isTablet = useMediaQuery({ maxWidth: 768 });
@@ -37,6 +38,7 @@ function Home() {
       setCategory("");
       setFilterData(null);
       setFilters(null);
+      onSliderClick();
     }
   };
 

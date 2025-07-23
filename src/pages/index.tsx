@@ -1,20 +1,35 @@
 import Home from "@/components/home/Home";
-// import Properties from "../components/landing/Properties";
 import ChooseUs from "../components/landing/ChooseUs";
 import MobileAppModal from "../components/landing/MobileAppModal";
 import MobileAppBanner from "../components/landing/MobileAppBanner";
 import LoginModal from "@/components/auth/LoginModal";
 import SignupModal from "@/components/auth/SignupModal";
 import FAQ from "@/components/landing/faq/FAQ";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useRef } from "react";
 import PropertyCartSkeleton from "@/components/skeleton/PropertyCartSkeleton";
 const Properties = lazy(() => import("../components/landing/Properties"));
 function LandingPage() {
+  const propertiesRef = useRef<HTMLDivElement | null>(null);
+  const onSliderClick = () => {
+    const offset = 80;
+    if (propertiesRef.current) {
+      const top =
+        propertiesRef.current.getBoundingClientRect().top +
+        window.scrollY -
+        offset;
+      window.scrollTo({
+        top,
+        behavior: "smooth",
+      });
+    }
+  };
   return (
     <>
-      <Home />
+      <Home onSliderClick={onSliderClick} />
       <Suspense fallback={<PropertyCartSkeleton cards={5} />}>
-        <Properties />
+        <div ref={propertiesRef}>
+          <Properties />
+        </div>
       </Suspense>
       <ChooseUs />
       <FAQ />

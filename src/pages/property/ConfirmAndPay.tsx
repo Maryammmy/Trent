@@ -24,6 +24,8 @@ import { updateQueryParamInURL } from "@/utils/updateQueryParamInURL";
 import { currentLanguage, uid } from "@/constants";
 import { handleErrorMessage } from "@/utils/handleErrorMsg";
 import { defaultCouponResponse } from "@/utils/defaultValues";
+import { useUserAPI } from "@/services/userService";
+import { IUser } from "@/interfaces/accountSettings";
 
 function ConfirmAndPay() {
   const [loading, setLoading] = useState(false);
@@ -64,6 +66,8 @@ function ConfirmAndPay() {
   const partialValue = couponResponse?.partial_value
     ? Number(couponResponse?.partial_value)
     : Number(bookingData?.partial_value);
+  const { data: user } = useUserAPI();
+  const userData: IUser = user?.data?.data?.user_data;
   const createFawryPayment = async () => {
     try {
       if (!paymentMethod) {
@@ -71,14 +75,17 @@ function ConfirmAndPay() {
         return;
       }
       setLoading(true);
-      const paymentData = generateFawryPaymentInitData(
-        fawryCredentials?.merchant_code,
-        fawryCredentials?.secure_key,
+      const paymentData = generateFawryPaymentInitData({
+        encryptedMerchantCode: fawryCredentials?.merchant_code,
+        encryptedSecureKey: fawryCredentials?.secure_key,
         itemId,
-        partialValue,
+        price: partialValue,
         paymentMethod,
-        returnUrl
-      );
+        returnUrl,
+        ...(userData?.email && { customerEmail: userData?.email }),
+        customerMobile: userData?.phone,
+        customerName: userData?.full_name,
+      });
       const response = await initFawryPaymentAPI(paymentData);
       if (response.status === 200) {
         const redirectUrl = response.data;
