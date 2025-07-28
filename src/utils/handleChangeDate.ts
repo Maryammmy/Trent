@@ -47,16 +47,24 @@ export const validateEndDate = (
     toast.error(t("error_check_out"));
     return null;
   }
+
   start.setHours(0, 0, 0, 0);
   end.setHours(0, 0, 0, 0);
+
   const diffInDays =
     Math.round((end.getTime() - start.getTime()) / (1000 * 3600 * 24)) + 1;
+
+  const MAX_ALLOWED_DAYS = 180; // أقصى مدة = 6 شهور
+  const allowedMaxDays =
+    maxDays && maxDays > 0 ? Math.min(maxDays, MAX_ALLOWED_DAYS) : undefined;
+
   if (typeof minDays === "number" && minDays > 0 && diffInDays < minDays) {
     toast.error(t("error_min_days_stay", { days: minDays }));
     return null;
   }
-  if (typeof maxDays === "number" && maxDays > 0 && diffInDays > maxDays) {
-    toast.error(t("error_max_days_stay", { days: maxDays }));
+
+  if (typeof allowedMaxDays === "number" && diffInDays > allowedMaxDays) {
+    toast.error(t("error_max_days_stay", { days: allowedMaxDays }));
     return null;
   }
 
