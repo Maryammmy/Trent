@@ -53,7 +53,7 @@ export const generateFawryPaymentInitData = ({
     customerName,
     paymentMethod,
     signature,
-    authCaptureModePayment: true,
+    authCaptureModePayment: false,
     paymentExpiry,
     returnUrl,
   };
