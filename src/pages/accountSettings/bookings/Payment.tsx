@@ -57,7 +57,9 @@ function Payment() {
       ? "CARD"
       : paymentMethodFromUrl === "PayAtFawry"
       ? "PayAtFawry"
-      : "MWALLET"
+      : paymentMethodFromUrl === "MWALLET"
+      ? "MWALLET"
+      : "CARD"
   );
   const walletBalance = Number(bookingData?.wallet_balance);
   const itemId = bookingData.item_id.toString();
@@ -80,7 +82,8 @@ function Payment() {
         paymentMethod,
         returnUrl,
         ...(userData?.email && { customerEmail: userData?.email }),
-        customerMobile: userData?.phone,
+        ...(userData?.c_code === "+20" &&
+          userData?.phone && { customerMobile: `0${userData?.phone}` }),
         customerName: userData?.full_name,
       });
       const response = await initFawryPaymentAPI(paymentData);

@@ -55,7 +55,9 @@ function ConfirmAndPay() {
       ? "CARD"
       : paymentMethodFromUrl === "PayAtFawry"
       ? "PayAtFawry"
-      : "MWALLET"
+      : paymentMethodFromUrl === "MWALLET"
+      ? "MWALLET"
+      : "CARD"
   );
   const [couponResponse, setCouponResponse] = useState<ICoupon>(
     defaultCouponResponse
@@ -83,7 +85,8 @@ function ConfirmAndPay() {
         paymentMethod,
         returnUrl,
         ...(userData?.email && { customerEmail: userData?.email }),
-        customerMobile: userData?.phone,
+        ...(userData?.c_code === "+20" &&
+          userData?.phone && { customerMobile: `0${userData?.phone}` }),
         customerName: userData?.full_name,
       });
       const response = await initFawryPaymentAPI(paymentData);
@@ -113,6 +116,7 @@ function ConfirmAndPay() {
       if (paymentMethod === "TRENT_BALANCE" && walletBalance >= partialValue) {
         setLoading(true);
       }
+
       const payload = {
         prop_id: id ? id : "",
         guest_counts: bookingData?.guest_count,
