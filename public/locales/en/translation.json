@@ -628,5 +628,7 @@
   "raise_amount": "Extra charge",
   "enter_raise_charge": "Enter raise charge",
   "error_out_of_range_raise_price": "Value must be between 50 and 10,000",
-  "views_count": "Views count"
+  "views_count": "Views count",
+  "note": "Note",
+  "price_note": "Prices may vary depending on dates or peak seasons. Please review the final price before confirming the booking."
 }

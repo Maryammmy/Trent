@@ -222,6 +222,10 @@ function Booking() {
                     </span>
                   </div>
                 )}
+                <div className="border-t py-4 text-dark space-y-2">
+                  <h3 className="font-semibold">{t("note")}</h3>
+                  <p>{t("price_note")}</p>
+                </div>
               </div>
             </div>
           </div>
