@@ -42,7 +42,6 @@ function FilterModal({ isFilterOpen, close }: IProps) {
     city && city,
     city && compound && compound
   );
-  console.log(data?.data?.data);
   const governmentList = governments?.data?.data?.government_list;
   const [cityList, setCityList] = useState<undefined | []>(undefined);
   const [compoundList, setCompoundList] = useState<undefined | []>(undefined);
@@ -68,7 +67,6 @@ function FilterModal({ isFilterOpen, close }: IProps) {
       }
     }
   }, [data, city, compound]);
-  console.log(minPrice, maxPrice, values);
   useEffect(() => {
     if (minPrice && maxPrice) {
       setValues([minPrice, maxPrice]);
