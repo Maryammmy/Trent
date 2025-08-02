@@ -3,7 +3,7 @@ import { ICompound } from "../../../interfaces";
 import Select from "../../ui/Select";
 interface IProps {
   handleCompoundChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  compounds: ICompound[];
+  compounds: ICompound[] | undefined;
   compound: string;
 }
 function CompoundFilter({ handleCompoundChange, compounds, compound }: IProps) {

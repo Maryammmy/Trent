@@ -3,7 +3,7 @@ import Select from "../../ui/Select";
 import { ICity } from "@/interfaces/filter";
 interface IProps {
   handleCityChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  cities: ICity[];
+  cities: ICity[] |undefined;
   city: string;
 }
 function CityFilter({ handleCityChange, cities, city }: IProps) {

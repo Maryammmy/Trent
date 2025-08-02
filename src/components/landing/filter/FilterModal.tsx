@@ -40,11 +40,12 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   const { data } = useCascadeFiltersAPI(
     government,
     city && city,
-    compound && compound
+    city && compound && compound
   );
+  console.log(data?.data?.data);
   const governmentList = governments?.data?.data?.government_list;
-  const cityList = data?.data?.data?.city_list;
-  const compoundList = data?.data?.data?.compound_list;
+  const [cityList, setCityList] = useState<undefined | []>(undefined);
+  const [compoundList, setCompoundList] = useState<undefined | []>(undefined);
   const priceRange = data?.data?.data?.price_range;
   const periodList = data?.data?.data?.period_list;
   const propertyTypes = data?.data?.data?.category_list;
@@ -57,10 +58,25 @@ function FilterModal({ isFilterOpen, close }: IProps) {
       ? Number(priceRange?.max_price)
       : undefined;
   useEffect(() => {
+    if (data?.data?.data) {
+      if (!city && !compound) {
+        setCityList(data.data.data.city_list);
+        setCompoundList(data.data.data.compound_list);
+      }
+      if (city && !compound) {
+        setCompoundList(data.data.data.compound_list || []);
+      }
+    }
+  }, [data, city, compound]);
+  console.log(minPrice, maxPrice, values);
+  useEffect(() => {
     if (minPrice && maxPrice) {
       setValues([minPrice, maxPrice]);
+    } else {
+      setValues([0, 0]);
     }
   }, [minPrice, maxPrice]);
+
   const handleSelectedFacilities = (id: number) => {
     setSelectedFacilities((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
@@ -81,10 +97,13 @@ function FilterModal({ isFilterOpen, close }: IProps) {
   ) => {
     const newGovernement = event.target.value;
     setGovernment(newGovernement);
+    setCity("");
+    setCompound("");
   };
   const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newCity = event.target.value;
     setCity(newCity);
+    setCompound("");
   };
   const handleRatingChange = (newRating: number) => {
     setRating(newRating);
