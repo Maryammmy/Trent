@@ -157,3 +157,11 @@ export interface ICompletePayment {
   merchant_ref_number?: string;
   item_id: string;
 }
+export interface IVerifyPay {
+  uid: string;
+  item_id: string;
+}
+export interface ICancelNonCompletedBooking {
+  uid: string;
+  item_id: string;
+}

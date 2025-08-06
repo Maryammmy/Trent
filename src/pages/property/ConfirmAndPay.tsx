@@ -17,7 +17,11 @@ import { AxiosError } from "axios";
 import { useQueryParam } from "@/utils/getQueryParam";
 import PaymentStatus from "@/components/property/confirmAndPay/PaymentStatus";
 import PaymentMethodSelector from "@/components/property/confirmAndPay/PaymentMethodSelector";
-import { paymentStatusAPI, saveBookingAPI } from "@/services/bookingService";
+import {
+  paymentStatusAPI,
+  saveBookingAPI,
+  verifyPayAPI,
+} from "@/services/bookingService";
 import SuccessBookingModal from "@/components/property/confirmAndPay/SuccessBookingModal";
 import CardPaymentStatus from "@/components/property/confirmAndPay/CardPaymentStatus";
 import { updateQueryParamInURL } from "@/utils/updateQueryParamInURL";
@@ -116,7 +120,6 @@ function ConfirmAndPay() {
       if (paymentMethod === "TRENT_BALANCE" && walletBalance >= partialValue) {
         setLoading(true);
       }
-
       const payload = {
         prop_id: id ? id : "",
         guest_counts: bookingData?.guest_count,
@@ -153,10 +156,33 @@ function ConfirmAndPay() {
     id,
     t,
   ]);
+  const verifyPayAndProceed = async () => {
+    try {
+      setLoading(true);
+      const verifyResponse = await verifyPayAPI({ uid, item_id: itemId });
+      if (verifyResponse?.data?.response_code === 200) {
+        if (verifyResponse?.data?.result === "true") {
+          toast.success(verifyResponse?.data?.response_message);
+          // ✅ Step 2: Check payment method
+          if (paymentMethod === "TRENT_BALANCE") {
+            await handleSaveBooking(); // Save booking directly
+          } else {
+            await createFawryPayment(); // Redirect to Fawry
+          }
+        } else {
+          toast.error(verifyResponse?.data?.response_message); // Or use verifyResponse?.data?.response_message if available
+        }
+      }
+    } catch (error) {
+      handleErrorMessage(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fawryPaymentStatus = async () => {
     try {
       setLoading(true);
-
       const response = await paymentStatusAPI(
         merchantRefNumber,
         itemId,
@@ -168,10 +194,8 @@ function ConfirmAndPay() {
         updateQueryParamInURL("orderStatus", status);
         setOrderStatus(status);
       }
-    } catch (error: AxiosError | unknown) {
-      if (error instanceof AxiosError) {
-        toast.error(error?.message);
-      }
+    } catch (error) {
+      handleErrorMessage(error);
     } finally {
       setLoading(false);
     }
@@ -326,9 +350,7 @@ function ConfirmAndPay() {
               onClick={
                 orderStatus === "UNPAID"
                   ? fawryPaymentStatus
-                  : paymentMethod === "TRENT_BALANCE"
-                  ? handleSaveBooking
-                  : createFawryPayment
+                  : verifyPayAndProceed
               }
               className={`bg-primary font-medium text-lg text-white w-32 py-2 rounded-md ${
                 orderStatus === "UNPAID" && "w-48"

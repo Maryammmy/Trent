@@ -2,10 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { baseAPI, baseAPIForm } from ".";
 import {
   ICancelBooking,
+  ICancelNonCompletedBooking,
   ICheckInOut,
   ICompletePayment,
   IConfirmBooking,
   ISaveBooking,
+  IVerifyPay,
   IVerifyProperty,
 } from "@/interfaces/booking";
 import { currentLanguage, uid } from "@/constants";
@@ -150,6 +152,36 @@ export const completePaymentAPI = async (payload: ICompletePayment) => {
   });
   const response = await baseAPIForm.post(
     "user_api/booking/u_complete_paying.php",
+    formData
+  );
+  return response;
+};
+export const verifyPayAPI = async (payload: IVerifyPay) => {
+  const formData = new FormData();
+  Object.entries(payload).forEach(([key, value]) => {
+    formData.append(key, String(value));
+  });
+  const response = await baseAPIForm.post(
+    "user_api/booking/verify_pay.php",
+    formData
+  );
+  return response;
+};
+export const nonCompletedBookingAPI = async () => {
+  const response = await baseAPI.get(
+    `user_api/booking/u_non_completed_booking.php?uid=${uid}&lang=${currentLanguage}`
+  );
+  return response;
+};
+export const cancelNonCompletedBookingAPI = async (
+  payload: ICancelNonCompletedBooking
+) => {
+  const formData = new FormData();
+  Object.entries(payload).forEach(([key, value]) => {
+    formData.append(key, String(value));
+  });
+  const response = await baseAPIForm.post(
+    "user_api/booking/u_cancel_non_completed.php",
     formData
   );
   return response;
