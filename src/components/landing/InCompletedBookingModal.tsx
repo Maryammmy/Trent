@@ -32,7 +32,7 @@ function InCompletedBookingModal() {
 
   if (!data?.data?.data?.Booking?.length) return null;
 
-  const lastBooking = data.data.data.Booking.slice(-1)[0];
+  const lastBooking = data?.data?.data?.Booking?.slice(-1)[0];
   const { prop_id, confirm_guest_rules, id, from_date, to_date, guest_count } =
     lastBooking;
   const handleClose = () => setIsOpen(false);
