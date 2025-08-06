@@ -630,5 +630,7 @@
   "error_out_of_range_raise_price": "Value must be between 50 and 10,000",
   "views_count": "Views count",
   "note": "Note",
-  "price_note": "Prices may vary depending on dates or peak seasons. Please review the final price before confirming the booking."
+  "price_note": "Prices may vary depending on dates or peak seasons. Please review the final price before confirming the booking.",
+  "incomplete_booking": "Incomplete Booking",
+  "in_completed_booking_desc": "It looks like you have an unfinished booking. You can continue from where you left off or cancel it now."
 }

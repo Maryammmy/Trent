@@ -7,6 +7,7 @@ import { useMyBookingsAPI } from "@/services/bookingService";
 import { useQueryParam } from "@/utils/getQueryParam";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import InCompletedBooking from "./InCompletedBooking";
 
 function Bookings() {
   const { t } = useTranslation();
@@ -19,6 +20,7 @@ function Bookings() {
   return (
     <div className="max-w-6xl mx-auto py-5 md:py-10 px-5 xl:px-0">
       <DynamicTitle title="my_bookings" />
+      <InCompletedBooking />
       <div className="flex gap-10 sm:gap-20 text-xl my-8 font-semibold">
         <Button
           onClick={() => navigate("/account-settings/bookings?status=active")}

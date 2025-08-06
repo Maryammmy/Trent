@@ -7,6 +7,7 @@ import SignupModal from "@/components/auth/SignupModal";
 import FAQ from "@/components/landing/faq/FAQ";
 import { lazy, Suspense, useRef } from "react";
 import PropertyCartSkeleton from "@/components/skeleton/PropertyCartSkeleton";
+import InCompletedBookingModal from "@/components/landing/InCompletedBookingModal";
 const Properties = lazy(() => import("../components/landing/Properties"));
 function LandingPage() {
   const propertiesRef = useRef<HTMLDivElement | null>(null);
@@ -34,6 +35,7 @@ function LandingPage() {
       <ChooseUs />
       <FAQ />
       <MobileAppBanner />
+      <InCompletedBookingModal />
       <MobileAppModal />
       <LoginModal />
       <SignupModal />

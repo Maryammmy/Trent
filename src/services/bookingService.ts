@@ -173,6 +173,15 @@ export const nonCompletedBookingAPI = async () => {
   );
   return response;
 };
+export const useNonCompletedBookingAPI = () => {
+  return useQuery({
+    queryKey: ["nonCompletedBooking"],
+    queryFn: () =>
+      baseAPI.get(
+        `user_api/booking/u_non_completed_booking.php?uid=${uid}&lang=${currentLanguage}`
+      ),
+  });
+};
 export const cancelNonCompletedBookingAPI = async (
   payload: ICancelNonCompletedBooking
 ) => {
