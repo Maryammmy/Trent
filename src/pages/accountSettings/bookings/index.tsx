@@ -7,7 +7,7 @@ import { useMyBookingsAPI } from "@/services/bookingService";
 import { useQueryParam } from "@/utils/getQueryParam";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import InCompletedBooking from "./InCompletedBooking";
+import InCompletedBooking from "../../../components/booking/inCompletedBooking/InCompletedBooking";
 
 function Bookings() {
   const { t } = useTranslation();

@@ -44,7 +44,6 @@ function Payment() {
   const fawryCredentials = data?.data?.data?.fawry_credentials;
   const referenceNumber = useQueryParam("referenceNumber");
   const orderStatusFromUrl = useQueryParam("orderStatus");
-  const paymentAmount = useQueryParam("paymentAmount");
   const paymentMethodFromUrl = useQueryParam("paymentMethod");
   const statusCode = useQueryParam("statusCode");
   const statusDescription = useQueryParam("statusDescription");
@@ -227,7 +226,6 @@ function Payment() {
                 <PaymentStatus
                   referenceNumber={referenceNumber || ""}
                   orderStatus={orderStatus}
-                  paymentAmount={paymentAmount || ""}
                   paymentMethodFromUrl={normalizedPaymentMethodFromUrl || ""}
                 />
               )}
@@ -288,7 +286,6 @@ function Payment() {
               <PaymentStatus
                 referenceNumber={referenceNumber || ""}
                 orderStatus={orderStatus}
-                paymentAmount={paymentAmount || ""}
                 paymentMethodFromUrl={normalizedPaymentMethodFromUrl || ""}
               />
             )}

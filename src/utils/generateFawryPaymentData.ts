@@ -3,7 +3,7 @@ import {
   currentLanguage,
   fawryPrivateKey,
   paymentExpiry,
-} from "./../constants/index";
+} from "./../constants";
 import { decryptFawryCredentials } from "./decryptFawryCredentials";
 import { merchantRefNum, quantity } from "@/constants";
 import { sha256 } from "js-sha256";

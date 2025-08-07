@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "26.5rem", // custom screen size
+      },
       colors: {
         primary: {
           DEFAULT: "hsl(var(--primary))",

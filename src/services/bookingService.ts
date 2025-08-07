@@ -104,7 +104,7 @@ export const cancelBookingAPI = async (payload: ICancelBooking) => {
   return response;
 };
 export const paymentStatusAPI = (
-  merchantRefNumber: string | null,
+  merchantRefNumber: string,
   itemId: string,
   finalTotal: string
 ) => {
@@ -142,6 +142,12 @@ export const checkCouponAPI = async (
 ) => {
   const response = await baseAPI.get(
     `user_api/booking/u_check_coupon.php?coupon_code=${couponCode}&uid=${uid}&item_id=${itemId}&total=${total}`
+  );
+  return response;
+};
+export const removeCouponAPI = async (itemId: string) => {
+  const response = await baseAPI.get(
+    `user_api/booking/remove_coupon.php?uid=${uid}&item_id=${itemId}`
   );
   return response;
 };

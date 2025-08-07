@@ -11,6 +11,8 @@ interface IProps {
   className?: string;
   dialogPanelClassName?: string;
   btnColor?: string;
+  closeBtn?: boolean;
+  canCloseOnOutsideClick?: boolean;
 }
 export default function Modal({
   isOpen,
@@ -20,6 +22,8 @@ export default function Modal({
   className,
   dialogPanelClassName,
   btnColor = "black",
+  closeBtn = true,
+  canCloseOnOutsideClick = true,
 }: IProps) {
   return (
     <>
@@ -27,7 +31,7 @@ export default function Modal({
         open={isOpen}
         as="div"
         className="relative z-[3000]"
-        onClose={close}
+        onClose={canCloseOnOutsideClick ? close : () => {}}
         __demoMode
       >
         <div className="fixed backdrop-blur-sm inset-0 z-50 w-screen overflow-y-auto">
@@ -39,9 +43,11 @@ export default function Modal({
                 dialogPanelClassName && dialogPanelClassName
               )}
             >
-              <Button onClick={close} className="absolute top-5 right-4 z-10">
-                <X size={20} color={btnColor} />
-              </Button>
+              {closeBtn && (
+                <Button onClick={close} className="absolute top-5 right-4 z-10">
+                  <X size={20} color={btnColor} />
+                </Button>
+              )}
               {title && (
                 <DialogTitle as="h3" className={className}>
                   {title}

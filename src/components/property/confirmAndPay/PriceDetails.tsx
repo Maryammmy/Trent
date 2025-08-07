@@ -11,6 +11,8 @@ import toast from "react-hot-toast";
 import { handleErrorMessage } from "@/utils/handleErrorMsg";
 import { defaultCouponResponse } from "@/utils/defaultValues";
 import { Check } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import { useQueryParam } from "@/utils/getQueryParam";
 interface IProps {
   bookingData: IVerifyPropertyResponse;
   couponResponse: ICoupon;
@@ -22,10 +24,15 @@ function PriceDetails({
   handleChangeCouponResponse,
 }: IProps) {
   const { t } = useTranslation();
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
-  const [coupon, setCoupon] = useState("");
+  const couponFromUrl = useQueryParam("coupon");
+  const couponFromStateOrUrl = location?.state?.coupon || couponFromUrl;
+  const [coupon, setCoupon] = useState(couponFromStateOrUrl || "");
   useEffect(() => {
-    setCoupon(couponResponse?.coupon);
+    if (couponResponse?.coupon) {
+      setCoupon(couponResponse?.coupon);
+    }
   }, [couponResponse?.coupon]);
   const handleApplyCoupon = async () => {
     try {

@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import Modal from "@/components/ui/Modal";
+import { useState } from "react";
 import {
   paymentStatusAPI,
   useNonCompletedBookingAPI,
@@ -13,23 +12,14 @@ import { handleErrorMessage } from "@/utils/handleErrorMsg";
 import { useNavigate } from "react-router-dom";
 import Loader from "@/components/loader/Loader";
 import { decryptFawryCredentials } from "@/utils/decryptFawryCredentials";
-import CancelInCompletedBookingModal from "../booking/inCompletedBooking/CancelInCompletedBookingModal";
+import CancelInCompletedBookingModal from "./CancelInCompletedBookingModal";
 
-function InCompletedBookingModal() {
+function InCompletedBooking() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { data } = useNonCompletedBookingAPI();
-  const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [cancelOpen, setCancelOpen] = useState(false);
-  console.log(data);
-  useEffect(() => {
-    // const hasSeenPopup = sessionStorage.getItem("nonCompletedBookingShown");
-    if (data?.data?.data?.Booking?.length) {
-      setIsOpen(true);
-      // sessionStorage.setItem("nonCompletedBookingShown", "true"); // mark as shown
-    }
-  }, [data]);
 
   if (!data?.data?.data?.Booking?.length) return null;
 
@@ -49,7 +39,6 @@ function InCompletedBookingModal() {
   const merchantRefNumber =
     decryptFawryCredentials(ref_number, fawryPrivateKey) || "";
   console.log(lastBooking);
-  const handleClose = () => setIsOpen(false);
   const fawryPaymentStatus = async (
     partialValue: string
   ): Promise<"PAID" | "UNPAID" | null> => {
@@ -112,18 +101,15 @@ function InCompletedBookingModal() {
         }
         if (coupon) queryParams.set("coupon", coupon);
         // Step 3: Navigate to confirm and pay page WITH queryParams
-        setTimeout(() => {
-          navigate(
-            `/properties/${id}/confirm-and-pay?${queryParams.toString()}`,
-            {
-              state: {
-                data: bookingDetails,
-                ...(coupon && { coupon }),
-              },
-            }
-          );
-          handleClose();
-        }, 500);
+        navigate(
+          `/properties/${id}/confirm-and-pay?${queryParams.toString()}`,
+          {
+            state: {
+              data: bookingDetails,
+              ...(coupon && { coupon }),
+            },
+          }
+        );
       }
     } catch (error) {
       handleErrorMessage(error);
@@ -134,21 +120,11 @@ function InCompletedBookingModal() {
 
   return (
     <>
-      <Modal
-        closeBtn={false}
-        canCloseOnOutsideClick={false}
-        dialogPanelClassName="max-w-[450px]"
-        isOpen={isOpen}
-        close={handleClose}
-        title={t("incomplete_booking")}
-        className="text-2xl text-primary text-center pt-6 pb-2 font-bold"
-      >
-        <div className="px-5 md:px-10 pb-6">
-          <p className="text-dark text-center font-medium pb-3">
-            {t("in_completed_booking_desc")}
-          </p>
-          <div className="space-y-1 pb-4 text-sm">
-            <div className="grid grid-cols-1 xs:grid-cols-2 gap-1 sm:gap-5 font-medium">
+      <div className="mt-8 bg-yellow-100 border border-yellow-400 rounded-md p-4 flex justify-between items-center text-dark font-semibold">
+        <div>
+          <span>⚠ {t("You have an incomplete booking")}</span>
+          <div className="space-y-1 pt-2">
+            <div className="grid grid-cols-1 xs:grid-cols-2 gap-1 sm:gap-5 font-medium text-sm">
               <div>
                 <span>{t("check_in")} :</span> <span>{from_date}</span>
               </div>
@@ -157,26 +133,22 @@ function InCompletedBookingModal() {
               </div>
             </div>
           </div>
-          <div className="flex justify-between gap-4 font-medium">
-            <Button
-              onClick={() => {
-                handleClose();
-                setCancelOpen(true);
-              }}
-              type="button"
-              className="w-32 py-2 bg-gray-200 text-primary rounded-md hover:bg-gray-200/80"
-            >
-              {t("cancel")}
-            </Button>
-            <Button
-              onClick={handleVerifyAndCheckPayment}
-              className="w-32 py-2 text-center bg-primary text-white rounded-md hover:bg-primary/80"
-            >
-              {loading ? <Loader /> : t("continue")}
-            </Button>
-          </div>
         </div>
-      </Modal>
+        <div className="flex gap-4">
+          <Button
+            onClick={handleVerifyAndCheckPayment}
+            className="bg-primary text-white w-32 py-2 rounded-md"
+          >
+            {loading ? <Loader /> : t("Continue")}
+          </Button>
+          <Button
+            onClick={() => setCancelOpen(true)}
+            className="bg-gray-400 text-white w-32 py-2 rounded-md"
+          >
+            {t("Cancel")}
+          </Button>
+        </div>
+      </div>
       <CancelInCompletedBookingModal
         cancelInCompletedBooking={cancelOpen}
         close={() => setCancelOpen(false)}
@@ -186,4 +158,4 @@ function InCompletedBookingModal() {
   );
 }
 
-export default InCompletedBookingModal;
+export default InCompletedBooking;

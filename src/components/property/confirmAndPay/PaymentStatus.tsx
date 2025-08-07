@@ -3,27 +3,31 @@ import { useTranslation } from "react-i18next";
 interface IProps {
   referenceNumber: string;
   orderStatus: string;
-  paymentAmount: string;
   paymentMethodFromUrl: string;
 }
 const PaymentStatus = ({
   referenceNumber,
   orderStatus,
-  paymentAmount,
   paymentMethodFromUrl,
 }: IProps) => {
   const { t } = useTranslation();
   return (
     <div className="p-4 rounded-lg border mt-5 font-semibold">
       <h4 className="text-xl mb-2 text-primary">{t("payment_status")}</h4>
-      <p className="">
-        <span>{t("reference_number")}:</span> {referenceNumber}
-      </p>
+      {paymentMethodFromUrl === "PayAtFawry" && referenceNumber && (
+        <p className="">
+          <span>{t("reference_number")}:</span> {referenceNumber}
+        </p>
+      )}
       <p>
-        <span>{t("order_status")}:</span> {capitalize(orderStatus)}
-      </p>
-      <p>
-        <span>{t("amount")}:</span> {paymentAmount} {t("EGP")}
+        <span>{t("order_status")}:</span>{" "}
+        <span
+          className={
+            orderStatus === "PAID" ? "text-green-600" : "text-yellow-400"
+          }
+        >
+          {capitalize(orderStatus)}
+        </span>
       </p>
       <p>
         <span>{t("payment_method")}:</span>{" "}
