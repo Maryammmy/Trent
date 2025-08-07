@@ -27,7 +27,6 @@ export const generateFawryPaymentInitData = ({
     encryptedSecureKey,
     fawryPrivateKey
   );
-  sessionStorage.setItem("mer", merchantRefNum);
   const signatureString =
     merchantCode +
     merchantRefNum +
