@@ -31,6 +31,7 @@ import { IUser } from "@/interfaces/accountSettings";
 
 function Payment() {
   const [loading, setLoading] = useState(false);
+  const [checkStatusLoading, setCheckStatusLoading] = useState(false);
   const { t } = useTranslation();
   const location = useLocation();
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
@@ -51,16 +52,24 @@ function Payment() {
   const [isSuccessModal, setIsSuccessModal] = useState(false);
   const [saveBookingResponse, setSaveBookingResponse] = useState(null);
   const [orderStatus, setOrderStatus] = useState(orderStatusFromUrl);
-  const [paymentMethod, setPaymentMethod] = useState(
+  const isCardPayment =
     paymentMethodFromUrl === "PayUsingCC" ||
-      statusDescription?.toLowerCase().includes("card")
-      ? "CARD"
-      : paymentMethodFromUrl === "PayAtFawry"
-      ? "PayAtFawry"
-      : paymentMethodFromUrl === "MWALLET"
-      ? "MWALLET"
-      : "CARD"
+    paymentMethodFromUrl === "CARD" ||
+    statusDescription?.toLowerCase().includes("card");
+  const normalizedPaymentMethodFromUrl = isCardPayment
+    ? "CARD"
+    : paymentMethodFromUrl;
+  const [paymentMethod, setPaymentMethod] = useState(
+    normalizedPaymentMethodFromUrl || "CARD"
   );
+  const isSameAsOriginalPaymentMethod =
+    paymentMethod === normalizedPaymentMethodFromUrl;
+  const shouldShowCheckPaymentButton =
+    orderStatus === "UNPAID" && isSameAsOriginalPaymentMethod;
+  const actualPaymentMethod =
+    paymentMethod === "TRENT_BALANCE"
+      ? "TRENT_BALANCE"
+      : normalizedPaymentMethodFromUrl || paymentMethod;
   const walletBalance = Number(bookingData?.wallet_balance);
   const itemId = bookingData.item_id.toString();
   const hasSavedRef = useRef(false);
@@ -104,8 +113,7 @@ function Payment() {
   };
   const fawryPaymentStatus = async () => {
     try {
-      setLoading(true);
-
+      setCheckStatusLoading(true);
       const response = await paymentStatusAPI(
         merchantRefNumber,
         itemId,
@@ -117,12 +125,10 @@ function Payment() {
         updateQueryParamInURL("orderStatus", status);
         setOrderStatus(status);
       }
-    } catch (error: AxiosError | unknown) {
-      if (error instanceof AxiosError) {
-        toast.error(error?.message);
-      }
+    } catch (error) {
+      handleErrorMessage(error);
     } finally {
-      setLoading(false);
+      setCheckStatusLoading(false);
     }
   };
   const handleCompletePayment = useCallback(async () => {
@@ -144,7 +150,7 @@ function Payment() {
         item_id: itemId,
         lang: currentLanguage,
         booking_id: bookingData?.book_id,
-        method_key: paymentMethod,
+        method_key: actualPaymentMethod,
         ...(merchantRefNumber && { merchant_ref_number: merchantRefNumber }),
       };
       const response = await completePaymentAPI(payload);
@@ -159,7 +165,9 @@ function Payment() {
     }
   }, [
     bookingData?.book_id,
+    itemId,
     merchantRefNumber,
+    actualPaymentMethod,
     paymentMethod,
     remainingValue,
     t,
@@ -215,12 +223,12 @@ function Payment() {
                   TrentCredits={bookingData?.wallet_balance}
                 />
               </div>
-              {orderStatus && (
+              {(shouldShowCheckPaymentButton || orderStatus === "PAID") && (
                 <PaymentStatus
                   referenceNumber={referenceNumber || ""}
                   orderStatus={orderStatus}
                   paymentAmount={paymentAmount || ""}
-                  paymentMethodFromUrl={paymentMethodFromUrl || ""}
+                  paymentMethodFromUrl={normalizedPaymentMethodFromUrl || ""}
                 />
               )}
               {statusCode && statusDescription && (
@@ -228,6 +236,7 @@ function Payment() {
                   statusCode={statusCode}
                   statusDescription={statusDescription}
                   orderStatus={orderStatus}
+                  paymentMethod={paymentMethod}
                 />
               )}
             </div>
@@ -275,46 +284,47 @@ function Payment() {
                 TrentCredits={bookingData?.wallet_balance}
               />
             </div>
-            {orderStatus && (
+            {(shouldShowCheckPaymentButton || orderStatus === "PAID") && (
               <PaymentStatus
                 referenceNumber={referenceNumber || ""}
                 orderStatus={orderStatus}
                 paymentAmount={paymentAmount || ""}
-                paymentMethodFromUrl={paymentMethodFromUrl || ""}
+                paymentMethodFromUrl={normalizedPaymentMethodFromUrl || ""}
               />
             )}
-            {statusCode && (
+            {statusCode && statusDescription && (
               <CardPaymentStatus
                 statusCode={statusCode}
-                statusDescription={statusDescription || ""}
+                statusDescription={statusDescription}
                 orderStatus={orderStatus}
+                paymentMethod={paymentMethod}
               />
             )}
           </div>
         )}
         {orderStatus !== "PAID" && (
-          <div className="px-2 md:px-10 flex justify-end">
+          <div className="px-2 md:px-10 flex justify-end gap-4">
+            {shouldShowCheckPaymentButton && (
+              <Button
+                type="button"
+                disabled={checkStatusLoading}
+                onClick={fawryPaymentStatus}
+                className="bg-secondary font-medium text-lg text-white w-48 py-2 rounded-md"
+              >
+                {checkStatusLoading ? <Loader /> : t("check_payment")}
+              </Button>
+            )}
             <Button
               type="button"
               disabled={loading}
               onClick={
-                orderStatus === "UNPAID"
-                  ? fawryPaymentStatus
-                  : paymentMethod === "TRENT_BALANCE"
+                paymentMethod === "TRENT_BALANCE"
                   ? handleCompletePayment
                   : createFawryPayment
               }
-              className={`bg-primary font-medium text-lg text-white w-32 py-2 rounded-md ${
-                orderStatus === "UNPAID" && "w-48"
-              }`}
+              className="bg-primary font-medium text-lg text-white w-32 py-2 rounded-md"
             >
-              {loading ? (
-                <Loader />
-              ) : orderStatus === "UNPAID" ? (
-                t("check_payment")
-              ) : (
-                t("pay")
-              )}
+              {loading ? <Loader /> : t("pay")}
             </Button>
           </div>
         )}

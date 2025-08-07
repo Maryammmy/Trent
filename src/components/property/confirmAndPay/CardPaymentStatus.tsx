@@ -2,17 +2,23 @@ interface IProps {
   statusDescription: string;
   statusCode: string;
   orderStatus: string | null;
+  paymentMethod: string;
 }
 
 function CardPaymentStatus({
   statusCode,
   statusDescription,
   orderStatus,
+  paymentMethod,
 }: IProps) {
-  if (statusCode === "200" && orderStatus !== "PAID") {
+  const isSuccess = statusCode === "200" && orderStatus === "PAID";
+
+  const isError =
+    statusDescription && statusCode && !orderStatus && paymentMethod === "CARD";
+
+  if (!isSuccess && !isError) {
     return null;
   }
-  const isSuccess = statusCode === "200" && orderStatus === "PAID";
 
   return (
     <div
