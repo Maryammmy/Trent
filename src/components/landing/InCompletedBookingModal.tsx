@@ -147,8 +147,8 @@ function InCompletedBookingModal() {
           <p className="text-dark text-center font-medium pb-3">
             {t("in_completed_booking_desc")}
           </p>
-          <div className="space-y-1 pb-4 text-sm">
-            <div className="grid grid-cols-1 xs:grid-cols-2 gap-1 sm:gap-5 font-medium">
+          <div className="space-y-1 pb-4">
+            <div className="grid grid-cols-1 xs:grid-cols-2 gap-1 sm:gap-5 font-medium text-sm">
               <div>
                 <span>{t("check_in")} :</span> <span>{from_date}</span>
               </div>
