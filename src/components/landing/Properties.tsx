@@ -30,7 +30,6 @@ export default function Properties() {
   const properties: IProperty[] | undefined = data?.pages?.flatMap(
     (page) => page?.data?.data?.property_list
   );
-  console.log(properties);
   const handleToggleView = () => {
     dispatch(setEnableMap(!enableMap));
     setTimeout(() => {
