@@ -120,11 +120,11 @@ function InCompletedBooking() {
 
   return (
     <>
-      <div className="mt-8 bg-yellow-100 border border-yellow-400 rounded-md p-4 flex justify-between items-center text-dark font-semibold">
+      <div className="mt-8 bg-yellow-100 border border-yellow-400 rounded-md p-4 flex flex-col md:flex-row gap-2 md:gap-10 md:justify-between md:items-center text-dark font-semibold">
         <div>
-          <span>⚠ {t("incompleted_booking_title", { title: prop_title })}</span>
+          <p>⚠ {t("incompleted_booking_title", { title: prop_title })}</p>
           <div className="space-y-1 pt-2">
-            <div className="grid grid-cols-1 xs:grid-cols-2 gap-1 sm:gap-5 font-medium text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4 font-medium text-sm w-fit">
               <div>
                 <span>{t("check_in")} :</span> <span>{from_date}</span>
               </div>
