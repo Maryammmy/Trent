@@ -632,7 +632,8 @@
   "note": "Note",
   "price_note": "Prices may vary depending on dates or peak seasons. Please review the final price before confirming the booking.",
   "incomplete_booking": "Incomplete Booking",
-  "in_completed_booking_desc": "It looks like you have an unfinished booking. You can continue from where you left off or cancel it now.",
+  "in_completed_booking_desc": "It looks like you didn’t finish booking {{title}}. You can pick up where you left off or cancel.",
+  "incompleted_booking_title": "You have an incomplete booking at {{title}}",
   "cancel_incompleted_booking": "Cancel Incomplete Booking",
   "cancel_incompleted_booking_desc": "Are you sure you want to cancel this incomplete booking?"
 }

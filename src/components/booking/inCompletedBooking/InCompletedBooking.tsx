@@ -35,10 +35,10 @@ function InCompletedBooking() {
     coupon,
     fawry_number,
     method_key,
+    prop_title,
   } = lastBooking;
   const merchantRefNumber =
     decryptFawryCredentials(ref_number, fawryPrivateKey) || "";
-  console.log(lastBooking);
   const fawryPaymentStatus = async (
     partialValue: string
   ): Promise<"PAID" | "UNPAID" | null> => {
@@ -122,7 +122,7 @@ function InCompletedBooking() {
     <>
       <div className="mt-8 bg-yellow-100 border border-yellow-400 rounded-md p-4 flex justify-between items-center text-dark font-semibold">
         <div>
-          <span>⚠ {t("You have an incomplete booking")}</span>
+          <span>⚠ {t("incompleted_booking_title", { title: prop_title })}</span>
           <div className="space-y-1 pt-2">
             <div className="grid grid-cols-1 xs:grid-cols-2 gap-1 sm:gap-5 font-medium text-sm">
               <div>
@@ -139,13 +139,13 @@ function InCompletedBooking() {
             onClick={handleVerifyAndCheckPayment}
             className="bg-primary text-white w-32 py-2 rounded-md"
           >
-            {loading ? <Loader /> : t("Continue")}
+            {loading ? <Loader /> : t("continue")}
           </Button>
           <Button
             onClick={() => setCancelOpen(true)}
             className="bg-gray-400 text-white w-32 py-2 rounded-md"
           >
-            {t("Cancel")}
+            {t("cancel")}
           </Button>
         </div>
       </div>

@@ -9,6 +9,7 @@ import { HostingRoutes } from "./HostingRoutes";
 import Layout from "../layouts/Layout";
 import { BecomeAHostRoutes } from "./becomeHostRoutes";
 import ErrorHandler from "@/components/errors/ErrorHandler";
+import { TermsRoutes } from "./TermsAndConditionsRoutes";
 import { MobileRoutes } from "./MobileRoutes";
 
 const router = createBrowserRouter(
@@ -17,8 +18,9 @@ const router = createBrowserRouter(
       {RootRoutes}
       {BecomeAHostRoutes}
       {HostingRoutes}
-      {DashboardRoutes}
+      {TermsRoutes}
       {MobileRoutes}
+      {DashboardRoutes}
     </Route>
   )
 );

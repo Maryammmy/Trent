@@ -55,11 +55,11 @@ export default function RaisePriceRanges() {
       setAmount("");
     }
   };
-  const handleDelete = (index: number) => {
-    const updatedRanges = ranges.filter((_, i) => i !== index);
-    setRanges(updatedRanges);
-    sessionStorage.setItem("inc_value_ranges", JSON.stringify(updatedRanges));
-  };
+    const handleDelete = (index: number) => {
+      const updatedRanges = ranges.filter((_, i) => i !== index);
+      setRanges(updatedRanges);
+      sessionStorage.setItem("inc_value_ranges", JSON.stringify(updatedRanges));
+    };
   useEffect(() => {
     const stored = sessionStorage.getItem("inc_value_ranges");
     if (stored) {

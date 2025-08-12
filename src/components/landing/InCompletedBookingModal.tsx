@@ -22,7 +22,6 @@ function InCompletedBookingModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [cancelOpen, setCancelOpen] = useState(false);
-  console.log(data);
   useEffect(() => {
     // const hasSeenPopup = sessionStorage.getItem("nonCompletedBookingShown");
     if (data?.data?.data?.Booking?.length) {
@@ -45,10 +44,10 @@ function InCompletedBookingModal() {
     coupon,
     fawry_number,
     method_key,
+    prop_title,
   } = lastBooking;
   const merchantRefNumber =
     decryptFawryCredentials(ref_number, fawryPrivateKey) || "";
-  console.log(lastBooking);
   const handleClose = () => setIsOpen(false);
   const fawryPaymentStatus = async (
     partialValue: string
@@ -145,7 +144,7 @@ function InCompletedBookingModal() {
       >
         <div className="px-5 md:px-10 pb-6">
           <p className="text-dark text-center font-medium pb-3">
-            {t("in_completed_booking_desc")}
+            {t("in_completed_booking_desc", { title: prop_title })}
           </p>
           <div className="space-y-1 pb-4">
             <div className="grid grid-cols-1 xs:grid-cols-2 gap-1 sm:gap-5 font-medium text-sm">
