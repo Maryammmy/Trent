@@ -173,12 +173,6 @@ export const verifyPayAPI = async (payload: IVerifyPay) => {
   );
   return response;
 };
-export const nonCompletedBookingAPI = async () => {
-  const response = await baseAPI.get(
-    `user_api/booking/u_non_completed_booking.php?uid=${uid}&lang=${currentLanguage}`
-  );
-  return response;
-};
 export const useNonCompletedBookingAPI = () => {
   return useQuery({
     queryKey: ["nonCompletedBooking"],
@@ -186,6 +180,7 @@ export const useNonCompletedBookingAPI = () => {
       baseAPI.get(
         `user_api/booking/u_non_completed_booking.php?uid=${uid}&lang=${currentLanguage}`
       ),
+    refetchOnWindowFocus: false,
   });
 };
 export const cancelNonCompletedBookingAPI = async (
