@@ -10,6 +10,9 @@ body {
 }
 p,
 span {
+  overflow-wrap: break-word;
+}
+.wrap-break-anywhere {
   overflow-wrap: anywhere;
 }
 /* Button scale */

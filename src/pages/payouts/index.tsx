@@ -18,6 +18,7 @@ function Payouts() {
   const payoutsHistory: IPayoutHistory[] =
     data?.data?.data?.payout_request_list;
   const totalEarnings: IPayoutEarning = data?.data?.data?.earning;
+  console.log(totalEarnings?.total_completed);
   return (
     <>
       <div className="py-10 px-5 xl:px-0 max-w-6xl mx-auto">
@@ -27,14 +28,18 @@ function Payouts() {
               {t("payouts")}
             </h2>
             <div className="flex flex-col gap-1 text-white font-semibold">
-              <p>
-                {t("total_pending_earnings")} {totalEarnings?.total_pending}{" "}
-                {t("EGP")}
-              </p>
-              <p>
-                {t("total_completed_earnings")} {totalEarnings?.total_completed}{" "}
-                {t("EGP")}
-              </p>
+              {totalEarnings?.total_pending && (
+                <p>
+                  {t("total_pending_earnings")} {totalEarnings?.total_pending}{" "}
+                  {t("EGP")}
+                </p>
+              )}
+              {totalEarnings?.total_completed && (
+                <p>
+                  {t("total_completed_earnings")}{" "}
+                  {totalEarnings?.total_completed} {t("EGP")}
+                </p>
+              )}
               {/* <span className="text-white font-semibold text-lg">
                 {t("your_total_earnings")}
               </span> */}
