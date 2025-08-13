@@ -57,21 +57,15 @@ const Property = ({ property }: IProps) => {
   return (
     <>
       <div className="grid grid-cols-3 sm:grid-cols-7 gap-3 items-center text-sm md:text-base min-h-20 sm:min-h-24 bg-white shadow rounded-md p-4 sm:p-6 hover:bg-gray-100 transition">
-        <p className="font-medium whitespace-nowrap overflow-hidden text-ellipsis">
-          {title}
-        </p>
-        <p className="font-medium hidden sm:block whitespace-nowrap overflow-hidden text-ellipsis">
+        <p className="font-medium truncate">{title}</p>
+        <p className="font-medium hidden sm:block truncate">
           {government_name}
         </p>
-        <p className="font-medium hidden sm:block whitespace-nowrap overflow-hidden text-ellipsis">
-          {category_type}
-        </p>
-        <p className="font-medium hidden sm:block whitespace-nowrap overflow-hidden text-ellipsis">
+        <p className="font-medium hidden sm:block truncate">{category_type}</p>
+        <p className="font-medium hidden sm:block truncate">
           {price} {t("EGP")}
         </p>
-        <p className="font-medium hidden sm:block whitespace-nowrap overflow-hidden text-ellipsis">
-          {view_count}
-        </p>
+        <p className="font-medium hidden sm:block truncate">{view_count}</p>
         <p className={`font-semibold ${statusColor}`}>{statusText}</p>
         <div className="flex flex-wrap items-center gap-3">
           {showEdit && (

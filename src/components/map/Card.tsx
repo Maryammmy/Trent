@@ -70,29 +70,20 @@ function Card({ property }: IProps) {
       <div>
         <div className="grid grid-cols-2 gap-2 pt-2">
           <div className="flex items-center">
-            <h3 className="font-bold whitespace-nowrap overflow-hidden text-ellipsis">
-              {title}
-            </h3>
+            <h3 className="font-bold truncate">{title}</h3>
           </div>
           <div className="flex items-center justify-end gap-1 font-medium">
-            <span className="font-bold text-primary whitespace-nowrap overflow-hidden text-ellipsis">
+            <span className="font-bold text-primary truncate">
               {basePrice}
               {t(parsedCurrency?.currency)}
             </span>
-            <span className="text-dark whitespace-nowrap overflow-hidden text-ellipsis">
-              /{period_name}
-            </span>
+            <span className="text-dark truncate">/{period_name}</span>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2 pt-1">
           <div className="flex items-center font-medium">
-            <p className="whitespace-nowrap overflow-hidden text-ellipsis">
-              {city_name}
-            </p>
-            ,
-            <p className="whitespace-nowrap overflow-hidden text-ellipsis">
-              {government_name}
-            </p>
+            <p className="truncate">{city_name}</p>,
+            <p className="truncate">{government_name}</p>
           </div>
           <div className="flex gap-1 justify-end items-center font-medium">
             <Rating rating={Number(rate)} />
