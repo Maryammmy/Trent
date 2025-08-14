@@ -21,8 +21,8 @@ function AccountSettings() {
             </div>
           ) : (
             <div className="flex flex-wrap items-center gap-1">
-              <span className="font-medium text-xl">{user?.full_name},</span>
-              <p className="text-xl wrap-break-anywhere">{user?.email}</p>
+              <span className="font-medium sm:text-xl">{user?.full_name},</span>
+              <p className="sm:text-xl wrap-break-anywhere">{user?.email}</p>
             </div>
           )}
           <Link
