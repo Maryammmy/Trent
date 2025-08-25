@@ -12,9 +12,6 @@ p,
 span {
   overflow-wrap: break-word;
 }
-.wrap-break-anywhere {
-  overflow-wrap: anywhere;
-}
 /* Button scale */
 .zoom {
   transition: transform 0.3s ease-in-out;
