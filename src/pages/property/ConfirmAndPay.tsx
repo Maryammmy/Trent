@@ -76,7 +76,7 @@ function ConfirmAndPay() {
       : normalizedPaymentMethodFromUrl || paymentMethod;
   const walletBalance = Number(bookingData?.wallet_balance);
   const itemId = bookingData.item_id.toString();
-  const hasSavedRef = useRef(false);
+  const hasCheckedPaymentStatus = useRef(false);
   const partialValue = couponResponse?.partial_value
     ? Number(couponResponse?.partial_value)
     : Number(bookingData?.partial_value);
@@ -118,8 +118,6 @@ function ConfirmAndPay() {
     }
   };
   const handleSaveBooking = useCallback(async () => {
-    if (hasSavedRef.current) return;
-    hasSavedRef.current = true;
     try {
       if (paymentMethod === "TRENT_BALANCE" && walletBalance < partialValue) {
         toast.error(t("insufficient_balance"));
@@ -151,19 +149,24 @@ function ConfirmAndPay() {
     } catch (error) {
       handleErrorMessage(error);
     } finally {
-      setLoading(false);
+      if (paymentMethod === "TRENT_BALANCE" && walletBalance >= partialValue) {
+        setLoading(false);
+      }
     }
   }, [
-    couponResponse,
-    bookingData,
-    paymentMethod,
     actualPaymentMethod,
-    walletBalance,
-    partialValue,
-    merchantRefNumber,
-    itemId,
+    bookingData?.confirm_guest_rules,
+    bookingData?.from_date,
+    bookingData?.guest_count,
+    bookingData?.to_date,
+    couponResponse?.coupon,
     id,
+    itemId,
+    merchantRefNumber,
+    partialValue,
+    paymentMethod,
     t,
+    walletBalance,
   ]);
   const verifyPayAndProceed = async () => {
     try {
@@ -188,31 +191,56 @@ function ConfirmAndPay() {
       setLoading(false);
     }
   };
-  const fawryPaymentStatus = async () => {
+  const fawryPaymentStatus = useCallback(async () => {
+    if (hasCheckedPaymentStatus.current) return;
+    hasCheckedPaymentStatus.current = true;
     try {
-      setCheckStatusLoading(true);
+      // ✅ loader يشتغل بس لو الحالة لسه مش مدفوعة
+      if (orderStatus !== "PAID") {
+        setCheckStatusLoading(true);
+      }
+
       const response = await paymentStatusAPI(
         merchantRefNumber,
         itemId,
         bookingData?.partial_value
       );
+
       if (response?.data?.response_code === 200) {
         toast.success(response?.data?.response_message);
         const status = response?.data?.data?.status ? "PAID" : "UNPAID";
         updateQueryParamInURL("orderStatus", status);
         setOrderStatus(status);
+
+        // ✅ لو الدفع ناجح → كمل save booking
+        if (status === "PAID") {
+          await handleSaveBooking();
+        }
       }
     } catch (error) {
       handleErrorMessage(error);
     } finally {
-      setCheckStatusLoading(false);
+      if (orderStatus !== "PAID") {
+        setCheckStatusLoading(false);
+      }
     }
-  };
+  }, [
+    bookingData?.partial_value,
+    handleSaveBooking,
+    itemId,
+    merchantRefNumber,
+    orderStatus,
+  ]);
+
   useEffect(() => {
-    if (orderStatus === "PAID" && !hasSavedRef.current) {
-      handleSaveBooking();
+    if (
+      merchantRefNumber &&
+      orderStatus === "PAID" &&
+      !hasCheckedPaymentStatus.current
+    ) {
+      fawryPaymentStatus();
     }
-  }, [orderStatus, handleSaveBooking]);
+  }, [orderStatus, merchantRefNumber, fawryPaymentStatus]);
   useEffect(() => {
     setCouponResponse(
       sessionStorage.getItem("couponResponse")

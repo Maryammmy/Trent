@@ -71,7 +71,7 @@ function Payment() {
       : normalizedPaymentMethodFromUrl || paymentMethod;
   const walletBalance = Number(bookingData?.wallet_balance);
   const itemId = bookingData.item_id.toString();
-  const hasSavedRef = useRef(false);
+  const hasCheckedPaymentStatus = useRef(false);
   const remainingValue = Number(bookingData?.reminder_value);
   const { data: user } = useUserAPI();
   const userData: IUser = user?.data?.data?.user_data;
@@ -110,29 +110,7 @@ function Payment() {
       setLoading(false);
     }
   };
-  const fawryPaymentStatus = async () => {
-    try {
-      setCheckStatusLoading(true);
-      const response = await paymentStatusAPI(
-        merchantRefNumber,
-        itemId,
-        bookingData?.reminder_value
-      );
-      if (response?.data?.response_code === 200) {
-        toast.success(response?.data?.response_message);
-        const status = response?.data?.data?.status ? "PAID" : "UNPAID";
-        updateQueryParamInURL("orderStatus", status);
-        setOrderStatus(status);
-      }
-    } catch (error) {
-      handleErrorMessage(error);
-    } finally {
-      setCheckStatusLoading(false);
-    }
-  };
   const handleCompletePayment = useCallback(async () => {
-    if (hasSavedRef.current) return;
-    hasSavedRef.current = true;
     try {
       if (paymentMethod === "TRENT_BALANCE" && walletBalance < remainingValue) {
         toast.error(t("insufficient_balance"));
@@ -160,7 +138,12 @@ function Payment() {
     } catch (error) {
       handleErrorMessage(error);
     } finally {
-      setLoading(false);
+      if (
+        paymentMethod === "TRENT_BALANCE" &&
+        walletBalance >= remainingValue
+      ) {
+        setLoading(false);
+      }
     }
   }, [
     bookingData?.book_id,
@@ -172,11 +155,50 @@ function Payment() {
     t,
     walletBalance,
   ]);
-  useEffect(() => {
-    if (orderStatus === "PAID" && !hasSavedRef.current) {
-      handleCompletePayment();
+  const fawryPaymentStatus = useCallback(async () => {
+    if (hasCheckedPaymentStatus.current) return;
+    hasCheckedPaymentStatus.current = true;
+    try {
+      if (orderStatus !== "PAID") {
+        setCheckStatusLoading(true);
+      }
+      const response = await paymentStatusAPI(
+        merchantRefNumber,
+        itemId,
+        bookingData?.reminder_value
+      );
+      if (response?.data?.response_code === 200) {
+        toast.success(response?.data?.response_message);
+        const status = response?.data?.data?.status ? "PAID" : "UNPAID";
+        updateQueryParamInURL("orderStatus", status);
+        setOrderStatus(status);
+        if (status === "PAID") {
+          await handleCompletePayment();
+        }
+      }
+    } catch (error) {
+      handleErrorMessage(error);
+    } finally {
+      if (orderStatus !== "PAID") {
+        setCheckStatusLoading(false);
+      }
     }
-  }, [orderStatus, handleCompletePayment]);
+  }, [
+    bookingData?.reminder_value,
+    handleCompletePayment,
+    itemId,
+    merchantRefNumber,
+    orderStatus,
+  ]);
+  useEffect(() => {
+    if (
+      merchantRefNumber &&
+      orderStatus === "PAID" &&
+      !hasCheckedPaymentStatus.current
+    ) {
+      fawryPaymentStatus();
+    }
+  }, [orderStatus, merchantRefNumber, fawryPaymentStatus]);
   return (
     <>
       <div className="py-10 px-5 xl:px-20 max-w-7xl mx-auto">
