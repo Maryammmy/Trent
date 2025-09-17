@@ -16,7 +16,7 @@ function Notification({ notification, close }: IProps) {
     notification;
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
+  console.log(notification);
   const updateNotification = async () => {
     try {
       const response = await updateNotificationAPI(id);

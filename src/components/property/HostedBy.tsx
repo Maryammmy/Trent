@@ -12,6 +12,8 @@ import { chatListAPI } from "@/services/chatService";
 import toast from "react-hot-toast";
 import { IOwner } from "@/interfaces/chat";
 import { uid } from "@/constants";
+import { useAppDispatch } from "@/store/hooks";
+import { setIsloggedin } from "@/store/features/auth/authSlice";
 interface IProps {
   id: string | undefined;
   owner: IDetailsProperty["owner"];
@@ -24,7 +26,14 @@ function HostedBy({ id, owner, ownerId, propImage, title }: IProps) {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const handleChatNavigator = async () => {
+    console.log(uid);
+    if (!uid) {
+      dispatch(setIsloggedin(true));
+      navigate("/");
+      return;
+    }
     try {
       setLoading(true);
       const response = await chatListAPI(id);

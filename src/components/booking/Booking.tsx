@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useBookingDetailsAPI } from "@/services/bookingService";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -24,12 +24,12 @@ import { baseURL } from "@/services";
 import { formatDate } from "@/utils/formatDate";
 
 function Booking() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const printRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation();
   const { data } = useBookingDetailsAPI(id);
   const booking: IBookingDetails = data?.data?.data?.Booking_details;
-
+  const location = useLocation();
   const handlePrint = async () => {
     const input = printRef.current;
     if (input) {
@@ -194,6 +194,18 @@ function Booking() {
                     {booking?.total} {t("EGP")}
                   </span>
                 </div>
+                {location?.pathname === `/hosting/bookings/${id}` && (
+                  <div className="flex items-center gap-2 flex-wrap border-t py-4 font-medium text-lg">
+                    <div className="flex items-center gap-2">
+                      <GiMoneyStack
+                        className="text-primary shrink-0"
+                        size={30}
+                      />
+                      <span>{t("trent_fees")} :</span>
+                    </div>
+                    <span>{booking?.tax}%</span>
+                  </div>
+                )}
                 {!booking?.is_full_paid && (
                   <div className="flex items-center gap-2 flex-wrap border-t py-4 text-lg font-medium">
                     <div className="flex items-center gap-2">

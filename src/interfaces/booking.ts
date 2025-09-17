@@ -116,6 +116,7 @@ export interface IBookingDetails {
   rate: string;
   subtotal: string;
   total: string;
+  tax: string;
   reminder_value: string;
   partial_value: string;
   total_day: string;

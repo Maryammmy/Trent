@@ -6,7 +6,9 @@ export const getNotificationRoute = (
   if (key === "property_id") {
     return "/hosting/properties";
   }
-
+  if (key === "chat_id") {
+    return "/chat";
+  }
   if (key === "booking_id") {
     const activeStatuses = ["Booked", "Check_in", "Confirmed"];
     const completedStatuses = ["Cancelled", "Completed"];

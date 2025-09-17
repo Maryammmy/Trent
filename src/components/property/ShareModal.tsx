@@ -32,33 +32,10 @@ function ShareModal({ url, open, onClose }: IProps) {
       isOpen={open}
       close={onClose}
       title={t("share_this_place")}
-      className="py-6 text-center text-xl font-semibold text-primary"
+      className="pt-6 pb-2 text-center text-xl font-semibold text-primary"
     >
-      <div className="p-5 sm:p-8 pt-0">
-        <div className="flex items-center gap-2 mb-6">
-          <Input
-            dir="ltr"
-            type="text"
-            value={url}
-            readOnly
-            className="flex-1 px-3 py-2 border rounded-md bg-gray-100 text-gray-700 text-sm outline-none"
-          />
-          <Button
-            onClick={handleCopy}
-            className={`p-2 rounded-md bg-gray-200 hover:bg-primary/10 text-primary transition ${
-              copied && "hidden"
-            }`}
-            title={t("copy_link")}
-          >
-            <FaRegCopy size={20} />
-          </Button>
-          {copied && (
-            <span className="text-green-600 text-xs font-medium mt-1 min-w-[50px] text-center">
-              {t("copied")}
-            </span>
-          )}
-        </div>
-        <div className="flex justify-center gap-6 mb-2">
+      <div className="p-5 sm:p-8">
+        <div className="flex justify-center gap-6 mb-6">
           <FacebookShareButton url={url}>
             <FaFacebook
               size={36}
@@ -87,6 +64,28 @@ function ShareModal({ url, open, onClose }: IProps) {
               className="hover:scale-110 transition"
             />
           </TelegramShareButton>
+        </div>
+        <div className="flex items-center gap-2 mb-2" dir="ltr">
+          <Input
+            type="text"
+            value={url}
+            readOnly
+            className="flex-1 px-3 py-2 border rounded-md bg-gray-100 text-gray-700 text-sm outline-none"
+          />
+          <Button
+            onClick={handleCopy}
+            className={`p-2 rounded-md bg-gray-200 hover:bg-primary/10 text-primary transition ${
+              copied && "hidden"
+            }`}
+            title={t("copy_link")}
+          >
+            <FaRegCopy size={20} />
+          </Button>
+          {copied && (
+            <span className="text-green-600 text-xs font-medium mt-1 min-w-[50px] text-center">
+              {t("copied")}
+            </span>
+          )}
         </div>
       </div>
     </Modal>

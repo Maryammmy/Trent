@@ -16,7 +16,6 @@ function Bookings() {
   const { data } = useMyBookingsAPI(status);
   const bookings: IBooking[] = data?.data?.data?.My_Booking;
   const navigate = useNavigate();
-
   return (
     <div className="max-w-6xl mx-auto py-5 md:py-10 px-5 xl:px-0">
       <DynamicTitle title="my_bookings" />

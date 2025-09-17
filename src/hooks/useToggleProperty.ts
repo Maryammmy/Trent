@@ -1,5 +1,7 @@
 import { uid } from "@/constants";
 import { togglePropertyAPI } from "@/services/propertyService";
+import { setIsloggedin } from "@/store/features/auth/authSlice";
+import { useAppDispatch } from "@/store/hooks";
 import { handleErrorMessage } from "@/utils/handleErrorMsg";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -8,7 +10,7 @@ import { useTranslation } from "react-i18next";
 export function useToggleProperty() {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
-
+  const dispatch = useAppDispatch();
   const toggleFav = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     prop_id: string
@@ -17,6 +19,7 @@ export function useToggleProperty() {
 
     if (!uid) {
       toast.error(t("fav_error"));
+      dispatch(setIsloggedin(true));
       return;
     }
 
