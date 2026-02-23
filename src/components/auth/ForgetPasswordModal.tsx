@@ -62,7 +62,7 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
   const verifyOtp = async (
     e: React.FormEvent<HTMLFormElement>,
     { otp, mobile, ccode }: { otp: string; mobile: string; ccode: string },
-    close: () => void
+    close: () => void,
   ) => {
     e.preventDefault();
     try {
@@ -102,7 +102,10 @@ function ForgetPasswordModal({ isOpen, close }: IProps) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-1 mb-4">
               <label className="text-sm font-medium">{t("phone_number")}</label>
-              <div className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary">
+              <div
+                dir="ltr"
+                className="flex items-center gap-2 border rounded-lg p-3 focus-within:border-2 focus-within:border-primary"
+              >
                 <Controller
                   name="ccode"
                   control={control}

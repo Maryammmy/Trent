@@ -21,7 +21,7 @@ interface IProps {
   verifyOtp: (
     e: React.FormEvent<HTMLFormElement>,
     { otp, mobile, ccode }: { otp: string; mobile: string; ccode: string },
-    close: () => void
+    close: () => void,
   ) => Promise<void>;
 }
 
@@ -92,9 +92,15 @@ export default function OtpModal({
     >
       <div className="p-5 md:py-8 md:px-10">
         <div className="pb-6">
-          <p className="text-dark font-medium px-1 text-center md:px-0">
-            {t("enter_otp_code")}
-          </p>
+          <div className="space-y-1">
+            <p className="text-dark font-medium px-1 text-center md:px-0">
+              {t("enter_otp_code")}
+            </p>
+            <p className="text-dark font-medium px-1 text-center md:px-0">
+              {t("sent_otp_to")}{" "}
+              <span dir="ltr">{`${countryCode}${mobile}`}</span>
+            </p>
+          </div>
         </div>
         <form onSubmit={verifyOTP}>
           <div className="pb-6" dir="ltr">
@@ -113,7 +119,7 @@ export default function OtpModal({
           <p className="text-sm text-dark font-semibold text-center mb-4">
             {timeLeft > 0
               ? `${t("resend_otp_in")} ${Math.floor(timeLeft / 60)}:${String(
-                  timeLeft % 60
+                  timeLeft % 60,
                 ).padStart(2, "0")}`
               : t("didnt_receive_code")}
           </p>

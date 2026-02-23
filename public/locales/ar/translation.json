@@ -555,6 +555,7 @@
   "new_phone_number": "رقم الهاتف الجديد",
   "enter_your_phone_number": "أدخل رقم هاتفك",
   "send_otp": "إرسال رمز التحقق",
+  "sent_otp_to": "لقد أرسلنا رمز التحقق إلى",
   "search_placeholder": "بحث...",
   "chats": "المحادثات",
   "phone_required": "رقم الهاتف مطلوب.",

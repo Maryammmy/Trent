@@ -563,6 +563,7 @@
   "new_phone_number": "New phone number",
   "enter_your_phone_number": "Enter your phone number",
   "send_otp": "Send OTP",
+  "sent_otp_to": "We have sent the code verification to",
   "search_placeholder": "Search...",
   "chats": "Chats",
   "phone_required": "Phone number is required.",
